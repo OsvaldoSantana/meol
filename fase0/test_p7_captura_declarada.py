@@ -312,3 +312,32 @@ def test_P150_eventos_b3_tem_cadencia_com_motivo_e_limitacao_ate_o_cron_provar()
     assert cobre[0]["tipo"] == "NAO_CONSERTADA"
     assert "b3_eventos" not in P["regimes_de_captura"]
     assert os.path.isfile(os.path.join(RAIZ, "docs", "acervo", "b3_eventos", "capturas.csv"))
+
+
+# ── P-150: regime automatico sem registro em acervo.REGISTROS e captura sem vigia ──
+
+import acervo  # noqa: E402
+
+
+@pytest.mark.repositorio
+def test_P150_todo_regime_tem_o_registro_em_acervo_REGISTROS():
+    """P7, a lacuna do #32. `acervo.frescor()` e `abrir()` so leem os registros de
+    `acervo.REGISTROS`: um acervo que entrasse em `regimes_de_captura` (o `b3_eventos`,
+    quando o cron provar) sem entrar ali seria captura automatica que ninguem vigia -- se
+    ela parar, nada acusa."""
+    assert acervo.regimes_sem_registro(RAIZ) == []
+
+
+def test_P150_mutacao_b3_eventos_no_regime_e_fora_de_REGISTROS_e_ACUSADO(tmp_path):
+    reg = "docs/acervo/b3_eventos/capturas.csv"
+    raiz = _com_regime(tmp_path, {"b3_eventos": {
+        "regime": "AUTOMATICO", "executor": ".github/workflows/c.yml",
+        "passo": "captura", "registro": reg}})
+    assert acervo.regimes_sem_registro(raiz) == ["b3_eventos"]
+    com = dict(acervo.REGISTROS, b3_eventos=os.path.join(*reg.split("/")))
+    assert acervo.regimes_sem_registro(raiz, registros=com) == []
+
+
+def test_P150_regime_sem_campo_registro_tambem_e_acusado(tmp_path):
+    raiz = _com_regime(tmp_path, {"x": {"regime": "AUTOMATICO"}})
+    assert acervo.regimes_sem_registro(raiz) == ["x"]

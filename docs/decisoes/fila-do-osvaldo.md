@@ -48,6 +48,35 @@ qualquer documento.
 | 5% por teste, ~9,75% na janela | σ_max cai para 0,0383 no JCP e 0,0416 no dividendo (mesmo script, `alvo=0,05`, 26/09). O σ iid de 2021–2025 no JCP (0,0472) já passa dos dois tetos, e com um teto mais baixo o `NAO_CONFIRMADO` por falta de poder fica mais provável numa janela com menos JCP | troca uma reprovação à toa, que é visível, por um "sem poder" mais frequente, que não decide nada |
 | ler antes, sem decidir agora | o critério fica parado até uma nova leitura dele | o texto e os números já estavam à vista, e o que falta para o merge (silver e D1) não depende desta escolha |
 
+### Resposta dele, 26/09/2026: contar o n antes de escolher a janela (P-115, revisão 4)
+
+**Decisão:** antes do merge do #27, contar os JCPs por ano no silver **sem ler preço** e
+escolher a janela pela regra da §9 do critério v2, escrita antes de qualquer contagem.
+- **Candidatas:** 2016–2020, 2015–2020, 2014–2020 e 2013–2020.
+- **Regra:** vale a menor com `0,0472 × √(819/n_JCP) ≤ 0,8 × 0,0416`, ou seja, **n_JCP ≥ 1.648**.
+- **Se nenhuma atender:** 2016–2020, com o `NAO_CONFIRMADO` provável declarado.
+
+Nenhum ano de 2013–2015 tinha sido medido antes; a evidência está na §9.
+
+| alternativa | o que acontecia | por que não |
+|---|---|---|
+| **contar o n e escolher pela regra** (escolhida) | a janela cresce para trás só se precisar, e o critério de crescer está escrito antes de ver o n | — |
+| ficar em 2016–2020 sem contar | o K2 provavelmente sai `NAO_CONFIRMADO` por falta de poder (σ iid de 2021–2025 já passa do σ_max) | gasta a janela num teste que provavelmente não decide |
+| medir em várias janelas e ficar com a que passar | — | é escolher pelo resultado: o jardim dos caminhos que se bifurcam, que o pré-registro existe para fechar |
+| usar sempre 2013–2020 | o maior n possível | anos mais antigos sem necessidade, com mais JCP para o D1 achar documento e mais distância do que o critério viu; a menor janela que basta é a mais próxima do registro original |
+
+**Pergunta aberta, a decidir antes da contagem de segunda:** o n do silver é um **teto** do n
+do K2. Os 819 contaram só papel-dia com preço no dia e na véspera, e o silver não sabe quem
+tem preço.
+- **`n-a`** (a regra como está): a regra usa o n do silver. É otimista, e a janela escolhida
+  pode ainda sair sem poder.
+- **`n-b`** (calibrar): o script também conta 2021–2025 no silver, e o n de cada candidata é
+  multiplicado por `819 ÷ n_silver(2021–2025)` antes de comparar com 1.648. Não lê preço e
+  corrige o teto pela proporção observada. Exige que o calendário do silver cubra também
+  2021–2025, e acrescenta à regra uma razão que também é escolha.
+
+Se a resposta não vier antes da contagem, vale **`n-a`**, que é o texto já empurrado no #27.
+
 ### Resposta dele, 26/09/2026, sobre o app do Claude no GitHub
 
 **Não instalar** (menor privilégio; os check-ins agendados cobrem). Revisitar se um aviso

@@ -1159,6 +1159,21 @@ critério corrigido repete o defeito da P-116.
 
 > **Decisão dele, 26/09/2026: `115a`** (recomendada) — empurrar o critério corrigido do degrau como pré-registro antes de medir 2016–2020. O Claude Code redige; ele responde "pode empurrar" antes de qualquer medição. Registro em `docs/decisoes/fila-do-osvaldo.md`.
 
+> **26/09/2026, revisão 4 (no rascunho do PR #27, §9):** "pode empurrar" dado, com merge
+> condicionado. **Antes do merge, a janela é escolhida pelo n de JCPs, sem ler preço.** As
+> candidatas são 2016–2020, 2015–2020, 2014–2020 e 2013–2020. Vale a menor com
+> **n_JCP ≥ 1.648**; se nenhuma atender, fica 2016–2020 com o `NAO_CONFIRMADO` provável
+> declarado. Quem conta é o `auditoria/c02_contar_n.py` (só no branch do #27 até o merge),
+> que lê do silver só `cod`, `type_stock`, `tipo` e as duas datas. **A ordem da sessão local:**
+> 1. silver com calendário desde **2013-01-01**;
+> 2. contar;
+> 3. gravar contagem, janela e sha256 num commit só;
+> 4. sortear e empurrar o D1;
+> 5. merge.
+>
+> **Aberta, e decidir antes de segunda:** o n do silver é teto do n do K2. A calibração pela
+> razão de 2021–2025 está na fila (`n-a` ou `n-b`).
+
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados
 
@@ -1434,7 +1449,9 @@ o plano. **Falta só a parte do desktop** (roteiro em `## Ao voltar ao desktop`)
 inventário da carga, mas não as que o cron registrar, e o `frescor()` não vigia essa captura.
 **No dia em que a P-150 fechar**, junto com a entrada em `regimes_de_captura`, o registro entra
 em `REGISTROS`. Antes disso não entra, porque o `frescor` acusaria `NUNCA_OBSERVADO` enquanto o
-cron não roda.
+cron não roda. **Guardado desde 26/09:** `acervo.regimes_sem_registro()` e
+`test_P150_todo_regime_tem_o_registro_em_acervo_REGISTROS` reprovam um regime cujo registro
+não esteja em `REGISTROS`. Esquecer a segunda metade deixa a suíte vermelha, não calada.
 
 **O universo é o IBOV do dia (26/09, registro).** A captura lê a carteira do dia e pede eventos
 só de quem está nela. Quem sai do índice deixa de ser capturado na segunda seguinte: o que já

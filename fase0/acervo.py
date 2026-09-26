@@ -171,6 +171,25 @@ def abrir(recurso, arquivo, versao=None, *, armazem=None, cache=None, repo=None,
     return armazem.baixar(k, no_cache)
 
 
+def regimes_sem_registro(repo=None, registros=None):
+    """Os acervos de `politica.yaml -> regimes_de_captura` cujo `registro` nao esta em
+    `REGISTROS`, em ordem.
+
+    P-150 (26/09/2026), a lacuna do #32: `frescor()` e `versoes()` so leem os registros
+    daqui. Um acervo automatico fora desta lista e captura sem vigia -- se o cron parar,
+    `CapturaParada` nao dispara, e o que o cron registrar nao se abre pelo registro (P7).
+    O `b3_eventos` entra aqui no mesmo commit em que entrar em `regimes_de_captura`."""
+    repo = repo or raiz_repo()
+    registros = REGISTROS if registros is None else registros
+    conhecidos = {os.path.normpath(r) for r in registros.values()}
+    out = []
+    for nome, r in (manifesto_cvm._politica(repo).get("regimes_de_captura") or {}).items():
+        reg = (r or {}).get("registro") if isinstance(r, dict) else None
+        if not reg or os.path.normpath(reg) not in conhecidos:
+            out.append(nome)
+    return sorted(out)
+
+
 def _recursos_com_rotina(repo):
     out = set()
     for rel in REGISTROS.values():

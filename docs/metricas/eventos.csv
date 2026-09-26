@@ -64,3 +64,4 @@ data;codigo;tipo;autor;quem_achou;regua;commit_introduziu;commit_corrigiu;descri
 2026-09-26;P-159;retratacao;claude-chat;claude-code;5;desconhecido;mesmo-commit;"nao distribuir, nao receber comissao e nao aceitar anuncio" apresentado como criterio da CVM 19; a norma permite distribuir com segregacao (art. 18, I e par. 2) e nao fala de anuncio
 2026-09-26;P-150;retratacao;claude-chat;claude-code;3;desconhecido;64b27a8;"mandei declarar em regimes_de_captura.b3, chave do COTAHIST que exige execucao comprovada"
 2026-09-26;P-159;retratacao;claude-code;claude-chat;5;1d7db98;mesmo-commit;"o uso pessoal dele nao e prestacao de servico a cliente" dado como CONFIRMADO na transcricao da CVM 19; o texto lido nao diz isso: INFERENCIA, pergunta na P-158 (nota N-PESSOAL)
+2026-09-26;P-115;retratacao;claude-chat;claude-chat;1;desconhecido;2e11c48;"enquadrei o pode empurrar pelo risco de 19% e omiti o 'sem poder' provavel do K2 (linhas 232 e 240)"
