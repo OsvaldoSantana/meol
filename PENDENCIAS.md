@@ -1171,8 +1171,13 @@ critério corrigido repete o defeito da P-116.
 > 4. sortear e empurrar o D1;
 > 5. merge.
 >
-> **Aberta, e decidir antes de segunda:** o n do silver é teto do n do K2. A calibração pela
-> razão de 2021–2025 está na fila (`n-a` ou `n-b`).
+> ~~**Aberta, e decidir antes de segunda:** o n do silver é teto do n do K2. A calibração pela
+> razão de 2021–2025 está na fila (`n-a` ou `n-b`).~~ **Decidida em 26/09: `n-c`.** O n passa a
+> ser a unidade dos 819, medida por presença no COTAHIST e sem preço. A calibração é condição:
+> sobre 2021–2025 tem de dar 819, senão o script para e mostra a diferença. E há quarentena do
+> retorno do dia ex em 2013–2020 até o merge. Texto na §9 do #27 (`d7811fd`); decisão em
+> `docs/decisoes/fila-do-osvaldo.md`. **Na segunda**, se a calibração parar, a janela não cresce,
+> e a diferença vai para ele antes de qualquer outro passo.
 
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados
@@ -1565,6 +1570,12 @@ emenda não precisou fazer, porque o mês saiu igual nas duas:
 > branch, empurrou ao `main` em `53112d6` (16:54Z) um texto de mesma substância e outra redação
 > (sha256 `7fc09d780c5012ac`). O merge de 25/09 ficou com a versão de `2f939ae`, a primeira no
 > `origin`; `53112d6` fica no histórico como registro. Achado GIT-01.
+> **26/09/2026 — quarentena da P-115 (§9 do critério v2, no #27).** Até o merge e a medição
+> do #27, nenhuma medição lê o **retorno do dia ex** em 2013–2020, esta inclusive. Conferido no
+> mesmo dia: o `universo_ml.py`, que esta medição usa, lê do COTAHIST CODBDI, TPMERC, CODNEG,
+> **VOLTOT** e CODISI, e nenhum campo de preço. Volume não é retorno, e a P-145 roda dentro da
+> quarentena **como está**. Se ela passar a abrir preço, espera.
+
 **E a captura do banco de ISIN não é rotina** (P7): foi uma vez, 25/09, `isinp.zip` sha256
 `c4654dbd…`. Para 2010–2017 isso basta (o passado não muda), mas a ponte de um ano novo precisa
 de captura, ou de limitação declarada.
