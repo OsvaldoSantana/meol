@@ -413,37 +413,77 @@ A escolha do tamanho não pode ver preço, senão vira escolha pelo resultado.
 Se nenhuma candidata atender, a janela é **2016–2020**. Nesse caso, o `NAO_CONFIRMADO`
 provável do K2 fica declarado no resultado **antes** da corrida, com o n contado ao lado.
 
-**O que é o n_JCP.** É a mesma unidade dos 819 de 2021–2025, até onde o silver sozinho
-consegue dizer. Conta-se o **papel-dia** (`cod` + `type_stock` + data) que tem
-`JRS CAP PROPRIO` e **não** tem, no mesmo papel e dia, `DIVIDENDO` (o "só JCP") nem evento de
-quantidade (o "dia limpo"). A data é a `data_ex`; onde ela falta, o ano sai do
-`ultimo_dia_com_direito`, e a saída diz quantos eventos caíram nesse caso. O papel-dia junta a
-mesma linha vinda das duas origens, suplemento e paginado (A-13).
+**O que é o n_JCP (decisão n-c dele, 26/09/2026).** É a **mesma unidade dos 819**: papel-dia
+só-JCP, dia sem evento de quantidade, com negócio no COTAHIST no dia e na véspera. Por
+extenso, é o degrau que o `ajustar.py` mede e o `residuo_de_mercado` conta como "só JCP" em
+dia `LIMPO`:
+- o papel é casado pelo próprio `ajustar.casar` (ISIN e depois prefixo com ESPECI), e a data
+  ex é a do `ajustar.rederivar_data_ex`, com o calendário da janela;
+- há negócio à vista em lote padrão (CODBDI 02, TPMERC 010) no dia ex e num pregão anterior
+  do mesmo papel, dentro da janela;
+- o evento ganhou fator. Um `SEM_PRECO` ganha fator se o papel negociou antes da data ex, e a
+  cópia de um provento já calculado pela outra esteira não ganha (A-13);
+- o dia não tem evento de quantidade, nem marca de bonificação ou grupamento no ESPECI, nem
+  evento sem fator;
+- o dia tem mercado, isto é, pelo menos 20 papéis com negócio no dia e no anterior;
+- os tipos do dia são só JCP.
 
-**Quem conta.** O `auditoria/c02_contar_n.py`, que lê do silver **só** `cod`, `type_stock`,
-`tipo`, `data_ex` e `ultimo_dia_com_direito`. Nenhuma coluna de valor, preço ou fator é lida,
-e um teste com essas colunas envenenadas prova isso.
+O n se conta **por janela**, porque a véspera e o mercado dependem dos anos lidos, como na
+corrida.
 
-**O limite da contagem (P5).** O n do silver é um **teto** do n que entra no K2. Os 819
-contaram só papel-dia com preço no dia e na véspera, e o silver não sabe quem tem preço sem
-ler o COTAHIST. A regra, portanto, é **otimista**: uma janela escolhida por ela ainda pode
-sair sem poder. O que corrige isso sem ler preço está na fila do Osvaldo (a calibração pela
-razão de 2021–2025) e **só entra se ele decidir antes da contagem**.
+**Alternativas rejeitadas:**
+- **`n-a`** (o n bruto do silver, a primeira versão desta seção). Contava papel-dia no
+  silver e o comparava com os 819 sem conferir que eram a mesma coisa. Não eram: os 819
+  exigem negócio no dia e na véspera, fator, mercado e dia limpo. O n bruto é um teto, e uma
+  janela escolhida por ele podia sair sem poder do mesmo jeito.
+- **`n-b`** (multiplicar o n do silver por 819 ÷ n_silver de 2021–2025). Corrige o teto por
+  uma proporção, e a proporção de 2021–2025 não precisa valer em 2013–2020, com outro
+  universo de papéis e outra liquidez. Seria mais uma escolha dentro da regra, sem medir a
+  unidade.
+
+**Quem conta.** O `auditoria/c02_contar_n.py`, **sem ler preço**:
+- do COTAHIST, pelas posições do `docs/schemas/cotahist-v02.yaml` (P-105, P-130), lê só os
+  campos de identidade: DATA, CODBDI, CODNEG, TPMERC, ESPECI e CODISI. O pedido era só DATA
+  e CODNEG; os outros quatro vieram da decisão dele de 26/09, porque sem eles o casamento e o
+  dia limpo não são os do `ajustar`, e a calibração não poderia dar 819;
+- do silver, lê só identidade, tipo, as duas datas e os dois status. Nem `valor`, nem
+  `preco_vespera`, nem `fator`;
+- dois testes provam o limite. Com toda posição de preço, volume e fator de cotação
+  envenenada, a contagem sai certa. E uma versão do leitor com PREULT na lista é pega.
+
+**Calibração, como condição.** Rodado sobre 2021–2025, com o mesmo silver e as mesmas versões
+do COTAHIST, o script **tem de dar 819**. Se der outro valor, a presença não reproduz a
+unidade, e **a regra não escolhe janela**: o script para, mostra a diferença (`contou n;
+diferença ±k`) e sai com código 2. Nesse caso a janela não cresce, e o que fazer vira
+pergunta para ele, com a diferença à vista. A calibração não ajusta nada: ou confere, ou
+para.
+
+**O que a presença não vê (P5).** Os descartes do `ajustar` que dependem do **valor** do
+preço: fechamento zero ou ilegível, e dois proventos do mesmo tipo e dia com valores
+diferentes. É a calibração que diz se eles pesam.
+
+**Quarentena.** Até o merge deste texto e a medição que ele pré-registra, **nenhuma medição
+lê o retorno do dia ex em 2013–2020**, a P-145 inclusive. Contar presença (dias com negócio)
+não é ler retorno, e é o que este script faz. Qualquer outro script que abra preço desses
+anos, para qualquer fim, espera o resultado desta corrida. O motivo: a janela é escolhida
+agora, e um retorno visto antes do merge seria o jardim dos caminhos que se bifurcam (§1).
 
 **A ordem, na sessão local:**
-1. Gerar o silver com calendário que cubra **2013-01-01 a 2020-12-31**. O nome vira
-   `cal-2013…-2020…` (P-117). Sem isso, os eventos de 2013–2015 saem sem `data_ex`.
-2. Rodar `auditoria/c02_contar_n.py` sobre ele. A saída tem só contagens, sem preço (P-136).
-3. Aplicar a regra e gravar, **num commit só e antes de abrir qualquer preço**: a contagem, a
-   janela escolhida e o sha256 do silver na §2.
-4. A janela escolhida substitui "2016–2020" em todo o texto:
+1. Gerar o silver (P-117). A data ex é rederivada pelo calendário de cada janela, como na
+   corrida.
+2. Rodar `py -3.11 auditoria/c02_contar_n.py <silver>` com o COTAHIST de 2013 a 2025 no
+   acervo, nas versões fixadas. A saída tem só contagens, sem preço (P-136).
+3. Se a saída for `PARADO`, parar: nada se grava além da diferença.
+4. Se não, aplicar a regra e gravar, **num commit só e antes de abrir qualquer preço**: a
+   saída, a janela escolhida e o sha256 do silver na §2.
+5. A janela escolhida substitui "2016–2020" em todo o texto:
    - o COTAHIST dos anos acrescentados entra na tabela da §2, com as versões fixadas em
      `docs/aprendizado/preregistro-ml-v2.pins.yaml`, que já tem 2013, 2014 e 2015;
    - o universo do sorteio do D1 passa a ser a janela escolhida;
    - os critérios ano a ano (§4.2) valem para cada ano;
    - o H-FISCAL usa 15% de IR no JCP até 31/12/2015 (a alíquota de 18% vale só de 01/01 a
      08/03/2016).
-5. Sortear e empurrar o D1, e só então seguir a §3.1.
+6. Sortear e empurrar o D1, e só então seguir a §3.1.
 
 **Conferência de contaminação: nenhum ano de 2013–2015 sai das candidatas.** Varredura de
 26/09 por `2013`, `2014` e `2015` em `docs/auditoria/` e no `ACHADOS.md`. Nenhuma medição do
