@@ -91,6 +91,32 @@ arquivos, no commit `2625cc7` do PR #38:
 
 Qualquer mudança num desses arquivos depois daqui é imagem nova, e precisa de nova aprovação.
 
+### Respostas dele, 27/09/2026, às lacunas achadas na S5 (P-162)
+
+Ao juntar as decisões para o pré-registro final, a S5 achou quatro pontos que o texto de
+20/09, a 17a e as respostas de 27/09 deixavam abertos. A S5 parou e perguntou; ele respondeu
+na sessão do Claude Code. As quatro seguem a recomendação.
+
+| código | a lacuna | resposta | alternativas não escolhidas |
+|---|---|---|---|
+| **q-a** | "vence a maior média em confiável **e** em é para mim": e se cada escala der uma direção? | **índice das duas:** por pessoa, a média de "confiável" e "é para mim" vira um índice, e a regra 17a roda sobre ele | vencer nas duas, com empate se discordarem; "confiável" decide sozinha |
+| **r-a** | a análise sai com e sem amigos: qual decide? | **a sem amigos decide;** a com todos vai para o relatório como sensibilidade (o viés de agradar mora nos amigos) | a com todos decide; as duas precisam concordar |
+| **s-a** | a H4 compara com "um iniciante", mas o filtro exclui iniciantes | **a H4 sai do teste**, declarada não testável neste desenho, e vai para a P-156 | pergunta direta exploratória; abrir o filtro para a H4 |
+| **t-a** | a H2 compara a D com quem? | **contra a E e contra a C:** a D pior que as duas, com intervalo pareado excluindo zero, em "confiável/parece golpe" ou em "honesto/vendedor" | contra a média de E e C |
+
+### Respostas dele, 27/09/2026, ao ensaio do questionário (S5, P-162)
+
+Um subagente respondeu o questionário três vezes, como três investidores leigos, só para
+achar defeito no instrumento (nada do ensaio é dado). Quatro achados mexiam em texto que ele
+tinha decidido; a S5 perguntou, e as quatro respostas seguem a recomendação.
+
+| código | o achado do ensaio | resposta |
+|---|---|---|
+| **u-a** | "Você conhece quem criou este app?" vem antes de qualquer tela e sem criador nomeado: amigo responde "não", e a análise sem amigos (que decide, r-a) se contamina | **"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"** |
+| **v-a** | no filtro, "aporta" e "renda variável" são jargão, e quem só aplica no Tesouro pode marcar "sim" | **"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"**; o convite passa a dizer o mesmo |
+| **w-a** | "segura ou arriscada" mistura a tela com o produto, e "sofisticada ou simples" tem sentidos opostos para cada pessoa (nenhuma das duas entra na regra nem na H1 e H2) | **reescritas pelo visual:** "insegurança ou segurança" pelo jeito da tela, e "app popular ou de luxo" |
+| **x-a** | "honesta ou vendedora" soa estranho e "parece golpe" planta suspeita, mas são as escalas da regra e da H2 | **manter os construtos de 20/09**, com a ordem das palavras igual à da escala e rótulos claros ("Quer me vender algo" ↔ "Honesta"; "Parece golpe" ↔ "Confiável"); o efeito de sugestão de "golpe" fica como limitação |
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do
