@@ -33,6 +33,17 @@ redigido e **para**, e só é empurrado depois do "pode empurrar".
 | os prints do Gorila e do Bastter são contas dele? | **não**: contas de terceiros ou de demonstração | procedência declarada na rodada 1 (nota N-PRINTS) |
 | a F0 entra no `PLANO.md`? | **sim, agora, como trilha paralela** de produto | [`docs/decisoes/F0-trilha-de-produto.md`](F0-trilha-de-produto.md); `PLANO.md` §3-F0 |
 
+### Respostas dele, 26/09/2026, sobre a fila do rosto
+
+| pergunta | resposta | onde ficou |
+|---|---|---|
+| para quem é a v1 do rosto | protótipo com dado sintético para o teste com pessoas | [`rosto-v1.md`](rosto-v1.md) |
+| a ordem da marca | à risca: pesquisa → design → mercado → UX → brandbook | idem; nota N-ORDEM no mapa |
+| `SEM_POSICAO` primeiro | sim, depois da P-115 | P-164 |
+| o que sobrevive do Quanto-e-Onde | só o conceito | `rosto-v1.md`, com a medição |
+| onde o motor roda | "servidor", **em aberto** por colidir com a P-157 | P-165, bloco 18 |
+| nome nos estímulos | MEOL | `rosto-v1.md`; logotipo espera a P-166 |
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do
@@ -348,6 +359,71 @@ vem antes da técnica.
 **Recomendo 01a.** Assinar porque o rascunho está pronto é o erro que o pré-registro existe
 para impedir, e na fase A o motor de aporte está ocioso de qualquer jeito.
 **Destrava:** só a sua carteira. O sistema funciona sem (U-01).
+
+---
+
+## 16 · Quais direções entram no teste de marca · P-162
+
+O pré-registro de 20/09 tem A (Instrumento), B (Private silencioso), C (Digital
+amigável) e D (Ostentação, controle). Depois dele, o chat propôs a **E (Instrumento de
+precisão)**, fundindo A e B, que não está em hipótese nenhuma.
+- **(a)** A, B, C e D, como registrado; a E fica fora.
+- **(b)** E, C e D. A H1 passa a ser "E supera D em confiável e honesto". Menos telas
+  por pessoa, menos cansaço, mais precisão com amostra pequena. Perde-se saber qual
+  metade da E pesou.
+- **(c)** As cinco. Mais informação, mais pessoas necessárias, questionário longo.
+**Recomendação: (b).** A E é a candidata real, a C é a estética do concorrente de
+fintech, e a D é o controle. Mudar agora é legítimo, porque nenhum estímulo foi mostrado.
+
+---
+
+## 17 · A regra de decisão precisa de número antes do teste · P-162
+
+A regra de 20/09 diz "empate dentro da margem" sem definir a margem, "abaixo da mediana
+em honesto" sem dizer mediana de quê, e a H3 não diz como será testada.
+- **(a)** Escala de 1 a 7. Empate quando o intervalo de 95% da diferença pareada
+  (bootstrap) contém zero. "Não ficar abaixo da mediana" = não ser a pior direção em
+  honesto. H3 testada com cada pessoa vendo a direção com e sem a faixa, em ordem
+  aleatória.
+- **(b)** Escala de 1 a 7, empate quando a diferença de médias for menor que 0,5 ponto;
+  o resto igual a (a).
+- **(c)** Sem estatística: vence a maior média, e empate só se forem iguais na primeira
+  casa decimal.
+**Recomendação: (a).** Cada pessoa vê todas as telas, então a comparação pareada é a
+certa, e o script calcula sem julgamento humano depois de ver os dados.
+
+---
+
+## 18 · Onde o motor roda para o usuário · P-165
+
+- **(A)** No aparelho, como diz a P-157. Mais pesado de carregar, e o dado nunca sai.
+- **(B)** Servidor com banco de dados. Leve, sincroniza entre aparelhos, mas o dado
+  financeiro passa a morar com o MEOL: LGPD, backup, vazamento, login e custo mensal.
+- **(B′)** Servidor **sem estado**. O aparelho envia a situação, o servidor calcula e
+  devolve, e nada é gravado (nem em log). O dado continua morando no aparelho.
+**Recomendação: (B′).** Fica com o ganho da resposta dele (motor em Python num lugar só,
+sem carregar o motor no celular) e mantém a P-157. O que precisa ser verdade: log sem
+conteúdo, verificado por teste.
+
+---
+
+## 19 · A regra do primeiro aporte com patrimônio zero · P-164
+
+- **(a)** A mesma regra do motor com patrimônio zero: as `k_max` rotas de maior peso-alvo
+  (hoje `k_max = 2`). Nenhuma regra nova.
+- **(b)** Uma regra própria para o primeiro aporte (por exemplo, começar pela rota de
+  menor custo de entrada), declarada no `politica.yaml`.
+- **(c)** Todo o primeiro aporte na rota de maior peso.
+**Recomendação: (a).** A P2 fica intacta: o caso vira um valor da mesma função, não uma
+exceção. Responder quando a P-115 fechar.
+
+---
+
+## 20 · Ler a especificação da F0 · portão do esquema
+
+Ler `docs/ux/F0-contrato-de-saida.md` e responder: **aprovado**, **aprovado com
+mudanças** (quais) ou **refazer**. Sem isso, nenhum código de esquema (decisão F0, regra
+3). Não é urgente: pela ordem à risca, o esquema é da etapa 4.
 
 ---
 

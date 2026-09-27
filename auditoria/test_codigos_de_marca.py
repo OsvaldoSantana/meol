@@ -35,6 +35,8 @@ CITACOES_DE_ACHADO = {
     "A-03": "o codigo da emissora muda e a historia nao vem junto (troca de ticker)",
     "X-01": "o dado estruturado nao alcanca a decisao (o dossie fica fora da v1)",
     "D-01": "numero sobre o dinheiro dele so em estado.yaml; citado na nota dos prints",
+    "P-116": "pre-registro vale pelo que foi empurrado primeiro; citado no pre-registro do "
+             "teste de marca de 20/09 (27/09/2026)",
 }
 
 

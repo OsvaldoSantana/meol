@@ -1662,6 +1662,11 @@ As H1 a H4 vêm de um pré-registro do teste de marca de 20/09 que **não está 
 (a rodada 1 o cita e diz que o atualiza); trazê-lo do Projeto no claude.ai é o primeiro passo
 desta pendência, antes de qualquer estímulo ser mostrado a alguém.
 
+> **26/09/2026:** o escopo de marca (H1 a H4) passa para a P-162, na etapa 3. Esta pendência
+> fica com as hipóteses de interface (H-C1, H-C2, RI-15), na etapa 4. O "primeiro passo"
+> (trazer o pré-registro de 20/09) está feito:
+> `docs/marca/preregistro-teste-de-marca-2026-09-20.md`.
+
 ## P-157 · Importação de carteira: quais formatos são viáveis
 
 **Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes de desenhar a tela O4 do [mapa de
@@ -1730,6 +1735,65 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 - **(c)** O `pyproject` deixa de ter versão própria (`dynamic`), lida do `politica.yaml`.
   Exige ferramenta de build, e o projeto não é pacote (B-04).
 
+## P-162 · Teste de marca das direções visuais (H1 a H4)
+
+**Dono:** Osvaldo (recrutamento e custo) · Claude (estímulos, questionário, análise) ·
+**Gatilho:** quando a P-163 estiver pronta **e** o pré-registro final estiver empurrado ·
+**Classe:** `DECISAO_DE_DESENHO`
+
+É a etapa 3 (mercado) da fila do rosto (`docs/decisoes/rosto-v1.md`). O pré-registro de
+20/09 está em `docs/marca/preregistro-teste-de-marca-2026-09-20.md`, sem impressão digital
+e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora da H1, a
+margem de empate da regra de decisão, e o desenho do teste da H3. Filtro de entrada:
+aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
+para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
+entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
+P-154).
+
+## P-163 · Direções visuais como estímulo: a T1 desenhada em cada direção
+
+**Dono:** Claude Code (nuvem) · Osvaldo (aprova antes do teste) · **Gatilho:** P-155
+fechada e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
+
+Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** (só o visual
+muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
+`docs/marca/tokens/` e contraste verificado por teste no CI. O controle D precisa ser uma
+ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 trivial.
+
+## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
+
+**Dono:** Osvaldo (a regra) · Claude Code (implementar) · **Gatilho:** P-115 fechada ·
+**Classe:** `DECISAO_DE_DESENHO` (vira engenharia quando ele responder o bloco 19)
+
+`motor_aporte()` devolve `SEM_POSICAO` com patrimônio zero, e quem tem a reserva cheia e
+nada investido fica sem "quanto e onde" (F0-contrato §2 e §3, item 2). Lido no código em
+26/09: com `V = 0`, a fórmula das ordens já põe o aporte nas `k_max` rotas de maior peso;
+o guarda existe por causa das divisões por `V` (`peso_atual`, `deficit_rel`). O
+`test_depois_da_reserva_o_sistema_aloca_sem_nada_assinado` confere o alvo, não as ordens.
+O teste que prende o conserto tem de **falhar na versão atual**: patrimônio zero e reserva
+cheia recebem ordens com rota e valor.
+
+## P-165 · Onde o motor roda para o usuário: a resposta "servidor" contra a P-157
+
+**Dono:** Osvaldo · **Gatilho:** antes do mapa v2 (etapa 4) · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Em 26/09 ele respondeu "servidor". Isso colide com a P-157 ("o dado fica no aparelho") e
+com o mapa (O1 e §5). As três vias estão no bloco 18 da fila: no aparelho; servidor com
+banco de dados; **servidor sem estado** (calcula e devolve sem gravar). Não afeta a v1,
+que é sintética. Com servidor, entram na conta a LGPD (quem guarda o quê, por quanto
+tempo), o custo fixo e a autenticação (WCAG 3.3.8).
+
+## P-166 · Busca de anterioridade da marca MEOL e do domínio
+
+**Dono:** sessão de pesquisa (nuvem), e Osvaldo · **Gatilho:** antes de desenhar
+logotipo ou marca nominativa · **Classe:** `DECISAO_DE_DESENHO`
+
+A busca pública do INPI por marcas iguais ou parecidas nas classes de serviço financeiro e
+de software (quais classes, `NAO_CONFIRMADO`: a pesquisa confirma na fonte), mais a
+disponibilidade de domínio. **Não é parecer:** viabilidade jurídica é da P-158. Colisão
+encontrada vai para ele antes de qualquer desenho de marca.
+
 ---
 
 ## Ao voltar ao desktop
@@ -1755,3 +1819,7 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 > 6. **P-145 — dois passos dele destravam a medição na nuvem:** ⚙ **desktop:**
 >    `py -3.11 fase0/subir_acervo_local.py --aplicar` (sobe o `isinp.zip`); e, de qualquer
 >    lugar, o token do R2 **somente leitura** com os quatro segredos `R2_LEITURA_*`.
+> 7. **27/09/2026 — a fila do rosto.** Os blocos 16 a 20 da fila
+>    (`docs/decisoes/fila-do-osvaldo.md`) esperam o Osvaldo; os 16 e 17 destravam a P-162, e
+>    nenhum exige o desktop. **A P-115 continua na frente**: a fila do rosto não disputa com
+>    ela (`docs/decisoes/rosto-v1.md`).
