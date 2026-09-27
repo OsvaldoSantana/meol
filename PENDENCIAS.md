@@ -1749,58 +1749,6 @@ para **pilotar** o questionário, não para contar como resposta. A medição da
 entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
 P-154).
 
-## P-163 · Direções visuais como estímulo: a T1 desenhada em cada direção
-
-**Dono:** Claude Code (nuvem) · Osvaldo (aprova antes do teste) · **Gatilho:** P-155
-fechada (**feito em 27/09**) e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
-
-Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** (só o visual
-muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
-`docs/marca/tokens/` e contraste verificado por teste no CI. O controle D precisa ser uma
-ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 trivial.
-
-> **27/09/2026 — estímulos feitos; a pendência fica aberta até ele aprovar.** Direções E, C e D
-> (resposta 16b), cada uma em `docs/marca/direcoes/<direção>.html` com os estados normal e
-> PARCIAL, PNG 390×844 em `docs/marca/direcoes/png/`. Números do motor sobre cenário sintético
-> (`python tools/conteudo_estimulo.py`, `conteudo.yaml`); tokens em
-> `docs/marca/tokens/direcoes.yaml`, 44 pares, nenhum abaixo do limiar
-> (`auditoria/test_contraste_tokens.py`, com a execução vermelha registrada no PR); o
-> conteúdo idêntico, as cores só do YAML, nenhum recurso remoto e o formato do real guardados
-> por `auditoria/test_direcoes_marca.py`. **O que ele revisa:** se o D é ostentação
-> competente (critério: parece cartão ou private premium de mercado, não paródia) e se as
-> três se distinguem à primeira vista.
->
-> **Diferenças em relação ao pré-registro de 20/09, para o texto final da P-162:** (1) o D
-> ficou **sem a imagem de estilo de vida**, porque a S3 proibiu foto; (2) a "linguagem leve" da
-> C não entrou, porque o texto é idêntico nas três; (3) o estado normal mostra o custo da
-> compra como se a tarifa da B3 fosse `COMPLETO`, o que é contrafactual de propósito, para a
-> H3; (4) a "data de referência" é o dia da rodada, porque o motor não emite o mês de
-> referência (F0).
->
-> **Perguntas para ele, que o teste precisa antes de rodar (nenhuma foi decidida aqui):**
-> - **Ordem de apresentação:** cada pessoa vê as três direções em ordem aleatória, ou em
->   ordem balanceada (quadrado latino, 3 ordens × igual número de pessoas)? A balanceada
->   controla melhor o efeito de ordem com amostra pequena; a aleatória é mais simples.
-> - **Tamanho de amostra:** quantas pessoas, e com que critério? Sem esse número, a regra 17a
->   (bootstrap pareado) pode dar "empate" só por falta de gente.
-> - **Estímulo como imagem fixa ou como página:** as fontes são as do sistema, e cada aparelho
->   mostra outra tipografia (Didot e Iowan no iPhone; Roboto e Noto Serif no Android; DejaVu
->   no PNG daqui). Mostrar a página ao vivo põe o aparelho de cada pessoa no meio da
->   comparação. **Recomendação: imagem fixa**, renderizada uma vez com fontes livres (OFL)
->   embutidas, para todos verem a mesma coisa; os PNG de hoje servem para layout e cor, não
->   para tipografia.
-> - **H3 no desenho 17a:** ver a mesma direção com e sem a faixa é uma tela a mais por direção
->   (seis no total). Vale para as três direções ou só para a vencedora?
->
-> **27/09/2026, S4 — as quatro perguntas foram respondidas (g-B, h-A, i-A, j-A; fila), e os
-> estímulos refeitos.** Rótulo genérico no lugar do ticker (l-B), nenhum estado
-> contrafactual (selo `PARCIAL` nas duas versões, que é o status do insumo), as versões
-> **base** e **com rota bloqueada** (j-A: a primeira rota que o motor elimina, pela ordem
-> dos portões), a C em magenta (m-B), a D com a ilustração provisória (k-A, P-168) e as
-> fontes OFL embutidas (i-A). Os seis PNG, com sha256, estão em
-> `docs/marca/direcoes/README.md`. **Continua aberta até ele aprovar esses seis PNG**; a
-> aprovação vai para a fila e é pré-condição da S5.
-
 ## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
 
 **Dono:** Osvaldo (a regra) · Claude Code (implementar) · **Gatilho:** P-115 fechada ·

@@ -313,7 +313,7 @@ protótipo sobre dado sintético, para teste com pessoas.
 | 1 · pesquisa | rodadas 1 e 2, Pix | — | — | **feita**; bloco de marcas encerrado por decisão |
 | 2 · design | ~~P-155 WCAG na fonte~~ | nuvem | — | **feita em 27/09**: RI-22 a RI-34, cada um com verificação (`docs/fontes/wcag-22-w3c.md`) |
 | 2 · design | P-166 busca de anterioridade da marca | nuvem, e ele | — | resultado transcrito com data; colisão vai para ele antes de qualquer logotipo |
-| 2 · design | P-163 direções visuais como estímulo | Claude Code, nuvem | P-155 fechada; bloco 16 da fila respondido | uma T1 estática por direção, com conteúdo idêntico; tokens em YAML; contraste testado e provado por mutação **estímulos refeitos na S4, 27/09** (respostas g-B a p-A); falta a aprovação dele dos seis PNG |
+| 2 · design | ~~P-163 direções visuais como estímulo~~ | Claude Code, nuvem | P-155 fechada; bloco 16 da fila respondido | **feita em 27/09**: S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |
 | 3 · mercado | P-162 teste de marca (H1 a H4) | ele recruta; Claude faz os estímulos | pré-registro final **empurrado antes** de qualquer estímulo (P4); blocos 16 e 17 respondidos | direção escolhida pela regra, ou empate decidido por ele com critério escrito |
 | 3 · mercado | P-153 e P-154 | nuvem, e ele | — | como estão escritas |
 | 3 · mercado | posicionamento e tom de voz | nuvem | P-162 fechada | documento interno em `docs/marca/`; nenhum texto público (P-158) |

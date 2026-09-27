@@ -2,8 +2,9 @@
 
 *S3 (27/09/2026) fez a primeira versão; a S4 (27/09/2026) a refez com as respostas de 27/09
 dele (g-B a p-A, em `docs/decisoes/fila-do-osvaldo.md`). **Nada daqui foi mostrado a
-ninguém.** Os PNG são candidatos a imagem final: o sha256 deles só entra no pré-registro
-(P-162, S5) se ele os aprovar.*
+ninguém.** Os seis PNG abaixo foram **aprovados por ele em 27/09/2026** (fila, "Aprovação dele,
+27/09/2026: os seis PNG da S4"); o sha256 deles é o que o pré-registro final (P-162, S5)
+congela. Mudar um byte é imagem nova e pede nova aprovação.*
 
 | arquivo | o que é |
 |---|---|
