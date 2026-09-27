@@ -1637,6 +1637,12 @@ A rodada 1 estima ~28,6 milhões no perfil "Diversifica" (`PARCIAL`, derivado da
 sinais: paralisia, dependência e arrependimento. Sem essa medição, "o público é grande" é
 ordem de grandeza do perfil, não do público.
 
+> **27/09/2026 — a H-A2 passa para cá** (resposta n-A dele). Origem: rodada 1, §7
+> ([pesquisa de fundação](docs/marca/pesquisa-fundacao-2026-09.md)): *"o primeiro susto com
+> queda é um evento comum entre quem saiu da poupança, e está associado a abandono."* Ela
+> tinha ficado sem pendência quando a nota de 26/09 na P-156 deixou lá só as hipóteses de
+> interface. Como a H-A1, é pergunta sobre o público, não sobre a tela.
+
 ## P-156 · Teste com pessoas das hipóteses de interface e de marca
 
 **Dono:** Osvaldo (recrutamento e custo) · Claude (roteiro, estímulos e pré-registro do
@@ -1735,54 +1741,13 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 20/09 está em `docs/marca/preregistro-teste-de-marca-2026-09-20.md`, sem impressão digital
 e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora da H1, a
 margem de empate da regra de decisão, e o desenho do teste da H3. *(27/09: fechadas pelas
-respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* Filtro de entrada:
+respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* *(27/09, S4: g-B, h-A, i-A,
+j-A, amigos e recrutamento também respondidos; a S5 grava o pré-registro final depois de ele
+aprovar os PNG da S4.)* Filtro de entrada:
 aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
 para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
 entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
 P-154).
-
-## P-163 · Direções visuais como estímulo: a T1 desenhada em cada direção
-
-**Dono:** Claude Code (nuvem) · Osvaldo (aprova antes do teste) · **Gatilho:** P-155
-fechada (**feito em 27/09**) e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
-
-Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** (só o visual
-muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
-`docs/marca/tokens/` e contraste verificado por teste no CI. O controle D precisa ser uma
-ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 trivial.
-
-> **27/09/2026 — estímulos feitos; a pendência fica aberta até ele aprovar.** Direções E, C e D
-> (resposta 16b), cada uma em `docs/marca/direcoes/<direção>.html` com os estados normal e
-> PARCIAL, PNG 390×844 em `docs/marca/direcoes/png/`. Números do motor sobre cenário sintético
-> (`python tools/conteudo_estimulo.py`, `conteudo.yaml`); tokens em
-> `docs/marca/tokens/direcoes.yaml`, 44 pares, nenhum abaixo do limiar
-> (`auditoria/test_contraste_tokens.py`, com a execução vermelha registrada no PR); o
-> conteúdo idêntico, as cores só do YAML, nenhum recurso remoto e o formato do real guardados
-> por `auditoria/test_direcoes_marca.py`. **O que ele revisa:** se o D é ostentação
-> competente (critério: parece cartão ou private premium de mercado, não paródia) e se as
-> três se distinguem à primeira vista.
->
-> **Diferenças em relação ao pré-registro de 20/09, para o texto final da P-162:** (1) o D
-> ficou **sem a imagem de estilo de vida**, porque a S3 proibiu foto; (2) a "linguagem leve" da
-> C não entrou, porque o texto é idêntico nas três; (3) o estado normal mostra o custo da
-> compra como se a tarifa da B3 fosse `COMPLETO`, o que é contrafactual de propósito, para a
-> H3; (4) a "data de referência" é o dia da rodada, porque o motor não emite o mês de
-> referência (F0).
->
-> **Perguntas para ele, que o teste precisa antes de rodar (nenhuma foi decidida aqui):**
-> - **Ordem de apresentação:** cada pessoa vê as três direções em ordem aleatória, ou em
->   ordem balanceada (quadrado latino, 3 ordens × igual número de pessoas)? A balanceada
->   controla melhor o efeito de ordem com amostra pequena; a aleatória é mais simples.
-> - **Tamanho de amostra:** quantas pessoas, e com que critério? Sem esse número, a regra 17a
->   (bootstrap pareado) pode dar "empate" só por falta de gente.
-> - **Estímulo como imagem fixa ou como página:** as fontes são as do sistema, e cada aparelho
->   mostra outra tipografia (Didot e Iowan no iPhone; Roboto e Noto Serif no Android; DejaVu
->   no PNG daqui). Mostrar a página ao vivo põe o aparelho de cada pessoa no meio da
->   comparação. **Recomendação: imagem fixa**, renderizada uma vez com fontes livres (OFL)
->   embutidas, para todos verem a mesma coisa; os PNG de hoje servem para layout e cor, não
->   para tipografia.
-> - **H3 no desenho 17a:** ver a mesma direção com e sem a faixa é uma tela a mais por direção
->   (seis no total). Vale para as três direções ou só para a vencedora?
 
 ## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
 
@@ -1831,6 +1796,19 @@ dinheiro, e o "executei" da T1b (com desfazer antes de gravar) é o caso dele. O
 (1.1.1, 1.3.1, 1.3.2, 1.4.13, 2.1.1, 2.4.3, 2.4.6, 3.3.1, 3.3.2, 3.3.3, 4.1.2 e 4.1.3) estão na
 mesma lista. O que fecha: cada um lido na fonte, virando RI com verificação ou declarado sem
 aplicação com o motivo.
+
+## P-168 · Ativos visuais próprios do MEOL (ilustração, ícone, imagem)
+
+**Dono:** Osvaldo (decide) · Claude (desenha e testa) · **Gatilho:** a etapa 5 (brandbook) da
+fila do rosto · **Classe:** `DECISAO_DE_DESENHO`
+
+Resposta k-A dele (27/09/2026): **todo ativo visual do MEOL é produzido para o MEOL; nada de
+banco de imagens.** O único ativo hoje é a ilustração da direção D, um cartão metálico
+genérico desenhado em código (SVG, sem marca e sem texto), marcado `data-provisorio="P-168"`
+em `docs/marca/direcoes/D.html` e guardado por `auditoria/test_direcoes_marca.py`. Ele é
+**provisório**: existe só para o controle D do teste de marca não perder a "imagem de estilo
+de vida" do pré-registro de 20/09. O que fecha: o conjunto de ativos do brandbook, feito para
+o MEOL, com licença e origem de cada um.
 
 ---
 

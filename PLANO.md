@@ -313,7 +313,7 @@ protótipo sobre dado sintético, para teste com pessoas.
 | 1 · pesquisa | rodadas 1 e 2, Pix | — | — | **feita**; bloco de marcas encerrado por decisão |
 | 2 · design | ~~P-155 WCAG na fonte~~ | nuvem | — | **feita em 27/09**: RI-22 a RI-34, cada um com verificação (`docs/fontes/wcag-22-w3c.md`) |
 | 2 · design | P-166 busca de anterioridade da marca | nuvem, e ele | — | resultado transcrito com data; colisão vai para ele antes de qualquer logotipo |
-| 2 · design | P-163 direções visuais como estímulo | Claude Code, nuvem | P-155 fechada; bloco 16 da fila respondido | uma T1 estática por direção, com conteúdo idêntico; tokens em YAML; contraste testado e provado por mutação **estímulos feitos em 27/09** (E, C e D, resposta 16b); falta a aprovação dele e as quatro perguntas da P-163 |
+| 2 · design | ~~P-163 direções visuais como estímulo~~ | Claude Code, nuvem | P-155 fechada; bloco 16 da fila respondido | **feita em 27/09**: S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |
 | 3 · mercado | P-162 teste de marca (H1 a H4) | ele recruta; Claude faz os estímulos | pré-registro final **empurrado antes** de qualquer estímulo (P4); blocos 16 e 17 respondidos | direção escolhida pela regra, ou empate decidido por ele com critério escrito |
 | 3 · mercado | P-153 e P-154 | nuvem, e ele | — | como estão escritas |
 | 3 · mercado | posicionamento e tom de voz | nuvem | P-162 fechada | documento interno em `docs/marca/`; nenhum texto público (P-158) |
@@ -380,7 +380,7 @@ foram classificadas. *Pendência sem classe é desabafo*, pela regra dele.
 |---|---|---|---|
 | ~~A~~ | ~~destino da cópia do OneDrive~~ | — | **decidida em 18/09: apagada** |
 | B | a segunda esteira (X-01) entra no escopo, e quando? | é orçamento de esforço, não questão técnica | o M3 nasce cobrindo só parte do universo, e sem isso escrito |
-| C | `CLAUDE.md` cortado agora ou depois do passo 1? | é o tempo dele que paga os dois lados | ~40 mil tokens por sessão, toda sessão |
+| ~~C~~ | ~~`CLAUDE.md` cortado agora ou depois do passo 1?~~ | — | **riscada em 27/09/2026 (resposta o-A dele):** decidida em 19/09 (P-103, item 5) e feita em 26/09 (`7d8a566`); a linha ficou velha e foi apontada na S1 |
 | D | nível ou tendência nos blocos de balanço (P-16/P-63) | é escolha de método, não de dado | trava o bloco C no passo 4 |
 
 ---
