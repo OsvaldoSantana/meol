@@ -1734,7 +1734,8 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 É a etapa 3 (mercado) da fila do rosto (`docs/decisoes/rosto-v1.md`). O pré-registro de
 20/09 está em `docs/marca/preregistro-teste-de-marca-2026-09-20.md`, sem impressão digital
 e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora da H1, a
-margem de empate da regra de decisão, e o desenho do teste da H3. Filtro de entrada:
+margem de empate da regra de decisão, e o desenho do teste da H3. *(27/09: fechadas pelas
+respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* Filtro de entrada:
 aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
 para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
 entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
@@ -1749,6 +1750,39 @@ Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** 
 muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
 `docs/marca/tokens/` e contraste verificado por teste no CI. O controle D precisa ser uma
 ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 trivial.
+
+> **27/09/2026 — estímulos feitos; a pendência fica aberta até ele aprovar.** Direções E, C e D
+> (resposta 16b), cada uma em `docs/marca/direcoes/<direção>.html` com os estados normal e
+> PARCIAL, PNG 390×844 em `docs/marca/direcoes/png/`. Números do motor sobre cenário sintético
+> (`python tools/conteudo_estimulo.py`, `conteudo.yaml`); tokens em
+> `docs/marca/tokens/direcoes.yaml`, 44 pares, nenhum abaixo do limiar
+> (`auditoria/test_contraste_tokens.py`, com a execução vermelha registrada no PR); o
+> conteúdo idêntico, as cores só do YAML, nenhum recurso remoto e o formato do real guardados
+> por `auditoria/test_direcoes_marca.py`. **O que ele revisa:** se o D é ostentação
+> competente (critério: parece cartão ou private premium de mercado, não paródia) e se as
+> três se distinguem à primeira vista.
+>
+> **Diferenças em relação ao pré-registro de 20/09, para o texto final da P-162:** (1) o D
+> ficou **sem a imagem de estilo de vida**, porque a S3 proibiu foto; (2) a "linguagem leve" da
+> C não entrou, porque o texto é idêntico nas três; (3) o estado normal mostra o custo da
+> compra como se a tarifa da B3 fosse `COMPLETO`, o que é contrafactual de propósito, para a
+> H3; (4) a "data de referência" é o dia da rodada, porque o motor não emite o mês de
+> referência (F0).
+>
+> **Perguntas para ele, que o teste precisa antes de rodar (nenhuma foi decidida aqui):**
+> - **Ordem de apresentação:** cada pessoa vê as três direções em ordem aleatória, ou em
+>   ordem balanceada (quadrado latino, 3 ordens × igual número de pessoas)? A balanceada
+>   controla melhor o efeito de ordem com amostra pequena; a aleatória é mais simples.
+> - **Tamanho de amostra:** quantas pessoas, e com que critério? Sem esse número, a regra 17a
+>   (bootstrap pareado) pode dar "empate" só por falta de gente.
+> - **Estímulo como imagem fixa ou como página:** as fontes são as do sistema, e cada aparelho
+>   mostra outra tipografia (Didot e Iowan no iPhone; Roboto e Noto Serif no Android; DejaVu
+>   no PNG daqui). Mostrar a página ao vivo põe o aparelho de cada pessoa no meio da
+>   comparação. **Recomendação: imagem fixa**, renderizada uma vez com fontes livres (OFL)
+>   embutidas, para todos verem a mesma coisa; os PNG de hoje servem para layout e cor, não
+>   para tipografia.
+> - **H3 no desenho 17a:** ver a mesma direção com e sem a faixa é uma tela a mais por direção
+>   (seis no total). Vale para as três direções ou só para a vencedora?
 
 ## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
 
@@ -1825,5 +1859,5 @@ aplicação com o motivo.
 >    lugar, o token do R2 **somente leitura** com os quatro segredos `R2_LEITURA_*`.
 > 7. **27/09/2026 — a fila do rosto.** Os blocos 16 a 20 da fila
 >    (`docs/decisoes/fila-do-osvaldo.md`) esperam o Osvaldo; os 16 e 17 destravam a P-162, e
->    nenhum exige o desktop. **A P-115 continua na frente**: a fila do rosto não disputa com
+>    nenhum exige o desktop. *(27/09: 16b e 17a respondidos; seguem 18, 19 e 20.)* **A P-115 continua na frente**: a fila do rosto não disputa com
 >    ela (`docs/decisoes/rosto-v1.md`).

@@ -44,6 +44,16 @@ redigido e **para**, e só é empurrado depois do "pode empurrar".
 | onde o motor roda | "servidor", **em aberto** por colidir com a P-157 | P-165, bloco 18 |
 | nome nos estímulos | MEOL | `rosto-v1.md`; logotipo espera a P-166 |
 
+### Respostas dele, 27/09/2026, aos blocos 16 e 17 (P-162)
+
+Dadas na sessão do Claude Code que abriu a S3, em resposta à pergunta feita quando o
+portão da P-163 estava fechado. As duas seguem a recomendação.
+
+| bloco | resposta | o que muda |
+|---|---|---|
+| 16 · direções no teste | **16b** — E, C e D | a S3 desenha só essas três. A H1 do pré-registro passa a "E supera D em confiável e honesto"; A e B saem do teste, e perde-se saber qual metade da E pesou |
+| 17 · regra de decisão | **17a** — escala de 1 a 7, empate quando o intervalo de 95% da diferença pareada (bootstrap) contém zero; "não ficar abaixo da mediana" = não ser a pior direção em honesto; H3 com cada pessoa vendo a direção com e sem a faixa, em ordem aleatória | fecha três das lacunas do pré-registro de 20/09. **Ainda não é o pré-registro final:** ele só vale gravado e empurrado antes de qualquer estímulo ser mostrado (P-162) |
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do
@@ -362,7 +372,7 @@ para impedir, e na fase A o motor de aporte está ocioso de qualquer jeito.
 
 ---
 
-## 16 · Quais direções entram no teste de marca · P-162
+## 16 · Quais direções entram no teste de marca · P-162 · **respondido em 27/09: 16b**
 
 O pré-registro de 20/09 tem A (Instrumento), B (Private silencioso), C (Digital
 amigável) e D (Ostentação, controle). Depois dele, o chat propôs a **E (Instrumento de
@@ -377,7 +387,7 @@ fintech, e a D é o controle. Mudar agora é legítimo, porque nenhum estímulo 
 
 ---
 
-## 17 · A regra de decisão precisa de número antes do teste · P-162
+## 17 · A regra de decisão precisa de número antes do teste · P-162 · **respondido em 27/09: 17a**
 
 A regra de 20/09 diz "empate dentro da margem" sem definir a margem, "abaixo da mediana
 em honesto" sem dizer mediana de quê, e a H3 não diz como será testada.
