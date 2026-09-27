@@ -7,8 +7,10 @@ em sessões de chat de 20/09 e trazidos do Projeto no claude.ai para o repositó
 
 | documento | papel |
 |---|---|
-| **[requisitos de interface v1](requisitos-interface-v1.md)** | o contrato: RI-01 a RI-21, cada um com a sua verificação (teste, revisão ou pesquisa) |
-| **[mapa de telas v1](../ux/mapa-de-telas-v1.md)** | as telas, os fluxos, os estados e os campos que a F0 (contrato de saída do motor) precisa emitir |
+| **[requisitos de interface v1](requisitos-interface-v1.md)** | o contrato: RI-01 a RI-34, cada um com a sua verificação (teste, revisão ou pesquisa); os RI-22 a RI-34 (v1.1, 27/09) vêm da [WCAG 2.2 lida na fonte](../fontes/wcag-22-w3c.md) |
+| **[mapa de telas v1](../ux/mapa-de-telas-v1.md)** | as telas, os fluxos, os estados e os campos que a F0 (contrato de saída do motor) precisa emitir; desde 26/09, **rascunho de UX adiantado**, revisado na etapa 4 (nota N-ORDEM nele) |
+| **[estímulos das direções E, C e D](direcoes/)** | a T1 desenhada em cada direção escolhida (16b), estados normal e PARCIAL, com os [tokens](tokens/direcoes.yaml) e os números do motor ([`conteudo.yaml`](direcoes/conteudo.yaml)); P-163, espera a aprovação dele |
+| **[pré-registro do teste de marca, 20/09](preregistro-teste-de-marca-2026-09-20.md)** | as direções A a D, as hipóteses H1 a H4 e a regra de decisão como declaradas em 20/09; **sem impressão digital**, e com lacunas que ele fechou nos blocos 16 e 17 da fila (16b e 17a, 27/09), a entrar na versão final (P-162) |
 
 Os três documentos de pesquisa abaixo são a **origem** desses dois: explicam de onde cada
 requisito veio, mas não se editam para mudar um requisito. Requisito novo, revogado ou
@@ -24,9 +26,13 @@ reescrito muda o documento de requisitos, com nova versão (regra da §6 dele).
    Banco Central, MC-25 a MC-29, RI-17 a RI-21, e o bloco de marcas encerrado por decisão.
 4. [requisitos de interface v1](requisitos-interface-v1.md) — a consolidação.
 5. [mapa de telas v1](../ux/mapa-de-telas-v1.md) — a etapa de UX.
+6. [pré-registro do teste de marca, 20/09](preregistro-teste-de-marca-2026-09-20.md) — o que o
+   teste de marca da etapa 3 vai medir, como declarado antes de qualquer estímulo.
 
 A trilha de produto que continua daqui é a F0, paralela ao motor: ver `PLANO.md` §3-F0 e a
 decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-produto.md).
+A ordem das etapas do rosto (pesquisa → design → mercado → UX → brandbook) e o que a v1 é
+estão em [`docs/decisoes/rosto-v1.md`](../decisoes/rosto-v1.md) (26/09/2026, decisão dele).
 
 ## Os códigos
 

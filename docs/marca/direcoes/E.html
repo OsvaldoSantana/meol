@@ -1,0 +1,132 @@
+<!doctype html>
+<!-- Estimulo do teste de marca, direcao E (Instrumento de precisao). P-163.
+     Cores: docs/marca/tokens/direcoes.yaml, bloco E. Textos e numeros:
+     docs/marca/direcoes/conteudo.yaml (gerado pelo motor, cenario sintetico). -->
+<html lang="pt-BR" data-direcao="E">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>MEOL</title>
+<style>
+  :root {
+    --fundo: #F5F3EE; --superficie: #FBFAF6; --texto: #1B1A17; --texto-2: #57534A;
+    --destaque: #7A5F32; --borda: #8C7A5B; --divisoria: #E4DFD4;
+    --ok: #2E5B3B; --parcial: #3B5577; --recusa: #8A2F2B;
+    --f-titulo: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --f-corpo: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--fundo); color: var(--texto); font-family: var(--f-corpo); }
+  .tela { width: 390px; height: 844px; overflow: hidden; display: flex; flex-direction: column;
+          background: var(--fundo); padding: 28px 28px 0; }
+  .tela + .tela { margin-top: 24px; }
+  .topo { display: flex; justify-content: space-between; align-items: baseline;
+          padding-bottom: 14px; border-bottom: 1px solid var(--divisoria); }
+  .marca { font-family: var(--f-titulo); font-size: 15px; font-weight: 600;
+           letter-spacing: 0.32em; color: var(--texto); }
+  .data { font-family: var(--f-titulo); font-size: 12px; letter-spacing: 0.06em;
+          color: var(--texto-2); }
+  .conteudo { flex: 1; padding-top: 36px; }
+  .rotulo-secao { font-family: var(--f-titulo); font-size: 12px; font-weight: 600;
+                  text-transform: uppercase; letter-spacing: 0.18em; color: var(--texto-2); }
+  .selo { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+          font-family: var(--f-titulo); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
+  .selo-marca { width: 8px; height: 8px; border: 1.5px solid currentColor; }
+  .selo[data-status="completo"] { color: var(--ok); }
+  .selo[data-status="completo"] .selo-marca { background: var(--ok); }
+  .selo[data-status="parcial"] { color: var(--parcial); }
+  .decisao { margin-top: 18px; font-size: 30px; line-height: 1.22; font-weight: 400;
+             font-variant-numeric: tabular-nums lining-nums; }
+  .porque { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--texto-2); }
+  .detalhe { margin-top: 30px; background: var(--superficie); border-top: 1px solid var(--divisoria); }
+  .linha { display: flex; justify-content: space-between; align-items: baseline;
+           padding: 14px 2px; border-bottom: 1px solid var(--divisoria); }
+  dt { font-family: var(--f-titulo); font-size: 12px; text-transform: uppercase;
+       letter-spacing: 0.14em; color: var(--texto-2); }
+  dd { font-size: 17px; color: var(--texto); text-align: right; }
+  .numero { font-variant-numeric: tabular-nums lining-nums; }
+  .nota { margin-top: 12px; font-size: 15px; line-height: 1.45; color: var(--parcial); }
+  .acoes { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  button { font: inherit; background: none; border: none; color: inherit; cursor: pointer; }
+  button:focus-visible { outline: 2px solid var(--texto); outline-offset: 2px; }
+  .primario, .secundario { min-height: 48px; font-family: var(--f-titulo); font-size: 14px;
+                           font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+                           border: 1.5px solid var(--destaque); color: var(--destaque);
+                           background: var(--superficie); border-radius: 2px; }
+  .secundario { border-color: var(--borda); color: var(--texto); }
+  .rodape { padding: 16px 0 22px; border-top: 1px solid var(--divisoria); }
+  .contato { width: 100%; min-height: 44px; font-size: 15px; color: var(--texto);
+             text-decoration: underline; text-underline-offset: 4px; }
+  .abas { display: flex; justify-content: space-around; margin-top: 8px; }
+  .aba { min-height: 44px; min-width: 88px; font-family: var(--f-titulo); font-size: 12px;
+         letter-spacing: 0.16em; text-transform: uppercase; color: var(--texto-2); }
+  .aba[aria-current="page"] { color: var(--texto); border-bottom: 2px solid var(--destaque); }
+  .sem-quebra, dd.numero { white-space: nowrap; }
+  dt { flex: 1; padding-right: 12px; }
+  /* Revisao: arquivo.html#tela-parcial mostra so o estado PARCIAL (sem script). */
+  body:has(#tela-parcial:target) #tela-normal { display: none; }
+  body:has(#tela-parcial:target) .tela + .tela { margin-top: 0; }
+</style>
+</head>
+<body>
+<section class="tela" id="tela-normal" data-estado="normal" aria-label="Decisão do mês, estado normal">
+  <header class="topo">
+    <span class="marca">MEOL</span>
+    <span class="data">Decisão de setembro de 2026</span>
+  </header>
+  <main class="conteudo">
+    <p class="rotulo-secao">Decisão do mês</p>
+    <p class="selo" data-status="completo"><span class="selo-marca" aria-hidden="true"></span>Completo</p>
+    <h1 class="decisao" data-camada="1">Este mês, aporte R$&nbsp;800,00 em PIBB11.</h1>
+    <p class="porque" data-camada="2">É a parte da sua carteira mais abaixo do <span class="sem-quebra">peso-alvo</span>.</p>
+    <dl class="detalhe">
+      <div class="linha"><dt>Valor</dt><dd class="numero">R$&nbsp;800,00</dd></div>
+      <div class="linha"><dt>Destino</dt><dd>PIBB11</dd></div>
+      <div class="linha"><dt>Custo da compra</dt><dd class="numero">R$&nbsp;0,24</dd></div>
+    </dl>
+    <div class="acoes">
+      <button type="button" class="primario">Executei</button>
+      <button type="button" class="secundario">Por quê?</button>
+    </div>
+  </main>
+  <footer class="rodape">
+    <button type="button" class="contato">Falar com o MEOL</button>
+    <nav class="abas" aria-label="Destinos">
+      <button type="button" class="aba" aria-current="page">Decisão</button>
+      <button type="button" class="aba">Carteira</button>
+      <button type="button" class="aba">Mais</button>
+    </nav>
+  </footer>
+</section>
+<section class="tela" id="tela-parcial" data-estado="parcial" aria-label="Decisão do mês, estado parcial">
+  <header class="topo">
+    <span class="marca">MEOL</span>
+    <span class="data">Decisão de setembro de 2026</span>
+  </header>
+  <main class="conteudo">
+    <p class="rotulo-secao">Decisão do mês</p>
+    <p class="selo" data-status="parcial"><span class="selo-marca" aria-hidden="true"></span>Parcial</p>
+    <h1 class="decisao" data-camada="1">Este mês, aporte R$&nbsp;800,00 em PIBB11.</h1>
+    <p class="porque" data-camada="2">É a parte da sua carteira mais abaixo do <span class="sem-quebra">peso-alvo</span>.</p>
+    <dl class="detalhe">
+      <div class="linha"><dt>Valor</dt><dd class="numero">R$&nbsp;800,00</dd></div>
+      <div class="linha"><dt>Destino</dt><dd>PIBB11</dd></div>
+      <div class="linha"><dt>Custo da compra</dt><dd class="numero">entre R$&nbsp;0,22 e R$&nbsp;0,24</dd></div>
+    </dl>
+    <p class="nota" data-status="parcial">A tarifa da B3 tem duas fontes que ainda não batem.</p>
+    <div class="acoes">
+      <button type="button" class="primario">Executei</button>
+      <button type="button" class="secundario">Por quê?</button>
+    </div>
+  </main>
+  <footer class="rodape">
+    <button type="button" class="contato">Falar com o MEOL</button>
+    <nav class="abas" aria-label="Destinos">
+      <button type="button" class="aba" aria-current="page">Decisão</button>
+      <button type="button" class="aba">Carteira</button>
+      <button type="button" class="aba">Mais</button>
+    </nav>
+  </footer>
+</section>
+</body>
+</html>

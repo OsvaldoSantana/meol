@@ -301,14 +301,53 @@ parte dos [requisitos de interface v1](docs/marca/requisitos-interface-v1.md).
 **O que destrava:** a construção de qualquer tela, e o teste com pessoas (P-156), cujos
 estímulos dependem de campos reais. **O que a impede hoje:** nada; é escrita, na nuvem.
 
+### A fila do rosto — continuação da F0 · decisão dele, 26/09/2026
+
+[`docs/decisoes/rosto-v1.md`](docs/decisoes/rosto-v1.md). Mesmas regras da F0: **não
+disputa o caminho crítico com a P-115** e **não conta como a engenharia que destrava**.
+A ordem é a dele: pesquisa → design → mercado → UX → brandbook. A v1 é estímulo e
+protótipo sobre dado sintético, para teste com pessoas.
+
+| etapa | item | onde | portão para começar | pronto quando |
+|---|---|---|---|---|
+| 1 · pesquisa | rodadas 1 e 2, Pix | — | — | **feita**; bloco de marcas encerrado por decisão |
+| 2 · design | ~~P-155 WCAG na fonte~~ | nuvem | — | **feita em 27/09**: RI-22 a RI-34, cada um com verificação (`docs/fontes/wcag-22-w3c.md`) |
+| 2 · design | P-166 busca de anterioridade da marca | nuvem, e ele | — | resultado transcrito com data; colisão vai para ele antes de qualquer logotipo |
+| 2 · design | P-163 direções visuais como estímulo | Claude Code, nuvem | P-155 fechada; bloco 16 da fila respondido | uma T1 estática por direção, com conteúdo idêntico; tokens em YAML; contraste testado e provado por mutação **estímulos feitos em 27/09** (E, C e D, resposta 16b); falta a aprovação dele e as quatro perguntas da P-163 |
+| 3 · mercado | P-162 teste de marca (H1 a H4) | ele recruta; Claude faz os estímulos | pré-registro final **empurrado antes** de qualquer estímulo (P4); blocos 16 e 17 respondidos | direção escolhida pela regra, ou empate decidido por ele com critério escrito |
+| 3 · mercado | P-153 e P-154 | nuvem, e ele | — | como estão escritas |
+| 3 · mercado | posicionamento e tom de voz | nuvem | P-162 fechada | documento interno em `docs/marca/`; nenhum texto público (P-158) |
+| 4 · UX | mapa v2, que resolve a P-160 | Claude, e ele | P-162 e P-165 decididas | toda tela com campo, ou fora com o motivo |
+| 4 · UX | a F0 em esquema | Claude Code | ele leu a F0 (bloco 20 da fila) | esquema em `docs/schemas/`, validado contra `alocar()` do usuário novo |
+| 4 · UX | P-167 os critérios da WCAG que a P-155 não leu (o 3.3.4 primeiro) | nuvem | — | cada um lido na fonte: RI com verificação, ou sem aplicação com o motivo |
+| 4 · UX | protótipo F1, F3 e F6 | Claude Code | esquema pronto; tokens da direção escolhida | os sete estados do mapa §4 renderizam; axe sem violação; RI-02, RI-08, RI-10, RI-17 e RI-18 com teste |
+| 4 · UX | P-156 teste de interface | ele, e Claude | critério gravado antes (P4) | H-C1, H-C2 e RI-15 medidos |
+| 5 · brandbook | brandbook | — | P-155, P-162 e P-156 fechadas | — |
+| motor | P-164 primeiro aporte com patrimônio zero | Claude Code | **P-115 fechada**; bloco 19 respondido | um teste que falha hoje: patrimônio zero e reserva cheia recebem ordens |
+
+**Portões que valem sempre:** P-158 antes de qualquer usuário além dele ou de texto
+comercial público. O texto de recrutamento do teste é convite de pesquisa, sem
+promessa de produto. As respostas são anônimas, e nenhum dado de participante
+entra no repositório (só o agregado).
+
+**O que destrava:** a escolha da direção visual com evidência, e a primeira tela
+com dado real depois dela. **O que impede hoje:** nada; a etapa 2 roda na nuvem.
+
 ### Fora da fila, mas com custo em toda sessão
 
-- **`CLAUDE.md` tem 2.270 linhas / ~40 mil tokens**, e `PENDENCIAS.md` outros ~29 mil. A
+- ~~**`CLAUDE.md` tem 2.270 linhas / ~40 mil tokens**, e `PENDENCIAS.md` outros ~29 mil. A
   §11.4 registrou em 06/09 que o corte tinha levado o custo por sessão a ~13 mil; hoje é
   **cinco vezes isso**. A doutrina da retratação declarou a troca e nomeou a saída: *"se um
   dia o custo virar impeditivo, a saída é mover o histórico para um arquivo de achados — não
   deletá-lo."* **Virou.** Alvo: `CLAUDE.md` ≤ 600 linhas de instrução; todo bloco datado vai
-  para `ACHADOS.md`.
+  para `ACHADOS.md`.~~ **Medido em 27/09/2026:** `CLAUDE.md` tem **399 linhas**
+  (`wc -l`; o `tamanho_do_contexto.py` conta 400) e **~7,9 mil tokens**; o `PENDENCIAS.md`,
+  **~35 mil**; a leitura de sessão (os quatro arquivos `SEMPRE`), **~55 mil**. Tokens
+  pelo proxy de 2,96 caracteres por token, ±15%: esta sessão na nuvem mediu sem `tiktoken`.
+  O alvo de ≤ 600 linhas foi cumprido pelo corte de 26/09 (`7d8a566`), depois da decisão C
+  executada em 19/09 (P-103, item 5), e a história foi para `docs/historico/`, não para o `ACHADOS.md`. O que mais pesa na
+  leitura de sessão hoje é o `PENDENCIAS.md`. O antes e depois de cada corte:
+  `docs/metricas/contexto-de-sessao.md`.
 - **Trabalho de repositório pertence ao Claude Code.** A tabela §11.2 já diz isso e as
   rodadas de 16 e 18/09 foram feitas da nuvem mesmo assim — pagando transferência de arquivo
   e sem alcançar o git. A nuvem é para **pesquisa com fonte primária, subagentes e

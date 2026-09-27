@@ -1,0 +1,24 @@
+# Cenario SINTETICO dos estimulos do teste de marca (P-163). Nenhum numero aqui e do
+# Osvaldo (D-01): e uma pessoa inventada, do publico de entrada decidido em 20/09 --
+# quem ja aporta. O gerador e `tools/conteudo_estimulo.py`; ele escreve o
+# `conteudo.yaml` ao lado, e `tools/test_conteudo_estimulo.py` reprova se o arquivo
+# gravado divergir do que o motor da hoje.
+versao: 1
+cadastro:
+  # O cadastro minimo do `alocacao/test_usuario_novo.py` (CADASTRO_MINIMO), lido de la
+  # pelo gerador -- nao copiado aqui (N-01: duas listas que concordam por acidente).
+  origem: alocacao/test_usuario_novo.py::CADASTRO_MINIMO
+reserva:
+  # Reserva cheia: o gerador usa `reserva_alvo()` do motor, e nao um numero escrito.
+  origem: alocacao.reserva_alvo
+posicoes:
+  # 12 meses de aporte de R$ 800 (9.600), sem rendimento, espalhados por ESCOLHA DE
+  # DESENHO DO ESTIMULO: quem ja aporta ha um ano e comecou pelo Tesouro Selic. A
+  # distribuicao foi escolhida para o maior deficit ser UNICO (pibb11); com rotas
+  # empatadas, a escolha sairia da ordem do dicionario, nao do motor.
+  td_selic: 4000.0
+  bova11: 2000.0
+  ivvb11: 2000.0
+  divo11: 800.0
+  smal11: 400.0
+  acao_zero: 400.0

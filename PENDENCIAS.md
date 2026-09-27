@@ -1637,16 +1637,6 @@ A rodada 1 estima ~28,6 milhões no perfil "Diversifica" (`PARCIAL`, derivado da
 sinais: paralisia, dependência e arrependimento. Sem essa medição, "o público é grande" é
 ordem de grandeza do perfil, não do público.
 
-## P-155 · Ler a WCAG na fonte: contraste, alvo de toque e daltonismo · era P-WCAG
-
-**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do brandbook e da primeira tela
-desenhada · **Classe:** `DECISAO_DE_DESENHO`
-
-O capítulo de acessibilidade do Pix é recomendação e não cobre contraste, tamanho de alvo nem
-daltonismo ([Pix v7.4](docs/marca/pesquisa-pix-e-pendencias-2026-09.md), §1.1). Os requisitos
-de interface declaram a lacuna (§5, item 2). O que fecha: a WCAG lida na fonte, com os critérios
-que viram requisito novo (RI-22 em diante) e a verificação de cada um.
-
 ## P-156 · Teste com pessoas das hipóteses de interface e de marca
 
 **Dono:** Osvaldo (recrutamento e custo) · Claude (roteiro, estímulos e pré-registro do
@@ -1661,6 +1651,11 @@ hipóteses H1 a H4 do teste de marca. O critério de cada uma é gravado antes d
 As H1 a H4 vêm de um pré-registro do teste de marca de 20/09 que **não está no repositório**
 (a rodada 1 o cita e diz que o atualiza); trazê-lo do Projeto no claude.ai é o primeiro passo
 desta pendência, antes de qualquer estímulo ser mostrado a alguém.
+
+> **26/09/2026:** o escopo de marca (H1 a H4) passa para a P-162, na etapa 3. Esta pendência
+> fica com as hipóteses de interface (H-C1, H-C2, RI-15), na etapa 4. O "primeiro passo"
+> (trazer o pré-registro de 20/09) está feito:
+> `docs/marca/preregistro-teste-de-marca-2026-09-20.md`.
 
 ## P-157 · Importação de carteira: quais formatos são viáveis
 
@@ -1730,6 +1725,113 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 - **(c)** O `pyproject` deixa de ter versão própria (`dynamic`), lida do `politica.yaml`.
   Exige ferramenta de build, e o projeto não é pacote (B-04).
 
+## P-162 · Teste de marca das direções visuais (H1 a H4)
+
+**Dono:** Osvaldo (recrutamento e custo) · Claude (estímulos, questionário, análise) ·
+**Gatilho:** quando a P-163 estiver pronta **e** o pré-registro final estiver empurrado ·
+**Classe:** `DECISAO_DE_DESENHO`
+
+É a etapa 3 (mercado) da fila do rosto (`docs/decisoes/rosto-v1.md`). O pré-registro de
+20/09 está em `docs/marca/preregistro-teste-de-marca-2026-09-20.md`, sem impressão digital
+e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora da H1, a
+margem de empate da regra de decisão, e o desenho do teste da H3. *(27/09: fechadas pelas
+respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* Filtro de entrada:
+aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
+para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
+entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
+P-154).
+
+## P-163 · Direções visuais como estímulo: a T1 desenhada em cada direção
+
+**Dono:** Claude Code (nuvem) · Osvaldo (aprova antes do teste) · **Gatilho:** P-155
+fechada (**feito em 27/09**) e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
+
+Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** (só o visual
+muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
+`docs/marca/tokens/` e contraste verificado por teste no CI. O controle D precisa ser uma
+ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 trivial.
+
+> **27/09/2026 — estímulos feitos; a pendência fica aberta até ele aprovar.** Direções E, C e D
+> (resposta 16b), cada uma em `docs/marca/direcoes/<direção>.html` com os estados normal e
+> PARCIAL, PNG 390×844 em `docs/marca/direcoes/png/`. Números do motor sobre cenário sintético
+> (`python tools/conteudo_estimulo.py`, `conteudo.yaml`); tokens em
+> `docs/marca/tokens/direcoes.yaml`, 44 pares, nenhum abaixo do limiar
+> (`auditoria/test_contraste_tokens.py`, com a execução vermelha registrada no PR); o
+> conteúdo idêntico, as cores só do YAML, nenhum recurso remoto e o formato do real guardados
+> por `auditoria/test_direcoes_marca.py`. **O que ele revisa:** se o D é ostentação
+> competente (critério: parece cartão ou private premium de mercado, não paródia) e se as
+> três se distinguem à primeira vista.
+>
+> **Diferenças em relação ao pré-registro de 20/09, para o texto final da P-162:** (1) o D
+> ficou **sem a imagem de estilo de vida**, porque a S3 proibiu foto; (2) a "linguagem leve" da
+> C não entrou, porque o texto é idêntico nas três; (3) o estado normal mostra o custo da
+> compra como se a tarifa da B3 fosse `COMPLETO`, o que é contrafactual de propósito, para a
+> H3; (4) a "data de referência" é o dia da rodada, porque o motor não emite o mês de
+> referência (F0).
+>
+> **Perguntas para ele, que o teste precisa antes de rodar (nenhuma foi decidida aqui):**
+> - **Ordem de apresentação:** cada pessoa vê as três direções em ordem aleatória, ou em
+>   ordem balanceada (quadrado latino, 3 ordens × igual número de pessoas)? A balanceada
+>   controla melhor o efeito de ordem com amostra pequena; a aleatória é mais simples.
+> - **Tamanho de amostra:** quantas pessoas, e com que critério? Sem esse número, a regra 17a
+>   (bootstrap pareado) pode dar "empate" só por falta de gente.
+> - **Estímulo como imagem fixa ou como página:** as fontes são as do sistema, e cada aparelho
+>   mostra outra tipografia (Didot e Iowan no iPhone; Roboto e Noto Serif no Android; DejaVu
+>   no PNG daqui). Mostrar a página ao vivo põe o aparelho de cada pessoa no meio da
+>   comparação. **Recomendação: imagem fixa**, renderizada uma vez com fontes livres (OFL)
+>   embutidas, para todos verem a mesma coisa; os PNG de hoje servem para layout e cor, não
+>   para tipografia.
+> - **H3 no desenho 17a:** ver a mesma direção com e sem a faixa é uma tela a mais por direção
+>   (seis no total). Vale para as três direções ou só para a vencedora?
+
+## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
+
+**Dono:** Osvaldo (a regra) · Claude Code (implementar) · **Gatilho:** P-115 fechada ·
+**Classe:** `DECISAO_DE_DESENHO` (vira engenharia quando ele responder o bloco 19)
+
+`motor_aporte()` devolve `SEM_POSICAO` com patrimônio zero, e quem tem a reserva cheia e
+nada investido fica sem "quanto e onde" (F0-contrato §2 e §3, item 2). Lido no código em
+26/09: com `V = 0`, a fórmula das ordens já põe o aporte nas `k_max` rotas de maior peso;
+o guarda existe por causa das divisões por `V` (`peso_atual`, `deficit_rel`). O
+`test_depois_da_reserva_o_sistema_aloca_sem_nada_assinado` confere o alvo, não as ordens.
+O teste que prende o conserto tem de **falhar na versão atual**: patrimônio zero e reserva
+cheia recebem ordens com rota e valor.
+
+## P-165 · Onde o motor roda para o usuário: a resposta "servidor" contra a P-157
+
+**Dono:** Osvaldo · **Gatilho:** antes do mapa v2 (etapa 4) · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Em 26/09 ele respondeu "servidor". Isso colide com a P-157 ("o dado fica no aparelho") e
+com o mapa (O1 e §5). As três vias estão no bloco 18 da fila: no aparelho; servidor com
+banco de dados; **servidor sem estado** (calcula e devolve sem gravar). Não afeta a v1,
+que é sintética. Com servidor, entram na conta a LGPD (quem guarda o quê, por quanto
+tempo), o custo fixo e a autenticação (WCAG 3.3.8).
+
+## P-166 · Busca de anterioridade da marca MEOL e do domínio
+
+**Dono:** sessão de pesquisa (nuvem), e Osvaldo · **Gatilho:** antes de desenhar
+logotipo ou marca nominativa · **Classe:** `DECISAO_DE_DESENHO`
+
+A busca pública do INPI por marcas iguais ou parecidas nas classes de serviço financeiro e
+de software (quais classes, `NAO_CONFIRMADO`: a pesquisa confirma na fonte), mais a
+disponibilidade de domínio. **Não é parecer:** viabilidade jurídica é da P-158. Colisão
+encontrada vai para ele antes de qualquer desenho de marca.
+
+## P-167 · Os critérios da WCAG 2.2 que a P-155 não leu, a começar pelo 3.3.4 (erro em operação financeira)
+
+**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do protótipo F1, F3 e F6 da etapa 4
+(`PLANO.md`, fila do rosto) · **Classe:** `DECISAO_DE_DESENHO`
+
+A P-155 leu os 13 critérios candidatos e fechou em 27/09 com os RI-22 a RI-34. A leitura achou
+critérios fora da lista que parecem tocar o MEOL, listados sem leitura no fim de
+`docs/fontes/wcag-22-w3c.md`. O que mais pesa é o **3.3.4 Error Prevention (Legal, Financial,
+Data)**, nível AA, que o alvo AA do MEOL inclui: é o critério de um produto que mexe com
+dinheiro, e o "executei" da T1b (com desfazer antes de gravar) é o caso dele. Os outros doze
+(1.1.1, 1.3.1, 1.3.2, 1.4.13, 2.1.1, 2.4.3, 2.4.6, 3.3.1, 3.3.2, 3.3.3, 4.1.2 e 4.1.3) estão na
+mesma lista. O que fecha: cada um lido na fonte, virando RI com verificação ou declarado sem
+aplicação com o motivo.
+
 ---
 
 ## Ao voltar ao desktop
@@ -1755,3 +1857,7 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 > 6. **P-145 — dois passos dele destravam a medição na nuvem:** ⚙ **desktop:**
 >    `py -3.11 fase0/subir_acervo_local.py --aplicar` (sobe o `isinp.zip`); e, de qualquer
 >    lugar, o token do R2 **somente leitura** com os quatro segredos `R2_LEITURA_*`.
+> 7. **27/09/2026 — a fila do rosto.** Os blocos 16 a 20 da fila
+>    (`docs/decisoes/fila-do-osvaldo.md`) esperam o Osvaldo; os 16 e 17 destravam a P-162, e
+>    nenhum exige o desktop. *(27/09: 16b e 17a respondidos; seguem 18, 19 e 20.)* **A P-115 continua na frente**: a fila do rosto não disputa com
+>    ela (`docs/decisoes/rosto-v1.md`).

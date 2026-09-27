@@ -1,0 +1,162 @@
+# Tokens das direcoes visuais do teste de marca (P-163) -- DADO, nao CSS (P2).
+# Direcoes: E, C e D, pela resposta 16b dele (27/09/2026, fila-do-osvaldo.md). A e B sairam.
+# Guardado por auditoria/test_contraste_tokens.py (razao de contraste de cada par) e por
+# auditoria/test_direcoes_marca.py (toda cor hexadecimal de um estimulo esta aqui).
+versao: 1
+
+# Limiares: da WCAG 2.2, transcrita em docs/fontes/wcag-22-w3c.md (P1). Sem arredondar:
+# "4.499:1 would not meet the 4.5:1 threshold" (Understanding 1.4.3); idem 2.999:1 para
+# 3:1 (Understanding 1.4.11).
+limiares:
+  texto_pequeno:
+    razao: 4.5
+    criterio: "WCAG 2.2 SC 1.4.3 Contrast (Minimum), nivel AA"
+  texto_grande:
+    razao: 3.0
+    criterio: "WCAG 2.2 SC 1.4.3, excecao Large Text, nivel AA"
+    # Texto grande = 18 pt, ou 14 pt em negrito (definicao "large scale"); a pagina
+    # Understanding do 1.4.3 da "approximately 18.5px and 24px". Par marcado texto_grande
+    # declara o tamanho, e o teste confere.
+    tamanho_min_px: 24
+    tamanho_min_px_negrito: 18.5
+  componente:
+    razao: 3.0
+    criterio: "WCAG 2.2 SC 1.4.11 Non-text Contrast, nivel AA"
+
+# Rotulos de estado: iguais nas tres direcoes (o texto nao varia entre estimulos), e
+# obrigatorios ao lado da cor (RI-24, WCAG 2.2 SC 1.4.1: cor nunca sozinha).
+rotulos_de_estado:
+  completo: "Completo"
+  parcial: "Parcial"
+  recusa: "Recusado"
+
+direcoes:
+  E:
+    nome: "Instrumento de precisao"
+    descricao: >
+      Fundo off-white e tinta escura; um unico destaque metalico fosco (latao, nunca dourado
+      brilhante); titulos em caixa alta espacada, texto corrido com serifa, numeros com
+      algarismos alinhados; botoes vazados; status num conjunto separado do destaque.
+    cores:
+      fundo: "#F5F3EE"
+      superficie: "#FBFAF6"
+      texto: "#1B1A17"
+      texto_secundario: "#57534A"
+      destaque: "#7A5F32"
+      borda_componente: "#8C7A5B"
+      divisoria: "#E4DFD4"          # decorativa: nao identifica componente, fica fora dos pares
+      status_completo: "#2E5B3B"
+      status_parcial: "#3B5577"
+      status_recusa: "#8A2F2B"
+    fontes:
+      titulo: "-apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      corpo: "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif"
+      numeros: "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif"
+    forma:
+      raio_px: 2
+      botao: vazado
+      titulo_caixa_alta: true
+      algarismos: tabulares
+    pares:
+      - {frente: texto, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: superficie, tipo: texto_pequeno}     # rotulo do botao vazado
+      - {frente: destaque, fundo: fundo, tipo: componente}             # borda do botao vazado
+      - {frente: borda_componente, fundo: superficie, tipo: componente}
+      - {frente: borda_componente, fundo: fundo, tipo: componente}        # botao secundario no fundo
+      - {frente: status_completo, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_parcial, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: componente}           # indicador de foco (RI-29)
+      - {frente: status_completo, fundo: fundo, tipo: texto_pequeno}   # selo, que fica no fundo
+      - {frente: status_parcial, fundo: fundo, tipo: texto_pequeno}    # selo e nota do PARCIAL
+      - {frente: status_recusa, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: fundo, tipo: componente}                # indicador de foco no fundo
+
+  C:
+    nome: "Digital amigavel"
+    descricao: >
+      A estetica de fintech: cantos arredondados, cor viva, botao cheio. A linguagem leve do
+      pre-registro NAO entra: o texto e identico nas tres direcoes; varia so o visual.
+    cores:
+      fundo: "#F4F2FF"
+      superficie: "#FFFFFF"
+      texto: "#1D1A2E"
+      texto_secundario: "#5A5570"
+      destaque: "#6A2BD9"
+      texto_sobre_destaque: "#FFFFFF"
+      borda_componente: "#7C74A3"
+      divisoria: "#E6E2F5"
+      status_completo: "#08735A"
+      status_parcial: "#A04D00"
+      status_recusa: "#B42318"
+    fontes:
+      titulo: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      corpo: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      numeros: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    forma:
+      raio_px: 20
+      botao: cheio
+      titulo_caixa_alta: false
+      algarismos: proporcionais
+    pares:
+      - {frente: texto, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_sobre_destaque, fundo: destaque, tipo: texto_pequeno}   # rotulo do botao cheio
+      - {frente: destaque, fundo: fundo, tipo: componente}                     # o botao contra o fundo
+      - {frente: destaque, fundo: superficie, tipo: texto_pequeno}             # link "Por que?"
+      - {frente: borda_componente, fundo: superficie, tipo: componente}
+      - {frente: status_completo, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_parcial, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: superficie, tipo: componente}                # indicador de foco
+      - {frente: destaque, fundo: fundo, tipo: texto_pequeno}                  # nome MEOL e "Falar com o MEOL"
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}          # data, fora do cartao
+
+  D:
+    nome: "Ostentacao (controle)"
+    descricao: >
+      Controle da H2, COMPETENTE e no nivel do mercado de cartao e private premium: preto,
+      ouro fosco, serifa de alto contraste nos titulos, filete dourado, caixa alta espacada.
+      Sem a imagem de estilo de vida do pre-registro de 20/09: a S3 proibe foto nos estimulos
+      (a diferenca vai para ele na P-163).
+    cores:
+      fundo: "#0C0C0E"
+      superficie: "#17171B"
+      texto: "#F2EDE0"
+      texto_secundario: "#B8B0A0"
+      destaque: "#C8A04A"
+      texto_sobre_destaque: "#0C0C0E"
+      borda_componente: "#8A7338"
+      divisoria: "#2A2824"
+      status_completo: "#86C79A"
+      status_parcial: "#9DBBE3"
+      status_recusa: "#E79A93"
+    fontes:
+      titulo: "Didot, 'Bodoni 72', 'Bodoni MT', 'Big Caslon', Georgia, serif"
+      corpo: "-apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      numeros: "Didot, 'Bodoni 72', 'Bodoni MT', 'Big Caslon', Georgia, serif"
+    forma:
+      raio_px: 0
+      botao: cheio
+      titulo_caixa_alta: true
+      algarismos: proporcionais
+    pares:
+      - {frente: texto, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: fundo, tipo: texto_pequeno}                  # titulos e filetes com texto
+      - {frente: destaque, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_sobre_destaque, fundo: destaque, tipo: texto_pequeno}   # rotulo do botao
+      - {frente: destaque, fundo: fundo, tipo: componente}
+      - {frente: borda_componente, fundo: superficie, tipo: componente}
+      - {frente: status_completo, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_parcial, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: superficie, tipo: componente}                # indicador de foco
+      - {frente: status_parcial, fundo: fundo, tipo: texto_pequeno}            # nota do PARCIAL, no fundo

@@ -1,0 +1,46 @@
+# GERADO por `python tools/conteudo_estimulo.py` -- nao editar a mao (P1).
+# Cenario sintetico; nenhum numero do Osvaldo (D-01). Ver cenario.yaml.
+versao: 1
+meta:
+  comando: python tools/conteudo_estimulo.py
+  cenario: docs/marca/direcoes/cenario.yaml
+  gerado_em: '2026-09-27'
+  politica_versao: 1.36.0
+  politica_hash: 07aa0715b9fc
+  custos_hash: b5046aaa9858
+  sintetico: true
+cenario_resolvido:
+  reserva_atual: 18000.0
+  reserva_origem: alocacao.reserva_alvo(cadastro, politica)
+  patrimonio_investido: 9600.0
+  aporte_mensal: 800
+normal:
+  frase_decisao: "Este m\xEAs, aporte R$\_800,00 em PIBB11."
+  valor: 800.0
+  valor_fmt: "R$\_800,00"
+  valor_origem: motor_aporte(...)['ordens'][0]['valor']
+  destino: PIBB11
+  destino_origem: catalogo(C)[ordens[0]['rota']].nome, primeira palavra
+  rota_id: pibb11
+  deficit: 1213.33
+  deficit_origem: 'motor_aporte(...)[''ordens''][0][''deficit'']: o maior do cenario'
+  data_referencia: setembro de 2026
+  data_origem: 'procedencia[''gerado_em''] (dia da rodada). O motor nao emite o mes de referencia: decisao.data_referencia
+    e NAO_EXISTE na F0'
+  porque: "\xC9 a parte da sua carteira mais abaixo do peso-alvo."
+  porque_origem: 'texto; o fato e do motor: a rota escolhida e a de maior deficit (motor_aporte ordena
+    por deficit, k_max da politica)'
+  custo_compra_fmt: "R$\_0,24"
+  custo_compra_origem: 'custo_entrada_pct(rota, valor, b3.vista_total_pct.valor) x valor. CONTRAFACTUAL:
+    a tarifa e PARCIAL no custos.yaml; o estado normal a mostra como se fosse COMPLETA, de proposito,
+    para a H3'
+  limitacao_quantidade: 'rota em lote sem preco no cenario: motor_aporte usa 1,0 (precos.get). A quantidade
+    nao se mostra; o valor e o do motor'
+parcial:
+  status: PARCIAL
+  custo_compra_min: 0.22
+  custo_compra_max: 0.24
+  faixa_fmt: "entre R$\_0,22 e R$\_0,24"
+  faixa_origem: custo_entrada_pct() com b3.vista_total_pct.valor e com b3.vista_total_pct.divergencia.valor_alternativo
+    (custos.yaml)
+  motivo: "A tarifa da B3 tem duas fontes que ainda n\xE3o batem."

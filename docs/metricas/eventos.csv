@@ -66,3 +66,4 @@ data;codigo;tipo;autor;quem_achou;regua;commit_introduziu;commit_corrigiu;descri
 2026-09-26;P-159;retratacao;claude-code;claude-chat;5;1d7db98;mesmo-commit;"o uso pessoal dele nao e prestacao de servico a cliente" dado como CONFIRMADO na transcricao da CVM 19; o texto lido nao diz isso: INFERENCIA, pergunta na P-158 (nota N-PESSOAL)
 2026-09-26;P-115;retratacao;claude-chat;claude-chat;1;desconhecido;2e11c48;"enquadrei o pode empurrar pelo risco de 19% e omiti o 'sem poder' provavel do K2 (linhas 232 e 240)"
 2026-09-26;P-115;retratacao;claude-chat;claude-code;1;2e11c48;d7811fd;"a regra comparava o n do silver com os 819 sem conferir a unidade deles"
+2026-09-27;P-103;reincidencia;desconhecido;desconhecido;desconhecido;desconhecido;mesmo-commit;o PLANO.md (Fora da fila) seguia com CLAUDE.md em 2.270 linhas e ~40 mil tokens depois da decisao C (19/09) e do corte de 26/09 (7d8a566); medido em 27/09: 399 linhas -- a fila desatualizada da 5-A, no PLANO
