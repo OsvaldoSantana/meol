@@ -172,7 +172,7 @@ Declarado para não virar omissão (P6): notificações de qualquer tipo, gráfi
 | pendência | classe |
 |---|---|
 | **F0 — contrato de saída** com os campos da §6 | trilha de produto paralela; **não bloqueia o motor** *(revisão de 26/09/2026, nota N-F0)* |
-| P-WCAG — ler contraste, tamanho de alvo e daltonismo | `DECISAO_DE_DESENHO` |
+| ~~P-WCAG — ler contraste, tamanho de alvo e daltonismo~~ | fechada em 27/09/2026 como P-155: RI-22 a RI-34 nos requisitos de interface v1.1 |
 | Teste com pessoas das hipóteses H-C1, H-C2, RI-15 | `DECISAO_DE_DESENHO` |
 | Importação de carteira: descobrir quais formatos são viáveis | `DECISAO_DE_DESENHO` |
 

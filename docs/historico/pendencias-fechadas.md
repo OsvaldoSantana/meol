@@ -2116,10 +2116,23 @@ regime seja declarado onde ele lê.
 
 **FECHADA em 27/09/2026.** A execução agendada `36246158435` do `captura_cvm.yml` (schedule, 26/09, 13:44Z) rodou o passo `captura_nefin` verde; o passo "Falhar se a captura falhou" foi pulado, então o código foi 0. O NEFIN entrou em `regimes_de_captura` (política 1.36.0), e a limitação ficou `RESOLVIDA`. `test_P147_nefin_roda_sozinho_e_nao_e_mais_limitacao` reprova a volta.
 
+## ~~P-155~~ · Ler a WCAG na fonte: contraste, alvo de toque e daltonismo · era P-WCAG — **FECHADA em 27/09/2026**
+
+**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do brandbook e da primeira tela
+desenhada · **Classe:** `DECISAO_DE_DESENHO`
+
+O capítulo de acessibilidade do Pix é recomendação e não cobre contraste, tamanho de alvo nem
+daltonismo ([Pix v7.4](../marca/pesquisa-pix-e-pendencias-2026-09.md), §1.1). Os requisitos
+de interface declaram a lacuna (§5, item 2). O que fecha: a WCAG lida na fonte, com os critérios
+que viram requisito novo (RI-22 em diante) e a verificação de cada um.
+
+**FECHADA em 27/09/2026.** A WCAG 2.2 foi lida na recomendação do W3C (REC de 12/12/2024, acesso em 27/09/2026 04:54 UTC) e nas páginas Understanding dos 13 critérios candidatos, e transcrita em `docs/fontes/wcag-22-w3c.md`, com URL, Last-Modified e sha256 de cada página e a licença de documentos do W3C lida. Número, nível e limiar de cada critério foram conferidos no HTML da recomendação. Viraram os **RI-22 a RI-34** (`docs/marca/requisitos-interface-v1.md`, v1.1, tema E), cada um com a verificação: o teste de contraste dos tokens (P-163), o teste de navegador da etapa 4 ou revisão. O RI-34 (autenticação) não se aplica à v1, sem login, e passa a valer com a P-165. O que a WCAG não resolve para este público (alfabetismo, jargão) ficou como limitação 6 do documento, apontando para os RI-01 e RI-03 e para a P-156. Não é auditoria de acessibilidade; a lei brasileira não foi lida.
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-155** | ler a WCAG na fonte: contraste, alvo de toque e daltonismo (era P-WCAG) | 27/09 — WCAG 2.2 transcrita; RI-22 a RI-34 com verificação |
 | **P-147** | a captura do NEFIN não tinha rodado no executor | 27/09 — execução agendada `36246158435`, passo `captura_nefin` verde |
 | **P-159** | ler a Resolução CVM 19/2021 e confirmar ou retirar a tese de independência | 26/09 — duas teses confirmadas com escopo, uma retirada |
 | **P-01** | assinar os dois registros (HASH11 e Tesouro IPCA+) | 26/09 — hash11 ea8c8769bbf021e2, td_ipca 942c75bae248327b; td_ipca sem peso até a compra |

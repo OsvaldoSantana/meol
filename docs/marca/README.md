@@ -7,7 +7,7 @@ em sessões de chat de 20/09 e trazidos do Projeto no claude.ai para o repositó
 
 | documento | papel |
 |---|---|
-| **[requisitos de interface v1](requisitos-interface-v1.md)** | o contrato: RI-01 a RI-21, cada um com a sua verificação (teste, revisão ou pesquisa) |
+| **[requisitos de interface v1](requisitos-interface-v1.md)** | o contrato: RI-01 a RI-34, cada um com a sua verificação (teste, revisão ou pesquisa); os RI-22 a RI-34 (v1.1, 27/09) vêm da [WCAG 2.2 lida na fonte](../fontes/wcag-22-w3c.md) |
 | **[mapa de telas v1](../ux/mapa-de-telas-v1.md)** | as telas, os fluxos, os estados e os campos que a F0 (contrato de saída do motor) precisa emitir; desde 26/09, **rascunho de UX adiantado**, revisado na etapa 4 (nota N-ORDEM nele) |
 | **[pré-registro do teste de marca, 20/09](preregistro-teste-de-marca-2026-09-20.md)** | as direções A a D, as hipóteses H1 a H4 e a regra de decisão como declaradas em 20/09; **sem impressão digital**, e com lacunas que ele fecha nos blocos 16 e 17 da fila |
 

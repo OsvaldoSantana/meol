@@ -1637,16 +1637,6 @@ A rodada 1 estima ~28,6 milhões no perfil "Diversifica" (`PARCIAL`, derivado da
 sinais: paralisia, dependência e arrependimento. Sem essa medição, "o público é grande" é
 ordem de grandeza do perfil, não do público.
 
-## P-155 · Ler a WCAG na fonte: contraste, alvo de toque e daltonismo · era P-WCAG
-
-**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do brandbook e da primeira tela
-desenhada · **Classe:** `DECISAO_DE_DESENHO`
-
-O capítulo de acessibilidade do Pix é recomendação e não cobre contraste, tamanho de alvo nem
-daltonismo ([Pix v7.4](docs/marca/pesquisa-pix-e-pendencias-2026-09.md), §1.1). Os requisitos
-de interface declaram a lacuna (§5, item 2). O que fecha: a WCAG lida na fonte, com os critérios
-que viram requisito novo (RI-22 em diante) e a verificação de cada um.
-
 ## P-156 · Teste com pessoas das hipóteses de interface e de marca
 
 **Dono:** Osvaldo (recrutamento e custo) · Claude (roteiro, estímulos e pré-registro do
@@ -1753,7 +1743,7 @@ P-154).
 ## P-163 · Direções visuais como estímulo: a T1 desenhada em cada direção
 
 **Dono:** Claude Code (nuvem) · Osvaldo (aprova antes do teste) · **Gatilho:** P-155
-fechada e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
+fechada (**feito em 27/09**) e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
 
 Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** (só o visual
 muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
@@ -1793,6 +1783,20 @@ A busca pública do INPI por marcas iguais ou parecidas nas classes de serviço 
 de software (quais classes, `NAO_CONFIRMADO`: a pesquisa confirma na fonte), mais a
 disponibilidade de domínio. **Não é parecer:** viabilidade jurídica é da P-158. Colisão
 encontrada vai para ele antes de qualquer desenho de marca.
+
+## P-167 · Os critérios da WCAG 2.2 que a P-155 não leu, a começar pelo 3.3.4 (erro em operação financeira)
+
+**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do protótipo F1, F3 e F6 da etapa 4
+(`PLANO.md`, fila do rosto) · **Classe:** `DECISAO_DE_DESENHO`
+
+A P-155 leu os 13 critérios candidatos e fechou em 27/09 com os RI-22 a RI-34. A leitura achou
+critérios fora da lista que parecem tocar o MEOL, listados sem leitura no fim de
+`docs/fontes/wcag-22-w3c.md`. O que mais pesa é o **3.3.4 Error Prevention (Legal, Financial,
+Data)**, nível AA, que o alvo AA do MEOL inclui: é o critério de um produto que mexe com
+dinheiro, e o "executei" da T1b (com desfazer antes de gravar) é o caso dele. Os outros doze
+(1.1.1, 1.3.1, 1.3.2, 1.4.13, 2.1.1, 2.4.3, 2.4.6, 3.3.1, 3.3.2, 3.3.3, 4.1.2 e 4.1.3) estão na
+mesma lista. O que fecha: cada um lido na fonte, virando RI com verificação ou declarado sem
+aplicação com o motivo.
 
 ---
 
