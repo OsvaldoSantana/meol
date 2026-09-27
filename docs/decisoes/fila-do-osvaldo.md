@@ -65,17 +65,35 @@ Nenhum ano de 2013–2015 tinha sido medido antes; a evidência está na §9.
 | medir em várias janelas e ficar com a que passar | — | é escolher pelo resultado: o jardim dos caminhos que se bifurcam, que o pré-registro existe para fechar |
 | usar sempre 2013–2020 | o maior n possível | anos mais antigos sem necessidade, com mais JCP para o D1 achar documento e mais distância do que o critério viu; a menor janela que basta é a mais próxima do registro original |
 
-**Pergunta aberta, a decidir antes da contagem de segunda:** o n do silver é um **teto** do n
-do K2. Os 819 contaram só papel-dia com preço no dia e na véspera, e o silver não sabe quem
-tem preço.
-- **`n-a`** (a regra como está): a regra usa o n do silver. É otimista, e a janela escolhida
-  pode ainda sair sem poder.
-- **`n-b`** (calibrar): o script também conta 2021–2025 no silver, e o n de cada candidata é
-  multiplicado por `819 ÷ n_silver(2021–2025)` antes de comparar com 1.648. Não lê preço e
-  corrige o teto pela proporção observada. Exige que o calendário do silver cubra também
-  2021–2025, e acrescenta à regra uma razão que também é escolha.
+~~**Pergunta aberta, a decidir antes da contagem de segunda:**~~ **Respondida, abaixo (`n-c`).**
+Texto original, mantido: o n do silver é um **teto** do n do K2. Os 819 contaram só papel-dia
+com preço no dia e na véspera, e o silver não sabe quem tem preço. As opções eram `n-a` (a
+regra usa o n do silver) e `n-b` (calibrar pela razão 819 ÷ n_silver de 2021–2025).
 
-Se a resposta não vier antes da contagem, vale **`n-a`**, que é o texto já empurrado no #27.
+### Resposta dele, 26/09/2026: `n-c`, o n na unidade dos 819 (P-115)
+
+**Decisão:** o n passa a ser a **mesma unidade dos 819**: papel-dia só-JCP, dia sem evento de
+quantidade, com negócio no COTAHIST no dia e na véspera. Três regras vêm com ela:
+- **presença sem preço:** o script lê do COTAHIST só campos de identidade;
+- **calibração como condição:** sobre 2021–2025 o script tem de dar **819**. Se der outro
+  valor, a regra não escolhe janela, e o script para e mostra a diferença;
+- **quarentena:** até o merge e a medição do #27, nenhuma medição lê o retorno do dia ex em
+  2013–2020, a P-145 inclusive.
+
+O texto está na §9 do critério, no rascunho do #27 (`d7811fd`).
+
+| alternativa | o que acontecia | por que não |
+|---|---|---|
+| **`n-c`** · a unidade dos 819, por presença, calibrada (escolhida) | o n de cada janela é o que o K2 vai de fato contar, e a calibração prova isso antes de escolher | — |
+| `n-a` · o n bruto do silver | papel-dia no silver, comparado com os 819 | não era a mesma unidade: é um teto, e a janela escolhida podia sair sem poder |
+| `n-b` · o n do silver × 819 ÷ n_silver(2021–2025) | corrige o teto por proporção | supõe que a razão de 2021–2025 vale em 2013–2020, com outro universo e outra liquidez; é mais uma escolha, e sem medir a unidade |
+
+**O conjunto de campos, também decisão dele (26/09).** O pedido era ler só DATA e CODNEG. Com
+só esses dois, o casamento evento → papel exigiria uma tabela escrita à mão (ON → 3, PN → 4),
+que o `ajustar.py` recusa (A-01). Faltariam também o filtro de mercado e a marca de ex, e a
+calibração não daria 819. Ele escolheu **identidade, sem preço**: DATA, CODBDI, CODNEG,
+TPMERC, ESPECI e CODISI. Ficaram de fora todos os campos de preço, volume, quantidade e fator
+de cotação, e o teste envenena essas posições.
 
 ### Resposta dele, 26/09/2026, sobre o app do Claude no GitHub
 
