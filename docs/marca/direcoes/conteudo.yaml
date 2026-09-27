@@ -1,6 +1,6 @@
 # GERADO por `python tools/conteudo_estimulo.py` -- nao editar a mao (P1).
 # Cenario sintetico; nenhum numero do Osvaldo (D-01). Ver cenario.yaml.
-versao: 1
+versao: 2
 meta:
   comando: python tools/conteudo_estimulo.py
   cenario: docs/marca/direcoes/cenario.yaml
@@ -14,33 +14,44 @@ cenario_resolvido:
   reserva_origem: alocacao.reserva_alvo(cadastro, politica)
   patrimonio_investido: 9600.0
   aporte_mensal: 800
-normal:
-  frase_decisao: "Este m\xEAs, aporte R$\_800,00 em PIBB11."
+base:
+  status: PARCIAL
+  status_origem: custos.yaml -> b3.vista_total_pct.status, insumo do custo da compra; o selo e o do insumo,
+    sem contrafactual (S4, 27/09)
+  frase_decisao: "Este m\xEAs, aporte R$\_800,00 no fundo de \xEDndice de a\xE7\xF5es brasileiras."
   valor: 800.0
   valor_fmt: "R$\_800,00"
   valor_origem: motor_aporte(...)['ordens'][0]['valor']
-  destino: PIBB11
-  destino_origem: catalogo(C)[ordens[0]['rota']].nome, primeira palavra
+  destino: "fundo de \xEDndice de a\xE7\xF5es brasileiras"
+  destino_origem: 'cenario.yaml -> rotulos[ordens[0][''rota'']] (l-B: rotulo generico no lugar do ticker)'
   rota_id: pibb11
   deficit: 1213.33
   deficit_origem: 'motor_aporte(...)[''ordens''][0][''deficit'']: o maior do cenario'
   data_referencia: setembro de 2026
   data_origem: 'procedencia[''gerado_em''] (dia da rodada). O motor nao emite o mes de referencia: decisao.data_referencia
     e NAO_EXISTE na F0'
-  porque: "\xC9 a parte da sua carteira mais abaixo do peso-alvo."
+  porque: "\xC9 a parte da sua carteira mais abaixo da meta."
   porque_origem: 'texto; o fato e do motor: a rota escolhida e a de maior deficit (motor_aporte ordena
     por deficit, k_max da politica)'
-  custo_compra_fmt: "R$\_0,24"
-  custo_compra_origem: 'custo_entrada_pct(rota, valor, b3.vista_total_pct.valor) x valor. CONTRAFACTUAL:
-    a tarifa e PARCIAL no custos.yaml; o estado normal a mostra como se fosse COMPLETA, de proposito,
-    para a H3'
-  limitacao_quantidade: 'rota em lote sem preco no cenario: motor_aporte usa 1,0 (precos.get). A quantidade
-    nao se mostra; o valor e o do motor'
-parcial:
-  status: PARCIAL
   custo_compra_min: 0.22
   custo_compra_max: 0.24
-  faixa_fmt: "entre R$\_0,22 e R$\_0,24"
-  faixa_origem: custo_entrada_pct() com b3.vista_total_pct.valor e com b3.vista_total_pct.divergencia.valor_alternativo
+  custo_fmt: "entre R$\_0,22 e R$\_0,24"
+  custo_origem: custo_entrada_pct() com b3.vista_total_pct.valor e com b3.vista_total_pct.divergencia.valor_alternativo
     (custos.yaml)
-  motivo: "A tarifa da B3 tem duas fontes que ainda n\xE3o batem."
+  custo_motivo: "A tarifa da B3 tem duas fontes que ainda n\xE3o batem."
+  limitacao_quantidade: 'rota em lote sem preco no cenario: motor_aporte usa 1,0 (precos.get). A quantidade
+    nao se mostra; o valor e o do motor'
+com_rota_bloqueada:
+  difere_da_base: so pela linha abaixo (j-A); o resto e a base, igual
+  linha: "Cofrinho de banco digital: bloqueado, porque a regra de isen\xE7\xE3o muda todo m\xEAs."
+  rota_id: picpay_turbinado
+  portao: G5_status
+  motivo_motor: "custos.yaml -> cofrinho.turbinado_condicao_de_isencao esta PARCIAL: As missoes deste\
+    \ mes foram GASTOS NO CARTAO e TRAZER UMA CHAVE PIX. Nao e nenhuma das duas condicoes que a tela lista\
+    \ (R$2.500 em 3 meses, ou R$20 mil investidos): e uma terceira via, por tarefas que O BANCO ESCOLHE\
+    \ e que MUDAM todo mes. PARCIAL e nao COMPLETO porque a condicao do mes que vem e desconhecida por\
+    \ construcao \u2014 nao ha valor estavel a registrar."
+  rota_origem: alocar(...)['universo']['fora_status'][0], o primeiro portao de universo que elimina, na
+    ordem de politica.yaml -> portoes.*.ordem
+  linha_origem: cenario.yaml -> rotulos[rota_id] + motivos_em_linguagem_comum[rota_id].texto, conferido
+    contra o portao do motor

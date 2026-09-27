@@ -1637,6 +1637,12 @@ A rodada 1 estima ~28,6 milhões no perfil "Diversifica" (`PARCIAL`, derivado da
 sinais: paralisia, dependência e arrependimento. Sem essa medição, "o público é grande" é
 ordem de grandeza do perfil, não do público.
 
+> **27/09/2026 — a H-A2 passa para cá** (resposta n-A dele). Origem: rodada 1, §7
+> ([pesquisa de fundação](docs/marca/pesquisa-fundacao-2026-09.md)): *"o primeiro susto com
+> queda é um evento comum entre quem saiu da poupança, e está associado a abandono."* Ela
+> tinha ficado sem pendência quando a nota de 26/09 na P-156 deixou lá só as hipóteses de
+> interface. Como a H-A1, é pergunta sobre o público, não sobre a tela.
+
 ## P-156 · Teste com pessoas das hipóteses de interface e de marca
 
 **Dono:** Osvaldo (recrutamento e custo) · Claude (roteiro, estímulos e pré-registro do
@@ -1735,7 +1741,9 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 20/09 está em `docs/marca/preregistro-teste-de-marca-2026-09-20.md`, sem impressão digital
 e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora da H1, a
 margem de empate da regra de decisão, e o desenho do teste da H3. *(27/09: fechadas pelas
-respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* Filtro de entrada:
+respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* *(27/09, S4: g-B, h-A, i-A,
+j-A, amigos e recrutamento também respondidos; a S5 grava o pré-registro final depois de ele
+aprovar os PNG da S4.)* Filtro de entrada:
 aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
 para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
 entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
@@ -1783,6 +1791,15 @@ ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 
 >   para tipografia.
 > - **H3 no desenho 17a:** ver a mesma direção com e sem a faixa é uma tela a mais por direção
 >   (seis no total). Vale para as três direções ou só para a vencedora?
+>
+> **27/09/2026, S4 — as quatro perguntas foram respondidas (g-B, h-A, i-A, j-A; fila), e os
+> estímulos refeitos.** Rótulo genérico no lugar do ticker (l-B), nenhum estado
+> contrafactual (selo `PARCIAL` nas duas versões, que é o status do insumo), as versões
+> **base** e **com rota bloqueada** (j-A: a primeira rota que o motor elimina, pela ordem
+> dos portões), a C em magenta (m-B), a D com a ilustração provisória (k-A, P-168) e as
+> fontes OFL embutidas (i-A). Os seis PNG, com sha256, estão em
+> `docs/marca/direcoes/README.md`. **Continua aberta até ele aprovar esses seis PNG**; a
+> aprovação vai para a fila e é pré-condição da S5.
 
 ## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
 
@@ -1831,6 +1848,19 @@ dinheiro, e o "executei" da T1b (com desfazer antes de gravar) é o caso dele. O
 (1.1.1, 1.3.1, 1.3.2, 1.4.13, 2.1.1, 2.4.3, 2.4.6, 3.3.1, 3.3.2, 3.3.3, 4.1.2 e 4.1.3) estão na
 mesma lista. O que fecha: cada um lido na fonte, virando RI com verificação ou declarado sem
 aplicação com o motivo.
+
+## P-168 · Ativos visuais próprios do MEOL (ilustração, ícone, imagem)
+
+**Dono:** Osvaldo (decide) · Claude (desenha e testa) · **Gatilho:** a etapa 5 (brandbook) da
+fila do rosto · **Classe:** `DECISAO_DE_DESENHO`
+
+Resposta k-A dele (27/09/2026): **todo ativo visual do MEOL é produzido para o MEOL; nada de
+banco de imagens.** O único ativo hoje é a ilustração da direção D, um cartão metálico
+genérico desenhado em código (SVG, sem marca e sem texto), marcado `data-provisorio="P-168"`
+em `docs/marca/direcoes/D.html` e guardado por `auditoria/test_direcoes_marca.py`. Ele é
+**provisório**: existe só para o controle D do teste de marca não perder a "imagem de estilo
+de vida" do pré-registro de 20/09. O que fecha: o conjunto de ativos do brandbook, feito para
+o MEOL, com licença e origem de cada um.
 
 ---
 

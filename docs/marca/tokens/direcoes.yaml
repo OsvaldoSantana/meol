@@ -48,10 +48,13 @@ direcoes:
       status_completo: "#2E5B3B"
       status_parcial: "#3B5577"
       status_recusa: "#8A2F2B"
+    # i-A (27/09/2026, dele): so fontes OFL embutidas (docs/marca/tipografia/); o generico
+    # no fim da pilha nunca entra no PNG, porque a fonte embutida sempre carrega.
     fontes:
-      titulo: "-apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-      corpo: "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif"
-      numeros: "'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif"
+      titulo: "'Source Sans 3', sans-serif"
+      corpo: "'Source Serif 4', serif"
+      numeros: "'Source Serif 4', serif"
+      arquivos: [source-sans-3/source-sans-3-latin-400-normal.woff2, source-sans-3/source-sans-3-latin-600-normal.woff2, source-serif-4/source-serif-4-latin-400-normal.woff2]
     forma:
       raio_px: 2
       botao: vazado
@@ -78,24 +81,62 @@ direcoes:
   C:
     nome: "Digital amigavel"
     descricao: >
-      A estetica de fintech: cantos arredondados, cor viva, botao cheio. A linguagem leve do
+      A estetica de fintech: cantos arredondados, cor viva (magenta desde a S4, m-B), botao cheio. A linguagem leve do
       pre-registro NAO entra: o texto e identico nas tres direcoes; varia so o visual.
     cores:
-      fundo: "#F4F2FF"
+      # m-B (27/09/2026, dele): o roxo #6A2BD9 saiu -- e o matiz dominante do Nubank (lista
+      # abaixo). Entrou um magenta de matiz 318 graus, com fundo, divisoria, borda e textos
+      # levados para o mesmo matiz.
+      fundo: "#FBF4F9"
       superficie: "#FFFFFF"
-      texto: "#1D1A2E"
-      texto_secundario: "#5A5570"
-      destaque: "#6A2BD9"
+      texto: "#22161E"
+      texto_secundario: "#63545F"
+      destaque: "#AC157F"
       texto_sobre_destaque: "#FFFFFF"
-      borda_componente: "#7C74A3"
-      divisoria: "#E6E2F5"
+      borda_componente: "#8F7086"
+      divisoria: "#EFE1EB"
       status_completo: "#08735A"
       status_parcial: "#A04D00"
       status_recusa: "#B42318"
+    # m-B: a cor da C nao pode ser a dominante de uma marca financeira brasileira.
+    # METODO (27/09/2026, 11:52 UTC, nuvem): a cor que o site da instituicao declara no HTML
+    # (meta theme-color ou msapplication-TileColor) e, sem ela, a cor CROMATICA mais frequente
+    # no HTML da pagina inicial (saturacao > 0,35, luminosidade entre 0,15 e 0,85). Contagem,
+    # nao manual de marca: status OBSERVADO. Site que bloqueou (403), redirecionou ou nao tinha
+    # cor no HTML fica NAO_CONFIRMADO -- nao se completou de memoria.
+    # REGRA: ficar a pelo menos 30 graus de matiz de toda cor dominante OBSERVADA. O magenta de
+    # 318 graus fica a 42 do Nubank (276) e a 35 do vermelho secundario da Nomad (353). Os
+    # vermelhos de Bradesco e Santander e o laranja do Itau, se forem os de conhecimento
+    # comum, ficariam a mais de 30 graus -- mas isso e INFERENCIA, nao medicao.
+    escolha_de_cor:
+      regra: "matiz a >= 30 graus de toda cor dominante observada"
+      matiz_escolhido_graus: 318
+      marcas_conferidas:
+        - {marca: Nubank, url: "https://nubank.com.br/", cor: "#5D0599", matiz: 276, status: OBSERVADO, metodo: "cor cromatica mais frequente (empate com #CBA5FD, #3F026A, #AF63FD, todas 266-276)"}
+        - {marca: Inter, url: "https://inter.co/", cor: "#EA7100", matiz: 29, status: OBSERVADO, metodo: "meta theme-color"}
+        - {marca: PicPay, url: "https://picpay.com/", cor: "#21C25E", matiz: 143, status: OBSERVADO, metodo: "meta theme-color"}
+        - {marca: Mercado Pago, url: "https://www.mercadopago.com.br/", cor: "#007EB5", matiz: 198, status: OBSERVADO, metodo: "cor cromatica mais frequente (empate com #3483FA, 216, e #FFE600, 54)"}
+        - {marca: Sicredi, url: "https://www.sicredi.com.br/", cor: "#33820D", matiz: 101, status: OBSERVADO, metodo: "cor cromatica mais frequente"}
+        - {marca: PagBank, url: "https://pagbank.com.br/", cor: "#F5DE3E", matiz: 52, status: OBSERVADO, metodo: "cor cromatica mais frequente, uma ocorrencia so: sinal fraco"}
+        - {marca: Neon, url: "https://neon.com.br/", cor: "#0078D9", matiz: 207, status: OBSERVADO, metodo: "cor cromatica mais frequente"}
+        - {marca: Nomad, url: "https://www.nomadglobal.com/", cor: "#0073AF", matiz: 201, status: OBSERVADO, metodo: "cor cromatica mais frequente; a segunda e #F9283F, 353"}
+        - {marca: Sicoob, url: "https://www.sicoob.com.br/", cor: "#00AE9D", matiz: 174, status: OBSERVADO, metodo: "theme-color e branco; cor cromatica mais frequente"}
+        - {marca: Bradesco, url: "https://banco.bradesco/", status: NAO_CONFIRMADO, metodo: "200, mas nenhuma cor hexadecimal no HTML"}
+        - {marca: Itau, url: "https://www.itau.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Santander, url: "https://www.santander.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Banco do Brasil, url: "https://www.bb.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Caixa, url: "https://www.caixa.gov.br/", status: NAO_CONFIRMADO, metodo: "302 sem destino lido"}
+        - {marca: C6 Bank, url: "https://www.c6bank.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: XP, url: "https://www.xpi.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: BTG Pactual, url: "https://www.btgpactual.com/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Rico, url: "https://www.rico.com.vc/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Clear, url: "https://www.clear.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Safra, url: "https://www.safra.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
     fontes:
-      titulo: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-      corpo: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-      numeros: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      titulo: "'Nunito', sans-serif"
+      corpo: "'Nunito', sans-serif"
+      numeros: "'Nunito', sans-serif"
+      arquivos: [nunito/nunito-latin-500-normal.woff2, nunito/nunito-latin-600-normal.woff2, nunito/nunito-latin-700-normal.woff2, nunito/nunito-latin-800-normal.woff2]
     forma:
       raio_px: 20
       botao: cheio
@@ -122,8 +163,9 @@ direcoes:
     descricao: >
       Controle da H2, COMPETENTE e no nivel do mercado de cartao e private premium: preto,
       ouro fosco, serifa de alto contraste nos titulos, filete dourado, caixa alta espacada.
-      Sem a imagem de estilo de vida do pre-registro de 20/09: a S3 proibe foto nos estimulos
-      (a diferenca vai para ele na P-163).
+      Sem foto (S3). Desde a S4 (k-A), uma ilustracao PROVISORIA desenhada em codigo -- um
+      cartao metalico generico, sem marca e sem texto -- no lugar da imagem de estilo de vida
+      do pre-registro de 20/09 (P-168).
     cores:
       fundo: "#0C0C0E"
       superficie: "#17171B"
@@ -136,10 +178,17 @@ direcoes:
       status_completo: "#86C79A"
       status_parcial: "#9DBBE3"
       status_recusa: "#E79A93"
+      # k-A (27/09/2026, dele): a ilustracao PROVISORIA da D (P-168), um cartao metalico
+      # generico desenhado em SVG. Decorativa: nao identifica componente nem carrega
+      # informacao, entao fica fora dos pares (WCAG 1.4.11 so cobre grafico necessario).
+      ilustracao_clara: "#DDBF72"
+      ilustracao_escura: "#A9853A"
+      ilustracao_sombra: "#1F1D19"
     fontes:
-      titulo: "Didot, 'Bodoni 72', 'Bodoni MT', 'Big Caslon', Georgia, serif"
-      corpo: "-apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-      numeros: "Didot, 'Bodoni 72', 'Bodoni MT', 'Big Caslon', Georgia, serif"
+      titulo: "'Playfair Display', serif"
+      corpo: "'Montserrat', sans-serif"
+      numeros: "'Playfair Display', serif"
+      arquivos: [playfair-display/playfair-display-latin-400-normal.woff2, montserrat/montserrat-latin-400-normal.woff2, montserrat/montserrat-latin-700-normal.woff2]
     forma:
       raio_px: 0
       botao: cheio
@@ -160,3 +209,4 @@ direcoes:
       - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
       - {frente: destaque, fundo: superficie, tipo: componente}                # indicador de foco
       - {frente: status_parcial, fundo: fundo, tipo: texto_pequeno}            # nota do PARCIAL, no fundo
+      - {frente: status_recusa, fundo: fundo, tipo: texto_pequeno}             # linha da rota bloqueada (S4)

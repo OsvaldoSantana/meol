@@ -54,6 +54,26 @@ portão da P-163 estava fechado. As duas seguem a recomendação.
 | 16 · direções no teste | **16b** — E, C e D | a S3 desenha só essas três. A H1 do pré-registro passa a "E supera D em confiável e honesto"; A e B saem do teste, e perde-se saber qual metade da E pesou |
 | 17 · regra de decisão | **17a** — escala de 1 a 7, empate quando o intervalo de 95% da diferença pareada (bootstrap) contém zero; "não ficar abaixo da mediana" = não ser a pior direção em honesto; H3 com cada pessoa vendo a direção com e sem a faixa, em ordem aleatória | fecha três das lacunas do pré-registro de 20/09. **Ainda não é o pré-registro final:** ele só vale gravado e empurrado antes de qualquer estímulo ser mostrado (P-162) |
 
+### Respostas dele, 27/09/2026, às perguntas da P-163 e aos achados das S1 a S3
+
+Dadas em 27/09 e trazidas pelo prompt da S4. Nenhuma delas é a aprovação dos PNG: pelo
+plano, a aprovação que a S5 exige é a dos PNG que a S4 gerar com estas mudanças.
+
+| código | resposta | onde ficou |
+|---|---|---|
+| **g-B** | **ordem balanceada:** seis versões do formulário, uma por ordem das três direções, com os links enviados em rodízio. A versão fica registrada em cada resposta. O repasse na bola de neve desequilibra o rodízio, e isso fica declarado | P-162 (pré-registro final, S5) |
+| **h-A** | **amostra de quem aparecer, com janela de coleta de 21 dias corridos:** começa no dia do primeiro convite e termina às 23:59 do 21º dia, horário de Brasília. As datas absolutas entram num commit próprio, empurrado antes do primeiro convite. Resposta fora da janela é guardada e não entra na análise. **Nunca encerrar olhando o resultado** | P-162 |
+| **i-A** | **estímulo como imagem fixa**, gerada com fontes livres (OFL) embutidas | P-163; `docs/marca/direcoes/` |
+| **j-A** | **a H3 testada por rota bloqueada real, nas três direções.** Confirmado por ele em 27/09: na primeira resposta ele escreveu "h-A" duas vezes, e a segunda era o j | P-163; a versão "com rota bloqueada" dos estímulos |
+| **k-A** | **ilustração desenhada em código na D, PROVISÓRIA.** Regra de marca: todo ativo visual do MEOL é produzido para o MEOL; nada de banco de imagens | P-168 (nova); `data-provisorio="P-168"` no estímulo |
+| **l-B** | **rótulo genérico no lugar do ticker real** | `docs/marca/direcoes/cenario.yaml` (rótulo por rota) |
+| **m-B** | **a C troca o roxo por uma cor sem dono** entre as marcas financeiras | `docs/marca/tokens/direcoes.yaml`, bloco C, com a lista conferida |
+| **n-A** | **a H-A2 passa para a P-154** | P-154 |
+| **o-A** | **riscar a linha C da §5 do `PLANO.md`**: o corte do `CLAUDE.md` foi decidido em 19/09 e feito em 26/09 | `PLANO.md` §5 |
+| **p-A** | **merge do #37 com merge commit, feito por ele** | feito: `89848ac` no `main` |
+| amigos | **amigos contam no teste**, identificados pela pergunta "você conhece quem criou este app?" (sim/não). A análise sai com e sem eles, e as duas vão para o relatório | P-162 |
+| recrutamento | **rede pessoal e bola de neve, sem painel pago** | P-162 |
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do

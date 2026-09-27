@@ -1,19 +1,23 @@
 <!doctype html>
-<!-- Estimulo do teste de marca, direcao E (Instrumento de precisao). P-163.
-     Cores: docs/marca/tokens/direcoes.yaml, bloco E. Textos e numeros:
-     docs/marca/direcoes/conteudo.yaml (gerado pelo motor, cenario sintetico). -->
+<!-- Estimulo do teste de marca, direcao E (Instrumento de precisao). P-163, S4.
+     Cores: docs/marca/tokens/direcoes.yaml, bloco E. Fontes OFL: docs/marca/tipografia/.
+     Textos e numeros: docs/marca/direcoes/conteudo.yaml (gerado pelo motor, cenario sintetico).
+     Versoes: base e com rota bloqueada (j-A); diferem so no elemento data-diferenca. -->
 <html lang="pt-BR" data-direcao="E">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=390, initial-scale=1">
 <title>MEOL</title>
 <style>
+  @font-face { font-family: 'Source Sans 3'; src: url('../tipografia/source-sans-3/source-sans-3-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+  @font-face { font-family: 'Source Sans 3'; src: url('../tipografia/source-sans-3/source-sans-3-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: block; }
+  @font-face { font-family: 'Source Serif 4'; src: url('../tipografia/source-serif-4/source-serif-4-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
   :root {
     --fundo: #F5F3EE; --superficie: #FBFAF6; --texto: #1B1A17; --texto-2: #57534A;
     --destaque: #7A5F32; --borda: #8C7A5B; --divisoria: #E4DFD4;
     --ok: #2E5B3B; --parcial: #3B5577; --recusa: #8A2F2B;
-    --f-titulo: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --f-corpo: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    --f-titulo: 'Source Sans 3', sans-serif;
+    --f-corpo: 'Source Serif 4', serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--fundo); color: var(--texto); font-family: var(--f-corpo); }
@@ -26,7 +30,7 @@
            letter-spacing: 0.32em; color: var(--texto); }
   .data { font-family: var(--f-titulo); font-size: 12px; letter-spacing: 0.06em;
           color: var(--texto-2); }
-  .conteudo { flex: 1; padding-top: 36px; }
+  .conteudo { flex: 1; padding-top: 26px; }
   .rotulo-secao { font-family: var(--f-titulo); font-size: 12px; font-weight: 600;
                   text-transform: uppercase; letter-spacing: 0.18em; color: var(--texto-2); }
   .selo { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
@@ -35,18 +39,21 @@
   .selo[data-status="completo"] { color: var(--ok); }
   .selo[data-status="completo"] .selo-marca { background: var(--ok); }
   .selo[data-status="parcial"] { color: var(--parcial); }
-  .decisao { margin-top: 18px; font-size: 30px; line-height: 1.22; font-weight: 400;
+  .decisao { margin-top: 14px; font-size: 27px; line-height: 1.22; font-weight: 400;
              font-variant-numeric: tabular-nums lining-nums; }
   .porque { margin-top: 16px; font-size: 17px; line-height: 1.5; color: var(--texto-2); }
-  .detalhe { margin-top: 30px; background: var(--superficie); border-top: 1px solid var(--divisoria); }
+  .detalhe { margin-top: 20px; background: var(--superficie); border-top: 1px solid var(--divisoria); }
   .linha { display: flex; justify-content: space-between; align-items: baseline;
-           padding: 14px 2px; border-bottom: 1px solid var(--divisoria); }
+           padding: 11px 2px; border-bottom: 1px solid var(--divisoria); }
   dt { font-family: var(--f-titulo); font-size: 12px; text-transform: uppercase;
        letter-spacing: 0.14em; color: var(--texto-2); }
   dd { font-size: 17px; color: var(--texto); text-align: right; }
   .numero { font-variant-numeric: tabular-nums lining-nums; }
+  .bloqueada { margin-top: 12px; padding: 10px 12px; font-size: 15px; line-height: 1.45;
+               color: var(--recusa); border-left: 2px solid var(--recusa); background: var(--superficie); }
+  .texto-dd { max-width: 60%; line-height: 1.35; }
   .nota { margin-top: 12px; font-size: 15px; line-height: 1.45; color: var(--parcial); }
-  .acoes { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .acoes { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
   button { font: inherit; background: none; border: none; color: inherit; cursor: pointer; }
   button:focus-visible { outline: 2px solid var(--texto); outline-offset: 2px; }
   .primario, .secundario { min-height: 48px; font-family: var(--f-titulo); font-size: 14px;
@@ -63,27 +70,27 @@
   .aba[aria-current="page"] { color: var(--texto); border-bottom: 2px solid var(--destaque); }
   .sem-quebra, dd.numero { white-space: nowrap; }
   dt { flex: 1; padding-right: 12px; }
-  /* Revisao: arquivo.html#tela-parcial mostra so o estado PARCIAL (sem script). */
-  body:has(#tela-parcial:target) #tela-normal { display: none; }
-  body:has(#tela-parcial:target) .tela + .tela { margin-top: 0; }
+  /* Revisao: arquivo.html#tela-rota mostra so a versao com rota bloqueada (sem script). */
+  body:has(#tela-rota:target) #tela-base { display: none; }
+  body:has(#tela-rota:target) .tela + .tela { margin-top: 0; }
 </style>
 </head>
 <body>
-<section class="tela" id="tela-normal" data-estado="normal" aria-label="Decisão do mês, estado normal">
+<section class="tela" id="tela-base" data-versao="base" aria-label="Decisão do mês, versão base">
   <header class="topo">
     <span class="marca">MEOL</span>
     <span class="data">Decisão de setembro de 2026</span>
   </header>
   <main class="conteudo">
     <p class="rotulo-secao">Decisão do mês</p>
-    <p class="selo" data-status="completo"><span class="selo-marca" aria-hidden="true"></span>Completo</p>
-    <h1 class="decisao" data-camada="1">Este mês, aporte R$&nbsp;800,00 em PIBB11.</h1>
-    <p class="porque" data-camada="2">É a parte da sua carteira mais abaixo do <span class="sem-quebra">peso-alvo</span>.</p>
+    <p class="selo" data-status="parcial"><span class="selo-marca" aria-hidden="true"></span>Parcial</p>
+    <h1 class="decisao" data-camada="1">Este mês, aporte R$&nbsp;800,00 no fundo de índice de ações brasileiras.</h1>
+    <p class="porque" data-camada="2">É a parte da sua carteira mais abaixo da meta.</p>
     <dl class="detalhe">
       <div class="linha"><dt>Valor</dt><dd class="numero">R$&nbsp;800,00</dd></div>
-      <div class="linha"><dt>Destino</dt><dd>PIBB11</dd></div>
-      <div class="linha"><dt>Custo da compra</dt><dd class="numero">R$&nbsp;0,24</dd></div>
+      <div class="linha"><dt>Custo da compra</dt><dd class="numero">entre R$&nbsp;0,22 e R$&nbsp;0,24</dd></div>
     </dl>
+    <p class="nota" data-status="parcial">A tarifa da B3 tem duas fontes que ainda não batem.</p>
     <div class="acoes">
       <button type="button" class="primario">Executei</button>
       <button type="button" class="secundario">Por quê?</button>
@@ -98,7 +105,7 @@
     </nav>
   </footer>
 </section>
-<section class="tela" id="tela-parcial" data-estado="parcial" aria-label="Decisão do mês, estado parcial">
+<section class="tela" id="tela-rota" data-versao="com_rota_bloqueada" aria-label="Decisão do mês, versão com rota bloqueada">
   <header class="topo">
     <span class="marca">MEOL</span>
     <span class="data">Decisão de setembro de 2026</span>
@@ -106,14 +113,14 @@
   <main class="conteudo">
     <p class="rotulo-secao">Decisão do mês</p>
     <p class="selo" data-status="parcial"><span class="selo-marca" aria-hidden="true"></span>Parcial</p>
-    <h1 class="decisao" data-camada="1">Este mês, aporte R$&nbsp;800,00 em PIBB11.</h1>
-    <p class="porque" data-camada="2">É a parte da sua carteira mais abaixo do <span class="sem-quebra">peso-alvo</span>.</p>
+    <h1 class="decisao" data-camada="1">Este mês, aporte R$&nbsp;800,00 no fundo de índice de ações brasileiras.</h1>
+    <p class="porque" data-camada="2">É a parte da sua carteira mais abaixo da meta.</p>
     <dl class="detalhe">
       <div class="linha"><dt>Valor</dt><dd class="numero">R$&nbsp;800,00</dd></div>
-      <div class="linha"><dt>Destino</dt><dd>PIBB11</dd></div>
       <div class="linha"><dt>Custo da compra</dt><dd class="numero">entre R$&nbsp;0,22 e R$&nbsp;0,24</dd></div>
     </dl>
     <p class="nota" data-status="parcial">A tarifa da B3 tem duas fontes que ainda não batem.</p>
+    <p class="bloqueada" data-diferenca="rota-bloqueada">Cofrinho de banco digital: bloqueado, porque a regra de isenção muda todo mês.</p>
     <div class="acoes">
       <button type="button" class="primario">Executei</button>
       <button type="button" class="secundario">Por quê?</button>
