@@ -341,3 +341,12 @@ def test_P150_mutacao_b3_eventos_no_regime_e_fora_de_REGISTROS_e_ACUSADO(tmp_pat
 def test_P150_regime_sem_campo_registro_tambem_e_acusado(tmp_path):
     raiz = _com_regime(tmp_path, {"x": {"regime": "AUTOMATICO"}})
     assert acervo.regimes_sem_registro(raiz) == ["x"]
+
+
+def test_P147_nefin_roda_sozinho_e_nao_e_mais_limitacao():
+    """Falha na versao de 26/09 antes deste commit: a limitacao dizia "sai na primeira
+    execucao verde" com a execucao agendada 36246158435 (schedule, 26/09) ja verde no passo
+    `captura_nefin`."""
+    P = _politica()
+    assert P["regimes_de_captura"]["nefin"]["primeira_execucao_agendada"] == 36246158435
+    assert "nefin" not in set(m.acervos_em_limitacao(P))

@@ -1466,18 +1466,6 @@ perdido vira alta no ajuste, e um provento perdido vira queda. Declarado em
 `limitacoes_declaradas.universo_da_captura_de_eventos_e_o_ibov_do_dia`, ligado à P-48 e não a
 esta, porque não acaba quando esta fechar.
 
-## P-147 · A captura do NEFIN ainda não rodou no executor
-
-**Dono:** o workflow (ninguém dispara) · **Gatilho:** o cron diário das 09:15 UTC, ou um *Run
-workflow* da *Captura CVM* · **Classe:** `BLOQUEIA_O_SISTEMA` (o CSV saiu do git e só volta
-ao runner pelo armazém)
-
-O CSV do NEFIN saiu do git em 25/09 (LIC-01). `fase0/capturar_nefin.py` rodou uma vez, na
-máquina dele, e subiu a versão fixada ao R2 (`novo`, `619991c2192c…`). O passo `captura_nefin`
-entrou no `captura_cvm.yml`. **Fecha quando** o passo sair verde no executor. Nesse dia, apagar
-`limitacoes_declaradas.captura_do_nefin_ainda_nao_rodou_no_executor`, e o `test_P7` cobra que o
-regime seja declarado onde ele lê.
-
 ## P-146 · Três passos das métricas que só ele pode dar
 
 **Dono:** Osvaldo · **Gatilho:** nenhum; quanto antes, antes o semanal fica verde ·
@@ -1757,8 +1745,10 @@ As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
 >    proventos/…` e que não há `PARAR`. Um `DESCONHECIDO` em pasta de eventos se lê antes de
 >    seguir. Depois, com as `R2_*` no ambiente, `--aplicar`, e commitar
 >    `docs/acervo/b3_eventos/inventario-armazem.csv`. E conferir o cron de segunda, 28/09.
-> 4. **P-147 (NEFIN) e a release `cvm-acervo-2026`:** conferir depois do cron de 26/09. Não
->    exige desktop.
+> 4. ~~**P-147 (NEFIN) e a release `cvm-acervo-2026`:** conferir depois do cron de 26/09. Não
+>    exige desktop.~~ **Conferido em 27/09, na nuvem:** o cron `36246158435` (26/09)
+>    rodou o `captura_nefin` verde (P-147 fechada) e publicou a release `cvm-acervo-2026`
+>    (13:46Z). Nada a fazer no desktop.
 > 5. ~~`macro.poupanca_am` vence em 28/09~~ — renovada em 25/09; vence em **24/10**.
 > 6. **P-145 — dois passos dele destravam a medição na nuvem:** ⚙ **desktop:**
 >    `py -3.11 fase0/subir_acervo_local.py --aplicar` (sobe o `isinp.zip`); e, de qualquer

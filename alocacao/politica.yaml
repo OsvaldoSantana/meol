@@ -13,10 +13,16 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.35.0
+  versao: 1.36.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.36.0: >-
+      27/09/2026, P-147 fechada. A execucao agendada 36246158435 do captura_cvm.yml
+      (schedule, 26/09, 13:44Z) rodou o passo `captura_nefin` verde -- o "Falhar se a
+      captura falhou" foi pulado, entao o codigo do passo foi 0 --, sem ninguem disparar. O
+      NEFIN entra em `regimes_de_captura` e a limitacao
+      `captura_do_nefin_ainda_nao_rodou_no_executor` fica RESOLVIDA, como a da CVM e a da B3.
     1.35.0: >-
       26/09/2026, registro. `universo_da_captura_de_eventos_e_o_ibov_do_dia`: a captura dos
       eventos da B3 (P-150) le a carteira do IBOV do dia e so pede eventos de quem esta nela;
@@ -2021,6 +2027,13 @@ regimes_de_captura:
     registro: docs/acervo/b3/capturas.csv
     primeira_execucao_agendada: 36148547193
     em: 2026-09-25
+  nefin:
+    regime: AUTOMATICO
+    executor: .github/workflows/captura_cvm.yml
+    passo: captura_nefin
+    registro: docs/acervo/nefin/capturas.csv
+    primeira_execucao_agendada: 36246158435
+    em: 2026-09-26
 
 # P-150 (26/09/2026): a cadencia de uma captura que ainda nao provou o regime. Lida por
 # `fase0/capturar_eventos_b3.py`, que nao pede nada a B3 fora deste dia. Quando o cron sair
@@ -2559,6 +2572,11 @@ limitacoes_declaradas:
       Na primeira execucao verde do passo `captura_eventos_b3` no workflow.
     fonte: "fase0/coletar_b3.py; docs/acervo/b3_eventos/capturas.csv"
   captura_do_nefin_ainda_nao_rodou_no_executor:
+    RESOLVIDA: >-
+      27/09/2026 (P-147). A execucao agendada 36246158435 do captura_cvm.yml (evento
+      schedule, 26/09, 13:44Z -- o cron de 09:15 UTC saiu 4h29 atrasado) rodou o passo
+      `captura_nefin` verde, sem ninguem disparar. O regime passou para
+      `regimes_de_captura.nefin`.
     tipo: NAO_CONSERTADA
     o_que_resolveria: >
       A primeira execucao verde do .github/workflows/captura_cvm.yml com o passo
