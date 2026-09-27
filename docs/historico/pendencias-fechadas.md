@@ -2102,10 +2102,25 @@ dispositivos que se aplicam, e a tese **confirmada** (as notas N-CVM saem, com a
 
 **FECHADA em 26/09/2026.** A Resolução CVM 19/2021 foi lida na fonte primária (site da CVM, texto consolidado até a 179/2023) e transcrita em `docs/fontes/cvm-resolucao-19-consolidada.md`, com URL, data de acesso e sha256 do PDF e do DOCX. **Confirmadas com escopo:** o padrão individualizado é recomendação (art. 1º, § 1º, I e II) e a atividade é privativa de consultor (art. 2º), para o MEOL oferecido a terceiros; a vedação de garantir rentabilidade (art. 18, III). **Retirada:** "não distribuir, não receber comissão e não aceitar anúncio" como critério da CVM — a norma permite distribuir com segregação (art. 18, I e § 2º) e não fala de anúncio; as três ficam como escolha do MEOL. Retratação em `eventos.csv`. O enquadramento do MEOL segue na P-158. Não é parecer.
 
+## ~~P-147~~ · A captura do NEFIN ainda não rodou no executor — **FECHADA em 27/09/2026**
+
+**Dono:** o workflow (ninguém dispara) · **Gatilho:** o cron diário das 09:15 UTC, ou um *Run
+workflow* da *Captura CVM* · **Classe:** `BLOQUEIA_O_SISTEMA` (o CSV saiu do git e só volta
+ao runner pelo armazém)
+
+O CSV do NEFIN saiu do git em 25/09 (LIC-01). `fase0/capturar_nefin.py` rodou uma vez, na
+máquina dele, e subiu a versão fixada ao R2 (`novo`, `619991c2192c…`). O passo `captura_nefin`
+entrou no `captura_cvm.yml`. **Fecha quando** o passo sair verde no executor. Nesse dia, apagar
+`limitacoes_declaradas.captura_do_nefin_ainda_nao_rodou_no_executor`, e o `test_P7` cobra que o
+regime seja declarado onde ele lê.
+
+**FECHADA em 27/09/2026.** A execução agendada `36246158435` do `captura_cvm.yml` (schedule, 26/09, 13:44Z) rodou o passo `captura_nefin` verde; o passo "Falhar se a captura falhou" foi pulado, então o código foi 0. O NEFIN entrou em `regimes_de_captura` (política 1.36.0), e a limitação ficou `RESOLVIDA`. `test_P147_nefin_roda_sozinho_e_nao_e_mais_limitacao` reprova a volta.
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-147** | a captura do NEFIN não tinha rodado no executor | 27/09 — execução agendada `36246158435`, passo `captura_nefin` verde |
 | **P-159** | ler a Resolução CVM 19/2021 e confirmar ou retirar a tese de independência | 26/09 — duas teses confirmadas com escopo, uma retirada |
 | **P-01** | assinar os dois registros (HASH11 e Tesouro IPCA+) | 26/09 — hash11 ea8c8769bbf021e2, td_ipca 942c75bae248327b; td_ipca sem peso até a compra |
 | **P-152** | G8 tem de honrar REGRA_DECIDIDA (G-07) | 26/09 — G8 lê o estado; td_ipca 15% → 0% assinado em REGRA_DECIDIDA |
