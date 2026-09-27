@@ -1684,6 +1684,11 @@ desta pendência, antes de qualquer estímulo ser mostrado a alguém.
 > (trazer o pré-registro de 20/09) está feito:
 > `docs/marca/preregistro-teste-de-marca-2026-09-20.md`.
 
+> **27/09/2026 — a H4 do teste de marca vem para cá** (resposta s-a dele, S5). "Esse público
+> aceita mais informação por tela do que um iniciante aceitaria" não é testável no teste de
+> marca, cujo filtro exclui iniciantes. Aqui, onde o teste de interface pode ter os dois
+> grupos, ela entra com o critério gravado antes (P4).
+
 ## P-157 · Importação de carteira: quais formatos são viáveis
 
 **Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes de desenhar a tela O4 do [mapa de
@@ -1764,11 +1769,26 @@ e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora
 margem de empate da regra de decisão, e o desenho do teste da H3. *(27/09: fechadas pelas
 respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* *(27/09, S4: g-B, h-A, i-A,
 j-A, amigos e recrutamento também respondidos; a S5 grava o pré-registro final depois de ele
-aprovar os PNG da S4.)* Filtro de entrada:
+aprovar os PNG da S4.)* ~~Filtro de entrada:
 aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
 para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
 entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
-P-154).
+P-154).~~ *(27/09, S5: o filtro foi reescrito sem jargão (v-a); as pessoas próximas **contam**,
+com a análise dupla em que a sem elas decide (amigos, r-a); a H-A1 não entra, porque nenhuma
+decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
+
+> **27/09/2026, S5 — o pré-registro final está gravado:**
+> [`docs/marca/preregistro-teste-de-marca-final.md`](docs/marca/preregistro-teste-de-marca-final.md),
+> com o [questionário](docs/marca/teste-de-marca-questionario.md) e a análise
+> (`tools/analise_teste_marca.py`) congelados pelo sha256, e os seis PNG aprovados. A H4 foi
+> para a P-156 (s-a).
+>
+> **Primeiro convite só depois do merge deste pré-registro no main e do commit com as datas
+> da janela.**
+>
+> O que falta, em ordem, é dele: o merge; montar os seis formulários e conferi-los (roteiro em
+> "Ao voltar ao desktop", item 8); o commit das datas; o primeiro convite. A pendência fecha
+> com o relatório da análise, depois do dia 21.
 
 ## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
 
@@ -1887,7 +1907,31 @@ da C (318°), a decisão volta para ele antes do brandbook.
 >    (`docs/decisoes/fila-do-osvaldo.md`) esperam o Osvaldo; os 16 e 17 destravam a P-162, e
 >    nenhum exige o desktop. *(27/09: 16b e 17a respondidos; seguem 18, 19 e 20.)* **A P-115 continua na frente**: a fila do rosto não disputa com
 >    ela (`docs/decisoes/rosto-v1.md`).
-> 8. **27/09/2026 — o degrau 4 da escada de contorno (§5-B.18).** ⚙ **exige o desktop** (IP
+> 8. **27/09/2026 — P-162, os seis formulários do teste de marca.** ⚙ **exige o desktop**
+>    (navegador logado na conta Google dele; a sessão na nuvem não usa sessão de navegador,
+>    §5-A.7). Só **depois do merge** do pré-registro final. Tudo sai de
+>    `docs/marca/teste-de-marca-questionario.md`:
+>    1. **Montar um formulário** no Google Forms, seção por seção, com o texto exato do
+>       questionário: sem coletar e-mail, fuso (GMT-03:00) Brasília, perguntas obrigatórias
+>       (menos as duas abertas), uma seção por imagem e uma por bloco de perguntas, e os
+>       títulos copiados letra a letra (o script acha cada coluna pelo título). As imagens
+>       são os PNG de `docs/marca/direcoes/png/`, na ordem da versão 1 (E, C, D).
+>    2. **Duplicar seis vezes** (Forms → Fazer uma cópia) e, em cada cópia, trocar a ordem
+>       das imagens pela tabela da seção 8 do questionário. Nomear cada uma "versão N".
+>    3. **Conferir cada versão contra o questionário:** a ordem das seis imagens, os
+>       títulos, os rótulos do 1 e do 7, os desvios de seção do consentimento e do filtro.
+>    4. **Uma resposta de teste por versão, com "Não concordo"**, exportar as respostas de
+>       cada uma (Respostas → Planilhas → Baixar CSV) como `data/teste-marca/versao-N.csv` e
+>       rodar `py -3.11 tools/analise_teste_marca.py --conferir-cabecalho`: tem de dar `ok`
+>       nas seis e ler o carimbo. Se o carimbo não for lido, **parar**: o formato do Forms é
+>       `NAO_CONFIRMADO` e mudar o script é pré-registro novo, antes do convite.
+>    5. **Commit das datas da janela**: preencher as duas linhas da §6 do pré-registro final
+>       (dia 1 e dia 21) e empurrar. **Antes** do primeiro convite.
+>    6. **Primeiro convite**, com o link da versão 1; o seguinte com a 2, e assim em rodízio.
+>       Os CSV ficam em `data/teste-marca/` (ignorado pelo git) e em nenhum outro lugar do
+>       repositório. A análise roda depois de 23:59 do dia 21:
+>       `py -3.11 tools/analise_teste_marca.py --inicio <dia 1>` (antes disso ela recusa).
+> 9. **27/09/2026 — o degrau 4 da escada de contorno (§5-B.18).** ⚙ **exige o desktop** (IP
 >    residencial; a nuvem levou 403 do Akamai e o túnel do `web.archive.org` caiu). Dois
 >    roteiros, sem navegador e sem sessão logada: o do **BOVV11** está na P-05 (três `curl`
 >    e a transcrição do trecho da taxa total); o dos **11 bancos da regra m-B** está na P-169
