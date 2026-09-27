@@ -1177,7 +1177,9 @@ critério corrigido repete o defeito da P-116.
 > sobre 2021–2025 tem de dar 819, senão o script para e mostra a diferença. E há quarentena do
 > retorno do dia ex em 2013–2020 até o merge. Texto na §9 do #27 (`d7811fd`); decisão em
 > `docs/decisoes/fila-do-osvaldo.md`. **Na segunda**, se a calibração parar, a janela não cresce,
-> e a diferença vai para ele antes de qualquer outro passo.
+> e a diferença vai para ele antes de qualquer outro passo. **27/09, tolerância de 2% só para
+> cima:** 819 segue; de 820 a 835 segue, com o n × 819 ÷ n_cal arredondado para baixo; fora
+> disso, para (§9 do #27, `239acf1`).
 
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados

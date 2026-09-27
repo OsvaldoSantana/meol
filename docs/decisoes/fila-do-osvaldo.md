@@ -95,6 +95,24 @@ calibração não daria 819. Ele escolheu **identidade, sem preço**: DATA, CODB
 TPMERC, ESPECI e CODISI. Ficaram de fora todos os campos de preço, volume, quantidade e fator
 de cotação, e o teste envenena essas posições.
 
+### Resposta dele, 27/09/2026: tolerância de 2% na calibração (P-115)
+
+**Decisão:** a calibração sobre 2021–2025 aceita de **819 a 835** (819 × 1,02 = 835,38), e só
+para cima.
+- **819:** segue sem correção.
+- **820 a 835:** segue. O n de cada candidata é multiplicado por 819 ÷ n_cal e arredondado para
+  baixo, e a saída imprime o fator.
+- **Abaixo de 819 ou acima de 835:** para, sai com código 2 e não imprime as candidatas.
+
+Só para cima porque a presença só pode contar a mais que o `ajustar`: os descartes que ela não
+vê são por valor do preço. A correção só diminui o n. Texto na §9 do critério, no rascunho do
+#27 (`239acf1`).
+
+| alternativa | o que acontecia | por que não |
+|---|---|---|
+| **tolerância de 2% só para cima, com correção para baixo** (escolhida) | uma diferença pequena, na direção que a presença explica, não trava a escolha da janela, e o n corrigido fica do lado conservador | — |
+| parar sempre (a regra de 26/09) | qualquer diferença, mesmo de um degrau, deixava a janela em 2016–2020 | travava a decisão por uma diferença que a própria unidade explica, sem dizer nada sobre o poder |
+
 ### Resposta dele, 26/09/2026, sobre o app do Claude no GitHub
 
 **Não instalar** (menor privilégio; os check-ins agendados cobrem). Revisitar se um aviso
