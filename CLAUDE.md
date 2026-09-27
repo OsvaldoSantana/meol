@@ -163,6 +163,7 @@ auditoria/         os INSTRUMENTOS; os laudos moram em docs/auditoria/
   tamanho_do_contexto.py   quanto custa ler este projeto
   achados_ancorados.py     todo achado citado tem onde ser lido
   codigos_preservados.py   nenhum codigo (P-, A-, 5-B.n) some do repositorio
+  escada_contorno.py       NAO_CONFIRMADO por falta de acesso so com a escada (5-B.18)
 medicoes/          scripts de medicao sobre o acervo; push em `medir/<nome>` roda
                    `<nome>.py` no Actions, com o token de LEITURA (5-A.11); saida em resultados/
 tools/analisar_sessoes.py  tempo e tokens das sessoes, na maquina dele
@@ -296,6 +297,15 @@ que só imprime achados é opinião com sotaque de máquina.
 - **17 · Limitação da ferramenta de quem responde não é limitação da tarefa.** Escreva com o
   sujeito — *"a sessão na nuvem não alcança"* — e o passo seguinte é o roteiro para a sessão
   local, não trabalho manual para ele.
+- **18 · Antes de marcar `NAO_CONFIRMADO` por falta de acesso, sobe-se a escada**, e cada
+  degrau tentado fica transcrito com o erro: **(1)** outra ferramenta (curl no terminal,
+  `git clone`, a API em vez da página, outro formato do mesmo dado); **(2)** outra cópia
+  (Wayback Machine, espelho oficial, portal de dados abertos); **(3)** outra fonte primária
+  com o mesmo dado; **(4)** outro executor (sessão local, workflow `medir/`, script na máquina
+  dele); **(5)** só então `NAO_CONFIRMADO`, com os degraus na linha (`escada:`) e uma `P-nnn`
+  de conserto. Motivo: a 13 e a 17 se cumpriam com "tentei, deu 403, parei"; em 27/09, três
+  "bloqueados" caíram no degrau 1 (skill `bastter-contorno`; guarda
+  `auditoria/test_escada_contorno.py`).
 
 A tabela dos onze erros de 11 a 13/09 e a narrativa de cada regra estão no histórico (§13).
 

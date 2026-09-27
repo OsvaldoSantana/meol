@@ -45,13 +45,28 @@ páginas. **Um subagente por documento** é a diferença entre caber e não cabe
 
 | chave | bloqueia | o que fecha |
 |---|---|---|
-| `etf.BOVV11` | `tabela_etf_rv_completa` | site do gestor bloqueia robô — visita manual |
+| `etf.BOVV11` | `tabela_etf_rv_completa` | ~~site do gestor bloqueia robô — visita manual~~ escada subida em 27/09 sem resolver da nuvem (`docs/fontes/MAPA-CONSTANTES.md`); o degrau 4 é da sessão local, roteiro abaixo |
 | ~~`etf.IMAB11`~~ | **fechada 05/09** — 0,25% a.a. (página do gestor, PARCIAL). Falta o regulamento para virar COMPLETO |
 | `etf.ACWI11` | `comparacao_global_amplo` | regulamento / página do produto |
 | `exterior.vest_stablecoin.iof` | `ordenacao_rotas_exterior` | tratamento de IOF em stablecoin |
 
 O `IMAB11` é o mais valioso: é o único concorrente conhecido do Tesouro IPCA+ na
 função `PROTECAO_REAL` que não paga a custódia de 0,20% a.a. da B3.
+
+> **27/09/2026 — BOVV11, o degrau 4 da escada (§5-B.18), para a sessão local.** Da nuvem, os
+> degraus 1 a 3 falharam com o erro transcrito no `MAPA-CONSTANTES.md` (403 do Akamai no site
+> do gestor; túnel caído no `web.archive.org`; CVM sem campo de taxa para ETF). ⚙ **Na máquina
+> dele**, sem navegador e sem sessão logada:
+> 1. `curl -sS -L -o bovv11.html -w "%{http_code}\n" https://www.itnow.com.br/bovv11/` — IP
+>    residencial costuma passar pela WAF. Se der 200, procurar a lâmina ou o regulamento
+>    linkados na página e baixá-los com `curl`.
+> 2. Se der 403: `curl -sS -L -o bovv11_wb.html "https://web.archive.org/web/20260513194558id_/https://www.itnow.com.br/bovv11/"`
+>    (a cópia de 13/05/2026 que a API da Wayback aponta).
+> 3. Transcrever para `docs/fontes/` o trecho com a **taxa total** e a composição (P-50: adm,
+>    gestão, custódia), com URL, data do documento e sha256 do arquivo baixado.
+> Só depois disso o valor entra no `custos.yaml`, pelo protocolo de mudança: ele muda a rota
+> BOVV11 no motor, e o `conteudo.yaml` dos estímulos do teste de marca sai do motor (o
+> `--conferir` pega se mudar).
 
 ---
 
@@ -1200,7 +1215,13 @@ processo que evita a repetição: critério em um commit, **empurrado**, e só e
 `BLOQUEIA_O_SISTEMA` · ⚙ **exige o desktop**
 
 O `preregistro-ml-v2.md` §11 deixa as versões `NAO_CONFIRMADO` porque a consulta ao PyPI
-**da nuvem** foi recusada por `robots.txt`. A sessão local não tem essa recusa. O conserto é
+**da nuvem** foi recusada por `robots.txt`. A sessão local não tem essa recusa.
+
+> **27/09/2026 — degrau 1 da escada (§5-B.18), da nuvem:** `curl https://pypi.org/pypi/tabpfn/json`
+> respondeu **HTTP 200**. O `tabpfn` 9.0.0 declara `torch>=2.5` e `lightgbm>=4.4` entre as
+> dependências obrigatórias: **o TabPFN traz `torch`**. A recusa era da ferramenta de busca, não
+> do PyPI. O resto da pendência (o `--dry-run` contra a faixa fechada e o tamanho) segue aberto,
+> e talvez não exija o desktop: o índice do PyPI responde desta sessão. O conserto é
 `py -3.11 -m pip install --dry-run lightgbm tabpfn "numpy==2.4.4" "pandas==3.0.2"` — e, se o
 TabPFN trouxer `torch`, anotar o tamanho. É a entrada
 `dependencias_da_familia_aprendizado_nao_medidas`.
@@ -1830,6 +1851,33 @@ em `docs/marca/direcoes/D.html` e guardado por `auditoria/test_direcoes_marca.py
 de vida" do pré-registro de 20/09. O que fecha: o conjunto de ativos do brandbook, feito para
 o MEOL, com licença e origem de cada um.
 
+## P-169 · A escada de contorno fora do Markdown: 21 linhas de YAML, 12 delas da S4
+
+**Dono:** Claude (a guarda, na nuvem; o degrau 4 dos bancos, na sessão local) · Osvaldo só
+se aparecer colisão com a cor da C · **Gatilho:** antes da etapa 5 (brandbook) da fila do
+rosto; não bloqueia o teste de marca, cujos PNG estão congelados · **Classe:**
+`DECISAO_DE_DESENHO`
+
+`auditoria/escada_contorno.py` (regra 18 da §5-B) varre só `.md`, como a tarefa pediu. Em
+27/09, uma varredura com janela de 3 linhas achou **21 linhas de YAML** com `NAO_CONFIRMADO`
+perto de um motivo de acesso. As que pesam:
+
+- **`docs/marca/tokens/direcoes.yaml`, a lista da regra m-B (S4, minha).** Dos 20 bancos e
+  fintechs, **9 foram OBSERVADOS e 11 ficaram `NAO_CONFIRMADO`** (escada: só o degrau 1,
+  um `curl` na página inicial): 9 por 403, a Caixa por um 302 sem destino lido, e o Bradesco
+  por HTML sem cor. A regra "matiz a 30° de toda cor dominante observada" foi
+  conferida contra **n=9**, não contra o mercado. A S4 escreveu isso com honestidade
+  ("não se completou de memória"), mas não subiu os degraus 2 a 4: CSS e manifest do próprio
+  site, Wayback, manual de marca publicado e sessão local.
+- **`alocacao/custos.yaml` e `alocacao/catalogo.yaml`, BOVV11** ("site do gestor bloqueia
+  acesso automatizado"). A escada está no `MAPA-CONSTANTES.md` e na P-05; o texto do YAML
+  segue antigo e muda junto com o valor, pelo protocolo de mudança.
+
+O que fecha: (1) a guarda passa a ler YAML por campo (`status: NAO_CONFIRMADO` com `metodo`
+ou `motivo` de acesso exige `escada`), com a própria linha de base; (2) os 11 bancos sobem a
+escada, e a cor observada de cada um entra na lista; se algum ficar a menos de 30° do magenta
+da C (318°), a decisão volta para ele antes do brandbook.
+
 ---
 
 ## Ao voltar ao desktop
@@ -1883,3 +1931,10 @@ o MEOL, com licença e origem de cada um.
 >       Os CSV ficam em `data/teste-marca/` (ignorado pelo git) e em nenhum outro lugar do
 >       repositório. A análise roda depois de 23:59 do dia 21:
 >       `py -3.11 tools/analise_teste_marca.py --inicio <dia 1>` (antes disso ela recusa).
+> 9. **27/09/2026 — o degrau 4 da escada de contorno (§5-B.18).** ⚙ **exige o desktop** (IP
+>    residencial; a nuvem levou 403 do Akamai e o túnel do `web.archive.org` caiu). Dois
+>    roteiros, sem navegador e sem sessão logada: o do **BOVV11** está na P-05 (três `curl`
+>    e a transcrição do trecho da taxa total); o dos **11 bancos da regra m-B** está na P-169
+>    (a cor declarada no HTML ou no CSS de cada página inicial). **Não exige o desktop:**
+>    colar a versão 2 de `docs/ia/instrucoes-projeto-claude.md` nas instruções do Projeto no
+>    claude.ai, que passam a ter a escada.
