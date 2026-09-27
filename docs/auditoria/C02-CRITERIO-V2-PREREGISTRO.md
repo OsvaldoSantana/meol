@@ -451,12 +451,25 @@ corrida.
 - dois testes provam o limite. Com toda posição de preço, volume e fator de cotação
   envenenada, a contagem sai certa. E uma versão do leitor com PREULT na lista é pega.
 
-**Calibração, como condição.** Rodado sobre 2021–2025, com o mesmo silver e as mesmas versões
-do COTAHIST, o script **tem de dar 819**. Se der outro valor, a presença não reproduz a
-unidade, e **a regra não escolhe janela**: o script para, mostra a diferença (`contou n;
-diferença ±k`) e sai com código 2. Nesse caso a janela não cresce, e o que fazer vira
-pergunta para ele, com a diferença à vista. A calibração não ajusta nada: ou confere, ou
-para.
+**Calibração, como condição, com tolerância de 2% só para cima (decisão dele, 27/09/2026).**
+Rodado sobre 2021–2025, com o mesmo silver e as mesmas versões do COTAHIST, o script conta o
+n_cal:
+- **n_cal = 819:** segue sem correção;
+- **n_cal de 820 a 835** (819 × 1,02 = 835,38): segue. O n de cada candidata é multiplicado por
+  819 ÷ n_cal e **arredondado para baixo**, e a saída imprime o fator;
+- **n_cal abaixo de 819 ou acima de 835:** a regra **não escolhe janela**. O script para,
+  mostra a diferença, sai com código 2 e não imprime as candidatas.
+
+**Por que só para cima.** A presença só pode contar **a mais** que o `ajustar`: o que ela não vê
+são descartes pelo valor do preço (ver abaixo), e nenhum deles cria degrau. Contar a menos é
+sinal de unidade errada. A correção só **diminui** o n, então nunca faz passar uma janela que
+não passaria.
+
+**Alternativa rejeitada: parar sempre** (a versão de 26/09: "a calibração não ajusta nada: ou
+confere, ou para"). Uma diferença de poucos degraus, na direção que a presença explica,
+travaria a escolha da janela inteira sem dizer nada sobre o poder. Com 819 ÷ n_cal, o n
+corrigido fica do lado conservador, e a trava continua para qualquer diferença fora dessa
+direção ou acima de 2%.
 
 **O que a presença não vê (P5).** Os descartes do `ajustar` que dependem do **valor** do
 preço: fechamento zero ou ilegível, e dois proventos do mesmo tipo e dia com valores

@@ -25,9 +25,10 @@ O QUE LE, e so isto:
   - do silver, as colunas de `LIDAS_SILVER`: identidade, tipo, as duas datas e os dois
     status. Nem `valor`, nem `preco_vespera`, nem `fator`.
 
-A CALIBRACAO e condicao, nao ajuste: rodado sobre 2021-2025, o script tem de dar 819. Outro
-valor quer dizer que a presenca nao reproduz a unidade, e a regra NAO escolhe janela: o
-script para, mostra a diferenca e sai 2.
+A CALIBRACAO e condicao, com tolerancia de 2% so para cima (decisao dele, 27/09/2026):
+rodado sobre 2021-2025, 819 segue; de 820 a 835 segue com o n de cada candidata x 819/n_cal,
+arredondado para baixo; abaixo de 819 ou acima de 835, a regra NAO escolhe janela -- o
+script para, mostra a diferenca e sai 2, sem imprimir candidatas.
 
 O QUE NAO MEDE (P5): os casos em que o `ajustar` descarta por VALOR do preco (preco zero,
 fechamento ilegivel, dois proventos de mesmo tipo e dia com valores diferentes). A calibracao
@@ -69,6 +70,13 @@ MERCADO_MINIMO = 20          # o `minimo` de `ajustar.mercado_do_dia`
 SIGMA_2021_2025 = 0.0472
 CALIBRACAO_N = 819
 CALIBRACAO_ANOS = (2021, 2025)
+# Decisao dele, 27/09/2026. A tolerancia e SO PARA CIMA: a presenca so pode contar A MAIS
+# que o `ajustar` -- os descartes que ela nao ve sao por VALOR do preco (fechamento zero ou
+# ilegivel, dois proventos de mesmo tipo e dia com valores diferentes), e nenhum deles cria
+# degrau. Contar a menos quer dizer unidade errada, e para sempre. Dentro de 819 x 1,02, o n
+# de cada candidata e multiplicado por 819 / n_cal e arredondado para BAIXO: a correcao so
+# diminui o n, entao nunca faz uma janela passar que nao passaria.
+TOLERANCIA_CALIBRACAO = 0.02
 SIGMA_MAX_K2 = 0.0416
 FOLGA = 0.8
 N_MIN = math.ceil(CALIBRACAO_N * (SIGMA_2021_2025 / (FOLGA * SIGMA_MAX_K2)) ** 2)
@@ -213,12 +221,22 @@ def n_da_janela(evs: list[dict[str, str]], cot: Presenca, ini: int, fim: int) ->
     return sum(c["so_jcp"] for c in medir_n(evs, cot, range(ini, fim + 1)).values())
 
 
-def calibrar(n: int) -> None:
-    if n != CALIBRACAO_N:
+def calibrar(n: int) -> tuple[int, int]:
+    """(819, n) -- o fator da correcao como fracao -- se `n` esta em [819, 819 x 1,02];
+    fora disso, `CalibracaoFalhou` com a diferenca."""
+    teto = CALIBRACAO_N * (1 + TOLERANCIA_CALIBRACAO)
+    if not CALIBRACAO_N <= n <= teto:
         raise CalibracaoFalhou(
             f"calibracao {CALIBRACAO_ANOS[0]}-{CALIBRACAO_ANOS[1]}: contou {n}, a unidade "
-            f"dos {CALIBRACAO_N} pede {CALIBRACAO_N}; diferenca {n - CALIBRACAO_N:+d}. "
-            f"A regra NAO escolhe janela (secao 9).")
+            f"dos {CALIBRACAO_N} aceita de {CALIBRACAO_N} a {teto:.2f} "
+            f"(tolerancia {TOLERANCIA_CALIBRACAO:.0%}, so para cima); diferenca "
+            f"{n - CALIBRACAO_N:+d}. A regra NAO escolhe janela (secao 9).")
+    return CALIBRACAO_N, n
+
+
+def corrigir(n: int, n_cal: int) -> int:
+    """n x 819 / n_cal, arredondado para BAIXO, em inteiros (sem ponto flutuante)."""
+    return n * CALIBRACAO_N // n_cal
 
 
 def janela(ns: Mapping[tuple[int, int], int]) -> dict[str, object]:
@@ -240,14 +258,19 @@ def main(argv: list[str] | None = None) -> int:
     cot = ler_cotahist(a.cotahist, range(CANDIDATAS[-1][0], CALIBRACAO_ANOS[1] + 1))
     n_cal = n_da_janela(evs, cot, *CALIBRACAO_ANOS)
     try:
-        calibrar(n_cal)
+        num, den = calibrar(n_cal)
     except CalibracaoFalhou as e:
         print(f"RESUMO PARADO: {e}")
         return 2
-    print(f"calibracao {CALIBRACAO_ANOS[0]}-{CALIBRACAO_ANOS[1]}: {n_cal} (confere)")
-    ns = {w: n_da_janela(evs, cot, *w) for w in CANDIDATAS}
-    for (ini, fim), n in ns.items():
-        print(f"  {ini}-{fim}: n_JCP {n}")
+    print(f"calibracao {CALIBRACAO_ANOS[0]}-{CALIBRACAO_ANOS[1]}: {n_cal}; "
+          + ("fator 1 (819/819), sem correcao" if num == den else
+             f"fator {num}/{den} = {num / den:.6f}, arredondado para baixo"))
+    ns = {}
+    for ini, fim in CANDIDATAS:
+        bruto = n_da_janela(evs, cot, ini, fim)
+        ns[(ini, fim)] = corrigir(bruto, n_cal)
+        print(f"  {ini}-{fim}: n_JCP {bruto}"
+              + ("" if num == den else f" -> corrigido {ns[(ini, fim)]}"))
     j = janela(ns)
     print(f"RESUMO regra da secao 9: n_min {N_MIN}; janela {j['ini']}-{j['fim']}, n {j['n']}, "
           + ("atende" if j["atende"] else

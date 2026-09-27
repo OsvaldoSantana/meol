@@ -9,8 +9,8 @@ O QUE MEDE (P5):
   (c) a unidade e a dos 819: degrau com negocio no dia ex e na vespera DO PAPEL, que ganhou
       fator, em dia limpo (sem evento de quantidade, sem marca B/G, sem evento sem fator),
       com mercado do dia (>= 20 papeis), so JCP;
-  (d) a calibracao: 2021-2025 tem de dar 819; outro valor PARA a regra e mostra a
-      diferenca;
+  (d) a calibracao: 2021-2025 da 819 (segue), 820-835 (segue, n x 819/n_cal para baixo)
+      ou outro valor (PARA, mostra a diferenca, sem candidatas);
   (e) a regra da janela e o texto citam os mesmos numeros.
 NAO mede o dado real: o silver e o COTAHIST moram no disco dele, e o script nao roda aqui.
 """
@@ -183,14 +183,72 @@ def test_c_o_primeiro_dia_da_janela_nao_tem_vespera():
 
 # ── (d) calibracao e (e) regra ────────────────────────────────────────────────
 
-def test_d_calibracao_certa_passa():
-    N.calibrar(N.CALIBRACAO_N)
+# Decisao dele, 27/09/2026: tolerancia de 2% SO PARA CIMA. 819 segue sem correcao; de 820 a
+# 835 (819 x 1,02 = 835,38) segue, com o n de cada candidata x 819/n_cal arredondado para
+# BAIXO; 818 ou 836 PARA.
+
+def test_d_tolerancia_e_constante_declarada():
+    assert N.TOLERANCIA_CALIBRACAO == 0.02
 
 
-def test_d_calibracao_errada_para_e_mostra_a_diferenca():
+@pytest.mark.parametrize("n_cal", [819, 820, 835])
+def test_d_dentro_da_tolerancia_segue(n_cal):
+    assert N.calibrar(n_cal) == (N.CALIBRACAO_N, n_cal)
+
+
+@pytest.mark.parametrize("n_cal", [818, 836])
+def test_d_fora_da_tolerancia_para_e_mostra_a_diferenca(n_cal):
     with pytest.raises(N.CalibracaoFalhou) as e:
-        N.calibrar(801)
-    assert "801" in str(e.value) and "819" in str(e.value) and "-18" in str(e.value)
+        N.calibrar(n_cal)
+    assert str(n_cal) in str(e.value) and "819" in str(e.value)
+    assert f"{n_cal - 819:+d}" in str(e.value)
+
+
+def test_d_correcao_arredonda_para_baixo_e_so_diminui():
+    assert N.corrigir(1650, 819) == 1650
+    assert N.corrigir(1650, 820) == 1647          # 1650 x 819 / 820 = 1647,98
+    assert N.corrigir(2000, 835) == 1961          # 1961,68 -> 1961
+    for n_cal in range(819, 836):
+        assert N.corrigir(1650, n_cal) <= 1650
+
+
+NS = {(2016, 2020): 1300, (2015, 2020): 1600, (2014, 2020): 1650, (2013, 2020): 2000}
+
+
+def _main(monkeypatch, tmp_path, capsys, n_cal):
+    silver = tmp_path / "silver.csv"
+    silver.write_text("x\n", encoding="utf-8")
+    monkeypatch.setattr(N, "ler_silver", lambda caminho: iter(()))
+    monkeypatch.setattr(N, "ler_cotahist", lambda raiz, anos: None)
+    tabela = dict(NS)
+    tabela[N.CALIBRACAO_ANOS] = n_cal
+    monkeypatch.setattr(N, "n_da_janela", lambda evs, cot, ini, fim: tabela[(ini, fim)])
+    rc = N.main([str(silver)])
+    return rc, capsys.readouterr().out
+
+
+def test_d_main_819_segue_sem_correcao(monkeypatch, tmp_path, capsys):
+    rc, out = _main(monkeypatch, tmp_path, capsys, 819)
+    assert rc == 0 and "fator 1 (819/819)" in out
+    assert "janela 2014-2020, n 1650" in out
+
+
+@pytest.mark.parametrize("n_cal,janela", [(820, "janela 2013-2020, n 1997"),
+                                          (835, "janela 2013-2020, n 1961")])
+def test_d_main_dentro_da_tolerancia_corrige_e_imprime_o_fator(monkeypatch, tmp_path,
+                                                               capsys, n_cal, janela):
+    rc, out = _main(monkeypatch, tmp_path, capsys, n_cal)
+    assert rc == 0 and f"fator 819/{n_cal}" in out
+    assert "2014-2020: n_JCP 1650 -> corrigido" in out
+    assert janela in out
+
+
+@pytest.mark.parametrize("n_cal", [818, 836])
+def test_d_main_fora_da_tolerancia_para_sem_candidatas(monkeypatch, tmp_path, capsys,
+                                                       n_cal):
+    rc, out = _main(monkeypatch, tmp_path, capsys, n_cal)
+    assert rc == 2 and "PARADO" in out
+    assert "n_JCP" not in out and "janela 20" not in out
 
 
 def test_e_limiar_e_candidatas():
@@ -213,4 +271,5 @@ def test_e_o_texto_cita_os_mesmos_numeros():
     with open(TEXTO, encoding="utf-8") as f:
         s = f.read()
     assert "n_JCP ≥ 1.648" in s and "2016–2020, 2015–2020, 2014–2020 e 2013–2020" in s
-    assert "tem de dar 819" in s and "sai com código 2" in s
+    assert "**n_cal de 820 a 835**" in s and "sai com código 2" in s
+    assert "**arredondado para baixo**" in s and "Alternativa rejeitada: parar sempre" in s
