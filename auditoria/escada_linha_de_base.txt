@@ -1,0 +1,11 @@
+# linha de base da escada de contorno (5-B.18) -- so encolhe; ver auditoria/escada_contorno.py
+# caminho | sha256[:12] da linha | motivo
+docs/auditoria/AUDITORIA-PREREGISTRO-ML-V1.md | ce49a43108b3 | laudo datado (registro, nao instrucao); a pergunta e da P-122, que em 27/09 recebeu o degrau 1: o JSON do PyPI diz que o tabpfn 9.0.0 traz torch
+docs/historico/entregas/DEPENDE-DE-VOCE.md | f2f026f180f0 | falso positivo: "bloqueado" e a rota IMAB11 bloqueada pelo motor (P1), nao falta de acesso; e bilhete vencido em docs/historico
+docs/historico/pesquisa-custos-2026-08/pesquisa-corretoras.md | 43ba82863e70 | pesquisa de 08/2026 em docs/historico (registro, nao instrucao); a Clear foi resolvida na propria pesquisa (linha 572: entidade extinta)
+docs/historico/pesquisa-custos-2026-08/pesquisa-corretoras.md | 0cb75437c3b3 | pesquisa de 08/2026 em docs/historico (registro, nao instrucao); o Banco do Brasil nao aparece no custos.yaml
+docs/historico/pesquisa-custos-2026-08/pesquisa-corretoras.md | e72715b123d7 | pesquisa de 08/2026 em docs/historico; o 403 foi numa noticia sobre o controle da Avenue e a linha trata do braco Brasil (B3); a rota do motor e a Avenue EUA, com fonte propria no custos.yaml
+docs/historico/pesquisa-custos-2026-08/pesquisa-corretoras.md | f61fabcb6eed | pesquisa de 08/2026 em docs/historico; a linha ja transcreve dois degraus (curl e WebFetch, 403 nos dois)
+docs/historico/pesquisa-custos-2026-08/pesquisa-corretoras.md | 0a340a43b36c | pesquisa de 08/2026 em docs/historico; e a propria correcao da linha 162 (a Clear e entidade extinta)
+docs/historico/pesquisa-custos-2026-08/reconciliacao.md | 8c87cd3d2025 | pesquisa de 08/2026 em docs/historico; o BOVV11 vigente esta no MAPA-CONSTANTES.md, com a escada de 27/09 e a P-05
+docs/ux/F0-contrato-de-saida.md | 7143556d0852 | falso positivo: `InsumoBloqueado` e a excecao do motor (P1), nao falta de acesso

@@ -144,7 +144,7 @@ Fonte legítima que não é documento arquivável. Estas não precisam de `.md`;
 
 | chave | valor | status atual | o que fecha |
 |---|---|---|---|
-| `etf.BOVV11` | — | `NAO_CONFIRMADO` | site do gestor bloqueia robô; visita manual |
+| `etf.BOVV11` | — | `NAO_CONFIRMADO` | ~~site do gestor bloqueia robô; visita manual~~ **27/09/2026, escada subida (§5-B.18) sem resolver da nuvem — P-05.** escada: (1) `curl` em `itnow.com.br` e `itnow.com.br/bovv11/` → HTTP 403 do `AkamaiGHost` (a WAF do site, não o proxy da sessão); (2) Wayback: a API aponta a cópia `20260513194558` (status 200), mas `web.archive.org` fecha o túnel desta sessão (`ws_closed_mid_exchange`, 4 de 4); (3) CVM: o fundo é o It Now Ibovespa (CNPJ 21.407.758/0001-19, FIIM, em funcionamento, no `registro_fundo_classe`), que **não tem campo de taxa**; o `extrato_fi` só cobre FIF; o `cad_fi` só o tem cancelado; o FundosNet devolve 0 documentos para o CNPJ (controle com um FII devolve); (4) sessão local, roteiro na P-05. O número de 06/09 (0,10% total, PARCIAL, de subagente) segue sem conferência de trecho (P-50) |
 | `etf.IMAB11` | — | `NAO_CONFIRMADO` | regulamento do fundo |
 | `etf.ACWI11` | — | `NAO_CONFIRMADO` | regulamento / página do produto |
 | `exterior.vest_stablecoin.iof` | — | `NAO_CONFIRMADO` | tratamento de IOF em stablecoin |
