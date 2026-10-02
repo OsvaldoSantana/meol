@@ -1796,8 +1796,10 @@ decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
 > vale é [`docs/marca/teste-de-marca/preregistro-final.md`](docs/marca/teste-de-marca/preregistro-final.md),
 > com o [questionário como dado](docs/marca/teste-de-marca/questionario.yaml), o
 > [livro de códigos visuais](docs/marca/teste-de-marca/codigos-visuais.yaml) com E, C e D já
-> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: y-b (voltam os
-> textos de 20/09 do filtro e dos amigos), z-a, aa-a e ab-a.
+> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: ~~y-b (voltam os
+> textos de 20/09 do filtro e dos amigos)~~, z-a, aa-a e ab-a. **02/10/2026, y-a:** supera a
+> y-b; voltam os textos do ensaio (u-a e v-a), e o `questionario.yaml` ganha sha256 novo, antes
+> do primeiro convite.
 >
 > **Primeiro convite só depois do merge deste pré-registro e da página (S6) no main, e do
 > commit com as datas da janela.**
@@ -1922,6 +1924,15 @@ e o `veto()` aplicado à direção vencedora quando a análise sair. **Antes da 
 a lista de marcas por categoria, escrita e empurrada, pela mesma razão da ac-a. As capturas
 são de página pública (loja de apps, site); a §5-A.7 vale: nada de sessão logada, e acesso
 recusado sobe a escada (§5-B.18) antes de virar `NAO_CONFIRMADO`.
+
+> **02/10/2026, sessão 1 da R3 (sessão local):** antes da primeira marca, ele emendou o livro de
+> códigos (versão 2; ad-a, ae-a e af-a na fila): quatro categorias novas (consultoria CVM,
+> assessor, robô, planejador), a unidade (app ou site) e 10 marcas sorteadas por categoria. O
+> plano e o sorteio estão gravados ([`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml);
+> semente 20261002): consultoria 528, assessor 148, corretora 138 e gestora 1.195 no universo.
+> **Nenhuma marca visitada.** O andamento mora em
+> [`docs/marca/pesquisa-marcas-rodada3-2026-09.md`](docs/marca/pesquisa-marcas-rodada3-2026-09.md),
+> §5. **As visitas só começam depois do merge** que grava a emenda e o sorteio.
 
 ---
 

@@ -1,0 +1,529 @@
+ordem,cnpj,nome,site_declarado
+1,35.351.119/0001-93,K1 CAPITAL HUMANO PLANEJAMENTO FINANCEIRO,www.k1planejamento.com.br
+2,62.524.099/0001-88,HIGH INVESTMENT ADVISORY LTDA,wealth.highpar.com.br
+3,62.420.374/0001-13,MONTCLAIR ADVISORY,https://www.montclairadvisory.com.br/
+4,54.084.093/0001-09,MEROTTO WEALTH MANAGEMENT,www.merotto.com.br
+5,67.677.167/0001-62,HOSKEN & CUNHA INVESTMENT,https://www.hoskencunhainvestment.com/
+6,37.576.416/0001-62,PORTFEL CONSULTORIA FINANCEIRA LTDA,www.portfel.com.br
+7,44.542.369/0001-00,HELIX CONSULTORIA DE VALORES MOBILIARIOS LTDA,www.helixconsult.com.br
+8,54.359.541/0001-30,STOKOS,www.stokoswealth.com
+9,51.182.266/0001-33,KONSTANSKY CONSULTORIA DE INVESTIMENTOS,www.ripenconsultoria.com.br
+10,68.678.884/0001-71,WCIA CONSULTORIA DE INVESTIMENTOS,www.wcia-consultoria.com.br
+11,55.674.959/0001-02,WITZ CONSULTORIA EM TÍTULOS E VALORES MOBILIÁRIOS LTDA,witzwealth.com
+12,47.595.258/0001-41,VITA TECH LTDA,www.vitainvestimentos.com
+13,65.713.597/0001-67,BLUE3 CONSULTORIA DE VALORES MOBILIÁRIOS LTDA,www.blue3investimentos.com.br
+14,65.728.125/0001-88,TELOS WEALTH,www.teloswealth.com.br
+15,58.490.133/0001-73,VINEA INVESTIMENTOS LTDA,www.vineagestaodecapital.com.br
+16,03.866.812/0001-02,--,www.diblasiconsultoria.com.br
+17,34.443.157/0001-03,MAPA DE INVESTIMENTOS,https://www.mapadeinvestimentos.com.br
+18,49.870.185/0001-84,NORD LIBERTA,https://www.nordinvestimentos.com.br/liberta/
+19,52.062.506/0001-29,MILOZZI CAPITAL,https://www.milozzicapital.com.br
+20,50.073.190/0001-45,CENTURY MULTI FAMILY OFFICE,www.centurymfo.com.br
+21,68.913.286/0001-30,NOLANA WEALTH  MANAGEMENT,nolana.com.br
+22,47.059.280/0001-77,COLINA PLANEJAMENTO E INVESTIMENTO,https://colinainvest.com.br/
+23,61.888.113/0001-60,VELIS CONSULTORIA,www.velispartners.com
+24,26.207.537/0001-10,OP FINANCE,www.opfinance.com.br
+25,14.868.120/0001-10,CARPA CONSULTORIA,www.carpafamilyoffice.com
+26,23.828.090/0001-09,I9ADVISORY,https://www.i9advisory.com
+27,50.552.078/0001-97,PROPÓSITO PARTNERS CONSULTORIA DE VALORES MOBILIÁRIOS,www.propositop.com
+28,66.789.501/0001-07,C2 PARTNERS CONSULTORIA DE INVESTIMENTOS,www.c2lz.com.br
+29,44.056.030/0001-95,-----,https://www.traad.com.br/
+30,36.488.241/0001-79,ANDALUZ CONSULTORIA DE INVESTIMENTOS,www.andaluzinvestimentos.com.br
+31,16.717.240/0001-41,OVERCLUB | FAMILY OFFCIE,www.overclub.com.br
+32,44.466.466/0001-52,ÉQUORA MFO,https://equoramfo.com
+33,59.812.126/0001-03,ÍMPAR INVESTIMENTOS,www.novaimpar.com.br
+34,23.670.302/0001-72,ELEVA CONSULTORIA DE VALORES MOBILIÁRIOS,www.elevainvest.com.br
+35,44.254.890/0001-33,GS STRATEGY LTDA.,www.gsestrategia.com.br
+36,54.248.690/0001-21,AXION CONSULTORIA FINANCEIRA,www.axioncf.com.br
+37,64.561.057/0001-42,BENURA,www.benura.com.br
+38,43.672.397/0001-70,TUTORS CONSULTORIA DE VALORES MOBILIÁRIOS,https://tutorsconsultoria.com/
+39,31.415.301/0001-00,TROON CAPITAL,https://www.trooncapital.com.br/
+40,07.931.931/0001-52,QUANTUM,www.quantumfinance.com.br
+41,55.585.717/0001-34,ALETINVEST ATHENA CAPITAL,www.aletathena.com
+42,22.139.095/0001-61,RUBIK CAPITAL,www.rubikcapital.com.br
+43,68.144.262/0001-63,VASTIS,www.vastis.com.br
+44,52.246.985/0001-33,LIVRATO CAPITAL,livratocapital.com
+45,54.515.139/0001-05,HRENZ,www.hrenz.com.br
+46,63.318.981/0001-30,LORI LEGACY,www.lorilegacy.com.br
+47,05.563.299/0001-06,SOMMA INVESTIMENTOS,www.sommainvestimentos.com.br
+48,66.102.389/0001-94,REVERT AI CONSULTORIA LTDA.,www.revertai.com.br
+49,67.175.598/0001-20,ROW CAPITAL CONSULTORIA FINANCEIRA LTDA,www.rowcapital.com.br
+50,26.203.162/0001-10,HUNTERPAR,www.hunterpar.com.br
+51,14.057.808/0001-10,SETE CAPITAL CONSULTORIA LTDA,setecapitalrpps.com.br
+52,39.147.090/0001-83,LIFFE LEGACY,https://www.liffelegacy.com.br/
+53,32.121.330/0001-21,NEXCO CONSULTORIA DE INVESTIMENTOS E PLANEJAMENTO FINANCEIRO,www.gruponexco.com.br
+54,11.143.389/0001-40,MH PREV,mhprevconsultoria.com.br
+55,66.100.211/0001-04,CASA RIO CONSULTORIA,www.casarioconsultoria.com
+56,46.828.542/0001-58,FAUSTO NICHELE CONSULTORIA EM INVESTIMENTOS LTDA,www.faustonichele.com
+57,57.494.084/0001-84,ORYON GLOBAL FINANCE,www.oryonglobalfinance.com
+58,47.965.438/0001-78,EQI INVESTIMENTOS CORRETORA DE TÍTULOS E VALORES MOBILIÁRIOS S.A.,www.eqi.com.br
+59,39.445.512/0001-05,VINSON WEALTH,www.vinsonwealth.com.br
+60,38.315.642/0001-52,CX3 CONSULTORIA E GESTÃO DE INVESTIMENTOS LTDA.,www.cx3.com.br
+61,50.639.255/0001-77,AGF WEALTH,https://acoesgarantem.com.br
+62,61.020.726/0001-80,ALTSIDE,https://altside.com/
+63,64.755.417/0001-47,DECADE WEALTH MANAGEMENT,https://www.decade.com
+64,47.125.269/0001-68,NK INVESTMENTS,www.nkinvestments.com.br
+65,50.469.193/0001-00,DINAI,dinai.capital
+66,62.033.515/0001-45,MABE INVEST,www.mabeinvest.com.br
+67,32.877.398/0001-35,JOURNEY CAPITAL WM,www.journeycapital.com.br
+68,35.394.142/0001-65,MEDFI CONSULTORIA DE INVESTIMENTOS,www.medficonsultoria.com.br
+69,07.748.542/0001-96,BRAINVEST CONSULTORIA EM TÍTULOS E VALORES MOBILIÁRIOS LTDA,https://www.brainvest.com/
+70,45.654.026/0001-91,ZAITTI INVEST,www.zaittinvest.com.br
+71,68.639.611/0001-18,NOBEL FAMILY OFFICE,www.nobelconsultoria.com.br
+72,61.515.500/0001-50,STELLA WEALTH,www.stellawealth.com.br
+73,15.621.336/0001-49,MOSAICO CONSULTORIA FINANCEIRA LTDA,www.mosaicoconsultoria.com.br
+74,29.247.309/0001-62,SOMMA MULTI-FAMILY OFFICE,www.sommainvestimentos.com.br
+75,55.460.600/0001-24,AUREUM FINANCE,www.aureumfinance.com.br
+76,13.484.369/0001-69,ADITUS CONSULTORIA E SISTEMAS LTDA,www.aditusbr.com
+77,50.859.666/0001-78,AVERE PARTNERS,www.averepartners.com.br
+78,35.809.186/0001-09,PAUSARE CAPITAL,www.pausare-capital.com
+79,65.665.921/0001-19,WHG FAMILY OFFICE LTDA.,https://whg.com.br/informacoes-regulatorias/
+80,57.289.603/0001-72,BONANZA CONSULTORIA DE INVESTIMENTOS LTDA,www.bonanzacapital.com.br
+81,58.776.690/0001-55,SPTZ,https://www.sptzconsultoria.com.br/
+82,55.864.113/0001-27,CALIX CAPITAL LTDA,https://www.calixfamilyoffice.com/
+83,07.035.676/0001-60,--,http://www.pharosconsult.net
+84,67.887.457/0001-30,SHP WEALTH,www.shpwealth.com.br
+85,33.046.828/0001-30,HS WEALTH,www.hswealth.com.br
+86,43.960.555/0001-98,TURIM ADVISORY CONSULTORIA DE VALORES MOBILI-RIOS LTDA.,https://www.turimadvisory.com
+87,65.971.768/0001-58,R3 CAPITAL WEALTH PLANNING LTDA,www.r3cap.com.br
+88,22.687.467/0001-94,------,www.maisvaliaconsultoria.com.br
+89,10.198.379/0001-40,THEMA CONSULTORIA,www.themacvm.com.br
+90,00.059.307/0001-68,AGENDA ASSESSORIA,https://www.agendaassessoria.com.br
+91,59.969.008/0001-03,HERDADE CAPITAL,herdadecapital.com.br
+92,59.880.782/0001-43,NEWPORT CAPITAL,https://newportcapital.com.br/
+93,42.531.112/0001-19,MAG CONSULTORIA DE INVESTIMENTOS LTDA,www.magconsult.com.br
+94,03.223.073/0001-30,INTEGRAL - TRUST SERVICOS FINANCEIROS,http://www.integraltrust.com
+95,55.389.345/0001-70,CAZA CAPITAL,www.cazacapital.com.br
+96,50.884.578/0001-26,CAFÉ WEALTH MANAGEMENT,www.cafeinvest.com.br
+97,32.676.543/0001-10,SOCIEDADE NOVUS CONSULTORIA E PARTICIPAÇÕES LTDA.,www.novuscapital.com.br
+98,29.685.570/0001-44,INVESTIS CAPITAL,http://www.investis.com.br
+99,57.053.793/0001-24,OKEGEN CONSULTORIA FINANCEIRA E PARTICIPACOES LTDA,https://okegen.com.br/
+100,07.416.843/0001-12,--,www.metlife.com.br
+101,45.653.114/0001-79,RMARTINS CONSULTORIA DE VALORES MOBILIÁRIOS,www.martinsleaoconsultoria.com
+102,60.475.813/0001-60,DOMUS,https://domusgestao.com/
+103,45.640.708/0001-45,NOTORIUS RESEARCH,www.notoriusresearch.com.br
+104,10.979.208/0001-58,--,www.blackrock.com/br
+105,27.253.377/0001-09,CAPITALIZO CONSULTORIA FINANCEIRA,www.capitalizo.com.br
+106,47.181.394/0001-95,SEGNO CAPITAL,www.segnocapital.com.br
+107,68.772.550/0001-62,BRUDER CAPITAL,www.brudercapital.com.br
+108,61.773.813/0001-09,TAUARI WEALTH SERVICE,www.tauariwealth.com.br
+109,47.864.742/0001-29,CENTURIA CONSULTORIA DE VALORES MOBILIARIOS LTDA.,https://www.centuriafo.com
+110,65.109.421/0001-09,BROMPTON MFO,www.bromptonmfo.com
+111,68.649.244/0001-33,VALLARIS INVESTIMENTOS,https://vallarisinvestimentos.com.br/
+112,67.164.600/0001-66,APICE WEALTH,https://apiceinvestimentos.com.br/apice-wealth/
+113,53.773.965/0001-83,RS WEALTH,www.rswealth.com.br
+114,47.593.883/0001-54,MARKET MAKERS,www.mmkares.com.br
+115,58.890.524/0001-85,QUANTY TECNOLOGIA E CONSULTORIA DE INVESTIMENTOS LTDA,www.quanty.com.br
+116,68.307.199/0001-39,LIBERDADE CONSULTORIA DE VALORES MOBILIÁRIOS,https://liberdade.ecn.br/
+117,30.500.261/0001-31,GFAI CONSULTORIA DE INVESTIMENTOS,http://www.gfai.com.br/gfaiconsultoriadeinvestimentos
+118,30.798.071/0001-42,ATIVO INVESTIMENTOS,https://ativoinvestimentos.com.br/
+119,62.223.032/0001-03,MGMT,https://mgmtinvest.com
+120,68.548.182/0001-73,MILANO CAPITAL,https://milanowealth.com.br/
+121,69.136.387/0001-04,VERUM WEALTH MANAGEMENT,www.verumwealth.com.br
+122,61.549.928/0001-14,COESO CAPITAL,www.coesocapital.com.br
+123,11.437.087/0001-85,APROAR PLANEJAMENTO PATRIMONIAL LTDA.,www.aproar.com.br
+124,62.427.997/0001-18,CHEIDA WEALTH,https://www.cheidawealth.com.br/
+125,65.108.716/0001-52,MERUM CONSULTORIA,https://www.synvestconsultoria.com.br
+126,18.880.404/0001-82,SRB,www.srbinvest.com.br
+127,06.344.636/0001-37,SIMPLUS CONSULTORIA PATRIMONIAL,https://www.simplus.com.br
+128,58.158.654/0001-28,US WEALTH CONSULTORIA DE INVESTIMENTOS,uswealth.com.br
+129,04.270.778/0001-71,SANTANDER CORRETORA,https://www.santander.com.br/conta-corrente-pessoa-fisica/santander-private/santander-family-office
+130,64.437.141/0001-59,FORE CONSULTORIA DE INVESTIMENTOS,www.foreinvestimentos.com.br
+131,68.260.191/0001-64,STEWARD LTDA.,steward.com.br
+132,51.807.233/0001-31,MONEYBOX,https://moneybox.com.br/
+133,62.611.459/0001-89,DMF CAPITAL,www.dmfcapital.com.br
+134,48.494.902/0001-58,GUARDIAN WEALTH MANAGEMENT,guardiantrustcapital.com
+135,44.488.614/0001-30,HEALTHMONEY,www.healthmoney.com.br
+136,69.254.922/0001-21,OGNAX CAPITAL,ognaxcapital.com.br
+137,27.784.851/0001-29,MULTIPLOS INVESTIMENTOS,https://www.multiplosinvestimentos.com.br/
+138,58.579.325/0001-50,N/A,https://www.nomadglobal.com/
+139,27.691.059/0001-20,LOGUS CAPITAL CONSULTORIA DE INVESTIMENTOS LTDA,www.loguscapital.com.br
+140,11.077.338/0001-68,XP CONSULTORIA,www.xpi.com.br/consultoria/
+141,58.372.622/0001-20,COSTA BRAVA FINANCIAL ADVISORY SERVICES & INVESTMENTS,costabrava-investments.com
+142,50.150.706/0001-08,CT INVEST AGENTE AUTONOMO DE INVESTIMENTOS LTDA,www.ctinvestimentosholding.com.br
+143,60.002.467/0001-00,VIGO PARTNERS CONSULTORIA DE VALORES MOBILIARIOS LTDA,www.vigopartners.com.br
+144,60.328.542/0001-10,GISELE BAZANELLA ANÁLISES DE INVESTIMENTOS LTDA,https://gb-analisesdeinvestimentos.com.br/
+145,55.911.132/0001-67,REINO CAPITAL,www.reinocapital.com.br
+146,58.696.252/0001-87,KINZAI CONSULTORIA FINANCEIRA LTDA,www.kinzai.com.br
+147,62.454.575/0001-31,RAYA ADVISORY,rayabr.com
+148,62.298.706/0001-39,SOLIDEZ MFO LTDA,solizemfo.com.br
+149,38.269.371/0001-46,BEVAS WEALTH MANAGEMENT,http://www.bevas.com.br/
+150,62.557.653/0001-23,PLAIN,https://plain.app.br
+151,66.731.791/0001-38,INVESTFINANCE,www.investefinance.com.br
+152,37.200.916/0001-03,SPAR FINANCIAL,sparfinancial.com
+153,11.340.009/0001-68,CREDITO & MERCADO CONSULTORIA EM INVESTIMENTOS,http://www.creditoemercado.com.br/consultoria-em-investiment
+154,54.833.466/0001-05,4CF INVESTIMENTOS,www.4cf.com.br
+155,59.711.332/0001-27,ALIÁ MULTI FAMILY OFFICE,www.aliamfo.com.br
+156,64.675.359/0001-41,DELPHOS CAPITAL,delphoscapital.com.br
+157,40.250.916/0001-14,FRACTAL CONSULTORIA,http://www.fractalconsultoria.com.br
+158,58.430.087/0001-17,INVÉS WEALTH,https://inveswealth.com
+159,55.929.842/0001-14,ROI CAPITAL,www.roicapitalws.com
+160,62.098.234/0001-70,ORIGEM WEALTH,http://origemwealth.com.br
+161,41.940.952/0001-72,XVI CAPITAL,https://xvicapital.com.br/
+162,42.705.659/0001-93,VOGA WEALTH,https://voga.com.br/servicos/wealth/
+163,32.041.749/0001-73,CICLOINVEST,https://www.cicloinvest.com
+164,59.582.885/0001-27,V INVESTOR WEALTH MANAGEMENT LTDA,https://www.viwealth.com.br/
+165,65.256.343/0001-67,PETRÓPOLIS WEALTH,www.petropoliswealth.com.br
+166,61.532.145/0001-28,ATLAS,www.atlasmfo.com
+167,66.996.677/0001-30,FONTANA WEALTH,fontanawealth.com.br
+168,17.152.441/0001-01,JOINTVEST,jointvest.com
+169,41.088.892/0001-01,NIPA INVEST,www.nipainvest.com.br
+170,22.863.573/0001-81,AMX CAPITAL,www.amxcapital.com.br
+171,23.791.507/0001-06,ATTIMO FAMILY OFFICE,www.attimofamilyoffice.com.br
+172,62.082.879/0001-15,MVN,www.mvnconsultoria.com.br
+173,64.676.407/0001-16,-----,https://ventupartners.com/
+174,64.721.121/0001-05,LESTE HERITAGE,www.lesteheritage.com
+175,42.322.977/0001-75,DOLARAME,https://www.dolarame.com.br/
+176,09.065.366/0001-13,--,www.wadvisors.com
+177,54.678.025/0001-78,SAGA CONSULTORIA,www.sagainvista.com.br
+178,01.710.916/0001-06,MORGAN STANLEY ADMINISTRADORA DE CARTEIRAS S.A.,www.morganstanley.com.br
+179,57.844.601/0001-06,LEGATE CAPITAL CONSULTORIA DE RECURSOS LTDA,www.enduranceam.com.br
+180,56.902.160/0001-80,DORIUS WEALTH,doriuswealth.com.br
+181,65.914.109/0001-80,AKIVA CONSULTORIA,https://akivaconsultoria.com.br/
+182,62.884.162/0001-97,BIONDO INVESTIMENTOS,www.biondoinvestimentos.com.br
+183,46.743.918/0001-21,KAPITAL INVESTIMENTOS & PARTICIPAÇÕES LTDA.,www.kapitalinvest.com.br
+184,45.670.274/0001-26,MUSA CAPITAL,https://www.musacapital.com.br/
+185,59.777.875/0001-47,YNVESTOR,www.ynvestor.com.br
+186,43.228.744/0001-70,HIKE COMPANY,https://www.hike.capital
+187,66.771.644/0001-91,IDV BLACK WEALTH LTDA,idvblackwealth.com.br
+188,45.562.681/0001-10,FINANZIA WEALTH CONSULTORIA E GESTÃO LTDA.,www.finanzia.com.br
+189,51.577.127/0001-09,PLAN FOR LIFE FAMILY OFFICE,https://plan4life.com.br/
+190,53.531.028/0001-11,FIN STUDIO FINANCAS ACESSIVEIS,https://finstudiofa.com/
+191,21.809.572/0001-96,VGV CONSULT,http://www.vgvinvest.com.br
+192,60.958.364/0001-00,ID WEALTH,https://idwealthwm.com/
+193,66.437.980/0001-00,VALOR CONSULTORIA DE INVESTIMENTOS LTDA,valoradvisory.com.br
+194,64.512.558/0001-39,PLANCORP WEALTH,plancorpinvestimentos.com.br/home
+195,22.074.324/0001-07,ETHOS INVESTIMENTOS,www.ethosinvestimentos.com.br
+196,61.538.224/0001-46,MEDALLION WEALTH,www.medallionwealth.com.br
+197,07.335.928/0001-76,STONEX CONSULTORIA,https://stonex.com/pt-br
+198,63.205.482/0001-36,NAUTILUS WEALTH,https://www.nautiluswealth.com.br/
+199,63.509.347/0001-84,NARA CAPITAL,www.naracapital.com.br
+200,66.364.882/0001-82,KIM PARTNERS CONSULTORIA PATRIMONIAL LTDA,eftconsultoria.com.br
+201,51.447.953/0001-33,IMPROVE CONSULTORIA DE INVESTIMENTOS,https://www.improvewealth.com.br/
+202,60.806.944/0001-82,OLP WEALTH MANAGEMENT LTDA,consultoriaolp.com.br
+203,60.478.608/0001-58,SWS,https://somusws.com.br/
+204,32.121.452/0001-18,TAG CONSULTORIA DE INVESTIMENTOS,www.taginvest.com.br
+205,03.230.467/0001-16,SPINNAKER CAPITAL - CONSULTORIA EM GESTAO DE RECURSOS LTDA.,https://www.spinnskercgr.com.br
+206,58.526.157/0001-35,ORIGAMI CONSULTORIA DE INVESTIMENTOS LTDA,https://origamiinvestimentos.com
+207,56.439.966/0001-84,ELOS BENS E VALORES,www.elosbensevalores.com.br
+208,45.936.169/0001-96,OREGON INVEST,https://www.oregon-invest.com/
+209,41.257.319/0001-84,EMPERA CONSULTORIA,https://emperafp.com.br/consultoria-de-investimentos/
+210,12.695.840/0001-03,BTG PACTUAL FAMILY OFFICE,https://www.btgpactual.com/wealth-management
+211,65.037.112/0001-62,RM CONSULTING,vindoro.com.br
+212,35.808.907/0001-66,PONTO CAPITAL,https://www.pontocapitalcv.com/
+213,54.927.180/0001-80,RTS PARTNERS,https://rtspartners.com.br
+214,59.006.583/0001-00,BEGINITY CAPITAL,https://www.beginitycapital.com/
+215,16.622.977/0001-80,--,www.wmaconsultores.com
+216,55.071.507/0001-28,ALUDE CAPITAL,www.aludecapital.com.br
+217,54.667.643/0001-12,M2WM,www.mwealth.com.br
+218,51.506.704/0001-71,AMB WEALTH,https://ambwealth.com.br/
+219,53.866.916/0001-95,AZFLOW CONSULTORIA DE VALORES MOBILIÁRIOS LTDA,https://azflow.com.br/
+220,06.310.347/0001-17,SKUF FINANÇAS PESSOAIS,www.skufinvestimentos.com.br
+221,61.759.397/0001-94,CHIABAI INVESTIMENTOS,https://chiabaiinvestimentos.com.br/
+222,46.944.432/0001-51,EQI PARTNERS,https://ib.eqi.com.br/
+223,40.170.492/0001-88,N2 CONSULTORIA,www.n2app.com.br
+224,45.401.386/0001-81,SEVEN CONSULTORIA DE VALORES MOBILIÁRIOS LTDA.,https://sevencf.com.br/
+225,30.657.372/0001-56,SP FINANCIAL CONSULTANCY,https://www.spfinancialconsultancy.com/
+226,66.047.508/0001-53,ENDURANT,https://endurant.com.br
+227,23.785.970/0001-45,-----,www.bfoconsultoria.com.br
+228,60.238.324/0001-94,ADALIA CONSULTORIA,https://www.adaliaconsultoria.com.br/
+229,41.001.303/0001-06,SPOT CAPITAL CONSULTORIA,www.spotcapital.com.br
+230,56.173.484/0001-25,INVESTIDORES GLOBAIS,www.investidoresglobais.com.br
+231,15.665.087/0001-93,CONFIANÇA WEALTH,www.confiancawealth.com.br
+232,59.664.397/0001-69,BW FINANCE,bwfinance.com.br
+233,43.485.732/0001-21,-----,https://qinv.com.br/
+234,32.612.504/0001-59,JAU CONSULORIA DE INVESTIMENTOS LTDA.,www.jauinvestimentos.com
+235,66.044.972/0001-96,VAULT CAPITAL,https://vaultcapital.com.br/pt
+236,55.334.645/0001-52,GOLDEN WEALTH LTDA,https://www.goldenwealth.com.br/inicio/
+237,51.056.161/0001-38,"AVA CONSULTORIA E PLANEJAMENTO FINANCEIRO LTDA.""",www.avainvest.com.br
+238,50.200.083/0001-30,NIPPUR CONSULTORIA,https://www.nippurconsultoria.com.br/
+239,13.545.391/0001-71,-----,https://dijoninvestimentos.com.br/
+240,53.501.906/0001-56,REFRAN CONSULTORIA,www.refranconsultoria.com
+241,59.644.362/0001-68,DMF CONSULTORIA,www.dmf.com.br
+242,21.172.839/0001-87,FORTES EQUITIES,https://www.fortesequities.com/
+243,21.564.362/0001-85,LIME PRIME MULTI FAMILY OFFICE,www.limeprime.com.br
+244,49.701.612/0001-09,PS CONSULTORIA,https://psgestaoecapital.com.br/
+245,40.935.647/0001-20,VISLO CAPITAL,www.vislo.com.br
+246,03.866.830/0001-94,PREVCONSULTING INVESTIMENTOS,https://prevconsulting.com/site/
+247,47.211.324/0001-32,HORIZON ADVISORS,www.horizonadvisors.com.br/
+248,37.134.551/0001-58,FP360 FINANÇAS PESSOAIS,https://fp360.com.br/
+249,56.929.527/0001-50,PETA CAPITAL CONSULTORIA FINANCEIRA LTDA.,https://petacapital.com.br/
+250,61.989.664/0001-10,TP CAPITAL WEALTH S/A,www.tpcapital.com.br
+251,58.321.323/0001-67,LDC CAPITAL,https://ldccapital.com.br/
+252,52.590.640/0001-00,ATHIVOS CONSULTOR DE VALORES MOBILIARIO LTDA,www.athivos.com.br
+253,61.954.160/0001-64,SANKT GALLEN INVESTIMENTOS LTDA,www.sanktgallen.com.br
+254,62.981.349/0001-09,JP LEGACY INVESTIMENTOS,jplegacyinvest.com
+255,59.741.600/0001-53,L7 WEALTH SERVIÇOS ADMINISTRATIVOS LTDA,www.l7wealth.com.br
+256,52.694.472/0001-95,GULL INVESTIMENTOS CONSULTORIA DE VALORES MOBILIARIOS LTDA,http://gullinvest.com.br
+257,09.227.630/0001-78,V10 CONSULTORIA FINANCEIRA LTDA ME,www.v10investimentos.com.br
+258,45.708.838/0001-72,UNK,https://unkwealth.com.br/
+259,47.785.237/0001-99,AWK WEALTH,www.awkfamilyoffice.com
+260,53.871.228/0001-13,SOLO INVESTIMENTOS,www.soloinvestimentos.com
+261,37.595.625/0001-53,NUMO GESTÃO PATRIMONIAL,www.numogp.com.br
+262,68.770.524/0001-03,WISS,https://wiss.io/
+263,57.226.362/0001-12,AON BRASIL SERVIÇOS DE CONSULTORIA EM INVESTIMENTOS LTDA,https://www.aon.com/pt-br/capabilities/investments
+264,16.987.291/0001-93,AZ GUIDANCE,azguidance.com.br
+265,38.376.143/0001-75,Auhren Family Office,https://auhren.com.br/
+266,19.389.406/0001-36,CONFIANÇA CONSULTORIA EM INVESTIMENTOS LTDA,www.confiancainvest.com.br
+267,39.149.578/0001-40,RSA INVESTIMENTOS,https://rsainvestimentos.com.br/
+268,64.772.107/0001-30,GULFSTREAM CAPITAL,https://gulfstreamcapital.com.br
+269,46.941.025/0001-90,THREE VALLEYS MULTI FAMILY OFFICE,https://threevalleys.com.br/
+270,33.804.015/0001-61,PLENO FINANCE,https://www.pleno.finance/
+271,69.369.399/0001-89,ECONS CAPITAL,www.econscapital.com.br
+272,62.548.801/0001-43,BRAVES CAPITAL,www.bravescapital.com.br
+273,63.101.381/0001-15,ATLAS VALORUM,www.atlasvalorum.com.br
+274,59.891.025/0001-75,S4 CONSULTORIA DE INVESTIMENTOS LTDA,www.s4consultoria.com
+275,58.085.554/0001-19,TRÍADE CAPITAL,https://triadecapital.com/
+276,09.815.294/0001-84,EMERALD GESTÃO DE INVESTIMENTOS SOCIEDADE UNIPESSOAL LIMITADA,www.https://www.emerald.com.br/
+277,10.541.510/0001-20,ATUARIAL CONSULTORIA,http://www.atuarialconsultoria.com.br
+278,66.332.671/0001-68,JB3 CONSULTORIA DE VALORES MOBILIARIOS LTDA,jb3consultoria.com.br
+279,49.574.765/0001-24,API CAPITAL,www.apicapital.com.br
+280,57.646.113/0001-86,RIO NEGRO FAMILY OFFICE,rionegromfo.com.br
+281,62.632.780/0001-40,CONVEX WEALTH,https://www.convexwealth.com.br/
+282,38.614.932/0001-05,MZM WEALTH PLANNING,www.mzmwealthplan.com.br
+283,41.225.235/0001-69,BABYLON CAPITAL,www.babyloncapital.com.br
+284,67.643.208/0001-08,MZR CONSULTORIA LTDA.,www.mzrconsultoria.com.br
+285,62.577.989/0001-58,RFJ CAPITAL,rfjcapital.com
+286,33.898.234/0001-57,MULTI WEALTH FAMILY OFFICE,https://mwfamilyoffice.com.br
+287,49.889.513/0001-94,MUNDO INVEST LTDA,www.mundoinvest.com.br
+288,60.084.921/0001-01,VERUS CONSULTORIA DE INVESTIMENTOS LTDA,www.verus.com.br
+289,64.267.293/0001-50,PARVA CAPITAL PARTNERS CONSULTORIA DE VALORES MOBILIÁRIOS LTDA.,https://mintcream-goldfish-167901.hostingersite.com/
+290,35.722.467/0001-20,STRATI CONSULTORIA DE INVESTIMENTOS LTDA,https:.//www.strati.in
+291,29.767.428/0001-46,-----,https://www.faroinvestimentos.net/
+292,43.732.359/0001-66,ADAM WEALTH CONSULTORIA DE INVESTIMENTOS,www.investeadam.com.br
+293,33.782.571/0001-84,TICKER WEALTH,tickerwealth.com.br/compliance
+294,28.616.998/0001-72,YUNO,www.yunofp.com.br
+295,66.870.661/0001-86,KRW WEALTH MANAGEMENT LTDA,rectorwm.com.br
+296,03.271.868/0001-14,GUIAINVEST WEALTH,https://site.guiainvest.com.br/
+297,66.766.661/0001-30,PEQUOD WEALTH,www.pequodwealth.com.br
+298,47.401.503/0001-32,M2 PARTNERS,www.m2partners.com.br
+299,19.070.094/0001-01,04543-011BASIS POINT CONSULTORIA DE INVESTIMENTOS LTDA.,www.basispoint.com.br
+300,37.980.602/0001-62,CONSIST,https://www.cmfo.com.br/
+301,65.691.071/0001-23,VIRTUS WEALTH,https://virtuswealth.com.br/
+302,52.552.938/0001-18,INTEGRITY WEALTH MANAGEMENT LTDA,https://www.integritywm.com.br/
+303,14.813.501/0001-00,LEMA ECONOMIA & FINANÇAS,www.lemaef.com.br
+304,66.679.348/0001-65,MORE CAPITAL LTDA,www.morecapital.com.br
+305,11.285.621/0001-85,CAPYTAL ASSETS,www.capytalassets.com.br
+306,65.678.301/0001-14,MONTEVERDE CONSULTORIA,www.monteverdeconsultoria.com.br
+307,64.858.685/0001-94,TGM INVESTIMENTOS,www.tgminvestimentos.com.br
+308,61.387.800/0001-00,TRIO GESTÃO DE RECURSOS LTDA.,https://www.triohq.com/pt-br/solutions/investimentos
+309,54.075.657/0001-47,RETORNO ADVISOR,www.retornoadvisor.com
+310,10.463.850/0001-80,SPOROS GESTÃO DE VALOR,http://www.sporos.com
+311,55.492.391/0001-09,MERCER HUMAN RESOURCE CONSULTING,www.mercer.com
+312,62.633.588/0001-78,AMPLUS CAPITAL,www.ampluscapital.com.br
+313,57.930.820/0001-08,CENTER CONSULTORIA,centerwealth.com.br
+314,66.853.886/0001-24,VESSAR INVESTIMENTOS,www.vessar.com.br
+315,61.652.578/0001-17,MONTÉE CONSULT,www.monteeconsult.com.br
+316,12.672.102/0001-32,AZIMUT BRASIL CONSULTORIA,www.azimutbrasil.com.br
+317,54.908.103/0001-83,QUAD CONSULTORIA FINANCEIRA,https://www.quadfinancial.com.br/wealth
+318,58.566.726/0001-76,DAPORT INVEST,https://daportinvest.com.br/
+319,54.403.979/0001-78,CASTELLAN FINANÇAS,www.castellanfinancas.com.br
+320,51.589.963/0001-03,ASCENDA INVESTIMENTOS,www.ascendainvestimentos.com.br
+321,27.298.119/0001-49,GESTOR UM CONSULTORIA,www.gestorum.com.br
+322,46.670.803/0001-54,BLM FINANCIAL,https://blmfinancial.com.br
+323,66.235.039/0001-04,VALMONT CONSULTORIA FINANCEIRA LTDA,www.valmontconsultoria.com.br
+324,53.796.930/0001-60,BRUNEL PARTNERS,www.brunel-partners.com.br
+325,53.217.061/0001-71,XPTO-FO,www.xpto-fo.com
+326,31.747.459/0001-87,ONEOPEN FINANCE,www.oneopen.com.br
+327,57.344.664/0001-95,FINSAGE CONSULTORIA DE VALORES MOBILIÁRIOS LTDA,www.finsage.com.br
+328,20.306.104/0001-36,-,https://www.creditoemercado.com.br
+329,61.842.625/0001-95,VELTOR WEALTH MANAGEMENT LTDA.,www.veltor.com.br
+330,61.513.307/0001-80,VIGILIA CAPITAL,www.vigiliacapital.com.br
+331,08.978.297/0001-76,***,https://www.ufconsult.com.br/
+332,52.331.836/0001-72,SMART FINANCIAL,https://smartfinancial.company/
+333,54.825.697/0001-69,INVESTOR CONSULTORIA LTDA,www.investorbrasil.com
+334,68.128.318/0001-96,LINDEN CAPITAL,www.lindencapital.com.br
+335,54.697.563/0001-00,ASOR INVESTIMENTOS CONSULTORIA E ACONSELHAMENTO LTDA,https://asorinvestimentos.com.br
+336,43.562.649/0001-09,MEU PATRIMÔNIO INVESTIMENTOS,www.meupatrimonio.com
+337,32.168.959/0001-27,-----,www.aplix.com.br
+338,17.585.521/0001-50,VWS Capital,https://vwscapital.com.br/
+339,16.847.061/0001-29,MENSURAR INVESTIMENTOS,www.mensurarinvestimentos.com.br
+340,36.608.262/0001-80,FH ADVISORS,www.fhadvisors.com.br
+341,38.239.753/0001-27,APEN CAPITAL CONSULTORIA DE VALORES MOBILIÁRIOS LTDA,www.apencapital.com.br
+342,54.081.291/0001-19,ACANTO INVEST CONSULTORIA DE INVESTIMENTOS,www.acantoinvest.com.br
+343,48.825.089/0001-51,ADVENTO CAPITAL CONSULTORIA LTDA,www.adventocapital.com.br
+344,37.686.925/0001-48,SAVVY INVESTIMENTOS,www.savvyinvestimentos.com.br
+345,05.189.991/0001-16,PLANCORP CAPITAL,www.plancorp.com.br
+346,46.968.315/0001-28,IDE CAPITAL CONSULTORIA DE INVESTIMENTOS LTDA,www.idecapital.com.br
+347,65.713.092/0001-00,ESSENTIA CONSELHO PATRIMONIAL,https://www.essentiaconselho.com.br/
+348,47.226.850/0001-76,MIRADOURO,www.miradouro.co
+349,60.672.054/0001-25,VELTRYA INVESTIMENTOS,www.veltryainvestimentos.com.br
+350,67.745.884/0001-84,LION CONSULTORIA DE INVESTIMENTOS LTDA,www.lionconsultoria.com.br
+351,55.786.205/0001-36,LOYALTY WEALTH SERVICES,www.loyaltyws.com.br
+352,63.116.575/0001-94,OSIRA MULTI-FAMILY OFFICE,www.osira.com.br
+353,43.838.134/0001-99,UNITED | UNITED MULTI FAMILY OFFICE,http://www.unitedmfo.com.br/
+354,52.196.386/0001-52,COPAÍBA ADVISORS,https://copaibaadvisors.com.br/
+355,40.815.594/0001-03,POLYFACE INVEST S.A.,https://www.polyface.com.br/
+356,21.990.572/0001-35,EXIMIA CAPITAL,www.eximiacapital.com.br
+357,65.780.522/0001-07,VIESA CAPITAL,www.viesacapital.com.br
+358,49.939.165/0001-12,HEDGE AGRO CONSULTORIA,https://hedgeagro.com.br/
+359,60.898.919/0001-76,GUIBOR CONSULTORIA WEALTH,https://guiborconsultoria.com.br/
+360,46.177.090/0001-91,NUI CONSULTORIA EMPRESARIAL,www.gruponui.com.br
+361,34.687.728/0001-55,BENCUIDAT,www.bencuidat.com.br
+362,66.861.821/0001-20,VETRIS CONSULTORIA,www.vetrisconsultoria.com.br
+363,55.064.231/0001-50,SEIKO PARTNERS,www.seikopartners.com.br
+364,01.999.873/0001-12,ÂMBAR CONSULTORIA DE INVESTIMENTOS,https://mackimascarello.wixsite.com/ambarconsultoria
+365,46.095.088/0001-73,ZELV WEALTH,https://zelv.com.br/
+366,61.159.954/0001-36,STARKE CAPITAL,www.starkecapital.com.br
+367,55.457.528/0001-86,GOVERNANÇA CONSULTORIA EM INVESTIMENTOS,www.governancainvestimentos.com.br
+368,52.256.710/0001-80,CGC INVESTIMENTOS,www.cgcinvestimentos.com.br
+369,50.245.935/0001-06,WILLIS TOWERS WATSON,https://www.willistowerswatson.com/
+370,55.258.919/0001-71,NAHU INVESTIMENTOS,www.nahu.com.br
+371,37.258.078/0001-10,PASSER CONSULTORIA,www.passerconsultoria.com.br
+372,63.608.534/0001-15,STOCK CAPITAL MULTI FAMILY OFFICE LTDA.,https://stockcapitalmfo.com.br/
+373,05.365.401/0001-69,--,www.valorconsult.com.br
+374,53.063.062/0001-09,GUEX CONSULTORIA,https://guex.com.br
+375,66.430.847/0001-14,MERIDIAN WEALTH MANAGEMENT LTDA,http://meridianwealth.com.br
+376,65.609.925/0001-80,ORVYA CONSULTORIA DE INVESTIMENTOS,www.orvyainvestimentos.com.br
+377,43.891.101/0001-02,BWM FAMILY OFFICE,www.bwmfo.com.br
+378,28.678.702/0001-48,ITAUNA ADVISORS,https://www.itaunaconsultoria.com.br/
+379,24.128.377/0001-99,SONORA CAPITAL,http://www.sonoracapital.com.br/
+380,09.238.885/0001-36,AWG Advisory LTDA,www.awgadvisory.com.br
+381,54.777.753/0001-37,DUOP CONSULTORIA,www.duop.com.br
+382,56.092.858/0001-88,CLUBE DO VALOR BANKERS,https://clubedovalor.com.br/cdvbankers/manuais/
+383,63.461.356/0001-42,TRION CAPITAL CONSULTORIA,www.trioncapital.com.br
+384,13.056.344/0001-64,ALBION CAPITAL,www.albioncapital.com.br
+385,19.329.436/0001-57,F8A CONSULTORIA FINANCEIRA EIRELI,www.f8a.com.br
+386,55.073.765/0001-43,SANTO CAPITAL,santocapital.com.br
+387,54.014.286/0001-93,BLACK WALLET CONSULTORIA DE INVESTIMENTOS,https://grupoblackwallet.com.br/
+388,62.244.175/0001-00,NEXUS CAPITAL BRASIL,www.nexuscapitalbrasil.com.br
+389,22.093.128/0001-80,IBRRA CONSULTORIA FINANCEIRA,www.ibbra.com.br
+390,26.753.773/0001-32,TORI 21 CONSULTORIA,www.vitainvestimentos.com
+391,50.534.764/0001-35,VINDE WEALTH,www.vindewealth.com
+392,36.325.279/0001-20,LADYBANK,www.ladybank.com.br
+393,26.341.935/0001-25,LDB CONSULTORIA FINANCEIRA LTDA - EPP,https://www.ldbsys.com.br
+394,46.846.180/0001-28,IAAS,www.iaasbr.com
+395,54.953.530/0001-83,BRAZIL WEALTH,www.brazilwealth.com.br/compliance
+396,37.199.552/0001-80,SAMESIDE CONSULTORIA DE INVESTIMENTOS LTDA,www.sameside.com.br
+397,54.337.612/0001-01,CICLOS CAPITAL,www.cicloscapital.com.br
+398,22.828.968/0001-43,REAL ESTATE CAPITAL,www.rec-gestao.com
+399,49.592.362/0001-08,ZANELLA WEALTH,zanellawealth.com.br
+400,60.952.729/0001-90,VAROS CONSULTORIA,https://varos.com.br/consultoria
+401,12.908.862/0001-04,3J CONSULTORIA,www.3jcapital.com.br
+402,66.284.880/0001-83,VERSO CONSULTORIA DE INVESTIMENTOS - WEALTH MANAGEMENT LTDA.,https://versowealth.com.br/
+403,48.059.044/0001-13,EVERGREEN INVESTIMENT,www.evergreeninvestments.com.br
+404,59.178.199/0001-95,B8 PARTNERS CONSULTORIA FINANCEIRA LTDA,http://b8.partners/
+405,59.302.413/0001-73,RATING A CONSULTORIA DE INVESTIMENTOS,ratinga.com.br
+406,63.412.177/0001-15,INOVE WEALTH MANAGEMENT LTDA,www.inovewm.com.br
+407,51.118.670/0001-48,CAPITAL WEALTH,www.capitalwealth.com.br
+408,58.348.417/0001-20,META,www.metawealth.com.br
+409,44.826.175/0001-28,PEGASUS CAPITAL,www.pegasuscap.com.br
+410,55.060.267/0001-66,PROSPERIDAS CONSULTORIA EM INVESTIMENTOS LTDA.,www.prosperidas.com/site/
+411,59.676.609/0001-28,FINACTA CONSULTORIA,www.finacta.com.br
+412,35.402.120/0001-08,SPACEMONEY CONSULTORIA DE INVESTIMENTOS,consultoria.spacemoney.com.br (em construção)
+413,04.931.816/0001-90,MILENIUM CAPITAL CONSULTORIA E GESTÃO S.A.,www.milenium.adm.br
+414,57.687.619/0001-33,SEVERO CAPITAL,www.severocapital.com.br
+415,34.369.665/0001-99,INVESTING META,https://www.investingmeta.com.br/
+416,53.241.492/0001-73,TRIAX,www.traxininvestimentos.com
+417,58.291.719/0001-09,LUMEN INVESTIMENTOS,lumeninvestimentos.com.br
+418,08.925.716/0001-01,DIVERSINVEST,www.diversinvest.com.br
+419,63.451.906/0001-42,ALTARA CAPITAL,https://altaracapital.com.br
+420,52.840.115/0001-98,UNION INVESTIMENTOS,www.unioninvestimentos.com
+421,13.424.753/0001-76,-,www.afaf.com.br
+422,42.196.095/0001-00,ARTON ADVISORS,http://www.artonadvisors.com.br/
+423,54.559.657/0001-12,RC WEALTH,www.robcorrea.com.br/wealth
+424,63.435.769/0001-52,MONTE CARLO MULTI FAMILY OFFICE,www.montecarlomfo.com
+425,19.559.660/0001-35,GRCB QUARK,www.grcbcapital.com.br
+426,05.495.939/0001-98,KANSAI CONSULTORES DE VALORES MOBILIÁRIOS LTDA.,http://kansai.net.br
+427,64.159.523/0001-68,AKROS CONSULTORIA,https://akrosconsultoria.com.br/
+428,62.765.124/0001-15,AAWZ WEALTH,https://www.aawzwealth.com.br
+429,55.560.073/0001-20,FERMENTO WEALTH,www.fermentowealth.com
+430,67.511.611/0001-75,TALLINN CAPITAL CONSULTORIA DE INVESTIMENTOS LTDA,www.tallinncapital.com.br
+431,40.087.677/0001-23,ECONOMIRNA,https://mwresearch.com.br/consultoria/
+432,55.046.525/0001-50,TROPEA INVESTIMENTOS,https://www.tropeainvestimentos.com.br
+433,46.895.578/0001-54,MONTE AZUL GESTÃO DE RECURSOS LTDA.,http://www.monteazulmfo.com.br/
+434,53.186.319/0001-10,AKWS LTDA.,www.akws.com.br
+435,05.784.884/0001-36,INVESTPORT GESTÃO E CONSULTORIA DE INVESTIMENTOS LTDA,www.investport.com.br
+436,45.831.975/0001-08,A4Y ANÁLISES E CONSULTORIA DE VALORES MOBILIÁRIOS LTDA. - A4Y INVESTIMENTOS,https://www.a4y.com.br/
+437,61.591.540/0001-81,GRUBERT INVESTIMENTOS,grubertinvestimentos.com.br
+438,42.643.373/0001-20,SEE INVESTIMENTOS,http://www.vegagp.com.br/
+439,42.653.971/0001-80,SHARKE CONSULTORIA DE INVESTIMENTOS MOBILIARIOS,https://www.sharke.com.br
+440,56.964.932/0001-09,ZERO MARKETS BRASIL,www.zeromarketsbrasil.com.br
+441,18.309.162/0001-71,FI FACIL INVESTIMENTOS,https://fifacilinvestimentos.com.br/
+442,45.450.380/0001-02,MTG CONSULTORIA EM INVESTIMENTOS LTDA.,www.mtgconsultoria.com.br
+443,51.410.571/0001-35,TRUPP,www.truppinvestimentos.com.br
+444,40.008.771/0001-40,-----,www.rpwm.com.br
+445,67.043.640/0001-50,PILAR PARTNERS,https://pilarpartners.com.br
+446,53.753.605/0001-10,CARE,www.caremfo.com.br
+447,53.655.362/0001-87,AVEL CONSULTORIA,https://avel.me/consultoria/
+448,62.134.405/0001-70,BAROQUE,www.baroque.com.br
+449,60.940.286/0001-17,ZELEN CONSULTORIA DE INVESTIMENTOS,www.zelen.com.br
+450,42.249.747/0001-28,CLUBE DO VALOR CONSULTORIA,https://clubedovalor.com.br/
+451,53.075.034/0001-01,RC WEALTH CONSULTORIA LTDA,http://rcwm.com.br/
+452,33.479.023/0001-80,CITIBANK - BANCO,www.citibank.com.br
+453,15.555.601/0001-38,B.SIDE WEALTH MANAGEMENT CONSULTORIA E GESTÃO DE RECURSOS LTDA,https://bsideinvestimentos.com.br/wealth-management/
+454,47.820.404/0001-95,CRESCENTO PLANEJAMENTO E INVESTIMENTO,https://www.crescento.com.br/
+455,62.295.192/0001-68,OPENSOLO CAPITAL,www.opensolocapital.com
+456,68.272.337/0001-91,METRIC AI CONSULTORIA DE INVESTIMENTOS LTDA.,https://www.metric-invest.com.br/
+457,52.237.218/0001-68,1 TO 1 CAPITAL,http://www.1to1capital.com.br
+458,25.248.367/0001-50,VÊNETO FAMILY OFFICE,https://www.venetomfo.com.br/
+459,61.118.566/0001-07,VITAE WEALTH,www.vitaewealth.com
+460,67.268.093/0001-00,SCENIUM BRASIL,https://www.scenium.io/
+461,36.317.053/0001-88,ASTERA,https://asteraplanejamento.com.br/
+462,68.955.227/0001-24,RENTAINVEST CONSULTORIA DE INVESTIMENTOS LTDA.,https://rentainvest.com.br/consultoria/
+463,12.448.812/0001-83,PROGREDIR INVESTIMENTOS,www.progredirinvestimentos.com.br
+464,54.267.244/0001-64,GORDON MULTI FAMILY OFFICE,www.gordoncapital.com.br
+465,55.577.690/0001-38,M7 CONSULTORIA DE INVESTIMENTOS,https://multi7.com.br/wealth
+466,03.494.061/0001-40,LUZ ENGENHARIA FINANCEIRA LTDA,www.luz-ef.com
+467,40.701.503/0001-09,PRINZ CAPITAL,prinzcapital.com.br
+468,68.950.566/0001-18,ALMAR ADVISORY,almaradvisory.com.br
+469,50.785.727/0001-08,POTENZA MFO,www.potenzamfo.com.br
+470,58.188.528/0001-16,AUMA CAPITAL LTDA,www.aumacapital.com.br
+471,37.456.586/0001-03,LOMBARD ODIER BRASIL,https://www.lombardodier.com/legal/americas
+472,48.759.689/0001-69,MONTE BRANCO WEALTH,www.montebrancowealth.com.br
+473,65.535.990/0001-08,EMERIS CONSULTORIA DE INVESTIMENTOS LTDA,www.emeris.com.br
+474,62.618.543/0001-24,BEIT INVESTIMENTOS LTDA.,https://beitinvestimentos.com/
+475,32.810.869/0001-98,OIKOS FAMILY OFFICE,www.oikosmfo.com
+476,30.086.047/0001-80,INFINITY,www.infinityinvest.com.br
+477,51.271.144/0001-13,TRUST 61 PRIVATE,www.trust61private.com.br
+478,61.944.944/0001-01,ESPARTA INVEST LTDA,https://www.ramacini.com/espartainvest
+479,56.029.456/0001-39,SALLSA CONSULTORIA E PLANEJAMENTO PATRIMONIAL LTDA.,https://sallsa.com.br/
+480,40.904.853/0001-72,SAPIENS CONSULTORIA DE INVESTIMENTOS LTDA,www.sapiensci.com.br
+481,54.618.407/0001-06,GS INVESTIMENTOS,https://gsmfo.com.br
+482,63.564.081/0001-72,CAPOLI MULTIFAMILY OFFICE,www.capolimfo.com.br
+483,11.882.190/0001-34,SMI,www.smiconsult.com.br
+484,43.556.394/0001-71,INFINITY4U,https://www.infinity4u.com.br/
+485,35.725.184/0001-31,HORIZONTE CAPITAL,https://hztcapital.com/
+486,66.853.639/0001-28,NOMMA CAPITAL CONSULTORIA DE INVESTIMENTOS LTDA,nommacapital.com.br
+487,28.097.963/0001-74,ARAM CAPITAL CONSULTORIA DE VALORES MOBILIÁRIOS LTDA.,www.aramcapital.com.br
+488,59.776.982/0001-50,HATTERAS CONSULTORIA EM INVESTIMENTOS,www.hatteras.com.br
+489,27.383.813/0001-64,SIMPLA INVEST WEALTH,https://simplainvest.com.br/
+490,64.119.005/0001-10,LUDO WEALTH MANAGEMENT LTDA,https://www.ludogroup.com.br/
+491,61.454.080/0001-40,VOCARE WEALTH,www.vocarewealth.com.br
+492,40.017.583/0001-88,AETERNUS MULTI FAMILY OFFICE,www.aeternus.com.br
+493,38.234.170/0001-03,-----,www.momainvestimentos.com.br
+494,06.039.551/0001-45,Capitânia Advisors S/A,www.capitaniaadvisors.com.br
+495,25.161.602/0001-51,KKM ASSESSORIA E CONSULTORIA FINANCEIRA LTDA.,www.kkmpartners.com.br
+496,68.873.574/0001-08,SK CONSULTORIA PATRIMONIAL LTDA,skpatrimonial.com
+497,34.138.610/0001-78,ICATU SERVIÇOS E CONSULTORIA,www.icatuservicoseconsultoria.com.br
+498,65.922.050/0001-71,MONVANTI CONSULTORIA,https://monvanti.com/
+499,11.431.155/0001-07,EMPIRICUS,https://www.empiricus.com.br/
+500,47.084.094/0001-98,PTR CAPITAL,www.ptr.capital
+501,66.642.609/0001-72,BE STRATEGY CONSULTORIA EM VALORES MOBILIARIOS LTDA,bestrategy.com.br
+502,57.641.118/0001-16,PRAXES GESTÃO PATRIMONIAL,www.praxes.com.br
+503,11.519.438/0001-05,UBS BRASIL ADMINISTRADORA DE VALORES MOBILIÁRIOS LTDA.,https://www.ubs.com/br/pt.html
+504,49.479.036/0001-99,AUVP CONSULTORIA,https://auvpcapital.com.br/
+505,42.912.336/0001-70,SAROH CONSCIÊNCIA FINANCEIRA,https://saroh.com.br/
+506,52.065.311/0001-32,CIMO FAMILY OFFICE,www.cimofamilyoffice.com/
+507,69.002.610/0001-20,LIBERTE CAPITAL LTDA,www.libertecapital.com.br
+508,27.289.005/0001-32,ALCARAZ CONSULTING,www.alcarazconsulting.com
+509,51.654.190/0001-00,AGGIU WEALTH MANAGEMENT,aggiu.com.br
+510,63.542.490/0001-78,AG CAPITAL,https://krysfinc.com.br/
+511,29.200.473/0001-14,FAROS MFO,https://farosmfo.com.br
+512,31.541.066/0001-12,PRÓPRIO CONSULTORIA,www.proprioconsultoria.com.br
+513,67.557.832/0001-84,JCWM FINANCIAL ADVISORY,https://jcwm.com.br/
+514,26.228.525/0001-72,SUNO RESEARCH,www.suno.com.br
+515,43.765.033/0001-35,RAGX CONSULTORIA LTDA.,https://ragx.com.br/
+516,61.603.456/0001-30,GMAP CAPITAL,www.gmapcapital.com.br
+517,53.666.989/0001-33,LIBERTA WEALTH,www.libertawealth.com.br
+518,47.106.470/0001-06,BALLAST CAPITAL LTDA.,https://www.ballastwpc.com.br/
+519,26.031.087/0001-58,JUROS E BOLSA,jurosebolsa.com.br
+520,67.520.955/0001-40,FINAVERA CAPITAL,https://finavera.com.br/
+521,64.204.661/0001-11,SERENO CAPITAL,https://serenocapital.com.br/
+522,14.261.603/0001-51,REFERÊNCIA GESTÃO E RISCO LTDA,https://referencia.poa.br/
+523,41.468.144/0001-54,LDX CAPITAL,https://ldxcapital.com.br/educacional
+524,67.318.891/0001-08,GD WEALTH MANAGEMENT,www.gdwealth.com.br
+525,26.261.572/0001-18,ALVA CONSULTORIA DE INVESTIMENTOS LTDA,www.alvamfo.com.br
+526,61.401.842/0001-40,FA CAPITAL,https://facapital.com.br/
+527,19.807.960/0001-96,ASA ASSET MANAGEMENT LTDA.,asa.com.br
+528,56.315.385/0001-30,WAGNER INVESTIMENTOS,www.wia.com.br
