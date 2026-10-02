@@ -1,0 +1,113 @@
+# Livro de codigos visuais do veto de distincao (P-162) -- DADO (P2), FECHADO antes da R3.
+# Decisao dele (27/09/2026): se a direcao vencedora pela regra 17a IMITAR o codigo visual
+# dominante de uma categoria concorrente auditada na rodada 3 de marcas (R3), a escolha volta
+# para ele, com criterio escrito; a escolha da direcao so sai com a R3 fechada.
+# aa-a (27/09/2026, dele): o codigo dominante e contado sobre as QUATRO variaveis centrais.
+# ac-a (02/10/2026, dele): as categorias concorrentes ficam FECHADAS aqui, e nao na R3 -- quem
+# escolhesse categoria depois de ver a classificacao de E, C e D poderia escolher o veto.
+# O sha256 deste arquivo esta no pre-registro final. NADA daqui se ajusta depois de a R3
+# comecar: mudar um byte e pre-registro novo, e so vale se for antes da primeira marca
+# classificada. O classificador e tools/codigos_visuais.py (o mesmo para as direcoes e as marcas).
+versao: 1
+data: 2026-09-27
+
+# O que se classifica: a tela principal (a primeira depois do login, ou a pagina inicial do
+# app quando nao ha login), num telefone de 390 px de largura, sem rolar. Uma captura por marca.
+unidade: "a primeira tela do app, em 390 px de largura, sem rolar"
+
+variaveis:
+  fundo:
+    central: true
+    valores: [claro, escuro]
+    como_medir: "a cor de maior area na captura (moda dos pixels); luminancia relativa da WCAG 2.2"
+    regra: "claro se a luminancia relativa for maior que 0.179; escuro se for menor ou igual"
+    porque_0179: "e a luminancia em que texto preto e texto branco tem o mesmo contraste: acima dela, o preto contrasta mais"
+    limiar_luminancia: 0.179
+
+  matiz:
+    central: true
+    como_medir: "a cor de preenchimento do botao principal; se o botao for vazado, a cor da borda; se nao houver botao, a cor cromatica de maior area (saturacao HSL >= 0.15)"
+    regra: "neutro se a saturacao HSL for menor que 0.15; senao, a faixa que contem o matiz HSL (inicio incluido, fim excluido)"
+    saturacao_minima: 0.15
+    # O circulo cromatico em doze setores de 30 graus, centrados nas primarias, secundarias e
+    # terciarias (vermelho em 0). Nenhuma faixa foi desenhada olhando E, C ou D.
+    faixas:
+      - {nome: vermelho, de: 345, ate: 15}
+      - {nome: laranja, de: 15, ate: 45}
+      - {nome: amarelo, de: 45, ate: 75}
+      - {nome: lima, de: 75, ate: 105}
+      - {nome: verde, de: 105, ate: 135}
+      - {nome: verde_agua, de: 135, ate: 165}
+      - {nome: ciano, de: 165, ate: 195}
+      - {nome: celeste, de: 195, ate: 225}
+      - {nome: azul, de: 225, ate: 255}
+      - {nome: violeta, de: 255, ate: 285}
+      - {nome: magenta, de: 285, ate: 315}
+      - {nome: rosa, de: 315, ate: 345}
+    valores: [neutro, vermelho, laranja, amarelo, lima, verde, verde_agua, ciano, celeste, azul, violeta, magenta, rosa]
+
+  familia_do_titulo:
+    central: true
+    valores: [serifa, sem_serifa, monoespacada]
+    como_medir: "a fonte do TEXTO DE MAIOR CORPO da tela, fora o logotipo (nao o que um arquivo chama de titulo)"
+    regra: "monoespacada se todos os caracteres tem a mesma largura; serifa se as hastes terminam em serifa; sem_serifa nos outros casos (fonte decorativa cai pela presenca de serifa)"
+
+  raio:
+    central: true
+    valores: [reto, pequeno, grande]
+    como_medir: "o raio de canto do botao principal, em px numa tela de 390 px; sem botao, o do cartao principal"
+    regra: "reto ate 2 px; pequeno de 3 a 8 px; grande a partir de 9 px (pilula inclusive)"
+    limites_px: {reto_ate: 2, pequeno_ate: 8}
+
+  densidade:
+    central: false
+    valores: [baixa, media, alta]
+    como_medir: "conta os BLOCOS de informacao visiveis sem rolar"
+    regra_de_contagem: "1 por paragrafo ou titulo (texto continuo, quantas linhas tiver); 1 por par rotulo-valor numa linha; 1 por botao; 1 por selo ou etiqueta de estado; 1 por imagem ou ilustracao; 1 pela barra de navegacao inteira; 1 por item de cabecalho que nao seja o logotipo; o logotipo conta 0"
+    regra: "baixa ate 8 blocos; media de 9 a 15; alta a partir de 16"
+    limites: {baixa_ate: 8, media_ate: 15}
+    # Declarado: os limites foram escritos DEPOIS de contar E, C e D (12, 12 e 13 blocos) e
+    # ANTES de qualquer marca da R3. A densidade nao entra no veto (aa-a), so e relatada.
+
+  botao:
+    central: false
+    valores: [cheio, vazado]
+    como_medir: "o botao principal (a acao que a tela pede)"
+    regra: "cheio se o fundo do botao for de cor diferente do fundo da tela; vazado se so a borda ou o texto tiverem cor. Sem botao: vazado"
+
+veto:
+  categoria: "uma das categorias_concorrentes abaixo, uma so por marca: a do app que se classifica"
+  # ac-a: lista fechada. Os exemplos vem das rodadas 1 e 2 e so ilustram a fronteira de cada
+  # categoria: NAO sao a lista de marcas da R3. Marca com categoria fora desta lista e das
+  # categorias_fora_do_veto reprova o classificador (P1: valor fora da lista falha alto).
+  categorias_concorrentes:
+    banco_tradicional: "banco de varejo com agencia (Itau, Bradesco, Banco do Brasil, Santander, Caixa)"
+    banco_digital: "banco sem agencia, de app; o investimento dentro do app do banco conta aqui (Nubank, Inter, C6, Neon)"
+    corretora: "corretora ou banco de investimento com app proprio de investimento para pessoa fisica (XP, Rico, Clear, Toro, BTG Pactual, Genial)"
+    gestora_e_private: "gestora de recursos ou private banking (Verde, Dynamo, SPX, Itau Private)"
+    pagamentos: "carteira ou conta de pagamento (PicPay, Mercado Pago, PagBank)"
+    consolidador: "app de acompanhamento de carteira (Gorila, Kinvo)"
+    casa_de_analise_e_educacao: "casa de analise ou marca de educacao financeira (Empiricus, Suno, Me Poupe!, Primo Rico)"
+  # ac-a: as referencias de sentimento (rodada 2: SBB, Volvo) podem ser auditadas na R3, mas
+  # nao sao concorrentes: entram classificadas e nao acionam o veto.
+  categorias_fora_do_veto: [referencia_de_sentimento]
+  n_minimo_de_marcas: 5
+  codigo_dominante: "a combinacao dos valores das quatro variaveis centrais presente em pelo menos metade das marcas classificadas da categoria (empate de duas combinacoes na metade exata: as duas sao dominantes)"
+  fracao_minima: 0.5
+  imitar: "a direcao partilha os quatro valores centrais com o codigo dominante de alguma categoria"
+  consequencia: "se a direcao vencedora pela regra 17a imitar, a escolha volta para ele, com criterio escrito; categoria sem codigo dominante (ou com menos de 5 marcas) nao aciona o veto"
+  quando: "a escolha da direcao so sai com a R3 fechada"
+
+# A classificacao de E, C e D, feita em 27/09/2026 ANTES da R3 comecar, pelas regras acima.
+# Os valores medidos saem dos tokens e do HTML dos estimulos (tools/codigos_visuais.py os le
+# e o teste confere); a densidade e contagem na imagem, com os blocos listados.
+direcoes:
+  E:
+    densidade_blocos: 12
+    densidade_lista: "data; rotulo da secao; selo Parcial; titulo; frase; linha Valor; linha Custo; nota da B3; Executei; Por que; Falar com o MEOL; barra de navegacao"
+  C:
+    densidade_blocos: 12
+    densidade_lista: "data; rotulo da secao; selo Parcial; titulo; frase; linha Valor; linha Custo; nota da B3; Executei; Por que; Falar com o MEOL; barra de navegacao"
+  D:
+    densidade_blocos: 13
+    densidade_lista: "data; ilustracao do cartao; rotulo da secao; selo Parcial; titulo; frase; linha Valor; linha Custo; nota da B3; Executei; Por que; Falar com o MEOL; barra de navegacao"

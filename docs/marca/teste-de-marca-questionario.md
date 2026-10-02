@@ -1,5 +1,12 @@
 # Teste de marca — o questionário, com o texto exato de cada tela
 
+> **SUPERADO em 27/09/2026, sem ter sido usado: nenhum convite saiu.** Ele trocou o Google
+> Forms por uma página própria (Vercel e Supabase, S6) e acrescentou o veto de distinção
+> (fila, "Decisões dele, 27/09/2026, trazidas pelo prompt da S5 v2"). Vale
+> [`docs/marca/teste-de-marca/preregistro-final.md`](teste-de-marca/preregistro-final.md).
+> Este questionário fica como registro e não se edita; o vigente é
+> [`teste-de-marca/questionario.yaml`](teste-de-marca/questionario.yaml).
+
 *27/09/2026, S5. Parte do pré-registro final (`preregistro-teste-de-marca-final.md`), que
 grava o sha256 deste arquivo. **Mudar uma vírgula depois do merge é questionário novo**, e o
 pré-registro deixa de cobri-lo. A seção 9 diz o que mudou por causa do ensaio.*

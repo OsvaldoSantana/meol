@@ -19,7 +19,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import analise_teste_marca as AT  # noqa: E402
 
 RAIZ = AT.RAIZ
-QUESTIONARIO = os.path.join(RAIZ, "docs", "marca", "teste-de-marca-questionario.md")
 
 
 def _pessoas(medias: dict[str, dict[str, float]], n: int = 40, semente: int = 1,
@@ -34,7 +33,7 @@ def _pessoas(medias: dict[str, dict[str, float]], n: int = 40, semente: int = 1,
             for ve, fonte in (("base", medias), ("rota", rota or medias)):
                 r.notas[(d, ve)] = {
                     esc: int(np.clip(round(fonte[d].get(esc, 4) + rng.integers(-1, 2)), 1, 7))
-                    for esc in AT.ESCALAS.values()}
+                    for esc in AT.ESCALAS}
         out.append(r)
     return out
 
@@ -175,123 +174,145 @@ def test_menos_de_duas_pessoas_nao_decide():
     assert AT.decidir([])["resultado"] == "SEM_DADOS"
 
 
-# --- o CSV do Forms, a janela e a privacidade -------------------------------------------------
+# --- a exportacao da pagina, a janela e a privacidade ------------------------------------------
 
-def _csv_sintetico(path, linhas):
-    cab = ["Carimbo de data/hora"] + AT.colunas_esperadas()
+def _linha(versao, aberta, concluida, consent="sim", filtro="sim", amigo="nao", nota=5):
+    """Uma linha do contrato: notas iguais em todas as escalas e telas (so a leitura importa)."""
+    val = {"id_resposta": f"r{versao}{aberta}{concluida}", "versao": str(versao),
+           "aberta_em": aberta, "concluida_em": concluida, "consentimento": consent,
+           "filtro": filtro, "amigo": amigo, "pronuncia": ""}
+    out = []
+    for c in AT.colunas_esperadas():
+        if c in val:
+            out.append(val[c])
+        elif c.endswith("_lembra"):
+            out.append("")
+        else:
+            out.append("" if not concluida else str(nota))
+    return out
+
+
+def _csv(path, linhas, cabecalho=None):
     with io.open(path, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
-        w.writerow(cab)
-        for carimbo, consent, filtro, amigo, nota in linhas:
-            w.writerow([carimbo, consent, filtro, amigo] + [str(nota)] * (6 * len(AT.ESCALAS)))
+        w.writerow(cabecalho or AT.colunas_esperadas())
+        w.writerows(linhas)
 
 
-def test_janela_de_21_dias_e_filtros(tmp_path):
-    """h-A: do dia 1 ao dia 21, 23:59:59; fora da janela, sem consentimento ou fora do filtro
-    ficam no CSV e fora da analise."""
-    ini, fim = AT.janela(dt.date(2026, 10, 5))
-    assert (ini, fim) == (dt.datetime(2026, 10, 5, 0, 0, 0), dt.datetime(2026, 10, 25, 23, 59, 59))
-    p = tmp_path / "versao-3.csv"
-    _csv_sintetico(p, [
-        ("05/10/2026 00:00:00", "Concordo", "Sim", "N\u00e3o", 5),
-        ("25/10/2026 23:59:59", "Concordo", "Sim", "Sim", 5),
-        ("26/10/2026 00:00:00", "Concordo", "Sim", "N\u00e3o", 5),
-        ("06/10/2026 10:00:00", "N\u00e3o concordo", "", "", 5),
-        ("06/10/2026 10:00:00", "Concordo", "N\u00e3o", "N\u00e3o", 5),
+def test_janela_de_21_dias_filtros_e_abandono_por_versao(tmp_path):
+    """h-A: do dia 1 ao dia 21, inclusive, pelo dia da conclusao. Fora da janela, sem
+    consentimento ou fora do filtro: guardada no CSV e fora da analise. ab-a: abandono conta
+    por versao."""
+    assert AT.janela(dt.date(2026, 10, 5)) == (dt.date(2026, 10, 5), dt.date(2026, 10, 25))
+    p = tmp_path / "respostas.csv"
+    _csv(p, [
+        _linha(3, "2026-10-05", "2026-10-05"),                      # dia 1: entra
+        _linha(3, "2026-10-25", "2026-10-25", amigo="sim"),         # dia 21: entra
+        _linha(1, "2026-10-25", "2026-10-26"),                      # abriu no 21, concluiu no 22
+        _linha(2, "2026-10-04", "2026-10-04"),                      # antes do dia 1
+        _linha(4, "2026-10-06", "2026-10-06", consent="nao"),
+        _linha(5, "2026-10-06", "2026-10-06", filtro="nao"),
+        _linha(6, "2026-10-06", ""),                                 # abandono
+        _linha(6, "2026-10-07", ""),                                 # abandono
     ])
-    rs, c = AT.ler_versao(str(p), dt.date(2026, 10, 5))
-    assert c == {"linhas": 5, "sem_consentimento": 1, "fora_do_filtro": 1,
-                 "fora_da_janela": 1, "validas": 2}
+    rs, c = AT.ler(str(p), dt.date(2026, 10, 5))
+    assert (c["aberturas"], c["abandonos"], c["sem_consentimento"], c["fora_do_filtro"],
+            c["fora_da_janela"], c["validas"]) == (8, 2, 1, 1, 2, 2)
+    assert c["abandonos_por_versao"][6] == 2 and c["aberturas_por_versao"][3] == 2
     assert [r.versao for r in rs] == [3, 3] and [r.amigo for r in rs] == [False, True]
     # versao 3 = C, E, D: a tela 1 e a C na base, a tela 4 e a C com rota bloqueada
     assert set(rs[0].notas) == {(d, v) for d in "CED" for v in ("base", "rota")}
 
 
-def test_cabecalho_errado_reprova(tmp_path):
-    p = tmp_path / "versao-1.csv"
-    p.write_text("Carimbo de data/hora,Outra coisa\n", encoding="utf-8")
+def test_mutacao_resposta_fora_da_janela_nao_pode_entrar(tmp_path, monkeypatch):
+    """Se a janela fosse ignorada, a resposta do dia 22 entraria: a guarda tem de ver."""
+    p = tmp_path / "respostas.csv"
+    _csv(p, [_linha(1, "2026-10-05", "2026-10-05"), _linha(1, "2026-10-26", "2026-10-26")])
+    assert AT.ler(str(p), dt.date(2026, 10, 5))[1]["validas"] == 1
+    monkeypatch.setattr(AT, "janela", lambda inicio: (dt.date(1900, 1, 1), dt.date(2999, 1, 1)))
+    assert AT.ler(str(p), dt.date(2026, 10, 5))[1]["validas"] == 2
+
+
+def test_tela_k_vai_para_a_direcao_da_ordem_da_versao(tmp_path):
+    """g-B: a tela k da versao v e a direcao ORDENS[v][(k-1) % 3]; base ate a 3, rota depois."""
+    p = tmp_path / "respostas.csv"
+    linha = _linha(5, "2026-10-05", "2026-10-05")          # versao 5 = D, E, C
+    ix = AT.colunas_esperadas().index
+    linha[ix("t1_confiavel")] = "1"                         # tela 1: D base
+    linha[ix("t5_confiavel")] = "7"                         # tela 5: E rota
+    _csv(p, [linha])
+    r = AT.ler(str(p), dt.date(2026, 10, 5))[0][0]
+    assert r.notas[("D", "base")]["confiavel"] == 1 and r.notas[("E", "rota")]["confiavel"] == 7
+
+
+def test_cabecalho_fora_do_contrato_reprova(tmp_path):
+    p = tmp_path / "respostas.csv"
+    cab = AT.colunas_esperadas()
+    _csv(p, [], cabecalho=cab[:-1] + ["ip"])
     with pytest.raises(SystemExit):
-        AT.ler_versao(str(p), None)
+        AT.ler(str(p), None)
+    assert AT.conferir_cabecalho(list(reversed(cab))) == ["colunas fora da ordem do contrato"]
 
 
-def test_csv_dentro_do_repositorio_e_fora_do_ignore_e_recusado():
-    """Resposta real nunca entra no git: um versao-N.csv que o git nao ignora e recusado."""
-    assert AT._dentro_do_git_sem_ignorar(os.path.join(RAIZ, "docs", "versao-1.csv"))
-    assert not AT._dentro_do_git_sem_ignorar(os.path.join(RAIZ, "data", "teste-marca",
-                                                          "versao-1.csv"))
+def test_contrato_nao_tem_coluna_que_identifica():
+    proibidas = {"ip", "email", "e_mail", "nome", "user_agent", "hora"}
+    assert not proibidas & {c.lower() for c in AT.colunas_esperadas()}
 
 
-def test_nenhuma_resposta_real_no_repositorio():
-    """Ate o teste rodar, nenhum CSV de resposta pode existir fora de data/ (ignorado)."""
-    achados = []
-    for base, dirs, arqs in os.walk(RAIZ):
-        dirs[:] = [d for d in dirs if d not in (".git", "data", "node_modules")]
-        achados += [os.path.join(base, a) for a in arqs if re.fullmatch(r"versao-\d\.csv", a)]
-    assert achados == []
-
-
-# --- o script e o questionario falam a mesma lingua ----------------------------------------
-
-def _texto_questionario() -> str:
-    with io.open(QUESTIONARIO, encoding="utf-8") as f:
-        return f.read()
-
-
-def test_titulos_das_escalas_batem_com_o_questionario():
-    q = _texto_questionario()
-    for titulo, nome in AT.ESCALAS.items():
-        assert f"`[Tela k] {titulo}`" in q, titulo
-        assert f"`{nome}`" in q, nome
-    for fixo in (AT.CONSENTIMENTO, AT.FILTRO, AT.AMIGO):
-        assert f"`{fixo}`" in q, fixo
-
-
-def test_as_seis_ordens_batem_com_o_questionario():
-    q = _texto_questionario()
-    for v, ordem in AT.ORDENS.items():
-        base = ", ".join(ordem)
-        assert f"| {v} | {base} | {base} |" in q, v
-    assert sorted(AT.ORDENS.values()) == sorted(
-        "".join(p) for p in __import__("itertools").permutations("ECD"))
-
-
-def test_conferir_cabecalho_le_o_carimbo_de_toda_linha(tmp_path):
-    """O formato do carimbo do Forms e NAO_CONFIRMADO: o roteiro confere com uma resposta de
-    teste ("Nao concordo", descartada na analise). Formato desconhecido para o script."""
-    _csv_sintetico(tmp_path / "versao-2.csv",
-                   [("06/10/2026 10:00:00", "N\u00e3o concordo", "", "", 1)])
-    assert AT.main(["--pasta", str(tmp_path), "--conferir-cabecalho"]) == 0
-    _csv_sintetico(tmp_path / "versao-2.csv",
-                   [("2026-10-06T10:00:00Z", "N\u00e3o concordo", "", "", 1)])
+def test_data_com_hora_viola_o_contrato(tmp_path):
+    """O contrato grava so o dia: uma data com hora e recusada, e a conferencia a pega."""
+    p = tmp_path / "respostas.csv"
+    _csv(p, [_linha(1, "2026-10-05T14:03:22-03:00", "2026-10-05")])
     with pytest.raises(SystemExit):
-        AT.main(["--pasta", str(tmp_path), "--conferir-cabecalho"])
+        AT.main(["--arquivo", str(p), "--conferir-cabecalho"])
 
 
 def test_analise_nao_roda_antes_do_fim_da_janela(tmp_path, capsys):
-    """h-A, "nunca encerrar olhando o resultado": ate 23:59:59 do dia 21 o script recusa a
+    """h-A, "nunca encerrar olhando o resultado": ate o fim do dia 21 o script recusa a
     analise. Sem esta guarda, a regra dependeria de alguem lembrar (P7)."""
-    linhas = [("06/10/2026 10:00:00", "Concordo", "Sim", "N\u00e3o", n) for n in (3, 5, 6)]
-    _csv_sintetico(tmp_path / "versao-1.csv", linhas)
-    args = ["--pasta", str(tmp_path), "--inicio", "2026-10-05"]
-    assert AT.main(args, agora=dt.datetime(2026, 10, 25, 23, 59, 59)) == 3
+    p = tmp_path / "respostas.csv"
+    _csv(p, [_linha(1, "2026-10-06", "2026-10-06", nota=n) for n in (3, 5, 6)])
+    args = ["--arquivo", str(p), "--inicio", "2026-10-05"]
+    assert AT.main(args, hoje=dt.date(2026, 10, 25)) == 3
     assert "regra:" not in capsys.readouterr().out
-    assert AT.main(args, agora=dt.datetime(2026, 10, 26, 0, 0, 0)) == 0
+    assert AT.main(args, hoje=dt.date(2026, 10, 26)) == 0
     assert "sem_amigos_DECIDE (n=3)" in capsys.readouterr().out
+
+
+def test_csv_dentro_do_repositorio_e_fora_do_ignore_e_recusado():
+    """Resposta real nunca entra no git: um CSV que o git nao ignora e recusado."""
+    assert AT._dentro_do_git_sem_ignorar(os.path.join(RAIZ, "docs", "respostas.csv"))
+    assert not AT._dentro_do_git_sem_ignorar(os.path.join(RAIZ, "data", "teste-marca",
+                                                          "respostas.csv"))
+
+
+def test_nenhuma_resposta_real_no_repositorio():
+    """Ate o teste rodar, nenhuma exportacao pode existir fora de data/ (ignorado)."""
+    achados = []
+    for base, dirs, arqs in os.walk(RAIZ):
+        dirs[:] = [d for d in dirs if d not in (".git", "data", "node_modules")]
+        achados += [os.path.join(base, a) for a in arqs
+                    if re.fullmatch(r"respostas.*\.csv|versao-\d\.csv", a)]
+    assert achados == []
 
 
 def test_descritivas_trazem_as_cinco_escalas_nas_seis_telas():
     rel = AT.analisar(_pessoas({"E": M(6, 6, 6), "C": M(4, 4, 5), "D": M(3, 3, 2)}))
     desc = rel["sem_amigos_DECIDE"]["descritivas"]
     assert set(desc) == {f"{d}-{v}" for d in AT.DIRECOES for v in ("base", "rota")}
-    assert all(set(m) == set(AT.ESCALAS.values()) for m in desc.values())
+    assert all(set(m) == set(AT.ESCALAS) for m in desc.values())
 
 
 # --- o pre-registro final congela os arquivos pelo sha256 ------------------------------------
 
-PREREGISTRO = os.path.join(RAIZ, "docs", "marca", "preregistro-teste-de-marca-final.md")
+PREREGISTRO = os.path.join(RAIZ, "docs", "marca", "teste-de-marca", "preregistro-final.md")
 CONGELADOS = {f"docs/marca/direcoes/png/{d}-{v}.png" for d in "ECD"
               for v in ("base", "rota-bloqueada")} | {
-    "docs/marca/teste-de-marca-questionario.md", "tools/analise_teste_marca.py"}
+    "docs/marca/teste-de-marca/questionario.yaml",
+    "docs/marca/teste-de-marca/codigos-visuais.yaml",
+    "tools/analise_teste_marca.py",
+    # revisao de 02/10: o veto e calculado aqui; fora do conjunto, mudaria sem reprovar nada
+    "tools/codigos_visuais.py"}
 
 
 def _sha256_gravados(texto: str) -> dict[str, str]:
@@ -310,9 +331,9 @@ def _divergentes(gravados: dict[str, str]) -> list[str]:
     return out
 
 
-def test_preregistro_final_congela_os_oito_arquivos_pelo_sha256():
-    """P4: mudar um byte do questionario, do script ou de um PNG sem mudar o pre-registro no
-    mesmo commit reprova. Mutacao: um sha256 trocado no texto tem de aparecer como divergente."""
+def test_preregistro_final_congela_os_dez_arquivos_pelo_sha256():
+    """P4: mudar um byte do questionario, do livro de codigos, do script ou de um PNG sem mudar
+    o pre-registro no mesmo commit reprova. Mutacao: um sha256 trocado aparece como divergente."""
     with io.open(PREREGISTRO, encoding="utf-8") as f:
         gravados = _sha256_gravados(f.read())
     assert set(gravados) == CONGELADOS
