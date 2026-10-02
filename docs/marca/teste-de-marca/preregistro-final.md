@@ -1,0 +1,353 @@
+# Pré-registro do teste de marca — versão final 2 (P-162)
+
+*27/09/2026, S5 v2. Escrito antes de qualquer estímulo ser mostrado a alguém e antes de existir
+qualquer resposta, no repositório ou fora dele.*
+
+**Status.** Vale como pré-registro **a partir do merge deste arquivo no `main`**, e só se o
+merge vier antes do primeiro convite (a lição da P-116: critério gravado depois de olhar não é
+critério). A impressão digital é o sha do merge. Os nove arquivos que ele congela têm o sha256
+nas §3, §4 e §8. `tools/test_analise_teste_marca.py` reprova se um deles mudar sem que esta
+página mude junto.
+
+**Origem e o que este substitui.**
+- [`preregistro-teste-de-marca-2026-09-20.md`](../preregistro-teste-de-marca-2026-09-20.md):
+  o de 20/09, como declarado. sha256
+  `fca34b86d5265c5c7687aae297043fa925cc76c4a13cba1282b95e68765ebcbc`, commit `2c2976b`.
+- [`preregistro-teste-de-marca-final.md`](../preregistro-teste-de-marca-final.md): a versão 1
+  (PR #39, merge `3e89a46`), com o Google Forms. **Fica superada por esta, sem ter sido usada:**
+  nenhum convite saiu. Ele trocou o instrumento por uma página própria e acrescentou o veto de
+  distinção (fila, 27/09).
+
+Os dois ficam como registro. **Onde divergem desta, vale esta.**
+
+**Nome MEOL nos estímulos: decisão dele.**
+
+---
+
+## 1. As decisões, e de quem é cada uma
+
+Todas são dele e estão na fila ([`docs/decisoes/fila-do-osvaldo.md`](../../decisoes/fila-do-osvaldo.md)).
+Nenhuma foi preenchida por uma sessão. A coluna "20/09" diz o que mudou desde a origem.
+
+| ponto | 20/09 | agora | decisão |
+|---|---|---|---|
+| direções | A, B, C e D | **E, C e D** | 16b |
+| H1 | "B e A superam D em confiável e honesto" | **"E supera D em confiável e em honesto"** | 16b |
+| escala | sem número de pontos | **1 a 7**, com os polos escritos | 17a |
+| a regra, em duas escalas | "maior média em confiável e em é para mim" | **um índice por pessoa:** a média de confiável e é para mim | q-a |
+| empate | "dentro da margem", sem margem | **o intervalo de 95% da diferença pareada (bootstrap) contém zero** | 17a |
+| honesto | "não ficar abaixo da mediana" | **não ser a pior direção em honesto** | 17a |
+| H2 | "D aumenta a sensação de golpe ou de vendedor" | **D pior que E e pior que C**, com o intervalo pareado excluindo zero, em confiável ou em honesto | t-a |
+| H3 | "faixa ou rota bloqueada não reduz a confiança" | **rota bloqueada real, nas três direções**; base sempre antes, na mesma ordem: **exploratória** | 17a, j-A |
+| H4 | "aceita mais informação que um iniciante" | **fora do teste** (o filtro exclui iniciantes); vai para a P-156 | s-a |
+| q-a a t-a | — | **continuam valendo** nesta versão | z-a |
+| instrumento | — | **página própria no Vercel, respostas no Supabase**, sem IP, sem nome, sem e-mail; construída na S6 | instrumento (27/09) |
+| ordem das direções | aleatória | **seis ordens balanceadas; a versão sai de um contador de ABERTURAS no banco (mod 6)**, não do link | g-B revista, ab-a |
+| tamanho da amostra | — | **quem aparecer numa janela de 21 dias corridos**; nunca encerrar olhando o resultado | h-A |
+| estímulo | — | **imagem fixa**: os seis PNG aprovados, pelo sha256 | i-A |
+| amigos | (a P-162 dizia: só pilotam) | **contam**, pela pergunta "Você conhece quem criou este app?"; a análise sai com e sem eles, e **a sem eles decide** | amigos, r-a, y-b |
+| filtro | "aporta todo mês em renda variável há pelo menos 6 meses" | **o mesmo texto** ("Você aporta todo mês em renda variável há pelo menos 6 meses?") | y-b |
+| u-a e v-a | — | **superadas pela y-b**: voltaram os textos de 20/09, e o defeito que o ensaio tinha achado vira limitação (§9) | y-b |
+| recrutamento | rede do autor, comunidades, conhecidos de conhecidos | **rede pessoal e bola de neve, sem painel pago** | recrutamento |
+| escalas seguro e luxo | "seguro/arriscado", "sofisticado/simples" | **pelo visual:** insegurança ↔ segurança; popular ↔ de luxo | w-a |
+| escalas honesto e confiável | "honesto/vendedor", "confiável/parece golpe" | **mantidas**, com a ordem das palavras igual à da escala | x-a |
+| imagem de estilo de vida na D | prevista | ilustração desenhada em código, **provisória** (P-168) | k-A |
+| **veto de distinção** | — | se a vencedora pela 17a **imitar** o código dominante de uma categoria auditada na R3, a escolha volta para ele; **a direção só sai com a R3 fechada** (§8) | veto (27/09), aa-a |
+
+**O que não entra.** A H-A1, que a P-162 dizia que "pode entrar como exploratória", fica de
+fora: nenhuma decisão dele a incluiu, e a n-A juntou as perguntas sobre o público na P-154.
+
+## 2. Público, filtro, recrutamento, amigos
+
+- **Filtro**, antes de qualquer tela: *"Você aporta todo mês em renda variável há pelo menos 6
+  meses?"* Quem responde "Não" sai. O convite diz o mesmo critério.
+- **Recrutamento:** rede pessoal dele e bola de neve, sem painel pago, sem anúncio e sem
+  comunidade aberta.
+- **Amigos:** depois do filtro vem *"Você conhece quem criou este app?"*. Quem responde "Sim"
+  segue e conta. A análise sai duas vezes: **sem eles, que decide** (r-a), e com todos, como
+  sensibilidade.
+- **Consentimento:** é a primeira pergunta. "Não concordo" sai sem ver nenhuma tela; fica
+  gravado só que a pessoa não quis participar, com a versão e o dia (§4).
+
+## 3. Os estímulos (i-A)
+
+A T1 ("aporte do mês") nas direções **E** (instrumento de precisão), **C** (digital amigável) e
+**D** (ostentação, o controle), cada uma em versão **base** e **com rota bloqueada**. Os números
+saem do motor sobre um cenário sintético ([`../direcoes/README.md`](../direcoes/README.md)). São
+imagens fixas de 390 × 844, **aprovadas por ele em 27/09/2026** (fila). Mudar um byte é imagem
+nova, nova aprovação e novo pré-registro.
+
+| arquivo | sha256 |
+|---|---|
+| `docs/marca/direcoes/png/E-base.png` | `302a50ab35a31e24166874f14dfebc4055bc794524c90a73a6894a7311be3665` |
+| `docs/marca/direcoes/png/E-rota-bloqueada.png` | `04fe0520a5c4e0e022927ec37cca779fc88c169844b8d0185ff9bcca6e678962` |
+| `docs/marca/direcoes/png/C-base.png` | `91b3f24e0eebd467306917b1c24df86ed6fdde4fe25ca9ac211abe4c76acd5b9` |
+| `docs/marca/direcoes/png/C-rota-bloqueada.png` | `da85f3eb295e16d43872f5521ec18a13682888291d7ab4aa4c2912389c908174` |
+| `docs/marca/direcoes/png/D-base.png` | `36a7c019c0410b1567e5dc17177473895deb5d90a175e630f58eace063115a83` |
+| `docs/marca/direcoes/png/D-rota-bloqueada.png` | `f0ad96161c829d4536cd083f08d99581fc54deaa7f32f904c264702bb9b64b73` |
+
+## 4. O instrumento e a análise, congelados
+
+| arquivo | o que é | sha256 |
+|---|---|---|
+| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `1742303dd44464c15a46f32f05787493c83d5c5b275e22c937fe93621f17c1a3` |
+| `tools/analise_teste_marca.py` | a análise inteira: leitura pelo contrato, filtros, janela, regra, hipóteses, abandono por versão e saída | `2c43c9b9f59b19ab7f4784edad8a8b99a8a5b65ef3c1ca836c7f47b996b6caef` |
+
+A versão de leitura, [`questionario.md`](questionario.md), é **gerada** do YAML por
+`tools/questionario_teste_marca.py`, e o `--conferir` reprova se ela divergir. Ela não tem
+sha256 próprio, porque não é fonte.
+
+**A página (S6) segue o YAML.**
+- **Exposição:** a imagem aparece quando a pessoa toca em "Ver a tela". Fica
+  `telas.exposicao_segundos` (5) segundos, some, e não volta. Cabe inteira na tela, sem rolar.
+- **Respostas:** as escalas são obrigatórias, e as respostas só são gravadas no envio final.
+  Quem sai pelo consentimento ou pelo filtro conclui ali, e só a resposta que o tirou fica
+  gravada.
+- **O que fica gravado:** uma linha por abertura, com a versão e só o dia (AAAA-MM-DD, em
+  Brasília), sem hora.
+- **Privacidade:** o navegador nunca chama o Supabase; a gravação passa por uma função da
+  Vercel que não repassa os cabeçalhos do cliente. O link é o mesmo para todos. Analytics e
+  Speed Insights ficam desligados, e nenhuma resposta vai para o log.
+
+**O ensaio.** Um subagente respondeu a versão 5 como quatro investidores leigos, olhando os
+seis PNG. Nada do ensaio é dado. Ele achou 19 problemas.
+- **Corrigidos (redação desta sessão):**
+  - o consentimento prometia anonimato absoluto e omitia o que fica guardado se a pessoa
+    parar;
+  - uma só mensagem de saída valia para dois motivos;
+  - o "Não é venda" do convite soava como golpe;
+  - a instrução não dizia que a imagem some, não volta e pede um toque;
+  - "como se fosse a primeira vez" pedia o impossível;
+  - a instrução inteira se repetia seis vezes;
+  - "desenho" e "este app" na escala `seguro`;
+  - as escalas não tinham uma frase-cabeça;
+  - o exemplo "XP / xis-pê" ensinava a soletrar;
+  - a saída do filtro ensinava a resposta;
+  - não estava declarado que as escalas são obrigatórias, nem que a imagem cabe sem rolar.
+- **Mudanças no contrato:** as respostas só são gravadas no fim, e as datas são só o dia. Com
+  convite pessoal, a hora exata deixaria ligar uma resposta a quem abriu o link.
+- **Viraram limitação** os achados sobre textos decididos por ele e sobre as imagens (§9).
+
+## 5. O desenho
+
+- **Seis versões** (g-B), idênticas em tudo menos a ordem das imagens:
+
+  | versão | telas 1 a 3 (base) e 4 a 6 (com rota bloqueada) |
+  |---|---|
+  | 1 | E, C, D |
+  | 2 | E, D, C |
+  | 3 | C, E, D |
+  | 4 | C, D, E |
+  | 5 | D, E, C |
+  | 6 | D, C, E |
+
+- **Atribuição (g-B revista, ab-a):** `versão = (contador de aberturas mod 6) + 1`. O contador
+  fica no banco, começa em 0 e soma 1 a cada abertura, conclua a pessoa ou não. O link não
+  escolhe a versão.
+- **Cada pessoa vê as seis telas.** Para cada uma: a exposição; uma pergunta aberta ("o que
+  você lembra", o teste de 5 segundos de 20/09); e cinco escalas de 1 a 7 (`seguro`,
+  `para_mim`, `honesto`, `confiavel`, `luxo`; o 7 é sempre o polo do nome). No fim, a
+  pronúncia do nome.
+
+## 6. A janela (h-A)
+
+- **21 dias corridos**, do dia do primeiro convite até o fim do 21º dia, **em Brasília**.
+  Conta o **dia da conclusão** (`concluida_em`). Quem abre dentro da janela e envia depois
+  fica fora.
+- Resposta fora da janela é **guardada** e **não entra** na análise; o script a conta como
+  `fora_da_janela`.
+- **As datas absolutas** entram num **commit próprio, empurrado antes do primeiro convite**,
+  que muda só estas duas linhas:
+  - dia 1 (primeiro convite): **a preencher no commit das datas**
+  - dia 21 (último dia): **a preencher no commit das datas**
+- **Nunca encerrar olhando o resultado.** O script **recusa** a análise até o fim do dia 21
+  em Brasília. Antes disso, só roda `--conferir-cabecalho`, que não calcula nada.
+- **Sem tamanho mínimo nem alvo** (h-A). Com pouca gente, o intervalo fica largo e a regra
+  tende ao empate. Isso é consequência aceita, não motivo para estender a janela.
+
+## 7. A análise (o que `tools/analise_teste_marca.py` faz, e só isso)
+
+```
+python tools/analise_teste_marca.py --inicio AAAA-MM-DD   # o dia 1; só depois do dia 21
+```
+
+**Quem entra.** Uma linha da exportação conta se a pessoa concluiu, marcou "sim" no
+consentimento e no filtro, e concluiu dentro da janela. O script recusa um CSV que esteja no
+repositório sem ser ignorado pelo git, e recusa cabeçalho fora do contrato.
+
+**A amostra que decide** é a de quem respondeu "não" à pergunta dos amigos (r-a). A com todos
+sai com as mesmas contas, como sensibilidade.
+
+**A regra (17a + q-a), sobre as três telas base:**
+
+1. Por pessoa e por direção, **índice** = (`confiavel` + `para_mim`) / 2.
+2. Sai da disputa a direção com a **pior média em `honesto`**. Se duas empatarem exatamente
+   na pior média, as duas saem; se as três empatarem, nenhuma é elegível, e o resultado é
+   empate.
+3. Entre as que ficam, a de **maior média de índice** vence **se o intervalo de 95% da
+   diferença pareada para a segunda não contém zero**. Se contém, é **EMPATE**, e a escolha é
+   dele, com critério escrito antes de escolher. Se só uma fica, ela vence sem comparação.
+4. Com menos de 2 pessoas, não há intervalo: sai `SEM_DADOS`, e a regra não escolhe nada.
+
+**O intervalo:** bootstrap pareado por pessoa, percentil, **10.000 reamostragens, semente
+20260927**, nível 95%. Toda comparação usa a mesma semente. Nada disso tem opção de linha de
+comando. O nível vem da 17a. A semente e o número de reamostragens foram fixados pela S5 e
+estão declarados aqui.
+
+**As hipóteses**, relatadas ao lado, sem mudar a regra:
+- **H1** (16b): E − D em `confiavel` e em `honesto`, nas bases. **Confirmada** se os dois
+  intervalos ficam acima de zero.
+- **H2** (t-a): E − D e C − D, em `confiavel` e em `honesto`. **Confirmada** se, em pelo
+  menos uma escala, os dois intervalos ficam acima de zero.
+- **H3** (j-A), **exploratória**: rota bloqueada − base em `confiavel`, por direção. Saem
+  "reduz", "aumenta" ou "sem evidência de redução".
+- **H4:** fora do teste (s-a), na P-156.
+
+Não há correção de multiplicidade entre H1, H2 e H3. `seguro` e `luxo` são descritivas.
+
+**O que sai:** só agregado.
+- aberturas, abandonos e descartes por motivo;
+- **aberturas e abandonos por versão** (ab-a);
+- válidas, no total e por versão;
+- n de amigos;
+- médias, diferenças e intervalos, com o n de cada amostra.
+
+Nunca sai uma linha de resposta. O script não lê a pergunta aberta nem a de pronúncia. As
+duas são lidas por ele, fora do repositório, como material exploratório. Não mudam a regra, e
+nenhuma frase de participante entra no repositório.
+
+## 8. O veto de distinção (decisão dele, 27/09; aa-a)
+
+| arquivo | o que é | sha256 |
+|---|---|---|
+| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, a definição de código dominante e de imitar | `4e278a517600654846406852c729eb4ac1de90bd10558abf26f917e86737a3f5` |
+
+O classificador é `tools/codigos_visuais.py`, o mesmo para as direções e para as marcas da R3.
+
+**As variáveis.**
+
+| variável | central | valores | regra |
+|---|---|---|---|
+| fundo | sim | claro, escuro | luminância relativa da cor de maior área; claro se for maior que 0,179, o ponto em que texto preto e texto branco contrastam igual |
+| matiz | sim | neutro e 12 faixas de 30° | a cor do botão principal (borda, se for vazado); neutro se a saturação HSL for menor que 0,15 |
+| família do título | sim | serifa, sem serifa, monoespaçada | a fonte do **texto de maior corpo** da tela, fora o logotipo |
+| raio | sim | reto, pequeno, grande | o raio do botão principal: até 2 px é reto; de 3 a 8 px, pequeno; de 9 px em diante, grande |
+| densidade | não | baixa, média, alta | blocos de informação sem rolar: até 8, baixa; de 9 a 15, média; 16 ou mais, alta |
+| botão | não | cheio, vazado | se o botão tem fundo próprio |
+
+**A regra.**
+- **Código dominante de uma categoria:** a combinação das **quatro variáveis centrais**
+  presente em pelo menos metade das marcas classificadas, com **n ≥ 5** marcas. Com duas
+  combinações na metade exata, as duas são dominantes.
+- **Imitar:** a direção partilha os quatro valores centrais com um código dominante.
+- **Se a vencedora pela 17a imitar**, a escolha volta para ele, com critério escrito.
+- Categoria sem código dominante, ou com menos de 5 marcas, não aciona o veto.
+- **A escolha da direção só sai com a R3 fechada.**
+
+**A classificação de E, C e D, feita agora, antes de a R3 começar:**
+
+| direção | fundo | matiz | família do título | raio | densidade (blocos) | botão |
+|---|---|---|---|---|---|---|
+| E | claro | laranja (37,5°) | serifa | reto (2 px) | média (12) | vazado |
+| C | claro | rosa (317,9°) | sem serifa | grande (pílula) | média (12) | cheio |
+| D | escuro | laranja (41,0°) | serifa | reto (0 px) | média (13) | cheio |
+
+Três leituras para quem for aplicar o veto:
+- **O título da E é com serifa.** O h1 da decisão herda a Source Serif do corpo; o token
+  chamado `titulo` vale só para os rótulos em caixa alta.
+- **A C está a 2,9° da fronteira** entre rosa e magenta (315°). Uma categoria de código
+  magenta não a pega; uma de código rosa, sim.
+- **E e D partilham matiz, família e raio**, e diferem só no fundo.
+
+**Nada do livro se ajusta depois de a R3 começar.** Os limites de densidade foram escritos
+depois de contar E, C e D e antes de qualquer marca; a densidade não entra no veto.
+
+## 9. Limitações declaradas
+
+**As que o prompt pediu:**
+1. **Amostra de conveniência.** O resultado escolhe entre direções para quem respondeu. Não
+   descreve o investidor brasileiro, nem a fatia que o MEOL quer atender.
+2. **H3 exploratória, com ordem fixa.** A rota bloqueada vem sempre depois da base: a
+   diferença mistura o efeito da rota com o de rever a tela e com o cansaço.
+3. **Amigos com viés de agradar.** Por isso a análise dupla, e a sem eles decide.
+4. **A plataforma registra metadados por conta própria** (lido na documentação em 27/09, em
+   [`docs/fontes/vercel-supabase-metadados-de-acesso.md`](../../fontes/vercel-supabase-metadados-de-acesso.md)):
+   - **CONFIRMADO:** a Vercel coleta o IP do visitante e a cidade e o país derivados dele, e
+     guarda o log de runtime, com user agent e caminho, por **1 hora** no plano Hobby.
+   - **CONFIRMADO:** o IP "para DDoS" ela coleta mesmo se o dono o esconder, por um prazo que
+     não publica.
+   - **CONFIRMADO:** o DPA da Vercel não cobre o Hobby.
+   - **CONFIRMADO:** o Supabase guarda no log do gateway, por **1 dia** no Free, o IP, o user
+     agent e a geolocalização até o CEP **de quem o chama**. Por isso o contrato proíbe o
+     navegador de chamá-lo.
+   - `NAO_CONFIRMADO`: se dá para desligar os logs, o prazo do IP de DDoS e a região física
+     dos logs.
+   - A tabela da pesquisa não tem IP. A plataforma tem.
+5. **O resultado escolhe entre direções e não descreve o investidor brasileiro.**
+
+**As dos textos decididos (y-b, w-a, x-a), que o ensaio apontou:**
+
+6. **Filtro com jargão.** "Aporta" e "renda variável" podem não ser entendidos, e quem só
+   aplica no Tesouro pode marcar "sim". "Todo mês" é absoluto: quem pulou um mês decide
+   sozinho se arredonda.
+7. **A pergunta dos amigos vem antes de qualquer tela.** "Este app" ainda não se refere a
+   nada, e quem conhece o autor pode responder "não". A amostra que decide pode ter amigos.
+8. **"Segurança"** pode ser lida como risco do investimento, não da tela. **"Popular"** pode
+   ser lido como "famoso". As duas escalas são descritivas e não entram na regra.
+9. **`para_mim` e `honesto` sofrem o conteúdo, que é o mesmo nas três direções:** R$ 800 e
+   "aporte". Isso afeta o nível das notas mais que a comparação. A frase-cabeça das escalas
+   reduz o efeito, mas não o elimina.
+10. **"Parece golpe"** planta a suspeita, repetida seis vezes (x-a).
+
+**As das imagens, que estão congeladas:**
+
+11. "Cofrinho de banco digital: bloqueado" pode ser lido como "sua conta foi bloqueada", e
+    isso pesa na H3. Na D, a caixa da rota bloqueada tem pouco contraste e pode não ser vista
+    em 5 segundos.
+12. O aviso da tarifa da B3 e o selo "Parcial" parecem erro. Estão nas três direções.
+13. O cartão da D parece oferta de cartão de crédito.
+14. "M E O L" aparece espaçado na E e na D, e a pronúncia pode depender da última direção
+    vista.
+15. A C lembra um app de banco digital, o que pode puxar `para_mim` por familiaridade.
+
+**As do instrumento e da análise:**
+
+16. **Rodízio por contador de aberturas.** Quem abandona gasta uma versão, e quem reabre o
+    link abre de novo. O relatório traz aberturas e abandonos por versão e não pondera.
+17. **Respostas duplicadas não são detectáveis.** Sem e-mail nem IP na tabela, a mesma pessoa
+    pode responder duas vezes.
+18. **Bootstrap percentil com amostra pequena** dá intervalo mais estreito do que deveria. Com
+    poucas pessoas, a regra pode declarar vencedora com evidência mais fraca do que os 95%
+    sugerem. Cada intervalo sai com o n ao lado.
+19. **Os 5 segundos são de tela, não de atenção.** A página esconde a imagem, mas não sabe se a
+    pessoa olhou.
+20. **O livro de códigos mede o que o classificador declara.** A família da fonte vem do
+    genérico do CSS nas direções e do olho de quem classifica nas marcas da R3. E a fronteira
+    de matiz da C fica a 2,9°.
+
+## 10. Mudanças depois do merge
+
+- **Antes do primeiro convite:** qualquer mudança num dos nove arquivos é pré-registro novo.
+  Esta página muda no mesmo commit, com o motivo, e o teste de sha256 reprova se não mudar.
+- **Depois do primeiro convite:** nada muda. Defeito achado durante a coleta vai para o
+  relatório como **desvio do pré-registro**.
+- **O livro de códigos não muda depois de a R3 classificar a primeira marca**, mesmo antes do
+  primeiro convite.
+- **O relatório** dá o resultado sem amigos, o resultado com todos, se os dois divergem, e o
+  veto aplicado à vencedora com a R3 fechada.
+
+## 11. Privacidade
+
+A página não pede nome, e-mail nem login. A tabela não guarda IP, user agent nem hora (§4). A
+exportação fica em `data/teste-marca/`, que o git ignora. O script recusa ler um CSV que o git
+não ignore, e o teste reprova se uma exportação aparecer no repositório. No repositório entra
+só o agregado.
+
+## 12. Até o primeiro convite, em ordem
+
+1. Merge deste pré-registro no `main` (ele).
+2. A página, na S6, pelo `questionario.yaml` e pelas exigências da §4, e o merge dela no
+   `main`.
+3. Uma resposta de teste e `--conferir-cabecalho` sobre a exportação real da página.
+4. Commit das datas da janela (§6), empurrado.
+5. Primeiro convite.

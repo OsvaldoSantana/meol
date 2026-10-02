@@ -1,0 +1,117 @@
+# -*- coding: utf-8 -*-
+"""O livro de codigos visuais do veto (P-162): fechado, sem buraco, e as direcoes classificadas
+antes da R3 pela mesma regra que vai classificar as marcas."""
+from __future__ import annotations
+
+import os
+import sys
+
+import pytest
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import codigos_visuais as V  # noqa: E402
+
+LIVRO = V.ler_livro()
+
+# A classificacao gravada no pre-registro final (27/09/2026, antes da R3).
+ESPERADO = {
+    "E": {"fundo": "claro", "matiz": "laranja", "familia_do_titulo": "serifa", "raio": "reto",
+          "densidade": "media", "botao": "vazado"},
+    "C": {"fundo": "claro", "matiz": "rosa", "familia_do_titulo": "sem_serifa",
+          "raio": "grande", "densidade": "media", "botao": "cheio"},
+    "D": {"fundo": "escuro", "matiz": "laranja", "familia_do_titulo": "serifa", "raio": "reto",
+          "densidade": "media", "botao": "cheio"},
+}
+
+
+def test_classificacao_de_e_c_d_e_a_gravada_no_preregistro():
+    assert V.classificar_direcoes(LIVRO) == ESPERADO
+
+
+def test_titulo_e_o_texto_de_maior_corpo_nao_o_token_chamado_titulo():
+    """Na E o token `fontes.titulo` e sem serifa (rotulos em caixa alta), mas o h1 da decisao
+    herda a serifa do corpo: e o que a pessoa ve como titulo."""
+    assert V.medidas_da_direcao("E", LIVRO)["familia_generica"] == "serif"
+
+
+def test_as_faixas_de_matiz_cobrem_o_circulo_sem_buraco_nem_sobreposicao():
+    faixas = LIVRO["variaveis"]["matiz"]["faixas"]
+    for grau in range(360):
+        g = grau + 0.5
+        n = sum((f["de"] <= g < f["ate"]) if f["de"] < f["ate"] else (g >= f["de"] or g < f["ate"])
+                for f in faixas)
+        assert n == 1, grau
+
+
+@pytest.mark.parametrize("hexa,faixa", [
+    ("#FF0000", "vermelho"), ("#FF4000", "laranja"), ("#FFFF00", "amarelo"),
+    ("#00FF00", "verde"), ("#0000FF", "azul"), ("#FF00FF", "magenta"),
+    ("#808080", "neutro"), ("#1B1A17", "neutro"),
+])
+def test_faixas_nos_pontos_conhecidos(hexa, faixa):
+    assert V.faixa_de_matiz(hexa, LIVRO) == faixa
+
+
+def test_fronteiras_do_fundo_e_do_raio():
+    base = {"destaque_hex": "#FF0000", "familia_generica": "serif", "densidade_blocos": 1,
+            "botao": "cheio"}
+    # 0.179 e o ponto de contraste igual com preto e branco; #757575 (0.1779) fica abaixo,
+    # #767676 (0.1812) acima
+    assert V.classificar({**base, "fundo_hex": "#757575", "raio_px": 2}, LIVRO)["fundo"] == "escuro"
+    assert V.classificar({**base, "fundo_hex": "#767676", "raio_px": 2}, LIVRO)["fundo"] == "claro"
+    raios = {r: V.classificar({**base, "fundo_hex": "#FFFFFF", "raio_px": r}, LIVRO)["raio"]
+             for r in (0, 2, 3, 8, 9, 999)}
+    assert raios == {0: "reto", 2: "reto", 3: "pequeno", 8: "pequeno", 9: "grande",
+                     999: "grande"}
+
+
+def test_valor_fora_do_livro_reprova():
+    with pytest.raises(ValueError):
+        V.classificar({"fundo_hex": "#FFFFFF", "destaque_hex": "#FF0000",
+                       "familia_generica": "serif", "raio_px": 0, "densidade_blocos": 1,
+                       "botao": "gradiente"}, LIVRO)
+
+
+def _marca(fundo, matiz, familia, raio, densidade="media", botao="cheio"):
+    return {"fundo": fundo, "matiz": matiz, "familia_do_titulo": familia, "raio": raio,
+            "densidade": densidade, "botao": botao}
+
+
+def test_codigo_dominante_exige_metade_e_cinco_marcas():
+    roxo = _marca("claro", "violeta", "sem_serifa", "grande")
+    outra = _marca("escuro", "azul", "sem_serifa", "pequeno")
+    assert V.codigos_dominantes([roxo] * 4, LIVRO) == []                  # n = 4 < 5
+    dom = V.codigos_dominantes([roxo] * 3 + [outra] * 2, LIVRO)           # 3 de 5
+    assert dom == [("claro", "violeta", "sem_serifa", "grande")]
+    assert V.codigos_dominantes([roxo] * 2 + [outra] * 2 + [_marca("claro", "verde", "serifa",
+                                                                   "reto")], LIVRO) == []
+
+
+def test_imitar_e_partilhar_as_quatro_centrais():
+    c = ESPERADO["C"]
+    cat = [_marca("claro", "rosa", "sem_serifa", "grande", densidade=d, botao=b)
+           for d, b in (("alta", "vazado"), ("baixa", "cheio"), ("alta", "cheio"))]
+    cat += [_marca("escuro", "azul", "serifa", "reto")] * 2
+    dom = V.codigos_dominantes(cat, LIVRO)
+    assert V.imita(c, dom) and not V.imita(ESPERADO["E"], dom) and not V.imita(ESPERADO["D"], dom)
+
+
+def test_mutacao_dominante_sobre_seis_variaveis_perde_o_veto(monkeypatch):
+    """aa-a: o dominante e contado sobre as QUATRO centrais. Contado sobre as seis, a categoria
+    acima (densidade e botao variando) deixa de ter codigo dominante e o veto nao dispara."""
+    cat = [_marca("claro", "rosa", "sem_serifa", "grande", densidade=d, botao=b)
+           for d, b in (("alta", "vazado"), ("baixa", "cheio"), ("alta", "cheio"))]
+    cat += [_marca("escuro", "azul", "serifa", "reto")] * 2
+    assert V.imita(ESPERADO["C"], V.codigos_dominantes(cat, LIVRO))
+    monkeypatch.setattr(V, "CENTRAIS", tuple(LIVRO["variaveis"]))
+    assert not V.imita(ESPERADO["C"], V.codigos_dominantes(cat, LIVRO))
+
+
+def test_centrais_do_codigo_e_do_livro_sao_as_mesmas():
+    assert V.CENTRAIS == tuple(k for k, v in LIVRO["variaveis"].items() if v["central"])
+
+
+def test_livro_em_ascii():
+    with open(V.LIVRO, "rb") as f:
+        assert all(b < 128 for b in f.read())

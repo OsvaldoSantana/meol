@@ -1,0 +1,152 @@
+# O questionario do teste de marca (P-162) -- DADO (P2). A pagina da S6 le este arquivo, e o
+# script de analise (tools/analise_teste_marca.py) tambem: os ids das perguntas, a duracao da
+# exposicao, as ordens e o contrato da exportacao moram aqui, e em lugar nenhum mais.
+# O sha256 deste arquivo esta no pre-registro final (docs/marca/teste-de-marca/preregistro-final.md).
+# Mudar um byte depois do merge e questionario novo, e o pre-registro deixa de cobri-lo.
+# A versao de leitura (questionario.md) e GERADA por tools/questionario_teste_marca.py;
+# --conferir reprova se alguem a editar a mao.
+versao: 2
+data: 2026-09-27
+
+# P-158: convite de pesquisa, sem promessa de produto e sem nome de investimento.
+convite:
+  # Ensaio (27/09): "Nao e venda" e a negacao tipica de golpe; saiu.
+  texto: "Oi! Estou fazendo uma pesquisa curta, de uns 8 minutos, sobre como as pessoas percebem telas de aplicativos de investimento. \u00c9 para quem aporta todo m\u00eas em renda vari\u00e1vel h\u00e1 pelo menos 6 meses. Ela n\u00e3o pede dinheiro, cadastro, nome nem e-mail. O link abre a p\u00e1gina da pesquisa: {link}"
+
+# Uma linha (decisao dele, prompt da S5 v2).
+consentimento:
+  id: consentimento
+  # Ensaio (27/09): "ninguem sabera" prometia o que a pesquisa nao garante, e "posso parar"
+  # omitia o que fica guardado. As respostas so sao gravadas no fim (exportacao, abaixo).
+  texto: "Concordo em participar: a pesquisa n\u00e3o pede nome nem e-mail, as notas s\u00e3o analisadas em conjunto, e se eu parar no meio nada do que respondi \u00e9 guardado."
+  opcoes:
+    - {valor: sim, rotulo: "Concordo"}
+    - {valor: nao, rotulo: "N\u00e3o concordo"}
+  se: {nao: saida_sem_consentimento}
+
+# y-b (27/09/2026, dele): o texto de 20/09 e da S4, e nao o da v-a.
+filtro:
+  id: filtro
+  texto: "Voc\u00ea aporta todo m\u00eas em renda vari\u00e1vel h\u00e1 pelo menos 6 meses?"
+  opcoes:
+    - {valor: sim, rotulo: "Sim"}
+    - {valor: nao, rotulo: "N\u00e3o"}
+  se: {nao: saida_fora_do_filtro}
+
+# y-b (27/09/2026, dele): o texto de 20/09 e da S4, e nao o da u-a. A analise sai com e sem
+# quem responde "sim", e a sem eles decide (r-a).
+amigo:
+  id: amigo
+  texto: "Voc\u00ea conhece quem criou este app?"
+  opcoes:
+    - {valor: sim, rotulo: "Sim"}
+    - {valor: nao, rotulo: "N\u00e3o"}
+
+telas:
+  quantidade: 6
+  # A pagina mostra a imagem quando a pessoa toca no botao, por este tempo; esconde-a e so
+  # entao mostra as perguntas; nao ha como voltar a imagem. A imagem cabe inteira na tela, sem
+  # rolar. Os textos usam {segundos}, {k} e {n}: duracao, posicao e total nunca sao literais.
+  exposicao_segundos: 5
+  inicio_da_exposicao: toque
+  imagem_cabe_sem_rolar: true
+  # Ensaio (27/09): a instrucao inteira so antes da tela 1; nas outras, a curta, com progresso.
+  instrucao: "Voc\u00ea vai ver {n} telas de um aplicativo de investimento. Quando tocar em \"Ver a tela\", ela aparece por {segundos} segundos e some sozinha; n\u00e3o d\u00e1 para voltar a ela. Depois v\u00eam as perguntas. Olhe a imagem inteira, sem tentar ler cada palavra. As telas s\u00e3o exemplos inventados: os valores e o investimento n\u00e3o s\u00e3o recomenda\u00e7\u00e3o para voc\u00ea. Algumas telas se parecem ou se repetem com pequenas mudan\u00e7as, de prop\u00f3sito: d\u00ea as notas pelo que vir agora."
+  instrucao_curta: "Tela {k} de {n}: toque em \"Ver a tela\"; ela fica {segundos} segundos."
+  botao_ver: "Ver a tela"
+  cabeca_das_escalas: "Responda pelo que a tela passa, n\u00e3o pelo investimento que ela mostra."
+  lembranca:
+    id: lembra
+    texto: "O que voc\u00ea lembra desta tela? Escreva com as suas palavras."
+    obrigatoria: false
+  # 1 a 7 (17a). O 1 fica a esquerda com o polo_1, o 7 a direita com o polo_7, e o 4 nao tem
+  # rotulo. A ordem das palavras na pergunta e a da escala (x-a). 7 e sempre o polo do nome.
+  # w-a e x-a (27/09/2026, dele): seguro e luxo pelo visual; honesto e confiavel com rotulos claros.
+  escala_min: 1
+  escala_max: 7
+  escalas_obrigatorias: true
+  escalas:
+    - id: seguro
+      pergunta: "Pelo jeito da tela (cores, letras, formas), esta tela passa inseguran\u00e7a ou seguran\u00e7a?"
+      polo_1: "Inseguran\u00e7a"
+      polo_7: "Seguran\u00e7a"
+    - id: para_mim
+      pergunta: "Pelo visual, esta tela parece feita para algu\u00e9m como voc\u00ea?"
+      polo_1: "N\u00e3o \u00e9 para mim"
+      polo_7: "\u00c9 para mim"
+    - id: honesto
+      pergunta: "Esta tela parece querer te vender algo ou parece honesta?"
+      polo_1: "Quer me vender algo"
+      polo_7: "Honesta"
+    - id: confiavel
+      pergunta: "Esta tela parece golpe ou parece confi\u00e1vel?"
+      polo_1: "Parece golpe"
+      polo_7: "Confi\u00e1vel"
+    - id: luxo
+      pergunta: "O visual desta tela lembra mais um app popular ou um app de luxo?"
+      polo_1: "Popular"
+      polo_7: "De luxo"
+  # i-A: os seis PNG aprovados em 27/09/2026; o sha256 de cada um esta no pre-registro final.
+  estimulos:
+    E: {base: docs/marca/direcoes/png/E-base.png, rota: docs/marca/direcoes/png/E-rota-bloqueada.png}
+    C: {base: docs/marca/direcoes/png/C-base.png, rota: docs/marca/direcoes/png/C-rota-bloqueada.png}
+    D: {base: docs/marca/direcoes/png/D-base.png, rota: docs/marca/direcoes/png/D-rota-bloqueada.png}
+
+pronuncia:
+  id: pronuncia
+  # Ensaio (27/09): o exemplo "XP / xis-pe" ensinava a soletrar; saiu.
+  texto: "Nas telas apareceu o nome do app, MEOL. Como voc\u00ea o falaria em voz alta? Escreva o som, do seu jeito."
+  obrigatoria: false
+
+# Ensaio (27/09): uma saida por motivo; a de quem nao passou no filtro nao repete o criterio.
+final:
+  concluiu: "Obrigado! A sua resposta foi registrada. Se conhecer algu\u00e9m que tamb\u00e9m aporte todo m\u00eas em renda vari\u00e1vel, pode repassar o link."
+  saida_sem_consentimento: "Tudo bem, obrigado pelo seu tempo! S\u00f3 ficou registrado que voc\u00ea preferiu n\u00e3o participar."
+  saida_fora_do_filtro: "Obrigado pelo seu tempo! Esta pesquisa procura um perfil espec\u00edfico."
+
+# g-B revista (27/09/2026, dele) e ab-a: a versao sai de um contador de ABERTURAS no banco,
+# nunca do link. As telas 1 a 3 sao as tres direcoes na versao base e as 4 a 6 as mesmas tres,
+# na mesma ordem, com a rota bloqueada (j-A: "base antes" fixo; a H3 e exploratoria).
+ordens:
+  atribuicao: "versao = (contador_de_aberturas mod 6) + 1; o contador comeca em 0 e soma 1 a cada abertura, conclua ou nao"
+  versoes:
+    1: [E, C, D]
+    2: [E, D, C]
+    3: [C, E, D]
+    4: [C, D, E]
+    5: [D, E, C]
+    6: [D, C, E]
+
+# O contrato com a pagina (S6): o que a exportacao traz. Uma linha por ABERTURA (ab-a). As
+# respostas so sao gravadas quando a pessoa conclui (um envio no fim): quem para no meio deixa
+# so a versao e o dia da abertura, com concluida_em vazio. Quem sai pelo consentimento ou pelo
+# filtro conclui ali: grava a resposta que o tirou e o dia, e nada mais. Nada de IP, nome ou e-mail. As
+# datas sao SO O DIA, no fuso de Brasilia (AAAA-MM-DD), sem hora: com convite pessoal, a hora
+# exata deixaria ligar uma resposta a quem abriu o link, e a janela (h-A) so precisa do dia.
+exportacao:
+  arquivo: data/teste-marca/respostas.csv
+  separador: ","
+  codificacao: utf-8
+  formato_data: "AAAA-MM-DD, no fuso de Brasilia"
+  colunas_fixas: [id_resposta, versao, aberta_em, concluida_em, consentimento, filtro, amigo]
+  por_tela: "t{k}_{id}, para k de 1 a 6 e id em lembranca.id e escalas[].id"
+  colunas_finais: [pronuncia]
+  valores_sim_nao: [sim, nao]
+
+# "Sem IP, sem nome, sem e-mail" (decisao dele, 27/09). As duas plataformas guardam metadados
+# de acesso por conta propria (docs/fontes/vercel-supabase-metadados-de-acesso.md); estas sao as
+# exigencias para a pagina da S6 nao lhes entregar mais do que o inevitavel.
+privacidade:
+  - "o navegador nunca chama o Supabase; a grava\u00e7\u00e3o passa por uma fun\u00e7\u00e3o no servidor da Vercel"
+  - "a fun\u00e7\u00e3o n\u00e3o repassa ao Supabase os cabe\u00e7alhos do cliente (x-forwarded-for, x-real-ip, user-agent)"
+  - "o link \u00e9 o mesmo para todos, sem identificador na URL nem na query"
+  - "Web Analytics e Speed Insights da Vercel desligados; nenhum cookie; nenhum script de terceiros"
+  - "a fun\u00e7\u00e3o n\u00e3o escreve resposta nem cabe\u00e7alho no log (console.log)"
+  - "a tabela n\u00e3o tem IP, nome, e-mail, user agent nem hora"
+
+# h-A (27/09/2026, dele). As datas absolutas entram num commit proprio, antes do primeiro convite.
+janela:
+  dias: 21
+  fuso: America/Sao_Paulo
+  # o dia em que a pessoa concluiu (o envio); abertura na janela e envio fora = fora
+  instante_que_conta: concluida_em

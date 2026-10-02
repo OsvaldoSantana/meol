@@ -1,5 +1,12 @@
 # Pré-registro do teste de marca — versão final (P-162)
 
+> **SUPERADO em 27/09/2026, sem ter sido usado: nenhum convite saiu.** Ele trocou o Google
+> Forms por uma página própria (Vercel e Supabase, S6) e acrescentou o veto de distinção
+> (fila, "Decisões dele, 27/09/2026, trazidas pelo prompt da S5 v2"). Vale
+> [`docs/marca/teste-de-marca/preregistro-final.md`](teste-de-marca/preregistro-final.md).
+> Este pré-registro fica como registro e não se edita. O sha256 do script que ele cita
+> deixou de bater: o script mudou para a v2.
+
 *27/09/2026, S5. Escrito antes de qualquer estímulo ser mostrado a alguém e antes de existir
 qualquer resposta, no repositório ou fora dele.*
 
