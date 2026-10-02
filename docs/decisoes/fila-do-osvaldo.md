@@ -112,8 +112,8 @@ tinha decidido; a S5 perguntou, e as quatro respostas seguem a recomendação.
 
 | código | o achado do ensaio | resposta |
 |---|---|---|
-| **u-a** | "Você conhece quem criou este app?" vem antes de qualquer tela e sem criador nomeado: amigo responde "não", e a análise sem amigos (que decide, r-a) se contamina | ~~**"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"**~~ *superada pela y-b (27/09): volta o texto de 20/09, e o defeito vira limitação* |
-| **v-a** | no filtro, "aporta" e "renda variável" são jargão, e quem só aplica no Tesouro pode marcar "sim" | ~~**"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"**; o convite passa a dizer o mesmo~~ *superada pela y-b (27/09): volta o texto de 20/09, e o defeito vira limitação* |
+| **u-a** | "Você conhece quem criou este app?" vem antes de qualquer tela e sem criador nomeado: amigo responde "não", e a análise sem amigos (que decide, r-a) se contamina | ~~**"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"**~~ *superada pela y-b (~~27/09~~ 02/10, data corrigida): volta o texto de 20/09, e o defeito vira limitação* **Restaurada pela y-a, 02/10/2026:** o texto acima volta a valer. |
+| **v-a** | no filtro, "aporta" e "renda variável" são jargão, e quem só aplica no Tesouro pode marcar "sim" | ~~**"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"**; o convite passa a dizer o mesmo~~ *superada pela y-b (~~27/09~~ 02/10, data corrigida): volta o texto de 20/09, e o defeito vira limitação* **Restaurada pela y-a, 02/10/2026:** o texto acima volta a valer, e o convite e a tela de conclusão dizem o mesmo critério. |
 | **w-a** | "segura ou arriscada" mistura a tela com o produto, e "sofisticada ou simples" tem sentidos opostos para cada pessoa (nenhuma das duas entra na regra nem na H1 e H2) | **reescritas pelo visual:** "insegurança ou segurança" pelo jeito da tela, e "app popular ou de luxo" |
 | **x-a** | "honesta ou vendedora" soa estranho e "parece golpe" planta suspeita, mas são as escalas da regra e da H2 | **manter os construtos de 20/09**, com a ordem das palavras igual à da escala e rótulos claros ("Quer me vender algo" ↔ "Honesta"; "Parece golpe" ↔ "Confiável"); o efeito de sugestão de "golpe" fica como limitação |
 
@@ -136,7 +136,7 @@ deixava aberto. A S5 v2 parou e perguntou; ele respondeu na sessão do Claude Co
 
 | código | a divergência | resposta | alternativa não escolhida |
 |---|---|---|---|
-| **y-b** | o prompt trazia o filtro e a pergunta dos amigos de 20/09 e da S4; a u-a e a v-a os tinham trocado depois do ensaio | **voltam os textos do prompt:** filtro "Você aporta todo mês em renda variável há pelo menos 6 meses?" e amigos "Você conhece quem criou este app?". **A u-a e a v-a ficam riscadas; o defeito que o ensaio achou vira limitação declarada** | manter a u-a e a v-a (recomendação da S5 v2) |
+| ~~**y-b**~~ | ~~o prompt trazia o filtro e a pergunta dos amigos de 20/09 e da S4; a u-a e a v-a os tinham trocado depois do ensaio~~ | ~~**voltam os textos do prompt:** filtro "Você aporta todo mês em renda variável há pelo menos 6 meses?" e amigos "Você conhece quem criou este app?". **A u-a e a v-a ficam riscadas; o defeito que o ensaio achou vira limitação declarada**~~ | manter a u-a e a v-a (recomendação da S5 v2) *Superada pela y-a (02/10/2026). Data corrigida: a y-b entrou no commit `7321065`, de 02/10/2026, e não em 27/09 como o título desta seção dizia.* |
 | **z-a** | o prompt não citava a q-a, a r-a, a s-a e a t-a | **todas valem:** índice de confiável e é para mim (q-a); a análise sem amigos decide (r-a); a H4 fora, na P-156 (s-a); a H2 é a D pior que a E e que a C (t-a) | revisar alguma |
 | **aa-a** | "código dominante = combinação presente em pelo menos metade das marcas da categoria": combinação de quais variáveis? | **as quatro centrais** (fundo, matiz, família do título, raio), as mesmas que definem "imitar". Densidade e peso do botão são classificados e relatados, e não entram no veto | as seis variáveis |
 | **ab-a** | "versão = contador mod 6": o contador conta o quê? | **aberturas da página.** Quem abandona gasta uma versão, e o relatório traz o abandono por versão | respostas concluídas |
@@ -163,6 +163,20 @@ ele escolheu emendar.
 | **ad-a** | o prompt audita consultorias, assessores, robôs e planejadores, e nenhuma dessas é categoria do livro (ac-a): o `veto()` as recusaria. A consultoria é a categoria do próprio MEOL. **A falta foi da proposta da ac-a, feita por uma sessão** | **emendar o livro agora:** quatro categorias concorrentes novas (`consultoria_cvm`, `assessor`, `robo`, `planejador`) e uma precedência para marca que caiba em duas | ficarem fora do veto, só descritivas; encaixar nas sete da ac-a |
 | **ae-a** | o livro classifica "a primeira tela do app", que fica atrás do login, e muita marca não tem app | **o app pela primeira captura de interface da App Store; sem app, o site em 390 px**; cada marca registra qual, e o dominante sai também só com as de app | só app (o resto fora do livro); app mais prints dele |
 | **af-a** | a saturação pode parar uma categoria com 3 marcas, e o dominante pede n ≥ 5 | **pelo menos 10 marcas sorteadas por categoria** na classificação visual; a saturação continua valendo para os códigos MC | 5 sorteadas; só a saturação |
+
+### Resposta dele, 02/10/2026: y-a, os textos do ensaio voltam (P-162)
+
+Dada no claude.ai e aplicada na sessão da nuvem, **antes do primeiro convite** (o commit das
+datas da janela não existe). Não tinha entrado no #43.
+
+| código | o que ele decidiu | motivo | alternativa não escolhida |
+|---|---|---|---|
+| **y-a** | **supera a y-b.** Voltam os textos que o ensaio de 27/09 corrigiu: amigos (u-a) *"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"* e filtro (v-a) *"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"*. O convite e a tela de conclusão deixam de usar "aporta" e "renda variável" e dizem o mesmo critério | a y-b veio de um prompt do claude.ai que citava os textos de 20/09 como decisão. O texto antigo dos amigos contamina a análise sem amigos, que é a que decide (r-a), e o filtro usava jargão | y-b: manter os textos de 20/09, com os defeitos como limitação |
+
+Onde ficou: `docs/marca/teste-de-marca/questionario.yaml` (sha256 novo na §4 do
+pré-registro final), o `questionario.md` e o `pesquisa/questionario.json` regenerados; no
+pré-registro, a linha da y-a na §1, as limitações 6 (em parte) e 7 riscadas na §9 e a nota na
+§10.
 
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
