@@ -230,6 +230,11 @@ def conferir(path: str = CONTEUDO) -> list[str]:
     with io.open(path, encoding="utf-8") as f:
         gravado = yaml.safe_load(f)
     agora = gerar()
+    # data_referencia deriva de gerado_em, que e volatil: compara-se com o mes da rodada
+    # GRAVADA, nao com o de hoje. Sem isto o --conferir reprovava todo mes que virasse
+    # (medido em 02/10/2026: "setembro de 2026" gravado contra "outubro" do motor).
+    ano, mes, _ = (int(x) for x in str(gravado["meta"]["gerado_em"]).split("-"))
+    agora["base"]["data_referencia"] = f"{MESES[mes - 1]} de {ano}"
     a, b = _sem_volateis(gravado), _sem_volateis(agora)
     out = []
     for secao in sorted(set(a) | set(b)):

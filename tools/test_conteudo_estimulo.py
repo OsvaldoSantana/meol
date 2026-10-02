@@ -27,6 +27,28 @@ def test_mutacao_um_valor_editado_a_mao_reprova(tmp_path):
     assert "base.valor" in CE.conferir(str(alvo))
 
 
+def test_virar_o_mes_nao_reprova_e_mes_editado_a_mao_reprova(tmp_path, monkeypatch):
+    """data_referencia vem do dia da rodada GRAVADA. Antes de 02/10/2026 o --conferir a
+    comparava com o mes de hoje e reprovava todo mes que virasse; editar o mes a mao continua
+    reprovando."""
+    real = CE.gerar
+
+    def rodada_em_outro_mes():
+        g = real()
+        g["meta"]["gerado_em"] = "2027-03-15"
+        g["base"]["data_referencia"] = "mar\u00e7o de 2027"
+        return g
+
+    monkeypatch.setattr(CE, "gerar", rodada_em_outro_mes)
+    assert CE.conferir() == []
+    with open(CE.CONTEUDO, encoding="utf-8") as f:
+        c = yaml.safe_load(f)
+    c["base"]["data_referencia"] = "outubro de 2026"
+    alvo = tmp_path / "conteudo.yaml"
+    CE.gravar(c, str(alvo))
+    assert "base.data_referencia" in CE.conferir(str(alvo))
+
+
 def test_brl_no_formato_brasileiro():
     assert CE.brl(800) == "R$\u00a0800,00"
     assert CE.brl(1213.33) == "R$\u00a01.213,33"
