@@ -1,0 +1,23 @@
+{
+  "_sobre": "Textos da INTERFACE da pagina do teste de marca (S6): botoes, avisos e erros. NAO sao perguntas: as perguntas vem so de questionario.json, gerado do questionario.yaml pre-registrado. Estes textos nao estao no pre-registro; ficam neutros, sem promessa de produto (P-158). Os limites valem para a pagina (maxlength), para a funcao de envio e para o banco (esquema.sql, gerado).",
+  "titulo_da_pagina": "Pesquisa sobre telas de aplicativos",
+  "carregando": "Carregando a pesquisa…",
+  "falha_ao_abrir": "A pesquisa não pôde começar por uma falha no servidor. Tente abrir o link de novo mais tarde.",
+  "ja_respondeu": "Este aparelho já enviou uma resposta a esta pesquisa. Se você ainda não respondeu (por exemplo, se o aparelho é compartilhado), pode seguir.",
+  "botao_continuar": "Continuar",
+  "botao_proxima": "Próxima",
+  "botao_enviar": "Enviar",
+  "botao_tentar_de_novo": "Tentar de novo",
+  "opcional": "(opcional)",
+  "falta_nota": "Falta escolher uma nota em:",
+  "enviando": "Enviando…",
+  "falha_ao_enviar": "Não foi possível enviar. As suas respostas continuam nesta página; tente de novo.",
+  "falha_na_imagem": "A imagem desta tela não carregou, e a pesquisa parou aqui. Nada do que você respondeu foi guardado. Tente abrir o link de novo mais tarde.",
+  "texto_alternativo_da_tela": "Tela de um aplicativo de investimento, mostrada por alguns segundos.",
+  "limites": {
+    "texto_aberto_caracteres": 2000,
+    "pronuncia_caracteres": 200,
+    "corpo_do_envio_bytes": 65536
+  },
+  "marca_no_aparelho": "meol_pesquisa_marca_enviou"
+}
