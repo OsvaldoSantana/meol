@@ -1,6 +1,6 @@
 {
  "_gerado_por": "python tools/questionario_json.py -- nao editar a mao",
- "questionario_sha256": "73936c74ce82d3c73c7bc6aee4430ad80da74c108cf91c9aab0eab66f77d757a",
+ "questionario_sha256": "02773d8b9b71945e3a463e55ed10696f0d63eb7ddf4780e0fcc9520631f38091",
  "estimulos_origem": {
   "estimulos/E-base.png": "docs/marca/direcoes/png/E-base.png",
   "estimulos/E-rota-bloqueada.png": "docs/marca/direcoes/png/E-rota-bloqueada.png",
@@ -21,7 +21,7 @@
   "versao": 2,
   "data": "2026-09-27",
   "convite": {
-   "texto": "Oi! Estou fazendo uma pesquisa curta, de uns 8 minutos, sobre como as pessoas percebem telas de aplicativos de investimento. \u00c9 para quem aporta todo m\u00eas em renda vari\u00e1vel h\u00e1 pelo menos 6 meses. Ela n\u00e3o pede dinheiro, cadastro, nome nem e-mail. O link abre a p\u00e1gina da pesquisa: {link}"
+   "texto": "Oi! Estou fazendo uma pesquisa curta, de uns 8 minutos, sobre como as pessoas percebem telas de aplicativos de investimento. \u00c9 para quem, h\u00e1 pelo menos 6 meses, coloca dinheiro todo m\u00eas em a\u00e7\u00f5es, fundos de \u00edndice (ETF) ou fundos imobili\u00e1rios. Ela n\u00e3o pede dinheiro, cadastro, nome nem e-mail. O link abre a p\u00e1gina da pesquisa: {link}"
   },
   "consentimento": {
    "id": "consentimento",
@@ -42,7 +42,7 @@
   },
   "filtro": {
    "id": "filtro",
-   "texto": "Voc\u00ea aporta todo m\u00eas em renda vari\u00e1vel h\u00e1 pelo menos 6 meses?",
+   "texto": "H\u00e1 pelo menos 6 meses, voc\u00ea coloca dinheiro todo m\u00eas em a\u00e7\u00f5es, fundos de \u00edndice (ETF) ou fundos imobili\u00e1rios?",
    "opcoes": [
     {
      "valor": "sim",
@@ -59,7 +59,7 @@
   },
   "amigo": {
    "id": "amigo",
-   "texto": "Voc\u00ea conhece quem criou este app?",
+   "texto": "Voc\u00ea conhece pessoalmente a pessoa que est\u00e1 fazendo esta pesquisa (\u00e9 amigo, parente ou colega dela)?",
    "opcoes": [
     {
      "valor": "sim",
@@ -141,7 +141,7 @@
    "obrigatoria": false
   },
   "final": {
-   "concluiu": "Obrigado! A sua resposta foi registrada. Se conhecer algu\u00e9m que tamb\u00e9m aporte todo m\u00eas em renda vari\u00e1vel, pode repassar o link.",
+   "concluiu": "Obrigado! A sua resposta foi registrada. Se conhecer algu\u00e9m que tamb\u00e9m coloque dinheiro todo m\u00eas em a\u00e7\u00f5es, fundos de \u00edndice (ETF) ou fundos imobili\u00e1rios, pode repassar o link.",
    "saida_sem_consentimento": "Tudo bem, obrigado pelo seu tempo! S\u00f3 ficou registrado que voc\u00ea preferiu n\u00e3o participar.",
    "saida_fora_do_filtro": "Obrigado pelo seu tempo! Esta pesquisa procura um perfil espec\u00edfico."
   },

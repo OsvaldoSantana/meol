@@ -21,6 +21,12 @@ assessor, robô e planejador), a unidade que a R3 classifica (app ou site) e a a
 de 10 marcas por categoria. O que já estava no livro não mudou: variáveis, faixas, limites,
 dominante, imitar, e a classificação de E, C e D.*
 
+*Mudança de 02/10/2026, y-a (dele), que supera a y-b. Feita **antes do primeiro convite**: o
+commit das datas da janela não existe. Voltam os textos que o ensaio de 27/09 tinha corrigido:
+o filtro da v-a e a pergunta dos amigos da u-a; o convite e a tela de conclusão passam a dizer
+o mesmo critério do filtro. Muda só o `questionario.yaml` (§4); a análise não lê o texto das
+perguntas. Nenhuma resposta existe (§10).*
+
 **Origem e o que este substitui.**
 - [`preregistro-teste-de-marca-2026-09-20.md`](../preregistro-teste-de-marca-2026-09-20.md):
   o de 20/09, como declarado. sha256
@@ -57,9 +63,10 @@ Nenhuma foi preenchida por uma sessão. A coluna "20/09" diz o que mudou desde a
 | ordem das direções | aleatória | **seis ordens balanceadas; a versão sai de um contador de ABERTURAS no banco (mod 6)**, não do link | g-B revista, ab-a |
 | tamanho da amostra | — | **quem aparecer numa janela de 21 dias corridos**; nunca encerrar olhando o resultado | h-A |
 | estímulo | — | **imagem fixa**: os seis PNG aprovados, pelo sha256 | i-A |
-| amigos | (a P-162 dizia: só pilotam) | **contam**, pela pergunta "Você conhece quem criou este app?"; a análise sai com e sem eles, e **a sem eles decide** | amigos, r-a, y-b |
-| filtro | "aporta todo mês em renda variável há pelo menos 6 meses" | **o mesmo texto** ("Você aporta todo mês em renda variável há pelo menos 6 meses?") | y-b |
-| u-a e v-a | — | **superadas pela y-b**: voltaram os textos de 20/09, e o defeito que o ensaio tinha achado vira limitação (§9) | y-b |
+| amigos | (a P-162 dizia: só pilotam) | **contam**, pela pergunta "Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"; a análise sai com e sem eles, e **a sem eles decide** | amigos, r-a, u-a, y-a |
+| filtro | "aporta todo mês em renda variável há pelo menos 6 meses" | **sem jargão:** "Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"; o convite e a tela de conclusão dizem o mesmo critério | v-a, y-a |
+| u-a e v-a | — | ~~**superadas pela y-b**: voltaram os textos de 20/09, e o defeito que o ensaio tinha achado vira limitação (§9)~~ **restauradas pela y-a, 02/10/2026** | y-a |
+| **y-a** (02/10) | — | **supera a y-b:** voltam os textos da u-a e da v-a. A y-b veio de um prompt que citava os textos de 20/09 como decisão; o texto antigo dos amigos contamina a análise sem amigos, que é a que decide (r-a), e o filtro usava jargão. Saem as limitações 6 (em parte) e 7 (§9) | y-a |
 | recrutamento | rede do autor, comunidades, conhecidos de conhecidos | **rede pessoal e bola de neve, sem painel pago** | recrutamento |
 | escalas seguro e luxo | "seguro/arriscado", "sofisticado/simples" | **pelo visual:** insegurança ↔ segurança; popular ↔ de luxo | w-a |
 | escalas honesto e confiável | "honesto/vendedor", "confiável/parece golpe" | **mantidas**, com a ordem das palavras igual à da escala | x-a |
@@ -73,12 +80,12 @@ fora: nenhuma decisão dele a incluiu, e a n-A juntou as perguntas sobre o públ
 
 ## 2. Público, filtro, recrutamento, amigos
 
-- **Filtro**, antes de qualquer tela: *"Você aporta todo mês em renda variável há pelo menos 6
-  meses?"* Quem responde "Não" sai. O convite diz o mesmo critério.
+- **Filtro**, antes de qualquer tela: *"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"* Quem responde
+  "Não" sai. O convite e a tela de conclusão dizem o mesmo critério (v-a, y-a).
 - **Recrutamento:** rede pessoal dele e bola de neve, sem painel pago, sem anúncio e sem
   comunidade aberta.
-- **Amigos:** depois do filtro vem *"Você conhece quem criou este app?"*. Quem responde "Sim"
-  segue e conta. A análise sai duas vezes: **sem eles, que decide** (r-a), e com todos, como
+- **Amigos:** depois do filtro vem *"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"* (u-a, y-a).
+  Quem responde "Sim" segue e conta. A análise sai duas vezes: **sem eles, que decide** (r-a), e com todos, como
   sensibilidade.
 - **Consentimento:** é a primeira pergunta. "Não concordo" sai sem ver nenhuma tela; fica
   gravado só que a pessoa não quis participar, com a versão e o dia (§4).
@@ -104,7 +111,7 @@ nova, nova aprovação e novo pré-registro.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `73936c74ce82d3c73c7bc6aee4430ad80da74c108cf91c9aab0eab66f77d757a` |
+| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `02773d8b9b71945e3a463e55ed10696f0d63eb7ddf4780e0fcc9520631f38091` |
 | `tools/analise_teste_marca.py` | a análise inteira: leitura pelo contrato, filtros, janela, regra, hipóteses, abandono por versão e saída | `2c43c9b9f59b19ab7f4784edad8a8b99a8a5b65ef3c1ca836c7f47b996b6caef` |
 
 A versão de leitura, [`questionario.md`](questionario.md), é **gerada** do YAML por
@@ -341,13 +348,17 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
    - A tabela da pesquisa não tem IP. A plataforma tem.
 5. **O resultado escolhe entre direções e não descreve o investidor brasileiro.**
 
-**As dos textos decididos (y-b, w-a, x-a), que o ensaio apontou:**
+**As dos textos decididos (w-a, x-a), que o ensaio apontou.** As 6 e 7 vinham da y-b; a
+y-a (02/10/2026) devolveu os textos da v-a e da u-a, e elas saem. O texto fica riscado, como
+registro.
 
-6. **Filtro com jargão.** "Aporta" e "renda variável" podem não ser entendidos, e quem só
-   aplica no Tesouro pode marcar "sim". "Todo mês" é absoluto: quem pulou um mês decide
-   sozinho se arredonda.
-7. **A pergunta dos amigos vem antes de qualquer tela.** "Este app" ainda não se refere a
-   nada, e quem conhece o autor pode responder "não". A amostra que decide pode ter amigos.
+6. ~~**Filtro com jargão.** "Aporta" e "renda variável" podem não ser entendidos, e quem só
+   aplica no Tesouro pode marcar "sim".~~ *Sai pela y-a: o filtro nomeia ações, ETF e fundos
+   imobiliários.* **Fica:** "todo mês" é absoluto, e quem pulou um mês decide sozinho se
+   arredonda.
+7. ~~**A pergunta dos amigos vem antes de qualquer tela.** "Este app" ainda não se refere a
+   nada, e quem conhece o autor pode responder "não". A amostra que decide pode ter amigos.~~
+   *Sai pela y-a: a pergunta nomeia a pessoa que faz a pesquisa, e não um app.*
 8. **"Segurança"** pode ser lida como risco do investimento, não da tela. **"Popular"** pode
    ser lido como "famoso". As duas escalas são descritivas e não entram na regra.
 9. **`para_mim` e `honesto` sofrem o conteúdo, que é o mesmo nas três direções:** R$ 800 e
@@ -400,6 +411,12 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
   primeiro convite.
 - **O relatório** dá o resultado sem amigos, o resultado com todos, se os dois divergem, e o
   veto aplicado à vencedora com a R3 fechada.
+- **02/10/2026, y-a (dele), antes do primeiro convite.** O `questionario.yaml` mudou: filtro
+  da v-a, pergunta dos amigos da u-a, e o convite e a tela de conclusão com o critério do
+  filtro. sha256 de `73936c74…757a` para `02773d8b…8091` (§4). O `questionario.md` e o
+  `pesquisa/questionario.json` foram regenerados pelos geradores, com `--conferir`. Os ids,
+  as opções e as saídas não mudaram, e a análise não lê o texto das perguntas, então o
+  `tools/analise_teste_marca.py` e o seu sha256 ficam.
 
 ## 11. Privacidade
 

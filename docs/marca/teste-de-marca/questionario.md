@@ -6,7 +6,7 @@ Versão 2, 2026-09-27.
 
 ## 1. O convite (mensagem, fora da página)
 
-> Oi! Estou fazendo uma pesquisa curta, de uns 8 minutos, sobre como as pessoas percebem telas de aplicativos de investimento. É para quem aporta todo mês em renda variável há pelo menos 6 meses. Ela não pede dinheiro, cadastro, nome nem e-mail. O link abre a página da pesquisa: {link}
+> Oi! Estou fazendo uma pesquisa curta, de uns 8 minutos, sobre como as pessoas percebem telas de aplicativos de investimento. É para quem, há pelo menos 6 meses, coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários. Ela não pede dinheiro, cadastro, nome nem e-mail. O link abre a página da pesquisa: {link}
 
 ## 2. Consentimento
 
@@ -16,13 +16,13 @@ Opções: `Concordo` · `Não concordo`. "Não concordo" leva à saída.
 
 ## 3. Filtro de entrada
 
-> Você aporta todo mês em renda variável há pelo menos 6 meses?
+> Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?
 
 Opções: `Sim` · `Não`. "Não" leva à saída.
 
 ## 4. A pergunta dos amigos
 
-> Você conhece quem criou este app?
+> Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?
 
 Opções: `Sim` · `Não`. Todos seguem; a análise sai com e sem quem responde "Sim", e a sem eles decide (r-a).
 
@@ -55,7 +55,7 @@ A imagem aparece quando a pessoa toca em "Ver a tela", fica **5 segundos**, some
 
 ## 7. As mensagens finais
 
-- **Quem respondeu tudo:** Obrigado! A sua resposta foi registrada. Se conhecer alguém que também aporte todo mês em renda variável, pode repassar o link.
+- **Quem respondeu tudo:** Obrigado! A sua resposta foi registrada. Se conhecer alguém que também coloque dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários, pode repassar o link.
 - **Quem não concordou:** Tudo bem, obrigado pelo seu tempo! Só ficou registrado que você preferiu não participar.
 - **Quem não passou no filtro:** Obrigado pelo seu tempo! Esta pesquisa procura um perfil específico.
 

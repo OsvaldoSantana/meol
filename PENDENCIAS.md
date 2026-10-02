@@ -1796,8 +1796,10 @@ decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
 > vale é [`docs/marca/teste-de-marca/preregistro-final.md`](docs/marca/teste-de-marca/preregistro-final.md),
 > com o [questionário como dado](docs/marca/teste-de-marca/questionario.yaml), o
 > [livro de códigos visuais](docs/marca/teste-de-marca/codigos-visuais.yaml) com E, C e D já
-> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: y-b (voltam os
-> textos de 20/09 do filtro e dos amigos), z-a, aa-a e ab-a.
+> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: ~~y-b (voltam os
+> textos de 20/09 do filtro e dos amigos)~~, z-a, aa-a e ab-a. **02/10/2026, y-a:** supera a
+> y-b; voltam os textos do ensaio (u-a e v-a), e o `questionario.yaml` ganha sha256 novo, antes
+> do primeiro convite.
 >
 > **Primeiro convite só depois do merge deste pré-registro e da página (S6) no main, e do
 > commit com as datas da janela.**
