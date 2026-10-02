@@ -1923,6 +1923,15 @@ a lista de marcas por categoria, escrita e empurrada, pela mesma razão da ac-a.
 são de página pública (loja de apps, site); a §5-A.7 vale: nada de sessão logada, e acesso
 recusado sobe a escada (§5-B.18) antes de virar `NAO_CONFIRMADO`.
 
+> **02/10/2026, sessão 1 da R3 (sessão local):** antes da primeira marca, ele emendou o livro de
+> códigos (versão 2; ad-a, ae-a e af-a na fila): quatro categorias novas (consultoria CVM,
+> assessor, robô, planejador), a unidade (app ou site) e 10 marcas sorteadas por categoria. O
+> plano e o sorteio estão gravados ([`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml);
+> semente 20261002): consultoria 528, assessor 148, corretora 138 e gestora 1.195 no universo.
+> **Nenhuma marca visitada.** O andamento mora em
+> [`docs/marca/pesquisa-marcas-rodada3-2026-09.md`](docs/marca/pesquisa-marcas-rodada3-2026-09.md),
+> §5. **As visitas só começam depois do merge** que grava a emenda e o sorteio.
+
 ---
 
 ## Ao voltar ao desktop

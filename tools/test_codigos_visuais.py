@@ -141,11 +141,28 @@ def test_mutacao_categorias_da_r3_em_vez_do_livro_deixam_o_veto_passar(monkeypat
         V.veto(ESPERADO["C"], grupo, LIVRO)
 
 
-def test_as_sete_categorias_concorrentes_de_ac_a():
+def test_as_onze_categorias_concorrentes_de_ac_a_e_ad_a():
+    """ac-a deu sete; ad-a (02/10, antes da primeira marca da R3) acrescentou quatro."""
     assert list(LIVRO["veto"]["categorias_concorrentes"]) == [
         "banco_tradicional", "banco_digital", "corretora", "gestora_e_private", "pagamentos",
-        "consolidador", "casa_de_analise_e_educacao"]
+        "consolidador", "casa_de_analise_e_educacao",
+        "consultoria_cvm", "assessor", "robo", "planejador"]
     assert LIVRO["veto"]["categorias_fora_do_veto"] == ["referencia_de_sentimento"]
+
+
+def test_precedencia_cobre_exatamente_as_categorias_concorrentes():
+    """ad-a: marca que cabe em duas categorias fica com a primeira da precedencia; uma
+    categoria fora da precedencia deixaria o desempate sem regra."""
+    v = LIVRO["veto"]
+    assert sorted(v["precedencia"]) == sorted(v["categorias_concorrentes"])
+    assert len(v["precedencia"]) == len(set(v["precedencia"]))
+
+
+def test_unidade_e_amostra_da_r3_declaradas():
+    """ae-a e af-a: a unidade (app ou site) e a amostra minima sao dado do livro."""
+    u = LIVRO["unidade_na_r3"]
+    assert set(u) == {"com_app", "sem_app", "registro", "sensibilidade"}
+    assert LIVRO["veto"]["amostra_sorteada_por_categoria"] >= LIVRO["veto"]["n_minimo_de_marcas"]
 
 
 def test_centrais_do_codigo_e_do_livro_sao_as_mesmas():

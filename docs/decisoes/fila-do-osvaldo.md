@@ -151,6 +151,19 @@ quem escolhesse as categorias depois poderia escolher o veto.
 |---|---|---|---|
 | **ac-a** | quais categorias contam como "concorrentes" no veto, e quem as fixa | **fixadas agora no livro de códigos, todas as financeiras:** banco tradicional, banco digital, corretora (com banco de investimento), gestora e private, pagamentos, consolidador de carteira, casa de análise e educação. As referências de sentimento (SBB, Volvo) ficam fora do veto | só quem vende investimento (sem pagamentos nem casa de análise); a R3 declara antes de começar |
 
+### Respostas dele, 02/10/2026, ao abrir a rodada 3 de marcas (P-170)
+
+Dadas na sessão local do Claude Code, antes da primeira marca classificada e antes do primeiro
+convite (o commit das datas da janela não existe). O prompt da R3 dizia que o livro de códigos
+não se alterava; a sessão mostrou três pontos em que, sem mudança, o veto não funcionaria, e
+ele escolheu emendar.
+
+| código | o problema | resposta | alternativas não escolhidas |
+|---|---|---|---|
+| **ad-a** | o prompt audita consultorias, assessores, robôs e planejadores, e nenhuma dessas é categoria do livro (ac-a): o `veto()` as recusaria. A consultoria é a categoria do próprio MEOL. **A falta foi da proposta da ac-a, feita por uma sessão** | **emendar o livro agora:** quatro categorias concorrentes novas (`consultoria_cvm`, `assessor`, `robo`, `planejador`) e uma precedência para marca que caiba em duas | ficarem fora do veto, só descritivas; encaixar nas sete da ac-a |
+| **ae-a** | o livro classifica "a primeira tela do app", que fica atrás do login, e muita marca não tem app | **o app pela primeira captura de interface da App Store; sem app, o site em 390 px**; cada marca registra qual, e o dominante sai também só com as de app | só app (o resto fora do livro); app mais prints dele |
+| **af-a** | a saturação pode parar uma categoria com 3 marcas, e o dominante pede n ≥ 5 | **pelo menos 10 marcas sorteadas por categoria** na classificação visual; a saturação continua valendo para os códigos MC | 5 sorteadas; só a saturação |
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do

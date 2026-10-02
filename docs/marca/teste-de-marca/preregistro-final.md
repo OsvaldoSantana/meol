@@ -14,6 +14,13 @@ concorrentes do veto ficam fechadas no livro de códigos (ac-a, dele); o classif
 entra no conjunto congelado (eram nove arquivos); o contrato de privacidade exige envio por
 POST; e a limitação 4 ganha o painel do Firewall da Vercel. Nenhuma resposta existe.*
 
+*Emenda de 02/10/2026, livro de códigos versão 2 (ad-a, ae-a e af-a, dele). Feita **antes da
+primeira marca da R3 e antes do primeiro convite**: o commit das datas da janela não existe, e
+nenhuma marca foi classificada. Entram quatro categorias concorrentes (consultoria CVM,
+assessor, robô e planejador), a unidade que a R3 classifica (app ou site) e a amostra mínima
+de 10 marcas por categoria. O que já estava no livro não mudou: variáveis, faixas, limites,
+dominante, imitar, e a classificação de E, C e D.*
+
 **Origem e o que este substitui.**
 - [`preregistro-teste-de-marca-2026-09-20.md`](../preregistro-teste-de-marca-2026-09-20.md):
   o de 20/09, como declarado. sha256
@@ -59,6 +66,7 @@ Nenhuma foi preenchida por uma sessão. A coluna "20/09" diz o que mudou desde a
 | imagem de estilo de vida na D | prevista | ilustração desenhada em código, **provisória** (P-168) | k-A |
 | **veto de distinção** | — | se a vencedora pela 17a **imitar** o código dominante de uma categoria auditada na R3, a escolha volta para ele; **a direção só sai com a R3 fechada** (§8) | veto (27/09), aa-a |
 | categorias do veto | — | **fechadas no livro de códigos, não na R3:** banco tradicional, banco digital, corretora, gestora e private, pagamentos, consolidador, casa de análise e educação; as referências de sentimento ficam fora do veto (§8) | ac-a (02/10) |
+| mais quatro categorias, a unidade e a amostra da R3 | — | **consultoria CVM, assessor, robô e planejador** entram no veto, com uma precedência para quem cabe em duas; a R3 classifica **o app** (primeira captura de interface da App Store) ou, **sem app, o site** em 390 px, com o dominante também só com as de app; **pelo menos 10 marcas sorteadas por categoria** (§8) | ad-a, ae-a, af-a (02/10) |
 
 **O que não entra.** A H-A1, que a P-162 dizia que "pode entrar como exploratória", fica de
 fora: nenhuma decisão dele a incluiu, e a n-A juntou as perguntas sobre o público na P-154.
@@ -228,7 +236,7 @@ nenhuma frase de participante entra no repositório.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `d5c7306a5a84b191856646f6268e3c5c7e8996a35d75559d217e3eea64fdb074` |
+| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `1d32a59442693be97c6cc9628f422bb0509007fb9a205d1286365f1e1a14719b` |
 | `tools/codigos_visuais.py` | o classificador e o veto, os mesmos para as direções e para as marcas da R3. Congelado desde 02/10: sem ele no conjunto, o cálculo do veto podia mudar depois de a R3 começar sem que nada reprovasse | `7bf3129599fffaea6b883d6e1512c47eeabe96fa8c7e6ed63fb38083711f7188` |
 
 **As variáveis.**
@@ -257,6 +265,23 @@ R3**.
 | `pagamentos` | carteira ou conta de pagamento | PicPay, Mercado Pago, PagBank |
 | `consolidador` | app de acompanhamento de carteira | Gorila, Kinvo |
 | `casa_de_analise_e_educacao` | casa de análise ou marca de educação financeira | Empiricus, Suno, Me Poupe!, Primo Rico |
+| `consultoria_cvm` *(ad-a)* | consultoria de valores mobiliários registrada na CVM (Resolução CVM 19), pessoa jurídica: **a categoria do próprio MEOL** | — |
+| `assessor` *(ad-a)* | assessoria de investimento registrada na CVM (o antigo agente autônomo) | — |
+| `robo` *(ad-a)* | robô de investimento: a pessoa responde um perfil e o app monta e rebalanceia a carteira | — |
+| `planejador` *(ad-a)* | planejador financeiro pessoal com marca própria | — |
+
+**Precedência (ad-a).** Marca que cabe em duas categorias fica com a primeira desta ordem:
+robô, consultoria CVM, planejador, assessor, consolidador, corretora, gestora e private, casa
+de análise e educação, pagamentos, banco digital, banco tradicional.
+
+**A unidade na R3 (ae-a).** Com app: a primeira captura da App Store do Brasil que mostra a
+interface, recortada na tela do aparelho, em 390 px. Sem app: a página inicial do site oficial
+em 390 px, sem rolar. Cada marca registra qual foi usada; o dominante sai também **só com as de
+app**, como sensibilidade, e o veto usa todas. A tela depois do login fica fora do alcance de
+quem audita.
+
+**A amostra (af-a).** A R3 sorteia pelo menos **10 marcas por categoria** para a classificação
+visual, independentemente da saturação dos códigos MC, que é textual.
 
 As **referências de sentimento** (rodada 2: SBB, Volvo) podem ser auditadas na R3 com a
 categoria `referencia_de_sentimento`: entram classificadas e não acionam o veto. **Marca com
@@ -360,6 +385,10 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
     classifica, e a escolha do app é de quem classifica na R3. Crédito (Serasa) não está na
     lista nem fora do veto: uma marca só de crédito não tem categoria no livro, e o
     classificador a recusa se ela aparecer no arquivo do veto.
+22. **A unidade da R3 não é a das direções** (ae-a). E, C e D são a tela do app inteira; as
+    marcas são a captura de marketing da App Store, escolhida pela marca, ou o site, que é
+    página de venda e não tela de uso. O dominante só com as de app mede o tamanho dessa
+    diferença; não a elimina.
 
 ## 10. Mudanças depois do merge
 

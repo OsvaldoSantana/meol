@@ -1,0 +1,92 @@
+# O plano da rodada 3 de marcas (R3, P-170) -- DADO (P2), gravado e empurrado ANTES da
+# primeira marca classificada (P-170: "antes da primeira marca, a lista de marcas por
+# categoria, escrita e empurrada"). O sorteio sai de tools/r3_universo.py, que le este arquivo e
+# os cadastros oficiais baixados em data/r3/ (fora do git), e grava a ordem de visita de cada
+# categoria em docs/marca/rodada3/sorteio-<categoria>.csv.
+# A classificacao visual segue o livro de codigos versao 2
+# (docs/marca/teste-de-marca/codigos-visuais.yaml: ad-a, ae-a, af-a, 02/10/2026).
+versao: 1
+data: 2026-10-02
+
+# Uma semente para todas as categorias. A ordem base, antes da permutacao, e o CNPJ crescente:
+# quem baixar os mesmos arquivos (o sha256 abaixo) chega a mesma ordem.
+semente: 20261002
+
+# Os cadastros oficiais lidos, com o sha256 do arquivo baixado. Mudar de arquivo e sorteio novo.
+fontes:
+  consultor_vlmob:
+    url: "https://dados.cvm.gov.br/dados/CONSULTOR_VLMOB/CAD/DADOS/cad_consultor_vlmob.zip"
+    arquivo_local: data/r3/cvm/cad_consultor_vlmob.zip
+    sha256: dfb7c53e878317f51794ba65c89e138d5f1c25d5e431d9a9c48c1008bc20dc5f
+    baixado_em: 2026-10-02
+  agente_auton:
+    url: "https://dados.cvm.gov.br/dados/AGENTE_AUTON/CAD/DADOS/cad_agente_auton.zip"
+    arquivo_local: data/r3/cvm/cad_agente_auton.zip
+    sha256: 65fdd31ccba2bcf976b3d80c58bfaa5f24e5efa4812828dc406cf96f75483ee5
+    baixado_em: 2026-10-02
+  intermed:
+    url: "https://dados.cvm.gov.br/dados/INTERMED/CAD/DADOS/cad_intermed.zip"
+    arquivo_local: data/r3/cvm/cad_intermed.zip
+    sha256: 0ef327a9db21cf5733405dbd60988b87c2f452ca2273904e51517ce691150517
+    baixado_em: 2026-10-02
+  adm_cart:
+    url: "https://dados.cvm.gov.br/dados/ADM_CART/CAD/DADOS/cad_adm_cart.zip"
+    arquivo_local: data/r3/cvm/cad_adm_cart.zip
+    sha256: 1839dfe4573f2e2854fdb3ea6c6789db3565fa1fdda87a494cce8866f0a270a2
+    baixado_em: 2026-10-02
+  registro_fundo:
+    url: "https://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip"
+    arquivo_local: data/r3/cvm/registro_fundo_classe.zip
+    sha256: eae256cd9c5ffd0bf8b0498ac7b602e2aa27d19320696f2fcb4fd08029d0ad14
+    baixado_em: 2026-10-02
+
+# Os universos com lista oficial. Todos: PJ "EM FUNCIONAMENTO NORMAL", um CNPJ uma vez, e SO
+# quem declara site no cadastro (vies declarado: quem nao tem site fica fora, e a amostra
+# descreve as marcas que se mostram na internet).
+universos:
+  consultoria_cvm:
+    fonte: consultor_vlmob
+    membro: cad_consultor_vlmob_pj.csv
+    coluna_site: SITE_ADMIN
+  assessor:
+    fonte: agente_auton
+    membro: cad_agente_auton_pj.csv
+    coluna_site: SITE_ADMIN
+  corretora:
+    # "plataformas de fundos" sao distribuidoras: entram aqui, e nao em gestora.
+    fonte: intermed
+    membro: cad_intermed.csv
+    coluna_site: SITE_WEB
+    tipos: ["CORRETORAS", "DISTRIBUIDORAS"]
+  gestora_e_private:
+    # o cadastro de fundos da o gestor; o site vem do cadastro de administradores de carteira
+    fonte: registro_fundo
+    membro: registro_fundo.csv
+    situacao_do_fundo: "Em Funcionamento Normal"
+    site_de: adm_cart
+    membro_site: cad_adm_cart_pj.csv
+    coluna_site: SITE_ADMIN
+
+# A visita: na ordem do sorteio, ate classificar `amostra_sorteada_por_categoria` marcas
+# (livro, af-a). Quem nao passa num criterio e PULADO com o motivo, e a visita segue para a
+# proxima da lista. Os criterios foram escritos antes de qualquer visita.
+pular_se:
+  site_inacessivel: "o site nao abre depois da escada inteira (5-B.18), com os degraus transcritos"
+  nao_atende_pf: "o site nao oferece servico a pessoa fisica no Brasil (so institucional, so empresa, so estrangeiro)"
+  duplicada: "a marca ja foi classificada (mesmo grupo e mesma marca comercial)"
+  sem_marca: "o site nao tem marca propria (pagina em construcao, cartao de visita, pagina de terceiro)"
+# Marca cuja categoria pela precedencia do livro e OUTRA (ex.: uma consultoria que e um robo)
+# e classificada na categoria dela, e nao conta para a categoria em que foi sorteada.
+
+# O que ainda nao tem universo medido. Cada um sobe a escada (5-B.18) atras de uma lista
+# oficial antes de qualquer lista por busca; se for por busca, fica declarado.
+a_fazer:
+  robo: "lista oficial de robos (CVM, ANBIMA) a procurar"
+  consolidador: "lista oficial a procurar"
+  planejador: "a certificacao e a associacao que os listam, lidas na fonte"
+  banco_tradicional: "lista do Banco Central a ler na fonte"
+  banco_digital: "lista do Banco Central a ler na fonte"
+  pagamentos: "lista do Banco Central (instituicoes de pagamento) a ler na fonte"
+  casa_de_analise_e_educacao: "lista oficial a procurar (casas de analise registradas na CVM)"
+  fora_do_brasil: "secao separada (decisao dele, 27/09); nao entra no dominante brasileiro"
+  nao_auditadas_r1_r2: "Santander, Caixa, Itau Personnalite e Private, Suno, SPX, Braun, Grand Seiko e Leica"
