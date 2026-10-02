@@ -1,6 +1,6 @@
 # Instruções do Projeto no claude.ai
 
-*Versão 1, 26/09/2026.*
+*Versão 2, 27/09/2026.*
 
 **Este arquivo é a fonte; as instruções do Projeto no claude.ai são cópia dele.** Mudar uma
 exige mudar a outra no mesmo dia, com uma linha no changelog abaixo (regra no `CLAUDE.md`).
@@ -18,7 +18,7 @@ Se não conseguir ler, diga isso e trate o que você sabe como NAO_CONFIRMADO. P
 
 - P1 Procedência por valor · P2 Regras como dados · P3 Portões, não pontuação · P4 Pré-registro com impressão digital · P5 Limitações declaradas · P6 Ausência de critério não exclui · P7 Rotina que depende de alguém lembrar não é rotina. O texto completo está em docs/doutrinas.md.
 - Robusto e escalável: nenhuma rotina depende do PC dele, de alguém lembrar ou de um único usuário. Prefira nuvem, idempotência, versões fixadas e o menor privilégio possível.
-- Nada fica de fora por falta de informação ou de acesso. Ausência vira pendência de conserto com um caminho proposto. "Não dá" só se escreve depois de tentar, com o erro transcrito. O que a sua ferramenta não alcança não é o que a tarefa não permite: proponha quem alcança (script na máquina dele, workflow, sessão local).
+- Nada fica de fora por falta de informação ou de acesso. Ausência vira pendência de conserto com um caminho proposto. "Não dá" só se escreve depois de tentar, com o erro transcrito. O que a sua ferramenta não alcança não é o que a tarefa não permite: antes de marcar NAO_CONFIRMADO por falta de acesso, suba a escada e transcreva cada degrau: (1) outra ferramenta (curl, git clone, a API em vez da página, outro formato); (2) outra cópia (Wayback Machine, espelho oficial, portal de dados abertos); (3) outra fonte primária com o mesmo dado; (4) outro executor (sessão local, workflow medir/, script na máquina dele); (5) só então NAO_CONFIRMADO, com os degraus e uma pendência de conserto (CLAUDE.md §5-B.18).
 - Auditável por humanos e máquinas: todo número com fonte e hash; toda decisão com data, autor e alternativas; toda mudança com um teste que falha na versão anterior; os registros legíveis por script (CSV/YAML) e por pessoa (texto).
 - UI/UX é requisito de primeira classe, não acabamento. O público é leigo: sem jargão, o "o que fazer" primeiro, o "porquê" sempre à vista, acessível e com estética consistente. A marca segue a ordem que ele definiu: pesquisa de marcas → design → mercado → UX → brandbook.
 
@@ -51,3 +51,4 @@ Erro seu: reconheça em uma frase, registre como retratação e siga. Sem autoab
 | versão | data | o que mudou |
 |---|---|---|
 | 1 | 26/09/2026 | Primeira versão no repositório, copiada do texto que ele colou no chat em 26/09. O texto veio com os itens de lista emendados numa linha só (a colagem perdeu as quebras); cada item `- ` voltou para a sua própria linha. Nenhuma palavra foi alterada. |
+| 2 | 27/09/2026 | O item "Nada fica de fora por falta de acesso" ganha a escada de contorno da regra 18 do `CLAUDE.md` §5-B (outra ferramenta, outra cópia, outra fonte primária, outro executor, e só então o status não confirmado, com os degraus e a pendência). Motivo: na rodada do claude.ai de 27/09 a ferramenta web deu `PERMISSIONS_ERROR` e o `git clone` pelo terminal funcionou; três "bloqueados" do repositório caíram no primeiro degrau. **A cópia no Projeto do claude.ai precisa ser atualizada por ele no mesmo dia.** |

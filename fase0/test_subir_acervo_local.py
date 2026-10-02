@@ -112,3 +112,117 @@ def test_P145_o_banco_de_ISIN_sobe_e_a_captura_mais_recente_e_a_canonica(tmp_pat
                       cache=str(tmp_path / "cache"))
     with open(caminho, "rb") as f:
         assert f.read() == b"isin 01"
+
+
+# -- P-150 parte 1: os eventos da B3 que so existem no disco dele (captura de 11/09) --
+
+def _eventos(tmp_path, dias=("2026-09-11",)):
+    """A arvore que o `coletar_b3.py` grava em `data/bronze/b3`, por dia de captura."""
+    b3 = tmp_path / "data" / "bronze" / "b3"
+    for i, dia in enumerate(dias):
+        d = f"dt_captura={dia}"
+        for rel, corpo in ((f"indices/{d}/IBOV.json", f'{{"carteira": {i}}}'),
+                           (f"eventos/{d}/PETR.json", f'{{"cash": {i}}}'),
+                           (f"proventos/{d}/PETR/pagina-001.json", f'{{"p": {i}}}'),
+                           (f"proventos/{d}/VALE.cash.json", f'{{"evidencia": {i}}}')):
+            p = b3 / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(corpo, encoding="utf-8")
+    (b3 / "manifesto.jsonl").write_text('{"url": "x"}\n', encoding="utf-8")
+    return b3
+
+
+RECURSOS_EVENTOS = ("indice_carteira", "eventos_suplemento", "proventos")
+
+
+def test_P150_o_plano_lista_indice_eventos_e_proventos(tmp_path):
+    """Falha na versao anterior: o plano so conhecia cotahist e isin na B3, e os 207
+    arquivos da captura de 11/09 ficavam no disco dele."""
+    repo = _acervo(tmp_path)
+    _eventos(tmp_path)
+    subir = {(x["recurso"], x["arquivo"]) for x in S.plano(repo)
+             if x["acao"] == S.SUBIR and x["recurso"] in RECURSOS_EVENTOS}
+    assert subir == {("indice_carteira", "IBOV.json"), ("eventos_suplemento", "PETR.json"),
+                     ("proventos", "PETR__pagina-001.json"), ("proventos", "VALE.cash.json")}
+
+
+def test_P150_a_chave_e_a_mesma_que_o_passo_do_cron_daria(tmp_path):
+    """A carga inicial e o `captura_eventos_b3` nao podem discordar sobre o nome: se
+    discordassem, o 11/09 e a primeira segunda seriam dois arquivos, e nao duas versoes."""
+    import capturar_eventos_b3 as E
+    repo = _acervo(tmp_path)
+    b3 = _eventos(tmp_path)
+    plano = {x["chave"] for x in S.plano(repo)
+             if x["acao"] == S.SUBIR and x["recurso"] in RECURSOS_EVENTOS}
+    arm = A.ArmazemMemoria()
+    E.enviar(E.arquivos_do_coletor(str(b3)), arm, str(tmp_path / "reg.csv"), [], {})
+    assert plano == set(arm.objetos)
+
+
+def test_P150_metadados_inventario_do_acervo_de_eventos_e_versao_pelo_dia(tmp_path):
+    repo = _acervo(tmp_path)
+    _eventos(tmp_path, dias=("2026-09-06", "2026-09-11"))
+    itens = [x for x in S.plano(repo) if x["acao"] == S.SUBIR
+             and (x["recurso"], x["arquivo"]) == ("proventos", "PETR__pagina-001.json")]
+    papeis = {x["versao"]: x["papel"] for x in itens}
+    assert papeis == {"20260906": "snapshot", "20260911": "canonico"}
+    arm = A.ArmazemMemoria()
+    assert S.main(["--aplicar"], armazem=arm, repo=repo) == 0
+    inv = V._ler(S.inventario(repo, "b3_eventos"))
+    assert {ln["recurso"] for ln in inv} >= set(RECURSOS_EVENTOS)
+    assert all(ln["fonte"] == "b3" for ln in inv)
+    assert not any(ln["recurso"] in RECURSOS_EVENTOS
+                   for ln in V._ler(S.inventario(repo, "b3"))), "o acervo dos eventos e outro"
+    caminho = V.abrir("proventos", "PETR__pagina-001.json", repo=repo, armazem=arm,
+                      cache=str(tmp_path / "cache"))
+    with open(caminho, encoding="utf-8") as f:
+        assert f.read() == '{"p": 1}', "a vigente e a do dia mais recente"
+
+
+def test_P150_o_manifesto_do_coletor_sobe_como_log_e_fora_do_teto(tmp_path):
+    """O manifesto e a procedencia do 11/09 (sha256 e instante de cada pedido)."""
+    repo = _acervo(tmp_path)
+    _eventos(tmp_path)
+    man = [x for x in S.plano(repo) if x["recurso"] == "manifesto_coletor"]
+    assert len(man) == 1 and man[0]["acao"] == S.SUBIR
+    assert man[0]["chave"].startswith("logs/capturas_b3_eventos/carga-inicial__manifesto__")
+    arm = A.ArmazemMemoria().limitar(1)            # teto de 1 byte: so o isento sobe
+    assert S.aplicar(man, arm, repo) == 1
+    assert list(arm.objetos) == [man[0]["chave"]]
+    with pytest.raises(A.TetoExcedido):
+        S.aplicar([x for x in S.plano(repo) if x["recurso"] == "proventos"
+                   and x["acao"] == S.SUBIR], arm, repo)
+
+
+def test_P150_fora_da_convencao_nos_eventos_e_desconhecido(tmp_path):
+    repo = _acervo(tmp_path)
+    b3 = _eventos(tmp_path)
+    (b3 / "eventos" / "solto.json").write_text("{}", encoding="utf-8")
+    (b3 / "eventos" / "dt_captura=2026-09-11" / "notas.txt").write_text("?", encoding="utf-8")
+    desc = sorted(os.path.basename(x["caminho"]) for x in S.plano(repo)
+                  if x["acao"] == S.DESCONHECIDO)
+    assert desc == ["notas.txt", "notas.txt", "solto.json"]
+
+
+def test_P150_o_padrao_continua_plano_e_nada_sai(tmp_path):
+    repo = _acervo(tmp_path)
+    _eventos(tmp_path)
+    arm = A.ArmazemMemoria()
+    assert S.main([], armazem=arm, repo=repo) == 0
+    assert arm.objetos == {} and not os.path.exists(S.inventario(repo, "b3_eventos"))
+
+
+def test_P150_P136_os_eventos_nao_entram_na_release(tmp_path):
+    """A release le so o acervo da CVM, e o `publicavel` recusa qualquer fonte que nao
+    seja a CVM: depois da carga, nenhum evento aparece como candidato."""
+    import publicar_cvm
+    repo = _acervo(tmp_path)
+    _eventos(tmp_path)
+    arm = A.ArmazemMemoria()
+    assert S.main(["--aplicar"], armazem=arm, repo=repo) == 0
+    assert all(v.get("fonte") == "cvm" for v in publicar_cvm.versoes(repo))
+    for x in S.plano(repo):
+        if x["acao"] == S.SUBIR and x["recurso"] in RECURSOS_EVENTOS:
+            with pytest.raises(publicar_cvm.PublicacaoRecusada):
+                publicar_cvm.publicavel(dict(fonte=x["fonte"], recurso=x["recurso"],
+                                             arquivo=x["arquivo"], sha256=x["sha256"]))

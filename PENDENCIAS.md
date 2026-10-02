@@ -45,13 +45,28 @@ páginas. **Um subagente por documento** é a diferença entre caber e não cabe
 
 | chave | bloqueia | o que fecha |
 |---|---|---|
-| `etf.BOVV11` | `tabela_etf_rv_completa` | site do gestor bloqueia robô — visita manual |
+| `etf.BOVV11` | `tabela_etf_rv_completa` | ~~site do gestor bloqueia robô — visita manual~~ escada subida em 27/09 sem resolver da nuvem (`docs/fontes/MAPA-CONSTANTES.md`); o degrau 4 é da sessão local, roteiro abaixo |
 | ~~`etf.IMAB11`~~ | **fechada 05/09** — 0,25% a.a. (página do gestor, PARCIAL). Falta o regulamento para virar COMPLETO |
 | `etf.ACWI11` | `comparacao_global_amplo` | regulamento / página do produto |
 | `exterior.vest_stablecoin.iof` | `ordenacao_rotas_exterior` | tratamento de IOF em stablecoin |
 
 O `IMAB11` é o mais valioso: é o único concorrente conhecido do Tesouro IPCA+ na
 função `PROTECAO_REAL` que não paga a custódia de 0,20% a.a. da B3.
+
+> **27/09/2026 — BOVV11, o degrau 4 da escada (§5-B.18), para a sessão local.** Da nuvem, os
+> degraus 1 a 3 falharam com o erro transcrito no `MAPA-CONSTANTES.md` (403 do Akamai no site
+> do gestor; túnel caído no `web.archive.org`; CVM sem campo de taxa para ETF). ⚙ **Na máquina
+> dele**, sem navegador e sem sessão logada:
+> 1. `curl -sS -L -o bovv11.html -w "%{http_code}\n" https://www.itnow.com.br/bovv11/` — IP
+>    residencial costuma passar pela WAF. Se der 200, procurar a lâmina ou o regulamento
+>    linkados na página e baixá-los com `curl`.
+> 2. Se der 403: `curl -sS -L -o bovv11_wb.html "https://web.archive.org/web/20260513194558id_/https://www.itnow.com.br/bovv11/"`
+>    (a cópia de 13/05/2026 que a API da Wayback aponta).
+> 3. Transcrever para `docs/fontes/` o trecho com a **taxa total** e a composição (P-50: adm,
+>    gestão, custódia), com URL, data do documento e sha256 do arquivo baixado.
+> Só depois disso o valor entra no `custos.yaml`, pelo protocolo de mudança: ele muda a rota
+> BOVV11 no motor, e o `conteudo.yaml` dos estímulos do teste de marca sai do motor (o
+> `--conferir` pega se mudar).
 
 ---
 
@@ -414,6 +429,13 @@ rebalanceamento capturado, ou seja, ~2027).
 Mesma família: **backtest anterior a 2026 é reconstrução, não observação.** O acervo
 ponto-no-tempo começa no primeiro dia de captura. Isto também é limitação declarada, e é
 a mais importante das duas.
+
+> **26/09/2026 — a captura dos eventos da B3 (P-150) herda este viés.** O universo dela é o
+> IBOV do dia: quem sai do índice para de ser capturado. Está em
+> `limitacoes_declaradas.universo_da_captura_de_eventos_e_o_ibov_do_dia`, com esta pendência.
+> O que resolve é uma decisão de desenho: pedir também quem já passou pela carteira, ou todo
+> o COTAHIST. Do lado bom, o retrato semanal da carteira gravado pela mesma captura é a
+> composição observada daqui para frente.
 
 ---
 
@@ -1152,6 +1174,28 @@ critério corrigido repete o defeito da P-116.
 
 > **Decisão dele, 26/09/2026: `115a`** (recomendada) — empurrar o critério corrigido do degrau como pré-registro antes de medir 2016–2020. O Claude Code redige; ele responde "pode empurrar" antes de qualquer medição. Registro em `docs/decisoes/fila-do-osvaldo.md`.
 
+> **26/09/2026, revisão 4 (no rascunho do PR #27, §9):** "pode empurrar" dado, com merge
+> condicionado. **Antes do merge, a janela é escolhida pelo n de JCPs, sem ler preço.** As
+> candidatas são 2016–2020, 2015–2020, 2014–2020 e 2013–2020. Vale a menor com
+> **n_JCP ≥ 1.648**; se nenhuma atender, fica 2016–2020 com o `NAO_CONFIRMADO` provável
+> declarado. Quem conta é o `auditoria/c02_contar_n.py` (só no branch do #27 até o merge),
+> que lê do silver só `cod`, `type_stock`, `tipo` e as duas datas. **A ordem da sessão local:**
+> 1. silver com calendário desde **2013-01-01**;
+> 2. contar;
+> 3. gravar contagem, janela e sha256 num commit só;
+> 4. sortear e empurrar o D1;
+> 5. merge.
+>
+> ~~**Aberta, e decidir antes de segunda:** o n do silver é teto do n do K2. A calibração pela
+> razão de 2021–2025 está na fila (`n-a` ou `n-b`).~~ **Decidida em 26/09: `n-c`.** O n passa a
+> ser a unidade dos 819, medida por presença no COTAHIST e sem preço. A calibração é condição:
+> sobre 2021–2025 tem de dar 819, senão o script para e mostra a diferença. E há quarentena do
+> retorno do dia ex em 2013–2020 até o merge. Texto na §9 do #27 (`d7811fd`); decisão em
+> `docs/decisoes/fila-do-osvaldo.md`. **Na segunda**, se a calibração parar, a janela não cresce,
+> e a diferença vai para ele antes de qualquer outro passo. **27/09, tolerância de 2% só para
+> cima:** 819 segue; de 820 a 835 segue, com o n × 819 ÷ n_cal arredondado para baixo; fora
+> disso, para (§9 do #27, `239acf1`).
+
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados
 
@@ -1171,7 +1215,13 @@ processo que evita a repetição: critério em um commit, **empurrado**, e só e
 `BLOQUEIA_O_SISTEMA` · ⚙ **exige o desktop**
 
 O `preregistro-ml-v2.md` §11 deixa as versões `NAO_CONFIRMADO` porque a consulta ao PyPI
-**da nuvem** foi recusada por `robots.txt`. A sessão local não tem essa recusa. O conserto é
+**da nuvem** foi recusada por `robots.txt`. A sessão local não tem essa recusa.
+
+> **27/09/2026 — degrau 1 da escada (§5-B.18), da nuvem:** `curl https://pypi.org/pypi/tabpfn/json`
+> respondeu **HTTP 200**. O `tabpfn` 9.0.0 declara `torch>=2.5` e `lightgbm>=4.4` entre as
+> dependências obrigatórias: **o TabPFN traz `torch`**. A recusa era da ferramenta de busca, não
+> do PyPI. O resto da pendência (o `--dry-run` contra a faixa fechada e o tamanho) segue aberto,
+> e talvez não exija o desktop: o índice do PyPI responde desta sessão. O conserto é
 `py -3.11 -m pip install --dry-run lightgbm tabpfn "numpy==2.4.4" "pandas==3.0.2"` — e, se o
 TabPFN trouxer `torch`, anotar o tamanho. É a entrada
 `dependencias_da_familia_aprendizado_nao_medidas`.
@@ -1398,17 +1448,46 @@ cadência declarada em `politica.yaml → regimes_de_captura.b3`, com o mesmo po
 e o mesmo registro. Os termos da B3 permitem capturar para uso pessoal e vedam publicar
 (P-136): o armazém é privado, e os eventos não entram na release da CVM.
 
-## P-147 · A captura do NEFIN ainda não rodou no executor
+**26/09, parte 2 feita (esta sessão, na nuvem).** `fase0/capturar_eventos_b3.py` roda o
+`coletar_b3` numa pasta temporária e sobe cada arquivo ao armazém pela chave de conteúdo
+(`b3/indice_carteira|eventos_suplemento|proventos/…`), com o teto e o registro da CVM
+(`docs/acervo/b3_eventos/capturas.csv`). O passo `captura_eventos_b3` entrou no
+`captura_cvm.yml`; a cadência é dado (`politica.yaml → cadencias_de_captura.b3_eventos`,
+segunda-feira, com motivo), e fora dela o script sai 0 sem pedir nada à B3. O acervo fica em
+`limitacoes_declaradas.captura_de_eventos_b3_ainda_nao_rodou_no_executor` até o cron provar:
+`regimes_de_captura` exige a execução, e a chave `b3` já é do COTAHIST. Rodada real daqui, com
+armazém local: 5m44s, 207 arquivos, 4,3 MB, saída 0 com uma ressalva (MBRF sem evento nenhum —
+A-03). **Fecha quando** o passo sair verde no cron de uma segunda (a primeira é 28/09); nesse
+dia, `b3_eventos` entra em `regimes_de_captura` com a execução e a limitação sai.
 
-**Dono:** o workflow (ninguém dispara) · **Gatilho:** o cron diário das 09:15 UTC, ou um *Run
-workflow* da *Captura CVM* · **Classe:** `BLOQUEIA_O_SISTEMA` (o CSV saiu do git e só volta
-ao runner pelo armazém)
+~~**A parte 1 não roda como está:** `subir_acervo_local.py` só lê `data/bronze/b3/cotahist` e
+`…/isin`, e não as pastas `indices`, `eventos` e `proventos`. Falta estendê-lo (Claude Code, na
+nuvem; reusar `capturar_eventos_b3.arquivos_do_coletor`, para que o 11/09 caia nas mesmas chaves
+que o cron) antes de ⚙ o desktop rodar o `--aplicar`.~~ **Estendido em 26/09.** O
+`subir_acervo_local.py` agora planeja `data/bronze/b3/{indices,eventos,proventos}/dt_captura=…`.
+O recurso e o nome vêm das mesmas funções do passo do cron (`capturar_eventos_b3.RECURSOS` e
+`nome_no_armazem`), e um teste compara as chaves do plano com as que o passo daria para os
+mesmos arquivos. O inventário vai para `docs/acervo/b3_eventos/`. A versão é o dia da captura,
+e o dia mais recente é o canônico. O `manifesto.jsonl` do coletor sobe como log, fora do teto.
+Fora de `dt_captura=…/*.json`, o arquivo sai `DESCONHECIDO` e não sobe. O padrão continua sendo
+o plano. **Falta só a parte do desktop** (roteiro em `## Ao voltar ao desktop`).
 
-O CSV do NEFIN saiu do git em 25/09 (LIC-01). `fase0/capturar_nefin.py` rodou uma vez, na
-máquina dele, e subiu a versão fixada ao R2 (`novo`, `619991c2192c…`). O passo `captura_nefin`
-entrou no `captura_cvm.yml`. **Fecha quando** o passo sair verde no executor. Nesse dia, apagar
-`limitacoes_declaradas.captura_do_nefin_ainda_nao_rodou_no_executor`, e o `test_P7` cobra que o
-regime seja declarado onde ele lê.
+**Achado lateral (26/09):** `fase0/acervo.py → REGISTROS` não lista o registro
+`docs/acervo/b3_eventos/capturas.csv`. Com isso, o `abrir()` enxerga as versões dos eventos pelo
+inventário da carga, mas não as que o cron registrar, e o `frescor()` não vigia essa captura.
+**No dia em que a P-150 fechar**, junto com a entrada em `regimes_de_captura`, o registro entra
+em `REGISTROS`. Antes disso não entra, porque o `frescor` acusaria `NUNCA_OBSERVADO` enquanto o
+cron não roda. **Guardado desde 26/09:** `acervo.regimes_sem_registro()` e
+`test_P150_todo_regime_tem_o_registro_em_acervo_REGISTROS` reprovam um regime cujo registro
+não esteja em `REGISTROS`. Esquecer a segunda metade deixa a suíte vermelha, não calada.
+
+**O universo é o IBOV do dia (26/09, registro).** A captura lê a carteira do dia e pede eventos
+só de quem está nela. Quem sai do índice deixa de ser capturado na segunda seguinte: o que já
+subiu fica no armazém, e o evento novo não entra mais. É o viés da P-48, com direção
+**otimista** no universo. Na série de quem saiu, o erro não tem sinal conhecido: um grupamento
+perdido vira alta no ajuste, e um provento perdido vira queda. Declarado em
+`limitacoes_declaradas.universo_da_captura_de_eventos_e_o_ibov_do_dia`, ligado à P-48 e não a
+esta, porque não acaba quando esta fechar.
 
 ## P-146 · Três passos das métricas que só ele pode dar
 
@@ -1502,6 +1581,12 @@ emenda não precisou fazer, porque o mês saiu igual nas duas:
 > branch, empurrou ao `main` em `53112d6` (16:54Z) um texto de mesma substância e outra redação
 > (sha256 `7fc09d780c5012ac`). O merge de 25/09 ficou com a versão de `2f939ae`, a primeira no
 > `origin`; `53112d6` fica no histórico como registro. Achado GIT-01.
+> **26/09/2026 — quarentena da P-115 (§9 do critério v2, no #27).** Até o merge e a medição
+> do #27, nenhuma medição lê o **retorno do dia ex** em 2013–2020, esta inclusive. Conferido no
+> mesmo dia: o `universo_ml.py`, que esta medição usa, lê do COTAHIST CODBDI, TPMERC, CODNEG,
+> **VOLTOT** e CODISI, e nenhum campo de preço. Volume não é retorno, e a P-145 roda dentro da
+> quarentena **como está**. Se ela passar a abrir preço, espera.
+
 **E a captura do banco de ISIN não é rotina** (P7): foi uma vez, 25/09, `isinp.zip` sha256
 `c4654dbd…`. Para 2010–2017 isso basta (o passado não muda), mas a ponte de um ano novo precisa
 de captura, ou de limitação declarada.
@@ -1573,15 +1658,11 @@ A rodada 1 estima ~28,6 milhões no perfil "Diversifica" (`PARCIAL`, derivado da
 sinais: paralisia, dependência e arrependimento. Sem essa medição, "o público é grande" é
 ordem de grandeza do perfil, não do público.
 
-## P-155 · Ler a WCAG na fonte: contraste, alvo de toque e daltonismo · era P-WCAG
-
-**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do brandbook e da primeira tela
-desenhada · **Classe:** `DECISAO_DE_DESENHO`
-
-O capítulo de acessibilidade do Pix é recomendação e não cobre contraste, tamanho de alvo nem
-daltonismo ([Pix v7.4](docs/marca/pesquisa-pix-e-pendencias-2026-09.md), §1.1). Os requisitos
-de interface declaram a lacuna (§5, item 2). O que fecha: a WCAG lida na fonte, com os critérios
-que viram requisito novo (RI-22 em diante) e a verificação de cada um.
+> **27/09/2026 — a H-A2 passa para cá** (resposta n-A dele). Origem: rodada 1, §7
+> ([pesquisa de fundação](docs/marca/pesquisa-fundacao-2026-09.md)): *"o primeiro susto com
+> queda é um evento comum entre quem saiu da poupança, e está associado a abandono."* Ela
+> tinha ficado sem pendência quando a nota de 26/09 na P-156 deixou lá só as hipóteses de
+> interface. Como a H-A1, é pergunta sobre o público, não sobre a tela.
 
 ## P-156 · Teste com pessoas das hipóteses de interface e de marca
 
@@ -1597,6 +1678,16 @@ hipóteses H1 a H4 do teste de marca. O critério de cada uma é gravado antes d
 As H1 a H4 vêm de um pré-registro do teste de marca de 20/09 que **não está no repositório**
 (a rodada 1 o cita e diz que o atualiza); trazê-lo do Projeto no claude.ai é o primeiro passo
 desta pendência, antes de qualquer estímulo ser mostrado a alguém.
+
+> **26/09/2026:** o escopo de marca (H1 a H4) passa para a P-162, na etapa 3. Esta pendência
+> fica com as hipóteses de interface (H-C1, H-C2, RI-15), na etapa 4. O "primeiro passo"
+> (trazer o pré-registro de 20/09) está feito:
+> `docs/marca/preregistro-teste-de-marca-2026-09-20.md`.
+
+> **27/09/2026 — a H4 do teste de marca vem para cá** (resposta s-a dele, S5). "Esse público
+> aceita mais informação por tela do que um iniciante aceitaria" não é testável no teste de
+> marca, cujo filtro exclui iniciantes. Aqui, onde o teste de interface pode ter os dois
+> grupos, ela entra com o critério gravado antes (P4).
 
 ## P-157 · Importação de carteira: quais formatos são viáveis
 
@@ -1620,19 +1711,217 @@ com agente de IA que recomenda e executa se enquadram ([rodada
 2](docs/marca/pesquisa-marcas-rodada2-2026-09.md), §4.1, `NAO_CONFIRMADO`); e se "padrão é
 recomendação" (RI-07) se sustenta. Depende da P-159: o parecer começa pela norma lida.
 
-## P-159 · Ler a Resolução CVM 19/2021 na fonte primária e confirmar ou retirar a tese de independência
+> **26/09/2026 — a P-159 fechou, e deixa três perguntas para cá.** A Resolução CVM 19 está
+> transcrita em [`docs/fontes/cvm-resolucao-19-consolidada.md`](docs/fontes/cvm-resolucao-19-consolidada.md).
+> (1) O art. 1º exige prestação "de forma profissional" a um cliente. O uso pessoal dele fica
+> fora? A partir de qual momento o MEOL passa a ser serviço? *(26/09/2026: a transcrição dava
+> "o uso pessoal não é prestação de serviço" como confirmado. Virou `INFERENCIA`, nota
+> N-PESSOAL na transcrição: o texto lido não diz isso, e a resposta é do parecer.)* (2) O art. 2º, parágrafo único, I, e
+> o art. 16, II, remetem à norma de adequação ao perfil do cliente, que não foi lida. (3) As
+> Resoluções CVM 21 e 35, citadas pela pesquisa, não foram lidas. Nenhuma das três se resolve
+> por leitura: é parecer.
 
-**Dono:** sessão de pesquisa (nuvem), com a transcrição em `docs/fontes/` · **Gatilho:** antes
-da P-158 e antes de qualquer texto público que prometa independência · **Classe:**
+## P-160 · Telas sem campo no contrato de saída da F0
+
+**Dono:** Osvaldo (decidir o que entra) · Claude Code (especificar) · **Gatilho:** antes de
+desenhar qualquer uma destas telas · **Classe:** `DECISAO_DE_DESENHO`
+
+A especificação da F0 ([`docs/ux/F0-contrato-de-saida.md`](docs/ux/F0-contrato-de-saida.md),
+§5) aplicou a regra do mapa de telas: tela sem campo não se constrói. Cinco ficaram sem campo:
+a O5 (escolhas declaradas, com o porquê), a aba "e se" da T3 (que é contrato de chamada, não
+de campo), as empresas da T4 (o motor decide rota, não papel), o aviso de queda do RI-04 e a
+comparação líquido contra líquido do RI-11. Cada uma ganha campo na especificação, ou sai do
+mapa com o motivo escrito.
+
+## P-161 · A versão do `pyproject.toml` diverge da do `politica.yaml`, e nada as prende
+
+**Dono:** Osvaldo (decidir qual é a fonte) · Claude Code (o teste que prende) · **Gatilho:** a
+próxima subida de versão do `politica.yaml` · **Classe:** `DECISAO_DE_DESENHO`
+
+O `pyproject.toml` diz `version = "1.18.0"`, com o comentário *"acompanha politica.yaml ->
+meta.versao"*. O `politica.yaml` está em **1.35.0**. Medido em 26/09 no clone raso da nuvem
+(113 commits visíveis): as duas já divergem no primeiro commit visível, `b0f494a` de 23/09
+(1.18.0 contra 1.22.0), e a política subiu treze versões depois disso sem o `pyproject`
+acompanhar. Antes de 23/09, este clone não mostra. Nenhum código lê a versão do `pyproject`
+(`grep` em `alocacao/`, `fase0/`, `auditoria/` e `tools/`). A da política vai na procedência de
+todo resultado (`politica_versao`, lida três vezes em `alocacao/alocacao.py`). **Nenhum teste
+compara as duas.** O comentário declara um comportamento que o código não tem.
+
+As perguntas: **qual das duas é a fonte**, e **qual teste as prende**.
+- **(a)** A política é a fonte, e um teste reprova quando `[project].version` ≠
+  `meta.versao`. É o que o comentário promete. O custo é subir dois arquivos a cada mudança
+  de regra.
+- **(b)** As versões são de coisas diferentes: o `pyproject` versiona o ambiente e as
+  dependências, e a política versiona as regras. O comentário sai, e um teste reprova quando
+  alguém escrever de novo que uma acompanha a outra.
+- **(c)** O `pyproject` deixa de ter versão própria (`dynamic`), lida do `politica.yaml`.
+  Exige ferramenta de build, e o projeto não é pacote (B-04).
+
+## P-162 · Teste de marca das direções visuais (H1 a H4)
+
+**Dono:** Osvaldo (recrutamento e custo) · Claude (estímulos, questionário, análise) ·
+**Gatilho:** quando a P-163 estiver pronta **e** o pré-registro final estiver empurrado ·
+**Classe:** `DECISAO_DE_DESENHO`
+
+É a etapa 3 (mercado) da fila do rosto (`docs/decisoes/rosto-v1.md`). O pré-registro de
+20/09 está em `docs/marca/preregistro-teste-de-marca-2026-09-20.md`, sem impressão digital
+e com três lacunas que ele fecha nos blocos 16 e 17 da fila: a direção E fora da H1, a
+margem de empate da regra de decisão, e o desenho do teste da H3. *(27/09: fechadas pelas
+respostas 16b e 17a; entram no pré-registro final, ainda não gravado.)* *(27/09, S4: g-B, h-A, i-A,
+j-A, amigos e recrutamento também respondidos; a S5 grava o pré-registro final depois de ele
+aprovar os PNG da S4.)* ~~Filtro de entrada:
+aporta todo mês em renda variável há pelo menos 6 meses. Pessoas próximas do autor servem
+para **pilotar** o questionário, não para contar como resposta. A medição da H-A1 pode
+entrar como exploratória, declarada como **não sendo prevalência** (a prevalência é da
+P-154).~~ *(27/09, S5: o filtro foi reescrito sem jargão (v-a); as pessoas próximas **contam**,
+com a análise dupla em que a sem elas decide (amigos, r-a); a H-A1 não entra, porque nenhuma
+decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
+
+> **27/09/2026, S5 — o pré-registro final está gravado:**
+> [`docs/marca/preregistro-teste-de-marca-final.md`](docs/marca/preregistro-teste-de-marca-final.md),
+> com o [questionário](docs/marca/teste-de-marca-questionario.md) e a análise
+> (`tools/analise_teste_marca.py`) congelados pelo sha256, e os seis PNG aprovados. A H4 foi
+> para a P-156 (s-a).
+>
+> **Primeiro convite só depois do merge deste pré-registro no main e do commit com as datas
+> da janela.**
+>
+> ~~O que falta, em ordem, é dele: o merge; montar os seis formulários e conferi-los (roteiro em
+> "Ao voltar ao desktop", item 8); o commit das datas; o primeiro convite.~~ A pendência fecha
+> com o relatório da análise, depois do dia 21.
+
+> **27/09/2026, S5 v2 — a versão 1 acima fica SUPERADA, sem ter sido usada** (nenhum convite
+> saiu). Ele trocou o Google Forms por uma **página própria** (Vercel e Supabase, construída na
+> S6) e acrescentou o **veto de distinção** contra a rodada 3 de marcas (R3). O pré-registro que
+> vale é [`docs/marca/teste-de-marca/preregistro-final.md`](docs/marca/teste-de-marca/preregistro-final.md),
+> com o [questionário como dado](docs/marca/teste-de-marca/questionario.yaml), o
+> [livro de códigos visuais](docs/marca/teste-de-marca/codigos-visuais.yaml) com E, C e D já
+> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: y-b (voltam os
+> textos de 20/09 do filtro e dos amigos), z-a, aa-a e ab-a.
+>
+> **Primeiro convite só depois do merge deste pré-registro e da página (S6) no main, e do
+> commit com as datas da janela.**
+>
+> **A escolha da direção só sai com a R3 fechada** (veto de distinção).
+>
+> **02/10/2026, revisão antes do merge (Claude Code, sessão local):** as categorias do veto
+> ficaram fechadas no livro de códigos (ac-a, dele: as sete financeiras; as referências de
+> sentimento fora). O classificador `tools/codigos_visuais.py` entrou no conjunto congelado
+> (dez arquivos); o contrato da página exige envio por POST; e a limitação 4 ganhou o painel
+> do Firewall da Vercel. A R3 virou a P-170.
+>
+> **02/10/2026, S6 — a página da pesquisa está em `pesquisa/`** (sem deploy; nenhuma resposta
+> real existe). Pôr no ar é dele: roteiro em "Ao voltar ao desktop", item 10. **Primeiro
+> convite só depois do merge da S6, do roteiro do item 10 e do commit com as datas da janela.**
+
+## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
+
+**Dono:** Osvaldo (a regra) · Claude Code (implementar) · **Gatilho:** P-115 fechada ·
+**Classe:** `DECISAO_DE_DESENHO` (vira engenharia quando ele responder o bloco 19)
+
+`motor_aporte()` devolve `SEM_POSICAO` com patrimônio zero, e quem tem a reserva cheia e
+nada investido fica sem "quanto e onde" (F0-contrato §2 e §3, item 2). Lido no código em
+26/09: com `V = 0`, a fórmula das ordens já põe o aporte nas `k_max` rotas de maior peso;
+o guarda existe por causa das divisões por `V` (`peso_atual`, `deficit_rel`). O
+`test_depois_da_reserva_o_sistema_aloca_sem_nada_assinado` confere o alvo, não as ordens.
+O teste que prende o conserto tem de **falhar na versão atual**: patrimônio zero e reserva
+cheia recebem ordens com rota e valor.
+
+## P-165 · Onde o motor roda para o usuário: a resposta "servidor" contra a P-157
+
+**Dono:** Osvaldo · **Gatilho:** antes do mapa v2 (etapa 4) · **Classe:**
 `DECISAO_DE_DESENHO`
 
-A pesquisa de fundação apoia a tese de independência ("não distribui produto, não recebe
-comissão, não aceita anúncio") e a leitura de que "padrão é recomendação" num **achado de 20/09
-sobre a CVM 19 que só existe no chat**: não está no `ACHADOS.md` nem em `docs/fontes/`. Em
-26/09 toda afirmação que se apoia nele passou a `NAO_CONFIRMADO` (nota N-CVM nos documentos de
-`docs/marca/`). O que fecha: o texto da resolução transcrito da fonte primária, com os
-dispositivos que se aplicam, e a tese **confirmada** (as notas N-CVM saem, com a citação) ou
-**retirada** (a promessa sai da fundação de marca, como retratação, não apagada).
+Em 26/09 ele respondeu "servidor". Isso colide com a P-157 ("o dado fica no aparelho") e
+com o mapa (O1 e §5). As três vias estão no bloco 18 da fila: no aparelho; servidor com
+banco de dados; **servidor sem estado** (calcula e devolve sem gravar). Não afeta a v1,
+que é sintética. Com servidor, entram na conta a LGPD (quem guarda o quê, por quanto
+tempo), o custo fixo e a autenticação (WCAG 3.3.8).
+
+## P-166 · Busca de anterioridade da marca MEOL e do domínio
+
+**Dono:** sessão de pesquisa (nuvem), e Osvaldo · **Gatilho:** antes de desenhar
+logotipo ou marca nominativa · **Classe:** `DECISAO_DE_DESENHO`
+
+A busca pública do INPI por marcas iguais ou parecidas nas classes de serviço financeiro e
+de software (quais classes, `NAO_CONFIRMADO`: a pesquisa confirma na fonte), mais a
+disponibilidade de domínio. **Não é parecer:** viabilidade jurídica é da P-158. Colisão
+encontrada vai para ele antes de qualquer desenho de marca.
+
+## P-167 · Os critérios da WCAG 2.2 que a P-155 não leu, a começar pelo 3.3.4 (erro em operação financeira)
+
+**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do protótipo F1, F3 e F6 da etapa 4
+(`PLANO.md`, fila do rosto) · **Classe:** `DECISAO_DE_DESENHO`
+
+A P-155 leu os 13 critérios candidatos e fechou em 27/09 com os RI-22 a RI-34. A leitura achou
+critérios fora da lista que parecem tocar o MEOL, listados sem leitura no fim de
+`docs/fontes/wcag-22-w3c.md`. O que mais pesa é o **3.3.4 Error Prevention (Legal, Financial,
+Data)**, nível AA, que o alvo AA do MEOL inclui: é o critério de um produto que mexe com
+dinheiro, e o "executei" da T1b (com desfazer antes de gravar) é o caso dele. Os outros doze
+(1.1.1, 1.3.1, 1.3.2, 1.4.13, 2.1.1, 2.4.3, 2.4.6, 3.3.1, 3.3.2, 3.3.3, 4.1.2 e 4.1.3) estão na
+mesma lista. O que fecha: cada um lido na fonte, virando RI com verificação ou declarado sem
+aplicação com o motivo.
+
+## P-168 · Ativos visuais próprios do MEOL (ilustração, ícone, imagem)
+
+**Dono:** Osvaldo (decide) · Claude (desenha e testa) · **Gatilho:** a etapa 5 (brandbook) da
+fila do rosto · **Classe:** `DECISAO_DE_DESENHO`
+
+Resposta k-A dele (27/09/2026): **todo ativo visual do MEOL é produzido para o MEOL; nada de
+banco de imagens.** O único ativo hoje é a ilustração da direção D, um cartão metálico
+genérico desenhado em código (SVG, sem marca e sem texto), marcado `data-provisorio="P-168"`
+em `docs/marca/direcoes/D.html` e guardado por `auditoria/test_direcoes_marca.py`. Ele é
+**provisório**: existe só para o controle D do teste de marca não perder a "imagem de estilo
+de vida" do pré-registro de 20/09. O que fecha: o conjunto de ativos do brandbook, feito para
+o MEOL, com licença e origem de cada um.
+
+## P-169 · A escada de contorno fora do Markdown: 21 linhas de YAML, 12 delas da S4
+
+**Dono:** Claude (a guarda, na nuvem; o degrau 4 dos bancos, na sessão local) · Osvaldo só
+se aparecer colisão com a cor da C · **Gatilho:** antes da etapa 5 (brandbook) da fila do
+rosto; não bloqueia o teste de marca, cujos PNG estão congelados · **Classe:**
+`DECISAO_DE_DESENHO`
+
+`auditoria/escada_contorno.py` (regra 18 da §5-B) varre só `.md`, como a tarefa pediu. Em
+27/09, uma varredura com janela de 3 linhas achou **21 linhas de YAML** com `NAO_CONFIRMADO`
+perto de um motivo de acesso. As que pesam:
+
+- **`docs/marca/tokens/direcoes.yaml`, a lista da regra m-B (S4, minha).** Dos 20 bancos e
+  fintechs, **9 foram OBSERVADOS e 11 ficaram `NAO_CONFIRMADO`** (escada: só o degrau 1,
+  um `curl` na página inicial): 9 por 403, a Caixa por um 302 sem destino lido, e o Bradesco
+  por HTML sem cor. A regra "matiz a 30° de toda cor dominante observada" foi
+  conferida contra **n=9**, não contra o mercado. A S4 escreveu isso com honestidade
+  ("não se completou de memória"), mas não subiu os degraus 2 a 4: CSS e manifest do próprio
+  site, Wayback, manual de marca publicado e sessão local.
+- **`alocacao/custos.yaml` e `alocacao/catalogo.yaml`, BOVV11** ("site do gestor bloqueia
+  acesso automatizado"). A escada está no `MAPA-CONSTANTES.md` e na P-05; o texto do YAML
+  segue antigo e muda junto com o valor, pelo protocolo de mudança.
+
+O que fecha: (1) a guarda passa a ler YAML por campo (`status: NAO_CONFIRMADO` com `metodo`
+ou `motivo` de acesso exige `escada`), com a própria linha de base; (2) os 11 bancos sobem a
+escada, e a cor observada de cada um entra na lista; se algum ficar a menos de 30° do magenta
+da C (318°), a decisão volta para ele antes do brandbook.
+
+## P-170 · A rodada 3 de marcas (R3), visual, para o veto de distinção
+
+**Dono:** Claude (auditar e classificar) · Osvaldo (o veto, se disparar) · **Gatilho:** o
+merge do pré-registro final 2 do teste de marca (P-162), que fecha o livro de códigos; corre
+em paralelo à coleta · **Classe:** `DECISAO_DE_DESENHO`
+
+A escolha da direção do teste de marca só sai com a R3 fechada (veto de distinção, decisão
+dele de 27/09). Até 02/10 a R3 não existia no repositório: a rodada 2 a deixou como "P-B5b",
+**textual**, e a 2 não registrou nenhum código visual. A R3 é outra coisa: **visual**,
+classificando a tela de cada marca pelo
+[livro de códigos](docs/marca/teste-de-marca/codigos-visuais.yaml), com o classificador
+`tools/codigos_visuais.py`, nas sete categorias fechadas pela ac-a (02/10).
+
+O que fecha: um arquivo de marcas classificadas, uma linha por marca, com a categoria, a
+captura usada (fonte e data) e as medidas que o `classificar()` recebe; pelo menos 5 marcas
+por categoria que se queira capaz de vetar (com menos, a categoria não tem código dominante);
+e o `veto()` aplicado à direção vencedora quando a análise sair. **Antes da primeira marca:**
+a lista de marcas por categoria, escrita e empurrada, pela mesma razão da ac-a. As capturas
+são de página pública (loja de apps, site); a §5-A.7 vale: nada de sessão logada, e acesso
+recusado sobe a escada (§5-B.18) antes de virar `NAO_CONFIRMADO`.
 
 ---
 
@@ -1645,11 +1934,99 @@ dispositivos que se aplicam, e a tese **confirmada** (as notas N-CVM saem, com a
 > 1. **As respostas da fila** viram o trabalho da sessão seguinte, a começar pela 1 (P-115) e
 >    pela 2 (P-117), que vêm antes de qualquer janela nova da série ajustada.
 > 2. ~~**P-151 antes de segunda, 28/09, 11:00 UTC.**~~ **Fechada em 26/09** (a guarda do GIT-01 pula no CI).
-> 3. **P-150 — subir ao R2 o acervo de eventos de 11/09.** ⚙ **exige o desktop**; conferir antes
->    se o `subir_acervo_local.py` cobre a pasta de eventos.
-> 4. **P-147 (NEFIN) e a release `cvm-acervo-2026`:** conferir depois do cron de 26/09. Não
->    exige desktop.
+> 3. **P-150 — subir ao R2 o acervo de eventos de 11/09.** ⚙ **exige o desktop**. O script
+>    cobre as pastas desde 26/09. Primeiro `py -3.11 fase0/subir_acervo_local.py` (só o plano):
+>    conferir que os eventos aparecem como `SUBIR` em `b3/indice_carteira|eventos_suplemento|
+>    proventos/…` e que não há `PARAR`. Um `DESCONHECIDO` em pasta de eventos se lê antes de
+>    seguir. Depois, com as `R2_*` no ambiente, `--aplicar`, e commitar
+>    `docs/acervo/b3_eventos/inventario-armazem.csv`. E conferir o cron de segunda, 28/09.
+> 4. ~~**P-147 (NEFIN) e a release `cvm-acervo-2026`:** conferir depois do cron de 26/09. Não
+>    exige desktop.~~ **Conferido em 27/09, na nuvem:** o cron `36246158435` (26/09)
+>    rodou o `captura_nefin` verde (P-147 fechada) e publicou a release `cvm-acervo-2026`
+>    (13:46Z). Nada a fazer no desktop.
 > 5. ~~`macro.poupanca_am` vence em 28/09~~ — renovada em 25/09; vence em **24/10**.
 > 6. **P-145 — dois passos dele destravam a medição na nuvem:** ⚙ **desktop:**
 >    `py -3.11 fase0/subir_acervo_local.py --aplicar` (sobe o `isinp.zip`); e, de qualquer
 >    lugar, o token do R2 **somente leitura** com os quatro segredos `R2_LEITURA_*`.
+> 7. **27/09/2026 — a fila do rosto.** Os blocos 16 a 20 da fila
+>    (`docs/decisoes/fila-do-osvaldo.md`) esperam o Osvaldo; os 16 e 17 destravam a P-162, e
+>    nenhum exige o desktop. *(27/09: 16b e 17a respondidos; seguem 18, 19 e 20.)* **A P-115 continua na frente**: a fila do rosto não disputa com
+>    ela (`docs/decisoes/rosto-v1.md`).
+> 8. ~~**27/09/2026 — P-162, os seis formulários do teste de marca.**~~ **Superado pela S5 v2
+>    (27/09):** o instrumento é uma página própria, feita na S6, e não um formulário. O que
+>    fica dele: uma resposta de teste e o `py -3.11 tools/analise_teste_marca.py
+>    --conferir-cabecalho` sobre a exportação real da página, antes do commit das datas (§12 do
+>    pré-registro). O roteiro antigo, riscado:
+>    ~~(navegador logado na conta Google dele; a sessão na nuvem não usa sessão de navegador,~~
+>    ~~§5-A.7). Só **depois do merge** do pré-registro final. Tudo sai de~~
+>    ~~`docs/marca/teste-de-marca-questionario.md`:~~
+>    ~~1. **Montar um formulário** no Google Forms, seção por seção, com o texto exato do~~
+>    ~~questionário: sem coletar e-mail, fuso (GMT-03:00) Brasília, perguntas obrigatórias~~
+>    ~~(menos as duas abertas), uma seção por imagem e uma por bloco de perguntas, e os~~
+>    ~~títulos copiados letra a letra (o script acha cada coluna pelo título). As imagens~~
+>    ~~são os PNG de `docs/marca/direcoes/png/`, na ordem da versão 1 (E, C, D).~~
+>    ~~2. **Duplicar seis vezes** (Forms → Fazer uma cópia) e, em cada cópia, trocar a ordem~~
+>    ~~das imagens pela tabela da seção 8 do questionário. Nomear cada uma "versão N".~~
+>    ~~3. **Conferir cada versão contra o questionário:** a ordem das seis imagens, os~~
+>    ~~títulos, os rótulos do 1 e do 7, os desvios de seção do consentimento e do filtro.~~
+>    ~~4. **Uma resposta de teste por versão, com "Não concordo"**, exportar as respostas de~~
+>    ~~cada uma (Respostas → Planilhas → Baixar CSV) como `data/teste-marca/versao-N.csv` e~~
+>    ~~rodar `py -3.11 tools/analise_teste_marca.py --conferir-cabecalho`: tem de dar `ok`~~
+>    ~~nas seis e ler o carimbo. Se o carimbo não for lido, **parar**: o formato do Forms é~~
+>    ~~`NAO_CONFIRMADO` e mudar o script é pré-registro novo, antes do convite.~~
+>    ~~5. **Commit das datas da janela**: preencher as duas linhas da §6 do pré-registro final~~
+>    ~~(dia 1 e dia 21) e empurrar. **Antes** do primeiro convite.~~
+>    ~~6. **Primeiro convite**, com o link da versão 1; o seguinte com a 2, e assim em rodízio.~~
+>    ~~Os CSV ficam em `data/teste-marca/` (ignorado pelo git) e em nenhum outro lugar do~~
+>    ~~repositório. A análise roda depois de 23:59 do dia 21:~~
+>    ~~`py -3.11 tools/analise_teste_marca.py --inicio <dia 1>` (antes disso ela recusa).~~
+> 9. **27/09/2026 — o degrau 4 da escada de contorno (§5-B.18).** ⚙ **exige o desktop** (IP
+>    residencial; a nuvem levou 403 do Akamai e o túnel do `web.archive.org` caiu). Dois
+>    roteiros, sem navegador e sem sessão logada: o do **BOVV11** está na P-05 (três `curl`
+>    e a transcrição do trecho da taxa total); o dos **11 bancos da regra m-B** está na P-169
+>    (a cor declarada no HTML ou no CSS de cada página inicial). **Não exige o desktop:**
+>    colar a versão 2 de `docs/ia/instrucoes-projeto-claude.md` nas instruções do Projeto no
+>    claude.ai, que passam a ter a escada.
+> 10. **02/10/2026 — P-162, pôr a página da pesquisa no ar (S6).** Só **depois do merge** do PR
+>    da S6. Dá para fazer **no celular ou no computador**; nada exige o desktop, menos o passo 6
+>    (rodar a análise no `data/` dele). As contas e as chaves são dele: **nenhuma chave vai para o
+>    chat nem para o repositório** (§5-A.7). O que a página faz está em `pesquisa/README.md`.
+>    0. **Decidir o plano da Vercel.** O Hobby (grátis) é "restricted to non-commercial personal
+>       use only", e uso comercial é qualquer deploy "used for the purpose of financial gain of
+>       **anyone** involved" (`vercel.com/docs/limits/fair-use-guidelines`, lido em 02/10). A
+>       página não cobra, não anuncia e não vende, mas testa a marca de um produto possível. Se
+>       é uso comercial, é decisão dele: Hobby, Pro, ou perguntar ao suporte da Vercel.
+>    1. **Supabase, plano Free:** criar o projeto (*New project*), região **South America (São
+>       Paulo)**. A senha do banco fica no gerenciador de senhas dele.
+>    2. **SQL Editor → New query:** colar `pesquisa/supabase/esquema.sql` inteiro e rodar
+>       (*Run*). Depois, numa query nova, colar `pesquisa/supabase/teste_politicas.sql` e
+>       rodar. **Tem de terminar sem erro.** Um erro com "FALHA: …" quer dizer que o anon pode
+>       mais do que deve: **parar** e trazer a mensagem. O teste desfaz o que fez (`rollback`).
+>    3. **As duas chaves:** no botão *Connect* do projeto (ou *Settings → API Keys*), copiar a
+>       **Project URL** e a **Publishable key** (`sb_publishable_…`). **Nunca a secret key**
+>       (`sb_secret_…`), que passa por cima do RLS. A chave `anon` antiga (um texto longo que
+>       começa com `eyJ`) também funciona, mas o Supabase a descontinua até o fim de 2026.
+>    4. **Vercel:** *Add New → Project*, importar este repositório; **Root Directory:
+>       `pesquisa`**; *Framework Preset*: **Other**, sem comando de build. Em *Environment
+>       Variables*, criar `SUPABASE_URL` (a Project URL) e `SUPABASE_ANON_KEY` (a Publishable
+>       key), coladas direto no painel da Vercel. *Deploy*. **Não ligar** Web Analytics nem
+>       Speed Insights: eles vêm desligados, e o contrato os quer desligados.
+>    5. **Conferir no ar**, na URL de produção:
+>       - `<url>/README.md` e `<url>/supabase/esquema.sql` dão **404**. O `.vercelignore` os
+>         tira do ar; a documentação da Vercel não diz com todas as letras que isso vale para
+>         deploy pelo Git, então a prova é este passo;
+>       - **responder a pesquisa uma vez, até o fim**;
+>       - no Supabase, *Table Editor*: `aberturas` tem 1 linha e `respostas` tem 1 linha, e o
+>         `questionario_sha256` dela é o do pré-registro (`73936c74…`).
+>    6. ⚙ **No desktop:** rodar `pesquisa/supabase/exportar.sql` no SQL Editor, baixar o
+>       resultado em CSV como `data/teste-marca/respostas.csv` e rodar
+>       `py -3.11 tools/analise_teste_marca.py --conferir-cabecalho`. Tem de dar `ok`. Se não
+>       der, **parar**: o cabeçalho da exportação real é o último ponto que nenhum teste viu.
+>    7. **Apagar a resposta de teste** (SQL Editor). É o mesmo comando para o teste do passo 5 e
+>       para qualquer outro antes do convite:
+>       `delete from public.respostas; delete from public.aberturas;
+>       update public.contador_de_aberturas set aberturas = 0;`
+>       E apagar o `data/teste-marca/respostas.csv` do teste. O contador volta a 0 porque as
+>       aberturas de teste não são da janela (ab-a).
+>    8. Daí em diante, a ordem é a do pré-registro (§12): **o commit das datas da janela,
+>       empurrado, e só então o primeiro convite.** Depois do primeiro convite, nada se apaga.

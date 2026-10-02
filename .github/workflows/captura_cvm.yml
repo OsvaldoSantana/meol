@@ -87,6 +87,23 @@ jobs:
           python fase0/capturar_nefin.py --armazem s3
           echo "codigo=$?" >> "$GITHUB_OUTPUT"
 
+      # P-150 (26/09/2026): eventos societarios da B3 (carteira do IBOV, suplemento por
+      # emissora, proventos). Endpoint nao documentado (V-01), sem HEAD: o portao e o sha256 do
+      # armazem. A cadencia e dado (politica.yaml -> cadencias_de_captura.b3_eventos); fora do
+      # dia o script sai 0 sem pedir nada. Armazem privado; FORA da release (P-136). Erro ou
+      # bloqueio da B3 deixa o passo vermelho -- nao se contorna.
+      - name: Capturar eventos B3
+        id: captura_eventos_b3
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+        run: |
+          set +e
+          python fase0/capturar_eventos_b3.py --armazem s3
+          echo "codigo=$?" >> "$GITHUB_OUTPUT"
+
       # P-137 (25/09/2026): o anual do mes contra os diarios, e contra o anual anterior.
       # Idempotente: so trabalha quando existe anual observado depois do fim do mes e a
       # conciliacao dele ainda nao esta no CSV. Pregao sem diario, diario divergente ou
@@ -127,7 +144,7 @@ jobs:
         if: always()
         run: |
           set -euo pipefail
-          REGS="docs/acervo/cvm/capturas.csv docs/acervo/b3/capturas.csv docs/acervo/nefin/capturas.csv docs/acervo/b3/conciliacoes.csv"
+          REGS="docs/acervo/cvm/capturas.csv docs/acervo/b3/capturas.csv docs/acervo/nefin/capturas.csv docs/acervo/b3_eventos/capturas.csv docs/acervo/b3/conciliacoes.csv"
           if [ -z "$(git status --porcelain -- $REGS)" ]; then
             echo "registros inalterados: nada a commitar (a prova da rodada esta no log do armazem)"
             exit 0
@@ -160,7 +177,7 @@ jobs:
           fi
 
       - name: Falhar se a captura falhou
-        if: always() && (steps.captura.outputs.codigo != '0' || steps.captura_b3.outputs.codigo != '0' || steps.captura_nefin.outputs.codigo != '0' || steps.conciliacao_b3.outputs.codigo != '0' || steps.publicacao_cvm.outputs.codigo != '0')
+        if: always() && (steps.captura.outputs.codigo != '0' || steps.captura_b3.outputs.codigo != '0' || steps.captura_nefin.outputs.codigo != '0' || steps.captura_eventos_b3.outputs.codigo != '0' || steps.conciliacao_b3.outputs.codigo != '0' || steps.publicacao_cvm.outputs.codigo != '0')
         run: |
-          echo "CVM saiu com '${{ steps.captura.outputs.codigo }}'; COTAHIST com '${{ steps.captura_b3.outputs.codigo }}'; NEFIN com '${{ steps.captura_nefin.outputs.codigo }}'; conciliacao com '${{ steps.conciliacao_b3.outputs.codigo }}'; publicacao da CVM com '${{ steps.publicacao_cvm.outputs.codigo }}'"
+          echo "CVM saiu com '${{ steps.captura.outputs.codigo }}'; COTAHIST com '${{ steps.captura_b3.outputs.codigo }}'; NEFIN com '${{ steps.captura_nefin.outputs.codigo }}'; eventos B3 (captura_eventos_b3) com '${{ steps.captura_eventos_b3.outputs.codigo }}'; conciliacao com '${{ steps.conciliacao_b3.outputs.codigo }}'; publicacao da CVM com '${{ steps.publicacao_cvm.outputs.codigo }}'"
           exit 1

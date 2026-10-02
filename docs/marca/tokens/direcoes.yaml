@@ -1,0 +1,212 @@
+# Tokens das direcoes visuais do teste de marca (P-163) -- DADO, nao CSS (P2).
+# Direcoes: E, C e D, pela resposta 16b dele (27/09/2026, fila-do-osvaldo.md). A e B sairam.
+# Guardado por auditoria/test_contraste_tokens.py (razao de contraste de cada par) e por
+# auditoria/test_direcoes_marca.py (toda cor hexadecimal de um estimulo esta aqui).
+versao: 1
+
+# Limiares: da WCAG 2.2, transcrita em docs/fontes/wcag-22-w3c.md (P1). Sem arredondar:
+# "4.499:1 would not meet the 4.5:1 threshold" (Understanding 1.4.3); idem 2.999:1 para
+# 3:1 (Understanding 1.4.11).
+limiares:
+  texto_pequeno:
+    razao: 4.5
+    criterio: "WCAG 2.2 SC 1.4.3 Contrast (Minimum), nivel AA"
+  texto_grande:
+    razao: 3.0
+    criterio: "WCAG 2.2 SC 1.4.3, excecao Large Text, nivel AA"
+    # Texto grande = 18 pt, ou 14 pt em negrito (definicao "large scale"); a pagina
+    # Understanding do 1.4.3 da "approximately 18.5px and 24px". Par marcado texto_grande
+    # declara o tamanho, e o teste confere.
+    tamanho_min_px: 24
+    tamanho_min_px_negrito: 18.5
+  componente:
+    razao: 3.0
+    criterio: "WCAG 2.2 SC 1.4.11 Non-text Contrast, nivel AA"
+
+# Rotulos de estado: iguais nas tres direcoes (o texto nao varia entre estimulos), e
+# obrigatorios ao lado da cor (RI-24, WCAG 2.2 SC 1.4.1: cor nunca sozinha).
+rotulos_de_estado:
+  completo: "Completo"
+  parcial: "Parcial"
+  recusa: "Recusado"
+
+direcoes:
+  E:
+    nome: "Instrumento de precisao"
+    descricao: >
+      Fundo off-white e tinta escura; um unico destaque metalico fosco (latao, nunca dourado
+      brilhante); titulos em caixa alta espacada, texto corrido com serifa, numeros com
+      algarismos alinhados; botoes vazados; status num conjunto separado do destaque.
+    cores:
+      fundo: "#F5F3EE"
+      superficie: "#FBFAF6"
+      texto: "#1B1A17"
+      texto_secundario: "#57534A"
+      destaque: "#7A5F32"
+      borda_componente: "#8C7A5B"
+      divisoria: "#E4DFD4"          # decorativa: nao identifica componente, fica fora dos pares
+      status_completo: "#2E5B3B"
+      status_parcial: "#3B5577"
+      status_recusa: "#8A2F2B"
+    # i-A (27/09/2026, dele): so fontes OFL embutidas (docs/marca/tipografia/); o generico
+    # no fim da pilha nunca entra no PNG, porque a fonte embutida sempre carrega.
+    fontes:
+      titulo: "'Source Sans 3', sans-serif"
+      corpo: "'Source Serif 4', serif"
+      numeros: "'Source Serif 4', serif"
+      arquivos: [source-sans-3/source-sans-3-latin-400-normal.woff2, source-sans-3/source-sans-3-latin-600-normal.woff2, source-serif-4/source-serif-4-latin-400-normal.woff2]
+    forma:
+      raio_px: 2
+      botao: vazado
+      titulo_caixa_alta: true
+      algarismos: tabulares
+    pares:
+      - {frente: texto, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: superficie, tipo: texto_pequeno}     # rotulo do botao vazado
+      - {frente: destaque, fundo: fundo, tipo: componente}             # borda do botao vazado
+      - {frente: borda_componente, fundo: superficie, tipo: componente}
+      - {frente: borda_componente, fundo: fundo, tipo: componente}        # botao secundario no fundo
+      - {frente: status_completo, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_parcial, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: componente}           # indicador de foco (RI-29)
+      - {frente: status_completo, fundo: fundo, tipo: texto_pequeno}   # selo, que fica no fundo
+      - {frente: status_parcial, fundo: fundo, tipo: texto_pequeno}    # selo e nota do PARCIAL
+      - {frente: status_recusa, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: fundo, tipo: componente}                # indicador de foco no fundo
+
+  C:
+    nome: "Digital amigavel"
+    descricao: >
+      A estetica de fintech: cantos arredondados, cor viva (magenta desde a S4, m-B), botao cheio. A linguagem leve do
+      pre-registro NAO entra: o texto e identico nas tres direcoes; varia so o visual.
+    cores:
+      # m-B (27/09/2026, dele): o roxo #6A2BD9 saiu -- e o matiz dominante do Nubank (lista
+      # abaixo). Entrou um magenta de matiz 318 graus, com fundo, divisoria, borda e textos
+      # levados para o mesmo matiz.
+      fundo: "#FBF4F9"
+      superficie: "#FFFFFF"
+      texto: "#22161E"
+      texto_secundario: "#63545F"
+      destaque: "#AC157F"
+      texto_sobre_destaque: "#FFFFFF"
+      borda_componente: "#8F7086"
+      divisoria: "#EFE1EB"
+      status_completo: "#08735A"
+      status_parcial: "#A04D00"
+      status_recusa: "#B42318"
+    # m-B: a cor da C nao pode ser a dominante de uma marca financeira brasileira.
+    # METODO (27/09/2026, 11:52 UTC, nuvem): a cor que o site da instituicao declara no HTML
+    # (meta theme-color ou msapplication-TileColor) e, sem ela, a cor CROMATICA mais frequente
+    # no HTML da pagina inicial (saturacao > 0,35, luminosidade entre 0,15 e 0,85). Contagem,
+    # nao manual de marca: status OBSERVADO. Site que bloqueou (403), redirecionou ou nao tinha
+    # cor no HTML fica NAO_CONFIRMADO -- nao se completou de memoria.
+    # REGRA: ficar a pelo menos 30 graus de matiz de toda cor dominante OBSERVADA. O magenta de
+    # 318 graus fica a 42 do Nubank (276) e a 35 do vermelho secundario da Nomad (353). Os
+    # vermelhos de Bradesco e Santander e o laranja do Itau, se forem os de conhecimento
+    # comum, ficariam a mais de 30 graus -- mas isso e INFERENCIA, nao medicao.
+    escolha_de_cor:
+      regra: "matiz a >= 30 graus de toda cor dominante observada"
+      matiz_escolhido_graus: 318
+      marcas_conferidas:
+        - {marca: Nubank, url: "https://nubank.com.br/", cor: "#5D0599", matiz: 276, status: OBSERVADO, metodo: "cor cromatica mais frequente (empate com #CBA5FD, #3F026A, #AF63FD, todas 266-276)"}
+        - {marca: Inter, url: "https://inter.co/", cor: "#EA7100", matiz: 29, status: OBSERVADO, metodo: "meta theme-color"}
+        - {marca: PicPay, url: "https://picpay.com/", cor: "#21C25E", matiz: 143, status: OBSERVADO, metodo: "meta theme-color"}
+        - {marca: Mercado Pago, url: "https://www.mercadopago.com.br/", cor: "#007EB5", matiz: 198, status: OBSERVADO, metodo: "cor cromatica mais frequente (empate com #3483FA, 216, e #FFE600, 54)"}
+        - {marca: Sicredi, url: "https://www.sicredi.com.br/", cor: "#33820D", matiz: 101, status: OBSERVADO, metodo: "cor cromatica mais frequente"}
+        - {marca: PagBank, url: "https://pagbank.com.br/", cor: "#F5DE3E", matiz: 52, status: OBSERVADO, metodo: "cor cromatica mais frequente, uma ocorrencia so: sinal fraco"}
+        - {marca: Neon, url: "https://neon.com.br/", cor: "#0078D9", matiz: 207, status: OBSERVADO, metodo: "cor cromatica mais frequente"}
+        - {marca: Nomad, url: "https://www.nomadglobal.com/", cor: "#0073AF", matiz: 201, status: OBSERVADO, metodo: "cor cromatica mais frequente; a segunda e #F9283F, 353"}
+        - {marca: Sicoob, url: "https://www.sicoob.com.br/", cor: "#00AE9D", matiz: 174, status: OBSERVADO, metodo: "theme-color e branco; cor cromatica mais frequente"}
+        - {marca: Bradesco, url: "https://banco.bradesco/", status: NAO_CONFIRMADO, metodo: "200, mas nenhuma cor hexadecimal no HTML"}
+        - {marca: Itau, url: "https://www.itau.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Santander, url: "https://www.santander.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Banco do Brasil, url: "https://www.bb.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Caixa, url: "https://www.caixa.gov.br/", status: NAO_CONFIRMADO, metodo: "302 sem destino lido"}
+        - {marca: C6 Bank, url: "https://www.c6bank.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: XP, url: "https://www.xpi.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: BTG Pactual, url: "https://www.btgpactual.com/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Rico, url: "https://www.rico.com.vc/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Clear, url: "https://www.clear.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+        - {marca: Safra, url: "https://www.safra.com.br/", status: NAO_CONFIRMADO, metodo: "403"}
+    fontes:
+      titulo: "'Nunito', sans-serif"
+      corpo: "'Nunito', sans-serif"
+      numeros: "'Nunito', sans-serif"
+      arquivos: [nunito/nunito-latin-500-normal.woff2, nunito/nunito-latin-600-normal.woff2, nunito/nunito-latin-700-normal.woff2, nunito/nunito-latin-800-normal.woff2]
+    forma:
+      raio_px: 20
+      botao: cheio
+      titulo_caixa_alta: false
+      algarismos: proporcionais
+    pares:
+      - {frente: texto, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_sobre_destaque, fundo: destaque, tipo: texto_pequeno}   # rotulo do botao cheio
+      - {frente: destaque, fundo: fundo, tipo: componente}                     # o botao contra o fundo
+      - {frente: destaque, fundo: superficie, tipo: texto_pequeno}             # link "Por que?"
+      - {frente: borda_componente, fundo: superficie, tipo: componente}
+      - {frente: status_completo, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_parcial, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: superficie, tipo: componente}                # indicador de foco
+      - {frente: destaque, fundo: fundo, tipo: texto_pequeno}                  # nome MEOL e "Falar com o MEOL"
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}          # data, fora do cartao
+
+  D:
+    nome: "Ostentacao (controle)"
+    descricao: >
+      Controle da H2, COMPETENTE e no nivel do mercado de cartao e private premium: preto,
+      ouro fosco, serifa de alto contraste nos titulos, filete dourado, caixa alta espacada.
+      Sem foto (S3). Desde a S4 (k-A), uma ilustracao PROVISORIA desenhada em codigo -- um
+      cartao metalico generico, sem marca e sem texto -- no lugar da imagem de estilo de vida
+      do pre-registro de 20/09 (P-168).
+    cores:
+      fundo: "#0C0C0E"
+      superficie: "#17171B"
+      texto: "#F2EDE0"
+      texto_secundario: "#B8B0A0"
+      destaque: "#C8A04A"
+      texto_sobre_destaque: "#0C0C0E"
+      borda_componente: "#8A7338"
+      divisoria: "#2A2824"
+      status_completo: "#86C79A"
+      status_parcial: "#9DBBE3"
+      status_recusa: "#E79A93"
+      # k-A (27/09/2026, dele): a ilustracao PROVISORIA da D (P-168), um cartao metalico
+      # generico desenhado em SVG. Decorativa: nao identifica componente nem carrega
+      # informacao, entao fica fora dos pares (WCAG 1.4.11 so cobre grafico necessario).
+      ilustracao_clara: "#DDBF72"
+      ilustracao_escura: "#A9853A"
+      ilustracao_sombra: "#1F1D19"
+    fontes:
+      titulo: "'Playfair Display', serif"
+      corpo: "'Montserrat', sans-serif"
+      numeros: "'Playfair Display', serif"
+      arquivos: [playfair-display/playfair-display-latin-400-normal.woff2, montserrat/montserrat-latin-400-normal.woff2, montserrat/montserrat-latin-700-normal.woff2]
+    forma:
+      raio_px: 0
+      botao: cheio
+      titulo_caixa_alta: true
+      algarismos: proporcionais
+    pares:
+      - {frente: texto, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: fundo, tipo: texto_pequeno}
+      - {frente: texto_secundario, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: fundo, tipo: texto_pequeno}                  # titulos e filetes com texto
+      - {frente: destaque, fundo: superficie, tipo: texto_pequeno}
+      - {frente: texto_sobre_destaque, fundo: destaque, tipo: texto_pequeno}   # rotulo do botao
+      - {frente: destaque, fundo: fundo, tipo: componente}
+      - {frente: borda_componente, fundo: superficie, tipo: componente}
+      - {frente: status_completo, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_parcial, fundo: superficie, tipo: texto_pequeno}
+      - {frente: status_recusa, fundo: superficie, tipo: texto_pequeno}
+      - {frente: destaque, fundo: superficie, tipo: componente}                # indicador de foco
+      - {frente: status_parcial, fundo: fundo, tipo: texto_pequeno}            # nota do PARCIAL, no fundo
+      - {frente: status_recusa, fundo: fundo, tipo: texto_pequeno}             # linha da rota bloqueada (S4)

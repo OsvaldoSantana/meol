@@ -46,7 +46,7 @@ Cada afirmação também carrega a sua fonte, pelo código entre colchetes (ex.:
 
 7. **Educação financeira funciona, mas a literatura diverge sobre quanto e por quanto tempo** `PARCIAL` `[F06][F07]`. A conclusão de desenho sobrevive às duas leituras: **ensinar dentro da decisão, não num curso à parte.**
 
-8. **A escolha padrão é lida como recomendação.** Na adesão automática estudada por Madrian e Shea, parte dos participantes manteve o padrão por inércia e parte por tomá-lo como conselho de investimento da empresa `COMPLETO` `[F08]`. No MEOL, **qualquer padrão é uma recomendação** e responde à CVM 19. `NAO_CONFIRMADO` *(revisão de 26/09/2026, nota N-CVM)*
+8. **A escolha padrão é lida como recomendação.** Na adesão automática estudada por Madrian e Shea, parte dos participantes manteve o padrão por inércia e parte por tomá-lo como conselho de investimento da empresa `COMPLETO` `[F08]`. No MEOL, **qualquer padrão é uma recomendação** e responde à CVM 19. *(confirmada em 26/09/2026 na fonte: [Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md), art. 1º, caput e § 1º, I e II, e art. 2º — vale para o MEOL oferecido a terceiros como serviço; nota N-CVM)*
 
 9. **Mostrar incerteza em número não custa confiança; mostrar em palavras vagas custa** `COMPLETO` `[F10]`. Faixa numérica sim, "pode variar" não.
 
@@ -201,7 +201,7 @@ Status geral: `PARCIAL`. As evidências vêm de `[F01]` e `[F05]`; as emoções 
 
 A Vanguard é de propriedade dos seus próprios fundos, que são de propriedade dos investidores. Não há dono externo cobrando lucro. A empresa usa isso como argumento de alinhamento de interesse, e diz que é o que sustenta taxas menores.
 
-**Leitura.** A independência que constrói confiança é a **da estrutura**, não a do slogan. O MEOL não tem essa estrutura. O equivalente verificável é **não distribuir produto, não receber comissão e não aceitar anúncio** (achado de 20/09, CVM 19). `NAO_CONFIRMADO` *(revisão de 26/09/2026, nota N-CVM)*
+**Leitura.** A independência que constrói confiança é a **da estrutura**, não a do slogan. O MEOL não tem essa estrutura. O equivalente verificável é **não distribuir produto, não receber comissão e não aceitar anúncio** (achado de 20/09, CVM 19). *(**RETIRADA em 26/09/2026** como atribuição à CVM 19: a norma exige independência e veda remuneração que a prejudique, mas **permite distribuir** com segregação de atividades (art. 18, I e § 2º) e **não fala de anúncio**. As três condições ficam como escolha do MEOL, mais estrita que a norma. Fonte: [Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md); nota N-CVM)*
 
 ### B3. A auditoria visual de 20/09/2026 — resumo
 
@@ -271,7 +271,7 @@ Critério de parada da próxima rodada: **saturação.** Três marcas seguidas s
 **Leitura para o MEOL, e ela é dupla:**
 
 1. O padrão é a alavanca mais forte que existe para o leigo.
-2. Por isso mesmo, **todo padrão do MEOL é uma escolha declarada, com procedência** (P1), e juridicamente é uma recomendação (CVM 19) `NAO_CONFIRMADO` *(revisão de 26/09/2026, nota N-CVM)*. O caso do "2% por acidente" é exatamente o erro que a P1 existe para impedir: um número sem dono virando regra.
+2. Por isso mesmo, **todo padrão do MEOL é uma escolha declarada, com procedência** (P1), e juridicamente é uma recomendação (CVM 19) *(confirmada em 26/09/2026 na fonte: [Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md), art. 1º, caput e § 1º, I e II, e art. 2º — vale para o MEOL oferecido a terceiros como serviço; nota N-CVM)*. O caso do "2% por acidente" é exatamente o erro que a P1 existe para impedir: um número sem dono virando regra.
 
 ### C4. O que a mecânica de jogo fez no Robinhood
 
@@ -321,12 +321,12 @@ Requisitos derivados de A8 e B4. Serão conferidos contra o capítulo de acessib
 
 Status geral: `NAO_CONFIRMADO`. É síntese minha a partir dos blocos A a C, e será testada com pessoas.
 
-**Promessa:** confiança na decisão. Não "seu dinheiro seguro", que nenhum produto honesto garante (e a CVM veda garantir rentabilidade `NAO_CONFIRMADO` *(revisão de 26/09/2026, nota N-CVM)*).
+**Promessa:** confiança na decisão. Não "seu dinheiro seguro", que nenhum produto honesto garante (e a CVM veda garantir rentabilidade *(confirmada em 26/09/2026: [Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md), art. 18, III, vedação ao consultor)*).
 
 **Três provas, todas verificáveis:**
 
 1. **Registro:** toda decisão datada, com hash, reproduzível. É a herança que o MEOL tem sem fingir idade.
-2. **Independência:** não distribui produto, não recebe comissão, não aceita anúncio. É o critério do especialista (C6) e da CVM `NAO_CONFIRMADO` *(revisão de 26/09/2026, nota N-CVM)*.
+2. **Independência:** não distribui produto, não recebe comissão, não aceita anúncio. É o critério do especialista (C6) e da CVM. *(**RETIRADA em 26/09/2026** a parte "e da CVM": a norma não veda distribuir, que permite com segregação (art. 18, I e § 2º), nem fala de anúncio; veda remuneração que prejudique a independência (art. 18, V). As três condições são escolha do MEOL. Fonte: [Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md); nota N-CVM)*
 3. **Recusa:** quando falta dado, o MEOL diz "sem dado" em vez de chutar. É o F-02 como virtude pública.
 
 **O que o MEOL não reivindica:** herança, tradição, exclusividade por patrimônio, retorno.
@@ -374,7 +374,7 @@ Status geral: `NAO_CONFIRMADO`. É síntese minha a partir dos blocos A a C, e s
 4. **Requisitos do Pix:** li o índice e a notícia da versão 7.4, não o capítulo de acessibilidade.
 5. **Números derivados** (§3, A1) aplicam percentuais a uma população estimada. São ordem de grandeza.
 6. **Bloco D é síntese**, sem validação externa.
-7. **Nenhuma verificação jurídica.** As menções à CVM 19 retomam o achado de 20/09, que **não está no repositório** e não foi conferido na fonte primária: toda afirmação que se apoia nele está marcada `NAO_CONFIRMADO` (nota N-CVM). Nenhuma substitui parecer.
+7. **Nenhuma verificação jurídica.** As menções à CVM 19 retomavam um achado de 20/09 que não estava no repositório. Em 26/09/2026 a resolução foi lida na fonte primária e transcrita em [Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md): duas teses foram confirmadas com escopo e a de que as três condições de independência são "o critério da CVM" foi retirada (nota N-CVM). A leitura é do texto, **não é parecer**; o enquadramento do MEOL é da P-158.
 8. **Data.** Tudo o que é dado de mercado (B3, Kantar, BC) envelhece. Os números valem para setembro de 2026 (§8 do CLAUDE.md: "números que envelhecem").
 
 ---
@@ -430,4 +430,4 @@ Acesso em 20/09/2026, salvo indicação.
 - **N-COD.** C-nn → MC-nn e R-nn → RI-nn, só neste documento (tabela no cabeçalho). Motivo: os achados do projeto sobre o fator, o ajuste de proventos, a moeda e a ordem dos portões já usavam esses mesmos números com os prefixos C- e R-, e outros C/R já existiam em outros arquivos com outro sentido; os instrumentos `achados_ancorados` e `codigos_preservados` contariam todos como achados. Guardado por `auditoria/test_codigos_de_marca.py`.
 - **N-GORILA.** O item do Gorila deixou de ser "erro de formato": o formato está certo, e o que não bate é o valor exibido contra quantidade × preço (45 × 25,60 = 1.152 contra 4.159.382,64). Fica `NAO_CONFIRMADO` enquanto o print não estiver no repositório. A contagem de erros de formato passa de 3 para 2 das 12 vitrines.
 - **N-PRINTS.** A procedência dos prints da auditoria de 20/09 foi declarada: contas de terceiros ou de demonstração, não do autor (declaração dele, 26/09/2026). Nenhum número deles descreve o dinheiro do autor (D-01).
-- **N-CVM.** O "achado de 20/09" sobre a Resolução CVM 19 só existe no chat daquele dia: não está no `ACHADOS.md` nem em `docs/fontes/`. Toda afirmação que se apoia nele passou a `NAO_CONFIRMADO`, até a leitura da resolução na fonte primária (pendência aberta no `PENDENCIAS.md`, que confirma ou retira a tese de independência).
+- **N-CVM.** O "achado de 20/09" sobre a Resolução CVM 19 só existia no chat daquele dia. Toda afirmação apoiada nele passou a `NAO_CONFIRMADO` em 26/09/2026 e, no mesmo dia, foi conferida no texto consolidado da resolução, lido na fonte primária ([Res. CVM 19](../fontes/cvm-resolucao-19-consolidada.md), com URL, data de acesso e sha256). **Confirmadas:** o padrão individualizado é recomendação no sentido do art. 1º (§ 1º, I e II) e a atividade é privativa de consultor autorizado (art. 2º), **para o MEOL oferecido a terceiros como serviço**; e a vedação de garantir rentabilidade (art. 18, III). **Retirada:** que "não distribuir, não receber comissão e não aceitar anúncio" seja o critério da CVM. A norma permite distribuir com segregação (art. 18, I e § 2º) e não fala de anúncio; as três ficam como escolha do MEOL. O texto original das frases retiradas continua onde estava, com a retratação ao lado. Nada disto é parecer jurídico (P-158).

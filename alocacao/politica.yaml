@@ -13,10 +13,29 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.33.0
+  versao: 1.36.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.36.0: >-
+      27/09/2026, P-147 fechada. A execucao agendada 36246158435 do captura_cvm.yml
+      (schedule, 26/09, 13:44Z) rodou o passo `captura_nefin` verde -- o "Falhar se a
+      captura falhou" foi pulado, entao o codigo do passo foi 0 --, sem ninguem disparar. O
+      NEFIN entra em `regimes_de_captura` e a limitacao
+      `captura_do_nefin_ainda_nao_rodou_no_executor` fica RESOLVIDA, como a da CVM e a da B3.
+    1.35.0: >-
+      26/09/2026, registro. `universo_da_captura_de_eventos_e_o_ibov_do_dia`: a captura dos
+      eventos da B3 (P-150) le a carteira do IBOV do dia e so pede eventos de quem esta nela;
+      quem sai do indice para de ser capturado. Direcao do vies escrita (OTIMISTA no universo,
+      o da P-48) e ligada a P-48, que continua aberta quando a P-150 fechar. A limitacao de
+      execucao dos eventos aponta para ela.
+    1.34.0: >-
+      26/09/2026, P-150 parte 2. `cadencias_de_captura.b3_eventos`: os eventos societarios da
+      B3 (carteira do IBOV, suplemento por emissora e proventos paginados) passam a ter
+      cadencia declarada e um passo no captura_cvm.yml (`fase0/capturar_eventos_b3.py`), com
+      o mesmo armazem, teto e registro da CVM, e FORA da release (P-136). Ate o primeiro cron
+      verde, o acervo fica na limitacao `captura_de_eventos_b3_ainda_nao_rodou_no_executor`:
+      `regimes_de_captura` exige a execucao que provou o regime, e ela ainda nao existe.
     1.33.0: >-
       26/09/2026, decisoes dele da fila (docs/decisoes/fila-do-osvaldo.md). 12a: `funcoes
       .DATADO.liquidez_ou_vencimento_casado` -- a rota iliquida casa com o objetivo pelo
@@ -2008,6 +2027,30 @@ regimes_de_captura:
     registro: docs/acervo/b3/capturas.csv
     primeira_execucao_agendada: 36148547193
     em: 2026-09-25
+  nefin:
+    regime: AUTOMATICO
+    executor: .github/workflows/captura_cvm.yml
+    passo: captura_nefin
+    registro: docs/acervo/nefin/capturas.csv
+    primeira_execucao_agendada: 36246158435
+    em: 2026-09-26
+
+# P-150 (26/09/2026): a cadencia de uma captura que ainda nao provou o regime. Lida por
+# `fase0/capturar_eventos_b3.py`, que nao pede nada a B3 fora deste dia. Quando o cron sair
+# verde, a entrada `b3_eventos` entra tambem em `regimes_de_captura` com a execucao.
+cadencias_de_captura:
+  b3_eventos:
+    dia_da_semana: segunda
+    motivo: >
+      Semanal, e nao diaria, por tres razoes. O historico de proventos vem inteiro a cada
+      pedido (paginado), entao uma semana sem captura nao perde provento ja publicado. O
+      endpoint nao e documentado e cada rodada faz ~200 pedidos com pausa de cortesia --
+      diario seria sete vezes a carga sem ganho de dado. E o que a semana pode perder (uma
+      emissora que deixa a bolsa, uma carteira teorica que muda no rebalanceamento
+      quadrimestral) e raro e aparece na rodada seguinte como ausencia, nao como silencio.
+    revisitar_se: >
+      Uma rodada mostrar emissora que sumiu entre duas segundas, ou a carteira do IBOV
+      mudar sem a captura ter visto a versao anterior.
 
 # ── SLEEVES ───────────────────────────────────────────────────────────────────
 # Uma rota de renda variavel nao e um ativo: e um RECIPIENTE. O que muda entre
@@ -2505,7 +2548,35 @@ limitacoes_declaradas:
       NAO_CONSERTADA, com a pendencia do download.
     fonte: "alocacao/dados/nefin_factors.csv (sha256 em fatores.hash_fonte()); preregistro-ml-v2.md, secao 14"
 
+  captura_de_eventos_b3_ainda_nao_rodou_no_executor:
+    tipo: NAO_CONSERTADA
+    o_que_resolveria: >
+      A primeira execucao verde, numa segunda, do .github/workflows/captura_cvm.yml com o
+      passo `captura_eventos_b3` -- o cron diario (09:15 UTC) a produz sem ninguem disparar.
+      Ao sair, `b3_eventos` entra em `regimes_de_captura` com a execucao e deixa de ser
+      nomeado aqui.
+    pendencia: P-150
+    acervos: ["b3_eventos"]
+    o_que_falta: >
+      fase0/capturar_eventos_b3.py existe e nunca rodou no executor. A captura de 11/09/2026
+      (74 emissoras, 132 paginas de proventos) mora so no disco dele; subi-la ao armazem e a
+      parte 1 da P-150, do desktop.
+    direcao_do_vies: >
+      Nenhum sobre numero hoje: o silver le o acervo de 11/09 do disco dele. O que envelhece
+      calado e a observacao de evento novo, e o risco maior e o V-01: o endpoint nao
+      documentado pode sumir sem aviso, e o que nao foi capturado nao se compra depois.
+      O universo da captura e o IBOV do dia: quem sai do indice para de ser capturado. Esse
+      vies (OTIMISTA, o da P-48) nao acaba com o cron verde, e por isso tem entrada propria:
+      `universo_da_captura_de_eventos_e_o_ibov_do_dia`.
+    quando_deixa_de_importar: >
+      Na primeira execucao verde do passo `captura_eventos_b3` no workflow.
+    fonte: "fase0/coletar_b3.py; docs/acervo/b3_eventos/capturas.csv"
   captura_do_nefin_ainda_nao_rodou_no_executor:
+    RESOLVIDA: >-
+      27/09/2026 (P-147). A execucao agendada 36246158435 do captura_cvm.yml (evento
+      schedule, 26/09, 13:44Z -- o cron de 09:15 UTC saiu 4h29 atrasado) rodou o passo
+      `captura_nefin` verde, sem ninguem disparar. O regime passou para
+      `regimes_de_captura.nefin`.
     tipo: NAO_CONSERTADA
     o_que_resolveria: >
       A primeira execucao verde do .github/workflows/captura_cvm.yml com o passo
@@ -2542,6 +2613,35 @@ limitacoes_declaradas:
       citacao, mas reserva os direitos e nao autoriza redistribuir. Deixa de valer se o
       NEFIN publicar uma licenca que permita, ou autorizar por escrito.
     fonte: "docs/fontes/nefin.md, termos lidos em 25/09/2026"
+
+  universo_da_captura_de_eventos_e_o_ibov_do_dia:
+    tipo: NAO_CONSERTADA
+    o_que_falta: >
+      fase0/capturar_eventos_b3.py pede a carteira do IBOV do dia e so busca eventos e
+      proventos das emissoras que estao nela (P-150). Quem SAI do indice para de ser
+      capturado na segunda seguinte: o que ja subiu fica no armazem, mas evento novo dela
+      (grupamento, provento, OPA, cancelamento de registro) nao entra mais. Quem saiu antes
+      de 11/09/2026 nunca foi capturado.
+    direcao_do_vies: >
+      OTIMISTA no universo, o mesmo vies da P-48: o acervo de eventos cobre melhor quem
+      continuou no indice, e o indice perde as empresas depois de elas darem errado. Na serie
+      de cada empresa que saiu, o erro nao tem sinal conhecido: um grupamento perdido aparece
+      como alta de preco no ajuste, e um provento perdido aparece como queda. Os dois se
+      concentram justamente nas empresas que sairam, que costumam ser as que tiveram
+      grupamento, reestruturacao ou fechamento de capital.
+    o_que_resolveria: >
+      Um universo que nao dependa do indice do dia: no minimo, a uniao de toda emissora que
+      ja apareceu na carteira capturada (quem sai continua sendo pedido); no maximo, toda
+      emissora com negocio no COTAHIST ou registro ativo no cadastro da CVM. A escolha e de
+      desenho: custa pedidos a mais ao endpoint nao documentado (V-01).
+    pendencia: P-48
+    quando_deixa_de_importar: >
+      Quando o universo da captura deixar de ser so o indice do dia. O passado anterior a
+      11/09/2026 nao se conserta coletando (composicao_historica_do_indice). Efeito lateral
+      favoravel: o retrato semanal da carteira, que a mesma captura grava, e a composicao do
+      indice observada daqui para frente, e o primeiro rebalanceamento que ele vir e o ciclo
+      que a limitacao acima espera.
+    fonte: "fase0/capturar_eventos_b3.py (INDICE = IBOV); PENDENCIAS.md P-48 e P-150"
 
   composicao_historica_do_indice:
     tipo: FISICA

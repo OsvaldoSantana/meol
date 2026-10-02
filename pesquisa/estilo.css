@@ -1,0 +1,89 @@
+/* A pagina da pesquisa e visualmente NEUTRA (S6): preto, branco e cinza, fonte do sistema,
+   nenhuma cor de marca. Quem tem estilo sao so os estimulos (PNG congelados).
+   Contraste (RI-22, RI-23): texto #111 sobre #fff = 18,9:1; texto secundario #4d4d4d = 8,5:1;
+   bordas #595959 = 7,0:1; foco #111 = 18,9:1. Alvos de 44 px (RI-31 pede 24). */
+:root {
+  --fundo: #ffffff;
+  --texto: #111111;
+  --texto-2: #4d4d4d;
+  --borda: #595959;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+.pesquisa { max-width: 36rem; margin: 0 auto; padding: 1rem; }
+.pesquisa p { margin: 0 0 1rem; }
+.pesquisa [tabindex="-1"]:focus { outline: none; }
+.secundario { color: var(--texto-2); }
+.acoes { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0; }
+button {
+  font: inherit;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1.25rem;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 2px solid var(--texto);
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:disabled { color: var(--texto-2); border-color: var(--borda); cursor: default; }
+button:focus-visible, textarea:focus-visible, .ponto:has(input:focus-visible) {
+  outline: 3px solid var(--texto);
+  outline-offset: 3px;
+}
+label.campo { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+textarea {
+  font: inherit;
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.5rem;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 2px solid var(--borda);
+  border-radius: 4px;
+}
+fieldset { border: 0; padding: 0; margin: 0 0 1.75rem; min-width: 0; }
+legend { font-weight: 600; padding: 0; margin-bottom: 0.5rem; }
+.polos { display: flex; justify-content: space-between; gap: 1rem; color: var(--texto-2);
+         font-size: 0.9375rem; margin-bottom: 0.25rem; }
+.polos span:last-child { text-align: right; }
+.pontos { display: grid; grid-template-columns: repeat(7, minmax(24px, 1fr)); gap: 4px; }
+.ponto {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 2px solid var(--borda);
+  border-radius: 4px;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+/* RI-24: o escolhido nao se distingue so pela cor: fundo invertido, borda grossa e negrito */
+.ponto:has(input:checked) { background: var(--texto); color: var(--fundo); border-color: var(--texto);
+                            font-weight: 700; }
+.ponto input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.so-leitor {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.alerta { border-left: 4px solid var(--texto); padding: 0.5rem 0.75rem; font-weight: 600; }
+.alerta ul { margin: 0.25rem 0 0; padding-left: 1.25rem; font-weight: 400; }
+.exposicao { display: flex; justify-content: center; align-items: flex-start; }
+.exposicao img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  width: auto;
+  height: auto;
+  border: 1px solid var(--borda);
+}

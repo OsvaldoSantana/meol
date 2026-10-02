@@ -172,7 +172,7 @@ Declarado para não virar omissão (P6): notificações de qualquer tipo, gráfi
 | pendência | classe |
 |---|---|
 | **F0 — contrato de saída** com os campos da §6 | trilha de produto paralela; **não bloqueia o motor** *(revisão de 26/09/2026, nota N-F0)* |
-| P-WCAG — ler contraste, tamanho de alvo e daltonismo | `DECISAO_DE_DESENHO` |
+| ~~P-WCAG — ler contraste, tamanho de alvo e daltonismo~~ | fechada em 27/09/2026 como P-155: RI-22 a RI-34 nos requisitos de interface v1.1 |
 | Teste com pessoas das hipóteses H-C1, H-C2, RI-15 | `DECISAO_DE_DESENHO` |
 | Importação de carteira: descobrir quais formatos são viáveis | `DECISAO_DE_DESENHO` |
 
@@ -191,3 +191,4 @@ Declarado para não virar omissão (P6): notificações de qualquer tipo, gráfi
 
 - **N-COD.** C-nn → MC-nn e R-nn → RI-nn, só neste documento (tabela no cabeçalho). Motivo: os achados do projeto sobre o fator, o ajuste de proventos, a moeda e a ordem dos portões já usavam esses mesmos números com os prefixos C- e R-, e outros C/R já existiam em outros arquivos com outro sentido; os instrumentos `achados_ancorados` e `codigos_preservados` contariam todos como achados. Guardado por `auditoria/test_codigos_de_marca.py`.
 - **N-F0.** A F0 estava como `BLOQUEIA_O_SISTEMA`, mas o motor decide sem ela: ela bloqueia a **interface**, não o sistema. Decisão dele (26/09/2026): trilha de produto paralela no `PLANO.md`, que não disputa o caminho crítico com a P-115, com uma especificação como primeiro entregável. Registro em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-produto.md).
+- **N-ORDEM.** 26/09/2026, decisão dele (docs/decisoes/rosto-v1.md): a ordem pesquisa → design → mercado → UX → brandbook vale à risca. Este mapa foi feito antes das etapas de design e mercado e fica como rascunho de UX adiantado, revisado na etapa 4 (mapa v2). Nada dele se apaga.

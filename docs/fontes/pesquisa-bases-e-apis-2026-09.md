@@ -240,10 +240,21 @@ defasagem material — o dado de out-dez so sai em 31/03 do ano seguinte.
 terminal para "onde o dinheiro vai ficar". Tambem: Ranking de Qualidade de Ouvidorias,
 Penalidades do PAS, Multas emitidas, Tarifas Bancarias por Instituicao.
 
-NAO_CONFIRMADO: `olinda.bcb.gov.br` esta **bloqueado por robots.txt** (ROBOTS_DISALLOWED) —
+~~NAO_CONFIRMADO: `olinda.bcb.gov.br` esta **bloqueado por robots.txt** (ROBOTS_DISALLOWED) —
 nao contornado. As URLs-base vem das paginas do portal de dados abertos; a **sintaxe de
 parametro** do OData do BCB nao foi verificada. Antes de codificar, abrir o Swagger no
-navegador. ESTBAN nao existe no catalogo de dados abertos e o caminho antigo devolveu 404.
+navegador.~~ ESTBAN nao existe no catalogo de dados abertos e o caminho antigo devolveu 404.
+
+> **27/09/2026, medido de novo — resolvido no degrau 1 da escada (`CLAUDE.md` §5-B.18),
+> escada: 1 curl no terminal → HTTP 200.** O `ROBOTS_DISALLOWED` era a politica da ferramenta
+> de busca do subagente, nao uma recusa do servidor. `curl` em
+> `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='09-25-2026'&$format=json`
+> respondeu **HTTP 200**, com os campos `cotacaoCompra`, `cotacaoVenda` e `dataHoraCotacao`.
+> A **sintaxe de parametro** fica verificada pelo mesmo comando: parametro nomeado
+> `@dataCotacao`, data em `MM-DD-AAAA` entre aspas simples, `$format=json`. O
+> `https://olinda.bcb.gov.br/robots.txt` respondeu **HTTP 502** (pagina de erro do BCB, sem
+> regra legivel). As outras duas URLs-base da tabela (IF.data e taxaJuros) seguem `PARCIAL`:
+> o degrau 1 foi tentado so no PTAX.
 
 ---
 
@@ -294,8 +305,23 @@ de trecho que a doutrina exige**):
 | IRFM11 | adm 0,04% | total **nao** confirmado |
 | B5P211 | adm 0,04% | total **nao** confirmado |
 
-NAO_CONFIRMADO: se `cad_fi` da CVM tem campo de taxa (dominio bloqueado); se a B3 publica
-taxa de ETF (pagina devolveu 500); gestores BTG, Investo, Buena Vista, Bradesco.
+~~NAO_CONFIRMADO: se `cad_fi` da CVM tem campo de taxa (dominio bloqueado);~~ NAO_CONFIRMADO:
+se a B3 publica taxa de ETF (pagina devolveu 500); gestores BTG, Investo, Buena Vista, Bradesco
+*(estes dois nao foram reabertos em 27/09)*.
+
+> **27/09/2026, medido de novo — `cad_fi` resolvido no degrau 1, escada: 1 curl no terminal
+> → HTTP 206.** `curl -r 0-4095 https://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv`
+> devolveu o cabecalho: 41 colunas, **`TAXA_PERFM` na 22 e `TAXA_ADM` na 24** (mais
+> `INF_TAXA_PERFM` na 23 e `INF_TAXA_ADM` na 25). O `robots.txt` de `dados.cvm.gov.br` de hoje
+> barra so `/dataset/rate/`, `/revision/`, `/dataset/*/history` e `/api/`; `/dados/` fica livre.
+> **O que o cabecalho nao diz** (§5-B.1): o arquivo inteiro (17.921.330 bytes, sha256
+> `612adad8548d313d…`, `Last-Modified` 26/09/2026) tem `TAXA_ADM` preenchida em **15.117 de
+> 46.806 linhas, e so 1 delas `EM FUNCIONAMENTO NORMAL`**. Depois da adaptacao a RCVM 175 os
+> fundos vivos estao no `registro_fundo_classe.zip`, **que nao tem campo de taxa** (lidas as
+> colunas de `registro_fundo`, `registro_classe` e `registro_subclasse`); o `extrato_fi` de
+> 2025 e 2026 tem `TAXA_ADM` e `TAXA_CUSTODIA_MAX`, mas so para classes FIF (6.565 de 6.565
+> em 2026). **Para ETF, a CVM em dados abertos nao e fonte da taxa de hoje**: ver a escada do
+> BOVV11 em `MAPA-CONSTANTES.md` e a P-05.
 
 ---
 
@@ -331,6 +357,7 @@ nao um empate.
 > ⚠ **RETRATAÇÃO — 24/09/2026:** tratada como manual; um script na máquina dele resolve. A limitação era da ferramenta de quem respondia, não da tarefa. Hoje é `py -3.11 fase0/capturar_cvm.py` (CLAUDE.md §3, §5-B.17).
 - Cobertura do endpoint de proventos da B3 para empresas **deslistadas** e para o periodo
   anterior a 2010. Ponto cego, e e viés de sobrevivencia direto no backtest.
-- Sintaxe de parametro do OData do BCB (olinda bloqueado).
+- ~~Sintaxe de parametro do OData do BCB (olinda bloqueado).~~ *Verificada em 27/09 pelo
+  degrau 1 (curl na API PTAX, HTTP 200): ver a nota da secao 4.*
 - Se `arquivos.b3.com.br` ainda tem arquivo gratuito.
 - Historico da taxa de custodia do Tesouro.

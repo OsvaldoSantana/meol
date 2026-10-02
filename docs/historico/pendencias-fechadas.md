@@ -2086,10 +2086,110 @@ e colar `impressao: 942c75bae248327b`.
 
 **FECHADA em 26/09/2026.** Assinada por ele no chat em 26/09/2026 ("Assinar"), sobre o texto final mostrado antes de gravar. Mudanças dele no texto: no HASH11, sai a regra de desuso do K02 e sai o K04(c); no Tesouro IPCA+, o C03 mantém "9 meses" fixo, com o alarme `pendencias_de_premissa` (PR #22). Impressões gravadas: `hash11` **`ea8c8769bbf021e2`**, `td_ipca` **`942c75bae248327b`** (texto inalterado). O `td_ipca` fica em `REGRA_DECIDIDA`: válido, sem peso até a compra (G-07, PR #21). **Efeito medido** (cenário sintético, estabilidade baixa, reserva cheia): aposta 0 → 3% (`hash11`), RV 56% → 54,32%, lastro 44% → 42,68%, `td_ipca` 0%, sem pendência de reassinar. Os dois testes que exigiam "só modelos no repositório" viraram `test_repositorio_assinado_libera_so_o_que_a_assinatura_diz`, que fixa as impressões e o estado.
 
+## ~~P-159~~ · Ler a Resolução CVM 19/2021 na fonte primária e confirmar ou retirar a tese de independência — **FECHADA em 26/09/2026**
+
+**Dono:** sessão de pesquisa (nuvem), com a transcrição em `docs/fontes/` · **Gatilho:** antes
+da P-158 e antes de qualquer texto público que prometa independência · **Classe:**
+`DECISAO_DE_DESENHO`
+
+A pesquisa de fundação apoia a tese de independência ("não distribui produto, não recebe
+comissão, não aceita anúncio") e a leitura de que "padrão é recomendação" num **achado de 20/09
+sobre a CVM 19 que só existe no chat**: não está no `ACHADOS.md` nem em `docs/fontes/`. Em
+26/09 toda afirmação que se apoia nele passou a `NAO_CONFIRMADO` (nota N-CVM nos documentos de
+`docs/marca/`). O que fecha: o texto da resolução transcrito da fonte primária, com os
+dispositivos que se aplicam, e a tese **confirmada** (as notas N-CVM saem, com a citação) ou
+**retirada** (a promessa sai da fundação de marca, como retratação, não apagada).
+
+**FECHADA em 26/09/2026.** A Resolução CVM 19/2021 foi lida na fonte primária (site da CVM, texto consolidado até a 179/2023) e transcrita em `docs/fontes/cvm-resolucao-19-consolidada.md`, com URL, data de acesso e sha256 do PDF e do DOCX. **Confirmadas com escopo:** o padrão individualizado é recomendação (art. 1º, § 1º, I e II) e a atividade é privativa de consultor (art. 2º), para o MEOL oferecido a terceiros; a vedação de garantir rentabilidade (art. 18, III). **Retirada:** "não distribuir, não receber comissão e não aceitar anúncio" como critério da CVM — a norma permite distribuir com segregação (art. 18, I e § 2º) e não fala de anúncio; as três ficam como escolha do MEOL. Retratação em `eventos.csv`. O enquadramento do MEOL segue na P-158. Não é parecer.
+
+## ~~P-147~~ · A captura do NEFIN ainda não rodou no executor — **FECHADA em 27/09/2026**
+
+**Dono:** o workflow (ninguém dispara) · **Gatilho:** o cron diário das 09:15 UTC, ou um *Run
+workflow* da *Captura CVM* · **Classe:** `BLOQUEIA_O_SISTEMA` (o CSV saiu do git e só volta
+ao runner pelo armazém)
+
+O CSV do NEFIN saiu do git em 25/09 (LIC-01). `fase0/capturar_nefin.py` rodou uma vez, na
+máquina dele, e subiu a versão fixada ao R2 (`novo`, `619991c2192c…`). O passo `captura_nefin`
+entrou no `captura_cvm.yml`. **Fecha quando** o passo sair verde no executor. Nesse dia, apagar
+`limitacoes_declaradas.captura_do_nefin_ainda_nao_rodou_no_executor`, e o `test_P7` cobra que o
+regime seja declarado onde ele lê.
+
+**FECHADA em 27/09/2026.** A execução agendada `36246158435` do `captura_cvm.yml` (schedule, 26/09, 13:44Z) rodou o passo `captura_nefin` verde; o passo "Falhar se a captura falhou" foi pulado, então o código foi 0. O NEFIN entrou em `regimes_de_captura` (política 1.36.0), e a limitação ficou `RESOLVIDA`. `test_P147_nefin_roda_sozinho_e_nao_e_mais_limitacao` reprova a volta.
+
+## ~~P-155~~ · Ler a WCAG na fonte: contraste, alvo de toque e daltonismo · era P-WCAG — **FECHADA em 27/09/2026**
+
+**Dono:** sessão de pesquisa (nuvem) · **Gatilho:** antes do brandbook e da primeira tela
+desenhada · **Classe:** `DECISAO_DE_DESENHO`
+
+O capítulo de acessibilidade do Pix é recomendação e não cobre contraste, tamanho de alvo nem
+daltonismo ([Pix v7.4](../marca/pesquisa-pix-e-pendencias-2026-09.md), §1.1). Os requisitos
+de interface declaram a lacuna (§5, item 2). O que fecha: a WCAG lida na fonte, com os critérios
+que viram requisito novo (RI-22 em diante) e a verificação de cada um.
+
+**FECHADA em 27/09/2026.** A WCAG 2.2 foi lida na recomendação do W3C (REC de 12/12/2024, acesso em 27/09/2026 04:54 UTC) e nas páginas Understanding dos 13 critérios candidatos, e transcrita em `docs/fontes/wcag-22-w3c.md`, com URL, Last-Modified e sha256 de cada página e a licença de documentos do W3C lida. Número, nível e limiar de cada critério foram conferidos no HTML da recomendação. Viraram os **RI-22 a RI-34** (`docs/marca/requisitos-interface-v1.md`, v1.1, tema E), cada um com a verificação: o teste de contraste dos tokens (P-163), o teste de navegador da etapa 4 ou revisão. O RI-34 (autenticação) não se aplica à v1, sem login, e passa a valer com a P-165. O que a WCAG não resolve para este público (alfabetismo, jargão) ficou como limitação 6 do documento, apontando para os RI-01 e RI-03 e para a P-156. Não é auditoria de acessibilidade; a lei brasileira não foi lida.
+
+## ~~P-163~~ · Direções visuais como estímulo: a T1 desenhada em cada direção — **FECHADA em 27/09/2026**
+
+**Dono:** Claude Code (nuvem) · Osvaldo (aprova antes do teste) · **Gatilho:** P-155
+fechada (**feito em 27/09**) e bloco 16 da fila respondido · **Classe:** `DECISAO_DE_DESENHO`
+
+Uma tela T1 estática por direção, com **o mesmo texto e os mesmos números** (só o visual
+muda), números vindos de uma rodada do motor sobre cenário sintético, tokens em
+`docs/marca/tokens/` e contraste verificado por teste no CI. O controle D precisa ser uma
+ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 trivial.
+
+> **27/09/2026 — estímulos feitos; a pendência fica aberta até ele aprovar.** Direções E, C e D
+> (resposta 16b), cada uma em `docs/marca/direcoes/<direção>.html` com os estados normal e
+> PARCIAL, PNG 390×844 em `docs/marca/direcoes/png/`. Números do motor sobre cenário sintético
+> (`python tools/conteudo_estimulo.py`, `conteudo.yaml`); tokens em
+> `docs/marca/tokens/direcoes.yaml`, 44 pares, nenhum abaixo do limiar
+> (`auditoria/test_contraste_tokens.py`, com a execução vermelha registrada no PR); o
+> conteúdo idêntico, as cores só do YAML, nenhum recurso remoto e o formato do real guardados
+> por `auditoria/test_direcoes_marca.py`. **O que ele revisa:** se o D é ostentação
+> competente (critério: parece cartão ou private premium de mercado, não paródia) e se as
+> três se distinguem à primeira vista.
+>
+> **Diferenças em relação ao pré-registro de 20/09, para o texto final da P-162:** (1) o D
+> ficou **sem a imagem de estilo de vida**, porque a S3 proibiu foto; (2) a "linguagem leve" da
+> C não entrou, porque o texto é idêntico nas três; (3) o estado normal mostra o custo da
+> compra como se a tarifa da B3 fosse `COMPLETO`, o que é contrafactual de propósito, para a
+> H3; (4) a "data de referência" é o dia da rodada, porque o motor não emite o mês de
+> referência (F0).
+>
+> **Perguntas para ele, que o teste precisa antes de rodar (nenhuma foi decidida aqui):**
+> - **Ordem de apresentação:** cada pessoa vê as três direções em ordem aleatória, ou em
+>   ordem balanceada (quadrado latino, 3 ordens × igual número de pessoas)? A balanceada
+>   controla melhor o efeito de ordem com amostra pequena; a aleatória é mais simples.
+> - **Tamanho de amostra:** quantas pessoas, e com que critério? Sem esse número, a regra 17a
+>   (bootstrap pareado) pode dar "empate" só por falta de gente.
+> - **Estímulo como imagem fixa ou como página:** as fontes são as do sistema, e cada aparelho
+>   mostra outra tipografia (Didot e Iowan no iPhone; Roboto e Noto Serif no Android; DejaVu
+>   no PNG daqui). Mostrar a página ao vivo põe o aparelho de cada pessoa no meio da
+>   comparação. **Recomendação: imagem fixa**, renderizada uma vez com fontes livres (OFL)
+>   embutidas, para todos verem a mesma coisa; os PNG de hoje servem para layout e cor, não
+>   para tipografia.
+> - **H3 no desenho 17a:** ver a mesma direção com e sem a faixa é uma tela a mais por direção
+>   (seis no total). Vale para as três direções ou só para a vencedora?
+>
+> **27/09/2026, S4 — as quatro perguntas foram respondidas (g-B, h-A, i-A, j-A; fila), e os
+> estímulos refeitos.** Rótulo genérico no lugar do ticker (l-B), nenhum estado
+> contrafactual (selo `PARCIAL` nas duas versões, que é o status do insumo), as versões
+> **base** e **com rota bloqueada** (j-A: a primeira rota que o motor elimina, pela ordem
+> dos portões), a C em magenta (m-B), a D com a ilustração provisória (k-A, P-168) e as
+> fontes OFL embutidas (i-A). Os seis PNG, com sha256, estão em
+> `docs/marca/direcoes/README.md`. **Continua aberta até ele aprovar esses seis PNG**; a
+> aprovação vai para a fila e é pré-condição da S5.
+
+**FECHADA em 27/09/2026.** Os estímulos das direções E, C e D (resposta 16b), nas versões base e com rota bloqueada (j-A), foram refeitos na S4 com as respostas g-B a p-A (PR #38, commit `2625cc7`) e **aprovados por ele** em 27/09/2026 (`docs/decisoes/fila-do-osvaldo.md`, "Aprovação dele, 27/09/2026: os seis PNG da S4"), com o sha256 de cada um dos seis PNG gravado ao lado. Guardas: `auditoria/test_contraste_tokens.py` e `auditoria/test_direcoes_marca.py`, cada uma provada por mutação. O que segue: o pré-registro final (P-162, S5), que congela esses seis sha256. A ilustração da D continua provisória (P-168).
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-163** | as direções visuais como estímulo, a T1 em cada direção | 27/09 — S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |
+| **P-155** | ler a WCAG na fonte: contraste, alvo de toque e daltonismo (era P-WCAG) | 27/09 — WCAG 2.2 transcrita; RI-22 a RI-34 com verificação |
+| **P-147** | a captura do NEFIN não tinha rodado no executor | 27/09 — execução agendada `36246158435`, passo `captura_nefin` verde |
+| **P-159** | ler a Resolução CVM 19/2021 e confirmar ou retirar a tese de independência | 26/09 — duas teses confirmadas com escopo, uma retirada |
 | **P-01** | assinar os dois registros (HASH11 e Tesouro IPCA+) | 26/09 — hash11 ea8c8769bbf021e2, td_ipca 942c75bae248327b; td_ipca sem peso até a compra |
 | **P-152** | G8 tem de honrar REGRA_DECIDIDA (G-07) | 26/09 — G8 lê o estado; td_ipca 15% → 0% assinado em REGRA_DECIDIDA |
 | **P-117** | o silver tinha dois arquivos para a mesma captura e quem escolhia era o sorted() | 26/09 — 117a: nome com captura e calendário; escolha por regra, empate levanta |

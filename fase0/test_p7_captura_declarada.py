@@ -296,3 +296,57 @@ def test_P102_politica_ausente_NAO_e_lida_como_nada_declarado(tmp_path):
     (tmp_path / "pyproject.toml").write_text("[project]\n", encoding="utf-8")
     with pytest.raises(m.PoliticaAusente):
         m.acervos_sem_regime(str(tmp_path))
+
+
+def test_P150_eventos_b3_tem_cadencia_com_motivo_e_limitacao_ate_o_cron_provar():
+    """26/09/2026, P-150. Falha na versao anterior: a politica nao declarava cadencia nenhuma
+    para os eventos da B3. O acervo fica em limitacao (NAO_CONSERTADA, P-150) ate a primeira
+    execucao verde; so entao entra em `regimes_de_captura`, que exige a execucao."""
+    P = _politica()
+    c = P["cadencias_de_captura"]["b3_eventos"]
+    assert c["dia_da_semana"] in ("segunda", "terca", "quarta", "quinta", "sexta")
+    assert len(c["motivo"].split()) >= 20
+    cobre = [lim for lim in P["limitacoes_declaradas"].values()
+             if "b3_eventos" in (lim.get("acervos") or [])]
+    assert len(cobre) == 1 and cobre[0]["pendencia"] == "P-150"
+    assert cobre[0]["tipo"] == "NAO_CONSERTADA"
+    assert "b3_eventos" not in P["regimes_de_captura"]
+    assert os.path.isfile(os.path.join(RAIZ, "docs", "acervo", "b3_eventos", "capturas.csv"))
+
+
+# ── P-150: regime automatico sem registro em acervo.REGISTROS e captura sem vigia ──
+
+import acervo  # noqa: E402
+
+
+@pytest.mark.repositorio
+def test_P150_todo_regime_tem_o_registro_em_acervo_REGISTROS():
+    """P7, a lacuna do #32. `acervo.frescor()` e `abrir()` so leem os registros de
+    `acervo.REGISTROS`: um acervo que entrasse em `regimes_de_captura` (o `b3_eventos`,
+    quando o cron provar) sem entrar ali seria captura automatica que ninguem vigia -- se
+    ela parar, nada acusa."""
+    assert acervo.regimes_sem_registro(RAIZ) == []
+
+
+def test_P150_mutacao_b3_eventos_no_regime_e_fora_de_REGISTROS_e_ACUSADO(tmp_path):
+    reg = "docs/acervo/b3_eventos/capturas.csv"
+    raiz = _com_regime(tmp_path, {"b3_eventos": {
+        "regime": "AUTOMATICO", "executor": ".github/workflows/c.yml",
+        "passo": "captura", "registro": reg}})
+    assert acervo.regimes_sem_registro(raiz) == ["b3_eventos"]
+    com = dict(acervo.REGISTROS, b3_eventos=os.path.join(*reg.split("/")))
+    assert acervo.regimes_sem_registro(raiz, registros=com) == []
+
+
+def test_P150_regime_sem_campo_registro_tambem_e_acusado(tmp_path):
+    raiz = _com_regime(tmp_path, {"x": {"regime": "AUTOMATICO"}})
+    assert acervo.regimes_sem_registro(raiz) == ["x"]
+
+
+def test_P147_nefin_roda_sozinho_e_nao_e_mais_limitacao():
+    """Falha na versao de 26/09 antes deste commit: a limitacao dizia "sai na primeira
+    execucao verde" com a execucao agendada 36246158435 (schedule, 26/09) ja verde no passo
+    `captura_nefin`."""
+    P = _politica()
+    assert P["regimes_de_captura"]["nefin"]["primeira_execucao_agendada"] == 36246158435
+    assert "nefin" not in set(m.acervos_em_limitacao(P))

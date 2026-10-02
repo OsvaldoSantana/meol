@@ -104,9 +104,13 @@ def test_primeira_rodada_sobe_os_diarios_e_o_anual_com_chave_da_b3(tmp_path):
     assert [x["situacao"] for x in linhas] == ["novo"] * 6
 
 
-def test_segunda_rodada_no_mesmo_mes_nao_baixa_nada(tmp_path):
+def test_segunda_rodada_no_mesmo_mes_nao_baixa_nada(tmp_path, monkeypatch):
     """O portao HEAD fecha os diarios, e o anual ja foi observado neste mes: nenhum GET
     -- e o anual nem recebe HEAD. E isso que impede 85 MB por dia."""
+    # O registro grava dt_captura pelo relogio real (C.agora) e o teste fixa `hoje`: em
+    # outubro de 2026 o anual "observado" deixou de ser do mes do `hoje` e o teste caiu
+    # (medido em 02/10/2026). O relogio fica no mesmo dia do `hoje` da rodada.
+    monkeypatch.setattr(T.C, "agora", lambda: "2026-09-24T12:00:00Z")
     srv, arm = _b3(), A.ArmazemMemoria()
     _rodar(tmp_path, srv, arm)
     srv.chamadas.clear()

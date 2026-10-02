@@ -484,6 +484,8 @@ REGIME_DAS_SECOES = {
     "regimes_de_captura": (OPERACIONAL, "P7: o acervo cuja captura roda sozinha, com o "
                                      "executor, o passo e a execucao agendada que o "
                                      "provou; quem le e fase0/manifesto_cvm.py"),
+    "cadencias_de_captura": (OPERACIONAL, "P-150: o dia em que uma captura sem HEAD pede "
+                                          "a fonte; quem le e fase0/capturar_eventos_b3.py"),
     "bloco_C_solvencia":            (ESPECIFICACAO, "P-30: especificado em 05/09, "
                                      "nenhum modulo aplica"),
     "regime_instituicao_financeira":(ESPECIFICACAO, "P-31: especificado em 05/09, "

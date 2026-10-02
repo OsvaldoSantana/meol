@@ -1,0 +1,44 @@
+# Cenario SINTETICO dos estimulos do teste de marca (P-163). Nenhum numero aqui e do
+# Osvaldo (D-01): e uma pessoa inventada, do publico de entrada decidido em 20/09 --
+# quem ja aporta. O gerador e `tools/conteudo_estimulo.py`; ele escreve o
+# `conteudo.yaml` ao lado, e `tools/test_conteudo_estimulo.py` reprova se o arquivo
+# gravado divergir do que o motor da hoje.
+versao: 1
+cadastro:
+  # O cadastro minimo do `alocacao/test_usuario_novo.py` (CADASTRO_MINIMO), lido de la
+  # pelo gerador -- nao copiado aqui (N-01: duas listas que concordam por acidente).
+  origem: alocacao/test_usuario_novo.py::CADASTRO_MINIMO
+reserva:
+  # Reserva cheia: o gerador usa `reserva_alvo()` do motor, e nao um numero escrito.
+  origem: alocacao.reserva_alvo
+posicoes:
+  # 12 meses de aporte de R$ 800 (9.600), sem rendimento, espalhados por ESCOLHA DE
+  # DESENHO DO ESTIMULO: quem ja aporta ha um ano e comecou pelo Tesouro Selic. A
+  # distribuicao foi escolhida para o maior deficit ser UNICO (pibb11); com rotas
+  # empatadas, a escolha sairia da ordem do dicionario, nao do motor.
+  td_selic: 4000.0
+  bova11: 2000.0
+  ivvb11: 2000.0
+  divo11: 800.0
+  smal11: 400.0
+  acao_zero: 400.0
+
+# l-B (27/09/2026, dele): rotulo generico no lugar do ticker real. O gerador le daqui, por
+# rota_id, e PARA se a rota que o motor escolher nao tiver rotulo (nada de ticker no texto).
+# `contracao`: a preposicao que a frase da decisao usa antes do rotulo.
+rotulos:
+  pibb11:
+    rotulo: "fundo de \u00edndice de a\u00e7\u00f5es brasileiras"
+    contracao: "no"
+  picpay_turbinado:
+    rotulo: "cofrinho de banco digital"
+    contracao: "no"
+
+# j-A (27/09/2026, dele): a H3 por rota bloqueada REAL. A rota vem do motor pela regra
+# declarada em tools/conteudo_estimulo.py (a primeira eliminada na ordem dos portoes de
+# universo); aqui mora so a traducao do motivo para linguagem comum, por rota_id e portao.
+# O texto tem de dizer o motivo que o motor da, nao outro: a origem vai no conteudo.yaml.
+motivos_em_linguagem_comum:
+  picpay_turbinado:
+    portao: G5_status
+    texto: "bloqueado, porque a regra de isen\u00e7\u00e3o muda todo m\u00eas."

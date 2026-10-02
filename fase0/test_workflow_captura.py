@@ -172,3 +172,30 @@ def test_P136_publicacao_da_CVM_no_workflow_com_token_do_proprio_job():
     assert "steps.publicacao_cvm.outputs.codigo != '0'" in \
         _passo("Falhar se a captura falhou")["if"]
 
+
+
+def test_P150_eventos_b3_no_mesmo_workflow_armazem_registro_e_vermelho_proprio():
+    """26/09/2026, P-150: os eventos societarios da B3 so existiam no disco dele (captura de
+    11/09). Falha na versao anterior: o workflow nao tinha passo de eventos."""
+    e = _passo("captura_eventos_b3")
+    assert "fase0/capturar_eventos_b3.py --armazem s3" in e["run"] and "set +e" in e["run"]
+    assert '"codigo=$?" >> "$GITHUB_OUTPUT"' in e["run"]
+    # o mesmo armazem (e portanto o mesmo teto 7/9 GB, lido pelo armazem.py): os mesmos
+    # quatro segredos de escrita do passo da CVM, nenhum a mais
+    assert e["env"] == _passo("captura")["env"]
+    nomes = [p.get("id") or p.get("name") for p in _passos()]
+    assert nomes.index("captura_eventos_b3") < nomes.index("Commitar o registro, se mudou")
+    assert "docs/acervo/b3_eventos/capturas.csv" in _passo("Commitar o registro, se mudou")["run"]
+    falha = _passo("Falhar se a captura falhou")
+    assert "steps.captura_eventos_b3.outputs.codigo != '0'" in falha["if"]
+    assert "captura_eventos_b3" in falha["run"]
+
+
+def test_P150_P136_eventos_b3_fora_da_release():
+    """O passo que publica le so a CVM; a regra que recusa qualquer outra fonte e do codigo."""
+    import publicar_cvm
+    assert "b3" not in _passo("publicacao_cvm")["run"]
+    v = {"fonte": "b3", "recurso": "proventos", "arquivo": "PETR__pagina-001.json",
+         "sha256": "0" * 64}
+    with pytest.raises(publicar_cvm.PublicacaoRecusada):
+        publicar_cvm.publicavel(v)
