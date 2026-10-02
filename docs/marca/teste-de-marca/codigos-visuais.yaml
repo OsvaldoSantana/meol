@@ -3,6 +3,8 @@
 # dominante de uma categoria concorrente auditada na rodada 3 de marcas (R3), a escolha volta
 # para ele, com criterio escrito; a escolha da direcao so sai com a R3 fechada.
 # aa-a (27/09/2026, dele): o codigo dominante e contado sobre as QUATRO variaveis centrais.
+# ac-a (02/10/2026, dele): as categorias concorrentes ficam FECHADAS aqui, e nao na R3 -- quem
+# escolhesse categoria depois de ver a classificacao de E, C e D poderia escolher o veto.
 # O sha256 deste arquivo esta no pre-registro final. NADA daqui se ajusta depois de a R3
 # comecar: mudar um byte e pre-registro novo, e so vale se for antes da primeira marca
 # classificada. O classificador e tools/codigos_visuais.py (o mesmo para as direcoes e as marcas).
@@ -74,7 +76,21 @@ variaveis:
     regra: "cheio se o fundo do botao for de cor diferente do fundo da tela; vazado se so a borda ou o texto tiverem cor. Sem botao: vazado"
 
 veto:
-  categoria: "um grupo de marcas concorrentes definido e auditado na R3 (a R3 declara as categorias antes de classificar)"
+  categoria: "uma das categorias_concorrentes abaixo, uma so por marca: a do app que se classifica"
+  # ac-a: lista fechada. Os exemplos vem das rodadas 1 e 2 e so ilustram a fronteira de cada
+  # categoria: NAO sao a lista de marcas da R3. Marca com categoria fora desta lista e das
+  # categorias_fora_do_veto reprova o classificador (P1: valor fora da lista falha alto).
+  categorias_concorrentes:
+    banco_tradicional: "banco de varejo com agencia (Itau, Bradesco, Banco do Brasil, Santander, Caixa)"
+    banco_digital: "banco sem agencia, de app; o investimento dentro do app do banco conta aqui (Nubank, Inter, C6, Neon)"
+    corretora: "corretora ou banco de investimento com app proprio de investimento para pessoa fisica (XP, Rico, Clear, Toro, BTG Pactual, Genial)"
+    gestora_e_private: "gestora de recursos ou private banking (Verde, Dynamo, SPX, Itau Private)"
+    pagamentos: "carteira ou conta de pagamento (PicPay, Mercado Pago, PagBank)"
+    consolidador: "app de acompanhamento de carteira (Gorila, Kinvo)"
+    casa_de_analise_e_educacao: "casa de analise ou marca de educacao financeira (Empiricus, Suno, Me Poupe!, Primo Rico)"
+  # ac-a: as referencias de sentimento (rodada 2: SBB, Volvo) podem ser auditadas na R3, mas
+  # nao sao concorrentes: entram classificadas e nao acionam o veto.
+  categorias_fora_do_veto: [referencia_de_sentimento]
   n_minimo_de_marcas: 5
   codigo_dominante: "a combinacao dos valores das quatro variaveis centrais presente em pelo menos metade das marcas classificadas da categoria (empate de duas combinacoes na metade exata: as duas sao dominantes)"
   fracao_minima: 0.5

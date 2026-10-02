@@ -9,6 +9,9 @@ veto mediria a diferenca entre duas maos. Aqui fica a regra UMA vez, lida de
 antes da R3, a partir dos proprios estimulos: tokens (`docs/marca/tokens/direcoes.yaml`) e o
 CSS do HTML (`docs/marca/direcoes/<X>.html`).
 
+As categorias concorrentes tambem sao do livro (ac-a, 02/10/2026): `veto()` recusa marca com
+categoria que o livro nao lista.
+
 O QUE ELE NAO FAZ (P5). Nao mede captura de tela de marca: a R3 mede os valores (cor de
 fundo, cor do botao, familia, raio, blocos) e os passa para `classificar()`. Nao le a
 densidade das direcoes no HTML: e contagem na imagem, gravada no YAML com a lista dos blocos.
@@ -178,6 +181,27 @@ def codigos_dominantes(marcas: list[dict[str, str]], livro: dict[str, Any] | Non
 def imita(direcao: dict[str, str], dominantes: list[tuple[str, ...]]) -> bool:
     """Imitar = partilhar os quatro valores centrais com um codigo dominante."""
     return tuple(direcao[v] for v in CENTRAIS) in dominantes
+
+
+def veto(direcao: dict[str, str], marcas: list[dict[str, str]],
+         livro: dict[str, Any] | None = None) -> dict[str, Any]:
+    """O veto aplicado a uma direcao, sobre as marcas classificadas na R3 (cada uma com a sua
+    `categoria`). ac-a: as categorias sao as do livro; categoria desconhecida reprova, para que
+    nenhuma marca entre ou saia do veto por um nome escrito na hora."""
+    livro = ler_livro() if livro is None else livro
+    v = livro["veto"]
+    concorrentes = list(v["categorias_concorrentes"])
+    conhecidas = set(concorrentes) | set(v["categorias_fora_do_veto"])
+    desconhecidas = sorted({m["categoria"] for m in marcas} - conhecidas)
+    if desconhecidas:
+        raise ValueError(f"categoria fora do livro de codigos (ac-a): {desconhecidas}")
+    por_categoria: dict[str, Any] = {}
+    for cat in concorrentes:
+        grupo = [m for m in marcas if m["categoria"] == cat]
+        dom = codigos_dominantes(grupo, livro)
+        por_categoria[cat] = {"n": len(grupo), "dominantes": dom, "imita": imita(direcao, dom)}
+    return {"veta": any(c["imita"] for c in por_categoria.values()),
+            "por_categoria": por_categoria}
 
 
 def main() -> int:

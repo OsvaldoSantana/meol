@@ -1803,6 +1803,12 @@ decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
 > commit com as datas da janela.**
 >
 > **A escolha da direção só sai com a R3 fechada** (veto de distinção).
+>
+> **02/10/2026, revisão antes do merge (Claude Code, sessão local):** as categorias do veto
+> ficaram fechadas no livro de códigos (ac-a, dele: as sete financeiras; as referências de
+> sentimento fora). O classificador `tools/codigos_visuais.py` entrou no conjunto congelado
+> (dez arquivos); o contrato da página exige envio por POST; e a limitação 4 ganhou o painel
+> do Firewall da Vercel. A R3 virou a P-170.
 
 ## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
 
@@ -1891,6 +1897,27 @@ O que fecha: (1) a guarda passa a ler YAML por campo (`status: NAO_CONFIRMADO` c
 ou `motivo` de acesso exige `escada`), com a própria linha de base; (2) os 11 bancos sobem a
 escada, e a cor observada de cada um entra na lista; se algum ficar a menos de 30° do magenta
 da C (318°), a decisão volta para ele antes do brandbook.
+
+## P-170 · A rodada 3 de marcas (R3), visual, para o veto de distinção
+
+**Dono:** Claude (auditar e classificar) · Osvaldo (o veto, se disparar) · **Gatilho:** o
+merge do pré-registro final 2 do teste de marca (P-162), que fecha o livro de códigos; corre
+em paralelo à coleta · **Classe:** `DECISAO_DE_DESENHO`
+
+A escolha da direção do teste de marca só sai com a R3 fechada (veto de distinção, decisão
+dele de 27/09). Até 02/10 a R3 não existia no repositório: a rodada 2 a deixou como "P-B5b",
+**textual**, e a 2 não registrou nenhum código visual. A R3 é outra coisa: **visual**,
+classificando a tela de cada marca pelo
+[livro de códigos](docs/marca/teste-de-marca/codigos-visuais.yaml), com o classificador
+`tools/codigos_visuais.py`, nas sete categorias fechadas pela ac-a (02/10).
+
+O que fecha: um arquivo de marcas classificadas, uma linha por marca, com a categoria, a
+captura usada (fonte e data) e as medidas que o `classificar()` recebe; pelo menos 5 marcas
+por categoria que se queira capaz de vetar (com menos, a categoria não tem código dominante);
+e o `veto()` aplicado à direção vencedora quando a análise sair. **Antes da primeira marca:**
+a lista de marcas por categoria, escrita e empurrada, pela mesma razão da ac-a. As capturas
+são de página pública (loja de apps, site); a §5-A.7 vale: nada de sessão logada, e acesso
+recusado sobe a escada (§5-B.18) antes de virar `NAO_CONFIRMADO`.
 
 ---
 

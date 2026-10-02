@@ -5,9 +5,14 @@ qualquer resposta, no repositório ou fora dele.*
 
 **Status.** Vale como pré-registro **a partir do merge deste arquivo no `main`**, e só se o
 merge vier antes do primeiro convite (a lição da P-116: critério gravado depois de olhar não é
-critério). A impressão digital é o sha do merge. Os nove arquivos que ele congela têm o sha256
+critério). A impressão digital é o sha do merge. Os dez arquivos que ele congela têm o sha256
 nas §3, §4 e §8. `tools/test_analise_teste_marca.py` reprova se um deles mudar sem que esta
 página mude junto.
+
+*Revisão de 02/10/2026, antes do merge (Claude Code, sessão local): as categorias
+concorrentes do veto ficam fechadas no livro de códigos (ac-a, dele); o classificador do veto
+entra no conjunto congelado (eram nove arquivos); o contrato de privacidade exige envio por
+POST; e a limitação 4 ganha o painel do Firewall da Vercel. Nenhuma resposta existe.*
 
 **Origem e o que este substitui.**
 - [`preregistro-teste-de-marca-2026-09-20.md`](../preregistro-teste-de-marca-2026-09-20.md):
@@ -53,6 +58,7 @@ Nenhuma foi preenchida por uma sessão. A coluna "20/09" diz o que mudou desde a
 | escalas honesto e confiável | "honesto/vendedor", "confiável/parece golpe" | **mantidas**, com a ordem das palavras igual à da escala | x-a |
 | imagem de estilo de vida na D | prevista | ilustração desenhada em código, **provisória** (P-168) | k-A |
 | **veto de distinção** | — | se a vencedora pela 17a **imitar** o código dominante de uma categoria auditada na R3, a escolha volta para ele; **a direção só sai com a R3 fechada** (§8) | veto (27/09), aa-a |
+| categorias do veto | — | **fechadas no livro de códigos, não na R3:** banco tradicional, banco digital, corretora, gestora e private, pagamentos, consolidador, casa de análise e educação; as referências de sentimento ficam fora do veto (§8) | ac-a (02/10) |
 
 **O que não entra.** A H-A1, que a P-162 dizia que "pode entrar como exploratória", fica de
 fora: nenhuma decisão dele a incluiu, e a n-A juntou as perguntas sobre o público na P-154.
@@ -90,7 +96,7 @@ nova, nova aprovação e novo pré-registro.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `1742303dd44464c15a46f32f05787493c83d5c5b275e22c937fe93621f17c1a3` |
+| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `73936c74ce82d3c73c7bc6aee4430ad80da74c108cf91c9aab0eab66f77d757a` |
 | `tools/analise_teste_marca.py` | a análise inteira: leitura pelo contrato, filtros, janela, regra, hipóteses, abandono por versão e saída | `2c43c9b9f59b19ab7f4784edad8a8b99a8a5b65ef3c1ca836c7f47b996b6caef` |
 
 A versão de leitura, [`questionario.md`](questionario.md), é **gerada** do YAML por
@@ -107,7 +113,9 @@ sha256 próprio, porque não é fonte.
   Brasília), sem hora.
 - **Privacidade:** o navegador nunca chama o Supabase; a gravação passa por uma função da
   Vercel que não repassa os cabeçalhos do cliente. O link é o mesmo para todos. Analytics e
-  Speed Insights ficam desligados, e nenhuma resposta vai para o log.
+  Speed Insights ficam desligados, e nenhuma resposta vai para o log. O envio é **POST**, com
+  as respostas no corpo: o log de runtime da Vercel guarda sozinho os parâmetros da URL
+  (revisão de 02/10).
 
 **O ensaio.** Um subagente respondeu a versão 5 como quatro investidores leigos, olhando os
 seis PNG. Nada do ensaio é dado. Ele achou 19 problemas.
@@ -220,9 +228,8 @@ nenhuma frase de participante entra no repositório.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, a definição de código dominante e de imitar | `4e278a517600654846406852c729eb4ac1de90bd10558abf26f917e86737a3f5` |
-
-O classificador é `tools/codigos_visuais.py`, o mesmo para as direções e para as marcas da R3.
+| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `d5c7306a5a84b191856646f6268e3c5c7e8996a35d75559d217e3eea64fdb074` |
+| `tools/codigos_visuais.py` | o classificador e o veto, os mesmos para as direções e para as marcas da R3. Congelado desde 02/10: sem ele no conjunto, o cálculo do veto podia mudar depois de a R3 começar sem que nada reprovasse | `7bf3129599fffaea6b883d6e1512c47eeabe96fa8c7e6ed63fb38083711f7188` |
 
 **As variáveis.**
 
@@ -234,6 +241,27 @@ O classificador é `tools/codigos_visuais.py`, o mesmo para as direções e para
 | raio | sim | reto, pequeno, grande | o raio do botão principal: até 2 px é reto; de 3 a 8 px, pequeno; de 9 px em diante, grande |
 | densidade | não | baixa, média, alta | blocos de informação sem rolar: até 8, baixa; de 9 a 15, média; 16 ou mais, alta |
 | botão | não | cheio, vazado | se o botão tem fundo próprio |
+
+**As categorias concorrentes (ac-a, 02/10).** Fechadas aqui, e não na R3, porque a
+classificação de E, C e D já está pública neste arquivo: quem escolhesse as categorias depois
+poderia escolher o veto. Cada marca entra em **uma** categoria, a do app que se classifica.
+Os exemplos vêm das rodadas 1 e 2 e só mostram a fronteira; **não são a lista de marcas da
+R3**.
+
+| categoria | o que entra | exemplos |
+|---|---|---|
+| `banco_tradicional` | banco de varejo com agência | Itaú, Bradesco, Banco do Brasil, Santander, Caixa |
+| `banco_digital` | banco sem agência, de app; o investimento dentro do app do banco conta aqui | Nubank, Inter, C6, Neon |
+| `corretora` | corretora ou banco de investimento com app próprio de investimento para pessoa física | XP, Rico, Clear, Toro, BTG Pactual, Genial |
+| `gestora_e_private` | gestora de recursos ou private banking | Verde, Dynamo, SPX, Itaú Private |
+| `pagamentos` | carteira ou conta de pagamento | PicPay, Mercado Pago, PagBank |
+| `consolidador` | app de acompanhamento de carteira | Gorila, Kinvo |
+| `casa_de_analise_e_educacao` | casa de análise ou marca de educação financeira | Empiricus, Suno, Me Poupe!, Primo Rico |
+
+As **referências de sentimento** (rodada 2: SBB, Volvo) podem ser auditadas na R3 com a
+categoria `referencia_de_sentimento`: entram classificadas e não acionam o veto. **Marca com
+qualquer outra categoria reprova o classificador** (`veto()` levanta erro), para que nenhuma
+marca entre ou saia do veto por um nome escrito na hora.
 
 **A regra.**
 - **Código dominante de uma categoria:** a combinação das **quatro variáveis centrais**
@@ -280,6 +308,9 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
    - **CONFIRMADO:** o Supabase guarda no log do gateway, por **1 dia** no Free, o IP, o user
      agent e a geolocalização até o CEP **de quem o chama**. Por isso o contrato proíbe o
      navegador de chamá-lo.
+   - **CONFIRMADO (02/10):** o painel do Firewall da Vercel agrupa o tráfego por IP de
+     origem e por user agent, numa janela de até 24 horas. `NAO_CONFIRMADO`: se esse painel
+     existe no plano Hobby.
    - `NAO_CONFIRMADO`: se dá para desligar os logs, o prazo do IP de DDoS e a região física
      dos logs.
    - A tabela da pesquisa não tem IP. A plataforma tem.
@@ -324,10 +355,15 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
 20. **O livro de códigos mede o que o classificador declara.** A família da fonte vem do
     genérico do CSS nas direções e do olho de quem classifica nas marcas da R3. E a fronteira
     de matiz da C fica a 2,9°.
+21. **Uma categoria por marca** (ac-a). Marca com mais de um negócio (o Itaú do varejo e o
+    Itaú Private; o Nubank e o Nu Invest dentro dele) entra pela categoria do app que se
+    classifica, e a escolha do app é de quem classifica na R3. Crédito (Serasa) não está na
+    lista nem fora do veto: uma marca só de crédito não tem categoria no livro, e o
+    classificador a recusa se ela aparecer no arquivo do veto.
 
 ## 10. Mudanças depois do merge
 
-- **Antes do primeiro convite:** qualquer mudança num dos nove arquivos é pré-registro novo.
+- **Antes do primeiro convite:** qualquer mudança num dos dez arquivos é pré-registro novo.
   Esta página muda no mesmo commit, com o motivo, e o teste de sha256 reprova se não mudar.
 - **Depois do primeiro convite:** nada muda. Defeito achado durante a coleta vai para o
   relatório como **desvio do pré-registro**.

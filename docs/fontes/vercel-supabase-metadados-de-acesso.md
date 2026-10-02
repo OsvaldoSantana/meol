@@ -5,6 +5,12 @@ larga feita por subagente (§5-A.10), com URL e trecho literal por afirmação. 
 foram **conferidos por mim com `curl`** no mesmo dia (marcados ✔). O que ficou sem
 confirmação está marcado `NAO_CONFIRMADO`.*
 
+*Revisão de 02/10/2026 (Claude Code, sessão local): uma segunda leitura, independente, por
+outro subagente, confirmou a coleta do IP pela Vercel, a retenção de 1 hora, os Drains fora do
+Hobby, o Analytics desligado por padrão, os cabeçalhos do gateway do Supabase e a retenção de
+1 dia. Ela achou uma linha a mais, a do painel do Firewall, cujo trecho conferi com `curl`
+(✔ 02/10). As linhas do DPA e do IP para DDoS ela não leu.*
+
 **Por que importa.** A decisão dele é "sem IP, sem nome, sem e-mail". A tabela da pesquisa
 cumpre isso. Mas as duas plataformas registram metadados de acesso **sem que o dono
 configure nada**, e isso vai para o consentimento, para o contrato da página (S6) e para as
@@ -24,6 +30,7 @@ limitações.
 | Web Analytics e Speed Insights | desligados por padrão; só coletam se ativados e com o pacote instalado | CONFIRMADO | https://vercel.com/docs/analytics/quickstart; https://vercel.com/docs/speed-insights/limits-and-pricing |
 | DPA | "applies … for Customers who are on Enterprise and Pro plans": **não cobre o Hobby** | CONFIRMADO | https://vercel.com/legal/dpa |
 | região da função | `iad1` (Washington, EUA) por padrão; o Hobby tem uma região | CONFIRMADO | https://vercel.com/docs/functions/configuring-functions/region |
+| painel do Firewall, por IP | "**Client IP Addresses**: View traffic grouped by source IP address" e "**User Agents**: Inspect clients by user agent strings", numa janela de até "the last 24 hours" ✔ (02/10). A frase "available on all plans" da mesma página fala dos *Firewall Alerts*, não desta visão | CONFIRMADO (o painel agrupa por IP, até 24 h) · NAO_CONFIRMADO (se existe no Hobby) | https://vercel.com/docs/vercel-firewall/firewall-observability (`.md`, linhas 50, 75, 76 e 86) |
 
 ## Supabase (plano Free)
 

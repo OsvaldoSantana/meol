@@ -141,6 +141,16 @@ deixava aberto. A S5 v2 parou e perguntou; ele respondeu na sessão do Claude Co
 | **aa-a** | "código dominante = combinação presente em pelo menos metade das marcas da categoria": combinação de quais variáveis? | **as quatro centrais** (fundo, matiz, família do título, raio), as mesmas que definem "imitar". Densidade e peso do botão são classificados e relatados, e não entram no veto | as seis variáveis |
 | **ab-a** | "versão = contador mod 6": o contador conta o quê? | **aberturas da página.** Quem abandona gasta uma versão, e o relatório traz o abandono por versão | respostas concluídas |
 
+### Resposta dele, 02/10/2026, na revisão do PR #43 antes do merge (P-162)
+
+Dada na sessão local do Claude Code. O livro de códigos do #43 deixava a R3 declarar as
+categorias concorrentes. Mas a classificação de E, C e D já está pública no pré-registro, e
+quem escolhesse as categorias depois poderia escolher o veto.
+
+| código | a lacuna | resposta | alternativas não escolhidas |
+|---|---|---|---|
+| **ac-a** | quais categorias contam como "concorrentes" no veto, e quem as fixa | **fixadas agora no livro de códigos, todas as financeiras:** banco tradicional, banco digital, corretora (com banco de investimento), gestora e private, pagamentos, consolidador de carteira, casa de análise e educação. As referências de sentimento (SBB, Volvo) ficam fora do veto | só quem vende investimento (sem pagamentos nem casa de análise); a R3 declara antes de começar |
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do

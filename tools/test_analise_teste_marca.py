@@ -310,7 +310,9 @@ CONGELADOS = {f"docs/marca/direcoes/png/{d}-{v}.png" for d in "ECD"
               for v in ("base", "rota-bloqueada")} | {
     "docs/marca/teste-de-marca/questionario.yaml",
     "docs/marca/teste-de-marca/codigos-visuais.yaml",
-    "tools/analise_teste_marca.py"}
+    "tools/analise_teste_marca.py",
+    # revisao de 02/10: o veto e calculado aqui; fora do conjunto, mudaria sem reprovar nada
+    "tools/codigos_visuais.py"}
 
 
 def _sha256_gravados(texto: str) -> dict[str, str]:
@@ -329,7 +331,7 @@ def _divergentes(gravados: dict[str, str]) -> list[str]:
     return out
 
 
-def test_preregistro_final_congela_os_nove_arquivos_pelo_sha256():
+def test_preregistro_final_congela_os_dez_arquivos_pelo_sha256():
     """P4: mudar um byte do questionario, do livro de codigos, do script ou de um PNG sem mudar
     o pre-registro no mesmo commit reprova. Mutacao: um sha256 trocado aparece como divergente."""
     with io.open(PREREGISTRO, encoding="utf-8") as f:

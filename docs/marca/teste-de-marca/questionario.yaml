@@ -142,6 +142,10 @@ privacidade:
   - "o link \u00e9 o mesmo para todos, sem identificador na URL nem na query"
   - "Web Analytics e Speed Insights da Vercel desligados; nenhum cookie; nenhum script de terceiros"
   - "a fun\u00e7\u00e3o n\u00e3o escreve resposta nem cabe\u00e7alho no log (console.log)"
+  # Revisao de 02/10: o log de runtime da Vercel mostra os parametros de busca de cada chamada
+  # sem nenhum console.log (docs/fontes/vercel-supabase-metadados-de-acesso.md). Resposta na URL
+  # iria para o log sozinha.
+  - "o envio \u00e9 POST, com as respostas no corpo; nenhuma resposta vai na URL nem na query"
   - "a tabela n\u00e3o tem IP, nome, e-mail, user agent nem hora"
 
 # h-A (27/09/2026, dele). As datas absolutas entram num commit proprio, antes do primeiro convite.

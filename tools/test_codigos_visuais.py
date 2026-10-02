@@ -108,6 +108,46 @@ def test_mutacao_dominante_sobre_seis_variaveis_perde_o_veto(monkeypatch):
     assert not V.imita(ESPERADO["C"], V.codigos_dominantes(cat, LIVRO))
 
 
+def _na_categoria(cat, marcas):
+    return [{**m, "categoria": cat} for m in marcas]
+
+
+def test_veto_so_dispara_em_categoria_concorrente_do_livro():
+    """ac-a: o mesmo grupo de marcas veta a C como banco digital e nao veta como referencia de
+    sentimento, que o livro deixa fora do veto."""
+    grupo = [_marca("claro", "rosa", "sem_serifa", "grande")] * 3
+    grupo += [_marca("escuro", "azul", "serifa", "reto")] * 2
+    como_banco = V.veto(ESPERADO["C"], _na_categoria("banco_digital", grupo), LIVRO)
+    assert como_banco["veta"] and como_banco["por_categoria"]["banco_digital"]["imita"]
+    como_ref = V.veto(ESPERADO["C"], _na_categoria("referencia_de_sentimento", grupo), LIVRO)
+    assert not como_ref["veta"]
+    assert not V.veto(ESPERADO["E"], _na_categoria("banco_digital", grupo), LIVRO)["veta"]
+
+
+def test_veto_recusa_categoria_fora_do_livro():
+    """ac-a: categoria escrita na hora (ou com outra grafia) nao entra nem sai do veto calada."""
+    grupo = _na_categoria("fintech", [_marca("claro", "rosa", "sem_serifa", "grande")] * 5)
+    with pytest.raises(ValueError, match="fintech"):
+        V.veto(ESPERADO["C"], grupo, LIVRO)
+
+
+def test_mutacao_categorias_da_r3_em_vez_do_livro_deixam_o_veto_passar(monkeypatch):
+    """Se a lista viesse de quem classifica (a R3 renomeando "banco_digital" para "fintech" e
+    declarando-a fora), o mesmo grupo deixaria de vetar: a guarda tem de reprovar antes."""
+    livro = {**LIVRO, "veto": {**LIVRO["veto"], "categorias_fora_do_veto": ["fintech"]}}
+    grupo = _na_categoria("fintech", [_marca("claro", "rosa", "sem_serifa", "grande")] * 5)
+    assert not V.veto(ESPERADO["C"], grupo, livro)["veta"]
+    with pytest.raises(ValueError):
+        V.veto(ESPERADO["C"], grupo, LIVRO)
+
+
+def test_as_sete_categorias_concorrentes_de_ac_a():
+    assert list(LIVRO["veto"]["categorias_concorrentes"]) == [
+        "banco_tradicional", "banco_digital", "corretora", "gestora_e_private", "pagamentos",
+        "consolidador", "casa_de_analise_e_educacao"]
+    assert LIVRO["veto"]["categorias_fora_do_veto"] == ["referencia_de_sentimento"]
+
+
 def test_centrais_do_codigo_e_do_livro_sao_as_mesmas():
     assert V.CENTRAIS == tuple(k for k, v in LIVRO["variaveis"].items() if v["central"])
 

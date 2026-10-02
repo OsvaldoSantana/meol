@@ -87,6 +87,7 @@ Nada de IP, nome ou e-mail. Exigências de privacidade para a página (ver `docs
 - o link é o mesmo para todos, sem identificador na URL nem na query;
 - Web Analytics e Speed Insights da Vercel desligados; nenhum cookie; nenhum script de terceiros;
 - a função não escreve resposta nem cabeçalho no log (console.log);
+- o envio é POST, com as respostas no corpo; nenhuma resposta vai na URL nem na query;
 - a tabela não tem IP, nome, e-mail, user agent nem hora.
 
 ## 10. A janela
