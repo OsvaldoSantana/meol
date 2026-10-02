@@ -1195,6 +1195,22 @@ critério corrigido repete o defeito da P-116.
 > e a diferença vai para ele antes de qualquer outro passo. **27/09, tolerância de 2% só para
 > cima:** 819 segue; de 820 a 835 segue, com o n × 819 ÷ n_cal arredondado para baixo; fora
 > disso, para (§9 do #27, `239acf1`).
+>
+> **02/10/2026, sessão local — a contagem deu `PARADO`.** A calibração em 2021–2025 contou
+> **807**, quando a faixa aceita vai de 819 a 835: diferença de **−12**, abaixo da faixa. A
+> §9 do #27 diz que contar a menos é sinal de unidade errada. Pelo passo 3, nada se gravou
+> além da diferença:
+> - sem janela escolhida;
+> - sem sha256 na §2;
+> - sem D1 sorteado.
+>
+> **Nenhum preço de 2013–2020 foi aberto.** O silver
+> (`eventos_silver_2026-09-11_cal-19860102-20260918.csv`, sha256 `ec6b50da…98143`, igual em
+> duas gerações) e os COTAHIST de 2013 a 2025, conferidos contra os pinos, estão na §9.
+>
+> **Em aberto:** o −12 é do contador ou da referência? Os 819 foram medidos em setembro, com o
+> silver e o código de então. Separar os dois exige rodar o `ajustar.medir` em 2021–2025 com
+> este silver; isso lê preço só de 2021–2025, fora da quarentena.
 
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados

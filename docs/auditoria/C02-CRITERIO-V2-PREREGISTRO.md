@@ -514,6 +514,40 @@ Fora das duas pastas (régua, pergunta 2):
 - ela usaria volume, e não degrau, e cobre 2016–2019 do mesmo jeito que 2013–2015. Se
   contaminasse os primeiros, contaminaria também a janela original.
 
+### A contagem de 02/10/2026: `PARADO` na calibração (sessão local)
+
+**Só a diferença**, como manda o passo 3. Nenhuma janela foi escolhida, a §2 continua com o
+`<PREENCHER>` e o D1 não foi sorteado. **Nenhum preço, retorno ou fator de 2013–2020 foi
+aberto.** A quarentena segue de pé.
+
+```
+silver eventos_silver_2026-09-11_cal-19860102-20260918.csv sha256 ec6b50dae59dd30e5ec48c66ab9849c5c000ea02d07ab1072904eab2dfe98143
+RESUMO PARADO: calibracao 2021-2025: contou 807, a unidade dos 819 aceita de 819 a 835.38 (tolerancia 2%, so para cima); diferenca -12. A regra NAO escolhe janela (secao 9).
+```
+Saída 2, em 3 min 47 s.
+
+**Como foi rodado, para que a diferença seja reproduzível:**
+- **Código:** este branch no commit `4a3f2d6`, o `239acf1` com o `main` trazido por merge.
+  O merge não tocou em `fase0/ajustar.py`, `fase0/refinar.py`, `fase0/calendario.py` nem
+  `auditoria/c02_contar_n.py`.
+- **Silver:** `py -3.11 fase0/refinar.py --dia 2026-09-11`, sobre o acervo do disco dele.
+  - O calendário cobre 1986-01-02 a 2026-09-18, com 10.059 pregões, e inclui 2013.
+  - São 9.272 linhas, e 9.271 têm a data ex derivada.
+  - **Duas gerações seguidas deram o mesmo sha256** (n=2).
+- **COTAHIST:** os anuais de 2013 a 2025, conferidos antes da contagem contra
+  `docs/aprendizado/preregistro-ml-v2.pins.yaml`. Os 13 batem no sha256 do ZIP e no tamanho,
+  e são exatamente os 13 arquivos que o `calendario.arquivos` escolhe na pasta.
+
+**O que a diferença diz, e o que não diz.** O script contou **12 a menos** que os 819 em
+2021–2025. A §9 escreveu antes que a presença só pode contar **a mais** que o `ajustar`, e que
+contar a menos é sinal de unidade errada. A contagem **não** diz qual dos dois lados mudou:
+- o contador (a presença não reproduz a unidade dos 819);
+- ou a referência (os 819 foram medidos em setembro, com o silver e o código de então, e
+  mudaram desde então: o silver com nome e calendário da P-117, o calendário da P-114).
+
+Separar os dois exige rodar o `ajustar.medir` em 2021–2025 com **este** silver. Isso lê preço
+de 2021–2025, fora da quarentena, mas é passo novo, e não foi feito: o passo 3 manda parar.
+
 ---
 
 ## Notas de revisão
