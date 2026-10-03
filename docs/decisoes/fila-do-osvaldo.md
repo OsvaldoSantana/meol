@@ -41,7 +41,7 @@ redigido e **para**, e só é empurrado depois do "pode empurrar".
 | a ordem da marca | à risca: pesquisa → design → mercado → UX → brandbook | idem; nota N-ORDEM no mapa |
 | `SEM_POSICAO` primeiro | sim, depois da P-115 | P-164 |
 | o que sobrevive do Quanto-e-Onde | só o conceito | `rosto-v1.md`, com a medição |
-| onde o motor roda | "servidor", **em aberto** por colidir com a P-157 | P-165, bloco 18 |
+| onde o motor roda | "servidor"; **fechado em 03/10: B′**, servidor sem estado | [`P-165-onde-o-motor-roda.md`](P-165-onde-o-motor-roda.md) |
 | nome nos estímulos | MEOL | `rosto-v1.md`; logotipo espera a P-166 |
 
 ### Respostas dele, 27/09/2026, aos blocos 16 e 17 (P-162)
@@ -216,6 +216,14 @@ deixar a referência zero como estava (21d original).
    fora, porque a regra só conta autoria Claude. Se a etiqueta obrigatória fizer as linhas novas
    saírem com autor, a taxa nova sobe sem que o modelo piore. O viés empurra para voltar, não
    para ficar.
+
+### Resposta dele, 03/10/2026, ao bloco 18 (P-165)
+
+Dada pelo formulário do Projeto no claude.ai.
+
+| bloco | resposta | onde ficou | alternativas não escolhidas |
+|---|---|---|---|
+| **18 · B′** | **servidor sem estado.** O aparelho envia a situação, o servidor calcula e devolve, e nada é gravado, nem em log. O dado continua morando no aparelho; a P-157 fica de pé | [`P-165-onde-o-motor-roda.md`](P-165-onde-o-motor-roda.md), com as três consequências e o status de cada uma | A (motor no aparelho), B (servidor com banco de dados) |
 
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
@@ -567,7 +575,7 @@ certa, e o script calcula sem julgamento humano depois de ver os dados.
 
 ---
 
-## 18 · Onde o motor roda para o usuário · P-165
+## 18 · Onde o motor roda para o usuário · P-165 · **respondido em 03/10: B′**
 
 - **(A)** No aparelho, como diz a P-157. Mais pesado de carregar, e o dado nunca sai.
 - **(B)** Servidor com banco de dados. Leve, sincroniza entre aparelhos, mas o dado
