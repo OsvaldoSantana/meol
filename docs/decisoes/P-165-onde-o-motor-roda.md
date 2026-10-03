@@ -33,7 +33,7 @@ da recomendação do Claude (Projeto no claude.ai) e da redação da sessão de 
 |---|---|---|
 | (a) | **A LGPD continua valendo: processar é tratar, mesmo sem gravar.** Pedem-se base legal, aviso, transporte cifrado e região de hospedagem declarada. | **NAO_CONFIRMADO juridicamente.** Nada disto foi lido na fonte nem passou por parecer; segue na **P-158**. |
 | (b) | **"Não grava" exige prova:** teste com valores-sentinela que reprova se qualquer um aparecer em log, erro ou métrica, incluindo o padrão da plataforma de hospedagem. | **Aberta: P-175**, antes do primeiro endpoint do motor (etapa 4). |
-| (c) | **O contrato da F0 passa a ser também o formato que trafega na rede.** Na leitura do item 20 da fila, minimizar os campos em trânsito. | **Aberta**, junto do item 20 da fila ("Ler a especificação da F0"). |
+| (c) | **O contrato da F0 passa a ser também o formato que trafega na rede.** Na leitura do item 20 da fila, minimizar os campos em trânsito. | **Dividida em 03/10.** **Saída: decidida** no item 20 da fila: `reserva.atual` e `alocacao.atual[]` não são devolvidos na resposta, a tela os monta com o que o aparelho guarda. **Entrada: aberta, P-178** (quais campos do `Estado` viajam). |
 
 ## O que esta decisão não faz
 

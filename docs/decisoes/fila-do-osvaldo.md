@@ -600,11 +600,27 @@ exceção. Responder quando a P-115 fechar.
 
 ---
 
-## 20 · Ler a especificação da F0 · portão do esquema
+## 20 · Ler a especificação da F0 · portão do esquema · **respondido em 03/10: aprovado com mudanças**
 
 Ler `docs/ux/F0-contrato-de-saida.md` e responder: **aprovado**, **aprovado com
 mudanças** (quais) ou **refazer**. Sem isso, nenhum código de esquema (decisão F0, regra
 3). Não é urgente: pela ordem à risca, o esquema é da etapa 4.
+
+**Resposta, 03/10/2026 (formulários do Projeto no claude.ai; ele não declarou razões):
+aprovado com mudanças.**
+
+1. **Os 23 campos: aprovados, todos ficam.**
+2. **`reserva.atual` e `alocacao.atual[]`** ficam no contrato da **tela**, mas **não trafegam
+   na resposta do servidor** (B′, P-165): a tela os monta com o que o aparelho já guarda.
+3. **Venda:** "quero que o motor recomende venda". Recusou o texto fixo "o motor não
+   recomenda venda" como solução permanente. → direção do produto e compromisso da
+   [P-123](../../PENDENCIAS.md); até ela fechar vale o F5 do mapa, **provisório**.
+4. **Frase curta (`decisao.motivo_curto`):** "frase curta sim, mas a interface pode montar".
+   É **permissão**, não obrigação.
+
+Efeitos: o contrato em [`F0-contrato-de-saida.md`](../ux/F0-contrato-de-saida.md); a
+minimização da **entrada** virou a P-178; a consequência (c) da
+[P-165](P-165-onde-o-motor-roda.md) foi atualizada.
 
 ---
 
