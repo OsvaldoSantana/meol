@@ -92,7 +92,7 @@ lint = [
 # dentro do ArmazemS3, e a suite roda sem ele. Fora da impressao do ambiente pelo mesmo
 # motivo do `lint`: transporte de byte nao muda numero nenhum -- o sha256 confere.
 captura = [
-  "boto3==1.43.101",
+  "boto3==1.43.102",
 ]
 # P-141 (25/09/2026): a suite completa roda em paralelo (`-n auto --dist loadgroup`).
 # NAO vai em `dev`, e a razao e medida: `ambiente.declarado()` le `dependencies` + `dev`,
