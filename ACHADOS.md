@@ -3066,7 +3066,7 @@ antiga, e eu troquei de mecanismo sem inventariar o que o mecanismo velho garant
 acidente (é o N-01 de novo, do lado da guarda). **Conserto:** cada `(job, nome)` autorizado
 tem de casar com exatamente um passo; zero ou dois ou mais é defeito, com nome e contagem na
 mensagem. **Processo:** troca de guarda passa a ter a tabela "garantia antiga → teste que a
-cobre hoje" no PR (ficou no PR #52).
+cobre hoje" no PR (ficou no PR #53).
 
 ---
 
