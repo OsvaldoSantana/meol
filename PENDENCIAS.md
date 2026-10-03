@@ -1227,6 +1227,18 @@ critério corrigido repete o defeito da P-116.
 > julgado pela §3.1 (por pregão, semente 20260926). A janela só seria outra com o σ por pregão
 > de 2021–2025 entre 0,0276 e 0,0342, e ele não foi medido. **Próximo passo do D1:** a
 > transcrição dos documentos (§3.1, passo 2), antes da corrida.
+>
+> **03/10/2026 — D1 transcrito: `PASSA`** (`docs/fontes/jcp-amostra-2016-2020.md`). As posições
+> 1 a 10 têm documento no RAD e as 10 são `BRUTO`; nenhuma foi pulada. As posições 5 (GGBR3) e
+> 10 (TOTS3) não rotulavam o valor: depois da escada, a decisão dele virou a **emenda E-D1a**
+> ("sujeito a retenção de IR" = bruto; o 20-F em HTML vale como prova), empurrada antes da
+> classificação (`95042ca`). A emenda veio depois de abrir os documentos, e isso está declarado
+> na §3.1: sem ela, o D1 não daria `PASSA`. O RAD corta downloads (`curl: (18)`); a guarda de
+> integridade reprova as 5 cópias cortadas, e as 10 provas repetiram o sha256 em duas rodadas.
+> **Aberto:** os PDFs no armazém (§3.1), que a nuvem não alcança: sessão local, em "Ao voltar
+> ao desktop". **Próximo passo:** o script da corrida de 2016–2020 (§3.1, passo 3), que ainda
+> não existe: aplica a §4 com o bootstrap por pregão da §3.1 (semente 20260926), tem testes
+> sobre dado sintético e é empurrado **antes** de rodar. Só então a sessão local roda.
 
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados
@@ -2136,3 +2148,9 @@ mutação que faz `C = None` e `del C` e exige a acusação nos dois.
 >       aberturas de teste não são da janela (ab-a).
 >    8. Daí em diante, a ordem é a do pré-registro (§12): **o commit das datas da janela,
 >       empurrado, e só então o primeiro convite.** Depois do primeiro convite, nada se apaga.
+>
+> 11. **03/10/2026 — P-115, os PDFs do D1 no armazém.** ⚙ **exige o desktop** (o R2 só se
+>     escreve de lá). Baixar as 10 provas pelas URLs de `docs/fontes/jcp-amostra-2016-2020.md`,
+>     conferir cada sha256 contra a tabela antes de subir e subir com a chave = conteúdo. Do
+>     20-F da Gerdau, sobe o documento arquivado (sha256 `20f8599e…b512`). Não bloqueia a
+>     corrida: a §3.1 exige as quatro provas por evento, e o armazém guarda a cópia.
