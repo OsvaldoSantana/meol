@@ -577,6 +577,50 @@ novo é recomputado pela convenção acima e o RNG pode diferir do de setembro, 
 σ saem com o n ao lado (5-B.14) e o 0,0472 de setembro continua sendo o publicado, não o
 reproduzido.
 
+### O resultado: n = 807, a referência mudou (03/10/2026)
+
+**Saída: 807.** O `ajustar.medir` de hoje, em 2021–2025, com o silver `ec6b50da…98143`
+(sha256 conferido na corrida, igual) e o COTAHIST fixado, conta **n = 807** degraus só-JCP em
+dia `LIMPO`. É o número do contador. **O contador não conta errado: os 819 de setembro é que
+não valem mais**, e a saída aplicada é a de 807. Só se leu preço de 2021–2025; nenhum de
+2013–2020 foi aberto, e a quarentena segue.
+
+```
+JRS CAP PROPRIO  n=807  razao queda/provento = 0,9523   (setembro: n=819, 0,951)
+  IC 95% [0,8579 ; 1,0468], sigma = (hi-lo)/2/1,96 = 0,0482   (n=807, 2.000 reamostras, semente 20260921)
+DIVIDENDO        n=407  razao = 1,1639                       (setembro: n=400, 1,164)
+  IC 95% [1,0892 ; 1,2361], sigma = 0,0375                   (n=407)
+```
+
+**Os três números novos, na convenção da §9** (n, σ e limiar medidos em 2021–2025 com o silver
+de hoje; substituem 819, 0,0472 e 1.648 para a regra da janela):
+
+| | setembro | hoje (n=807) |
+|---|---|---|
+| n_cal (JCP) | 819 | **807** |
+| σ iid do JCP | 0,0472 | **0,0482** |
+| limiar n_JCP | 1.648 | **n ≥ 1.693** |
+
+Limiar: 807 × (0,0482 ÷ 0,03328)² = 1.692,8, arredondado para cima = **1.693**. Pelo σ sem
+arredondar o IC (0,0482 → 1.692,1) o teto dá o mesmo 1.693: o inteiro não depende do arredondamento.
+
+**O que mudou e o que não se sabe (P5):**
+- O n do JCP caiu 12 e o do dividendo subiu 7. **A causa não foi separada**: as candidatas
+  são o silver com nome e calendário da P-117 e o calendário da P-114, e separar exigiria
+  bisseção do código sobre o mesmo acervo. Nada nesta decisão depende disso.
+- O σ vem de um bootstrap **recomputado**: o script de setembro não está no repositório, e
+  `random.Random(20260921)` pode não ser o RNG de então. A razão 0,9523 contra 0,951 e o σ
+  0,0482 contra 0,0472 misturam a mudança do silver com a do sorteio; os dois não se separam.
+  O limiar sobe de 1.648 para 1.693 pelas duas causas juntas.
+- A regra "menor janela com n_JCP ≥ limiar" e as quatro candidatas não mudam. **O limiar
+  novo (1.693) vale daqui para a frente; o texto acima (1.648, 819, 0,0472) fica como
+  registro do que se escreveu em 26/09.**
+
+**O que falta antes de qualquer contagem de 2013–2020:** `auditoria/c02_contar_n.py` ainda
+carrega `CALIBRACAO_N = 819`, `SIGMA_2021_2025 = 0.0472` e o limiar 1.648, com a faixa de
+aceitação de 819 a 835. Trocar por 807, 0,0482 e 1.693, com o teste, é revisão do script e
+**vem empurrada antes da contagem**; este commit só grava a medição.
+
 ---
 
 ## Notas de revisão
