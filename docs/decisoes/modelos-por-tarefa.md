@@ -38,8 +38,8 @@ do Opus. O semanal (`testes.yml`, passo "Regra de volta dos modelos") mede a tax
 **14 dias** e a compara com a **referência**: os eventos e os PRs de 16/09 a 02/10, tudo em Opus,
 classificados uma vez em [`docs/metricas/referencia-modelos.csv`](../metricas/referencia-modelos.csv).
 A classe volta um degrau (`haiku → sonnet → opusplan → opus`) quando a taxa **passa de 1,5 vez**
-a referência **e** há **pelo menos 4 PRs** dela na janela. Classe sem referência só mostra os
-números. O 1,5 e o 4 são escolha declarada, não medida. Quando uma classe volta, o semanal abre
+a referência **e** há **pelo menos 4 PRs** dela na janela. *(Ajuste de 03/10: a referência é
+(eventos + 1) / (PRs + 1) e a volta exige também pelo menos 2 eventos da classe na janela.)* O 1,5 e o 4 são escolha declarada, não medida. Quando uma classe volta, o semanal abre
 uma issue, e a volta se registra aqui, com a data e os números.
 
 **O PR leva a etiqueta no título**, `[modelo=<m> classe=<c>]`, porque é ele o denominador. O CI
@@ -55,9 +55,13 @@ reprova o PR sem ela (`metricas_processo.py --titulo-pr`), com o Dependabot fora
 - **A referência começa em 25/09, não em 16/09.** O primeiro PR mergeado no `main` é de 25/09.
   Os 10 eventos de 16/09 a 24/09 estão no CSV, mas fora da taxa, porque não têm denominador.
   Ficam 17 eventos em 37 PRs.
-- **Referência zero.** `registro` (0 em 6) e `arquitetura` (0 em 2) voltam no **primeiro**
-  evento numa janela com 4 PRs. `estatistica` não tem PR na referência e nunca volta pela regra.
-  Revisão em 17/10 (P-172).
+- **Referência zero, resolvida no ajuste de 03/10.** Com a referência em eventos / PRs,
+  `registro` (0 em 6) e `arquitetura` (0 em 2) voltavam no **primeiro** evento numa janela com 4
+  PRs. Decisão dele, no mesmo dia: a referência passa a ser **(eventos + 1) / (PRs + 1)**, e a
+  volta exige **pelo menos 2 eventos** da classe na janela, além do fator e dos 4 PRs. `registro`
+  fica com 1/7 = 0,14 (limiar 0,21) e `estatistica`, sem PR, com 1,0 (limiar 1,5), em vez de
+  "só os números". O +1 e o 2 são escolha declarada, não medida; o efeito é de piso, e quem diz
+  se o piso é alto demais é a revisão de 17/10 (P-172).
 - **O autor desconhecido.** 40 das 73 linhas do período não dizem quem errou e ficaram fora da
   referência. Se as linhas novas saírem mais completas, a taxa nova sobe sem que o modelo piore.
 - **O PR não mede o tamanho do trabalho.** Um PR de uma linha e um de mil contam igual.

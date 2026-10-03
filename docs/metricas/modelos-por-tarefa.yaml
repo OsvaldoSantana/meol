@@ -24,12 +24,17 @@ regra_de_volta:
   # DECISAO dele, 03/10/2026 (fila, bloco 21: 21d), no lugar da proposta 21a (2 eventos em 14
   # dias). A TAXA de uma classe e eventos de autoria Claude por PR mergeado no main, os dois
   # etiquetados nela com modelo abaixo do topo da `ordem`. Numa janela de `janela_dias`, a
-  # classe volta um degrau quando taxa > fator x referencia E houver >= min_prs PRs dela.
-  # Classe sem referencia (zero PR nela na referencia): o relatorio so mostra os numeros.
-  # `fator` e `min_prs` sao ESCOLHA DECLARADA dele, nao medida.
+  # classe volta um degrau quando taxa > fator x referencia E houver >= min_prs PRs dela E
+  # >= min_eventos eventos dela na janela.
+  # AJUSTE dele, 03/10/2026 (claude.ai), no mesmo dia: a referencia de cada classe e
+  # (eventos + 1) / (PRs + 1), para que classe com zero evento nao tenha regua zero (1,5 x 0 = 0
+  # devolvia a classe no primeiro evento); e o minimo de 2 eventos impede que um erro so a volte.
+  # Classe sem PR na referencia fica com regua 1,0, nao mais "so os numeros".
+  # `fator`, `min_prs` e `min_eventos` sao ESCOLHA DECLARADA dele, nao medida.
   janela_dias: 14
   fator: 1.5
   min_prs: 4
+  min_eventos: 2
   referencia:
     # A classificacao de 16/09 a 02/10, UMA vez, com tudo em Opus. A classe de cada linha foi
     # INFERIDA pela sessao de 03/10 a partir da descricao do evento e do titulo do PR.

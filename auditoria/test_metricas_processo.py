@@ -84,7 +84,7 @@ def test_a_tabela_tem_as_classes_da_decisao_e_fable_fora():
 # mudar de sentido quando ele mexer no 1,5 ou no 4 do YAML.
 
 HOJE = M.dt.date(2026, 10, 20)
-REGRA = dict(janela_dias=14, fator=1.5, min_prs=4)
+REGRA = dict(janela_dias=14, fator=1.5, min_prs=4, min_eventos=2)
 
 
 def _modelos(**regra):
@@ -105,8 +105,8 @@ def _volta(eventos, prs, ref, **regra):
     return M.regra_de_volta(eventos, prs, HOJE, ref, _modelos(**regra))["registro"]
 
 
-# referencia sintetica: 2 eventos em 4 PRs = 0,5. O limiar e 1,5 x 0,5 = 0,75.
-REF = {"registro": (2, 4)}
+# referencia sintetica: 1 evento em 3 PRs -> (1 + 1) / (3 + 1) = 0,5. O limiar e 1,5 x 0,5 = 0,75.
+REF = {"registro": (1, 3)}
 
 
 def test_21d_volta_quando_a_taxa_PASSA_de_1_5_vez_a_referencia():
@@ -124,11 +124,25 @@ def test_21d_nao_volta_com_menos_de_4_PRs_da_classe_na_janela():
     assert _volta(_ev(8), [_pr("2026-10-15")] * 4, REF)["volta"]
 
 
-def test_21d_sem_referencia_so_mostra_os_numeros_e_nunca_volta():
-    v = _volta(_ev(9), [_pr("2026-10-15")] * 5, {"registro": (0, 0)})
-    assert v["ref"] is None and v["taxa"] == 9 / 5 and not v["volta"]
-    assert "sem referencia (0 / 0): so os numeros" in M.relatorio_volta(
-        {"registro": v}, [], HOJE, _modelos())
+def test_21d_referencia_zero_nao_tem_regua_zero_e_um_evento_so_nao_volta():
+    # (0 + 1) / (6 + 1) = 1/7; limiar 1,5/7 = 0,214. 1 evento em 4 PRs = 0,25 > limiar, mas e UM
+    # evento so. Mutacao: tirar o `+ 1` da referencia (regua 0) ou o `min_eventos` -> volta.
+    ref0 = {"registro": (0, 6)}
+    prs = [_pr("2026-10-15")] * 4
+    v = _volta(_ev(1), prs, ref0)
+    assert v["ref"] == 1 / 7 and v["taxa"] == 0.25 and not v["volta"]
+    assert _volta(_ev(2), prs, ref0)["volta"]            # dois eventos: volta
+    # o minimo vem do YAML (P2): com min_eventos 1 o mesmo caso volta
+    assert _volta(_ev(1), prs, ref0, min_eventos=1)["volta"]
+
+
+def test_21d_classe_sem_PR_na_referencia_tem_regua_1_e_o_relatorio_mostra():
+    # (0 + 1) / (0 + 1) = 1,0: limiar 1,5; 9 eventos em 5 PRs = 1,8 volta, 7 em 5 = 1,4 nao
+    prs = [_pr("2026-10-15")] * 5
+    assert _volta(_ev(9), prs, {"registro": (0, 0)})["volta"]
+    assert not _volta(_ev(7), prs, {"registro": (0, 0)})["volta"]
+    v = _volta(_ev(9), prs, {"registro": (0, 0)})
+    assert "1.00 (0 / 0)" in M.relatorio_volta({"registro": v}, [], HOJE, _modelos())
 
 
 def test_21d_a_janela_vale_para_o_evento_E_para_o_PR():
