@@ -5,6 +5,8 @@ import re
 
 import yaml
 
+from guarda_segredos import PERMITIDOS_POR_WORKFLOW, defeitos_de_segredo, referencias
+
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WF = os.path.join(RAIZ, ".github", "workflows")
 
@@ -34,10 +36,14 @@ def test_toda_maquina_e_ubuntu_24_04():
 
 
 def test_segredo_do_R2_so_no_passo_que_materializa_o_acervo():
+    """CX-01: por lista de permissao (`guarda_segredos`), nao por `"secrets." in str(...)`,
+    que nao via `secrets['X']` nem `toJSON(secrets)` -- e este workflow roda em pull_request."""
     d = _wf("testes.yml")
-    com = [p["name"] for p in _passos(d) if "secrets." in str(p.get("env", ""))]
-    assert com == ["Materializar o acervo do armazem"], com
-    assert "secrets." not in str(d["jobs"]["rapido"])
+    assert defeitos_de_segredo(d, PERMITIDOS_POR_WORKFLOW["testes.yml"]) == []
+    achados = {(j, p) for j, p, _, _ in referencias(d)}
+    assert achados == {("completo", "Materializar o acervo do armazem")}, (
+        "vacuidade: o passo autorizado tem de ter os segredos")
+    assert not [r for r in referencias(d) if r[0] == "rapido"]
 
 
 def test_push_roda_sem_slow_e_o_semanal_roda_tudo():
