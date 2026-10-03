@@ -102,6 +102,12 @@ T1 mostra a venda com o **motivo nomeado**:
 
 Cada motivo abre um porquê diferente em T3. Enquanto o IR de renda variável estiver em `limitacoes_declaradas`, **nenhuma venda sai do motor**, e T1 diz isso em vez de recomendar.
 
+> **03/10/2026 — direção do produto, decisão do Osvaldo:** "quero que o motor recomende venda";
+> ele recusou o texto fixo "o motor não recomenda venda" como solução permanente. O motor
+> recomenda venda pelos três motivos acima. **PROVISÓRIO até a P-123 fechar:** vale o texto do
+> parágrafo anterior (a T1 diz que o motor ainda não avalia venda). **Isto é proposta do Claude
+> para o intervalo, e o Osvaldo pode vetar.**
+
 ### F6 — Recusa (o fluxo que quase ninguém desenha)
 
 O motor recusa → T1 troca a decisão por **três linhas fixas**:

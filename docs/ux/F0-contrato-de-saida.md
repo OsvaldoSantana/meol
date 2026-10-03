@@ -4,6 +4,15 @@
 decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-produto.md)).
 **Nenhum esquema em código antes de ele ler este documento.**
 
+> **Decisão do Osvaldo, 03/10/2026: aprovado com mudanças** (item 20 da
+> [fila](../decisoes/fila-do-osvaldo.md); registro feito pelo Claude, sem razões atribuídas a ele).
+> Os 23 campos ficam. **Mudança:** `reserva.atual` e `alocacao.atual[]` seguem no contrato da
+> tela com **origem: aparelho, não trafega** — o servidor não os recebe nem os devolve (B′,
+> [P-165](../decisoes/P-165-onde-o-motor-roda.md)). **Venda:** o motor deve recomendar venda
+> (P-123); o `venda.motivo` abaixo é compromisso, hoje sem emissor. **Frase curta:** a
+> interface pode montá-la; o §3, item 3, "nunca montada na interface", **deixa de valer** como
+> exigência (ver a proposta do Claude no item 3, abaixo). Falta a pendência da **entrada** (P-178).
+
 **Entrada:** a lista de campos da §6 do [mapa de telas v1](mapa-de-telas-v1.md) e os
 [requisitos de interface v1](../marca/requisitos-interface-v1.md) (RI-01 a RI-21).
 
@@ -64,17 +73,17 @@ decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-p
 | campo | tipo | origem | tela | RI | exemplo |
 |---|---|---|---|---|---|
 | `reserva.alvo` | dinheiro em R$ | `EXISTE_EM_PARTE`: `Diretiva(G2).memoria["alvo"]` só quando o G2 dispara; com a reserva completa, só pela função `reserva_alvo()`, fora da saída | T2 | RI-09 | `27000.00` |
-| `reserva.atual` | dinheiro em R$ | `EXISTE_EM_PARTE`: `Diretiva(G2).memoria["atual"]`, idem; senão `Estado.reserva_atual` (entrada) | T2 | RI-09, RI-14 | `9000.00` |
+| `reserva.atual` | dinheiro em R$ | `EXISTE_EM_PARTE`: `Diretiva(G2).memoria["atual"]`, idem; senão `Estado.reserva_atual` (entrada). **Origem: aparelho, não trafega** (decisão de 03/10: a tela o monta com o que o aparelho guarda) | T2 | RI-09, RI-14 | `9000.00` |
 | `reserva.fase` | texto, um de `A`, `B`, `C` | `NAO_EXISTE`. A fase se deduz do G2 ter disparado, mas não é campo | T2 | RI-09 | `"A"` |
 | `alocacao.alvo[]` | lista de {rota, peso} | `EXISTE`: `saida["alvo"]["pesos"]` | T2 | RI-02 | `{rota: "bova11", peso: 0.30}` |
-| `alocacao.atual[]` | lista de {rota, peso} | `EXISTE`: `Estado.posicoes` (entrada) e `motor_aporte()["ordens"][i]["peso_atual"]` | T2 | RI-02 | `{rota: "bova11", peso: 0.25}` |
+| `alocacao.atual[]` | lista de {rota, peso} | `EXISTE`: `Estado.posicoes` (entrada) e `motor_aporte()["ordens"][i]["peso_atual"]`. **Origem: aparelho, não trafega** (decisão de 03/10) | T2 | RI-02 | `{rota: "bova11", peso: 0.25}` |
 | `custo_de_discordar` | p.p. ao ano | `EXISTE`: `custo_de_discordar()`, chamada à parte, fora do `alocar()` | T2 | RI-11 | `0.12` |
 
 ### Venda (T1, T3)
 
 | campo | tipo | origem | tela | RI | exemplo |
 |---|---|---|---|---|---|
-| `venda.motivo` | número, um de 1, 2, 3 | `NAO_EXISTE`. O motor não vende: `motor_aporte()` só acusa `DERIVA_ESTRUTURAL`, e a limitação `ir_na_venda_de_renda_variavel` impede a venda por desenho | T1, T3 | RI-17 | `3` |
+| `venda.motivo` | número, um de 1, 2, 3 | `NAO_EXISTE`. O motor não vende: `motor_aporte()` só acusa `DERIVA_ESTRUTURAL`, e a limitação `ir_na_venda_de_renda_variavel` impede a venda por desenho. **Decisão de 03/10: o motor deve recomendar venda** (P-123) | T1, T3 | RI-17 | `3` |
 
 ### Registro (T5)
 
@@ -109,7 +118,11 @@ construir, não uma decisão de construir.
    usuário novo sem "quanto e onde", embora os pesos existam. O motor precisa emitir a
    primeira compra a partir de `alvo.pesos` e do aporte.
 3. **`decisao.motivo_curto`:** uma frase por veredito e por portão, **como dado** (no YAML),
-   com teste de até 15 palavras (RI-01). Nunca montada na interface.
+   com teste de até 15 palavras (RI-01). ~~Nunca montada na interface.~~ **03/10: o Osvaldo
+   permitiu que a interface monte a frase** (permissão, não obrigação). **Proposta do Claude,
+   não decisão dele:** manter os modelos de frase num único arquivo versionado, lido por toda
+   interface, com o teste de até 15 palavras (RI-01), para que a mesma decisão não ganhe frases
+   diferentes em interfaces diferentes (o risco de duas listas que concordam só por acidente). Ele pode vetar.
 4. **`decisao.data_referencia`:** o mês a que a decisão se refere, distinto do `gerado_em`.
 5. **`decisao.status`:** o `val()` registra quando aceitou um `PARCIAL`, e o status da decisão
    é o pior dos insumos que ela usou.

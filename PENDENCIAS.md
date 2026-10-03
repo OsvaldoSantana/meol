@@ -1289,6 +1289,18 @@ Era limitação declarada desde 04/09 **sem pendência** — o portão da §5-B.
 favorece o ETF (a isenção de R$ 20 mil/mês é só da ação), que é exatamente a decisão A05.
 Efeito zero na acumulação sem venda. Entrada `ir_na_venda_de_renda_variavel`.
 
+> **03/10/2026 — a decisão do Osvaldo torna a venda um compromisso.** Ao ler a F0 (item 20 da
+> fila) ele disse "quero que o motor recomende venda" e recusou o texto fixo "o motor não
+> recomenda venda" como permanente. A pendência deixa de ser só limitação do rebalanceamento: é
+> pré-condição de um compromisso de produto. **Classe e gatilho não mudam.** A ordem:
+> 1. **regra de venda pré-registrada** (P4), decisão dele;
+> 2. **IR da venda lido na fonte primária**;
+> 3. **o motor emite `venda.motivo`**, com teste que falha antes da mudança.
+>
+> Os motivos a emitir são os três do F5 do [mapa de telas](docs/ux/mapa-de-telas-v1.md). **Até
+> fechar, vale o F5 do mapa, PROVISÓRIO:** a T1 diz que o motor ainda não avalia venda. Esse
+> intervalo é **proposta do Claude**, que ele pode vetar.
+
 ## P-127 · Oráculo externo do preço ajustado — **decisão sua**
 
 **Dono:** Osvaldo (decidir) · **Gatilho:** antes de usar a série ajustada na ML-3 ·
@@ -2053,7 +2065,25 @@ manda requisições com valores-sentinela (patrimônio, posições, aporte) e re
 um aparecer em log, mensagem de erro ou métrica — **incluindo o log padrão da plataforma de
 hospedagem** (acesso, proxy, tracing), que o código da aplicação não controla. A escolha da
 plataforma tem de passar por esse teste antes de valer. A LGPD (consequência (a)) é da P-158,
-e a minimização dos campos em trânsito (consequência (c)), da leitura do item 20 da fila.
+e a minimização dos campos em trânsito (consequência (c)): a da saída foi decidida em 03/10;
+a da entrada é a P-178.
+
+## P-178 · Contrato de ENTRADA do motor: quais campos do Estado viajam do aparelho
+
+**Dono:** sessão de especificação, com aprovação do Osvaldo · **Gatilho:** antes do primeiro
+endpoint do motor, junto da P-175 · **Classe:** `DECISAO_DE_DESENHO`
+
+A F0 cobre só a **saída**. Na B′ ([P-165](docs/decisoes/P-165-onde-o-motor-roda.md)) o que viaja
+do aparelho para o servidor é o `Estado` (`alocacao/alocacao.py:150`): `despesa_mensal`,
+`reserva_atual`, `reserva_por_rota`, `aporte_mensal`, `estabilidade_renda`, `dependentes`,
+`dividas`, `objetivos`, `posicoes`, `caixa`, `match_empregador`.
+
+**Objetivo:** minimizar os campos em trânsito (consequência (c) da P-165). A saída já foi
+decidida em 03/10 (`reserva.atual` e `alocacao.atual[]` não trafegam); falta dizer, campo a
+campo, qual desses onze o motor precisa receber para decidir e qual a tela pode guardar. Como a
+saída calcula `falta` da reserva e `peso_atual`, vale conferir o que o motor realmente lê antes
+de cortar (`python impacto.py` sobre cada campo). **Fecha com:** um documento no formato da F0,
+campo a campo, aprovado por ele, e a P-175 apontando para ele.
 
 ## Ao voltar ao desktop
 
