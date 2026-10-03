@@ -23,7 +23,7 @@ decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-p
 | `alocacao/alocacao.py` → `alocar()` | o dicionário `saida`: `estado`, `portoes` (as `Diretiva` do G0–G2), `pendencias` (`Pendencia`), `universo` (vivos e rejeitados por portão, com motivo), `alvo` (pesos, blocos, alertas, custos), `procedencia` (versão e hash da política, hash dos custos, data da rodada), `incoerencias_de_funcao`, `fora_de_escopo`, e `diretiva` quando o G0, G1 ou G2 encerram |
 | `alocacao/alocacao.py` → `_preparar()` | o esqueleto de `saida` e o bloco `procedencia` |
 | `alocacao/alocacao.py` → `fase_aporte()`, `g0_match_empregador()`, `g1_divida()`, `g2_reserva()` | a `Diretiva(portao, veredito, destino, valor, memoria)`; a do G2 traz na `memoria` o alvo, o atual e a falta da reserva |
-| `alocacao/alocacao.py` → `motor_aporte()` | as ordens do mês (`rota`, `valor`, `peso_atual`, `peso_alvo`), o caixa, os alertas de concentração e a deriva. Devolve `SEM_APORTE` com aporte zero e `SEM_POSICAO` com patrimônio zero |
+| `alocacao/alocacao.py` → `motor_aporte()` | as ordens do mês (`rota`, `valor`, `peso_atual`, `peso_alvo`), o caixa, os alertas de concentração e a deriva. Devolve `SEM_APORTE` com aporte zero. Com patrimônio zero (P-164, desde 03/10), uma ordem com o aporte inteiro e o `porque`, ou `NENHUMA_ROTA_CABE` com o `motivo` |
 | `alocacao/alocacao.py` → `custo_de_discordar()` | a diferença de arrasto entre o alvo e uma proposta, em p.p. ao ano |
 | `alocacao/alocacao.py` → `reserva_alvo()`, `meses_de_reserva_alvo()` | a meta da reserva em R$ e em meses |
 | `alocacao/motor.py` → `val()`, `InsumoBloqueado` | o valor de cada insumo do `custos.yaml`; recusa `NAO_CONFIRMADO` **levantando exceção**, com o motivo e o que bloqueia no texto |
@@ -45,8 +45,8 @@ decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-p
 | campo | tipo | origem | tela | RI | exemplo |
 |---|---|---|---|---|---|
 | `decisao.tipo` | texto, um de `reserva`, `aporte`, `venda`, `recusa` | `NAO_EXISTE`. Hoje se deduz: `saida["diretiva"].portao == "G2_reserva"` é reserva; `motor_aporte()["status"] == "OK"` é aporte; venda o motor não faz; recusa é exceção | T1 | RI-01, RI-09 | `"reserva"` |
-| `decisao.valor` | dinheiro em R$, 2 casas | `EXISTE_EM_PARTE`: `Diretiva.valor` (G0–G2) ou `motor_aporte()["ordens"][i]["valor"]`. **Com patrimônio zero, `motor_aporte` devolve `SEM_POSICAO` e não há valor**, embora `saida["alvo"]["pesos"]` exista | T1 | RI-02, RI-12 | `1000.00` |
-| `decisao.destino` | texto (nome da rota) | `EXISTE_EM_PARTE`: `Diretiva.destino` ou `motor_aporte()["ordens"][i]["rota"]`; mesmo buraco do `SEM_POSICAO` | T1 | RI-01 | `"Tesouro Selic"` |
+| `decisao.valor` | dinheiro em R$, 2 casas | `EXISTE_EM_PARTE`: `Diretiva.valor` (G0–G2) ou `motor_aporte()["ordens"][i]["valor"]`. ~~Com patrimônio zero, `motor_aporte` devolve `SEM_POSICAO` e não há valor~~: desde a P-164 (03/10) há valor; o que falta é o objeto `decisao` único | T1 | RI-02, RI-12 | `1000.00` |
+| `decisao.destino` | texto (nome da rota) | `EXISTE_EM_PARTE`: `Diretiva.destino` ou `motor_aporte()["ordens"][i]["rota"]`; ~~mesmo buraco do `SEM_POSICAO`~~ fechado pela P-164 | T1 | RI-01 | `"Tesouro Selic"` |
 | `decisao.motivo_curto` | texto, até 15 palavras | `NAO_EXISTE`. `Diretiva.veredito` é um rótulo técnico em caixa alta (`"TODO O APORTE PARA A RESERVA"`), não a frase para o leigo | T1 | RI-01, RI-03 | `"sem reserva, uma emergência obrigaria a vender na pior hora"` |
 | `decisao.data_referencia` | data (mês de referência) | `NAO_EXISTE`. `saida["procedencia"]["gerado_em"]` é o **dia da rodada**, não o mês a que a decisão se refere | T1, T5 | RI-19 | `"2026-10"` |
 | `decisao.status` | texto, um de `COMPLETO`, `PARCIAL`, `RECUSA` | `NAO_EXISTE`. `val()` aceita `PARCIAL` sem registrar que aceitou | T1, T3 | RI-05, RI-10 | `"PARCIAL"` |
@@ -114,9 +114,12 @@ construir, não uma decisão de construir.
 
 1. **`decisao`** como objeto único no topo da saída, preenchido nos três caminhos (diretiva do
    G0–G2, ordens do `motor_aporte`, recusa), em vez de a tela deduzir o tipo.
-2. **`decisao.valor` e `decisao.destino` com patrimônio zero:** hoje o `SEM_POSICAO` deixa o
+2. ~~**`decisao.valor` e `decisao.destino` com patrimônio zero:** hoje o `SEM_POSICAO` deixa o
    usuário novo sem "quanto e onde", embora os pesos existam. O motor precisa emitir a
-   primeira compra a partir de `alvo.pesos` e do aporte.
+   primeira compra a partir de `alvo.pesos` e do aporte.~~ **Feito em 03/10 (P-164, política
+   1.37.0):** com patrimônio zero o motor emite uma ordem, com o aporte inteiro, na rota de maior
+   peso que caiba, e a ordem traz o `porque`; se nenhuma couber, `NENHUMA_ROTA_CABE` com o
+   `motivo`.
 3. **`decisao.motivo_curto`:** uma frase por veredito e por portão, **como dado** (no YAML),
    com teste de até 15 palavras (RI-01). ~~Nunca montada na interface.~~ **03/10: o Osvaldo
    permitiu que a interface monte a frase** (permissão, não obrigação). **Proposta do Claude,

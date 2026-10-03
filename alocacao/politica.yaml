@@ -13,10 +13,16 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.36.0
+  versao: 1.37.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.37.0: >-
+      03/10/2026, P-164 fechada. `motor_aporte.primeiro_aporte`: com patrimonio zero o motor
+      deixa de devolver SEM_POSICAO e emite UMA ordem, com o aporte inteiro, na rota de
+      maior peso-alvo que caiba (lote e G3); empate pela ordem do catalogo; nenhuma que
+      caiba vira NENHUMA_ROTA_CABE com o motivo, e o dinheiro fica no caixa. Decisao dele,
+      bloco 19 da fila, opcao (c).
     1.36.0: >-
       27/09/2026, P-147 fechada. A execucao agendada 36246158435 do captura_cvm.yml
       (schedule, 26/09, 13:44Z) rodou o passo `captura_nefin` verde -- o "Falhar se a
@@ -897,6 +903,38 @@ motor_aporte:
     ordens e menos custo fixo. k_max alto espalha e converge mais rapido, pagando mais
     corretagem por ordem em corretora que cobra por ordem. Com corretagem zero o
     argumento de custo desaparece e sobra o operacional.
+  # P-164: o primeiro aporte, com patrimonio_investido zero. Ate a 1.36.0 o motor devolvia
+  # SEM_POSICAO e nenhuma ordem. A reserva cheia nao e conferida aqui: sem ela o G2 encerra
+  # o pipeline e nao existe alvo para o motor receber.
+  primeiro_aporte:
+    _registros: [decidido_em, decidido_por]
+    decidido_em: 2026-10-03
+    decidido_por: >-
+      Osvaldo, bloco 19 da fila (docs/decisoes/fila-do-osvaldo.md), opcao (c), contra a
+      recomendacao (a); a cessao para a proxima rota quando a maior nao cabe e resposta
+      dele do mesmo dia. O desempate e decisao tecnica do claude.ai.
+    regra: rota_de_maior_peso_que_cabe   # unica conhecida pelo motor; outra recusa
+    desempate: ordem_do_catalogo         # catalogo.yaml -> rotas, na ordem escrita
+    nota: >
+      O aporte vai INTEIRO para uma rota so: a de maior peso-alvo, ou, se ela nao couber
+      no valor do mes, a proxima em ordem decrescente de peso que caiba. "Caber" usa as
+      verificacoes que o motor ja tem e nenhuma nova: lote inteiro (negocia_em_lote) e o
+      G3 (portoes.G3_atrito) avaliado sobre o valor que a ordem gasta. A banda_sobre_alvo_pp
+      NAO se aplica: com patrimonio zero qualquer ordem e 100% da carteira, e a banda
+      recusaria toda rota -- a regra seria letra morta. O k_max tambem nao: a regra emite
+      uma ordem. Se nenhuma rota couber, nao ha ordem: o dinheiro vai para o caixa e o
+      motivo e dito (RI-10), nunca um zero. O desempate segue a ordem do catalogo porque
+      as rotas sao declaradas la, nao neste arquivo.
+    porque: >-
+      Primeiro aporte: o valor vai inteiro para {rota}, a maior parte da sua
+      carteira-alvo ({peso}). Nos proximos meses o aporte se espalha pelas outras partes,
+      sempre para a que estiver mais longe do alvo.
+    porque_cedeu: >-
+      Primeiro aporte: o valor vai inteiro para {rota} ({peso} da carteira-alvo), a maior
+      parte que cabe neste valor; {acima} ainda nao {cabe}. Nos proximos meses o aporte se
+      espalha pelas outras partes, sempre para a que estiver mais longe do alvo.
+    motivo_sem_rota: >-
+      O valor deste mes ainda nao alcanca nenhuma rota; ele fica guardado para o proximo.
 
 # ── ALOCACAO DENTRO DE CRESCIMENTO ────────────────────────────────────────────
 # ATENCAO: esta e a unica secao que contem uma PREFERENCIA, e ela esta declarada

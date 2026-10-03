@@ -502,6 +502,7 @@ DOCUMENTAL = (
     "*.pergunta", "*.*.pergunta", "*.custo_de_ignorar", "*.*.custo_de_ignorar",
     "*.justificativa", "*.*.justificativa", "*.*.*.justificativa",
     "*.decidido_em", "*.decidido_por", "*.aplica_a", "*.nao_aplica_a",
+    "*.*.decidido_em", "*.*.decidido_por",     # P-164: motor_aporte.primeiro_aporte
     # prosa da secao corretora, nomeada campo a campo — a lista e longa de proposito:
     # cada linha aqui e uma frase que alguem escreveu e ninguem executa.
     "corretora.justificativa_da_ordem", "corretora.nota_cobertura",
@@ -1192,10 +1193,13 @@ def test_fora_de_escopo_viaja_para_o_output_e_nao_contem_ipca_nem_cripto():
 
 
 # ══ motor de aporte ══════════════════════════════════════════════════════════
-def test_aporte_recusa_rodar_sem_posicao():
+def test_aporte_sem_posicao_nao_e_mais_recusa():
+    """P-164: ate a politica 1.36.0 este teste exigia SEM_POSICAO. A decisao dele de
+    03/10/2026 (bloco 19, opcao c) trocou a recusa por uma ordem; o comportamento novo
+    e guardado em test_p164_primeiro_aporte.py."""
     e = Estado(**BASE)
     alvo = alocar(e, C, P, teses={}, carregos={})["alvo"]
-    assert motor_aporte(e, alvo, C, P)["status"] == "SEM_POSICAO"
+    assert motor_aporte(e, alvo, C, P)["status"] == "OK"
 
 
 def test_aporte_produz_ordem_em_carteira_normal():

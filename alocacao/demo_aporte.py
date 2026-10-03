@@ -7,11 +7,13 @@ from alocacao import Estado, carregar_politica, alocar, motor_aporte, catalogo, 
 C, P = carregar_custos(), carregar_politica()
 ROTAS = {r.id: r for r in catalogo(C)}
 
-print("="*100); print("CAMADA 5 — MOTOR DE APORTE (exige patrimonio > 0)"); print("="*100)
+print("="*100); print("CAMADA 5 — MOTOR DE APORTE"); print("="*100)
 e0 = Estado(despesa_mensal=4500, reserva_atual=27000, aporte_mensal=500, horizonte_anos=25)
 alvo = alocar(e0, C, P)["alvo"]
-print("\n[a] sem posicao — o motor se recusa a rodar, e diz o porque:")
-print("   ", motor_aporte(e0, alvo, C, P)["nota"])
+print("\n[a] primeiro aporte, sem posicao (P-164) — uma ordem, e o porque:")
+o0 = motor_aporte(e0, alvo, C, P, rotas_por_id=ROTAS)["ordens"][0]
+print(f"    {ROTAS[o0['rota']].nome}: R${o0['valor']:,.2f}")
+print("   ", o0["porque"])
 
 print("\n[b] com 18 meses de aportes ja feitos, e a carteira derivou:")
 e1 = Estado(despesa_mensal=4500, reserva_atual=27000, aporte_mensal=500, horizonte_anos=25,
