@@ -199,3 +199,12 @@ def test_P150_P136_eventos_b3_fora_da_release():
          "sha256": "0" * 64}
     with pytest.raises(publicar_cvm.PublicacaoRecusada):
         publicar_cvm.publicavel(v)
+
+
+def test_cx01_segredo_so_por_lista_de_permissao():
+    """Os `==` de cima conferem os passos que conhecem; nao pegavam um segredo a mais em
+    outro passo, no env do job ou `toJSON(secrets)`. A regra e a de `auditoria/guarda_segredos`
+    (uma so, N-01); as mutacoes dela estao em `auditoria/test_guarda_segredos.py`."""
+    sys.path.insert(0, os.path.join(REPO, "auditoria"))
+    from guarda_segredos import PERMITIDOS_POR_WORKFLOW, defeitos_de_segredo
+    assert defeitos_de_segredo(_wf(), PERMITIDOS_POR_WORKFLOW["captura_cvm.yml"]) == []

@@ -10,50 +10,39 @@ from __future__ import annotations
 
 import copy
 import os
-import re
 import sys
 
+import pytest
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from guarda_segredos import PERMITIDOS_POR_WORKFLOW, defeitos_de_segredo, referencias  # noqa: E402
 from test_workflows import _wf  # noqa: E402
 
-SEGREDO = re.compile(r"secrets\.([A-Za-z0-9_]+)")
+PASSO_QUE_MEDE = ("medir", "Medir (token de leitura)")
+PERMITIDOS = PERMITIDOS_POR_WORKFLOW["medir.yml"]
 
 
 def defeitos(d):
-    """[o que o workflow faz alem do permitido] -- vazio e o unico resultado aceito."""
+    """[o que o workflow faz alem do permitido] -- vazio e o unico resultado aceito.
+
+    O segredo e conferido por lista de permissao (CX-01, `guarda_segredos`), nao por regex."""
     out = []
     if d.get("permissions") != {"contents": "write"}:
         out.append(f"permissions do workflow = {d.get('permissions')!r}; so contents: write")
     if d.get("on") != {"push": {"branches": ["medir/**"]}}:
         out.append(f"gatilho = {d.get('on')!r}; so push em medir/**")
-    if SEGREDO.search(str(d.get("env", ""))):
-        out.append("segredo no env do workflow")
-    passos_com_segredo = []
     for nome_job, job in d.get("jobs", {}).items():
         if "permissions" in job:
             out.append(f"job {nome_job} declara permissions proprias: {job['permissions']!r}")
-        fora = {k: v for k, v in job.items() if k != "steps"}
-        if SEGREDO.search(str(fora)):
-            out.append(f"segredo no job {nome_job} fora de um passo")
-        for p in job.get("steps", []):
-            if SEGREDO.search(str({k: v for k, v in p.items() if k != "env"})):
-                out.append(f"segredo fora do env do passo {p.get('name')!r}")
-            usados = SEGREDO.findall(str(p.get("env", "")))
-            if usados:
-                passos_com_segredo.append(p.get("name"))
-            out += [f"segredo {s} no passo {p.get('name')!r}: so R2_LEITURA_*"
-                    for s in usados if not s.startswith("R2_LEITURA_")]
-    if len(passos_com_segredo) > 1:
-        out.append(f"segredo em mais de um passo: {passos_com_segredo}")
-    return out
+    return out + defeitos_de_segredo(d, PERMITIDOS)
 
 
 def test_o_medir_yml_so_tem_contents_write_e_o_token_de_leitura_num_passo():
     d = _wf("medir.yml")
     assert defeitos(d) == []
-    com = [p["name"] for j in d["jobs"].values() for p in j["steps"]
-           if SEGREDO.search(str(p.get("env", "")))]
-    assert com == ["Medir (token de leitura)"], "vacuidade: o passo que mede tem de ter o token"
+    com = {(j, p) for j, p, _, _ in referencias(d)}
+    assert com == {PASSO_QUE_MEDE}, "vacuidade: o passo que mede tem de ter o token"
+    assert len(referencias(d)) == 4
 
 
 def _mutante(f):
@@ -76,7 +65,7 @@ def test_mutacao_token_de_escrita_reprova():
     def troca(d):
         _passo(d, "Medir (token de leitura)")["env"]["R2_ACCESS_KEY_ID"] = \
             "${{ secrets.R2_ACCESS_KEY_ID }}"
-    assert any("so R2_LEITURA_" in x for x in _mutante(troca))
+    assert any("nao permitido" in x for x in _mutante(troca))
 
 
 def test_mutacao_segredo_fora_do_passo_reprova():
@@ -92,3 +81,46 @@ def test_mutacao_segredo_fora_do_passo_reprova():
 def test_mutacao_outro_gatilho_reprova():
     assert _mutante(lambda d: d["on"].update(workflow_dispatch=None))
     assert _mutante(lambda d: d["on"]["push"].update(branches=["**"]))
+
+
+# CX-01: as formas que o regex `secrets\.NOME` nao enxergava. Cada uma, em cada lugar onde um
+# segredo poderia vazar, tem de reprovar. `_ONDE` e a lista dos lugares (do mais largo ao passo).
+_FORMAS_QUE_ESCAPAVAM = {
+    "indice literal": "${{ secrets['R2_ESCRITA_TOKEN'] }}",
+    "indice literal leitura": "${{ secrets['R2_LEITURA_BUCKET'] }}",
+    "toJSON": "${{ toJSON(secrets) }}",
+    "indice dinamico": "${{ secrets[format('R2_{0}', 'ESCRITA')] }}",
+    "maiuscula": "${{ SECRETS.R2_ESCRITA_TOKEN }}",
+    "composta": "${{ secrets.R2_LEITURA_BUCKET || secrets.R2_ESCRITA_TOKEN }}",
+    "espaco": "${{secrets .R2_ESCRITA_TOKEN}}",
+}
+
+
+def _onde():
+    def workflow(d, v):
+        d.setdefault("env", {})["X"] = v
+
+    def job(d, v):
+        d["jobs"]["medir"].setdefault("env", {})["X"] = v
+
+    def passo_sem_segredo_env(d, v):
+        _passo(d, "Conferir insumos")["env"] = {"X": v}
+
+    def passo_autorizado_env(d, v):
+        _passo(d, "Medir (token de leitura)")["env"]["X"] = v
+
+    def passo_with(d, v):
+        _passo(d, "Conferir insumos")["with"] = {"x": v}
+
+    def passo_run(d, v):
+        _passo(d, "Resumo")["run"] = f"echo {v}"
+
+    return {f.__name__: f for f in (workflow, job, passo_sem_segredo_env, passo_autorizado_env,
+                                    passo_with, passo_run)}
+
+
+@pytest.mark.parametrize("forma", sorted(_FORMAS_QUE_ESCAPAVAM))
+@pytest.mark.parametrize("onde", sorted(_onde()))
+def test_cx01_forma_de_segredo_que_escapava_do_regex_reprova(forma, onde):
+    v = _FORMAS_QUE_ESCAPAVAM[forma]
+    assert _mutante(lambda d: _onde()[onde](d, v)), (forma, onde)

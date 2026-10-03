@@ -2016,6 +2016,33 @@ erro novo.
    ajuste da 21d). Resta olhar, com dois semanais de dado, se o piso ficou alto demais para o
    `registro` (limiar 0,21 com referência 1/7).
 
+## P-173 · CX-02 · `pais_varridos()` não separa motor de teste, e 18 chaves ficam escondidas
+
+**Dono:** Claude Code · **Gatilho:** a próxima sessão que tocar `auditoria/chaves_orfas.py`, ou
+antes de o `exibidos` ganhar mais um leitor por `getattr` · **Classe:** `DECISAO_DE_DESENHO`
+
+Achado externo (auditoria do Codex, 03/10/2026, conferida pelo Claude do Projeto). **Medido em
+03/10:** 49 candidatos a chave órfã hoje; **67** contando só os pais lidos pelo motor. Das 18
+escondidas: **15** são leitura legítima, por `getattr`, da lista `exibidos`
+(`corretoras.py:398`); **1** é a P-32, já vigiada em `DIVIDA_DE_COBERTURA`; **2**
+(`custos.yaml` `etf.IMAB11.composicao.{administracao,gestao}`) estão escondidas por colisão de
+nome com `memoria["composicao"]` em `test_alocacao.py:2042` — um teste a ler uma chave faz o
+instrumento achar que o motor a lê (5-B.2: o filtro incluiu o que não devia).
+
+**Conserto, em duas partes e nesta ordem:** (a) ler `exibidos` como aresta de YAML, para as 15
+deixarem de depender de acidente; (b) excluir arquivos de teste de `pais_varridos()`. Fazer (b)
+antes de (a) faria as 15 virarem falso-órfão.
+
+## P-174 · CX-03 · `conftest.py:146` trata `atual is None` como "não mudou"
+
+**Dono:** Claude Code · **Gatilho:** a próxima sessão que tocar `alocacao/conftest.py` ·
+**Classe:** `DECISAO_DE_DESENHO` · **Prioridade:** baixa
+
+Achado externo (mesma auditoria do Codex). Um teste que faz `C = None` ou `del C` num módulo
+vigiado escapa da acusação e da restauração, porque `None` é lido como "sem mudança".
+**Conserto:** sentinela de ausência (`_AUSENTE = object()`) no lugar de `None`, com um teste de
+mutação que faz `C = None` e `del C` e exige a acusação nos dois.
+
 ## Ao voltar ao desktop
 
 > **26/09/2026, nuvem — substitui a nota de 25/09 abaixo.** A revisão das pendências dele fechou
