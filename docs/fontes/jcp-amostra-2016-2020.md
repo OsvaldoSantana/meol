@@ -17,9 +17,16 @@ regra é a da §3.1 com a **emenda E-D1a** (`95042ca`), empurrada antes desta cl
 
 As posições 1 a 10 têm documento achado, e as 10 são `BRUTO`. Nenhuma posição foi pulada.
 
-**Sem a E-D1a, o veredito seria outro.** As posições 5 e 10 só são `BRUTO` por ela. Sem a
-emenda, o D1 seria `NAO_CONFIRMADO` (leitura estrita) ou trocaria as duas pelas 11 e 12. A
-emenda e a sua limitação estão na §3.1.
+**O que cada saída daria** (correção de 03/10, auditoria do claude.ai: o texto anterior dizia
+que sem a E-D1a o D1 não seria `PASSA`, e só a leitura estrita leva a isso). As posições 5 e 10
+são `BRUTO` pela E-D1a; a emenda e a sua limitação estão na §3.1.
+
+| saída posta a ele antes da decisão | posição 5 (GGBR3) | posição 10 (TOTS3) | o D1 |
+|---|---|---|---|
+| retenção = bruto, aceitando o 20-F (**a decidida**) | `BRUTO` | `BRUTO` | `PASSA` (posições 1 a 10) |
+| as duas não contam (falta a 4ª prova; regra de pular) | pulada | pulada | `PASSA`: entram a 11 e a 12, já registradas como "seriam `BRUTO`" |
+| retenção = bruto, só com PDF | sem prova em PDF | `BRUTO` | depende da posição 5: se ela não contar, entra a 11 e dá `PASSA`; se contar como não `BRUTO`, `NAO_CONFIRMADO` |
+| leitura estrita (só "bruto"/"gross" ou líquido ao lado) | não `BRUTO` | não `BRUTO` | `NAO_CONFIRMADO` |
 
 | pos | data ex | ticker | data com | documento (CVM/RAD) | bruto (doc.) | líquido (doc.) | alíquota | valor da B3 | classe |
 |---|---|---|---|---|---|---|---|---|---|
@@ -200,8 +207,8 @@ D1 são as posições 1 a 10. Ficam registradas e **não entram no veredito**:
   igual ao previsto.
 - **A alíquota das posições 1, 8 e 10 não foi declarada em número.** A classe não depende dela
   (acima).
-- **A E-D1a veio depois de abrir os documentos** (§3.1, emenda). Sem ela, o veredito não seria
-  `PASSA`.
+- **A E-D1a veio depois de abrir os documentos** (§3.1, emenda). Das quatro saídas postas a
+  ele, só a leitura estrita leva a `NAO_CONFIRMADO` (tabela no início).
 
 ## O que falta
 

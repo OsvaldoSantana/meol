@@ -1233,12 +1233,22 @@ critério corrigido repete o defeito da P-116.
 > 10 (TOTS3) não rotulavam o valor: depois da escada, a decisão dele virou a **emenda E-D1a**
 > ("sujeito a retenção de IR" = bruto; o 20-F em HTML vale como prova), empurrada antes da
 > classificação (`95042ca`). A emenda veio depois de abrir os documentos, e isso está declarado
-> na §3.1: sem ela, o D1 não daria `PASSA`. O RAD corta downloads (`curl: (18)`); a guarda de
+> na §3.1, com o que cada saída daria: só a leitura estrita leva a `NAO_CONFIRMADO`. O RAD corta downloads (`curl: (18)`); a guarda de
 > integridade reprova as 5 cópias cortadas, e as 10 provas repetiram o sha256 em duas rodadas.
 > **Aberto:** os PDFs no armazém (§3.1), que a nuvem não alcança: sessão local, em "Ao voltar
-> ao desktop". **Próximo passo:** o script da corrida de 2016–2020 (§3.1, passo 3), que ainda
-> não existe: aplica a §4 com o bootstrap por pregão da §3.1 (semente 20260926), tem testes
-> sobre dado sintético e é empurrado **antes** de rodar. Só então a sessão local roda.
+> ao desktop".
+>
+> **03/10/2026 — o script da corrida existe** (`auditoria/c02_corrida.py`, §3.1 passo 3). Antes
+> dele, a decisão dele virou a **emenda E-K** (§4.4): o texto literal da §4.1 fazia o K6 falhar
+> por construção. O script:
+> - recalcula o D1 da transcrição;
+> - grava o sha256 do silver e de cada COTAHIST;
+> - **recusa ler preço de 2013–2020 se o commit não estiver no `origin`** (P7).
+>
+> 43 testes com dado sintético; 22 mutações reintroduzidas, 22 pegas. Não rodou sobre dado real.
+> **Próximo passo:** ⚙ **exige o desktop.** A sessão local roda
+> `py -3.11 auditoria/c02_corrida.py <silver>` sobre o silver da §2 (sha256 `ec6b50da…98143`),
+> depois do merge, e commita o JSON do resultado.
 
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados
