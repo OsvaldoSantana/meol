@@ -1,0 +1,28 @@
+# Modelo por classe de tarefa e a regra de volta (decisao dele, 02/10/2026).
+# O porque, as alternativas e o que nao se mede: docs/decisoes/modelos-por-tarefa.md.
+# Quem le: auditoria/metricas_processo.py (validar() e regra_de_volta()).
+
+vigente_desde: 2026-10-03     # evento com data a partir daqui leva a etiqueta [modelo= classe=]
+
+# Do mais barato ao mais caro. "Voltar" e subir um degrau nesta lista.
+ordem: [haiku, sonnet, opusplan, opus]
+
+classes:
+  registro: sonnet            # PENDENCIAS, fila, eventos, changelog, bilhete
+  pesquisa: sonnet            # com subagentes haiku (.claude/agents/Explore.md) na leitura larga
+  engenharia: opusplan        # Opus planeja, Sonnet executa
+  pre-registro: opus
+  estatistica: opus
+  p-115: opus                 # o criterio do degrau: nunca abaixo de Opus
+  auditoria: opus
+  arquitetura: opus
+
+# Fable nao entra em classe nenhuma (decisao de 02/10). Etiqueta com modelo fora da `ordem`
+# reprova a validacao.
+
+regra_de_volta:
+  # PROPOSTA desta sessao, a confirmar por ele (fila, bloco 21): em `janela_dias` corridos,
+  # `limiar` eventos de autoria Claude (achado, retratacao ou reincidencia) etiquetados numa
+  # classe com modelo abaixo do topo da `ordem` devolvem a classe um degrau acima.
+  janela_dias: 14
+  limiar: 2

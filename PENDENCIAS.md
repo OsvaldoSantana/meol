@@ -1092,6 +1092,11 @@ prova por mutação. A §11.4 não afirma mais valor — aponta para o comando.
 > (`docs/metricas/contexto-de-sessao.md`); 368 códigos de 368 continuam no repositório
 > (`auditoria/codigos_preservados.py`). Segue aberto o item 2.
 
+> **03/10/2026 — o `PENDENCIAS.md` saiu da abertura** (decisão dele, 02/10). Leitura de sessão:
+> **60.791 → 22.779 tokens (−62,5%)**, mais a seção da P da tarefa (mediana de 318 tokens nas 80
+> abertas, máximo de 2.197); `docs/metricas/contexto-de-sessao.md`. O índice é o
+> `docs/estado.md`, que o hook `SessionStart` injeta. Segue aberto o item 2.
+
 ---
 
 ## P-104 · Vinte e quatro achados são citados só em código, e podem não ser achados
@@ -1935,6 +1940,22 @@ recusado sobe a escada (§5-B.18) antes de virar `NAO_CONFIRMADO`.
 > §5. **As visitas só começam depois do merge** que grava a emenda e o sorteio.
 
 ---
+
+## P-171 · Vinte e quatro pendências abertas não declaram dono, gatilho nem classe
+
+**Dono:** Claude Code (propor os campos, sessão de registro em Sonnet) · Osvaldo (confirmar o
+que for dele) · **Gatilho:** a próxima sessão de registro · **Classe:** `DECISAO_DE_DESENHO`
+
+O `tools/estado.py` (03/10) lê os três campos de cada `## P-` aberta. **24 de 80 não têm
+nenhum dos três** (P-44, P-05, P-08, P-28 a P-35, P-22, P-23, P-25, …) e saem no `docs/estado.md`
+como `sem classe`, com `?`: a 5-A.1 diz que pendência sem os três é desabafo, e ela é de 06/09,
+mais nova que a maioria delas. **Mais uma regra que não auditou o passado** (a lição da P-103).
+
+**O que pesa na decisão:** o `estado.md` tem **~1.864 tokens** de um teto de 2.000 (razão de
+2,96 caracteres por token, sem `tiktoken`). Preencher dono e gatilho nas 24 custa cerca de 40
+caracteres cada, ~330 tokens: **estoura o teto**. Então a sessão que preencher também decide,
+para cada uma, se ela ainda é pendência ou se fecha (vai para o histórico com a evidência), e o
+`--conferir` reprova antes do CI se a conta não fechar.
 
 ## Ao voltar ao desktop
 

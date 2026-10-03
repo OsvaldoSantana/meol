@@ -57,13 +57,17 @@ TOKENS_POR_LINHA_MEDIDO = 19.0
 SEMPRE = {
     "CLAUDE.md": ("so o que muda o que alguem faz -- lido inteiro em toda sessao; a "
                   "historia saiu para docs/historico/ em 26/09"),
-    "PENDENCIAS.md": "so as abertas; as fechadas em docs/historico/pendencias-fechadas.md",
+    # 02/10/2026 (decisao dele): o PENDENCIAS.md saiu da abertura. O hook SessionStart injeta
+    # o indice gerado por tools/estado.py, e a sessao le so a secao da P da tarefa.
+    "docs/estado.md": "pendencias abertas e fila sem resposta, em menos de 2 mil tokens; injetado",
     "PLANO.md": "onde queremos chegar e a ordem do que falta",
     # 25/09/2026: o secao 2 do CLAUDE.md virou este arquivo (fonte unica, P2). Fora daqui ele
     # deixaria de ser lido, e as doutrinas sao o projeto.
     "docs/doutrinas.md": "as sete doutrinas -- sairam do CLAUDE.md e seguem lidas em toda sessao",
 }
 SOB_DEMANDA = {
+    "PENDENCIAS.md": ("so a secao da P da tarefa, desde 02/10; o indice esta em docs/estado.md, "
+                      "e as fechadas em docs/historico/pendencias-fechadas.md"),
     "ACHADOS.md": "historia dos achados -- so quando a tarefa toca a area",
     "README.md": "porta de entrada para humanos; repete o CLAUDE.md em resumo, nao instrui sessao",
     # 25/09/2026: os arquivos-padrao do GitHub. Sao para quem chega de fora, nao para a sessao.

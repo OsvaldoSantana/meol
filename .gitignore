@@ -143,6 +143,10 @@ docs/fontes/COTAHIST*
 .coverage.*
 coverage.json
 mutants/
+# tools/testar.py: a saida inteira da suite que falhou (02/10/2026)
+.testar/
+# o `pip install .` do CI e da nuvem deixa o metadado do build na raiz (03/10/2026)
+*.egg-info/
 
 # ── NEFIN (25/09/2026): no disco dele e no job semanal, nunca no git ─────────────
 alocacao/dados/nefin_factors.csv

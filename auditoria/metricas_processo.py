@@ -24,7 +24,10 @@ import collections
 import csv
 import datetime as dt
 import os
+import re
 import sys
+
+import yaml
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVENTOS = os.path.join(RAIZ, "docs", "metricas", "eventos.csv")
@@ -33,6 +36,15 @@ COLUNAS = ("data", "codigo", "tipo", "autor", "quem_achou", "regua", "commit_int
            "commit_corrigiu", "descricao")
 TIPOS = ("achado", "retratacao", "reincidencia")
 PESSOAS = ("claude-chat", "claude-code", "osvaldo", "outra-ia", "fonte", "desconhecido")
+MODELOS = os.path.join(RAIZ, "docs", "metricas", "modelos-por-tarefa.yaml")
+# 02/10/2026: sem o modelo no evento, a regra de volta nao tem o que contar. A etiqueta abre a
+# descricao: "[modelo=sonnet classe=registro] texto".
+ETIQUETA = re.compile(r"^\[modelo=([\w-]+) classe=([\w-]+)\]")
+
+
+def ler_modelos(caminho=MODELOS):
+    with open(caminho, encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 
 class EventoInvalido(ValueError):
@@ -47,7 +59,15 @@ def ler(caminho=EVENTOS):
         return list(r)
 
 
-def validar(eventos):
+def etiqueta(e):
+    """(modelo, classe) da etiqueta, ou None."""
+    m = ETIQUETA.match(e.get("descricao") or "")
+    return (m.group(1), m.group(2)) if m else None
+
+
+def validar(eventos, modelos=None):
+    modelos = modelos or ler_modelos()
+    desde = modelos["vigente_desde"]
     for i, e in enumerate(eventos, start=2):
         if not (e.get("codigo") or "").strip():
             raise EventoInvalido(f"linha {i}: evento sem codigo -- {e}")
@@ -63,7 +83,37 @@ def validar(eventos):
         vazios = [c for c in COLUNAS if not (e.get(c) or "").strip()]
         if vazios:
             raise EventoInvalido(f"linha {i}: {vazios} vazio -- escreva 'desconhecido'")
+        if e["autor"].startswith("claude") and dt.date.fromisoformat(e["data"]) >= desde:
+            et = etiqueta(e)
+            if et is None:
+                raise EventoInvalido(f"linha {i}: evento de autoria Claude desde {desde} abre a "
+                                     "descricao com [modelo=<m> classe=<c>]")
+            if et[0] not in modelos["ordem"] + ["desconhecido"] or et[1] not in modelos["classes"]:
+                raise EventoInvalido(f"linha {i}: etiqueta {et} fora de "
+                                     "docs/metricas/modelos-por-tarefa.yaml")
     return eventos
+
+
+def regra_de_volta(eventos, hoje, modelos=None):
+    """Classes que devem voltar ao modelo de cima: {classe: n de eventos na janela}.
+
+    Conta so evento de autoria Claude, etiquetado, dentro de `janela_dias`, com um modelo
+    abaixo do topo da `ordem` -- o que rodava tudo antes de 02/10. `desconhecido` nao conta,
+    e nao absolve: aparece no relatorio como etiqueta sem modelo."""
+    modelos = modelos or ler_modelos()
+    ordem, rv = modelos["ordem"], modelos["regra_de_volta"]
+    inicio = hoje - dt.timedelta(days=rv["janela_dias"])
+    n = collections.Counter()
+    for e in eventos:
+        et = etiqueta(e)
+        if not et or not e["autor"].startswith("claude") or et[0] not in ordem:
+            continue
+        if not inicio < dt.date.fromisoformat(e["data"]) <= hoje:
+            continue
+        # Antes de 02/10 tudo rodava no de cima: erro com modelo abaixo dele e o custo do corte.
+        if et[0] != ordem[-1]:
+            n[et[1]] += 1
+    return {c: k for c, k in n.items() if k >= rv["limiar"]}
 
 
 def semana(data):
@@ -132,6 +182,10 @@ def main(argv=None):
     a = ap.parse_args(argv)
     ev = validar(ler(a.eventos))
     print(relatorio(ev, sessoes_por_semana(a.turnos)), end="")
+    volta = regra_de_volta(ev, dt.date.today())
+    print("\nRegra de volta (docs/metricas/modelos-por-tarefa.yaml): " + (
+        ", ".join(f"{c} volta um degrau ({k} eventos)" for c, k in sorted(volta.items()))
+        or "nenhuma classe disparou"))
     return 0
 
 
