@@ -561,6 +561,42 @@ mudanças** (quais) ou **refazer**. Sem isso, nenhum código de esquema (decisã
 
 ---
 
+## 21 · O limiar da regra de volta dos modelos · decisão de 02/10
+
+O `eventos.csv` passou a levar `[modelo= classe=]` em todo evento de autoria Claude desde
+03/10 ([`modelos-por-tarefa.md`](modelos-por-tarefa.md)). Falta o número que devolve uma classe
+ao modelo de cima.
+
+- **21a** — **2 eventos em 14 dias** na mesma classe, com modelo abaixo do Opus. → Volta rápido;
+  com ~1,6 evento de autoria Claude por dia entre 16/09 e 02/10 (27 em 17 dias, e 40 das 73
+  linhas sem autor), pode voltar por ruído.
+- **21b** — **4 eventos em 28 dias**. → Mais lento e mais estável; um modelo ruim erra o dobro
+  antes de voltar.
+- **21c** — sem limiar: **você** lê o relatório do `metricas_processo.py` no semanal e decide. →
+  Nenhum número inventado, e a volta depende de alguém lembrar (P7).
+
+**Recomendação: 21a**, porque o custo de voltar cedo é só preço, e o de voltar tarde é erro no
+registro. Já está no YAML como proposta; responder confirma ou troca.
+
+---
+
+## 22 · O `PLANO.md` continua na abertura? · decisão de 02/10
+
+Depois do corte de 03/10 a abertura é de ~22.800 tokens, e o `PLANO.md` é o maior pedaço que
+sobrou depois do `CLAUDE.md`: **8.779 tokens** (`auditoria/tamanho_do_contexto.py`, razão de
+2,96 caracteres por token, sem `tiktoken`).
+
+- **22a** — fica. → O §1 do `CLAUDE.md` diz que ele "ganha de qualquer fila"; quem não o lê não
+  sabe o que vem primeiro.
+- **22b** — sai, como o `PENDENCIAS.md`: o `estado.md` ganha as cinco linhas da ordem do que
+  falta, e o resto se lê sob demanda. → Abertura de ~14 mil tokens; o risco é a sessão escolher
+  trabalho sem ver a ordem inteira.
+
+**Recomendação: 22a por enquanto**, até a regra de volta ter duas semanas de dado: medir um corte
+de cada vez.
+
+---
+
 ## Conferência de um minuto, com data
 
 - **Token do R2 somente leitura (P-145, destrava toda medição na nuvem):** no Cloudflare, R2 →

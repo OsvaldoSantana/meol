@@ -143,6 +143,8 @@ docs/fontes/COTAHIST*
 .coverage.*
 coverage.json
 mutants/
+# tools/testar.py: a saida inteira da suite que falhou (02/10/2026)
+.testar/
 
 # ── NEFIN (25/09/2026): no disco dele e no job semanal, nunca no git ─────────────
 alocacao/dados/nefin_factors.csv

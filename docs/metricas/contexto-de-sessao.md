@@ -5,6 +5,39 @@
 absoluto). O que é `SEMPRE` é declarado no próprio instrumento. Nenhum destes números é copiado
 para o `CLAUDE.md`.*
 
+## 03/10/2026 — o `PENDENCIAS.md` sai da abertura, e entra o `docs/estado.md`
+
+Decisão dele, 02/10 ([`docs/decisoes/modelos-por-tarefa.md`](../decisoes/modelos-por-tarefa.md)).
+
+| arquivo | antes (linhas / tokens) | depois (linhas / tokens) | diferença |
+|---|---|---|---|
+| `CLAUDE.md` | 410 / 8.170 | 427 / 8.658 | +488 (as quatro regras novas) |
+| `PENDENCIAS.md` | 2.044 / 40.364 | sai da abertura | **−40.364** |
+| `docs/estado.md` (novo, injetado pelo hook) | — | 101 / 1.864 | +1.864 |
+| `PLANO.md` | 410 / 8.779 | 410 / 8.779 | 0 |
+| `docs/doutrinas.md` | 185 / 3.478 | 185 / 3.478 | 0 |
+| **leitura de sessão** | **3.049 / 60.791** | **1.123 / 22.779** | **−38.012 (−62,5%)** |
+
+Antes: `origin/main` em `ed5e0b5`. Depois: o commit que trouxe esta seção. O `estado.md` muda a
+cada pendência: `python tools/estado.py --conferir` diz o tamanho do dia.
+
+**Somado à leitura, e fora do instrumento:** a seção da P da tarefa. Nas 80 abertas de 03/10, a
+mediana é **318 tokens**, o percentil 90 é **1.168** e a maior tem **2.197**. A abertura típica
+fica em **~23.100**, a pior em **~25.000**: **−59% a −62%**.
+
+**O que estes números não são (P5):**
+
+- **Estimativa, não contagem do tokenizador do Claude.** Sem `tiktoken` nesta sessão, a razão é a
+  de 19/09 (2,96 caracteres por token, ±15%); o erro é o mesmo nas duas pontas, e a diferença vale
+  mais que o valor absoluto.
+- **A releitura do `CLAUDE.md` não está no "antes".** Ele já chega no contexto pelo Claude Code; a
+  instrução antiga ("leia inteiro") fazia a sessão pagá-lo de novo com a ferramenta de leitura,
+  ~8 mil tokens a mais. O instrumento conta cada arquivo uma vez, então esse ganho não aparece na
+  tabela e não está somado à diferença.
+- **O variável continua sem medida** (P-103, item 2): resposta, saída de ferramenta, a suíte. O
+  `tools/testar.py` corta a saída da rodada final para uma linha por suíte, e isso também não está
+  na tabela.
+
 ## 26/09/2026 — a história saiu do `CLAUDE.md` e as fechadas saíram do `PENDENCIAS.md`
 
 | arquivo | antes (linhas / tokens) | depois (linhas / tokens) | diferença |
