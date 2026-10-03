@@ -82,8 +82,16 @@ def defeitos_de_segredo(d, permitidos):
     """[defeito] -- vazio e o unico resultado aceito.
 
     `permitidos`: {(job, nome_do_passo): {NOME, ...}}. So o `env` desse passo pode ler esses
-    segredos, e so pela forma `secrets.NOME`."""
+    segredos, e so pela forma `secrets.NOME`. Cada chave tem de casar com exatamente um passo."""
     out = []
+    # CX-01 (retratacao): autorizar por nome so vale se o nome acha UM passo. Dois homonimos
+    # herdariam a autorizacao um do outro; zero e lista permitindo o que nao existe.
+    for (job, nome), _ in permitidos.items():
+        passos = d.get("jobs", {}).get(job, {}).get("steps", [])
+        n = sum(1 for p in passos if p.get("name") == nome)
+        if n != 1:
+            out.append(f"passo autorizado {nome!r} do job {job!r} casa com {n} passos; "
+                       "tem de ser exatamente 1")
     for job, passo, onde, expr in referencias(d):
         local = f"{job or '<workflow>'}/{passo or '<fora de passo>'}/{onde}"
         autorizado = passo is not None and (job, passo) in permitidos

