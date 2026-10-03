@@ -56,8 +56,10 @@ O calendário tem de cobrir 2016-01-01 a 2020-12-31.
 
 | arquivo | sha256 |
 |---|---|
-| `eventos_silver_<PREENCHER>_cal-<PREENCHER>.csv` | `<PREENCHER NA SESSÃO LOCAL>` |
+| `eventos_silver_2026-09-11_cal-19860102-20260918.csv` | `ec6b50dae59dd30e5ec48c66ab9849c5c000ea02d07ab1072904eab2dfe98143` |
 
+> **Preenchido em 03/10/2026 (§9, "A contagem de 03/10/2026"); o aviso abaixo valia enquanto houvesse `<PREENCHER>`.** O silver, o calendário (1986-01-02 a 2026-09-18) cobre 2016-01-01 a 2020-12-31.
+>
 > **Com o `<PREENCHER>` o pré-registro não vale.** O silver mora no disco dele, e a sessão da
 > nuvem não o alcança (§5-B.17). A sessão local gera o silver com o `refinar.py` da P-117,
 > calcula o `sha256sum` e preenche as duas células. Esse é o commit que empurra. A corrida
@@ -628,6 +630,36 @@ remedida; **empurrada antes da contagem**:
 - **de onde vem o σ:** `auditoria/c02_bootstrap_sigma.py`, semente 20260921, 2.000 reamostras:
   `py -3.11 auditoria/c02_bootstrap_sigma.py <silver.csv>`;
 - o texto da §9 acima (819, 835, 0,0472, 1.648) fica como o que se escreveu em 26/09 e 27/09.
+
+### A contagem de 03/10/2026: nenhuma candidata atende, a janela é 2016–2020
+
+**Calibração: 807.** Dentro da faixa de 807 a 823, **sem correção** (fator 1). O contador e o
+`ajustar.medir` de hoje concordam em 2021–2025. Saída 0. **Nenhum preço, retorno ou fator de
+2013–2020 foi aberto**: o script lê só os seis campos de identidade do COTAHIST e as oito
+colunas do silver. A quarentena de 2013–2020 segue até o resultado desta corrida.
+
+```
+silver eventos_silver_2026-09-11_cal-19860102-20260918.csv sha256 ec6b50dae59dd30e5ec48c66ab9849c5c000ea02d07ab1072904eab2dfe98143
+calibracao 2021-2025: 807; fator 1 (807/807), sem correcao
+  2016-2020: n_JCP 555
+  2015-2020: n_JCP 648
+  2014-2020: n_JCP 751
+  2013-2020: n_JCP 851
+RESUMO regra da secao 9: n_min 1693; janela 2016-2020, n 555, NENHUMA atende: NAO_CONFIRMADO provavel no K2, declarado
+```
+
+**A janela é 2016–2020, e o `NAO_CONFIRMADO` provável do K2 do JCP fica declarado aqui, antes
+da corrida:** n_JCP = **555** contra o limiar de **1.693**. Mesmo a maior candidata (2013–2020,
+n = 851) fica na metade do limiar. Com σ = 0,0482 × √(807 ÷ 555) = 0,058 contra o σ_max de
+0,0416 (K2 do JCP), o JCP **não tem poder** para o K2 na janela escolhida, e o texto da §4
+já avisava (linhas 232 e 240). O resultado da corrida será lido com isso ao lado: um
+`REPROVA` do JCP só vale se o IC o sustentar; um não-`REPROVA` não confirma o ajuste.
+
+**Reprodução:** código no commit `2638de1` deste branch; COTAHIST de 2013 a 2025 conferidos
+contra `docs/aprendizado/preregistro-ml-v2.pins.yaml` (13 de 13 no sha256 do ZIP e no
+tamanho) antes da contagem; o silver da §2 (sha256 acima) é o da corrida de 02/10, igual em
+duas gerações. Item 5 da ordem: a janela escolhida é a própria "2016–2020", então **o texto
+não muda**; o COTAHIST da §2 já cobre 2016–2020, e o H-FISCAL (§6) não muda.
 
 ---
 
