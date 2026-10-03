@@ -708,6 +708,45 @@ tamanho) antes da contagem; o silver da §2 (sha256 acima) é o da corrida de 02
 duas gerações. Item 5 da ordem: a janela escolhida é a própria "2016–2020", então **o texto
 não muda**; o COTAHIST da §2 já cobre 2016–2020, e o H-FISCAL (§6) não muda.
 
+### Limitação: o σ que escolheu a janela não é o σ̂ que julga o K2 (03/10/2026, antes da corrida)
+
+**Decisão dele, 03/10/2026 (claude.ai):** o resultado da corrida de 2016–2020 é lido **pela
+convenção da §3.1**, e só por ela. O 0,0482 serviu para uma coisa: dimensionar o limiar da
+regra da janela. Os dois σ não são a mesma medida:
+
+| | o σ do limiar (esta §9) | o σ̂ do K2 (§3.1) |
+|---|---|---|
+| unidade reamostrada | o ponto (papel-dia), iid | o **pregão**: os pontos de uma data entram ou saem juntos |
+| gerador e semente | `random.Random(20260921)` (`auditoria/c02_bootstrap_sigma.py`) | `numpy.random.default_rng(20260926)` |
+| estimador | (hi − lo) ÷ 2 ÷ 1,96 do IC 95% percentil | desvio padrão das 2.000 razões |
+| dados | 2021–2025, n = 807 | 2016–2020, os da corrida |
+
+**Por que a diferença não muda a decisão, e em que faixa isso vale.** O veredito do K2 usa o σ̂
+que a própria corrida mede em 2016–2020; o 0,0482 não entra nele. Entra só na escolha da
+janela, e essa escolha só seria outra se o σ de 2021–2025 **na convenção da §3.1** caísse numa
+faixa estreita. Com o limiar n ≥ 807 × (σ ÷ 0,03328)², cada candidata passaria com σ até:
+
+| janela | n_JCP | passa com σ ≤ | abaixo de 0,0482 |
+|---|---|---|---|
+| 2016–2020 | 555 | 0,0276 | 43% |
+| 2015–2020 | 648 | 0,0298 | 38% |
+| 2014–2020 | 751 | 0,0321 | 33% |
+| 2013–2020 | 851 | 0,0342 | 29% |
+
+Acima de 0,0342, nenhuma passa e a janela é 2016–2020, como hoje. Abaixo de 0,0276, a
+2016–2020 passa por si e a janela também é 2016–2020; muda só a declaração do `NAO_CONFIRMADO`
+provável. **A janela só seria outra com o σ por pregão entre 0,0276 e 0,0342**, de 29% a 43%
+abaixo do σ por ponto. Reamostrar por pregão mantém juntos os resíduos que dividem o mesmo
+mercado do dia, e isso costuma **alargar** o IC, não estreitar; um σ por pregão 29% menor
+pediria resíduos da mesma data correlacionados negativamente.
+
+**O que não se mediu (P5).** O σ por pregão de 2021–2025 **não foi computado**: a frase acima é
+um argumento sobre a direção, não uma medição. O que a resolveria é rodar o bootstrap da §3.1
+(por pregão, semente 20260926, σ̂ = desvio padrão) sobre os mesmos 807 pontos de 2021–2025.
+Isso lê preço só de 2021–2025, fora da quarentena, e exige o silver do disco dele (sessão
+local). O σ = 0,058 da contagem acima (0,0482 × √(807 ÷ 555)) também está na convenção por
+ponto: ele avisa da falta de poder, e não é o σ̂ com que o K2 vai ser julgado.
+
 ---
 
 ## Notas de revisão

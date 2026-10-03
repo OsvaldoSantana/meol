@@ -1216,6 +1216,17 @@ critério corrigido repete o defeito da P-116.
 > **Em aberto:** o −12 é do contador ou da referência? Os 819 foram medidos em setembro, com o
 > silver e o código de então. Separar os dois exige rodar o `ajustar.medir` em 2021–2025 com
 > este silver; isso lê preço só de 2021–2025, fora da quarentena.
+>
+> **03/10/2026 — o −12 é da referência** (§9 do pré-registro): o `ajustar.medir` de hoje dá
+> **807** em 2021–2025; os 819 de setembro não valem mais. Revisão 5: calibração 807, σ 0,0482,
+> limiar **1.693** (`2638de1`). A contagem deu 2016–2020 = **555**, nenhuma candidata atende, e a
+> janela é **2016–2020** com o `NAO_CONFIRMADO` provável do K2 declarado (`60a40f2`). O D1 está
+> sorteado e empurrado (`73ee120`, semente 20260927, 30 posições). Esses quatro commits saíram
+> em Sonnet; a auditoria do claude.ai em Opus conferiu constantes, ordem e semente, sem
+> reexecutar (`eventos.csv`). **Limitação declarada (§9):** o 0,0482 é σ por ponto; o K2 é
+> julgado pela §3.1 (por pregão, semente 20260926). A janela só seria outra com o σ por pregão
+> de 2021–2025 entre 0,0276 e 0,0342, e ele não foi medido. **Próximo passo do D1:** a
+> transcrição dos documentos (§3.1, passo 2), antes da corrida.
 
 
 ## P-116 · O critério da janela entrou no mesmo commit que os resultados
