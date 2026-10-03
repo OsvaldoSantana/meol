@@ -1957,6 +1957,26 @@ caracteres cada, ~330 tokens: **estoura o teto**. Então a sessão que preencher
 para cada uma, se ela ainda é pendência ou se fecha (vai para o histórico com a evidência), e o
 `--conferir` reprova antes do CI se a conta não fechar.
 
+## P-172 · O PLANO.md na abertura volta à decisão em 17/10, com a regra de volta medida
+
+**Dono:** Osvaldo (decidir) · Claude Code (levar os números) · **Gatilho:** 17/10/2026, com duas
+semanas de dado da regra de volta · **Classe:** `DECISAO_DE_DESENHO`
+
+Resposta **22a** de 03/10 (fila, bloco 22): o `PLANO.md` segue na abertura, e a decisão volta a
+ele quando a regra de volta dos modelos (21d) tiver duas semanas de dado. Um corte de cada vez:
+tirar o `PLANO.md` e trocar de modelo ao mesmo tempo deixaria sem saber qual dos dois causou um
+erro novo.
+
+**O que a sessão de 17/10 leva:**
+1. a tabela da regra de volta, de `python auditoria/metricas_processo.py --prs prs.json` com a
+   lista de `gh pr list --state merged --base main --json number,title,mergedAt,author`, e o
+   resumo dos semanais de 05/10 e 12/10;
+2. o tamanho da abertura, de `python auditoria/tamanho_do_contexto.py`;
+3. a pergunta que a execução da 21d deixou: `registro` (0 em 6) e `arquitetura` (0 em 2) têm
+   referência zero e voltam no **primeiro** evento numa janela com 4 PRs, e `estatistica` não
+   tem PR na referência. Fica assim, ou a referência ganha um piso? (fila, respostas de 03/10,
+   item 2).
+
 ## Ao voltar ao desktop
 
 > **26/09/2026, nuvem — substitui a nota de 25/09 abaixo.** A revisão das pendências dele fechou

@@ -203,6 +203,9 @@ docs/
   passaria num teste de atributo.
 - **Commit: título até 72 caracteres, corpo com o porquê** e o que a mudança mediu (decisão
   dele, 25/09). O histórico anterior não se reescreve: os marcos valem pelo sha.
+- **PR: o título abre com `[modelo=<m> classe=<c>]`**, com o modelo da sessão e a classe de
+  `docs/metricas/modelos-por-tarefa.yaml`. O PR mergeado é o denominador da regra de volta dos
+  modelos (decisão 21d, 03/10), e o CI reprova o título sem ela.
 - **Achado novo** segue a skill `bastter-achado`; mudança em `alocacao/` segue
   `bastter-mudanca`.
 

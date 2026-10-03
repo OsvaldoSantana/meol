@@ -32,16 +32,35 @@ a etiqueta `[modelo=<m> classe=<c>]`, com os valores da tabela (ou `modelo=desco
 `auditoria/metricas_processo.py` reprova a linha sem etiqueta ou com valor fora da tabela, e
 imprime, no fim do relatório, as classes que dispararam a regra.
 
-**A regra (proposta, bloco 21 da fila):** em **14 dias corridos**, **2 eventos** de autoria
-Claude numa classe, etiquetados com modelo abaixo do Opus, devolvem a classe um degrau acima
-(`haiku → sonnet → opusplan → opus`). A volta se registra aqui, com a data e os eventos.
+**A regra (decisão dele, 03/10: 21d, fila bloco 21):** a **taxa** de uma classe é o número de
+eventos de autoria Claude por PR mergeado no `main`, os dois etiquetados nela com modelo abaixo
+do Opus. O semanal (`testes.yml`, passo "Regra de volta dos modelos") mede a taxa numa janela de
+**14 dias** e a compara com a **referência**: os eventos e os PRs de 16/09 a 02/10, tudo em Opus,
+classificados uma vez em [`docs/metricas/referencia-modelos.csv`](../metricas/referencia-modelos.csv).
+A classe volta um degrau (`haiku → sonnet → opusplan → opus`) quando a taxa **passa de 1,5 vez**
+a referência **e** há **pelo menos 4 PRs** dela na janela. Classe sem referência só mostra os
+números. O 1,5 e o 4 são escolha declarada, não medida. Quando uma classe volta, o semanal abre
+uma issue, e a volta se registra aqui, com a data e os números.
+
+**O PR leva a etiqueta no título**, `[modelo=<m> classe=<c>]`, porque é ele o denominador. O CI
+reprova o PR sem ela (`metricas_processo.py --titulo-pr`), com o Dependabot fora.
 
 **O que a regra não vê (P5):**
 
 - **Erro que ninguém achou.** O `eventos.csv` só tem o que alguém registrou; um modelo mais barato
   que erra em silêncio passa na regra. A guarda que existe contra isso é a suíte, não a regra.
-- **A linha de base.** Antes de 03/10 não havia etiqueta: não há taxa por classe do Opus para
-  comparar. O limiar de 2 é escolha, não medida; por isso vai para a fila.
+- **A classe da referência é inferida (`OBSERVADO`).** A sessão de 03/10 leu a descrição de cada
+  evento e o título de cada PR e escolheu a classe; ninguém a declarou na hora. Outro leitor
+  pode classificar diferente, e a referência muda com isso.
+- **A referência começa em 25/09, não em 16/09.** O primeiro PR mergeado no `main` é de 25/09.
+  Os 10 eventos de 16/09 a 24/09 estão no CSV, mas fora da taxa, porque não têm denominador.
+  Ficam 17 eventos em 37 PRs.
+- **Referência zero.** `registro` (0 em 6) e `arquitetura` (0 em 2) voltam no **primeiro**
+  evento numa janela com 4 PRs. `estatistica` não tem PR na referência e nunca volta pela regra.
+  Revisão em 17/10 (P-172).
+- **O autor desconhecido.** 40 das 73 linhas do período não dizem quem errou e ficaram fora da
+  referência. Se as linhas novas saírem mais completas, a taxa nova sobe sem que o modelo piore.
+- **O PR não mede o tamanho do trabalho.** Um PR de uma linha e um de mil contam igual.
 - **`modelo=desconhecido` não conta e não absolve.** Ele é aceito para não forçar ninguém a
   inventar o modelo; o relatório de etiquetas mostra quantos são.
 

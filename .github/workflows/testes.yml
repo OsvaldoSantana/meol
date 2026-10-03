@@ -32,6 +32,8 @@ on:
   # PR nao recebe segredo, e o completo le o armazem.
   pull_request:
     branches: [main]
+    # 03/10/2026: `edited` reroda quando so o titulo muda -- a etiqueta dele e conferida aqui.
+    types: [opened, synchronize, reopened, edited]
   schedule:
     - cron: '0 11 * * 1'           # segunda, 08:00 em Brasilia
   workflow_dispatch:
@@ -59,6 +61,13 @@ jobs:
           python-version: '3.11'
       - name: Instalar
         run: python -m pip install ".[dev,lint,paralelo]"
+      # Fila 21d (03/10/2026): o PR mergeado e o denominador da regra de volta dos modelos, e a
+      # classe e o modelo dele saem da etiqueta do titulo. O titulo vai por env, nunca no script.
+      - name: Etiqueta do titulo do PR
+        if: github.event_name == 'pull_request' && github.event.pull_request.user.login != 'dependabot[bot]'
+        env:
+          TITULO: ${{ github.event.pull_request.title }}
+        run: python auditoria/metricas_processo.py --titulo-pr "$TITULO"
       # Cada FAILED/ERROR vira anotacao: aparece na pagina da execucao sem abrir o log.
       - name: Suites sem slow
         run: |
@@ -82,7 +91,8 @@ jobs:
     timeout-minutes: 180
     permissions:
       contents: write      # o commit do cobertura.csv
-      issues: write        # a issue de expira
+      issues: write        # a issue de expira e a da regra de volta
+      pull-requests: read  # a lista dos PRs mergeados, denominador da regra de volta (fila 21d)
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
@@ -155,6 +165,23 @@ jobs:
           titulo="Constantes vencendo (expira em ate 7 dias)"
           corpo="Medido em $(date -u +%Y-%m-%d) por auditoria/expira_proxima.py. Reconferir na fonte e atualizar o YAML:"$'\n\n'"$lista"
           n=$(gh issue list --state open --search 'in:title "Constantes vencendo"' --json number --jq '.[0].number // empty')
+          if [ -n "$n" ]; then gh issue edit "$n" --body "$corpo"; else gh issue create --title "$titulo" --body "$corpo"; fi
+
+      # Fila 21d (03/10/2026): a taxa de cada classe numa janela de 14 dias contra a referencia
+      # de 16/09 a 02/10. O relatorio vai para o resumo do job; classe que volta abre UMA issue.
+      - name: Regra de volta dos modelos
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh pr list --state merged --base main --limit 500 --json number,title,mergedAt,author > prs.json
+          python auditoria/metricas_processo.py --prs prs.json | tee -a "$GITHUB_STEP_SUMMARY"
+          volta="$(python auditoria/metricas_processo.py --prs prs.json --disparou)"
+          if [ -z "$volta" ]; then echo "nenhuma classe volta"; exit 0; fi
+          titulo="Regra de volta: classe volta ao modelo de cima"
+          corpo="Medido em $(date -u +%Y-%m-%d) por auditoria/metricas_processo.py (fila 21d). Registrar a volta em docs/decisoes/modelos-por-tarefa.md e trocar o modelo em docs/metricas/modelos-por-tarefa.yaml:"$'\n\n'"$volta"
+          n=$(gh issue list --state open --search 'in:title "Regra de volta"' --json number --jq '.[0].number // empty')
           if [ -n "$n" ]; then gh issue edit "$n" --body "$corpo"; else gh issue create --title "$titulo" --body "$corpo"; fi
 
       - name: Falhar se algo falhou

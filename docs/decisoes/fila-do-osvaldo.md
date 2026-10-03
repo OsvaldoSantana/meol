@@ -178,6 +178,36 @@ pré-registro final), o `questionario.md` e o `pesquisa/questionario.json` regen
 pré-registro, a linha da y-a na §1, as limitações 6 (em parte) e 7 riscadas na §9 e a nota na
 §10.
 
+### Respostas dele, 03/10/2026, aos blocos 21 e 22
+
+Dadas no claude.ai e registradas na sessão local de 03/10.
+
+| bloco | resposta | onde ficou | alternativas não escolhidas |
+|---|---|---|---|
+| **21 · 21d** | **nenhuma das três.** Uma única vez, os eventos e os PRs de 16/09 a 02/10 (tudo em Opus) classificados nas classes de `modelos-por-tarefa.md`, marcados `OBSERVADO` porque a classe é inferida: é a referência, eventos por PR mergeado, por classe. Daí em diante, o `metricas_processo.py` do semanal compara, numa janela de 14 dias, a taxa da classe com o modelo novo. A classe volta para o modelo de cima quando a taxa passa de **1,5 vez** a referência **e** há pelo menos **4 PRs** da classe na janela. Até a referência existir, o relatório só mostra os números. O 1,5 e o 4 são escolha declarada no YAML, não medida | `docs/metricas/modelos-por-tarefa.yaml` (`regra_de_volta`), `docs/metricas/referencia-modelos.csv`, `auditoria/metricas_processo.py` e o passo "Regra de volta dos modelos" do semanal | 21a (2 eventos em 14 dias), 21b (4 em 28), 21c (ele lê e decide) |
+| **22 · 22a** | **o `PLANO.md` fica na abertura.** A decisão volta a ele em **17/10/2026**, com duas semanas de dado da regra de volta | P-172, que põe o gatilho no `docs/estado.md` | 22b (sai, e o `estado.md` ganha a ordem do que falta) |
+
+**O que a execução da 21d achou, e que a resposta não tinha como saber:**
+
+1. **Não há PR antes de 25/09.** O primeiro PR mergeado no `main` é de 25/09 (#1, #3, #4); de
+   16/09 a 24/09 o trabalho entrou por push direto. Os 10 eventos Claude desse trecho estão
+   classificados no CSV, mas ficam fora da taxa: sem denominador, contá-los inflaria a
+   referência. A referência vale de **25/09 a 02/10: 17 eventos em 37 PRs**.
+2. **Três classes saem com referência zero ou sem referência.** `registro` tem 0 eventos em 6
+   PRs, e `arquitetura`, 0 em 2. Com referência 0, 1,5 × 0 = 0, e **o primeiro evento** numa
+   janela com 4 PRs devolve a classe. Para o `registro`, que é a classe que desceu para o Sonnet,
+   a 21d vira na prática "um erro volta". `estatistica` não tem PR nenhum e fica só com os
+   números até alguém refazer a referência. Nada disso foi mudado: é o que a 21d dá com estes
+   dados, e a P-172 leva a pergunta para 17/10.
+3. **O denominador precisa de etiqueta.** Daqui em diante o PR abre o título com
+   `[modelo=<m> classe=<c>]`, a mesma etiqueta do `eventos.csv`, e o CI reprova o PR sem ela
+   (o Dependabot fica fora). PR sem etiqueta não entra na conta, e o relatório diz quantos
+   ficaram fora.
+4. **A referência subconta.** 40 das 73 linhas do período têm `autor = desconhecido` e ficaram
+   fora, porque a regra só conta autoria Claude. Se a etiqueta obrigatória fizer as linhas novas
+   saírem com autor, a taxa nova sobe sem que o modelo piore. O viés empurra para voltar, não
+   para ficar.
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do
@@ -561,7 +591,7 @@ mudanças** (quais) ou **refazer**. Sem isso, nenhum código de esquema (decisã
 
 ---
 
-## 21 · O limiar da regra de volta dos modelos · decisão de 02/10
+## 21 · O limiar da regra de volta dos modelos · decisão de 02/10 · **respondido em 03/10: 21d**
 
 O `eventos.csv` passou a levar `[modelo= classe=]` em todo evento de autoria Claude desde
 03/10 ([`modelos-por-tarefa.md`](modelos-por-tarefa.md)). Falta o número que devolve uma classe
@@ -578,9 +608,13 @@ ao modelo de cima.
 **Recomendação: 21a**, porque o custo de voltar cedo é só preço, e o de voltar tarde é erro no
 registro. Já está no YAML como proposta; responder confirma ou troca.
 
+**Resposta, 03/10: 21d**, que não estava na lista: taxa de eventos por PR mergeado, por classe,
+contra uma referência classificada uma vez em Opus; volta com taxa acima de 1,5 vez a referência
+e pelo menos 4 PRs na janela. O texto inteiro está nas respostas, acima do bloco 1.
+
 ---
 
-## 22 · O `PLANO.md` continua na abertura? · decisão de 02/10
+## 22 · O `PLANO.md` continua na abertura? · decisão de 02/10 · **respondido em 03/10: 22a**, volta em 17/10
 
 Depois do corte de 03/10 a abertura é de ~22.800 tokens, e o `PLANO.md` é o maior pedaço que
 sobrou depois do `CLAUDE.md`: **8.779 tokens** (`auditoria/tamanho_do_contexto.py`, razão de

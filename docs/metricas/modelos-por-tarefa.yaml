@@ -21,8 +21,21 @@ classes:
 # reprova a validacao.
 
 regra_de_volta:
-  # PROPOSTA desta sessao, a confirmar por ele (fila, bloco 21): em `janela_dias` corridos,
-  # `limiar` eventos de autoria Claude (achado, retratacao ou reincidencia) etiquetados numa
-  # classe com modelo abaixo do topo da `ordem` devolvem a classe um degrau acima.
+  # DECISAO dele, 03/10/2026 (fila, bloco 21: 21d), no lugar da proposta 21a (2 eventos em 14
+  # dias). A TAXA de uma classe e eventos de autoria Claude por PR mergeado no main, os dois
+  # etiquetados nela com modelo abaixo do topo da `ordem`. Numa janela de `janela_dias`, a
+  # classe volta um degrau quando taxa > fator x referencia E houver >= min_prs PRs dela.
+  # Classe sem referencia (zero PR nela na referencia): o relatorio so mostra os numeros.
+  # `fator` e `min_prs` sao ESCOLHA DECLARADA dele, nao medida.
   janela_dias: 14
-  limiar: 2
+  fator: 1.5
+  min_prs: 4
+  referencia:
+    # A classificacao de 16/09 a 02/10, UMA vez, com tudo em Opus. A classe de cada linha foi
+    # INFERIDA pela sessao de 03/10 a partir da descricao do evento e do titulo do PR.
+    arquivo: docs/metricas/referencia-modelos.csv
+    status: OBSERVADO
+    # O primeiro PR mergeado no main e de 25/09 (#1, #3, #4): antes dele nao ha denominador, e
+    # os eventos de 16/09 a 24/09 ficam classificados no CSV mas fora da taxa.
+    desde: 2026-09-25
+    ate: 2026-10-02
