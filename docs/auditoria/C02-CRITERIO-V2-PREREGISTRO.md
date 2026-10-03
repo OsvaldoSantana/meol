@@ -213,6 +213,41 @@ depois deste commit.** O próximo passo (a transcrição, §3.1) é dele.
 **Quem faz.** A sessão local sorteia, porque o silver mora no disco dele. Os documentos são
 buscados por quem alcançar a fonte, a sessão local ou a nuvem.
 
+#### Emenda E-D1a: valor sujeito a retenção de IR é o bruto (03/10/2026, antes de gravar a classificação)
+
+**Decisão dele, 03/10/2026** (pergunta na sessão da transcrição, Claude Code na nuvem, depois
+de subir a escada da §5-B.18 nas duas posições).
+
+**A lacuna.** A §3.1 classifica pelo "valor bruto" do documento, mas não dizia o que fazer
+quando o documento dá o valor por ação **sem** a palavra "bruto" e **sem** o líquido ao lado.
+Duas das dez primeiras posições são assim: a 5 (GGBR3, R$ 0,14) e a 10 (TOTS3,
+R$ 0,248642967). O documento foi achado e é legível, então elas não podem ser puladas.
+
+**A regra.** Quando a companhia diz que o pagamento do valor por ação **sofre retenção de imposto
+de renda**, esse valor é o **bruto**. Vale a frase do documento do evento ou de outro documento
+da própria companhia sobre o mesmo evento.
+
+**A prova pode ser HTML** quando o documento só existe nesse formato, como o 20-F na SEC.
+Os quatro campos continuam obrigatórios:
+- o sha256 é o do arquivo como baixado, e também o do documento arquivado, se o servidor
+  acrescentar bytes;
+- a página é a impressa no documento.
+
+**A alíquota não declarada** é a da lei citada acima (15%), só para calcular o líquido esperado.
+
+**O que esta emenda não protege (P5).** Ela foi escrita **depois** de abrir os documentos das
+posições 1 a 12. Quem a escreveu já sabia que, com ela, as posições 1 a 10 dariam `BRUTO`, e
+sem ela o D1 ficaria `NAO_CONFIRMADO` ou trocaria duas posições pelas 11 e 12. As quatro
+saídas foram postas a ele antes da decisão:
+- retenção = bruto, aceitando o 20-F;
+- retenção = bruto, só com PDF;
+- leitura estrita;
+- as duas posições não contam.
+
+A emenda não mexe na ordem, na semente, nem na regra de pular. É, por isso, uma regra
+escolhida com a amostra à vista: quem duvidar dela tem as quatro saídas e os documentos na
+transcrição para refazer a classe.
+
 **Dia limpo.** `classe_do_degrau(...) == "LIMPO"`: o dia não tem evento de quantidade, nem
 marca B/G do ESPECI sem evento no silver, nem evento sem fator no mesmo papel e dia.
 
