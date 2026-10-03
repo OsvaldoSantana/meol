@@ -1,0 +1,304 @@
+{
+ "ambiente": {
+  "numpy": "2.4.4",
+  "python": "3.11.9"
+ },
+ "commit": "506678e687bd099dfff6b6b59e7f89524d1ccb31",
+ "insumos": {
+  "cotahist": [
+   {
+    "arquivo": "COTAHIST_A2016.ZIP",
+    "bytes": 15715361,
+    "sha256": "ffc82a9b973cb5901e68dc11bea1bbc9bf0a2c46749e0efe5a7a89229bc0d81f"
+   },
+   {
+    "arquivo": "COTAHIST_A2017.ZIP",
+    "bytes": 16527191,
+    "sha256": "af6aaa85187c1d58ec6565522644066da573a7dc5b579c1d4c906ae95a2dea86"
+   },
+   {
+    "arquivo": "COTAHIST_A2018.ZIP",
+    "bytes": 19488404,
+    "sha256": "9d66136179d9822476c6035000167aecf2665f4396619e4d74c0011745a0c507"
+   },
+   {
+    "arquivo": "COTAHIST_A2019.ZIP",
+    "bytes": 26650371,
+    "sha256": "5170d3f8f079c3306424b36c2fae9b467391f8fa37d16d389f487b4c5c28edb9"
+   },
+   {
+    "arquivo": "COTAHIST_A2020.ZIP",
+    "bytes": 37181542,
+    "sha256": "86442168939b9da7b3cc1ec1662c333ee5ab4c75f2be1865b5bf55ba4c52168f"
+   }
+  ],
+  "silver": {
+   "arquivo": "eventos_silver_2026-09-11_cal-19860102-20260918.csv",
+   "bytes": 2249567,
+   "sha256": "ec6b50dae59dd30e5ec48c66ab9849c5c000ea02d07ab1072904eab2dfe98143"
+  }
+ },
+ "janela": [
+  2016,
+  2020
+ ],
+ "reamostras": 2000,
+ "resultado": {
+  "D1": {
+   "classes": [
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO"
+   ],
+   "gravadas": [
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO",
+    "BRUTO"
+   ],
+   "veredito": "PASSA"
+  },
+  "K1": {
+   "2016": {
+    "pares": 77699,
+    "pior": 1e-27,
+    "veredito": "PASSA"
+   },
+   "2017": {
+    "pares": 81470,
+    "pior": 1e-27,
+    "veredito": "PASSA"
+   },
+   "2018": {
+    "pares": 88143,
+    "pior": 1e-27,
+    "veredito": "PASSA"
+   },
+   "2019": {
+    "pares": 89672,
+    "pior": 1e-27,
+    "veredito": "PASSA"
+   },
+   "2020": {
+    "pares": 121458,
+    "pior": 1e-27,
+    "veredito": "PASSA"
+   }
+  },
+  "K2": {
+   "faixa": [
+    0.85,
+    1.15
+   ],
+   "hi": 1.0603350164625354,
+   "lo": 0.6801566865444281,
+   "n": 555,
+   "pregoes": 271,
+   "razao": 0.8782939925011588,
+   "sigma": 0.09707866664206535,
+   "sigma_max": 0.0416,
+   "veredito": "NAO_CONFIRMADO"
+  },
+  "K3": {
+   "faixa": [
+    0.85,
+    1.35
+   ],
+   "hi": 1.0746032229092166,
+   "lo": 0.7697374802632367,
+   "n": 416,
+   "pregoes": 201,
+   "razao": 0.9342762331769434,
+   "sigma": 0.07776055408423439,
+   "sigma_max": 0.0463,
+   "veredito": "NAO_CONFIRMADO"
+  },
+  "K5": {
+   "2016": {
+    "fora": [],
+    "n": 1,
+    "veredito": "PASSA"
+   },
+   "2017": {
+    "fora": [],
+    "n": 2,
+    "veredito": "PASSA"
+   },
+   "2018": {
+    "fora": [],
+    "n": 3,
+    "veredito": "PASSA"
+   },
+   "2019": {
+    "fora": [],
+    "n": 4,
+    "veredito": "PASSA"
+   },
+   "2020": {
+    "fora": [],
+    "n": 5,
+    "veredito": "PASSA"
+   }
+  },
+  "K5_janela": {
+   "minimo": 10,
+   "n": 15,
+   "veredito": "PASSA"
+  },
+  "K6": {
+   "M1": {
+    "K2": "REPROVA",
+    "K3": "REPROVA",
+    "razao_K2": -0.16267013892751003,
+    "razao_K3": -0.13924983684015446,
+    "reprovou": true
+   },
+   "M2": {
+    "anos_reprovados": 4,
+    "reprovou": true
+   },
+   "M3": {
+    "K2": "REPROVA",
+    "K3": "REPROVA",
+    "razao_K2": 51.060995497979285,
+    "razao_K3": 38.103977064829934,
+    "reprovou": true
+   },
+   "M4": {
+    "classes": [
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO",
+     "LIQUIDO"
+    ],
+    "reprovou": true,
+    "veredito": "REPROVA"
+   },
+   "M5": {
+    "K2": "REPROVA",
+    "K3": "REPROVA",
+    "razao_K2": 1.8865296296327538,
+    "razao_K3": 1.933804186458826,
+    "reprovou": true
+   },
+   "veredito": "PASSA"
+  },
+  "anos": {
+   "2016": "PASSA",
+   "2017": "PASSA",
+   "2018": "PASSA",
+   "2019": "PASSA",
+   "2020": "PASSA"
+  },
+  "completude": {
+   "2016": {
+    "degraus_provento": 172,
+    "fora_do_limpo": 0,
+    "grandes_quantidade": 1,
+    "sem_mercado": 0,
+    "veredito": "PASSA"
+   },
+   "2017": {
+    "degraus_provento": 197,
+    "fora_do_limpo": 2,
+    "grandes_quantidade": 2,
+    "sem_mercado": 0,
+    "veredito": "PASSA"
+   },
+   "2018": {
+    "degraus_provento": 237,
+    "fora_do_limpo": 8,
+    "grandes_quantidade": 3,
+    "sem_mercado": 0,
+    "veredito": "PASSA"
+   },
+   "2019": {
+    "degraus_provento": 259,
+    "fora_do_limpo": 2,
+    "grandes_quantidade": 4,
+    "sem_mercado": 0,
+    "veredito": "PASSA"
+   },
+   "2020": {
+    "degraus_provento": 233,
+    "fora_do_limpo": 3,
+    "grandes_quantidade": 5,
+    "sem_mercado": 0,
+    "veredito": "PASSA"
+   }
+  },
+  "razao_por_ano_descritiva": {
+   "2016": {
+    "DIVIDENDO": {
+     "n": 64,
+     "razao": 0.7271082622197871
+    },
+    "JRS CAP PROPRIO": {
+     "n": 93,
+     "razao": 0.5247178667633474
+    }
+   },
+   "2017": {
+    "DIVIDENDO": {
+     "n": 70,
+     "razao": 0.6003939936203704
+    },
+    "JRS CAP PROPRIO": {
+     "n": 108,
+     "razao": 0.8720278013916519
+    }
+   },
+   "2018": {
+    "DIVIDENDO": {
+     "n": 92,
+     "razao": 0.8976589923900549
+    },
+    "JRS CAP PROPRIO": {
+     "n": 113,
+     "razao": 0.8945314189695769
+    }
+   },
+   "2019": {
+    "DIVIDENDO": {
+     "n": 105,
+     "razao": 0.8727619965170392
+    },
+    "JRS CAP PROPRIO": {
+     "n": 127,
+     "razao": 1.1800776997746367
+    }
+   },
+   "2020": {
+    "DIVIDENDO": {
+     "n": 85,
+     "razao": 1.2510179818455416
+    },
+    "JRS CAP PROPRIO": {
+     "n": 114,
+     "razao": 1.0040748819935448
+    }
+   }
+  },
+  "veredito": "NAO_CONFIRMADA"
+ },
+ "semente": 20260926
+}
