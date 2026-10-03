@@ -21,6 +21,7 @@ Este README documenta a extração literal realizada sobre os arquivos-fonte bai
 | `vercel-supabase-metadados-de-acesso.md` | Que metadados de acesso a Vercel (Hobby) e o Supabase (Free) guardam por conta própria: IP, user agent, geolocalização, retenção, o que se desliga | 27/09/2026 | PARCIAL (desligar os logs, prazo do IP de DDoS e região dos logs: NAO_CONFIRMADO) | P-162, limitação 4 do pré-registro final 2 |
 | `b3-termos-de-uso.md` | Termos de uso da B3: uso pessoal, vedação de redistribuir dado de mercado, ambiguidade sobre documento | 25/09/2026 20:02 UTC | COMPLETO (as cláusulas de uso) | P-136, metade B3 |
 | `cvm-dados-abertos-licenca.md` | Licença ODbL do DFP e termos do portal (citação obrigatória) | 25/09/2026 20:02 UTC | COMPLETO (DFP; ITR/FCA/CAD não abertos) | P-136, metade CVM |
+| `jcp-amostra-2016-2020.md` | D1 do C-02: os 10 JCPs sorteados de 2016–2020, cada um com URL do RAD (ou da SEC), sha256, página e trecho do aviso, comparados ao valor da B3 | 03/10/2026 16:08–16:35 UTC | COMPLETO para as 10 posições (PDFs fora do armazém, ver o arquivo) | P-115 (§3.1, passo 2) |
 | `nefin.md` | Metodologia + estrutura do CSV de fatores NEFIN | 03/09/2026 14:18 | COMPLETO | Séries de fatores do NEFIN |
 | `ishares-ivv-factsheet.md` | Expense ratio IVV | 03/09/2026 15:29 | COMPLETO | Expense ratio de IVV |
 | `vanguard-voo-factsheet.md` | Expense ratio VOO | 03/09/2026 15:30 | COMPLETO | Expense ratio de VOO |

@@ -248,6 +248,22 @@ A emenda não mexe na ordem, na semente, nem na regra de pular. É, por isso, um
 escolhida com a amostra à vista: quem duvidar dela tem as quatro saídas e os documentos na
 transcrição para refazer a classe.
 
+#### A transcrição de 03/10/2026 (passo 2): D1 = `PASSA`
+
+Transcrição completa em [`docs/fontes/jcp-amostra-2016-2020.md`](../fontes/jcp-amostra-2016-2020.md):
+cada evento com URL, sha256, página e trecho.
+- **As posições 1 a 10 têm documento achado**, e as 10 são `BRUTO`. Nenhuma foi pulada.
+- **A diferença entre a B3 e o bruto é zero** na precisão impressa, nas 10. A menor distância
+  ao líquido é 0,0028, nas posições 6 e 7.
+- **As posições 5 e 10 são `BRUTO` pela E-D1a**, e sem ela o D1 não seria `PASSA`.
+- **A integridade** de cada PDF foi conferida antes do sha256: estrutura, todas as páginas e
+  duas cópias iguais. Uma segunda rodada repetiu os 11 sha256.
+- **O RAD corta a transferência** sem `--compressed`, e a guarda reprova as 5 cópias cortadas.
+- **As posições 11 e 12 foram abertas** antes de se saber que não entrariam, e estão
+  registradas fora do veredito.
+
+**Pela ordem da §3.1, a corrida de 2016–2020 pode rodar.** O passo 3 vem depois deste commit.
+
 **Dia limpo.** `classe_do_degrau(...) == "LIMPO"`: o dia não tem evento de quantidade, nem
 marca B/G do ESPECI sem evento no silver, nem evento sem fator no mesmo papel e dia.
 
