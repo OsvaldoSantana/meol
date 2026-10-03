@@ -206,6 +206,9 @@ docs/
 - **PR: o título abre com `[modelo=<m> classe=<c>]`**, com o modelo da sessão e a classe de
   `docs/metricas/modelos-por-tarefa.yaml`. O PR mergeado é o denominador da regra de volta dos
   modelos (decisão 21d, 03/10), e o CI reprova o título sem ela.
+- **Se a primeira linha do prompt pede um modelo e a sessão não é esse modelo, pare antes de
+  qualquer passo.** Motivo: a P-115, classe `opus`, rodou em Sonnet de `2638de1` a `73ee120`
+  porque o modelo escolhido na tela não era o do prompt (`eventos.csv`, 03/10).
 - **Achado novo** segue a skill `bastter-achado`; mudança em `alocacao/` segue
   `bastter-mudanca`.
 
