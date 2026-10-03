@@ -12,7 +12,7 @@ P-115**.
 | b | a ordem da marca, com a UX feita antes de design e mercado | **seguir a ordem à risca**: pesquisa → design → mercado → UX → brandbook | tratar mapa e requisitos como requisitos funcionais e manter a UX adiantada; reescrever a ordem |
 | c | o `SEM_POSICAO` é o primeiro item de motor para a tela | **sim**, depois da P-115, com a regra escrita por ele (P-164) | a primeira tela só para quem já tem posição; só um estado de recusa, sem mudar o motor |
 | d | o que do Quanto-e-Onde.html sobrevive | **só o conceito** "quanto e onde" como primeira linha | a tipografia IBM Plex; cada cor que passasse no contraste; nada |
-| e | onde o motor roda para o usuário | respondeu **servidor**; **fica em aberto** (P-165), porque colide com a P-157 | no aparelho; adiar |
+| e | onde o motor roda para o usuário | respondeu **servidor**; refinado e **fechado em 03/10: B′**, servidor sem estado ([`P-165`](P-165-onde-o-motor-roda.md)), que preserva a P-157 | no aparelho; adiar |
 | f | que nome aparece no protótipo | **MEOL** | nome neutro de trabalho; decidir o nome agora |
 
 ## O que cada resposta muda
@@ -43,8 +43,8 @@ P-115**.
   Carrega fontes do Google Fonts, que é recurso remoto. O **conteúdo** fica como
   candidato à T6 (Método).
 - **e · a resposta "servidor" colide** com a P-157 e com o mapa (O1, §5). Existe
-  uma terceira via: **servidor sem estado**. Fica aberta na P-165 e no bloco 18 da
-  fila.
+  uma terceira via: **servidor sem estado**. Foi a escolhida em 03/10
+  (P-165, bloco 18 da fila).
 - **f · o nome MEOL** entra nos estímulos com texto simples, sem logotipo, até a
   busca de anterioridade (P-166).
 

@@ -3053,6 +3053,20 @@ identificador `secrets` — sem diferenciar maiúscula — tem de ser **exatamen
 **O que a guarda não vê:** um script que leia `os.environ` do passo já autorizado; e workflow
 reutilizável de outro repositório (`uses:`), que só é pego se declarar `secrets:`.
 
+**Retratação parcial (03/10/2026, mesmo dia): o conserto reabriu uma garantia.** A guarda de
+`198d0c5` reprovava um segundo passo com segredo (`"segredo em mais de um passo"`). A
+`guarda_segredos` autorizava por **nome** de passo, e um passo homônimo — duplicado no fim ou
+inserido antes do original, com outro `run:` e o mesmo `env` — herdava a autorização:
+`defeitos_de_segredo` devolvia `[]` em `medir.yml`, `testes.yml` (job `completo`) e
+`captura_cvm.yml`. Medido no `main` (`f336042`): 24 dos novos testes de mutação falham
+(16 de duplicata, em início e fim; 8 de passo ausente). O nome do teste
+`..._so_tem_contents_write_e_o_token_de_leitura_num_passo` ainda prometia a garantia perdida.
+**Causa raiz do erro de método:** o prompt do conserto não listava os invariantes da guarda
+antiga, e eu troquei de mecanismo sem inventariar o que o mecanismo velho garantia por
+acidente (é o N-01 de novo, do lado da guarda). **Conserto:** cada `(job, nome)` autorizado
+tem de casar com exatamente um passo; zero ou dois ou mais é defeito, com nome e contagem na
+mensagem. **Processo:** troca de guarda passa a ter a tabela "garantia antiga → teste que a
+cobre hoje" no PR (ficou no PR #53).
 
 ---
 
@@ -3075,4 +3089,3 @@ instrumento incluiu o que não devia. Conserto e ordem em P-173; teste ainda nã
 
 `C = None` e `del C` num módulo vigiado escapam da acusação e da restauração. Conserto
 (sentinela de ausência) e teste de mutação descritos em P-174; ainda não feitos.
-

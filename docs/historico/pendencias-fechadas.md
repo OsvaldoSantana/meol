@@ -2182,10 +2182,28 @@ ostentação **competente**, no nível do mercado; uma caricatura tornaria a H2 
 
 **FECHADA em 27/09/2026.** Os estímulos das direções E, C e D (resposta 16b), nas versões base e com rota bloqueada (j-A), foram refeitos na S4 com as respostas g-B a p-A (PR #38, commit `2625cc7`) e **aprovados por ele** em 27/09/2026 (`docs/decisoes/fila-do-osvaldo.md`, "Aprovação dele, 27/09/2026: os seis PNG da S4"), com o sha256 de cada um dos seis PNG gravado ao lado. Guardas: `auditoria/test_contraste_tokens.py` e `auditoria/test_direcoes_marca.py`, cada uma provada por mutação. O que segue: o pré-registro final (P-162, S5), que congela esses seis sha256. A ilustração da D continua provisória (P-168).
 
+## ~~P-165~~ · Onde o motor roda para o usuário: a resposta "servidor" contra a P-157 — **FECHADA em 03/10/2026**
+
+**Dono:** Osvaldo · **Gatilho:** antes do mapa v2 (etapa 4) · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Em 26/09 ele respondeu "servidor". Isso colide com a P-157 ("o dado fica no aparelho") e
+com o mapa (O1 e §5). As três vias estão no bloco 18 da fila: no aparelho; servidor com
+banco de dados; **servidor sem estado** (calcula e devolve sem gravar). Não afeta a v1,
+que é sintética. Com servidor, entram na conta a LGPD (quem guarda o quê, por quanto
+tempo), o custo fixo e a autenticação (WCAG 3.3.8).
+
+**FECHADA em 03/10/2026.** Decisão dele pelo formulário do Projeto no claude.ai: **B′, servidor
+sem estado** (A e B recusadas). O desenho, o porquê e as três consequências estão em
+[`docs/decisoes/P-165-onde-o-motor-roda.md`](../decisoes/P-165-onde-o-motor-roda.md); a resposta, no
+bloco 18 da [fila](../decisoes/fila-do-osvaldo.md). A P-157 fica de pé. A consequência (b) virou
+a P-175; a (a) é da P-158 e a (c) é da leitura do item 20.
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-165** | onde o motor roda para o usuário | 03/10 — B′, servidor sem estado; consequências na P-175 |
 | **P-163** | as direções visuais como estímulo, a T1 em cada direção | 27/09 — S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |
 | **P-155** | ler a WCAG na fonte: contraste, alvo de toque e daltonismo (era P-WCAG) | 27/09 — WCAG 2.2 transcrita; RI-22 a RI-34 com verificação |
 | **P-147** | a captura do NEFIN não tinha rodado no executor | 27/09 — execução agendada `36246158435`, passo `captura_nefin` verde |

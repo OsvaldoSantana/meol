@@ -1883,17 +1883,6 @@ o guarda existe por causa das divisões por `V` (`peso_atual`, `deficit_rel`). O
 O teste que prende o conserto tem de **falhar na versão atual**: patrimônio zero e reserva
 cheia recebem ordens com rota e valor.
 
-## P-165 · Onde o motor roda para o usuário: a resposta "servidor" contra a P-157
-
-**Dono:** Osvaldo · **Gatilho:** antes do mapa v2 (etapa 4) · **Classe:**
-`DECISAO_DE_DESENHO`
-
-Em 26/09 ele respondeu "servidor". Isso colide com a P-157 ("o dado fica no aparelho") e
-com o mapa (O1 e §5). As três vias estão no bloco 18 da fila: no aparelho; servidor com
-banco de dados; **servidor sem estado** (calcula e devolve sem gravar). Não afeta a v1,
-que é sintética. Com servidor, entram na conta a LGPD (quem guarda o quê, por quanto
-tempo), o custo fixo e a autenticação (WCAG 3.3.8).
-
 ## P-166 · Busca de anterioridade da marca MEOL e do domínio
 
 **Dono:** sessão de pesquisa (nuvem), e Osvaldo · **Gatilho:** antes de desenhar
@@ -2052,6 +2041,19 @@ Achado externo (mesma auditoria do Codex). Um teste que faz `C = None` ou `del C
 vigiado escapa da acusação e da restauração, porque `None` é lido como "sem mudança".
 **Conserto:** sentinela de ausência (`_AUSENTE = object()`) no lugar de `None`, com um teste de
 mutação que faz `C = None` e `del C` e exige a acusação nos dois.
+
+## P-175 · "Não grava" exige prova: teste com valores-sentinela no servidor sem estado
+
+**Dono:** Claude Code · **Gatilho:** antes do primeiro endpoint do motor (etapa 4) · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Consequência (b) da decisão da P-165 ([`docs/decisoes/P-165-onde-o-motor-roda.md`](docs/decisoes/P-165-onde-o-motor-roda.md)):
+o servidor é sem estado e "nada é gravado, nem em log" é promessa até alguém provar. O teste
+manda requisições com valores-sentinela (patrimônio, posições, aporte) e reprova se qualquer
+um aparecer em log, mensagem de erro ou métrica — **incluindo o log padrão da plataforma de
+hospedagem** (acesso, proxy, tracing), que o código da aplicação não controla. A escolha da
+plataforma tem de passar por esse teste antes de valer. A LGPD (consequência (a)) é da P-158,
+e a minimização dos campos em trânsito (consequência (c)), da leitura do item 20 da fila.
 
 ## Ao voltar ao desktop
 
