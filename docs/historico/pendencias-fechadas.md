@@ -2304,10 +2304,49 @@ abertas a **P-176** (o padrão 1, 2, 3, 4, 5 no K5 e na completude) e a **P-177*
 não recusa insumo com sha256 diferente). Os PDFs do D1 no armazém seguem como item 11 de
 "Ao voltar ao desktop": não bloqueavam a corrida e não bloqueiam o fechamento.
 
+## ~~P-164~~ · Primeiro aporte com patrimônio zero (`SEM_POSICAO`) — **FECHADA em 03/10/2026**
+
+**Dono:** Osvaldo (a regra) · Claude Code (implementar) · **Gatilho:** P-115 fechada ·
+**Classe:** `DECISAO_DE_DESENHO` (virou engenharia quando ele respondeu o bloco 19)
+
+`motor_aporte()` devolvia `SEM_POSICAO` com patrimônio zero, e quem tem a reserva cheia e
+nada investido ficava sem "quanto e onde" (F0-contrato §2 e §3, item 2). Lido no código em
+26/09: com `V = 0`, a fórmula das ordens já põe o aporte nas `k_max` rotas de maior peso;
+o guarda existe por causa das divisões por `V` (`peso_atual`, `deficit_rel`). O
+`test_depois_da_reserva_o_sistema_aloca_sem_nada_assinado` confere o alvo, não as ordens.
+O teste que prende o conserto tem de **falhar na versão atual**: patrimônio zero e reserva
+cheia recebem ordens com rota e valor.
+
+**FECHADA em 03/10/2026.** Decisão dele, bloco 19 da [fila](../decisoes/fila-do-osvaldo.md):
+**(c)**, contra a recomendação (a). O primeiro aporte vai inteiro para a rota de maior
+peso-alvo que caiba (lote inteiro e G3 sobre o valor gasto). Empate: a ordem do catálogo.
+Nenhuma que caiba: `NENHUMA_ROTA_CABE`, com o motivo e o dinheiro no caixa. A regra é dado em
+`politica.yaml → motor_aporte.primeiro_aporte` (1.37.0); o código, em
+`alocacao.py → _primeiro_aporte()`.
+
+Evidência:
+
+- **Vermelho antes do conserto** (`alocacao/test_p164_primeiro_aporte.py`, contra a 1.36.0):
+  **7 de 8 falham**, o central com `assert 'SEM_POSICAO' == 'OK'`. O oitavo é o controle com
+  patrimônio, que passa nas duas versões de propósito.
+- **Mutação (n=4), cada uma reprova:** M1, o guarda `SEM_POSICAO` de volta (7 falhas); M2,
+  desempate alfabético (1 falha, o do empate); M3, desempate pela ordem do dict de pesos
+  (1 falha, idem); M4, sem o G3 (1 falha, o do G3).
+- **Instantâneo dourado** de `motor_aporte()` (144 cenários: 6 carteiras × 4 aportes × com e
+  sem rotas × 3 `k_max`), campo a campo: **18 mudaram de comportamento**, todos com patrimônio
+  zero e aporte positivo (`SEM_POSICAO` → `OK` com uma ordem em `td_selic`); **90** mudaram só
+  em `politica_versao` e `politica_hash`; **36** (aporte zero) ficaram idênticos.
+
+O teste antigo `test_aporte_recusa_rodar_sem_posicao` exigia a recusa e virou
+`test_aporte_sem_posicao_nao_e_mais_recusa`, com a decisão no docstring. O que se viu ao lado (o
+Tesouro sem investimento mínimo no catálogo, e o R$ 40 que o motor manda para o Tesouro
+Selic) abriu a **P-179**.
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-164** | primeiro aporte com patrimônio zero devolvia `SEM_POSICAO` | 03/10 — bloco 19, opção (c): uma ordem na rota de maior peso que caiba; `NENHUMA_ROTA_CABE` com motivo; política 1.37.0; P-179 |
 | **P-115** | o critério do degrau re-pré-registrado antes da próxima janela (C-02 v2) | 03/10 — opção A: `NAO_CONFIRMADA` em 2016–2020 como saiu (#57, `b331172`); PO-01, P-176, P-177 |
 | **P-165** | onde o motor roda para o usuário | 03/10 — B′, servidor sem estado; consequências na P-175 |
 | **P-163** | as direções visuais como estímulo, a T1 em cada direção | 27/09 — S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |

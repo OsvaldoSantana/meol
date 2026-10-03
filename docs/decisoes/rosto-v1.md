@@ -10,7 +10,7 @@ P-115**.
 |---|---|---|---|
 | a | para quem é a v1 do rosto | **protótipo com dado sintético para o teste com pessoas** | só para ele, com os números dele (exigiria os 12 campos `NAO_EXISTE` no motor e disputaria com a P-115); beta com terceiros (bloqueado pela P-158) |
 | b | a ordem da marca, com a UX feita antes de design e mercado | **seguir a ordem à risca**: pesquisa → design → mercado → UX → brandbook | tratar mapa e requisitos como requisitos funcionais e manter a UX adiantada; reescrever a ordem |
-| c | o `SEM_POSICAO` é o primeiro item de motor para a tela | **sim**, depois da P-115, com a regra escrita por ele (P-164) | a primeira tela só para quem já tem posição; só um estado de recusa, sem mudar o motor |
+| c | o `SEM_POSICAO` é o primeiro item de motor para a tela | **sim**, depois da P-115, com a regra escrita por ele (P-164; **feito em 03/10**, bloco 19, opção c) | a primeira tela só para quem já tem posição; só um estado de recusa, sem mudar o motor |
 | d | o que do Quanto-e-Onde.html sobrevive | **só o conceito** "quanto e onde" como primeira linha | a tipografia IBM Plex; cada cor que passasse no contraste; nada |
 | e | onde o motor roda para o usuário | respondeu **servidor**; refinado e **fechado em 03/10: B′**, servidor sem estado ([`P-165`](P-165-onde-o-motor-roda.md)), que preserva a P-157 | no aparelho; adiar |
 | f | que nome aparece no protótipo | **MEOL** | nome neutro de trabalho; decidir o nome agora |

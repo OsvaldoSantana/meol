@@ -324,7 +324,7 @@ protótipo sobre dado sintético, para teste com pessoas.
 | 4 · UX | protótipo F1, F3 e F6 | Claude Code | esquema pronto; tokens da direção escolhida | os sete estados do mapa §4 renderizam; axe sem violação; RI-02, RI-08, RI-10, RI-17 e RI-18 com teste |
 | 4 · UX | P-156 teste de interface | ele, e Claude | critério gravado antes (P4) | H-C1, H-C2 e RI-15 medidos |
 | 5 · brandbook | brandbook | — | P-155, P-162 e P-156 fechadas | — |
-| motor | P-164 primeiro aporte com patrimônio zero | Claude Code | ~~P-115 fechada~~ **feito em 03/10**: C-02 `NAO_CONFIRMADA` em 2016–2020, fechada como saiu (opção A; #57, `b331172`); falta o bloco 19 respondido | um teste que falha hoje: patrimônio zero e reserva cheia recebem ordens |
+| motor | ~~P-164 primeiro aporte com patrimônio zero~~ **fechada em 03/10** | Claude Code | ~~P-115 fechada~~ ~~bloco 19 respondido~~ **(c)**, 03/10 | **feito:** uma ordem na rota de maior peso que caiba, ou `NENHUMA_ROTA_CABE` com o motivo (política 1.37.0); o mínimo do Tesouro ficou na P-179 |
 
 **Portões que valem sempre:** P-158 antes de qualquer usuário além dele ou de texto
 comercial público. O texto de recrutamento do teste é convite de pesquisa, sem
