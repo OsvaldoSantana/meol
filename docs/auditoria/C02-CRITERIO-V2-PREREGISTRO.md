@@ -521,6 +521,49 @@ foi escrito, em `xfail(strict=True)` com a causa medida no motivo, a mesma decis
 21/09 para o v1. `NAO_CONFIRMADA` e `CRITERIO_SEM_PODER` também entram como estão, com a
 razão escrita. Um critério v3, se vier, vale para dado que ninguém mediu ainda.
 
+### O resultado de 2016–2020: `NAO_CONFIRMADA` (corrida de 03/10/2026)
+
+Como o JSON diz, sem leitura por cima: `docs/auditoria/C02-JANELA-2016-2020-resultado.json`,
+gravado pelo `auditoria/c02_corrida.py` no commit `506678e` e commitado em `b331172` (PR #57).
+O sha256 do blob é `73e43fba73cd07dc38e16415772d670a9d887674fc93dec6aba699bb5487defd`. Os
+insumos batem com a §2, e o D1 deu `PASSA` (10 de 10 `BRUTO`).
+
+| critério | o que saiu | veredito |
+|---|---|---|
+| K2 · JCP | razão **0,878**, IC 95% [0,680 ; 1,060], σ̂ **0,0971** > σ_max 0,0416; n = 555 em 271 pregões | `NAO_CONFIRMADO` |
+| K3 · dividendo | razão **0,934**, IC 95% [0,770 ; 1,075], σ̂ **0,0778** > σ_max 0,0463; n = 416 em 201 pregões | `NAO_CONFIRMADO` |
+| K1 · controle, ano a ano | pior desvio relativo 1e-27 nos cinco anos (77.699 a 121.458 pares por ano) | `PASSA` × 5 |
+| K5 · quantidade grande, ano a ano | n = 1, 2, 3, 4 e 5; nenhum fora de ±15% | `PASSA` × 5 |
+| K5 · janela | n = 15, mínimo 10 | `PASSA` |
+| completude, ano a ano | 0 a 8 degraus de provento fora do limpo (de 172 a 259); 0 eventos grandes sem mercado | `PASSA` × 5 |
+| K6 · o critério pode reprovar? | M1, M2 (4 anos), M3, M4 (10 `LIQUIDO`) e M5 reprovam | `PASSA` |
+| **janela (§4.3)** | nenhum `REPROVA`; K2 e K3 sem poder | **`NAO_CONFIRMADA`** |
+
+**O que isso diz.** O ajuste não foi reprovado em critério nenhum, e o K6 prova que o critério
+teria reprovado as cinco versões erradas. Os dois testes de razão, porém, ficaram sem poder: o
+σ̂ do bootstrap por pregão saiu acima do σ_max no JCP e no dividendo. O `NAO_CONFIRMADO`
+provável do K2 estava declarado na §9 antes da corrida. O do K3 não estava: é um resultado. O
+tamanho da falta de poder está no achado **PO-01** do `ACHADOS.md`: o σ̂ do JCP é 0,0971, contra
+os ~0,058 que a §9 projetava.
+
+**Os padrões K5 = completude = 1, 2, 3, 4, 5** estão como saíram. Se forem defeito de contagem
+(P-176), o conserto é emenda declarada **posterior ao resultado**, e o veredito da janela não
+muda, porque vem do K2 e do K3.
+
+**Decisão dele, 03/10/2026 (claude.ai): opção A.** A P-115 fecha com o C-02 como saiu. O
+critério não é afrouxado, e a janela não é refeita. O teste entra como escrito, em
+`xfail(strict=True)` com a causa medida no motivo:
+`auditoria/test_c02_janela_2016_2020.py::test_REAL_C02_V2_a_janela_2016_2020_passa`.
+Ele é `slow`, lê o acervo e confere os sha256 da §2 antes de medir. Um insumo diferente sai
+como erro, não como xfail. Provado por mutação em 03/10 (n=2): com o veredito esperado trocado
+para o que saiu, o teste reprova como `XPASS(strict)`; com um sha256 errado, sai `ERROR`.
+
+> **HIPÓTESE EXPLORATÓRIA, NÃO RESULTADO.** A razão do JCP, de 0,878, está perto dos **0,85**
+> esperados se o mercado precificasse o JCP **líquido** dos 15% retidos, e não do 1,0 que o
+> H-FISCAL (§6) previa. Mas o IC, de 0,68 a 1,06, contém os dois e **não distingue** um do
+> outro. Foi formulada depois de ver o número: não julga nada e não entra em critério nenhum.
+> Só vale como pré-registro para dado que ninguém mediu ainda.
+
 ## 8. O que este pré-registro não protege (P5) — os limiares escolhidos
 
 Nenhum destes é derivado. Estão escritos antes para não serem escolhidos depois:

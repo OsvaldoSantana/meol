@@ -37,6 +37,10 @@ CITACOES_DE_ACHADO = {
     "D-01": "numero sobre o dinheiro dele so em estado.yaml; citado na nota dos prints",
     "P-116": "pre-registro vale pelo que foi empurrado primeiro; citado no pre-registro do "
              "teste de marca de 20/09 (27/09/2026)",
+    "P-115": "o criterio do degrau (C-02 v2); o mapa de telas a cita como o caminho critico, e o "
+             "PO-01 e o GIT-03 citam a corrida que a fechou (03/10/2026)",
+    "P-165": "onde o motor roda (servidor sem estado); o mapa de telas a cita, e o GIT-03 cita a "
+             "sessao que a fechava (03/10/2026)",
 }
 
 

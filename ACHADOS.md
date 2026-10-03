@@ -3089,3 +3089,88 @@ instrumento incluiu o que não devia. Conserto e ordem em P-173; teste ainda nã
 
 `C = None` e `del C` num módulo vigiado escapam da acusação e da restauração. Conserto
 (sentinela de ausência) e teste de mutação descritos em P-174; ainda não feitos.
+
+---
+
+## PO-01 · O limiar de poder do C-02 foi calculado numa convenção, e o resultado foi lido em outra
+
+*03/10/2026. Achado na leitura do resultado da corrida de 2016–2020 (`b331172`), depois da
+corrida. Introduzido em `2e11c48` (26/09, §9 do pré-registro, revisão 4) e mantido em
+`2638de1` (revisão 5). **Não muda o veredito, que saiu como saiu (P-115, opção A); é lição
+para um critério v3.***
+
+**O que se mediu, em uma frase.** O bootstrap **por pregão** da §3.1 deu σ̂ do JCP =
+**0,0971 (n=555, 271 pregões)**. A §9 projetava ~**0,058** (0,0482 × √(807 ÷ 555)) a partir de
+um σ **por ponto**, iid, de 2021–2025. O σ̂ real ficou 1,67 vez acima da projeção.
+
+**A conta que faltou.** Pela convenção que julga o K2, chegar ao σ_max de 0,0416 exigiria
+555 × (0,0971 ÷ 0,0416)² = **3.024 JCPs (≈ 3.000)**. A regra da §9, que pede σ ≤ 0,8 × σ_max =
+0,03328, exigiria 555 × (0,0971 ÷ 0,03328)² = **4.725**. O acervo inteiro de 2013–2025 tem
+cerca de **1.658** (851 em 2013–2020 e 807 em 2021–2025, as duas contagens do
+`c02_contar_n.py`). Com isso, **nenhuma janela possível no acervo dava poder ao K2 do JCP**. O
+K3 do dividendo também ficou sem poder (σ̂ 0,0778 > 0,0463, n=416), e este não tinha nem o
+aviso da §9.
+
+**A consequência em termos do projeto.** A §9 escolheu a janela com uma régua que não era a do
+juiz. O veredito não mudaria, porque com qualquer σ acima de 0,0342 a janela é 2016–2020 de
+qualquer jeito. Mas **a inviabilidade teria aparecido antes da corrida**, com uma medição de
+2021–2025 fora da quarentena. A §9 ("O que não se mediu") descreveu essa medição e não a fez.
+Com ela, a pergunta para ele seria "o K2 do JCP não tem poder em nenhuma janela; roda assim
+mesmo?", e não a leitura de um `NAO_CONFIRMADO` depois.
+
+**Lição: o limiar de poder tem de ser calculado com a mesma convenção que vai ler o
+resultado** (mesma unidade reamostrada, mesmo gerador e mesmo estimador do σ). É o padrão N-01
+do lado da estatística: dois números com o mesmo nome (σ) que concordavam por suposição.
+
+**Retratação (claude.ai, 03/10/2026).** Na auditoria de 03/10 (`1828c18`), o claude.ai afirmou
+que a diferença de convenção "não muda nenhuma decisão". **A evidência que a derruba:** o σ̂ por
+pregão saiu 1,67 vez o projetado, e a conta acima mostra o K2 inviável em todo o acervo. **O
+que estava certo:** a janela escolhida e o veredito não mudariam. **O que estava errado:** "não
+muda nenhuma decisão". Rodar ou não uma corrida sem poder **é** uma decisão, e a medição que a
+teria informado estava descrita e não foi feita. **Causa raiz do erro de método:** o alcance da
+frase foi medido só contra a escolha da janela (a tabela de 0,0276 a 0,0342), e não contra a
+decisão de rodar. É a pergunta 1 da régua (5-B): a frase da medição era mais estreita que a
+conclusão.
+
+**O que muda no processo.** Um pré-registro com teste de poder calcula o σ esperado pela
+**função que julga**, ou declara em uma linha por que não pode. No C-02, essa função é
+`c02_corrida.bootstrap_por_pregao`. **Guarda:** ainda não há teste. Ela vale para um critério v3
+(§7: o v3 só vale para dado que ninguém mediu) e entra no pré-registro dele.
+
+---
+
+## GIT-03 · Duas sessões locais no mesmo clone ao mesmo tempo, durante a corrida do C-02
+
+*03/10/2026. Sem efeito no resultado, **medido**. Mesma família do GIT-01: duas mãos no mesmo
+repositório sem uma ver a outra.*
+
+**O que o reflog do clone mostra** (`git reflog --date=iso`, 03/10/2026, horário de Brasília):
+
+| hora | o que |
+|---|---|
+| 15:34:40 | `pull --ff-only origin main` → HEAD `506678e` (o commit que a corrida grava) |
+| 15:36:48–54 | checkout de `claude/p-165-autoria-das-razoes` e rebase dela sobre `origin/main` |
+| 15:36:56 | checkout de `claude/p-115-corrida-2016-2020`, com HEAD em `97bdc56` (o commit da P-165) |
+| 15:38:10 | `branch: Reset to 506678e`, checkout e o commit do resultado `b331172` |
+| 15:38:49 | checkout de volta para `claude/p-165-autoria-das-razoes` |
+
+Duas sessões alternaram o HEAD da mesma pasta em intervalos de segundos. A da P-165 trocou de
+branch 39 s depois do commit do resultado. O branch da corrida chegou a apontar para o commit
+da P-165 por 74 s, até o reset. **O reflog não diz qual sessão fez cada passo**, e a hora exata
+da corrida (44 s) não está nele; o JSON grava o commit `506678e`.
+
+**Por que não contaminou.** A trava P7 do `c02_corrida.py` exige árvore limpa e HEAD no
+`origin`, e o JSON registra o commit que de fato rodou. **E a prova é a reexecução:** em
+03/10, nesta sessão, `julgar(ajustar.medir(...))` sobre os mesmos insumos (sha256 da §2
+conferidos) reproduziu o `resultado` do JSON **folha a folha: 150 folhas, 0 diferenças (n=1)**.
+O código medido (`auditoria/c02_corrida.py`, `fase0/`, `custos.yaml`, a transcrição do D1) é
+idêntico entre `506678e` e o HEAD da reexecução (`git diff --stat` vazio).
+
+**O risco, que desta vez não se realizou.** Uma troca de branch no meio de uma corrida muda os
+`.py` que ainda não foram importados. Um `git add` de uma sessão pega o arquivo da outra. O
+commit "do resultado" pode sair em cima do commit errado: aqui o reset corrigiu, mas por mão,
+não por guarda.
+
+**Conserto:** regra no `CLAUDE.md` §5. É **uma sessão local por pasta**; sessões paralelas
+usam `git worktree`, uma pasta por branch. Guarda automática: nenhuma. Duas sessões não se veem,
+e a regra é de quem as abre.
