@@ -548,6 +548,35 @@ contar a menos é sinal de unidade errada. A contagem **não** diz qual dos dois
 Separar os dois exige rodar o `ajustar.medir` em 2021–2025 com **este** silver. Isso lê preço
 de 2021–2025, fora da quarentena, mas é passo novo, e não foi feito: o passo 3 manda parar.
 
+### A separação do −12: o que se mede e o que cada saída aciona (03/10/2026, antes de rodar)
+
+**Decisão dele, 03/10/2026 (claude.ai):** pode rodar o `ajustar.medir` em 2021–2025 com o
+mesmo silver (`ec6b50da…98143`) e o mesmo COTAHIST fixado. **Escrito e empurrado antes da
+corrida.** A quarentena de 2013–2020 continua: a corrida abre só 2021–2025.
+
+**O que se mede (uma frase):** o n dos degraus só-JCP em dia `LIMPO` com mercado, que o
+`ajustar` conta em `residuo_de_mercado` (a linha `queda do preco / provento, so JRS CAP
+PROPRIO n=…`), com o silver e o código de hoje. É a unidade dos 819, na versão de hoje.
+
+**As três saídas, e só a indicada se aplica:**
+- **n = 819.** O `ajustar` de hoje reproduz setembro, e o contador (807) conta errado. O
+  conserto do `auditoria/c02_contar_n.py` entra como **revisão da §9, empurrada antes de uma
+  nova contagem**. Nenhuma contagem de 2013–2020 antes disso.
+- **n = 807.** A referência mudou desde setembro (o silver com nome e calendário da P-117, o
+  calendário da P-114). Então **n, σ e o limiar** (hoje 819, 0,0472 e 1.648) são medidos de
+  novo em 2021–2025 e gravados aqui **antes de qualquer contagem de 2013–2020**. O σ sai da
+  mesma convenção de setembro: o IC 95% do bootstrap da razão queda/provento só-JCP
+  (2.000 reamostras, semente 20260921), σ = (hi − lo) ÷ 2 ÷ 1,96. O limiar é
+  n ≥ ⌈n_novo × (σ_novo ÷ 0,03328)²⌉, com 0,03328 = 0,8 × 0,0416 (o σ_max do K2 não depende
+  da referência). A calibração do contador passa a ser contra o n_novo.
+- **qualquer outro n.** Parar e gravar a diferença. Nada além disso se aplica.
+
+**Alcance (P5):** isto mede a referência e o contador num só ponto (2021–2025); não diz se a
+unidade se mantém em 2013–2020. O script do bootstrap de setembro não está no repositório: o σ
+novo é recomputado pela convenção acima e o RNG pode diferir do de setembro, então a razão e o
+σ saem com o n ao lado (5-B.14) e o 0,0472 de setembro continua sendo o publicado, não o
+reproduzido.
+
 ---
 
 ## Notas de revisão
