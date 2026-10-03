@@ -163,6 +163,53 @@ do passo seguinte:
 Um D1 refeito depois de ver o resultado da corrida não vale: vira D1 novo, com semente nova e
 nota do porquê.
 
+#### O sorteio de 03/10/2026 (passo 1; nenhum documento foi aberto)
+
+Silver da §2, sha256 `ec6b50dae59dd30e5ec48c66ab9849c5c000ea02d07ab1072904eab2dfe98143`.
+Janela 2016–2020 (a escolhida na §9: nenhuma candidata atendeu). Script
+`auditoria/c02_sorteio_d1.py` (commit `2caf988`), que lê da B3 só o provento (`valor`), e do
+COTAHIST só a presença. O universo tem **697** pares (ticker, data ex) de JCP em 2016–2020
+com valor > 0.
+`numpy.random.default_rng(20260927).permutation(697)`, as 30 primeiras posições:
+
+| pos | índice | data ex | ticker | valor da B3 |
+|---|---|---|---|---|
+| 1 | 465 | 2019-06-27 | RADL3 | 0.162303512 |
+| 2 | 539 | 2019-12-23 | WEGE3 | 0.038235294 |
+| 3 | 397 | 2018-12-28 | CPLE5 | 2.8905 |
+| 4 | 133 | 2017-02-21 | ITUB4 | 0.7754 |
+| 5 | 342 | 2018-08-22 | GGBR3 | 0.14 |
+| 6 | 633 | 2020-09-02 | BBDC4 | 0.018974809 |
+| 7 | 448 | 2019-05-03 | BBDC4 | 0.018974809 |
+| 8 | 97 | 2016-12-02 | VALE5 | 0.166293936 |
+| 9 | 506 | 2019-10-01 | MULT3 | 0.13417101396 |
+| 10 | 108 | 2016-12-22 | TOTS3 | 0.248642967 |
+| 11 | 325 | 2018-08-02 | BBDC3 | 0.017249826 |
+| 12 | 235 | 2017-12-18 | WEGE3 | 0.057058824 |
+| 13 | 290 | 2018-04-06 | HYPE3 | 0.212009676 |
+| 14 | 588 | 2020-03-27 | RADL3 | 0.14247717 |
+| 15 | 263 | 2018-01-04 | EQTL3 | 0.11 |
+| 16 | 271 | 2018-02-02 | BBDC4 | 0.018974809 |
+| 17 | 314 | 2018-06-28 | PSSA3 | 0.70749437 |
+| 18 | 518 | 2019-11-12 | PETR3 | 0.2 |
+| 19 | 373 | 2018-12-17 | POMO4 | 0.09 |
+| 20 | 622 | 2020-08-07 | SANB11 | 0.20659646879 |
+| 21 | 503 | 2019-09-25 | CSMG3 | 0.4124376346 |
+| 22 | 483 | 2019-08-02 | BBDC3 | 0.017249826 |
+| 23 | 462 | 2019-06-26 | POMO3 | 0.03 |
+| 24 | 359 | 2018-10-08 | SANB11 | 0.16064688187 |
+| 25 | 352 | 2018-09-25 | LREN3 | 0.079685 |
+| 26 | 441 | 2019-04-12 | HYPE3 | 0.02637 |
+| 27 | 438 | 2019-04-08 | SANB11 | 0.26792907936 |
+| 28 | 130 | 2017-02-21 | ITSA3 | 0.049 |
+| 29 | 85 | 2016-11-11 | EGIE3 | 0.6625893121 |
+| 30 | 516 | 2019-11-04 | BBDC4 | 0.018974809 |
+
+**Duas escolhas que o texto não fechava, tomadas antes de ver a lista:** (1) o par (ticker,
+data ex) com mais de um valor conta uma vez, pelo **menor** valor (7 pares assim); (2) a data
+ex é a do silver rederivada pelo calendário de 2016–2020, como na corrida. **A ordem não muda
+depois deste commit.** O próximo passo (a transcrição, §3.1) é dele.
+
 **Quem faz.** A sessão local sorteia, porque o silver mora no disco dele. Os documentos são
 buscados por quem alcançar a fonte, a sessão local ou a nuvem.
 
