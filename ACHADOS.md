@@ -3007,3 +3007,72 @@ refazer o que já está assinado. **Mudança de comportamento, medida por instan
 `G8_carrego:td_ipca` e o alerta de PROTECAO_REAL sem rota viável. Com o `teses.yaml` do
 repositório (não assinado) e com o carrego em `COMPROMISSO_ATIVO`: **zero diferenças**.
 Teste: `test_G07_regra_decidida_nao_libera_peso_no_g8`, que reprova no G8 anterior.
+
+
+---
+
+## CX-01 · A guarda de segredo dos workflows prometia mais do que fazia
+
+*03/10/2026. Achado externo (auditoria do Codex), conferido pelo Claude do Projeto; medido e
+consertado pelo Claude Code.*
+
+**É o padrão do F-05**, com o YAML vigente a mascarar a diferença: a guarda dizia "segredo só
+no passo que precisa", e o que ela media era "a *forma* `secrets.NOME` só aparece no passo
+que precisa". O `auditoria/test_workflow_medir.py` usava `secrets\.([A-Za-z0-9_]+)`, e o
+`test_workflows.py` usava `"secrets." in str(...)` para o `testes.yml` — que roda em
+`pull_request`. `secrets['R2_ESCRITA_TOKEN']`, `toJSON(secrets)` e `secrets[format(...)]`
+passavam. Como os quatro workflows só escrevem a forma com ponto, **nenhum teste vigente
+podia acusar a diferença**.
+
+**Medição.** No `main` (198d0c5), com `defeitos()` do `medir.yml`: das 42 combinações
+(7 formas × 6 lugares: env do workflow, do job, do passo autorizado, de outro passo, `with:`,
+`run:`), **36 não eram reprovadas** — as 6 que eram usam a forma com ponto dentro de uma
+expressão composta. Para o `testes.yml`, a guarda antiga aceita `toJSON(secrets)` no env de
+um passo do job `rapido`. O `fase0/test_workflow_captura.py` não tinha o regex, mas só
+conferia os passos que conhecia (`==` nos dois passos): um segredo a mais em outro passo, ou
+no env do job, passava.
+
+**Consequência.** Um PR com `${{ toJSON(secrets) }}` num passo do `testes.yml` (ou um push em
+`medir/**` com `secrets['R2_ESCRITA_TOKEN']`) exfiltraria o token de escrita do armazém com
+todas as guardas verdes — e o `medir.yml` existe justamente para o token de leitura ser o
+único alcançável (5-A.11).
+
+**Conserto, por lista de permissão e com uma função só (N-01):**
+`auditoria/guarda_segredos.py::defeitos_de_segredo`. Percorre todo valor do YAML, extrai cada
+`${{ ... }}` (e o `if:`, que é expressão sem delimitador), e toda expressão que mencione o
+identificador `secrets` — sem diferenciar maiúscula — tem de ser **exatamente**
+`secrets.<NOME>`, no `env` de um passo, com `<NOME>` permitido para aquele (job, passo).
+`secrets:` como chave (`inherit`) e expressão sem fechamento também reprovam. A lista
+(`PERMITIDOS_POR_WORKFLOW`) é uma só e um teste exige entrada para todo arquivo de
+`.github/workflows/`. Usam-na `medir.yml`, `testes.yml`, `mutacao.yml` e `captura_cvm.yml`.
+
+**Testes que falham na versão anterior:** `test_cx01_forma_de_segredo_que_escapava_do_regex_reprova`
+(36 das 42 falhavam no `main`) e `auditoria/test_guarda_segredos.py` (10 formas × 8 lugares ×
+4 workflows, controle do YAML vigente e vacuidade por workflow).
+
+**O que a guarda não vê:** um script que leia `os.environ` do passo já autorizado; e workflow
+reutilizável de outro repositório (`uses:`), que só é pego se declarar `secrets:`.
+
+
+---
+
+## CX-02 · `pais_varridos()` não separa motor de teste
+
+*03/10/2026. Achado externo (auditoria do Codex), **aberto** — pendência P-173.*
+
+Medido em 03/10: 49 candidatos a chave órfã hoje, 67 contando só os pais do motor. Das 18
+escondidas, 15 são leitura legítima por `getattr` da lista `exibidos` (`corretoras.py:398`), 1
+é a P-32 (vigiada em `DIVIDA_DE_COBERTURA`) e 2 (`custos.yaml`
+`etf.IMAB11.composicao.{administracao,gestao}`) estão escondidas por colisão de nome com
+`memoria["composicao"]` em `test_alocacao.py:2042`. É a pergunta 2 da régua (5-B): o
+instrumento incluiu o que não devia. Conserto e ordem em P-173; teste ainda não escrito.
+
+---
+
+## CX-03 · `conftest.py:146` trata `atual is None` como "não mudou"
+
+*03/10/2026. Achado externo (auditoria do Codex), **aberto**, prioridade baixa — pendência P-174.*
+
+`C = None` e `del C` num módulo vigiado escapam da acusação e da restauração. Conserto
+(sentinela de ausência) e teste de mutação descritos em P-174; ainda não feitos.
+
