@@ -112,8 +112,8 @@ tinha decidido; a S5 perguntou, e as quatro respostas seguem a recomendação.
 
 | código | o achado do ensaio | resposta |
 |---|---|---|
-| **u-a** | "Você conhece quem criou este app?" vem antes de qualquer tela e sem criador nomeado: amigo responde "não", e a análise sem amigos (que decide, r-a) se contamina | ~~**"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"**~~ *superada pela y-b (27/09): volta o texto de 20/09, e o defeito vira limitação* |
-| **v-a** | no filtro, "aporta" e "renda variável" são jargão, e quem só aplica no Tesouro pode marcar "sim" | ~~**"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"**; o convite passa a dizer o mesmo~~ *superada pela y-b (27/09): volta o texto de 20/09, e o defeito vira limitação* |
+| **u-a** | "Você conhece quem criou este app?" vem antes de qualquer tela e sem criador nomeado: amigo responde "não", e a análise sem amigos (que decide, r-a) se contamina | ~~**"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"**~~ *superada pela y-b (~~27/09~~ 02/10, data corrigida): volta o texto de 20/09, e o defeito vira limitação* **Restaurada pela y-a, 02/10/2026:** o texto acima volta a valer. |
+| **v-a** | no filtro, "aporta" e "renda variável" são jargão, e quem só aplica no Tesouro pode marcar "sim" | ~~**"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"**; o convite passa a dizer o mesmo~~ *superada pela y-b (~~27/09~~ 02/10, data corrigida): volta o texto de 20/09, e o defeito vira limitação* **Restaurada pela y-a, 02/10/2026:** o texto acima volta a valer, e o convite e a tela de conclusão dizem o mesmo critério. |
 | **w-a** | "segura ou arriscada" mistura a tela com o produto, e "sofisticada ou simples" tem sentidos opostos para cada pessoa (nenhuma das duas entra na regra nem na H1 e H2) | **reescritas pelo visual:** "insegurança ou segurança" pelo jeito da tela, e "app popular ou de luxo" |
 | **x-a** | "honesta ou vendedora" soa estranho e "parece golpe" planta suspeita, mas são as escalas da regra e da H2 | **manter os construtos de 20/09**, com a ordem das palavras igual à da escala e rótulos claros ("Quer me vender algo" ↔ "Honesta"; "Parece golpe" ↔ "Confiável"); o efeito de sugestão de "golpe" fica como limitação |
 
@@ -136,7 +136,7 @@ deixava aberto. A S5 v2 parou e perguntou; ele respondeu na sessão do Claude Co
 
 | código | a divergência | resposta | alternativa não escolhida |
 |---|---|---|---|
-| **y-b** | o prompt trazia o filtro e a pergunta dos amigos de 20/09 e da S4; a u-a e a v-a os tinham trocado depois do ensaio | **voltam os textos do prompt:** filtro "Você aporta todo mês em renda variável há pelo menos 6 meses?" e amigos "Você conhece quem criou este app?". **A u-a e a v-a ficam riscadas; o defeito que o ensaio achou vira limitação declarada** | manter a u-a e a v-a (recomendação da S5 v2) |
+| ~~**y-b**~~ | ~~o prompt trazia o filtro e a pergunta dos amigos de 20/09 e da S4; a u-a e a v-a os tinham trocado depois do ensaio~~ | ~~**voltam os textos do prompt:** filtro "Você aporta todo mês em renda variável há pelo menos 6 meses?" e amigos "Você conhece quem criou este app?". **A u-a e a v-a ficam riscadas; o defeito que o ensaio achou vira limitação declarada**~~ | manter a u-a e a v-a (recomendação da S5 v2) *Superada pela y-a (02/10/2026). Data corrigida: a y-b entrou no commit `7321065`, de 02/10/2026, e não em 27/09 como o título desta seção dizia.* |
 | **z-a** | o prompt não citava a q-a, a r-a, a s-a e a t-a | **todas valem:** índice de confiável e é para mim (q-a); a análise sem amigos decide (r-a); a H4 fora, na P-156 (s-a); a H2 é a D pior que a E e que a C (t-a) | revisar alguma |
 | **aa-a** | "código dominante = combinação presente em pelo menos metade das marcas da categoria": combinação de quais variáveis? | **as quatro centrais** (fundo, matiz, família do título, raio), as mesmas que definem "imitar". Densidade e peso do botão são classificados e relatados, e não entram no veto | as seis variáveis |
 | **ab-a** | "versão = contador mod 6": o contador conta o quê? | **aberturas da página.** Quem abandona gasta uma versão, e o relatório traz o abandono por versão | respostas concluídas |
@@ -150,6 +150,72 @@ quem escolhesse as categorias depois poderia escolher o veto.
 | código | a lacuna | resposta | alternativas não escolhidas |
 |---|---|---|---|
 | **ac-a** | quais categorias contam como "concorrentes" no veto, e quem as fixa | **fixadas agora no livro de códigos, todas as financeiras:** banco tradicional, banco digital, corretora (com banco de investimento), gestora e private, pagamentos, consolidador de carteira, casa de análise e educação. As referências de sentimento (SBB, Volvo) ficam fora do veto | só quem vende investimento (sem pagamentos nem casa de análise); a R3 declara antes de começar |
+
+### Respostas dele, 02/10/2026, ao abrir a rodada 3 de marcas (P-170)
+
+Dadas na sessão local do Claude Code, antes da primeira marca classificada e antes do primeiro
+convite (o commit das datas da janela não existe). O prompt da R3 dizia que o livro de códigos
+não se alterava; a sessão mostrou três pontos em que, sem mudança, o veto não funcionaria, e
+ele escolheu emendar.
+
+| código | o problema | resposta | alternativas não escolhidas |
+|---|---|---|---|
+| **ad-a** | o prompt audita consultorias, assessores, robôs e planejadores, e nenhuma dessas é categoria do livro (ac-a): o `veto()` as recusaria. A consultoria é a categoria do próprio MEOL. **A falta foi da proposta da ac-a, feita por uma sessão** | **emendar o livro agora:** quatro categorias concorrentes novas (`consultoria_cvm`, `assessor`, `robo`, `planejador`) e uma precedência para marca que caiba em duas | ficarem fora do veto, só descritivas; encaixar nas sete da ac-a |
+| **ae-a** | o livro classifica "a primeira tela do app", que fica atrás do login, e muita marca não tem app | **o app pela primeira captura de interface da App Store; sem app, o site em 390 px**; cada marca registra qual, e o dominante sai também só com as de app | só app (o resto fora do livro); app mais prints dele |
+| **af-a** | a saturação pode parar uma categoria com 3 marcas, e o dominante pede n ≥ 5 | **pelo menos 10 marcas sorteadas por categoria** na classificação visual; a saturação continua valendo para os códigos MC | 5 sorteadas; só a saturação |
+
+### Resposta dele, 02/10/2026: y-a, os textos do ensaio voltam (P-162)
+
+Dada no claude.ai e aplicada na sessão da nuvem, **antes do primeiro convite** (o commit das
+datas da janela não existe). Não tinha entrado no #43.
+
+| código | o que ele decidiu | motivo | alternativa não escolhida |
+|---|---|---|---|
+| **y-a** | **supera a y-b.** Voltam os textos que o ensaio de 27/09 corrigiu: amigos (u-a) *"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"* e filtro (v-a) *"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"*. O convite e a tela de conclusão deixam de usar "aporta" e "renda variável" e dizem o mesmo critério | a y-b veio de um prompt do claude.ai que citava os textos de 20/09 como decisão. O texto antigo dos amigos contamina a análise sem amigos, que é a que decide (r-a), e o filtro usava jargão | y-b: manter os textos de 20/09, com os defeitos como limitação |
+
+Onde ficou: `docs/marca/teste-de-marca/questionario.yaml` (sha256 novo na §4 do
+pré-registro final), o `questionario.md` e o `pesquisa/questionario.json` regenerados; no
+pré-registro, a linha da y-a na §1, as limitações 6 (em parte) e 7 riscadas na §9 e a nota na
+§10.
+
+### Respostas dele, 03/10/2026, aos blocos 21 e 22
+
+Dadas no claude.ai e registradas na sessão local de 03/10.
+
+| bloco | resposta | onde ficou | alternativas não escolhidas |
+|---|---|---|---|
+| **21 · 21d** | **nenhuma das três.** Uma única vez, os eventos e os PRs de 16/09 a 02/10 (tudo em Opus) classificados nas classes de `modelos-por-tarefa.md`, marcados `OBSERVADO` porque a classe é inferida: é a referência, eventos por PR mergeado, por classe. Daí em diante, o `metricas_processo.py` do semanal compara, numa janela de 14 dias, a taxa da classe com o modelo novo. A classe volta para o modelo de cima quando a taxa passa de **1,5 vez** a referência **e** há pelo menos **4 PRs** da classe na janela. Até a referência existir, o relatório só mostra os números. O 1,5 e o 4 são escolha declarada no YAML, não medida | `docs/metricas/modelos-por-tarefa.yaml` (`regra_de_volta`), `docs/metricas/referencia-modelos.csv`, `auditoria/metricas_processo.py` e o passo "Regra de volta dos modelos" do semanal | 21a (2 eventos em 14 dias), 21b (4 em 28), 21c (ele lê e decide) |
+| **22 · 22a** | **o `PLANO.md` fica na abertura.** A decisão volta a ele em **17/10/2026**, com duas semanas de dado da regra de volta | P-172, que põe o gatilho no `docs/estado.md` | 22b (sai, e o `estado.md` ganha a ordem do que falta) |
+
+**O que a execução da 21d achou, e que a resposta não tinha como saber:**
+
+1. **Não há PR antes de 25/09.** O primeiro PR mergeado no `main` é de 25/09 (#1, #3, #4); de
+   16/09 a 24/09 o trabalho entrou por push direto. Os 10 eventos Claude desse trecho estão
+   classificados no CSV, mas ficam fora da taxa: sem denominador, contá-los inflaria a
+   referência. A referência vale de **25/09 a 02/10: 17 eventos em 37 PRs**.
+2. **Três classes saem com referência zero ou sem referência.** `registro` tem 0 eventos em 6
+   PRs, e `arquitetura`, 0 em 2. Com referência 0, 1,5 × 0 = 0, e **o primeiro evento** numa
+   janela com 4 PRs devolve a classe. Para o `registro`, que é a classe que desceu para o Sonnet,
+   a 21d vira na prática "um erro volta". `estatistica` não tem PR nenhum e fica só com os
+   números até alguém refazer a referência. **Ajustado no mesmo dia, ver abaixo.**
+
+**Ajuste da 21d, 03/10 (decisão dele, claude.ai), sobre o item 2:** a referência de cada classe
+passa a ser **(eventos + 1) / (PRs + 1)**, para que classe com zero evento não tenha régua zero
+(`registro`: 1/7; `estatistica`, sem PR: 1,0, e deixa de ser "só os números"), e a volta passa a
+exigir **pelo menos 2 eventos** da classe na janela, além do fator 1,5 e dos 4 PRs, que não mudam.
+Escolha declarada, não medida: `regra_de_volta.min_eventos: 2` no YAML e o `+ 1` em
+`metricas_processo.regra_de_volta()`. Testes: referência (0 em 6) com 1 evento não volta, com 2
+volta; provado por mutação (tirar o `+ 1` ou o `min_eventos` reprova). Alternativa não escolhida:
+deixar a referência zero como estava (21d original).
+
+3. **O denominador precisa de etiqueta.** Daqui em diante o PR abre o título com
+   `[modelo=<m> classe=<c>]`, a mesma etiqueta do `eventos.csv`, e o CI reprova o PR sem ela
+   (o Dependabot fica fora). PR sem etiqueta não entra na conta, e o relatório diz quantos
+   ficaram fora.
+4. **A referência subconta.** 40 das 73 linhas do período têm `autor = desconhecido` e ficaram
+   fora, porque a regra só conta autoria Claude. Se a etiqueta obrigatória fizer as linhas novas
+   saírem com autor, a taxa nova sobe sem que o modelo piore. O viés empurra para voltar, não
+   para ficar.
 
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
@@ -531,6 +597,46 @@ exceção. Responder quando a P-115 fechar.
 Ler `docs/ux/F0-contrato-de-saida.md` e responder: **aprovado**, **aprovado com
 mudanças** (quais) ou **refazer**. Sem isso, nenhum código de esquema (decisão F0, regra
 3). Não é urgente: pela ordem à risca, o esquema é da etapa 4.
+
+---
+
+## 21 · O limiar da regra de volta dos modelos · decisão de 02/10 · **respondido em 03/10: 21d**
+
+O `eventos.csv` passou a levar `[modelo= classe=]` em todo evento de autoria Claude desde
+03/10 ([`modelos-por-tarefa.md`](modelos-por-tarefa.md)). Falta o número que devolve uma classe
+ao modelo de cima.
+
+- **21a** — **2 eventos em 14 dias** na mesma classe, com modelo abaixo do Opus. → Volta rápido;
+  com ~1,6 evento de autoria Claude por dia entre 16/09 e 02/10 (27 em 17 dias, e 40 das 73
+  linhas sem autor), pode voltar por ruído.
+- **21b** — **4 eventos em 28 dias**. → Mais lento e mais estável; um modelo ruim erra o dobro
+  antes de voltar.
+- **21c** — sem limiar: **você** lê o relatório do `metricas_processo.py` no semanal e decide. →
+  Nenhum número inventado, e a volta depende de alguém lembrar (P7).
+
+**Recomendação: 21a**, porque o custo de voltar cedo é só preço, e o de voltar tarde é erro no
+registro. Já está no YAML como proposta; responder confirma ou troca.
+
+**Resposta, 03/10: 21d**, que não estava na lista: taxa de eventos por PR mergeado, por classe,
+contra uma referência classificada uma vez em Opus; volta com taxa acima de 1,5 vez a referência
+e pelo menos 4 PRs na janela. O texto inteiro está nas respostas, acima do bloco 1.
+
+---
+
+## 22 · O `PLANO.md` continua na abertura? · decisão de 02/10 · **respondido em 03/10: 22a**, volta em 17/10
+
+Depois do corte de 03/10 a abertura é de ~22.800 tokens, e o `PLANO.md` é o maior pedaço que
+sobrou depois do `CLAUDE.md`: **8.779 tokens** (`auditoria/tamanho_do_contexto.py`, razão de
+2,96 caracteres por token, sem `tiktoken`).
+
+- **22a** — fica. → O §1 do `CLAUDE.md` diz que ele "ganha de qualquer fila"; quem não o lê não
+  sabe o que vem primeiro.
+- **22b** — sai, como o `PENDENCIAS.md`: o `estado.md` ganha as cinco linhas da ordem do que
+  falta, e o resto se lê sob demanda. → Abertura de ~14 mil tokens; o risco é a sessão escolher
+  trabalho sem ver a ordem inteira.
+
+**Recomendação: 22a por enquanto**, até a regra de volta ter duas semanas de dado: medir um corte
+de cada vez.
 
 ---
 

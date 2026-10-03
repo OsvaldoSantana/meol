@@ -1,8 +1,23 @@
 {
+  "model": "sonnet",
   "permissions": {
     "deny": [
       "mcp__claude-in-chrome",
       "mcp__claude-in-chrome__*"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"$CLAUDE_PROJECT_DIR/docs/estado.md\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }

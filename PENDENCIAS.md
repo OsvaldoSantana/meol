@@ -1092,6 +1092,11 @@ prova por mutação. A §11.4 não afirma mais valor — aponta para o comando.
 > (`docs/metricas/contexto-de-sessao.md`); 368 códigos de 368 continuam no repositório
 > (`auditoria/codigos_preservados.py`). Segue aberto o item 2.
 
+> **03/10/2026 — o `PENDENCIAS.md` saiu da abertura** (decisão dele, 02/10). Leitura de sessão:
+> **60.791 → 22.779 tokens (−62,5%)**, mais a seção da P da tarefa (mediana de 318 tokens nas 80
+> abertas, máximo de 2.197); `docs/metricas/contexto-de-sessao.md`. O índice é o
+> `docs/estado.md`, que o hook `SessionStart` injeta. Segue aberto o item 2.
+
 ---
 
 ## P-104 · Vinte e quatro achados são citados só em código, e podem não ser achados
@@ -1812,8 +1817,10 @@ decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
 > vale é [`docs/marca/teste-de-marca/preregistro-final.md`](docs/marca/teste-de-marca/preregistro-final.md),
 > com o [questionário como dado](docs/marca/teste-de-marca/questionario.yaml), o
 > [livro de códigos visuais](docs/marca/teste-de-marca/codigos-visuais.yaml) com E, C e D já
-> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: y-b (voltam os
-> textos de 20/09 do filtro e dos amigos), z-a, aa-a e ab-a.
+> classificadas, e a análise, congelados pelo sha256. Respostas dele na fila: ~~y-b (voltam os
+> textos de 20/09 do filtro e dos amigos)~~, z-a, aa-a e ab-a. **02/10/2026, y-a:** supera a
+> y-b; voltam os textos do ensaio (u-a e v-a), e o `questionario.yaml` ganha sha256 novo, antes
+> do primeiro convite.
 >
 > **Primeiro convite só depois do merge deste pré-registro e da página (S6) no main, e do
 > commit com as datas da janela.**
@@ -1939,7 +1946,52 @@ a lista de marcas por categoria, escrita e empurrada, pela mesma razão da ac-a.
 são de página pública (loja de apps, site); a §5-A.7 vale: nada de sessão logada, e acesso
 recusado sobe a escada (§5-B.18) antes de virar `NAO_CONFIRMADO`.
 
+> **02/10/2026, sessão 1 da R3 (sessão local):** antes da primeira marca, ele emendou o livro de
+> códigos (versão 2; ad-a, ae-a e af-a na fila): quatro categorias novas (consultoria CVM,
+> assessor, robô, planejador), a unidade (app ou site) e 10 marcas sorteadas por categoria. O
+> plano e o sorteio estão gravados ([`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml);
+> semente 20261002): consultoria 528, assessor 148, corretora 138 e gestora 1.195 no universo.
+> **Nenhuma marca visitada.** O andamento mora em
+> [`docs/marca/pesquisa-marcas-rodada3-2026-09.md`](docs/marca/pesquisa-marcas-rodada3-2026-09.md),
+> §5. **As visitas só começam depois do merge** que grava a emenda e o sorteio.
+
 ---
+
+## P-171 · Vinte e quatro pendências abertas não declaram dono, gatilho nem classe
+
+**Dono:** Claude Code (propor os campos, sessão de registro em Sonnet) · Osvaldo (confirmar o
+que for dele) · **Gatilho:** a próxima sessão de registro · **Classe:** `DECISAO_DE_DESENHO`
+
+O `tools/estado.py` (03/10) lê os três campos de cada `## P-` aberta. **24 de 80 não têm
+nenhum dos três** (P-44, P-05, P-08, P-28 a P-35, P-22, P-23, P-25, …) e saem no `docs/estado.md`
+como `sem classe`, com `?`: a 5-A.1 diz que pendência sem os três é desabafo, e ela é de 06/09,
+mais nova que a maioria delas. **Mais uma regra que não auditou o passado** (a lição da P-103).
+
+**O que pesa na decisão:** o `estado.md` tem **~1.864 tokens** de um teto de 2.000 (razão de
+2,96 caracteres por token, sem `tiktoken`). Preencher dono e gatilho nas 24 custa cerca de 40
+caracteres cada, ~330 tokens: **estoura o teto**. Então a sessão que preencher também decide,
+para cada uma, se ela ainda é pendência ou se fecha (vai para o histórico com a evidência), e o
+`--conferir` reprova antes do CI se a conta não fechar.
+
+## P-172 · O PLANO.md na abertura volta à decisão em 17/10, com a regra de volta medida
+
+**Dono:** Osvaldo (decidir) · Claude Code (levar os números) · **Gatilho:** 17/10/2026, com duas
+semanas de dado da regra de volta · **Classe:** `DECISAO_DE_DESENHO`
+
+Resposta **22a** de 03/10 (fila, bloco 22): o `PLANO.md` segue na abertura, e a decisão volta a
+ele quando a regra de volta dos modelos (21d) tiver duas semanas de dado. Um corte de cada vez:
+tirar o `PLANO.md` e trocar de modelo ao mesmo tempo deixaria sem saber qual dos dois causou um
+erro novo.
+
+**O que a sessão de 17/10 leva:**
+1. a tabela da regra de volta, de `python auditoria/metricas_processo.py --prs prs.json` com a
+   lista de `gh pr list --state merged --base main --json number,title,mergedAt,author`, e o
+   resumo dos semanais de 05/10 e 12/10;
+2. o tamanho da abertura, de `python auditoria/tamanho_do_contexto.py`;
+3. ~~a pergunta da referência zero~~ **respondida em 03/10:** a referência virou
+   (eventos + 1) / (PRs + 1) e a volta exige pelo menos 2 eventos da classe na janela (fila,
+   ajuste da 21d). Resta olhar, com dois semanais de dado, se o piso ficou alto demais para o
+   `registro` (limiar 0,21 com referência 1/7).
 
 ## Ao voltar ao desktop
 

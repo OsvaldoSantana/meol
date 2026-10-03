@@ -1,0 +1,65 @@
+tipo;id;data;classe;trecho
+evento;5-B.12;2026-09-16;registro;CLAUDE.md entregue inteiro desfez duas linhas co
+evento;P-82;2026-09-16;engenharia;git add -A levou uma copia do projeto para o ind
+evento;5-B.13;2026-09-18;pesquisa;nao existe automacao deste download do COTAHIST
+evento;5-B.14;2026-09-19;estatistica;controle de 1,0000 publicado sem o numero de par
+evento;CLAUDE-11.4;2026-09-19;auditoria;tabela de tokens por sessao sem conta escrita (+
+evento;P-105;2026-09-19;engenharia;posicoes do leiaute do COTAHIST em Python, com a
+evento;P-106;2026-09-19;engenharia;modref_de e conferir_modref so chamadas por test
+evento;5-B.15;2026-09-21;engenharia;95 passed na arvore de entrega -- 21 vermelhos n
+evento;5-B.13;2026-09-24;pesquisa;"prompt da P-57 repetiu ""validacao por imagem"" co"
+evento;5-B.17;2026-09-24;pesquisa;captura da CVM tratada como manual por 18 dias -
+evento;P-97;2026-09-25;engenharia;isinp.zip gravado no acervo sem origem declarada
+evento;CV-07;2026-09-25;engenharia;captura local sem --armazem: o registro anota o
+evento;CLAUDE-11.5;2026-09-25;auditoria;instrumento que eu nao tenho -- tools/analisar_s
+evento;GIT-01;2026-09-25;pre-registro;sessao local olhou so o main e publicou uma segu
+evento;CI-03;2026-09-25;engenharia;Mutacao verde com os 4.935 mutantes not checked
+evento;5-A-credencial;2026-09-25;engenharia;a sessao tentou disparar workflow pelo navegador
+evento;GIT-02;2026-09-25;engenharia;o dependabot.yml abriu 4 branches e a guarda do
+evento;B-19;2026-09-25;engenharia;aporte zero dava entrada infinita e o min() devo
+evento;P-151;2026-09-26;engenharia;a guarda do GIT-01 roda no CI com fetch-depth 0
+evento;5-B.2;2026-09-26;auditoria;afirmei que a opcao A dispensava excecao no inst
+evento;P-159;2026-09-26;pesquisa;nao distribuir, nao receber comissao e nao aceit
+evento;P-150;2026-09-26;engenharia;mandei declarar em regimes_de_captura.b3, chave
+evento;P-159;2026-09-26;pesquisa;o uso pessoal dele nao e prestacao de servico a
+evento;P-115;2026-09-26;p-115;enquadrei o pode empurrar pelo risco de 19% e om
+evento;P-115;2026-09-26;p-115;a regra comparava o n do silver com os 819 sem c
+evento;5-B.17;2026-09-27;pesquisa;a S4 marcou 11 dos 20 bancos da regra m-B como N
+evento;P-163;2026-10-02;engenharia;o --conferir do conteudo dos estimulos comparava
+pr;#1;2026-09-25;pre-registro;P-145: esclarecimentos da secao 2 na emenda 1
+pr;#3;2026-09-25;engenharia;Sessao B: linhas longas do ruff e teste do P-82
+pr;#4;2026-09-25;engenharia;WIP Sessao B: doutrinas, guia, ArmazemLocal
+pr;#9;2026-09-25;engenharia;P-148: Dependabot ignora numpy e pandas
+pr;#10;2026-09-25;pesquisa;"P-57 e P-135 fechadas; P-136 lida (termos da B3)"
+pr;#11;2026-09-25;engenharia;Poupanca renovada, P-137 no workflow
+pr;#12;2026-09-25;engenharia;P-136: versoes da CVM publicadas em release
+pr;#13;2026-09-26;registro;Fila do Osvaldo: 16 pendencias vencidas fechadas
+pr;#14;2026-09-26;registro;Leitura de sessao 136 mil -> 48 mil tokens
+pr;#15;2026-09-26;engenharia;medir.yml: medicao sobre o acervo no Actions
+pr;#16;2026-09-26;engenharia;P-151: a guarda do GIT-01 pula no CI
+pr;#17;2026-09-26;registro;Fila de 26/09: 15 decisoes registradas
+pr;#18;2026-09-26;engenharia;Lint: ruff 0.16.8 e mypy 2.3.1
+pr;#19;2026-09-26;engenharia;P-01: tese.py volta a calcular a impressao
+pr;#20;2026-09-26;engenharia;P-117: o silver carrega captura e calendario
+pr;#21;2026-09-26;engenharia;G-07: o G8 honra REGRA_DECIDIDA
+pr;#22;2026-09-26;engenharia;P-01: alarme quando a meta da reserva muda
+pr;#23;2026-09-26;pre-registro;P-01: assina HASH11 e Tesouro IPCA+
+pr;#24;2026-09-26;registro;Instrucoes do Projeto e a analise da auditoria
+pr;#25;2026-09-26;arquitetura;Marca e UX: 5 documentos, MC/RI e a trilha F0
+pr;#26;2026-09-26;auditoria;Guarda: titulo de achado sem prefixo MC/RI
+pr;#28;2026-09-26;arquitetura;F0: especificacao do contrato de saida
+pr;#29;2026-09-26;pesquisa;P-159: Resolucao CVM 19 lida na fonte
+pr;#30;2026-09-26;engenharia;P-150 parte 2: eventos da B3 no cron
+pr;#31;2026-09-26;registro;Registro de 26/09: P-115 na fila, CVM 19
+pr;#32;2026-09-26;engenharia;P-150 parte 1: carga inicial da B3
+pr;#33;2026-09-26;engenharia;P7: regime automatico exige registro
+pr;#34;2026-09-26;p-115;Fila: decisao n-c da P-115
+pr;#35;2026-09-26;registro;P-147 fechada: o NEFIN rodou no cron
+pr;#36;2026-09-26;p-115;Fila: tolerancia de 2% na calibracao da P-115
+pr;#37;2026-09-27;pesquisa;Fila do rosto S1-S3: WCAG 2.2 e estimulos
+pr;#38;2026-09-27;pesquisa;S4: estimulos da P-163
+pr;#39;2026-09-27;pre-registro;S5: pre-registro final do teste de marca
+pr;#40;2026-09-27;auditoria;Regra 5-B.18: a escada de contorno e a guarda
+pr;#43;2026-10-02;pre-registro;S5 v2: pre-registro final 2 do teste de marca
+pr;#44;2026-10-02;engenharia;S6: a pagina do teste de marca
+pr;#45;2026-10-02;pre-registro;R3 sessao 1: livro de codigos v2 e o sorteio

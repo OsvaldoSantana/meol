@@ -1,7 +1,9 @@
 # CLAUDE.md
 
-Instruções para qualquer sessão do Claude que trabalhe neste repositório. Leia inteiro, e as
-doutrinas em `docs/doutrinas.md`, antes de tocar em código. Se algo aqui contradisser o que
+Instruções para qualquer sessão do Claude que trabalhe neste repositório. Ele já chega inteiro
+no contexto ao abrir a sessão: **não o releia** com a ferramenta de leitura (reler paga o arquivo
+duas vezes, decisão dele de 02/10). Leia as doutrinas em `docs/doutrinas.md` antes de tocar em
+código. Se algo aqui contradisser o que
 você acha razoável, o arquivo ganha — ou você argumenta contra ele explicitamente, e a conversa
 passa a ser sobre mudar o arquivo, não sobre ignorá-lo.
 
@@ -26,8 +28,12 @@ número, quem escolheu a regra, e o que aconteceria se a escolha fosse outra.
   execução, antes de qualquer dado ser tocado.
 
 Onde o projeto está e a ordem do que falta: **`PLANO.md`** (ganha de qualquer fila escrita
-aqui). O que está aberto: **`PENDENCIAS.md`**. As decisões que esperam o Osvaldo:
-**`docs/decisoes/fila-do-osvaldo.md`**.
+aqui). O que está aberto e o que espera o Osvaldo: **`docs/estado.md`**, que o hook SessionStart
+já injetou; do `PENDENCIAS.md` e da `docs/decisoes/fila-do-osvaldo.md` **leia só a seção da P
+da tarefa** (`grep -n "^## P-NN" PENDENCIAS.md`). Motivo: o `PENDENCIAS.md` inteiro eram ~40 mil
+tokens para usar uma seção (decisão de 02/10; `docs/decisoes/modelos-por-tarefa.md`). O
+`estado.md` é gerado por `tools/estado.py`, e o CI reprova se estiver velho. Hook de projeto
+roda na nuvem só em sessão de **um** repositório; numa de vários, rode `cat docs/estado.md`.
 
 As instruções do Projeto no claude.ai são cópia de **`docs/ia/instrucoes-projeto-claude.md`**:
 mudar uma exige mudar a outra no mesmo dia, com a linha no changelog de lá.
@@ -167,6 +173,9 @@ auditoria/         os INSTRUMENTOS; os laudos moram em docs/auditoria/
 medicoes/          scripts de medicao sobre o acervo; push em `medir/<nome>` roda
                    `<nome>.py` no Actions, com o token de LEITURA (5-A.11); saida em resultados/
 tools/analisar_sessoes.py  tempo e tokens das sessoes, na maquina dele
+tools/estado.py   gera docs/estado.md (o que o hook injeta); --conferir no CI
+tools/testar.py   a rodada do fim: uma linha por suite, so as falhas
+.claude/agents/Explore.md   subagente de leitura e busca, em Haiku, sem CLAUDE.md
 docs/
   doutrinas.md     as sete doutrinas
   decisoes/        decisoes com desenho e alternativas; fila-do-osvaldo.md
@@ -194,6 +203,9 @@ docs/
   passaria num teste de atributo.
 - **Commit: título até 72 caracteres, corpo com o porquê** e o que a mudança mediu (decisão
   dele, 25/09). O histórico anterior não se reescreve: os marcos valem pelo sha.
+- **PR: o título abre com `[modelo=<m> classe=<c>]`**, com o modelo da sessão e a classe de
+  `docs/metricas/modelos-por-tarefa.yaml`. O PR mergeado é o denominador da regra de volta dos
+  modelos (decisão 21d, 03/10), e o CI reprova o título sem ela.
 - **Achado novo** segue a skill `bastter-achado`; mudança em `alocacao/` segue
   `bastter-mudanca`.
 
@@ -241,6 +253,8 @@ Decididas por ele; valem em toda sessão sem ele precisar pedir.
    antes de declarar algo manual, pergunte se um script na máquina dele faz (§5-B.17).
 10. **Leitura larga vai para subagente**, com a proibição de inventar URL, número e versão e a
     ordem de marcar `NAO_CONFIRMADO` no prompt dele. Trabalho que decide o projeto fica na sessão.
+    O `Explore` do repositório (`.claude/agents/Explore.md`) já roda em Haiku e traz as duas
+    ordens no prompt; ele não lê este arquivo, por economia.
 11. **Medir sobre o acervo é empurrar uma branch `medir/<nome>`** com `medicoes/<nome>.py` — o
     `.github/workflows/medir.yml` roda o script com o token do R2 **somente leitura** e commita a
     saída na própria branch. **Esse push é o fluxo normal do agente, não uso de credencial
@@ -252,6 +266,9 @@ Decididas por ele; valem em toda sessão sem ele precisar pedir.
     (disparar outro workflow, mexer em segredo, escrever no armazém) continua na regra 7: pede.
     A saída vai para o repositório público: **nada de preço, volume ou dado de negociação da B3**
     nela (P-136) — só contagem, código e rótulo.
+12. **Não agendar conferência de PR** (`send_later`, rotina, `/loop`): os eventos do PR já acordam
+    a sessão, e cada conferência agendada reabre o contexto inteiro para, quase sempre, não achar
+    nada (decisão dele, 02/10).
 
 ---
 
@@ -362,18 +379,21 @@ que vencem em 7 dias viram issue no semanal (`auditoria/expira_proxima.py`).
 começou.
 
 **Duas rodadas, dois papéis (P-141).** Durante a tarefa, só a suíte tocada, sem `slow`. Uma vez,
-com a árvore parada, antes do commit:
+no fim, com a árvore parada, antes do commit, **pelo `tools/testar.py`**: uma linha por suíte e
+só as falhas, em vez de milhares de linhas no contexto (decisão dele, 02/10):
 
 ```bash
-for s in alocacao fase0 auditoria tools medicoes; do py -3.11 -m pytest $s -n auto --dist loadgroup -p no:cacheprovider; done
+python tools/testar.py           # nuvem: as cinco suítes, ruff e mypy, no recorte do CI
+py -3.11 tools/testar.py --tudo  # desktop: sem recorte, slow, acervo e privado inclusive
 ```
 
 - **`--dist loadgroup` não é opcional:** o memo de sessão e a fixture de módulo são por
   processo; sem o grupo, a leitura dupla do acervo volta calada (`fase0/test_memo_acervo.py`).
 - **Nenhuma rodada encosta no teto de 10 min do Bash.** Acima de 8 min, em segundo plano, sem
   editar nada enquanto roda.
-- Na nuvem, sem acervo nem `estado.yaml`: `-m "not acervo and not privado"`, e o número vai com
-  esse recorte escrito ao lado (§5-B.15).
+- Na nuvem, sem acervo nem `estado.yaml`, o recorte do CI é o padrão do `testar.py`, e o número
+  vai com esse recorte escrito ao lado (§5-B.15). A saída inteira de quem falhou fica em
+  `.testar/`.
 
 ---
 

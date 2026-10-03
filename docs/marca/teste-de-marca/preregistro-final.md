@@ -14,6 +14,19 @@ concorrentes do veto ficam fechadas no livro de códigos (ac-a, dele); o classif
 entra no conjunto congelado (eram nove arquivos); o contrato de privacidade exige envio por
 POST; e a limitação 4 ganha o painel do Firewall da Vercel. Nenhuma resposta existe.*
 
+*Emenda de 02/10/2026, livro de códigos versão 2 (ad-a, ae-a e af-a, dele). Feita **antes da
+primeira marca da R3 e antes do primeiro convite**: o commit das datas da janela não existe, e
+nenhuma marca foi classificada. Entram quatro categorias concorrentes (consultoria CVM,
+assessor, robô e planejador), a unidade que a R3 classifica (app ou site) e a amostra mínima
+de 10 marcas por categoria. O que já estava no livro não mudou: variáveis, faixas, limites,
+dominante, imitar, e a classificação de E, C e D.*
+
+*Mudança de 02/10/2026, y-a (dele), que supera a y-b. Feita **antes do primeiro convite**: o
+commit das datas da janela não existe. Voltam os textos que o ensaio de 27/09 tinha corrigido:
+o filtro da v-a e a pergunta dos amigos da u-a; o convite e a tela de conclusão passam a dizer
+o mesmo critério do filtro. Muda só o `questionario.yaml` (§4); a análise não lê o texto das
+perguntas. Nenhuma resposta existe (§10).*
+
 **Origem e o que este substitui.**
 - [`preregistro-teste-de-marca-2026-09-20.md`](../preregistro-teste-de-marca-2026-09-20.md):
   o de 20/09, como declarado. sha256
@@ -50,27 +63,29 @@ Nenhuma foi preenchida por uma sessão. A coluna "20/09" diz o que mudou desde a
 | ordem das direções | aleatória | **seis ordens balanceadas; a versão sai de um contador de ABERTURAS no banco (mod 6)**, não do link | g-B revista, ab-a |
 | tamanho da amostra | — | **quem aparecer numa janela de 21 dias corridos**; nunca encerrar olhando o resultado | h-A |
 | estímulo | — | **imagem fixa**: os seis PNG aprovados, pelo sha256 | i-A |
-| amigos | (a P-162 dizia: só pilotam) | **contam**, pela pergunta "Você conhece quem criou este app?"; a análise sai com e sem eles, e **a sem eles decide** | amigos, r-a, y-b |
-| filtro | "aporta todo mês em renda variável há pelo menos 6 meses" | **o mesmo texto** ("Você aporta todo mês em renda variável há pelo menos 6 meses?") | y-b |
-| u-a e v-a | — | **superadas pela y-b**: voltaram os textos de 20/09, e o defeito que o ensaio tinha achado vira limitação (§9) | y-b |
+| amigos | (a P-162 dizia: só pilotam) | **contam**, pela pergunta "Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"; a análise sai com e sem eles, e **a sem eles decide** | amigos, r-a, u-a, y-a |
+| filtro | "aporta todo mês em renda variável há pelo menos 6 meses" | **sem jargão:** "Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"; o convite e a tela de conclusão dizem o mesmo critério | v-a, y-a |
+| u-a e v-a | — | ~~**superadas pela y-b**: voltaram os textos de 20/09, e o defeito que o ensaio tinha achado vira limitação (§9)~~ **restauradas pela y-a, 02/10/2026** | y-a |
+| **y-a** (02/10) | — | **supera a y-b:** voltam os textos da u-a e da v-a. A y-b veio de um prompt que citava os textos de 20/09 como decisão; o texto antigo dos amigos contamina a análise sem amigos, que é a que decide (r-a), e o filtro usava jargão. Saem as limitações 6 (em parte) e 7 (§9) | y-a |
 | recrutamento | rede do autor, comunidades, conhecidos de conhecidos | **rede pessoal e bola de neve, sem painel pago** | recrutamento |
 | escalas seguro e luxo | "seguro/arriscado", "sofisticado/simples" | **pelo visual:** insegurança ↔ segurança; popular ↔ de luxo | w-a |
 | escalas honesto e confiável | "honesto/vendedor", "confiável/parece golpe" | **mantidas**, com a ordem das palavras igual à da escala | x-a |
 | imagem de estilo de vida na D | prevista | ilustração desenhada em código, **provisória** (P-168) | k-A |
 | **veto de distinção** | — | se a vencedora pela 17a **imitar** o código dominante de uma categoria auditada na R3, a escolha volta para ele; **a direção só sai com a R3 fechada** (§8) | veto (27/09), aa-a |
 | categorias do veto | — | **fechadas no livro de códigos, não na R3:** banco tradicional, banco digital, corretora, gestora e private, pagamentos, consolidador, casa de análise e educação; as referências de sentimento ficam fora do veto (§8) | ac-a (02/10) |
+| mais quatro categorias, a unidade e a amostra da R3 | — | **consultoria CVM, assessor, robô e planejador** entram no veto, com uma precedência para quem cabe em duas; a R3 classifica **o app** (primeira captura de interface da App Store) ou, **sem app, o site** em 390 px, com o dominante também só com as de app; **pelo menos 10 marcas sorteadas por categoria** (§8) | ad-a, ae-a, af-a (02/10) |
 
 **O que não entra.** A H-A1, que a P-162 dizia que "pode entrar como exploratória", fica de
 fora: nenhuma decisão dele a incluiu, e a n-A juntou as perguntas sobre o público na P-154.
 
 ## 2. Público, filtro, recrutamento, amigos
 
-- **Filtro**, antes de qualquer tela: *"Você aporta todo mês em renda variável há pelo menos 6
-  meses?"* Quem responde "Não" sai. O convite diz o mesmo critério.
+- **Filtro**, antes de qualquer tela: *"Há pelo menos 6 meses, você coloca dinheiro todo mês em ações, fundos de índice (ETF) ou fundos imobiliários?"* Quem responde
+  "Não" sai. O convite e a tela de conclusão dizem o mesmo critério (v-a, y-a).
 - **Recrutamento:** rede pessoal dele e bola de neve, sem painel pago, sem anúncio e sem
   comunidade aberta.
-- **Amigos:** depois do filtro vem *"Você conhece quem criou este app?"*. Quem responde "Sim"
-  segue e conta. A análise sai duas vezes: **sem eles, que decide** (r-a), e com todos, como
+- **Amigos:** depois do filtro vem *"Você conhece pessoalmente a pessoa que está fazendo esta pesquisa (é amigo, parente ou colega dela)?"* (u-a, y-a).
+  Quem responde "Sim" segue e conta. A análise sai duas vezes: **sem eles, que decide** (r-a), e com todos, como
   sensibilidade.
 - **Consentimento:** é a primeira pergunta. "Não concordo" sai sem ver nenhuma tela; fica
   gravado só que a pessoa não quis participar, com a versão e o dia (§4).
@@ -96,7 +111,7 @@ nova, nova aprovação e novo pré-registro.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `73936c74ce82d3c73c7bc6aee4430ad80da74c108cf91c9aab0eab66f77d757a` |
+| `docs/marca/teste-de-marca/questionario.yaml` | **o questionário como dado:** os textos de cada tela, a duração da exposição, as escalas e os polos, as seis ordens, o contrato da exportação, as exigências de privacidade e a janela. A página da S6 e o script leem este arquivo | `02773d8b9b71945e3a463e55ed10696f0d63eb7ddf4780e0fcc9520631f38091` |
 | `tools/analise_teste_marca.py` | a análise inteira: leitura pelo contrato, filtros, janela, regra, hipóteses, abandono por versão e saída | `2c43c9b9f59b19ab7f4784edad8a8b99a8a5b65ef3c1ca836c7f47b996b6caef` |
 
 A versão de leitura, [`questionario.md`](questionario.md), é **gerada** do YAML por
@@ -228,7 +243,7 @@ nenhuma frase de participante entra no repositório.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `d5c7306a5a84b191856646f6268e3c5c7e8996a35d75559d217e3eea64fdb074` |
+| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `1d32a59442693be97c6cc9628f422bb0509007fb9a205d1286365f1e1a14719b` |
 | `tools/codigos_visuais.py` | o classificador e o veto, os mesmos para as direções e para as marcas da R3. Congelado desde 02/10: sem ele no conjunto, o cálculo do veto podia mudar depois de a R3 começar sem que nada reprovasse | `7bf3129599fffaea6b883d6e1512c47eeabe96fa8c7e6ed63fb38083711f7188` |
 
 **As variáveis.**
@@ -257,6 +272,23 @@ R3**.
 | `pagamentos` | carteira ou conta de pagamento | PicPay, Mercado Pago, PagBank |
 | `consolidador` | app de acompanhamento de carteira | Gorila, Kinvo |
 | `casa_de_analise_e_educacao` | casa de análise ou marca de educação financeira | Empiricus, Suno, Me Poupe!, Primo Rico |
+| `consultoria_cvm` *(ad-a)* | consultoria de valores mobiliários registrada na CVM (Resolução CVM 19), pessoa jurídica: **a categoria do próprio MEOL** | — |
+| `assessor` *(ad-a)* | assessoria de investimento registrada na CVM (o antigo agente autônomo) | — |
+| `robo` *(ad-a)* | robô de investimento: a pessoa responde um perfil e o app monta e rebalanceia a carteira | — |
+| `planejador` *(ad-a)* | planejador financeiro pessoal com marca própria | — |
+
+**Precedência (ad-a).** Marca que cabe em duas categorias fica com a primeira desta ordem:
+robô, consultoria CVM, planejador, assessor, consolidador, corretora, gestora e private, casa
+de análise e educação, pagamentos, banco digital, banco tradicional.
+
+**A unidade na R3 (ae-a).** Com app: a primeira captura da App Store do Brasil que mostra a
+interface, recortada na tela do aparelho, em 390 px. Sem app: a página inicial do site oficial
+em 390 px, sem rolar. Cada marca registra qual foi usada; o dominante sai também **só com as de
+app**, como sensibilidade, e o veto usa todas. A tela depois do login fica fora do alcance de
+quem audita.
+
+**A amostra (af-a).** A R3 sorteia pelo menos **10 marcas por categoria** para a classificação
+visual, independentemente da saturação dos códigos MC, que é textual.
 
 As **referências de sentimento** (rodada 2: SBB, Volvo) podem ser auditadas na R3 com a
 categoria `referencia_de_sentimento`: entram classificadas e não acionam o veto. **Marca com
@@ -316,13 +348,17 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
    - A tabela da pesquisa não tem IP. A plataforma tem.
 5. **O resultado escolhe entre direções e não descreve o investidor brasileiro.**
 
-**As dos textos decididos (y-b, w-a, x-a), que o ensaio apontou:**
+**As dos textos decididos (w-a, x-a), que o ensaio apontou.** As 6 e 7 vinham da y-b; a
+y-a (02/10/2026) devolveu os textos da v-a e da u-a, e elas saem. O texto fica riscado, como
+registro.
 
-6. **Filtro com jargão.** "Aporta" e "renda variável" podem não ser entendidos, e quem só
-   aplica no Tesouro pode marcar "sim". "Todo mês" é absoluto: quem pulou um mês decide
-   sozinho se arredonda.
-7. **A pergunta dos amigos vem antes de qualquer tela.** "Este app" ainda não se refere a
-   nada, e quem conhece o autor pode responder "não". A amostra que decide pode ter amigos.
+6. ~~**Filtro com jargão.** "Aporta" e "renda variável" podem não ser entendidos, e quem só
+   aplica no Tesouro pode marcar "sim".~~ *Sai pela y-a: o filtro nomeia ações, ETF e fundos
+   imobiliários.* **Fica:** "todo mês" é absoluto, e quem pulou um mês decide sozinho se
+   arredonda.
+7. ~~**A pergunta dos amigos vem antes de qualquer tela.** "Este app" ainda não se refere a
+   nada, e quem conhece o autor pode responder "não". A amostra que decide pode ter amigos.~~
+   *Sai pela y-a: a pergunta nomeia a pessoa que faz a pesquisa, e não um app.*
 8. **"Segurança"** pode ser lida como risco do investimento, não da tela. **"Popular"** pode
    ser lido como "famoso". As duas escalas são descritivas e não entram na regra.
 9. **`para_mim` e `honesto` sofrem o conteúdo, que é o mesmo nas três direções:** R$ 800 e
@@ -360,6 +396,10 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
     classifica, e a escolha do app é de quem classifica na R3. Crédito (Serasa) não está na
     lista nem fora do veto: uma marca só de crédito não tem categoria no livro, e o
     classificador a recusa se ela aparecer no arquivo do veto.
+22. **A unidade da R3 não é a das direções** (ae-a). E, C e D são a tela do app inteira; as
+    marcas são a captura de marketing da App Store, escolhida pela marca, ou o site, que é
+    página de venda e não tela de uso. O dominante só com as de app mede o tamanho dessa
+    diferença; não a elimina.
 
 ## 10. Mudanças depois do merge
 
@@ -371,6 +411,12 @@ depois de contar E, C e D e antes de qualquer marca; a densidade não entra no v
   primeiro convite.
 - **O relatório** dá o resultado sem amigos, o resultado com todos, se os dois divergem, e o
   veto aplicado à vencedora com a R3 fechada.
+- **02/10/2026, y-a (dele), antes do primeiro convite.** O `questionario.yaml` mudou: filtro
+  da v-a, pergunta dos amigos da u-a, e o convite e a tela de conclusão com o critério do
+  filtro. sha256 de `73936c74…757a` para `02773d8b…8091` (§4). O `questionario.md` e o
+  `pesquisa/questionario.json` foram regenerados pelos geradores, com `--conferir`. Os ids,
+  as opções e as saídas não mudaram, e a análise não lê o texto das perguntas, então o
+  `tools/analise_teste_marca.py` e o seu sha256 ficam.
 
 ## 11. Privacidade
 

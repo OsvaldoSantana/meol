@@ -1,0 +1,46 @@
+# Modelo por classe de tarefa e a regra de volta (decisao dele, 02/10/2026).
+# O porque, as alternativas e o que nao se mede: docs/decisoes/modelos-por-tarefa.md.
+# Quem le: auditoria/metricas_processo.py (validar() e regra_de_volta()).
+
+vigente_desde: 2026-10-03     # evento com data a partir daqui leva a etiqueta [modelo= classe=]
+
+# Do mais barato ao mais caro. "Voltar" e subir um degrau nesta lista.
+ordem: [haiku, sonnet, opusplan, opus]
+
+classes:
+  registro: sonnet            # PENDENCIAS, fila, eventos, changelog, bilhete
+  pesquisa: sonnet            # com subagentes haiku (.claude/agents/Explore.md) na leitura larga
+  engenharia: opusplan        # Opus planeja, Sonnet executa
+  pre-registro: opus
+  estatistica: opus
+  p-115: opus                 # o criterio do degrau: nunca abaixo de Opus
+  auditoria: opus
+  arquitetura: opus
+
+# Fable nao entra em classe nenhuma (decisao de 02/10). Etiqueta com modelo fora da `ordem`
+# reprova a validacao.
+
+regra_de_volta:
+  # DECISAO dele, 03/10/2026 (fila, bloco 21: 21d), no lugar da proposta 21a (2 eventos em 14
+  # dias). A TAXA de uma classe e eventos de autoria Claude por PR mergeado no main, os dois
+  # etiquetados nela com modelo abaixo do topo da `ordem`. Numa janela de `janela_dias`, a
+  # classe volta um degrau quando taxa > fator x referencia E houver >= min_prs PRs dela E
+  # >= min_eventos eventos dela na janela.
+  # AJUSTE dele, 03/10/2026 (claude.ai), no mesmo dia: a referencia de cada classe e
+  # (eventos + 1) / (PRs + 1), para que classe com zero evento nao tenha regua zero (1,5 x 0 = 0
+  # devolvia a classe no primeiro evento); e o minimo de 2 eventos impede que um erro so a volte.
+  # Classe sem PR na referencia fica com regua 1,0, nao mais "so os numeros".
+  # `fator`, `min_prs` e `min_eventos` sao ESCOLHA DECLARADA dele, nao medida.
+  janela_dias: 14
+  fator: 1.5
+  min_prs: 4
+  min_eventos: 2
+  referencia:
+    # A classificacao de 16/09 a 02/10, UMA vez, com tudo em Opus. A classe de cada linha foi
+    # INFERIDA pela sessao de 03/10 a partir da descricao do evento e do titulo do PR.
+    arquivo: docs/metricas/referencia-modelos.csv
+    status: OBSERVADO
+    # O primeiro PR mergeado no main e de 25/09 (#1, #3, #4): antes dele nao ha denominador, e
+    # os eventos de 16/09 a 24/09 ficam classificados no CSV mas fora da taxa.
+    desde: 2026-09-25
+    ate: 2026-10-02

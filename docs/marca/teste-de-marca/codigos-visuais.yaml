@@ -8,12 +8,21 @@
 # O sha256 deste arquivo esta no pre-registro final. NADA daqui se ajusta depois de a R3
 # comecar: mudar um byte e pre-registro novo, e so vale se for antes da primeira marca
 # classificada. O classificador e tools/codigos_visuais.py (o mesmo para as direcoes e as marcas).
-versao: 1
+# versao 2 (02/10/2026): ad-a, ae-a e af-a, antes da primeira marca da R3 e antes do
+# primeiro convite; a versao 1 esta no merge do PR #43.
+versao: 2
 data: 2026-09-27
 
 # O que se classifica: a tela principal (a primeira depois do login, ou a pagina inicial do
 # app quando nao ha login), num telefone de 390 px de largura, sem rolar. Uma captura por marca.
 unidade: "a primeira tela do app, em 390 px de largura, sem rolar"
+# ae-a (02/10/2026, dele, antes da primeira marca da R3): a tela depois do login esta fora do
+# alcance de quem audita, e muita marca nao tem app. O que se classifica, por marca:
+unidade_na_r3:
+  com_app: "a primeira captura da pagina do app na App Store do Brasil que mostra a interface (nao arte de abertura), recortada a area da tela do aparelho, sem moldura nem legenda, em 390 px de largura"
+  sem_app: "a pagina inicial do site oficial, capturada em 390 px de largura, sem rolar"
+  registro: "cada marca registra qual das duas foi usada (app | site)"
+  sensibilidade: "o codigo dominante de cada categoria sai tambem so com as marcas de unidade app; o veto usa todas"
 
 variaveis:
   fundo:
@@ -88,10 +97,24 @@ veto:
     pagamentos: "carteira ou conta de pagamento (PicPay, Mercado Pago, PagBank)"
     consolidador: "app de acompanhamento de carteira (Gorila, Kinvo)"
     casa_de_analise_e_educacao: "casa de analise ou marca de educacao financeira (Empiricus, Suno, Me Poupe!, Primo Rico)"
+    # ad-a (02/10/2026, dele, antes da primeira marca da R3): quatro categorias que a ac-a nao
+    # tinha. A consultoria e a categoria do proprio MEOL (Resolucao CVM 19): fora da lista, a
+    # concorrente mais proxima nao vetaria nada.
+    consultoria_cvm: "consultoria de valores mobiliarios registrada na CVM (Resolucao CVM 19), pessoa juridica"
+    assessor: "assessoria de investimento registrada na CVM (o antigo agente autonomo)"
+    robo: "robo de investimento ou gestao automatizada: a pessoa responde um perfil e o app monta e rebalanceia a carteira sozinho"
+    planejador: "planejador financeiro pessoal com marca propria, que atende pessoa fisica"
+  # ad-a: uma marca, uma categoria: a da atividade principal do app (ou do site) classificado.
+  # Se couber em duas, vale a que vem primeiro nesta lista.
+  precedencia: [robo, consultoria_cvm, planejador, assessor, consolidador, corretora, gestora_e_private, casa_de_analise_e_educacao, pagamentos, banco_digital, banco_tradicional]
   # ac-a: as referencias de sentimento (rodada 2: SBB, Volvo) podem ser auditadas na R3, mas
   # nao sao concorrentes: entram classificadas e nao acionam o veto.
   categorias_fora_do_veto: [referencia_de_sentimento]
   n_minimo_de_marcas: 5
+  # af-a (02/10/2026, dele): a R3 sorteia pelo menos 10 marcas por categoria para a
+  # classificacao visual, independente da saturacao dos codigos MC (que e textual); assim
+  # sobram 5 validas mesmo com metade fora do livro ou inacessivel.
+  amostra_sorteada_por_categoria: 10
   codigo_dominante: "a combinacao dos valores das quatro variaveis centrais presente em pelo menos metade das marcas classificadas da categoria (empate de duas combinacoes na metade exata: as duas sao dominantes)"
   fracao_minima: 0.5
   imitar: "a direcao partilha os quatro valores centrais com o codigo dominante de alguma categoria"

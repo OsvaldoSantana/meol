@@ -23,8 +23,12 @@ import argparse
 import collections
 import csv
 import datetime as dt
+import json
 import os
+import re
 import sys
+
+import yaml
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVENTOS = os.path.join(RAIZ, "docs", "metricas", "eventos.csv")
@@ -33,6 +37,15 @@ COLUNAS = ("data", "codigo", "tipo", "autor", "quem_achou", "regua", "commit_int
            "commit_corrigiu", "descricao")
 TIPOS = ("achado", "retratacao", "reincidencia")
 PESSOAS = ("claude-chat", "claude-code", "osvaldo", "outra-ia", "fonte", "desconhecido")
+MODELOS = os.path.join(RAIZ, "docs", "metricas", "modelos-por-tarefa.yaml")
+# 02/10/2026: sem o modelo no evento, a regra de volta nao tem o que contar. A etiqueta abre a
+# descricao: "[modelo=sonnet classe=registro] texto".
+ETIQUETA = re.compile(r"^\[modelo=([\w-]+) classe=([\w-]+)\]")
+
+
+def ler_modelos(caminho=MODELOS):
+    with open(caminho, encoding="utf-8") as f:
+        return yaml.safe_load(f)
 
 
 class EventoInvalido(ValueError):
@@ -47,7 +60,15 @@ def ler(caminho=EVENTOS):
         return list(r)
 
 
-def validar(eventos):
+def etiqueta(e):
+    """(modelo, classe) da etiqueta, ou None."""
+    m = ETIQUETA.match(e.get("descricao") or "")
+    return (m.group(1), m.group(2)) if m else None
+
+
+def validar(eventos, modelos=None):
+    modelos = modelos or ler_modelos()
+    desde = modelos["vigente_desde"]
     for i, e in enumerate(eventos, start=2):
         if not (e.get("codigo") or "").strip():
             raise EventoInvalido(f"linha {i}: evento sem codigo -- {e}")
@@ -63,7 +84,130 @@ def validar(eventos):
         vazios = [c for c in COLUNAS if not (e.get(c) or "").strip()]
         if vazios:
             raise EventoInvalido(f"linha {i}: {vazios} vazio -- escreva 'desconhecido'")
+        if e["autor"].startswith("claude") and dt.date.fromisoformat(e["data"]) >= desde:
+            et = etiqueta(e)
+            if et is None:
+                raise EventoInvalido(f"linha {i}: evento de autoria Claude desde {desde} abre a "
+                                     "descricao com [modelo=<m> classe=<c>]")
+            if et[0] not in modelos["ordem"] + ["desconhecido"] or et[1] not in modelos["classes"]:
+                raise EventoInvalido(f"linha {i}: etiqueta {et} fora de "
+                                     "docs/metricas/modelos-por-tarefa.yaml")
     return eventos
+
+
+# 03/10/2026: Brasilia sem horario de verao desde 2019. O `mergedAt` do GitHub vem em UTC, e um
+# merge as 22h de Brasilia cairia no dia seguinte.
+BRASILIA = dt.timezone(dt.timedelta(hours=-3))
+
+
+def ler_referencia(modelos=None):
+    """As linhas da classificacao de 16/09 a 02/10 (fila 21d): tipo, id, data, classe, trecho."""
+    modelos = modelos or ler_modelos()
+    caminho = os.path.join(RAIZ, modelos["regra_de_volta"]["referencia"]["arquivo"])
+    with open(caminho, encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f, delimiter=";"))
+
+
+def referencia(linhas, modelos=None):
+    """{classe: (eventos, prs)} entre `desde` e `ate` da referencia, para toda classe da tabela.
+
+    Tudo rodava em Opus: e a taxa do modelo de cima, contra a qual o de baixo se compara."""
+    modelos = modelos or ler_modelos()
+    ref = modelos["regra_de_volta"]["referencia"]
+    n = {c: [0, 0] for c in modelos["classes"]}
+    for r in linhas:
+        if ref["desde"] <= dt.date.fromisoformat(r["data"]) <= ref["ate"]:
+            n[r["classe"]][0 if r["tipo"] == "evento" else 1] += 1
+    return {c: (e, p) for c, (e, p) in n.items()}
+
+
+def prs_do_gh(caminho):
+    """A saida de `gh pr list --state merged --json number,title,mergedAt,author`, como
+    [{numero, titulo, autor, data}], com a data em Brasilia."""
+    with open(caminho, encoding="utf-8") as f:
+        brutos = json.load(f)
+    return [dict(numero=p["number"], titulo=p["title"],
+                 autor=(p.get("author") or {}).get("login", ""),
+                 data=dt.datetime.fromisoformat(p["mergedAt"].replace("Z", "+00:00"))
+                 .astimezone(BRASILIA).date().isoformat())
+            for p in brutos]
+
+
+def validar_titulo(titulo, modelos=None):
+    """O titulo do PR abre com a etiqueta dos eventos: e o denominador da regra de volta."""
+    modelos = modelos or ler_modelos()
+    m = ETIQUETA.match(titulo or "")
+    if m is None:
+        raise EventoInvalido(f"titulo {titulo!r}: o PR abre com [modelo=<m> classe=<c>] "
+                             "(docs/metricas/modelos-por-tarefa.yaml)")
+    modelo, classe = m.groups()
+    if modelo not in modelos["ordem"] + ["desconhecido"] or classe not in modelos["classes"]:
+        raise EventoInvalido(f"titulo {titulo!r}: etiqueta {m.groups()} fora de "
+                             "docs/metricas/modelos-por-tarefa.yaml")
+    return m.groups()
+
+
+def regra_de_volta(eventos, prs, hoje, ref, modelos=None):
+    """Por classe: {eventos, prs, taxa, ref, ref_n, volta} na janela que termina em `hoje`.
+
+    Conta so o que esta etiquetado com um modelo abaixo do topo da `ordem`: o evento de autoria
+    Claude no numerador, o PR mergeado no denominador. `desconhecido` nao conta e nao absolve.
+    `ref` e a saida de referencia(). A taxa da referencia e (eventos + 1) / (PRs + 1): classe com
+    zero evento nao tem regua zero, e classe sem PR tem regua 1,0 (ajuste da 21d, 03/10). A volta
+    exige tambem `min_eventos` eventos da classe na janela, alem do fator e dos `min_prs`."""
+    modelos = modelos or ler_modelos()
+    ordem, rv = modelos["ordem"], modelos["regra_de_volta"]
+    abaixo = set(ordem[:-1])
+    inicio = hoje - dt.timedelta(days=rv["janela_dias"])
+
+    def na_janela(data):
+        return inicio < dt.date.fromisoformat(data) <= hoje
+
+    ne, npr = collections.Counter(), collections.Counter()
+    for e in eventos:
+        et = etiqueta(e)
+        if et and e["autor"].startswith("claude") and et[0] in abaixo and na_janela(e["data"]):
+            ne[et[1]] += 1
+    for p in prs:
+        m = ETIQUETA.match(p["titulo"] or "")
+        if m and m.group(1) in abaixo and na_janela(p["data"]):
+            npr[m.group(2)] += 1
+    out = {}
+    for c in modelos["classes"]:
+        e_ref, p_ref = ref.get(c, (0, 0))
+        taxa_ref = (e_ref + 1) / (p_ref + 1)
+        taxa = ne[c] / npr[c] if npr[c] else None
+        volta = (taxa is not None and npr[c] >= rv["min_prs"] and ne[c] >= rv["min_eventos"]
+                 and taxa > rv["fator"] * taxa_ref)
+        out[c] = dict(eventos=ne[c], prs=npr[c], taxa=taxa, ref=taxa_ref, ref_n=(e_ref, p_ref),
+                      volta=volta)
+    return out
+
+
+def relatorio_volta(volta, prs, hoje, modelos=None):
+    modelos = modelos or ler_modelos()
+    rv = modelos["regra_de_volta"]
+    ref = rv["referencia"]
+    R = [f"Regra de volta (fila 21d): janela de {rv['janela_dias']} dias; volta se taxa > "
+         f"{rv['fator']} x referencia (eventos + 1) / (PRs + 1), com >= {rv['min_prs']} PRs e "
+         f">= {rv['min_eventos']} eventos da classe. Referencia de "
+         f"{ref['desde']} a {ref['ate']}, em Opus, classe {ref['status']} (inferida).", "",
+         "| classe | modelo | eventos / PRs na janela | taxa | referencia (eventos / PRs) "
+         "| volta |", "|---|---|---|---|---|---|"]
+
+    def num(x):
+        return "-" if x is None else f"{x:.2f}"
+    for c, v in volta.items():
+        e_ref, p_ref = v["ref_n"]
+        r = f"{num(v['ref'])} ({e_ref} / {p_ref})"
+        R.append(f"| {c} | {modelos['classes'][c]} | {v['eventos']} / {v['prs']} "
+                 f"| {num(v['taxa'])} | {r} | {'**SIM**' if v['volta'] else 'nao'} |")
+    inicio = hoje - dt.timedelta(days=rv["janela_dias"])
+    sem = [p for p in prs if inicio < dt.date.fromisoformat(p["data"]) <= hoje
+           and not ETIQUETA.match(p["titulo"] or "") and "dependabot" not in p["autor"]]
+    R += ["", f"PRs mergeados na janela sem etiqueta, fora da conta (Dependabot excluido): "
+          f"{len(sem)}"]
+    return "\n".join(R) + "\n"
 
 
 def semana(data):
@@ -129,9 +273,41 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--eventos", default=EVENTOS)
     ap.add_argument("--turnos", default=TURNOS)
+    ap.add_argument("--prs", help="saida de `gh pr list --state merged --json "
+                    "number,title,mergedAt,author`; sem ela a regra de volta nao roda")
+    ap.add_argument("--titulo-pr", help="so valida a etiqueta do titulo de um PR e sai")
+    ap.add_argument("--disparou", action="store_true",
+                    help="com --prs: imprime so as classes que voltam (nada se nenhuma)")
     a = ap.parse_args(argv)
+    if a.titulo_pr is not None:
+        try:
+            validar_titulo(a.titulo_pr)
+        except EventoInvalido as ex:
+            print(f"{ex}. Corrija o titulo do PR e empurre de novo.", file=sys.stderr)
+            return 1
+        return 0
     ev = validar(ler(a.eventos))
+    if a.prs is None:
+        if a.disparou:
+            ap.error("--disparou precisa de --prs")
+        print(relatorio(ev, sessoes_por_semana(a.turnos)), end="")
+        print("\nRegra de volta: sem --prs os PRs nao foram lidos -- secao NAO medida aqui. "
+              "No semanal o workflow passa a lista do GitHub.")
+        return 0
+    prs = prs_do_gh(a.prs)
+    modelos = ler_modelos()
+    hoje = dt.datetime.now(BRASILIA).date()
+    volta = regra_de_volta(ev, prs, hoje, referencia(ler_referencia(modelos), modelos), modelos)
+    if a.disparou:
+        for c, v in volta.items():
+            if v["volta"]:
+                print(f"- {c}: {v['eventos']} eventos em {v['prs']} PRs (taxa {v['taxa']:.2f}, "
+                      f"referencia {v['ref']:.2f}); sai de {modelos['classes'][c]} e sobe "
+                      "um degrau")
+        return 0
     print(relatorio(ev, sessoes_por_semana(a.turnos)), end="")
+    print()
+    print(relatorio_volta(volta, prs, hoje, modelos), end="")
     return 0
 
 

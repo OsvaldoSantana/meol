@@ -46,10 +46,13 @@ def test_as_seis_ordens_sao_as_seis_permutacoes_de_e_c_d():
 
 
 def test_textos_decididos_por_ele():
-    """y-b (27/09): filtro e amigos com o texto de 20/09; w-a e x-a nas escalas."""
-    assert Q["filtro"]["texto"] == ("Voc\u00ea aporta todo m\u00eas em renda vari\u00e1vel "
-                                    "h\u00e1 pelo menos 6 meses?")
-    assert Q["amigo"]["texto"] == "Voc\u00ea conhece quem criou este app?"
+    """y-a (02/10, supera a y-b): filtro e amigos com os textos da v-a e da u-a; w-a e x-a nas
+    escalas."""
+    assert Q["filtro"]["texto"] == ("H\u00e1 pelo menos 6 meses, voc\u00ea coloca dinheiro todo "
+                                    "m\u00eas em a\u00e7\u00f5es, fundos de \u00edndice (ETF) "
+                                    "ou fundos imobili\u00e1rios?")
+    assert Q["amigo"]["texto"] == ("Voc\u00ea conhece pessoalmente a pessoa que est\u00e1 fazendo "
+                                   "esta pesquisa (\u00e9 amigo, parente ou colega dela)?")
     polos = {e["id"]: (e["polo_1"], e["polo_7"]) for e in Q["telas"]["escalas"]}
     assert polos == {
         "seguro": ("Inseguran\u00e7a", "Seguran\u00e7a"),
@@ -86,3 +89,29 @@ def test_yaml_em_ascii_e_valido():
         bruto = f.read()
     assert all(b < 128 for b in bruto)
     assert yaml.safe_load(bruto)["versao"] == 2
+
+
+def _textos_de_tela(no):
+    """Todo texto que a pagina mostra: os valores de texto do questionario, menos comentarios
+    (que o YAML nao carrega) e os ids."""
+    if isinstance(no, dict):
+        for k, v in no.items():
+            if k not in ("id", "valor"):
+                yield from _textos_de_tela(v)
+    elif isinstance(no, list):
+        for v in no:
+            yield from _textos_de_tela(v)
+    elif isinstance(no, str):
+        yield no
+
+
+def test_y_a_nenhuma_tela_usa_o_jargao_do_filtro():
+    """y-a (02/10): o convite e a tela de conclusao dizem o mesmo criterio do filtro (v-a),
+    sem "aporta" nem "renda variavel". Falha na versao da y-b, que os usava em tres telas."""
+    jargao = [t for t in _textos_de_tela(Q)
+              if "aport" in t.lower() or "renda vari\u00e1vel" in t.lower()]
+    assert jargao == []
+    criterio = "a\u00e7\u00f5es, fundos de \u00edndice (ETF) ou fundos imobili\u00e1rios"
+    assert criterio in Q["convite"]["texto"] and criterio in Q["filtro"]["texto"]
+    concluiu = [t for t in _textos_de_tela(Q) if t.startswith("Obrigado! A sua resposta")]
+    assert len(concluiu) == 1 and criterio in concluiu[0]

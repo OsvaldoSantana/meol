@@ -72,6 +72,20 @@ def test_pr_roda_o_rapido_e_nunca_o_completo():
     assert "push" not in d["jobs"]["completo"]["if"]
 
 
+def test_21d_PR_confere_a_etiqueta_e_o_semanal_roda_a_regra_de_volta():
+    """Fila 21d (03/10/2026): sem a etiqueta no titulo o PR nao entra no denominador; sem o
+    passo no semanal a regra depende de alguem lembrar (P7)."""
+    d = _wf("testes.yml")
+    assert "edited" in d["on"]["pull_request"]["types"]
+    tit = [p for p in d["jobs"]["rapido"]["steps"] if "--titulo-pr" in p.get("run", "")]
+    assert tit and "pull_request.title" in tit[0]["env"]["TITULO"]
+    assert "${{" not in tit[0]["run"], "titulo do PR interpolado no script e injecao"
+    volta = [p for p in d["jobs"]["completo"]["steps"]
+             if "metricas_processo.py --prs" in p.get("run", "")]
+    assert volta and volta[0]["if"] == "always()"
+    assert d["jobs"]["completo"]["permissions"]["pull-requests"] == "read"
+
+
 def test_P148_dependabot_ignora_exatamente_as_dependencias_numericas():
     """P-148: o Dependabot nao propoe o que muda numero pre-registrado (P-15), e so isso.
 
