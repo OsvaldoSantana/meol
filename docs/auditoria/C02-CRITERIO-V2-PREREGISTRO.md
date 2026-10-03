@@ -268,6 +268,30 @@ cada evento com URL, sha256, página e trecho.
 
 **Pela ordem da §3.1, a corrida de 2016–2020 pode rodar.** O passo 3 vem depois deste commit.
 
+#### O script da corrida (passo 3, 03/10/2026, antes de rodar)
+
+**O script:** `auditoria/c02_corrida.py`. Aplica a §4 com a emenda E-K (§4.4) e o K6 da §5.
+Nenhum limiar nasce nele: cada constante cita a linha deste texto de onde veio.
+- **Recalcula o D1** a partir da transcrição e só segue com `PASSA`.
+- **Grava o sha256 de cada insumo** junto do resultado: o silver e cada COTAHIST lido.
+- **Trava (P7):** recusa ler preço de 2013–2020 se o commit não estiver no `origin` ou se a
+  árvore tiver mudança que o commit não carrega. Sai com código 3, sem ler preço.
+
+**Os testes** (`auditoria/test_c02_corrida.py`, 43) usam só dado sintético de resposta
+conhecida:
+
+| cenário | resposta |
+|---|---|
+| queda igual ao bruto | `PASSA` |
+| queda igual ao líquido | K2 `REPROVA` |
+| sem queda | K2 e K3 `REPROVA`; a janela sai `CRITERIO_SEM_PODER` (§5, nota P5) |
+
+**Prova por mutação:** 22 defeitos reintroduzidos no próprio script, um a um, e a suíte reprova
+os 22. A semente, o percentil e a borda do K5 só passaram a ser pegos depois de um teste dourado
+e de um teste de borda, que entraram no mesmo commit.
+
+**O script ainda não rodou** sobre dado real; nenhum preço de 2013–2020 foi aberto.
+
 **Dia limpo.** `classe_do_degrau(...) == "LIMPO"`: o dia não tem evento de quantidade, nem
 marca B/G do ESPECI sem evento no silver, nem evento sem fator no mesmo papel e dia.
 
@@ -456,6 +480,15 @@ não tem poder.
 
 *(Emenda E-K, §4.4: um IC inteiro fora da faixa reprova, qualquer que seja o σ̂ (E-K1), e o
 ponto da M1 é o dia deslocado (E-K2).)*
+
+**O que o K6 não protege (P5, medido no dado sintético do script, 03/10/2026).** Das quatro
+mutações no dado, só a M5 depende de quanto o mercado de fato cai:
+- **M5:** dá razão 1 + k. Só sai da faixa do K2 com k > 0,15, e da faixa do K3 com k > 0,35.
+- **M1** (≈ 0) **e M3** (centenas) não dependem de k.
+
+Num mundo em que o preço não cai o provento (k ≈ 0), ignorar o provento **é** o ajuste certo,
+a M5 passa, e a janela sai `CRITERIO_SEM_PODER`. Em 2021–2025 mediu-se k ≈ 0,95 no JCP e
+≈ 1,16 no dividendo, longe dos dois limites.
 
 **Por que a M4 saiu do K2.** Na revisão 2 ela ficava em cima da borda da faixa do JCP. Se a
 razão verdadeira fosse 0,95 (2021–2025 mediu 0,951), a M4 cairia para ~1,10, caberia na faixa,
