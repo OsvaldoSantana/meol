@@ -1233,7 +1233,7 @@ critério corrigido repete o defeito da P-116.
 > 10 (TOTS3) não rotulavam o valor: depois da escada, a decisão dele virou a **emenda E-D1a**
 > ("sujeito a retenção de IR" = bruto; o 20-F em HTML vale como prova), empurrada antes da
 > classificação (`95042ca`). A emenda veio depois de abrir os documentos, e isso está declarado
-> na §3.1: sem ela, o D1 não daria `PASSA`. O RAD corta downloads (`curl: (18)`); a guarda de
+> na §3.1, com o que cada saída daria: só a leitura estrita leva a `NAO_CONFIRMADO`. O RAD corta downloads (`curl: (18)`); a guarda de
 > integridade reprova as 5 cópias cortadas, e as 10 provas repetiram o sha256 em duas rodadas.
 > **Aberto:** os PDFs no armazém (§3.1), que a nuvem não alcança: sessão local, em "Ao voltar
 > ao desktop". **Próximo passo:** o script da corrida de 2016–2020 (§3.1, passo 3), que ainda

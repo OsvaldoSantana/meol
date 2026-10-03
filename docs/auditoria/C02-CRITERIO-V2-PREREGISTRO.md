@@ -236,13 +236,16 @@ Os quatro campos continuam obrigatórios:
 **A alíquota não declarada** é a da lei citada acima (15%), só para calcular o líquido esperado.
 
 **O que esta emenda não protege (P5).** Ela foi escrita **depois** de abrir os documentos das
-posições 1 a 12. Quem a escreveu já sabia que, com ela, as posições 1 a 10 dariam `BRUTO`, e
-sem ela o D1 ficaria `NAO_CONFIRMADO` ou trocaria duas posições pelas 11 e 12. As quatro
-saídas foram postas a ele antes da decisão:
-- retenção = bruto, aceitando o 20-F;
-- retenção = bruto, só com PDF;
-- leitura estrita;
-- as duas posições não contam.
+posições 1 a 12. Quem a escreveu já sabia o que cada saída daria. As quatro foram postas a ele
+antes da decisão; só a leitura estrita leva a `NAO_CONFIRMADO` *(correção de 03/10, auditoria
+do claude.ai: o texto anterior dizia que sem a emenda o D1 não seria `PASSA`)*:
+
+| saída posta a ele antes da decisão | posição 5 (GGBR3) | posição 10 (TOTS3) | o D1 |
+|---|---|---|---|
+| retenção = bruto, aceitando o 20-F (**a decidida**) | `BRUTO` | `BRUTO` | `PASSA` (posições 1 a 10) |
+| as duas não contam (falta a 4ª prova; regra de pular) | pulada | pulada | `PASSA`: entram a 11 e a 12, já registradas como "seriam `BRUTO`" |
+| retenção = bruto, só com PDF | sem prova em PDF | `BRUTO` | depende da posição 5: se ela não contar, entra a 11 e dá `PASSA`; se contar como não `BRUTO`, `NAO_CONFIRMADO` |
+| leitura estrita (só "bruto"/"gross" ou líquido ao lado) | não `BRUTO` | não `BRUTO` | `NAO_CONFIRMADO` |
 
 A emenda não mexe na ordem, na semente, nem na regra de pular. É, por isso, uma regra
 escolhida com a amostra à vista: quem duvidar dela tem as quatro saídas e os documentos na
@@ -255,7 +258,8 @@ cada evento com URL, sha256, página e trecho.
 - **As posições 1 a 10 têm documento achado**, e as 10 são `BRUTO`. Nenhuma foi pulada.
 - **A diferença entre a B3 e o bruto é zero** na precisão impressa, nas 10. A menor distância
   ao líquido é 0,0028, nas posições 6 e 7.
-- **As posições 5 e 10 são `BRUTO` pela E-D1a**, e sem ela o D1 não seria `PASSA`.
+- **As posições 5 e 10 são `BRUTO` pela E-D1a.** Das outras três saídas, só a leitura estrita
+  daria `NAO_CONFIRMADO` (tabela da emenda, acima).
 - **A integridade** de cada PDF foi conferida antes do sha256: estrutura, todas as páginas e
   duas cópias iguais. Uma segunda rodada repetiu os 11 sha256.
 - **O RAD corta a transferência** sem `--compressed`, e a guarda reprova as 5 cópias cortadas.
@@ -391,6 +395,44 @@ exige ao menos **10** eventos grandes somados; com menos, a **janela** fica
 - **`CRITERIO_SEM_PODER`** se K6 falhar, qualquer que seja o resto. Nesse caso o critério não
   mede nada, e **não existe PASSA**.
 
+### 4.4 Emenda E-K: o que o script da corrida precisava e a §4 não fixava (03/10/2026)
+
+**Decisões dele, 03/10/2026.** Foram perguntadas na sessão que escreveu
+`auditoria/c02_corrida.py`, antes de o script existir e **sem nenhum preço de 2013–2020
+aberto**. Cada item é uma lacuna achada ao implementar a §4 e a §5, com a resposta dele.
+
+**E-K1: IC disjunto da faixa é `REPROVA`, qualquer que seja o σ̂.** Vale no dado real e nas
+mutações do K6. A ordem do veredito de K2 e K3 passa a ser:
+1. menos de 30 pontos ou menos de 20 pregões distintos → `NAO_CONFIRMADO`;
+2. o IC cabe na faixa → `PASSA`;
+3. o IC inteiro fora da faixa (hi < limite inferior, ou lo > limite superior) → `REPROVA`;
+4. o IC cruza uma borda e σ̂ ≤ σ_max → `REPROVA`;
+5. o IC cruza uma borda e σ̂ > σ_max → `NAO_CONFIRMADO` (sem poder).
+
+Pelo texto da §4.1, um IC inteiro fora da faixa com σ̂ > σ_max seria `NAO_CONFIRMADO`. A M3
+(σ̂ enorme) e, com o σ̂ esperado do JCP em 2016–2020 (~0,058 > 0,0416, §9), também a M1 e a M5
+cairiam nessa linha. O K6 falharia **por construção**, e a janela sairia `CRITERIO_SEM_PODER`
+antes de qualquer dado. O σ_max existe para o IC que cruza a borda: lá, "não coube" com σ
+grande é falta de dado. Um IC que não toca a faixa não é falta de dado.
+
+**E-K2: o ponto da M1 é o dia deslocado**, o pregão em que o fator mutado entra, como na
+tabela da §5 (razão ≈ 0). O rendimento `y`, os tipos, a classe do degrau e o mercado do dia
+vêm do silver **não mutado**.
+
+**E-K3: a completude conta só os degraus de provento.** O "1/3 dos degraus do ano fora dos dias
+limpos" é medido sobre os degraus que **não** são de quantidade. Contam como fora os
+`CONTAMINADO` e os `MARCA_SEM_EVENTO`. Os eventos de quantidade têm a sua própria linha de
+completude: no máximo 1/3 sem mercado do dia.
+
+**E-K4: os detalhes do bootstrap e do K5.**
+1. Cada teste ganha um gerador **novo**, `numpy.random.default_rng(20260926)`: K2, K3 e cada
+   mutação do K6. Cada um se reproduz sozinho, independente da ordem.
+2. O IC sai dos percentis 2,5 e 97,5 de `numpy.percentile`, com a interpolação linear padrão.
+3. σ̂ é o desvio padrão das 2.000 razões com `ddof=1`.
+4. "Cabe" tem bordas fechadas: lo ≥ inferior e hi ≤ superior.
+5. No K5, o fator ≤ 0,67 ou ≥ 1,5 é o do **degrau**: o produto dos fatores do dia, como o
+   `ajustar.py` grava.
+
 ## 5. K6 — o critério pode reprovar?
 
 Cada mutação altera **só a entrada do ajuste**. O `y` da estatística vem sempre do silver
@@ -411,6 +453,9 @@ verdadeira do mercado e `c` o múltiplo do valor que o ajuste usa, a razão medi
 no mesmo dado de 2016–2020; a M4 roda sobre a amostra transcrita do D1. Um `NAO_CONFIRMADO`
 numa mutação conta como falha do K6: um critério que não distingue a leitura errada da certa
 não tem poder.
+
+*(Emenda E-K, §4.4: um IC inteiro fora da faixa reprova, qualquer que seja o σ̂ (E-K1), e o
+ponto da M1 é o dia deslocado (E-K2).)*
 
 **Por que a M4 saiu do K2.** Na revisão 2 ela ficava em cima da borda da faixa do JCP. Se a
 razão verdadeira fosse 0,95 (2021–2025 mediu 0,951), a M4 cairia para ~1,10, caberia na faixa,
