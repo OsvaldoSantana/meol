@@ -2199,10 +2199,116 @@ sem estado** (A e B recusadas). O desenho, o porquê e as três consequências e
 bloco 18 da [fila](../decisoes/fila-do-osvaldo.md). A P-157 fica de pé. A consequência (b) virou
 a P-175; a (a) é da P-158 e a (c) é da leitura do item 20.
 
+## ~~P-115~~ · O critério do degrau precisa ser re-pré-registrado antes da próxima janela — **FECHADA em 03/10/2026**
+
+**Dono:** Osvaldo decide · **Gatilho:** antes de medir qualquer janela nova (2016–2020, ou o
+acervo inteiro) · **Classe:** `DECISAO_DE_DESENHO`
+
+O critério do C-02 reprovou em 4 de 5 anos (`docs/auditoria/C02-JANELA-2021-2025.md`) e o nulo
+estava errado: o dia ex ajustado tem o retorno do mercado, e o dividendo tira do preço 1,16×
+o que paga. O critério corrigido — dias **limpos**, **descontado o mercado** do dia, razão
+queda/provento **por tipo** — foi desenhado **depois** de ver 2021–2025, então só vale como
+pré-registro para dado que ainda não foi medido.
+
+**E só vale se for commitado e empurrado ANTES de rodar sobre 2016–2020.** Commit local não
+basta: o que torna o "antes" verificável (P4) é o histórico **público** datado — o verificador
+externo do laudo `docs/auditoria/PREREGISTRO-EVIDENCIA.md`. Sem o push anterior à corrida, o
+critério corrigido repete o defeito da P-116.
+
+> **Decisão dele, 26/09/2026: `115a`** (recomendada) — empurrar o critério corrigido do degrau como pré-registro antes de medir 2016–2020. O Claude Code redige; ele responde "pode empurrar" antes de qualquer medição. Registro em `docs/decisoes/fila-do-osvaldo.md`.
+
+> **26/09/2026, revisão 4 (no rascunho do PR #27, §9):** "pode empurrar" dado, com merge
+> condicionado. **Antes do merge, a janela é escolhida pelo n de JCPs, sem ler preço.** As
+> candidatas são 2016–2020, 2015–2020, 2014–2020 e 2013–2020. Vale a menor com
+> **n_JCP ≥ 1.648**; se nenhuma atender, fica 2016–2020 com o `NAO_CONFIRMADO` provável
+> declarado. Quem conta é o `auditoria/c02_contar_n.py` (só no branch do #27 até o merge),
+> que lê do silver só `cod`, `type_stock`, `tipo` e as duas datas. **A ordem da sessão local:**
+> 1. silver com calendário desde **2013-01-01**;
+> 2. contar;
+> 3. gravar contagem, janela e sha256 num commit só;
+> 4. sortear e empurrar o D1;
+> 5. merge.
+>
+> ~~**Aberta, e decidir antes de segunda:** o n do silver é teto do n do K2. A calibração pela
+> razão de 2021–2025 está na fila (`n-a` ou `n-b`).~~ **Decidida em 26/09: `n-c`.** O n passa a
+> ser a unidade dos 819, medida por presença no COTAHIST e sem preço. A calibração é condição:
+> sobre 2021–2025 tem de dar 819, senão o script para e mostra a diferença. E há quarentena do
+> retorno do dia ex em 2013–2020 até o merge. Texto na §9 do #27 (`d7811fd`); decisão em
+> `docs/decisoes/fila-do-osvaldo.md`. **Na segunda**, se a calibração parar, a janela não cresce,
+> e a diferença vai para ele antes de qualquer outro passo. **27/09, tolerância de 2% só para
+> cima:** 819 segue; de 820 a 835 segue, com o n × 819 ÷ n_cal arredondado para baixo; fora
+> disso, para (§9 do #27, `239acf1`).
+>
+> **02/10/2026, sessão local — a contagem deu `PARADO`.** A calibração em 2021–2025 contou
+> **807**, quando a faixa aceita vai de 819 a 835: diferença de **−12**, abaixo da faixa. A
+> §9 do #27 diz que contar a menos é sinal de unidade errada. Pelo passo 3, nada se gravou
+> além da diferença:
+> - sem janela escolhida;
+> - sem sha256 na §2;
+> - sem D1 sorteado.
+>
+> **Nenhum preço de 2013–2020 foi aberto.** O silver
+> (`eventos_silver_2026-09-11_cal-19860102-20260918.csv`, sha256 `ec6b50da…98143`, igual em
+> duas gerações) e os COTAHIST de 2013 a 2025, conferidos contra os pinos, estão na §9.
+>
+> **Em aberto:** o −12 é do contador ou da referência? Os 819 foram medidos em setembro, com o
+> silver e o código de então. Separar os dois exige rodar o `ajustar.medir` em 2021–2025 com
+> este silver; isso lê preço só de 2021–2025, fora da quarentena.
+>
+> **03/10/2026 — o −12 é da referência** (§9 do pré-registro): o `ajustar.medir` de hoje dá
+> **807** em 2021–2025; os 819 de setembro não valem mais. Revisão 5: calibração 807, σ 0,0482,
+> limiar **1.693** (`2638de1`). A contagem deu 2016–2020 = **555**, nenhuma candidata atende, e a
+> janela é **2016–2020** com o `NAO_CONFIRMADO` provável do K2 declarado (`60a40f2`). O D1 está
+> sorteado e empurrado (`73ee120`, semente 20260927, 30 posições). Esses quatro commits saíram
+> em Sonnet; a auditoria do claude.ai em Opus conferiu constantes, ordem e semente, sem
+> reexecutar (`eventos.csv`). **Limitação declarada (§9):** o 0,0482 é σ por ponto; o K2 é
+> julgado pela §3.1 (por pregão, semente 20260926). A janela só seria outra com o σ por pregão
+> de 2021–2025 entre 0,0276 e 0,0342, e ele não foi medido. **Próximo passo do D1:** a
+> transcrição dos documentos (§3.1, passo 2), antes da corrida.
+>
+> **03/10/2026 — D1 transcrito: `PASSA`** (`docs/fontes/jcp-amostra-2016-2020.md`). As posições
+> 1 a 10 têm documento no RAD e as 10 são `BRUTO`; nenhuma foi pulada. As posições 5 (GGBR3) e
+> 10 (TOTS3) não rotulavam o valor: depois da escada, a decisão dele virou a **emenda E-D1a**
+> ("sujeito a retenção de IR" = bruto; o 20-F em HTML vale como prova), empurrada antes da
+> classificação (`95042ca`). A emenda veio depois de abrir os documentos, e isso está declarado
+> na §3.1, com o que cada saída daria: só a leitura estrita leva a `NAO_CONFIRMADO`. O RAD corta downloads (`curl: (18)`); a guarda de
+> integridade reprova as 5 cópias cortadas, e as 10 provas repetiram o sha256 em duas rodadas.
+> **Aberto:** os PDFs no armazém (§3.1), que a nuvem não alcança: sessão local, em "Ao voltar
+> ao desktop".
+>
+> **03/10/2026 — o script da corrida existe** (`auditoria/c02_corrida.py`, §3.1 passo 3). Antes
+> dele, a decisão dele virou a **emenda E-K** (§4.4): o texto literal da §4.1 fazia o K6 falhar
+> por construção. O script:
+> - recalcula o D1 da transcrição;
+> - grava o sha256 do silver e de cada COTAHIST;
+> - **recusa ler preço de 2013–2020 se o commit não estiver no `origin`** (P7).
+>
+> 43 testes com dado sintético; 22 mutações reintroduzidas, 22 pegas. Não rodou sobre dado real.
+> **Próximo passo:** ⚙ **exige o desktop.** A sessão local roda
+> `py -3.11 auditoria/c02_corrida.py <silver>` sobre o silver da §2 (sha256 `ec6b50da…98143`),
+> depois do merge, e commita o JSON do resultado.
+
+**FECHADA em 03/10/2026.** Decisão dele no claude.ai: **opção A**, fechar com o C-02 como saiu.
+A corrida de 2016–2020 deu **`NAO_CONFIRMADA`**. K2 (JCP) e K3 (dividendo) ficaram
+`NAO_CONFIRMADO` por σ̂ acima do σ_max. K1, K5, a completude e o K6 deram `PASSA`, e não houve
+nenhum `REPROVA`. **Evidência:**
+- o PR **#57**, mergeado em `c4fec69`;
+- o commit do resultado, **`b331172`**, rodado sobre `506678e`;
+- o JSON `docs/auditoria/C02-JANELA-2016-2020-resultado.json`, com sha256 do blob
+  **`73e43fba73cd07dc38e16415772d670a9d887674fc93dec6aba699bb5487defd`**.
+
+O resultado, a decisão e a hipótese exploratória do JCP líquido (marcada como não resultado)
+estão na §7 do pré-registro. O teste `xfail(strict=True)` da §7 é o
+`auditoria/test_c02_janela_2016_2020.py`. A falta de poder é o achado **PO-01**. Ficaram
+abertas a **P-176** (o padrão 1, 2, 3, 4, 5 no K5 e na completude) e a **P-177** (a corrida
+não recusa insumo com sha256 diferente). Os PDFs do D1 no armazém seguem como item 11 de
+"Ao voltar ao desktop": não bloqueavam a corrida e não bloqueiam o fechamento.
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-115** | o critério do degrau re-pré-registrado antes da próxima janela (C-02 v2) | 03/10 — opção A: `NAO_CONFIRMADA` em 2016–2020 como saiu (#57, `b331172`); PO-01, P-176, P-177 |
 | **P-165** | onde o motor roda para o usuário | 03/10 — B′, servidor sem estado; consequências na P-175 |
 | **P-163** | as direções visuais como estímulo, a T1 em cada direção | 27/09 — S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |
 | **P-155** | ler a WCAG na fonte: contraste, alvo de toque e daltonismo (era P-WCAG) | 27/09 — WCAG 2.2 transcrita; RI-22 a RI-34 com verificação |

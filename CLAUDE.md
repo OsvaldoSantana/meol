@@ -209,6 +209,9 @@ docs/
 - **Se a primeira linha do prompt pede um modelo e a sessão não é esse modelo, pare antes de
   qualquer passo.** Motivo: a P-115, classe `opus`, rodou em Sonnet de `2638de1` a `73ee120`
   porque o modelo escolhido na tela não era o do prompt (`eventos.csv`, 03/10).
+- **Uma sessão local por pasta; sessões paralelas usam `git worktree`** (uma pasta por branch).
+  Motivo: em 03/10 a sessão da P-165 trocou de branch no mesmo clone 39 s depois do commit da
+  corrida do C-02 (GIT-03); o resultado escapou por reexecução, não por guarda.
 - **Achado novo** segue a skill `bastter-achado`; mudança em `alocacao/` segue
   `bastter-mudanca`.
 
