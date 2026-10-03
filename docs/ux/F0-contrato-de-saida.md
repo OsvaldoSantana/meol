@@ -7,7 +7,7 @@ decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-p
 > **Decisão do Osvaldo, 03/10/2026: aprovado com mudanças** (item 20 da
 > [fila](../decisoes/fila-do-osvaldo.md); registro feito pelo Claude, sem razões atribuídas a ele).
 > Os 23 campos ficam. **Mudança:** `reserva.atual` e `alocacao.atual[]` seguem no contrato da
-> tela com **origem: aparelho, não trafega** — o servidor não os recebe nem os devolve (B′,
+> tela com **origem: aparelho, não é devolvido** — o servidor não os devolve; se precisa recebê-los é decisão da P-178 (B′,
 > [P-165](../decisoes/P-165-onde-o-motor-roda.md)). **Venda:** o motor deve recomendar venda
 > (P-123); o `venda.motivo` abaixo é compromisso, hoje sem emissor. **Frase curta:** a
 > interface pode montá-la; o §3, item 3, "nunca montada na interface", **deixa de valer** como
@@ -73,10 +73,10 @@ decisão em [`docs/decisoes/F0-trilha-de-produto.md`](../decisoes/F0-trilha-de-p
 | campo | tipo | origem | tela | RI | exemplo |
 |---|---|---|---|---|---|
 | `reserva.alvo` | dinheiro em R$ | `EXISTE_EM_PARTE`: `Diretiva(G2).memoria["alvo"]` só quando o G2 dispara; com a reserva completa, só pela função `reserva_alvo()`, fora da saída | T2 | RI-09 | `27000.00` |
-| `reserva.atual` | dinheiro em R$ | `EXISTE_EM_PARTE`: `Diretiva(G2).memoria["atual"]`, idem; senão `Estado.reserva_atual` (entrada). **Origem: aparelho, não trafega** (decisão de 03/10: a tela o monta com o que o aparelho guarda) | T2 | RI-09, RI-14 | `9000.00` |
+| `reserva.atual` | dinheiro em R$ | `EXISTE_EM_PARTE`: `Diretiva(G2).memoria["atual"]`, idem; senão `Estado.reserva_atual` (entrada). **Origem: aparelho, não é devolvido na resposta** (decisão de 03/10: a tela o monta com o que o aparelho guarda; se o motor precisa recebê-lo é a P-178) | T2 | RI-09, RI-14 | `9000.00` |
 | `reserva.fase` | texto, um de `A`, `B`, `C` | `NAO_EXISTE`. A fase se deduz do G2 ter disparado, mas não é campo | T2 | RI-09 | `"A"` |
 | `alocacao.alvo[]` | lista de {rota, peso} | `EXISTE`: `saida["alvo"]["pesos"]` | T2 | RI-02 | `{rota: "bova11", peso: 0.30}` |
-| `alocacao.atual[]` | lista de {rota, peso} | `EXISTE`: `Estado.posicoes` (entrada) e `motor_aporte()["ordens"][i]["peso_atual"]`. **Origem: aparelho, não trafega** (decisão de 03/10) | T2 | RI-02 | `{rota: "bova11", peso: 0.25}` |
+| `alocacao.atual[]` | lista de {rota, peso} | `EXISTE`: `Estado.posicoes` (entrada) e `motor_aporte()["ordens"][i]["peso_atual"]`. **Origem: aparelho, não é devolvido na resposta** (decisão de 03/10; a entrada é a P-178) | T2 | RI-02 | `{rota: "bova11", peso: 0.25}` |
 | `custo_de_discordar` | p.p. ao ano | `EXISTE`: `custo_de_discordar()`, chamada à parte, fora do `alocar()` | T2 | RI-11 | `0.12` |
 
 ### Venda (T1, T3)

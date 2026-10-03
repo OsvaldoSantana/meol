@@ -2079,7 +2079,7 @@ do aparelho para o servidor é o `Estado` (`alocacao/alocacao.py:150`): `despesa
 `dividas`, `objetivos`, `posicoes`, `caixa`, `match_empregador`.
 
 **Objetivo:** minimizar os campos em trânsito (consequência (c) da P-165). A saída já foi
-decidida em 03/10 (`reserva.atual` e `alocacao.atual[]` não trafegam); falta dizer, campo a
+decidida em 03/10 (`reserva.atual` e `alocacao.atual[]` não são devolvidos na resposta; o motor pode precisar recebê-los); falta dizer, campo a
 campo, qual desses onze o motor precisa receber para decidir e qual a tela pode guardar. Como a
 saída calcula `falta` da reserva e `peso_atual`, vale conferir o que o motor realmente lê antes
 de cortar (`python impacto.py` sobre cada campo). **Fecha com:** um documento no formato da F0,
