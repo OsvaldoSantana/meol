@@ -616,10 +616,18 @@ arredondar o IC (0,0482 → 1.692,1) o teto dá o mesmo 1.693: o inteiro não de
   novo (1.693) vale daqui para a frente; o texto acima (1.648, 819, 0,0472) fica como
   registro do que se escreveu em 26/09.**
 
-**O que falta antes de qualquer contagem de 2013–2020:** `auditoria/c02_contar_n.py` ainda
-carrega `CALIBRACAO_N = 819`, `SIGMA_2021_2025 = 0.0472` e o limiar 1.648, com a faixa de
-aceitação de 819 a 835. Trocar por 807, 0,0482 e 1.693, com o teste, é revisão do script e
-**vem empurrada antes da contagem**; este commit só grava a medição.
+### Revisão 5: as constantes do contador (03/10/2026, antes de qualquer contagem de 2013–2020)
+
+Decisão dele, 03/10/2026. O `auditoria/c02_contar_n.py` passa a calibrar contra a referência
+remedida; **empurrada antes da contagem**:
+- **calibração 807**, com a mesma tolerância de 2% só para cima (27/09): **n_cal = 807** segue
+  sem correção; **n_cal de 808 a 823** (807 × 1,02 = 823,14) segue, com o n de cada candidata
+  × 807 ÷ n_cal, arredondado para baixo; **n_cal abaixo de 807 ou acima de 823** para, com código
+  2 e a diferença;
+- **σ 0,0482** e **limiar n_JCP ≥ 1.693**;
+- **de onde vem o σ:** `auditoria/c02_bootstrap_sigma.py`, semente 20260921, 2.000 reamostras:
+  `py -3.11 auditoria/c02_bootstrap_sigma.py <silver.csv>`;
+- o texto da §9 acima (819, 835, 0,0472, 1.648) fica como o que se escreveu em 26/09 e 27/09.
 
 ---
 

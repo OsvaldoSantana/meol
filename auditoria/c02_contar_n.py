@@ -5,8 +5,8 @@
 POR QUE (P-115, secao 9 do `docs/auditoria/C02-CRITERIO-V2-PREREGISTRO.md`, decisao n-c de
 26/09/2026). O K2 do JCP provavelmente sai sem poder em 2016-2020, e a janela pode crescer
 para tras (2013-2020 no maximo). O tamanho so pode ser escolhido pelo n, nunca pelo preco.
-E o n tem de estar na MESMA unidade dos 819 de 2021-2025: a primeira versao desta regra
-comparava a contagem do silver com os 819 sem conferir isso.
+E o n tem de estar na MESMA unidade dos 807 de 2021-2025 (819 ate a revisao de 03/10): a
+primeira versao dela comparava a contagem do silver com a referencia sem conferir isso.
 
 A UNIDADE (a de `ajustar.medir` -> `residuo_de_mercado` -> "so JCP", dias LIMPOS): o degrau
 (papel, data ex) com negocio no COTAHIST no dia ex e num pregao anterior DO PAPEL, que ganhou
@@ -26,8 +26,8 @@ O QUE LE, e so isto:
     status. Nem `valor`, nem `preco_vespera`, nem `fator`.
 
 A CALIBRACAO e condicao, com tolerancia de 2% so para cima (decisao dele, 27/09/2026):
-rodado sobre 2021-2025, 819 segue; de 820 a 835 segue com o n de cada candidata x 819/n_cal,
-arredondado para baixo; abaixo de 819 ou acima de 835, a regra NAO escolhe janela -- o
+rodado sobre 2021-2025, 807 segue; de 808 a 823 segue com o n de cada candidata x 807/n_cal,
+arredondado para baixo; abaixo de 807 ou acima de 823, a regra NAO escolhe janela -- o
 script para, mostra a diferenca e sai 2, sem imprimir candidatas.
 
 O QUE NAO MEDE (P5): os casos em que o `ajustar` descarta por VALOR do preco (preco zero,
@@ -66,15 +66,18 @@ QUANTIDADE = frozenset(refinar.TIPOS_DE_QUANTIDADE)
 CALCULADO, SEM_PRECO, DERIVADA = refinar.CALCULADO, refinar.SEM_PRECO, refinar.DERIVADA
 MERCADO_MINIMO = 20          # o `minimo` de `ajustar.mercado_do_dia`
 
-# a regra da secao 9: os numeros sao os da secao 4 (2021-2025 e sigma_max do K2)
-SIGMA_2021_2025 = 0.0472
-CALIBRACAO_N = 819
+# a regra da secao 9: os numeros sao os REMEDIDOS em 03/10/2026 (secao 9, "O resultado: n = 807"),
+# nao os de setembro (819, 0,0472, 1.648): o `ajustar.medir` de hoje, com o silver ec6b50da,
+# da n=807 e sigma 0,0482 em 2021-2025. O sigma sai de `c02_bootstrap_sigma.py`
+# (semente 20260921, 2.000 reamostras); sigma_max do K2 nao depende da referencia.
+SIGMA_2021_2025 = 0.0482
+CALIBRACAO_N = 807
 CALIBRACAO_ANOS = (2021, 2025)
 # Decisao dele, 27/09/2026. A tolerancia e SO PARA CIMA: a presenca so pode contar A MAIS
 # que o `ajustar` -- os descartes que ela nao ve sao por VALOR do preco (fechamento zero ou
 # ilegivel, dois proventos de mesmo tipo e dia com valores diferentes), e nenhum deles cria
-# degrau. Contar a menos quer dizer unidade errada, e para sempre. Dentro de 819 x 1,02, o n
-# de cada candidata e multiplicado por 819 / n_cal e arredondado para BAIXO: a correcao so
+# degrau. Contar a menos quer dizer unidade errada, e para sempre. Dentro de 807 x 1,02, o n
+# de cada candidata e multiplicado por 807 / n_cal e arredondado para BAIXO: a correcao so
 # diminui o n, entao nunca faz uma janela passar que nao passaria.
 TOLERANCIA_CALIBRACAO = 0.02
 SIGMA_MAX_K2 = 0.0416
@@ -156,7 +159,7 @@ def ler_silver(caminho: str) -> Iterator[dict[str, str]]:
 
 def medir_n(evs: Iterable[Mapping[str, str]], cot: Presenca,
             anos: Iterable[int]) -> dict[int, dict[str, int]]:
-    """{ano: {so_jcp, so_div, degraus}} da janela `anos`, na unidade dos 819."""
+    """{ano: {so_jcp, so_div, degraus}} da janela `anos`, na unidade da referencia (hoje 807)."""
     anos = set(anos)
     datas = {d for d in cot.datas if d.year in anos}
     cobertura = (min(datas), max(datas)) if datas else (None, None)
@@ -222,7 +225,7 @@ def n_da_janela(evs: list[dict[str, str]], cot: Presenca, ini: int, fim: int) ->
 
 
 def calibrar(n: int) -> tuple[int, int]:
-    """(819, n) -- o fator da correcao como fracao -- se `n` esta em [819, 819 x 1,02];
+    """(807, n) -- o fator da correcao como fracao -- se `n` esta em [807, 807 x 1,02];
     fora disso, `CalibracaoFalhou` com a diferenca."""
     teto = CALIBRACAO_N * (1 + TOLERANCIA_CALIBRACAO)
     if not CALIBRACAO_N <= n <= teto:
@@ -235,7 +238,7 @@ def calibrar(n: int) -> tuple[int, int]:
 
 
 def corrigir(n: int, n_cal: int) -> int:
-    """n x 819 / n_cal, arredondado para BAIXO, em inteiros (sem ponto flutuante)."""
+    """n x 807 / n_cal, arredondado para BAIXO, em inteiros (sem ponto flutuante)."""
     return n * CALIBRACAO_N // n_cal
 
 
@@ -263,7 +266,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"RESUMO PARADO: {e}")
         return 2
     print(f"calibracao {CALIBRACAO_ANOS[0]}-{CALIBRACAO_ANOS[1]}: {n_cal}; "
-          + ("fator 1 (819/819), sem correcao" if num == den else
+          + (f"fator 1 ({CALIBRACAO_N}/{CALIBRACAO_N}), sem correcao" if num == den else
              f"fator {num}/{den} = {num / den:.6f}, arredondado para baixo"))
     ns = {}
     for ini, fim in CANDIDATAS:

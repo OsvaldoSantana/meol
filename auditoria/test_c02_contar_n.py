@@ -6,10 +6,11 @@ O QUE MEDE (P5):
       (preco, volume, fator de cotacao -- qualquer leitura levanta erro), a presenca e a
       contagem saem certas;
   (b) mutacao: o mesmo leitor com PREULT na lista de campos e pego;
-  (c) a unidade e a dos 819: degrau com negocio no dia ex e na vespera DO PAPEL, que ganhou
+  (c) a unidade e a dos 807 (819 ate 03/10): degrau com negocio no dia ex e na vespera DO
+      PAPEL, que ganhou
       fator, em dia limpo (sem evento de quantidade, sem marca B/G, sem evento sem fator),
       com mercado do dia (>= 20 papeis), so JCP;
-  (d) a calibracao: 2021-2025 da 819 (segue), 820-835 (segue, n x 819/n_cal para baixo)
+  (d) a calibracao: 2021-2025 da 807 (segue), 808-823 (segue, n x 807/n_cal para baixo)
       ou outro valor (PARA, mostra a diferenca, sem candidatas);
   (e) a regra da janela e o texto citam os mesmos numeros.
 NAO mede o dado real: o silver e o COTAHIST moram no disco dele, e o script nao roda aqui.
@@ -183,36 +184,36 @@ def test_c_o_primeiro_dia_da_janela_nao_tem_vespera():
 
 # ── (d) calibracao e (e) regra ────────────────────────────────────────────────
 
-# Decisao dele, 27/09/2026: tolerancia de 2% SO PARA CIMA. 819 segue sem correcao; de 820 a
-# 835 (819 x 1,02 = 835,38) segue, com o n de cada candidata x 819/n_cal arredondado para
-# BAIXO; 818 ou 836 PARA.
+# Decisao dele, 27/09/2026, na referencia remedida em 03/10: tolerancia de 2% SO PARA CIMA.
+# 807 segue sem correcao; de 808 a 823 (807 x 1,02 = 823,14) segue, com o n de cada candidata
+# x 807/n_cal arredondado para BAIXO; 806 ou 824 PARA.
 
 def test_d_tolerancia_e_constante_declarada():
     assert N.TOLERANCIA_CALIBRACAO == 0.02
 
 
-@pytest.mark.parametrize("n_cal", [819, 820, 835])
+@pytest.mark.parametrize("n_cal", [807, 808, 823])
 def test_d_dentro_da_tolerancia_segue(n_cal):
     assert N.calibrar(n_cal) == (N.CALIBRACAO_N, n_cal)
 
 
-@pytest.mark.parametrize("n_cal", [818, 836])
+@pytest.mark.parametrize("n_cal", [806, 824])
 def test_d_fora_da_tolerancia_para_e_mostra_a_diferenca(n_cal):
     with pytest.raises(N.CalibracaoFalhou) as e:
         N.calibrar(n_cal)
-    assert str(n_cal) in str(e.value) and "819" in str(e.value)
-    assert f"{n_cal - 819:+d}" in str(e.value)
+    assert str(n_cal) in str(e.value) and "807" in str(e.value)
+    assert f"{n_cal - 807:+d}" in str(e.value)
 
 
 def test_d_correcao_arredonda_para_baixo_e_so_diminui():
-    assert N.corrigir(1650, 819) == 1650
-    assert N.corrigir(1650, 820) == 1647          # 1650 x 819 / 820 = 1647,98
-    assert N.corrigir(2000, 835) == 1961          # 1961,68 -> 1961
-    for n_cal in range(819, 836):
+    assert N.corrigir(1650, 807) == 1650
+    assert N.corrigir(1650, 808) == 1647          # 1650 x 807 / 808 = 1647,76 -> 1647
+    assert N.corrigir(2000, 823) == 1961
+    for n_cal in range(807, 824):
         assert N.corrigir(1650, n_cal) <= 1650
 
 
-NS = {(2016, 2020): 1300, (2015, 2020): 1600, (2014, 2020): 1650, (2013, 2020): 2000}
+NS = {(2016, 2020): 1300, (2015, 2020): 1600, (2014, 2020): 1700, (2013, 2020): 2000}
 
 
 def _main(monkeypatch, tmp_path, capsys, n_cal):
@@ -227,23 +228,23 @@ def _main(monkeypatch, tmp_path, capsys, n_cal):
     return rc, capsys.readouterr().out
 
 
-def test_d_main_819_segue_sem_correcao(monkeypatch, tmp_path, capsys):
-    rc, out = _main(monkeypatch, tmp_path, capsys, 819)
-    assert rc == 0 and "fator 1 (819/819)" in out
-    assert "janela 2014-2020, n 1650" in out
+def test_d_main_807_segue_sem_correcao(monkeypatch, tmp_path, capsys):
+    rc, out = _main(monkeypatch, tmp_path, capsys, 807)
+    assert rc == 0 and "fator 1 (807/807)" in out
+    assert "janela 2014-2020, n 1700" in out
 
 
-@pytest.mark.parametrize("n_cal,janela", [(820, "janela 2013-2020, n 1997"),
-                                          (835, "janela 2013-2020, n 1961")])
+@pytest.mark.parametrize("n_cal,janela", [(808, "janela 2014-2020, n 1697"),
+                                          (823, "janela 2013-2020, n 1961")])
 def test_d_main_dentro_da_tolerancia_corrige_e_imprime_o_fator(monkeypatch, tmp_path,
                                                                capsys, n_cal, janela):
     rc, out = _main(monkeypatch, tmp_path, capsys, n_cal)
-    assert rc == 0 and f"fator 819/{n_cal}" in out
-    assert "2014-2020: n_JCP 1650 -> corrigido" in out
+    assert rc == 0 and f"fator 807/{n_cal}" in out
+    assert "2014-2020: n_JCP 1700 -> corrigido" in out
     assert janela in out
 
 
-@pytest.mark.parametrize("n_cal", [818, 836])
+@pytest.mark.parametrize("n_cal", [806, 824])
 def test_d_main_fora_da_tolerancia_para_sem_candidatas(monkeypatch, tmp_path, capsys,
                                                        n_cal):
     rc, out = _main(monkeypatch, tmp_path, capsys, n_cal)
@@ -252,7 +253,7 @@ def test_d_main_fora_da_tolerancia_para_sem_candidatas(monkeypatch, tmp_path, ca
 
 
 def test_e_limiar_e_candidatas():
-    assert N.N_MIN == 1648 and N.CALIBRACAO_N == 819
+    assert N.N_MIN == 1693 and N.CALIBRACAO_N == 807 and N.SIGMA_2021_2025 == 0.0482
     assert N.CALIBRACAO_ANOS == (2021, 2025)
     assert N.CANDIDATAS == ((2016, 2020), (2015, 2020), (2014, 2020), (2013, 2020))
 
@@ -270,6 +271,6 @@ def test_e_regra_sem_candidata_cai_em_2016_2020():
 def test_e_o_texto_cita_os_mesmos_numeros():
     with open(TEXTO, encoding="utf-8") as f:
         s = f.read()
-    assert "n_JCP ≥ 1.648" in s and "2016–2020, 2015–2020, 2014–2020 e 2013–2020" in s
-    assert "**n_cal de 820 a 835**" in s and "sai com código 2" in s
+    assert "n ≥ 1.693" in s and "2016–2020, 2015–2020, 2014–2020 e 2013–2020" in s
+    assert "n_cal de 820 a 835" in s and "n_cal de 808 a 823" in s and "sai com código 2" in s
     assert "**arredondado para baixo**" in s and "Alternativa rejeitada: parar sempre" in s
