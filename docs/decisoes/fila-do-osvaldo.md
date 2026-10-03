@@ -197,8 +197,17 @@ Dadas no claude.ai e registradas na sessão local de 03/10.
    PRs, e `arquitetura`, 0 em 2. Com referência 0, 1,5 × 0 = 0, e **o primeiro evento** numa
    janela com 4 PRs devolve a classe. Para o `registro`, que é a classe que desceu para o Sonnet,
    a 21d vira na prática "um erro volta". `estatistica` não tem PR nenhum e fica só com os
-   números até alguém refazer a referência. Nada disso foi mudado: é o que a 21d dá com estes
-   dados, e a P-172 leva a pergunta para 17/10.
+   números até alguém refazer a referência. **Ajustado no mesmo dia, ver abaixo.**
+
+**Ajuste da 21d, 03/10 (decisão dele, claude.ai), sobre o item 2:** a referência de cada classe
+passa a ser **(eventos + 1) / (PRs + 1)**, para que classe com zero evento não tenha régua zero
+(`registro`: 1/7; `estatistica`, sem PR: 1,0, e deixa de ser "só os números"), e a volta passa a
+exigir **pelo menos 2 eventos** da classe na janela, além do fator 1,5 e dos 4 PRs, que não mudam.
+Escolha declarada, não medida: `regra_de_volta.min_eventos: 2` no YAML e o `+ 1` em
+`metricas_processo.regra_de_volta()`. Testes: referência (0 em 6) com 1 evento não volta, com 2
+volta; provado por mutação (tirar o `+ 1` ou o `min_eventos` reprova). Alternativa não escolhida:
+deixar a referência zero como estava (21d original).
+
 3. **O denominador precisa de etiqueta.** Daqui em diante o PR abre o título com
    `[modelo=<m> classe=<c>]`, a mesma etiqueta do `eventos.csv`, e o CI reprova o PR sem ela
    (o Dependabot fica fora). PR sem etiqueta não entra na conta, e o relatório diz quantos

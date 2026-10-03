@@ -1972,10 +1972,10 @@ erro novo.
    lista de `gh pr list --state merged --base main --json number,title,mergedAt,author`, e o
    resumo dos semanais de 05/10 e 12/10;
 2. o tamanho da abertura, de `python auditoria/tamanho_do_contexto.py`;
-3. a pergunta que a execução da 21d deixou: `registro` (0 em 6) e `arquitetura` (0 em 2) têm
-   referência zero e voltam no **primeiro** evento numa janela com 4 PRs, e `estatistica` não
-   tem PR na referência. Fica assim, ou a referência ganha um piso? (fila, respostas de 03/10,
-   item 2).
+3. ~~a pergunta da referência zero~~ **respondida em 03/10:** a referência virou
+   (eventos + 1) / (PRs + 1) e a volta exige pelo menos 2 eventos da classe na janela (fila,
+   ajuste da 21d). Resta olhar, com dois semanais de dado, se o piso ficou alto demais para o
+   `registro` (limiar 0,21 com referência 1/7).
 
 ## Ao voltar ao desktop
 

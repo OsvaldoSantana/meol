@@ -152,8 +152,9 @@ def regra_de_volta(eventos, prs, hoje, ref, modelos=None):
 
     Conta so o que esta etiquetado com um modelo abaixo do topo da `ordem`: o evento de autoria
     Claude no numerador, o PR mergeado no denominador. `desconhecido` nao conta e nao absolve.
-    `ref` e a saida de referencia(); classe sem PR na referencia nao tem taxa com que comparar
-    e nunca volta -- o relatorio so mostra os numeros (decisao 21d)."""
+    `ref` e a saida de referencia(). A taxa da referencia e (eventos + 1) / (PRs + 1): classe com
+    zero evento nao tem regua zero, e classe sem PR tem regua 1,0 (ajuste da 21d, 03/10). A volta
+    exige tambem `min_eventos` eventos da classe na janela, alem do fator e dos `min_prs`."""
     modelos = modelos or ler_modelos()
     ordem, rv = modelos["ordem"], modelos["regra_de_volta"]
     abaixo = set(ordem[:-1])
@@ -174,9 +175,9 @@ def regra_de_volta(eventos, prs, hoje, ref, modelos=None):
     out = {}
     for c in modelos["classes"]:
         e_ref, p_ref = ref.get(c, (0, 0))
-        taxa_ref = e_ref / p_ref if p_ref else None
+        taxa_ref = (e_ref + 1) / (p_ref + 1)
         taxa = ne[c] / npr[c] if npr[c] else None
-        volta = (taxa_ref is not None and taxa is not None and npr[c] >= rv["min_prs"]
+        volta = (taxa is not None and npr[c] >= rv["min_prs"] and ne[c] >= rv["min_eventos"]
                  and taxa > rv["fator"] * taxa_ref)
         out[c] = dict(eventos=ne[c], prs=npr[c], taxa=taxa, ref=taxa_ref, ref_n=(e_ref, p_ref),
                       volta=volta)
@@ -188,7 +189,8 @@ def relatorio_volta(volta, prs, hoje, modelos=None):
     rv = modelos["regra_de_volta"]
     ref = rv["referencia"]
     R = [f"Regra de volta (fila 21d): janela de {rv['janela_dias']} dias; volta se taxa > "
-         f"{rv['fator']} x referencia com >= {rv['min_prs']} PRs da classe. Referencia de "
+         f"{rv['fator']} x referencia (eventos + 1) / (PRs + 1), com >= {rv['min_prs']} PRs e "
+         f">= {rv['min_eventos']} eventos da classe. Referencia de "
          f"{ref['desde']} a {ref['ate']}, em Opus, classe {ref['status']} (inferida).", "",
          "| classe | modelo | eventos / PRs na janela | taxa | referencia (eventos / PRs) "
          "| volta |", "|---|---|---|---|---|---|"]
@@ -197,8 +199,7 @@ def relatorio_volta(volta, prs, hoje, modelos=None):
         return "-" if x is None else f"{x:.2f}"
     for c, v in volta.items():
         e_ref, p_ref = v["ref_n"]
-        r = (f"{num(v['ref'])} ({e_ref} / {p_ref})" if v["ref"] is not None
-             else f"sem referencia ({e_ref} / {p_ref}): so os numeros")
+        r = f"{num(v['ref'])} ({e_ref} / {p_ref})"
         R.append(f"| {c} | {modelos['classes'][c]} | {v['eventos']} / {v['prs']} "
                  f"| {num(v['taxa'])} | {r} | {'**SIM**' if v['volta'] else 'nao'} |")
     inicio = hoje - dt.timedelta(days=rv["janela_dias"])
