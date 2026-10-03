@@ -15,15 +15,17 @@
 
 A e B foram recusadas. A P-157 ("o dado fica no aparelho") fica de pé.
 
-**Por quê**, nas palavras do desenho:
+O Osvaldo escolheu a B′, a opção recomendada, sem declarar razão própria. As razões abaixo são
+da recomendação do Claude (Projeto no claude.ai) e da redação da sessão de registro; não são dele.
 
 1. **O motor em Python num lugar só.** Não se reimplementa nem se empacota o motor para rodar no
-   celular; a resposta dele de 26/09 ("servidor") era isso.
+   celular. Em 26/09 ele respondeu "servidor"; o significado dessa resposta não foi declarado.
 2. **O dado não mora no MEOL.** Sem banco, não há base de dados financeiros de pessoas para
    guardar, fazer backup, vazar ou responder em pedido de titular.
 3. **Não guardar é coerente com as provas de independência e com a recusa da marca:** o MEOL não
-   recebe comissão, não vende produto e não constrói ranking nem comparação entre pessoas
-   (RI-06). Um sistema que acumulasse as carteiras teria um ativo que contradiz isso.
+   recebe comissão nem vende produto, e o RI-06 proíbe ranking de usuários. Um sistema que
+   acumulasse as carteiras teria um ativo que não precisa ter; isso é leitura da recomendação,
+   não requisito escrito.
 
 ## As três consequências, com status
 
