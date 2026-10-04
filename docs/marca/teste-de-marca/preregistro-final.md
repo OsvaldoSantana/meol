@@ -27,6 +27,19 @@ o filtro da v-a e a pergunta dos amigos da u-a; o convite e a tela de conclusão
 o mesmo critério do filtro. Muda só o `questionario.yaml` (§4); a análise não lê o texto das
 perguntas. Nenhuma resposta existe (§10).*
 
+*Emenda de 04/10/2026, livro de códigos versão 3 (ag-b, dele). Feita **antes da primeira
+marca classificada e antes do primeiro convite**: o commit das datas da janela não existe.
+**Declarado:** a sessão de 04/10 já tinha capturado 65 marcas dos quatro sorteios (só a imagem
+e as medidas cruas do navegador, nenhuma classificada), e foi nelas que o defeito apareceu. A
+regra do matiz usava só a saturação HSL ≥ 0,15, que perto do branco e do preto explode:
+`#FFFEFE` dava saturação 1,0 ("vermelho") e `#F5F3EE`, o creme do fundo da própria E, dava
+"laranja", o matiz de E e D. Em 20 das 65 capturas, a cor cromática de maior área era um
+quase-branco ou quase-preto. A emenda: a cor só é cromática se, além da saturação, a
+luminosidade HSL estiver entre 0,10 e 0,90; fora disso é neutro, no botão e na cor de maior
+área. **E, C e D não mudam** (L = 0,34, 0,38 e 0,54; `tools/test_codigos_visuais.py`). Os
+limites 0,10 e 0,90 são escolha declarada, não medida. Muda o `codigos-visuais.yaml` e o
+`tools/codigos_visuais.py` (§8); nada do questionário nem da análise.*
+
 **Origem e o que este substitui.**
 - [`preregistro-teste-de-marca-2026-09-20.md`](../preregistro-teste-de-marca-2026-09-20.md):
   o de 20/09, como declarado. sha256
@@ -73,6 +86,7 @@ Nenhuma foi preenchida por uma sessão. A coluna "20/09" diz o que mudou desde a
 | imagem de estilo de vida na D | prevista | ilustração desenhada em código, **provisória** (P-168) | k-A |
 | **veto de distinção** | — | se a vencedora pela 17a **imitar** o código dominante de uma categoria auditada na R3, a escolha volta para ele; **a direção só sai com a R3 fechada** (§8) | veto (27/09), aa-a |
 | categorias do veto | — | **fechadas no livro de códigos, não na R3:** banco tradicional, banco digital, corretora, gestora e private, pagamentos, consolidador, casa de análise e educação; as referências de sentimento ficam fora do veto (§8) | ac-a (02/10) |
+| matiz perto do branco e do preto | — | **neutro** se a luminosidade HSL estiver fora de 0,10 a 0,90, mesmo com saturação HSL ≥ 0,15 (§8) | ag-b (04/10) |
 | mais quatro categorias, a unidade e a amostra da R3 | — | **consultoria CVM, assessor, robô e planejador** entram no veto, com uma precedência para quem cabe em duas; a R3 classifica **o app** (primeira captura de interface da App Store) ou, **sem app, o site** em 390 px, com o dominante também só com as de app; **pelo menos 10 marcas sorteadas por categoria** (§8) | ad-a, ae-a, af-a (02/10) |
 
 **O que não entra.** A H-A1, que a P-162 dizia que "pode entrar como exploratória", fica de
@@ -243,15 +257,15 @@ nenhuma frase de participante entra no repositório.
 
 | arquivo | o que é | sha256 |
 |---|---|---|
-| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `1d32a59442693be97c6cc9628f422bb0509007fb9a205d1286365f1e1a14719b` |
-| `tools/codigos_visuais.py` | o classificador e o veto, os mesmos para as direções e para as marcas da R3. Congelado desde 02/10: sem ele no conjunto, o cálculo do veto podia mudar depois de a R3 começar sem que nada reprovasse | `7bf3129599fffaea6b883d6e1512c47eeabe96fa8c7e6ed63fb38083711f7188` |
+| `docs/marca/teste-de-marca/codigos-visuais.yaml` | o livro de códigos: seis variáveis com valores fechados, a regra de medida de cada uma, as categorias concorrentes, a definição de código dominante e de imitar | `a900db6f9a404b5db6f232042fb65349e5e56bf7c9391623d0914b9a6b1e9364` |
+| `tools/codigos_visuais.py` | o classificador e o veto, os mesmos para as direções e para as marcas da R3. Congelado desde 02/10: sem ele no conjunto, o cálculo do veto podia mudar depois de a R3 começar sem que nada reprovasse | `2f8426c91898f466cdfeb9e591951a036afae59bd8c9aa486c3c8fedde26758e` |
 
 **As variáveis.**
 
 | variável | central | valores | regra |
 |---|---|---|---|
 | fundo | sim | claro, escuro | luminância relativa da cor de maior área; claro se for maior que 0,179, o ponto em que texto preto e texto branco contrastam igual |
-| matiz | sim | neutro e 12 faixas de 30° | a cor do botão principal (borda, se for vazado); neutro se a saturação HSL for menor que 0,15 |
+| matiz | sim | neutro e 12 faixas de 30° | a cor do botão principal (borda, se for vazado); neutro se a saturação HSL for menor que 0,15 ou a luminosidade HSL estiver fora de 0,10 a 0,90 (ag-b) |
 | família do título | sim | serifa, sem serifa, monoespaçada | a fonte do **texto de maior corpo** da tela, fora o logotipo |
 | raio | sim | reto, pequeno, grande | o raio do botão principal: até 2 px é reto; de 3 a 8 px, pequeno; de 9 px em diante, grande |
 | densidade | não | baixa, média, alta | blocos de informação sem rolar: até 8, baixa; de 9 a 15, média; 16 ou mais, alta |
@@ -411,6 +425,10 @@ registro.
   primeiro convite.
 - **O relatório** dá o resultado sem amigos, o resultado com todos, se os dois divergem, e o
   veto aplicado à vencedora com a R3 fechada.
+- **04/10/2026, ag-b (dele), antes da primeira marca classificada e do primeiro convite.** O
+  livro passa à versão 3: a faixa de luminosidade do matiz. sha256 do `codigos-visuais.yaml` de
+  `1d32a594…19b` para `a900db6f…9364`, e do `tools/codigos_visuais.py` de `7bf31295…188` para
+  `2f8426c9…758e` (§8). A classificação de E, C e D não muda.
 - **02/10/2026, y-a (dele), antes do primeiro convite.** O `questionario.yaml` mudou: filtro
   da v-a, pergunta dos amigos da u-a, e o convite e a tela de conclusão com o critério do
   filtro. sha256 de `73936c74…757a` para `02773d8b…8091` (§4). O `questionario.md` e o

@@ -69,6 +69,12 @@ def faixa_de_matiz(hexa: str, livro: dict[str, Any]) -> str:
     graus, sat = matiz_saturacao(hexa)
     if sat < m["saturacao_minima"]:
         return "neutro"
+    # ag-b (04/10/2026, dele, livro v3): perto do branco e do preto a saturacao HSL explode
+    # (#fffefe da 1,0) e um quase-branco virava cor. Fora da faixa de luminosidade, e neutro.
+    lum = colorsys.rgb_to_hls(*_rgb(hexa))[1]
+    faixa_l = m["luminosidade_cromatica"]
+    if not faixa_l["min"] <= lum <= faixa_l["max"]:
+        return "neutro"
     for f in m["faixas"]:
         de, ate = f["de"], f["ate"]
         dentro = de <= graus < ate if de < ate else (graus >= de or graus < ate)
