@@ -19,17 +19,28 @@ dois arquivos).
 
 ## P-145 · A ponte ticker → CD_CVM de 2013–2019 — o passo 1 do caminho crítico
 
-**Dono:** Claude Code (sessão local) · **Gatilho:** agora; é a cabeça do caminho crítico de
-03/10 · **Classe:** `BLOQUEIA_O_SISTEMA`
+**Dono:** Osvaldo (o envio ao R2) · Claude Code (a medição, depois) · **Gatilho:** agora; é a
+cabeça do caminho crítico de 03/10 · **Classe:** `BLOQUEIA_O_SISTEMA`
 
 A ponte de 2010–2012 fechou (P-143); a de 2013–2019 nunca foi medida. As duas escolhas da §2 são
 dele e foram decididas em 25/09 (`t-2..t`, `≥ mediana` inclusiva; emenda 1, sha256
 `71621ba64c899281`). A medição existe: `medicoes/p145_ponte_2013_2019.py` classifica cada
 emissor em `MANUAL`, `LIGADO_NOME_CONFERE`, `LIGADO_NOME_DIVERGE`, `CNPJ_SEM_CVM` e
 `AUSENTE_DO_ISIN`. Pelo `medir.yml` ela parou em 26/09 por falta do `isinp.zip` no armazém e do
-token de leitura, os dois dele. **Achado da triagem de 03/10:** o `isinp.zip` de 25/09 está no
-disco dele (`data/bronze/b3/isin/dt_captura=2026-09-25`), e o `acervo.abrir` lê de lá: a sessão
-local roda sem esperar nenhum dos dois. Saída só com contagem, código e rótulo (P-136).
+token de leitura. **Na sessão local, falta só o envio** (corrigido em 04/10): o `isinp.zip` de
+25/09 está no disco dele, mas o `acervo.abrir` só aceita versão que conste no registro ou no
+inventário do armazém, e o inventário só se grava **depois** do envio (`subir_acervo_local.py`).
+Rodado por ele em 04/10: `INSUMO AUSENTE ... 'isin/isinp.zip: nenhum registro nem inventario'`.
+O plano do envio, no mesmo dia: 393 `SUBIR`, 0 `PARAR`, 0 `DESCONHECIDO` (1.583 MiB), com o
+`isinp.zip` (`c4654dbd…`) entre eles. O token de leitura só é preciso para medir na nuvem.
+Saída só com contagem, código e rótulo (P-136).
+
+> **Retratação, 04/10/2026.** A triagem de 03/10 escreveu aqui que "a sessão local roda sem
+> esperar nenhum dos dois" passos dele. **Evidência que derruba:** a execução acima. **Causa
+> raiz:** concluí pela existência do arquivo no disco e pela descrição do `acervo.abrir` ("procura
+> no cache, no `data/bronze/` e no R2"), sem rodar o script e sem ler o `_escolher()`, que exige
+> registro ou inventário antes de procurar o byte. É a §5-B.13 ao contrário: "dá para fazer X"
+> escrito sem tentar X. **O que muda:** afirmação de que um passo roda sai com a execução ao lado.
 **Fecha com:** cada emissor de 2013–2019 classificado, e os três últimos rótulos conferidos à mão.
 
 ## P-51 · Só `ÚLTIMO`, e a partição é o ano do arquivo — regra do leitor da CVM
@@ -241,21 +252,22 @@ ativas.*
 
 **Da sessão local (sem ele):**
 
-1. **P-145:** `py -3.11 medicoes/p145_ponte_2013_2019.py` sobre o acervo do disco. É o passo 1
-   do caminho crítico.
+1. **P-145, depois do item 3:** `py -3.11 medicoes/p145_ponte_2013_2019.py` e o PR com os
+   inventários que o envio gravou. É o passo 1 do caminho crítico.
 2. **P-05 e P-169, o degrau 4 da escada:** `curl` de IP residencial no site do BOVV11 e nas
    páginas dos 11 bancos da regra m-B (os roteiros estão no texto das duas, na reserva).
 
 **Dele:**
 
-3. **P-150, subir os eventos de 11/09 ao R2:** `py -3.11 fase0/subir_acervo_local.py` (só o
-   plano: os eventos aparecem como `SUBIR`, nenhum `PARAR`), depois `--aplicar` com as `R2_*`
-   no ambiente, e commitar `docs/acervo/b3_eventos/inventario-armazem.csv`.
+3. **O envio ao R2, que destrava a P-145 e a parte 1 da P-150:** com as `R2_*` no ambiente,
+   `py -3.11 fase0/subir_acervo_local.py --aplicar`. O plano de 04/10 deu 393 `SUBIR`, 0
+   `PARAR`, 0 `DESCONHECIDO` (1.583 MiB), com o `isinp.zip` e os eventos de 11/09. Depois, os
+   `inventario-armazem.csv` que ele gravar vão para um commit (a sessão faz).
 4. **P-115, os PDFs do D1 no armazém:** baixar as 10 provas pelas URLs de
    `docs/fontes/jcp-amostra-2016-2020.md`, conferir cada sha256 contra a tabela e subir; do 20-F
    da Gerdau, o documento arquivado (sha256 `20f8599e…b512`).
 5. **Token do R2 somente leitura** e os quatro segredos `R2_LEITURA_*` (fila, "Conferência de
-   um minuto"): destrava toda medição na nuvem. Não é mais pré-requisito da P-145.
+   um minuto"): destrava toda medição na nuvem. A P-145 na sessão local não precisa dele.
 6. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
    além do passo 6.
 7. **Instruções do Projeto no claude.ai:** colar a versão 2 de

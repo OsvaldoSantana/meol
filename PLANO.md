@@ -43,7 +43,7 @@ depende de dado de usuário.
 
 | # | passo | destrava | o que impede hoje |
 |---|---|---|---|
-| 1 | **Ponte ticker → CD_CVM de 2013–2019** (P-145). A medição existe: `medicoes/p145_ponte_2013_2019.py` | o universo com CD_CVM, sem o qual DFP/ITR não se liga a papel; e os 13 eventos sem ticker (P-93) | **nada na sessão local:** o `isinp.zip` de 25/09 está no disco dele, e o `acervo.abrir` lê de lá. Na nuvem, faltam dois passos dele (token R2 de leitura, `isinp.zip` no armazém) |
+| 1 | **Ponte ticker → CD_CVM de 2013–2019** (P-145). A medição existe: `medicoes/p145_ponte_2013_2019.py` | o universo com CD_CVM, sem o qual DFP/ITR não se liga a papel; e os 13 eventos sem ticker (P-93) | **um passo dele:** o envio ao R2 (`subir_acervo_local.py --aplicar`), que grava o inventário do `isinp.zip`; sem ele o `acervo.abrir` recusa o arquivo do disco (rodado em 04/10). Na nuvem, falta também o token de leitura |
 | 2 | **Bitemporalidade** `dt_captura` × `DT_REFER`: DFP/ITR lidos *as-of*, com duas regras já escritas: só `ÚLTIMO`, partição pelo ano do arquivo (P-51); Parquet imutável e consulta DuckDB, ponte também bitemporal (P-53) | o direito de dizer que o backtest não vaza futuro | o passo 1 |
 | 3 | **Bloco C sobre dado real** (P-30): primeiro portão que olha empresa, e é de **exclusão**, não de ordenação. Vão junto: C-04 e C-05 (P-17, o escopo já está no repositório), a contagem de `SETOR_ATIV` (P-18), os regimes de leitura (P-58 a P-61), portão × dossiê (P-64) e, por métrica, nível, tendência ou híbrido (63a) | o M3 | o passo 2 |
 
@@ -92,7 +92,7 @@ texto comercial público.
 
 1. **O M1 não tem porta de uso** (P-181). Sem ela, "primeiro uso" é impossível, não adiado.
 2. **A bitemporalidade não existe em código** (passo 2 da §3).
-3. **A ponte de 2013–2019 não foi medida** (P-145). Na sessão local, nada a impede.
+3. **A ponte de 2013–2019 não foi medida** (P-145). Falta o envio ao R2, que é dele.
 
 **Decisões dele, abertas:**
 
