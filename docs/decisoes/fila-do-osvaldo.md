@@ -726,6 +726,27 @@ consumidor. A 65b continua valendo: muda o quando, não o se nem a condição de
 
 ---
 
+## 25 · O matiz perto do branco e do preto, no livro de códigos · P-170, P-162 · **respondido em 04/10: ag-b**
+
+Achado na primeira captura da R3 (04/10), antes de qualquer marca classificada. A regra do matiz
+usava só a saturação HSL ≥ 0,15, que perto do branco e do preto explode: `#FFFEFE` dava 1,0
+("vermelho"), e `#F5F3EE`, o creme do fundo da própria E, dava "laranja". Em 20 das 65 capturas
+a cor cromática de maior área era um quase-branco ou quase-preto. Risco nos dois sentidos: veto
+falso contra E e D, e veto escondido (botão quase-preto lido como azul).
+
+- **ag-a** — manter e declarar como limitação 23. → Nada muda no pré-registro.
+- **ag-b** — emenda curta, livro v3: cromática só com luminosidade HSL de 0,10 a 0,90. → E, C e
+  D não mudam; o commit das datas e o primeiro convite esperam o merge.
+- **ag-c** — croma perceptual (CIELAB ou OKLCH) com limiar novo. → Mais certo, sem âncora, mais
+  código congelado mudado.
+
+**Recomendação: ag-b. Resposta dele, 04/10/2026, pelo formulário: ag-b.** Na pergunta, a
+sessão deu `#ECE6E4` como exemplo de "laranja"; medido depois, o matiz dele é 14,99999°, e o
+ponto flutuante o põe em "vermelho". O exemplo certo é o `#F5F3EE` (retratação no
+`eventos.csv`). O resto da pergunta não muda: 20 de 65, e o creme da E vira laranja.
+
+---
+
 ## Conferência de um minuto, com data
 
 - **Token do R2 somente leitura (P-145, destrava toda medição na nuvem):** no Cloudflare, R2 →
