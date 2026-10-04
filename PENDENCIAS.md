@@ -1792,19 +1792,6 @@ decisão dele a incluiu e a n-A a juntou com a H-A2 na P-154.)*
 > real existe). Pôr no ar é dele: roteiro em "Ao voltar ao desktop", item 10. **Primeiro
 > convite só depois do merge da S6, do roteiro do item 10 e do commit com as datas da janela.**
 
-## P-164 · Primeiro aporte com patrimônio zero (`SEM_POSICAO`)
-
-**Dono:** Osvaldo (a regra) · Claude Code (implementar) · **Gatilho:** P-115 fechada ·
-**Classe:** `DECISAO_DE_DESENHO` (vira engenharia quando ele responder o bloco 19)
-
-`motor_aporte()` devolve `SEM_POSICAO` com patrimônio zero, e quem tem a reserva cheia e
-nada investido fica sem "quanto e onde" (F0-contrato §2 e §3, item 2). Lido no código em
-26/09: com `V = 0`, a fórmula das ordens já põe o aporte nas `k_max` rotas de maior peso;
-o guarda existe por causa das divisões por `V` (`peso_atual`, `deficit_rel`). O
-`test_depois_da_reserva_o_sistema_aloca_sem_nada_assinado` confere o alvo, não as ordens.
-O teste que prende o conserto tem de **falhar na versão atual**: patrimônio zero e reserva
-cheia recebem ordens com rota e valor.
-
 ## P-166 · Busca de anterioridade da marca MEOL e do domínio
 
 **Dono:** sessão de pesquisa (nuvem), e Osvaldo · **Gatilho:** antes de desenhar
@@ -2044,6 +2031,30 @@ eol=lf` desde o F-04. Conferido em 03/10: a cópia de trabalho no Windows tem o 
 blob (`73e43fba…87defd`). O que falta é **declarar o sha256 do blob como o canônico**: no
 cabeçalho do `.gitattributes` e na §2. Assim, quem citar o resultado cita o byte do
 repositório, e não o da sua cópia.
+
+## P-179 · O catálogo não conhece o investimento mínimo do Tesouro, e o primeiro aporte pode sair inexecutável
+
+**Dono:** Osvaldo (decide se o mínimo entra no "caber") · Claude (lê a fonte e modela) ·
+**Gatilho:** antes de o protótipo F1 mostrar uma ordem de primeiro aporte · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Visto ao lado da P-164 (03/10); não é achado: nenhum arquivo afirma que o mínimo é modelado. O "caber" do primeiro aporte usa as verificações que o motor
+já tem, por decisão dele: lote inteiro e G3. A `td_selic` tem `negocia_em_lote: false` e
+nenhum piso no `catalogo.yaml`, então para ela o lote é qualquer valor positivo. No
+instantâneo dourado da P-164, um aporte de **R$ 40** com patrimônio zero vira uma ordem de
+R$ 40 em Tesouro Selic (n=6 cenários, com e sem rotas). O Tesouro Direto tem investimento
+mínimo por título: o valor exato e a regra (fração do título com piso em reais) estão
+`NAO_CONFIRMADO` aqui, e quem confirma é a leitura da fonte primária do Tesouro Nacional, não a
+memória de quem escreve. Se o mínimo for maior que o aporte, a ordem não se executa, e a tela
+diria "compre" onde a casa recusa.
+
+Junto, e menor: o nome da rota é **"Tesouro Selic acima de R$10k"**, e é ele que o `porque` do
+primeiro aporte mostra para um aporte de R$ 500. O nome descreve o regime de custo da rota, e
+o leigo o lê como condição de entrada.
+
+**O que fecha:** o mínimo lido na fonte, com `trecho_conferido`, e a resposta dele: o mínimo
+entra no "caber" como a verificação de lote que já existe (dado novo, mesma regra), ou fica de
+fora e a ordem traz o aviso. E o nome que a tela mostra para a `td_selic`.
 
 ## Ao voltar ao desktop
 
