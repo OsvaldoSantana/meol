@@ -242,9 +242,10 @@ da conversa** (o prompt trouxe as decisões, não as opções), e nenhuma razão
 
 1. **Não existe porta de uso.** Dos três módulos que leem o `estado.yaml`, nenhum chama
    `alocar()` nem `motor_aporte()`. O "primeiro uso" começa por construí-la (P-181).
-2. **A cabeça do caminho crítico não espera por ele.** O `isinp.zip` de 25/09 está no disco da
-   máquina dele, e a medição da P-145 roda na sessão local; o token de leitura do R2 deixa de ser
-   pré-requisito.
+2. ~~**A cabeça do caminho crítico não espera por ele.**~~ **Retratado em 04/10:** espera por
+   um passo dele. O `isinp.zip` está no disco, mas o `acervo.abrir` só o aceita depois do envio ao
+   R2, que grava o inventário (P-145). O que se confirmou: o token de leitura não é preciso para
+   medir na sessão local.
 3. **A 65b ficou sem lugar.** O caminho de 03/10 não nomeia a P-65, decidida "construir já" em
    26/09. A posição dela é pergunta nova: bloco 23.
 
