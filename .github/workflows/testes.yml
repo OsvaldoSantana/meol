@@ -31,7 +31,8 @@ on:
   # 25/09/2026: PR de contribuidor e do Dependabot tambem precisam de portao. So o rapido:
   # PR nao recebe segredo, e o completo le o armazem.
   pull_request:
-    branches: [main]
+    # P-170: o PR das visitas R3 tem o livro v3 como base antes do merge dele.
+    branches: [main, claude/p170-livro-v3-luminosidade]
     # 03/10/2026: `edited` reroda quando so o titulo muda -- a etiqueta dele e conferida aqui.
     types: [opened, synchronize, reopened, edited]
   schedule:
