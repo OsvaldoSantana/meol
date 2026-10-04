@@ -10,7 +10,9 @@
 # classificada. O classificador e tools/codigos_visuais.py (o mesmo para as direcoes e as marcas).
 # versao 2 (02/10/2026): ad-a, ae-a e af-a, antes da primeira marca da R3 e antes do
 # primeiro convite; a versao 1 esta no merge do PR #43.
-versao: 2
+# versao 3 (04/10/2026): ag-b, a faixa de luminosidade do matiz, antes da primeira marca
+# classificada e antes do primeiro convite (65 capturas feitas, nenhuma classificada).
+versao: 3
 data: 2026-09-27
 
 # O que se classifica: a tela principal (a primeira depois do login, ou a pagina inicial do
@@ -35,9 +37,17 @@ variaveis:
 
   matiz:
     central: true
-    como_medir: "a cor de preenchimento do botao principal; se o botao for vazado, a cor da borda; se nao houver botao, a cor cromatica de maior area (saturacao HSL >= 0.15)"
-    regra: "neutro se a saturacao HSL for menor que 0.15; senao, a faixa que contem o matiz HSL (inicio incluido, fim excluido)"
+    como_medir: "a cor de preenchimento do botao principal; se o botao for vazado, a cor da borda; se nao houver botao, a cor cromatica de maior area (saturacao HSL >= 0.15 e luminosidade HSL de 0.10 a 0.90)"
+    regra: "neutro se a saturacao HSL for menor que 0.15, ou se a luminosidade HSL estiver fora de 0.10 a 0.90 (ag-b); senao, a faixa que contem o matiz HSL (inicio incluido, fim excluido)"
     saturacao_minima: 0.15
+    # ag-b (04/10/2026, dele, livro v3). A saturacao HSL e (max - min) / (1 - |2L - 1|): perto
+    # do branco e do preto o denominador vai a zero e um desvio de 1/255 vira cor. #fffefe da
+    # saturacao 1,0 ("vermelho"); #f5f3ee, o creme do fundo da propria E, da 0,39 ("laranja", o
+    # matiz de E e D). Nas 65 capturas da R3 de 04/10, em 20 a cor cromatica de maior area era
+    # um quase-branco ou quase-preto.
+    # Vale para o botao e para a cor de maior area. E, C e D nao mudam (L = 0,34; 0,38; 0,54).
+    # Os limites 0,10 e 0,90 sao ESCOLHA DECLARADA, nao medida.
+    luminosidade_cromatica: {min: 0.10, max: 0.90}
     # O circulo cromatico em doze setores de 30 graus, centrados nas primarias, secundarias e
     # terciarias (vermelho em 0). Nenhuma faixa foi desenhada olhando E, C ou D.
     faixas:

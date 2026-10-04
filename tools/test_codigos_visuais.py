@@ -48,6 +48,9 @@ def test_as_faixas_de_matiz_cobrem_o_circulo_sem_buraco_nem_sobreposicao():
     ("#FF0000", "vermelho"), ("#FF4000", "laranja"), ("#FFFF00", "amarelo"),
     ("#00FF00", "verde"), ("#0000FF", "azul"), ("#FF00FF", "magenta"),
     ("#808080", "neutro"), ("#1B1A17", "neutro"),
+    # ag-b (livro v3): quase-branco e quase-preto sao neutros, por mais "saturados" que o HSL diga
+    ("#FFFEFE", "neutro"), ("#ECE6E4", "neutro"), ("#F2F5F6", "neutro"), ("#0F1116", "neutro"),
+    ("#021226", "neutro"), ("#F5F3EE", "neutro"), ("#1E3A8A", "celeste"),
 ])
 def test_faixas_nos_pontos_conhecidos(hexa, faixa):
     assert V.faixa_de_matiz(hexa, LIVRO) == faixa
@@ -172,3 +175,19 @@ def test_centrais_do_codigo_e_do_livro_sao_as_mesmas():
 def test_livro_em_ascii():
     with open(V.LIVRO, "rb") as f:
         assert all(b < 128 for b in f.read())
+
+
+def test_mutacao_sem_a_faixa_de_luminosidade_o_quase_branco_vira_cor():
+    """ag-b, 04/10/2026: sem a faixa, #F5F3EE (o creme do fundo da propria E) cai em laranja, o
+    matiz de E e D, e #FFFEFE (branco aos olhos) em vermelho. Prova que a faixa os torna neutros."""
+    import copy
+    sem = copy.deepcopy(LIVRO)
+    sem["variaveis"]["matiz"]["luminosidade_cromatica"] = {"min": 0.0, "max": 1.0}
+    assert V.faixa_de_matiz("#F5F3EE", sem) == "laranja"
+    assert V.faixa_de_matiz("#FFFEFE", sem) == "vermelho"
+    assert V.faixa_de_matiz("#F5F3EE", LIVRO) == "neutro"
+
+
+def test_a_emenda_ag_b_nao_muda_e_c_d():
+    for d, esperado in ESPERADO.items():
+        assert V.classificar_direcoes(LIVRO)[d] == esperado

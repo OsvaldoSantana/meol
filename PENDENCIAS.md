@@ -224,7 +224,7 @@ depois o commit das datas, e só então o primeiro convite. A direção só sai 
 paralelo à coleta da P-162; as visitas já podem começar (o sorteio está no `main`, #45) ·
 **Classe:** `DECISAO_DE_DESENHO`
 
-Livro de códigos v2 (onze categorias, 10 marcas sorteadas por categoria, semente 20261002),
+Livro de códigos v3 (onze categorias, 10 marcas sorteadas por categoria, semente 20261002; a v3 é a ag-b, de 04/10, a luminosidade do matiz),
 plano em [`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml), andamento em
 `docs/marca/pesquisa-marcas-rodada3-2026-09.md` §5. Nenhuma marca visitada até 03/10. Só página
 pública; nada de sessão logada (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** uma linha

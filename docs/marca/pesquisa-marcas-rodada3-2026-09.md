@@ -21,6 +21,7 @@ funcionaria:
 | **ad-a** | quatro categorias novas: consultoria CVM, assessor, robô e planejador, com uma precedência para quem cabe em duas | estavam no prompt e fora do livro; o `veto()` as recusaria. A consultoria é a categoria do próprio MEOL |
 | **ae-a** | a unidade: a primeira captura de interface da App Store; sem app, o site em 390 px | a tela depois do login está fora do alcance, e muita marca não tem app |
 | **af-a** | pelo menos **10 marcas sorteadas por categoria** na classificação visual | a saturação pode parar uma categoria com 3 marcas, e o dominante pede n ≥ 5 |
+| **ag-b** *(04/10, livro v3)* | a cor só é cromática com luminosidade HSL de 0,10 a 0,90, além da saturação ≥ 0,15 | nas 65 primeiras capturas, 20 tinham um quase-branco ou quase-preto como "cor de maior área"; `#F5F3EE`, o creme da E, virava laranja. Feita antes da primeira marca classificada |
 
 ## 1. Método
 
