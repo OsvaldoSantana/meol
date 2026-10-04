@@ -17,7 +17,7 @@ def _m(cat, fundo, matiz, fam, raio, unidade="app", situacao="classificada", **k
     r.update({"marca": "x", "categoria": cat, "situacao": situacao, "unidade": unidade,
               "fundo": fundo, "matiz": matiz, "familia_do_titulo": fam, "raio": raio,
               "densidade": "media", "botao": "cheio", "url": "https://x", "data": "2026-10-02",
-              "sha256_captura": "a" * 64, "arquivo_wayback": "https://web.archive.org/x", **kw})
+              "sha256_captura": "a" * 64, "arquivo_wayback": "https://web.archive.org/web/x", **kw})
     return r
 
 
@@ -71,3 +71,14 @@ def test_mutacao_dominante_sem_o_limite_de_cinco_dispararia_o_veto(monkeypatch):
 def test_csv_gravado_valido_e_veto_md_confere():
     assert R.validar(R.ler(), LIVRO) == []
     assert R.main(["--conferir"]) == 0
+
+
+def test_arquivo_wayback_so_link_do_wayback_ou_pendente_declarado():
+    """04/10: a nuvem nao alcanca o Wayback; a linha diz PENDENTE_LOCAL, e nada mais passa."""
+    livro = V.ler_livro()
+    ok = [_m("assessor", *E_CODIGO, arquivo_wayback="https://web.archive.org/web/2026/x"),
+          _m("assessor", *E_CODIGO, arquivo_wayback=R.PENDENTE)]
+    assert R.validar(ok, livro) == []
+    ruim = [_m("assessor", *E_CODIGO, arquivo_wayback="arquivar depois")]
+    assert R.validar(ruim, livro)
+    assert "PENDENTE_LOCAL" in R.texto_veto(ok, livro)

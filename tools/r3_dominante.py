@@ -36,6 +36,11 @@ COLUNAS = ["marca", "categoria", "categoria_sorteada", "ordem_no_sorteio", "cnpj
            "raio_px", "densidade_blocos", "url", "data", "sha256_captura", "arquivo_wayback",
            "escada"]
 SITUACOES = ("classificada", "pulada", "fora_do_livro")
+# 04/10/2026: a sessao na nuvem nao alcanca web.archive.org (conexao derrubada pelo proxy; os
+# degraus estao na R3, sec. 1). O arquivamento e o degrau 4, na maquina dele
+# (tools/r3_arquivar.py). Ate la a linha diz PENDENTE_LOCAL -- e a R3 nao fecha com nenhuma assim.
+WAYBACK = "https://web.archive.org/web/"
+PENDENTE = "PENDENTE_LOCAL"
 
 
 def ler(path: str = CSV) -> list[dict[str, str]]:
@@ -69,6 +74,9 @@ def validar(linhas: list[dict[str, str]], livro: dict[str, Any]) -> list[str]:
         for campo in ("url", "data", "sha256_captura", "arquivo_wayback"):
             if not r[campo]:
                 probs.append(f"linha {i}: sem {campo} (procedencia da captura)")
+        arq = r["arquivo_wayback"]
+        if arq and not (arq.startswith(WAYBACK) or arq == PENDENTE):
+            probs.append(f"linha {i}: arquivo_wayback {arq!r} (link do Wayback ou {PENDENTE})")
     return probs
 
 
@@ -109,7 +117,11 @@ def texto_veto(linhas: list[dict[str, str]], livro: dict[str, Any]) -> str:
         ima = ["imita" if c["imita_so_app"][d] else "-" for d in ("E", "C", "D")]
         linhas_md.append(f"| {cat} | {c['n']} ({c['n_app']}) | {_codigo(c['dominantes'])} | "
                          + " | ".join(im) + " | " + " | ".join(ima) + " |")
-    return cab + "\n".join(linhas_md) + "\n"
+    pend = sum(1 for r in linhas if r["situacao"] == "classificada"
+               and r["arquivo_wayback"] == PENDENTE)
+    rod = (f"\n**Arquivamento:** {pend} linha(s) classificada(s) com `{PENDENTE}`. A R3 so "
+           "fecha com zero (tools/r3_arquivar.py, na maquina dele).\n") if pend else ""
+    return cab + "\n".join(linhas_md) + "\n" + rod
 
 
 def main(argv: list[str] | None = None) -> int:
