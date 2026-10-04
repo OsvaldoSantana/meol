@@ -52,6 +52,31 @@ funcionaria:
   [`rodada3/veto.md`](rodada3/veto.md), é **gerada** desse CSV por `tools/r3_dominante.py`,
   com as funções do classificador congelado no pré-registro.
 
+### 1.1 O procedimento da leitura (04/10/2026, antes da primeira marca classificada)
+
+O livro diz **o que** medir; estas são as escolhas de **como**, que o livro não fixa. São
+técnicas, foram escritas antes de qualquer linha classificada e valem para todas as marcas.
+
+| ponto | como se faz | por quê |
+|---|---|---|
+| captura | `tools/r3_capturar.py site <url>`: Chromium sem interface (Playwright 1.56.0, build 1194), 390 × 844, DPR 1, emulação de celular, `pt-BR`; espera o `load`, a rede parada (até 12 s) e mais 2,5 s; **não clica em nada**. Grava `390.png`, `1280.png` e `medidas.json` (moda dos pixels, botões visíveis com cor, borda e raio computados, textos de maior corpo com a família, sobreposições, links para a App Store, o começo do texto da página) | a mesma tela para todas; o que o navegador computa se confere depois, o olho não |
+| aviso de cookies, chat, pop-up | **ficam na captura** e entram na moda do fundo como chegaram; **nunca são o botão principal** | clicar em "aceitar" é consentir em nome dele; tirar do DOM é mexer na página |
+| botão principal | o botão da chamada do conteúdo principal na primeira tela; sem ele, o botão de ação do cabeçalho (cheio ou com borda); menu, logotipo, ícone de rede social, seta de carrossel e link de texto não contam | é "a ação que a tela pede" do livro, escrito antes de olhar a classificação |
+| sem botão | `matiz` = a cor cromática de maior área (`moda_cromatica`, que usa a regra do livro), `raio` = 0 se não houver cartão, `botao` = vazado | o livro manda; o raio 0 sem cartão é a leitura de "o do cartão principal" quando não há cartão |
+| família | o nome da fonte computada do texto de maior corpo fora o logotipo; a classe genérica (serifa, sem serifa, monoespaçada) sai do desenho da fonte nomeada, conferido no olho | o CSS nomeia a fonte, não a classe; limitação 5 |
+| densidade | contada no olho, na `390.png`, pela regra do livro | não entra no veto (aa-a) |
+| unidade app | a marca **tem app** se o site oficial aponta para a App Store, ou se a busca da App Store do Brasil (`itunes.apple.com/search`, `country=br`) devolve app do mesmo grupo e com a marca; app da plataforma parceira (o do BTG para um assessor do BTG) **não** é app da marca | ae-a: classifica-se o app da marca, não o do parceiro |
+| site inacessível | a escada, transcrita na coluna `escada`: (1) `curl` com e sem `www` e `http`; (2) a API `archive.org/wayback/available`; (3) o site atual por busca; (4) a sessão local, pelo IP dele. Verificação "confirme que é humano" (Cloudflare) **não se resolve aqui**: é degrau 4 | contornar verificação de robô é proibido; o IP residencial dele pode não receber a verificação |
+| arquivamento | a nuvem **não alcança** `web.archive.org` (degraus abaixo); a linha leva `PENDENTE_LOCAL`, e `tools/r3_arquivar.py`, na máquina dele, arquiva e escreve o link. **A R3 não fecha com nenhuma linha pendente** (`tools/r3_dominante.py` conta) | degrau 4 da escada |
+| as capturas | ficam em `data/r3/capturas/<categoria>-<ordem>/`, fora do git, com cópia na pasta dele | são de terceiros (§1); o sha256 está no CSV |
+
+**A escada do arquivamento, 04/10/2026, sessão na nuvem.** (1) `curl https://web.archive.org/save/<url>`:
+`Recv failure: Connection reset by peer`; o mesmo em `/web/2026/<url>`, em `archive.ph` e em
+`pragma.archivelab.org`; `http://web.archive.org/save/…` deu 403. O relatório do proxy registra
+`tunnel closed (code 1006)` para `web.archive.org:443`. (2) `archive.org/wayback/available` responde
+200, mas só devolve arquivamento já existente, não o de hoje. (3) Não há outra cópia pública da
+mesma página no mesmo dia. (4) **Sessão local:** `py -3.11 tools/r3_arquivar.py`.
+
 ## 2. Os universos, por categoria
 
 Contagem de 02/10/2026, no cadastro baixado nesse dia (sha256 no plano): PJ em funcionamento
