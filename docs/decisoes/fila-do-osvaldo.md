@@ -39,7 +39,7 @@ redigido e **para**, e só é empurrado depois do "pode empurrar".
 |---|---|---|
 | para quem é a v1 do rosto | protótipo com dado sintético para o teste com pessoas | [`rosto-v1.md`](rosto-v1.md) |
 | a ordem da marca | à risca: pesquisa → design → mercado → UX → brandbook | idem; nota N-ORDEM no mapa |
-| `SEM_POSICAO` primeiro | sim, depois da P-115 | P-164 |
+| `SEM_POSICAO` primeiro | sim, depois da P-115 | P-164; a regra é o bloco 19, respondido em 03/10: (c) |
 | o que sobrevive do Quanto-e-Onde | só o conceito | `rosto-v1.md`, com a medição |
 | onde o motor roda | "servidor"; **fechado em 03/10: B′**, servidor sem estado | [`P-165-onde-o-motor-roda.md`](P-165-onde-o-motor-roda.md) |
 | nome nos estímulos | MEOL | `rosto-v1.md`; logotipo espera a P-166 |
@@ -611,7 +611,27 @@ conteúdo, verificado por teste.
 
 ---
 
-## 19 · A regra do primeiro aporte com patrimônio zero · P-164
+## 19 · A regra do primeiro aporte com patrimônio zero · P-164 · **respondido em 03/10: (c)**
+
+**Resposta, 03/10/2026 (claude.ai): (c), contra a recomendação (a).** Com patrimônio zero e
+a reserva cheia, todo o primeiro aporte vai para a rota de maior peso-alvo.
+
+- **Se a rota de maior peso não couber no aporte** (resposta dele, 03/10): vai inteiro para
+  a próxima rota, em ordem decrescente de peso-alvo, que caiba. "Caber" usa as verificações
+  que o motor já tem, **lote inteiro e G3 (atrito)**, sem critério novo. Se **nenhuma**
+  couber, não há ordem: a saída é uma recusa com o motivo em linguagem comum ("o valor deste
+  mês ainda não alcança nenhuma rota; ele fica guardado para o próximo"), nunca um zero e
+  nunca `SEM_POSICAO` mudo (RI-10).
+- **Empate no maior peso** (decisão técnica do claude.ai, não dele): vale a primeira rota na
+  ordem declarada. O texto da decisão dizia "ordem do `politica.yaml`", mas as rotas são
+  declaradas no **`catalogo.yaml`**, não no `politica.yaml`; a implementação usa a ordem do
+  catálogo e o critério fica escrito no `politica.yaml` (`desempate: ordem_do_catalogo`).
+- **Duas consequências da (c) que a pergunta não nomeou**, escritas na `nota` da regra: a
+  `banda_sobre_alvo_pp` não se aplica (com patrimônio zero toda ordem é 100% da carteira e a
+  banda recusaria todas) e o `k_max` também não (a regra emite uma ordem).
+
+Implementado em `politica.yaml → motor_aporte.primeiro_aporte` (versão 1.37.0) e guardado
+por `alocacao/test_p164_primeiro_aporte.py`; a P-164 fechou no histórico.
 
 - **(a)** A mesma regra do motor com patrimônio zero: as `k_max` rotas de maior peso-alvo
   (hoje `k_max = 2`). Nenhuma regra nova.
@@ -619,7 +639,7 @@ conteúdo, verificado por teste.
   menor custo de entrada), declarada no `politica.yaml`.
 - **(c)** Todo o primeiro aporte na rota de maior peso.
 **Recomendação: (a).** A P2 fica intacta: o caso vira um valor da mesma função, não uma
-exceção. ~~Responder quando a P-115 fechar.~~ **A P-115 fechou em 03/10: já pode responder.**
+exceção. Responder quando a P-115 fechar.
 
 ---
 

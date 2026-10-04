@@ -1861,6 +1861,81 @@ def custo_de_discordar(alvo, proposta, C, aporte, anos, rotas_por_id):
                      "para isso existe o backtest com pre-registro, nao esta funcao")
 
 # ══ CAMADA 5 — MOTOR DE APORTE ═══════════════════════════════════════════════
+def _primeiro_aporte(estado, pesos, A, C, P, precos, rotas_por_id, k_max):
+    """P-164 (decisao dele, 03/10/2026, bloco 19, opcao c): com patrimonio zero o aporte
+    vai INTEIRO para uma rota so -- a de maior peso-alvo que caiba no valor do mes.
+
+    "Caber" sao as verificacoes que o motor ja tinha, e nenhuma nova: lote inteiro e o G3
+    sobre o valor que a ordem gasta. A banda de concentracao fica de fora de proposito:
+    com V = 0 toda ordem e 100% da carteira, e a banda recusaria todas. Sem a rota em
+    `rotas_por_id` o motor nao conhece lote nem custo dela, e confere so o valor
+    positivo -- o mesmo que ja fazia nas ordens com patrimonio (B-04).
+
+    Nenhuma rota cabe: nao ha ordem, o dinheiro vai para o caixa e o motivo e dito
+    (RI-10). Um zero ou um SEM_POSICAO mudo seriam a condicao engolida do F-02."""
+    regra = P["motor_aporte"]["primeiro_aporte"]
+    if regra["regra"] != "rota_de_maior_peso_que_cabe":
+        raise ValueError(f"primeiro_aporte.regra desconhecida: {regra['regra']}")
+    if regra["desempate"] != "ordem_do_catalogo":
+        raise ValueError(f"primeiro_aporte.desempate desconhecido: {regra['desempate']}")
+    ordem_cat = {rid: i for i, rid in enumerate(carregar_catalogo()["rotas"])}
+    fila = sorted((rid for rid, w in pesos.items() if w > 0),
+                  key=lambda rid: (-pesos[rid], ordem_cat.get(rid, len(ordem_cat))))
+
+    def nome(rid):
+        r = rotas_por_id.get(rid)
+        return r.nome if r is not None else rid
+
+    nao_couberam, ordem = [], None
+    for rid in fila:
+        r = rotas_por_id.get(rid)
+        p = precos.get(rid, 1.0)
+        em_lote = r.negocia_em_lote if r is not None else False   # B-04: flag, nao magnitude
+        if em_lote:
+            qtd = math.floor(A/p); gasto = qtd*p
+        else:
+            qtd = round(A, 2);     gasto = qtd
+        if qtd <= 0:
+            nao_couberam.append(dict(rota=rid, peso_alvo=round(pesos[rid], 4),
+                                     verificacao="lote",
+                                     detalhe=f"um lote custa R$ {p:.2f}, o aporte e R$ {A:.2f}"))
+            continue
+        if r is not None and not g3_atrito([r], C, P, gasto)[0]:
+            nao_couberam.append(dict(rota=rid, peso_alvo=round(pesos[rid], 4),
+                                     verificacao="G3_atrito",
+                                     detalhe=f"o custo de entrada sobre R$ {gasto:.2f} passa "
+                                             f"do teto do G3"))
+            continue
+        ordem = dict(rota=rid, quantidade=qtd, preco=p, valor=round(gasto, 2),
+                     deficit=round(pesos[rid]*A, 2), peso_atual=0.0,
+                     peso_alvo=round(pesos[rid], 4))
+        break
+
+    base = dict(aporte=A, aporte_base=estado.aporte_mensal,
+                extraordinario=round(A-estado.aporte_mensal, 2), patrimonio=0.0,
+                regra="primeiro_aporte", nao_couberam=nao_couberam,
+                politica_versao=P["meta"]["versao"], politica_hash=P.get("_hash"),
+                custos_hash=hash_custos())
+    if ordem is None:
+        return dict(status="NENHUMA_ROTA_CABE", ordens=[], motivo=regra["motivo_sem_rota"],
+                    caixa=round(estado.caixa + A, 2), **base)
+
+    peso = f"{pesos[ordem['rota']]*100:.1f}%".replace(".", ",")
+    if nao_couberam:
+        acima = [nome(d["rota"]) for d in nao_couberam]
+        ordem["porque"] = regra["porque_cedeu"].format(
+            rota=nome(ordem["rota"]), peso=peso, acima=" e ".join(acima),
+            cabe="cabe" if len(acima) == 1 else "cabem")
+    else:
+        ordem["porque"] = regra["porque"].format(rota=nome(ordem["rota"]), peso=peso)
+    # B-01/B-02/B-03: o residuo do lote vai para caixa, nunca para a ordem
+    return dict(status="OK", ordens=[ordem], caixa=round(estado.caixa + A - ordem["valor"], 2),
+                deficit_max=None, excesso_max=None, alertas=[], deriva=None, k_max=k_max,
+                nota_bases="P-164: com patrimonio zero nao ha peso atual nem deficit "
+                           "relativo; deficit_max e excesso_max ficam None, nao zero",
+                **base)
+
+
 def motor_aporte(estado, alvo, C, P, precos=None, k_max=None, rotas_por_id=None,
                  aporte_do_mes=None):
     """Onde aportar este mes. Retorna ordens + memoria de calculo (principio P4).
@@ -1882,15 +1957,14 @@ def motor_aporte(estado, alvo, C, P, precos=None, k_max=None, rotas_por_id=None,
         return dict(status="SEM_APORTE",
                     nota="aporte do mes igual a zero: nao ha ordem a emitir. O alvo e "
                          "os portoes continuam validos — o que falta e o dinheiro.")
-    if V <= 0:
-        return dict(status="SEM_POSICAO",
-                    nota="o motor de aporte precisa de patrimonio > 0. As camadas de "
-                         "portao, elegibilidade e alocacao alvo rodam sem ele — e sao "
-                         "elas que dizem por onde comecar.")
     if k_max is None: k_max = P["motor_aporte"]["k_max"]   # V-03: era default na assinatura
     pesos = alvo["pesos"]
     precos = precos or {}
     rotas_por_id = rotas_por_id or {}
+    if V <= 0:
+        # P-164: era SEM_POSICAO, e quem tinha a reserva cheia e nada investido ficava
+        # sem "quanto e onde". As divisoes por V abaixo sao o motivo do caminho proprio.
+        return _primeiro_aporte(estado, pesos, A, C, P, precos, rotas_por_id, k_max)
     D = {rid: pesos.get(rid,0.0)*(V+A) - estado.posicoes.get(rid,0.0) for rid in pesos}
     candidatos = sorted([(rid,d) for rid,d in D.items() if d > 0], key=lambda x:-x[1])
 

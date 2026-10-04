@@ -60,8 +60,9 @@ Conta como sessão de motor no ritmo da §5.
    onde e por quê" do mês, com a procedência. Hoje não existe (§2).
 2. **Ele usa** no aporte seguinte. Cada passo em que travar vira pendência com o nome do passo;
    o que ele não entender é defeito do sistema, não dele.
-3. **P-164**, primeiro aporte com patrimônio zero e reserva cheia: é o primeiro uso do cliente
-   novo. O bloco 19 da fila já pode ser respondido (a P-115 fechou).
+3. **P-179**, o investimento mínimo do Tesouro: o primeiro aporte (P-164, fechada em 03/10 com
+   a regra **(c)** dele) pode mandar R$ 40 para o Tesouro Selic, e a casa recusar. O mínimo se lê
+   na fonte antes de ele usar.
 
 ## 5. Ritmo e a fila do rosto
 
@@ -98,8 +99,8 @@ texto comercial público.
 | decisão | onde | o que muda |
 |---|---|---|
 | onde entra a P-65 (65b) no caminho de 03/10 | fila, bloco 23 | se a segunda esteira disputa vaga com a bitemporalidade, ou espera o bloco C |
-| a regra do primeiro aporte com patrimônio zero | fila, bloco 19 | destrava a P-164 |
-| o `PLANO.md` continua na abertura | P-172, em 17/10 | abertura de ~20,6 mil tokens com ele, ~17,8 mil sem ele (medido em 03/10) |
+| se o mínimo do Tesouro entra no "caber" do primeiro aporte | P-179 | ordem executável ou aviso na ordem |
+| o `PLANO.md` continua na abertura | P-172, em 17/10 | abertura de ~21,0 mil tokens com ele, ~18,2 mil sem ele (medido em 03/10) |
 | parecer jurídico | P-158 | qualquer usuário além dele |
 
 ## 7. As pendências
