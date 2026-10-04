@@ -216,7 +216,10 @@ códigos e a análise congelados pelo sha256 (a v1, com Google Forms, ficou supe
 página está em `pesquisa/`, sem deploy e sem resposta real. **O que falta é dele:** o roteiro em
 [`docs/marca/teste-de-marca/roteiro-no-ar.md`](docs/marca/teste-de-marca/roteiro-no-ar.md),
 depois o commit das datas, e só então o primeiro convite. A direção só sai com a R3 fechada
-(P-170). A H4 foi para a P-156. **Fecha com:** o relatório da análise, depois do dia 21.
+(P-170). A H4 foi para a P-156. **04/10:** o passo 0 (plano da Vercel) foi decidido por ele,
+**24b** (Hobby, com a leitura escrita na fila); o roteiro virou tutorial numerado, com o commit
+das datas e o texto do convite, e o sha256 que o passo 5 manda conferir foi corrigido para o da
+y-a (`02773d8b…`; retratação no roteiro). **Fecha com:** o relatório da análise, depois do dia 21.
 
 ## P-170 · A rodada 3 de marcas (R3), visual, para o veto de distinção
 

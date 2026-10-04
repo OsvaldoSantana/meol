@@ -726,6 +726,36 @@ consumidor. A 65b continua valendo: muda o quando, não o se nem a condição de
 
 ---
 
+## 24 · Em qual plano da Vercel a página do teste de marca vai ao ar · P-162 · **respondido em 04/10: 24b**
+
+Passo 0 do [roteiro](../marca/teste-de-marca/roteiro-no-ar.md). Lido na fonte em 04/10/2026
+(`vercel.com/docs/limits/fair-use-guidelines`, `last_updated: 2026-09-14`): o Hobby é
+"restricted to non-commercial personal use only", e uso comercial é qualquer deploy "used for
+the purpose of financial gain of **anyone** involved in **any part of the production** of the
+project". Os exemplos da página: cobrar do visitante, anunciar a venda de produto ou serviço,
+receber para criar ou hospedar o site, link de afiliado, anúncio. O Pro custa US$ 20 por mês
+(`vercel.com/pricing`, lido no mesmo dia), com teste grátis.
+
+- **24a** — **Pro por um mês**, cancelado depois do dia 21. → Tira a ambiguidade, e o DPA da
+  Vercel passa a cobrir a página (a limitação 4 do pré-registro diz que não cobre o Hobby).
+- **24b** — **Hobby, com a leitura escrita.** → Grátis. A página não cobra, não anuncia, não
+  vende, não tem afiliado nem anúncio. Risco: a Vercel pode pausar o deploy no meio da janela.
+- **24c** — **perguntar ao suporte antes.** → Resposta escrita vira fonte; custa dias.
+
+**Recomendação era 24a**, porque o MEOL é um produto comercial possível e a regra fala em ganho
+de "qualquer parte da produção". **Resposta dele, 04/10/2026, pelo formulário: 24b.**
+
+**A leitura escrita (24b), para quem auditar depois:** a página do teste é pesquisa, sem
+cobrança, sem anúncio de produto ou serviço, sem afiliado e sem publicidade, e ninguém é pago
+para criá-la ou hospedá-la; nenhum dos cinco exemplos da Vercel acontece nela. O texto da regra
+é mais largo que os exemplos ("any part of the production"), e por isso a leitura é **dele**, não
+da Vercel. **O que muda no teste se a Vercel discordar:** deploy pausado durante a janela é
+**desvio do pré-registro** (§10: depois do primeiro convite nada muda) e vai para o relatório
+com as datas da pausa; a janela não se estende (h-A). A limitação 4 (o DPA não cobre o Hobby)
+continua valendo como está escrita.
+
+---
+
 ## 25 · O matiz perto do branco e do preto, no livro de códigos · P-170, P-162 · **respondido em 04/10: ag-b**
 
 Achado na primeira captura da R3 (04/10), antes de qualquer marca classificada. A regra do matiz
