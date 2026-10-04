@@ -28,11 +28,12 @@ número, quem escolheu a regra, e o que aconteceria se a escolha fosse outra.
   execução, antes de qualquer dado ser tocado.
 
 Onde o projeto está e a ordem do que falta: **`PLANO.md`** (ganha de qualquer fila escrita
-aqui). O que está aberto e o que espera o Osvaldo: **`docs/estado.md`**, que o hook SessionStart
-já injetou; do `PENDENCIAS.md` e da `docs/decisoes/fila-do-osvaldo.md` **leia só a seção da P
-da tarefa** (`grep -n "^## P-NN" PENDENCIAS.md`). Motivo: o `PENDENCIAS.md` inteiro eram ~40 mil
-tokens para usar uma seção (decisão de 02/10; `docs/decisoes/modelos-por-tarefa.md`). O
-`estado.md` é gerado por `tools/estado.py`, e o CI reprova se estiver velho. Hook de projeto
+aqui). O que está aberto: **`PENDENCIAS.md`**, as ativas (no máximo 20), **lido inteiro**; o
+resto do que está aberto mora em `docs/pendencias-reserva.md`, **só por busca**
+(`grep -n "^## P-NN" docs/pendencias-reserva.md`); da `docs/decisoes/fila-do-osvaldo.md`, só o
+bloco da tarefa. Motivo: dieta de 03/10 (decisão dele); antes, o arquivo único eram ~40 mil
+tokens para usar uma seção. O hook SessionStart injeta o **`docs/estado.md`** (contagem, códigos
+da reserva, fila sem resposta), gerado por `tools/estado.py`; o CI reprova se estiver velho. Hook de projeto
 roda na nuvem só em sessão de **um** repositório; numa de vários, rode `cat docs/estado.md`.
 
 As instruções do Projeto no claude.ai são cópia de **`docs/ia/instrucoes-projeto-claude.md`**:

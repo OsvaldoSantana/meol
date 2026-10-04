@@ -2304,10 +2304,432 @@ abertas a **P-176** (o padrão 1, 2, 3, 4, 5 no K5 e na completude) e a **P-177*
 não recusa insumo com sha256 diferente). Os PDFs do D1 no armazém seguem como item 11 de
 "Ao voltar ao desktop": não bloqueavam a corrida e não bloqueiam o fechamento.
 
+---
+
+## ~~P-44~~ · O próximo passo não pode ser de engenharia duas vezes seguidas — **FECHADA em 03/10/2026**
+
+**Regra de processo, criada em 06/09 depois de medir o próprio ritmo.** Sete rodadas
+seguidas de qualidade de engenharia, zero de propósito — e **eu propus todas**, uma no
+fim de cada resposta.
+
+É o M-01 aplicado a nós: trocar o destino do aporte move 3 meses, trocar o valor move
+33, e o sistema trabalhava na alavanca de 3. **A alavanca da engenharia move 0.**
+Nenhum teste aproxima a reserva de existir.
+
+Se a sessão anterior fechou uma pendência de engenharia, a próxima proposta é de
+**produto, dado, ou uma pergunta a você**. Engenharia entra quando **destrava** algo.
+
+**Fechada em 03/10/2026, na triagem do registro:** virou regra permanente de sessão: `CLAUDE.md` §5-A.5 e a skill `bastter-proximo-passo`. Pendência que é regra não tem gatilho nem fecha; o lugar dela é a regra.
+
+---
+
+## ~~P-46~~ · Usar subagentes na leitura de fonte primária — **FECHADA em 03/10/2026**
+
+Ler os 32 arquivos de `docs/fontes` custou o texto **inteiro** de cada um dentro do
+contexto. Um subagente lê e devolve só a conclusão.
+
+Para a Fase 0 deixa de ser detalhe: os layouts da CVM e do COTAHIST têm centenas de
+páginas. **Um subagente por documento** é a diferença entre caber e não caber.
+
+**Gatilho:** a primeira sessão da Fase 0.
+
+**Fechada em 03/10/2026, na triagem do registro:** virou regra permanente: `CLAUDE.md` §5-A.10, e o subagente `.claude/agents/Explore.md` (Haiku, com a proibição de inventar e a ordem de marcar `NAO_CONFIRMADO`).
+
+---
+
+## ~~P-08~~ · Constantes vencendo — macro renovadas em 05/09 — **FECHADA em 03/10/2026**
+
+`cdi_aa` e `selic_aa` reconferidos na API do BCB: **13,90%** (SGS 4389, 03/09) e meta
+**14,00%** (SGS 432). **Os dois valores estavam certos** — era prazo vencido, não número
+errado. Novo `expira`: 04/12/2026. Falta `poupanca_am`, que vence em 28/09.
+
+| constante | `expira` |
+|---|---|
+| `macro.cdi_aa` | **04/09/2026 — já venceu** |
+| `macro.selic_aa` | 07/09/2026 |
+| `macro.poupanca_am` | 28/09/2026 |
+| tarifas B3 e Tesouro (9) | 04/12/2026 |
+| tabelas comerciais (11) | 04/12/2026 |
+| taxas de fundo (19) | 05/09/2027 |
+
+`motor.val()` avisa em stderr quando passa da data. Leis usam `expira: null` +
+`revisar_se`, porque lei não vence no aniversário.
+
+**Fechada em 03/10/2026, na triagem do registro:** a tabela era de 05/09 e estava vencida (a `poupanca_am` foi renovada em 25/09). O vigiar virou rotina sem ninguém lembrar (P7): `auditoria/expira_proxima.py` roda no semanal (`.github/workflows/testes.yml`) e abre issue com o que vence em 7 dias; `motor.val()` avisa em stderr.
+
+---
+
+## ~~P-09~~ · Fase 0 virou o único caminho — **prioridade máxima** — **FECHADA em 03/10/2026**
+
+Depois de H1/H3 (05/09), os três testes pré-registrados terminam no mesmo lugar:
+
+- **H1 (valor)** — o alfa medido é de um long-short cuja perna vendida não existe
+  para pessoa física. O NEFIN publica só o spread, nunca as pernas. Medir a carteira
+  investível exige montar os tercis a partir do dado de ação.
+- **H2 (dividendo)** — não há fator de DY na série. A carteira precisa ser montada.
+- **H3 (tamanho)** — fechada, e fechada sem precisar da Fase 0.
+
+Dois de três terminam nela. Somado ao prazo que já existia (a CVM sobrescreve os
+arquivos anuais e `dt_disponivel` não se reconstrói), a Fase 0 deixou de ser "a maior
+peça restante" e passou a ser **a única que destrava alguma coisa**.
+
+**Gatilho:** próxima sessão no desktop.
+
+**Fechada em 03/10/2026, na triagem do registro:** superada pelo caminho crítico de 03/10/2026 (`PLANO.md`: M2 pela CVM, ponte → bitemporalidade → bloco C). As carteiras de H1 e H2 que ela citava são do M3 e seguem na reserva (P-10, P-29).
+
+---
+
+## ~~P-63~~ · O híbrido nível/tendência é regra geral ou regra do bloco C? — **FECHADA em 03/10/2026**
+
+**Classe:** `DECISAO_DE_DESENHO`. **Dono:** Osvaldo. **Gatilho:** ao implementar qualquer
+métrica com leitura temporal.
+
+Em 05/09 ficou decidido, para solvência: **HÍBRIDO — o nível corta, a tendência marca sem
+poder de veto.**
+
+Em 06/09, sobre distratos, ele disse o contrário: `5% → 7% → 11% → 16%` preocupa **muito
+mais** que `12% → 11% → 10% → 9%`, mesmo com o segundo em nível mais alto. **A tendência
+domina.**
+
+Os dois podem estar certos — mas então **o híbrido não é regra geral, é regra do bloco C**,
+e isso precisa ser dito. Duas saídas, ambas defensáveis:
+
+- **(a)** o híbrido é *por métrica*, e distrato é uma métrica cuja informação mora na
+  direção;
+- **(b)** o híbrido é geral, e o que muda é o que conta como "nível" — para distrato, o
+  nível seria a **média móvel**, não o ponto.
+
+Decidir por omissão aqui seria deixar o código escolher, que é exatamente o que a P2 proíbe.
+
+> **Decisão dele, 26/09/2026: `63a`** (recomendada) — nível, tendência ou híbrido é declarado **por métrica** no YAML. Registro em `docs/decisoes/fila-do-osvaldo.md`.
+
+**Fechada em 03/10/2026, na triagem do registro:** decidida por ele em 26/09/2026, **63a**: nível, tendência ou híbrido é declarado **por métrica** no YAML. A execução não é pendência própria: é parte da P-30 (o bloco C sobre dado real), que leva a regra no texto dela.
+
+---
+
+## ~~P-67~~ · Falta o teste que impede `estado.yaml` de ir para um repositório público — **FECHADA em 03/10/2026**
+
+**Classe:** `BLOQUEIA_O_SISTEMA`. **Dono:** Claude. **Gatilho:** **antes** do primeiro
+`git add`.
+
+A decisão P-62 depende de uma linha de `.gitignore`, e uma linha de `.gitignore` é
+exatamente o tipo de coisa que se perde numa refatoração sem ninguém notar. **Isso é o
+padrão que o projeto inteiro existe para combater:** um arquivo declara um comportamento e
+nada testa se ele acontece.
+
+O teste: falha se `estado.yaml` estiver rastreado pelo git, ou se qualquer arquivo com o
+padrão de estado real entrar no índice. Barato, e é a diferença entre uma decisão e uma
+esperança.
+
+**Fechada em 03/10/2026, na triagem do registro:** `alocacao/test_p67_segredo.py` existe e roda em todo push (suíte `alocacao`): reprova `estado.yaml` rastreado e arquivo com padrão de estado real no índice.
+
+---
+
+## ~~P-82~~ · O repositório guardou uma cópia de si mesmo, e a suíte continuou verde — **FECHADA em 03/10/2026**
+
+**Classe:** `BLOQUEIA_O_SISTEMA`. **FECHADA em 16/09/2026**, no mesmo dia em que abriu —
+mas ela tem seis minutos de vida que valem mais que o conserto.
+
+Ao fechar as seis falhas herdadas, o `git rm` apagou os cinco `*-patch.py` e a guarda
+duplicada. Fez o certo. O `git add -A` seguinte encontrou na raiz a pasta
+`pacote_segunda/pacote_segunda/` — o zip de 14/09 descompactado ali por engano — e a
+levou junto. O git então viu os mesmos bytes saindo de um lugar e aparecendo em outro, e
+registrou **rename**: os arquivos não foram removidos, **foram mudados de lugar para
+dentro da cópia**.
+
+O commit `bebea75` passou a carregar uma cópia congelada do projeto de 14/09: um segundo
+`CLAUDE.md`, um segundo `chaves_orfas.py`, um segundo `refinar.py`, um segundo
+`test_chaves_orfas.py`. **E a suíte ficou verde**, porque nenhum portão olha para lá —
+`testpaths = ["alocacao"]`, `campos_mortos.py` varre `alocacao/`, o `ruff` do P-40 roda
+com `cwd=alocacao/`. **A P-80 cobrou a primeira conta em menos de uma hora.**
+
+### O que é caro aqui não é o erro, é que a regra já estava escrita
+
+O `.gitignore` ignora `Claude outputs/` com o motivo por extenso: *"ela contém uma CÓPIA
+INTEIRA do projeto... não é só tamanho: é a armadilha do `docs/historico/pesquisa-custos-2026-08/calc/`
+outra vez, e pior."* A armadilha tinha **nome**, tinha **precedente citado**, e tinha
+**remédio** — e o remédio era uma **lista de nomes de pasta que alguém precisa lembrar de
+estender**. `pacote_segunda/` não estava na lista. É a P7 na forma mais limpa que o
+projeto já produziu: *rotina que depende de lembrar não é rotina*.
+
+`alocacao/test_p82_copia_do_projeto.py` mede o **índice do git**, não o disco — como o
+`test_p67_segredo.py` faz com o `estado.yaml`. Descompactar um zip na pasta é inofensivo;
+o defeito nasce no `git add`. Duas regras: módulo com o mesmo nome de um módulo dos três
+pacotes, e **pasta de pacote aninhada** — a segunda existe porque a primeira não pegaria
+`pacote_segunda/pacote_segunda/alocacao/E02-patch.py`, cujo nome não colide com nada.
+
+### O que fica aberto dentro dela
+
+`docs/historico/pesquisa-custos-2026-08/calc/` tem `motor.py`, `test_motor.py` e `custos.yaml` — os
+mesmos nomes do projeto vivo, congelados em 28/08. Entrou em `COPIAS_DECLARADAS` com o
+motivo escrito, que é o terceiro caminho honesto do protocolo das órfãs. **Mas declarar
+não é resolver:** quem abrir `calc/motor.py` continua lendo uma versão de três semanas
+atrás sem nada no arquivo avisar. Mover para `docs/historico/` ou renomear os arquivos
+resolveria de vez — e isso é decisão sua.
+
+**Fechada em 03/10/2026, na triagem do registro:** fechada no próprio corpo em 16/09/2026; o cabeçalho nunca foi riscado. O item que ficou aberto (a cópia `calc/` congelada) está resolvido pelo lugar: ela mora em `docs/historico/pesquisa-custos-2026-08/calc/`, que é registro, não instrução.
+
+---
+
+## ~~P-98~~ · 507 MB entraram em `docs/fontes/` sem casar com nenhum padrão do `.gitignore` — **FECHADA em 03/10/2026**
+
+**Dono:** próxima sessão (feito: guarda escrita) · **Gatilho:** **antes do próximo
+`git add`** · **Classe:** `BLOQUEIA_O_SISTEMA` · ⚙ **exige o desktop**
+
+O acervo COTAHIST (6,0 GB) foi baixado para `docs\fontes\series-historicas-cotahist\`
+— **dentro do repositório, que é público.** O `.gitignore` cobria
+`docs/fontes/**/*.zip` e `**/*.txt`, e por isso 65 dos 81 arquivos estavam cobertos.
+
+**Os 16 de 1986–2001 não.** O ZIP da B3 muda de convenção no meio da série e esses anos
+saem **sem extensão** (`COTAHIST.A1986`, `COTAHIST_A2001`). São **507 MB** que padrão
+nenhum pegava, a um `git add -A` de virar histórico permanente — blob commitado não se
+apaga com `git rm`, só com reescrita de histórico, e depois de um push nem isso.
+
+**É a P-82 pela segunda vez em dois dias:** *regra escrita numa lista de nomes não é
+regra, é lembrete.* Lá era uma lista de **pastas**; aqui é uma lista de **extensões**,
+e estendê-la exigiria saber de antemão como um publicador nomeia o conteúdo de um ZIP
+de 1986. Ninguém sabe.
+
+**Fechado nesta sessão, nos dois níveis:** `.gitignore` ganhou a pasta, e
+`alocacao/test_p98_acervo_fora_do_indice.py` mede **tamanho no índice do git** — bytes
+não dependem de alguém ter acertado o nome. 5 testes, com prova por mutação usando os
+números reais do incidente. **Falta rodar `git status` antes do próximo commit** para
+confirmar que nada já entrou.
+
+**Fechada em 03/10/2026, na triagem do registro:** a guarda `alocacao/test_p98_acervo_fora_do_indice.py` mede bytes no índice do git em todo push. O "rodar `git status` antes do próximo commit" que sobrava era um lembrete (P7); a guarda o substitui.
+
+---
+
+## ~~P-103~~ · O `CLAUDE.md` afirmava tokens sem conta, e um plano externo calibrou nele — **FECHADA em 03/10/2026**
+
+**Dono:** próxima sessão · **Gatilho:** nenhum — fechada no que dava para fechar ·
+**Classe:** `DECISAO_DE_DESENHO` · *(retratação na §11.4; laudo em
+`docs/auditoria/AUDITORIA-PLANO-DE-TOKENS.md`)*
+
+A §11.4 declarava a leitura de sessão em **"~26 mil"** antes do corte de 06/09 e
+**"~13 mil"** depois. Medido em 19/09 com `tiktoken`: a razão real deste repositório é
+**19,0 tokens/linha**, logo os valores são **~38.400** e **~19.900** — erros de **+48%** e
+**+53%**, os dois na direção que faz o projeto parecer mais enxuto.
+
+**O custo não foi interno.** Três planos de otimização de tokens foram escritos em 19/09, e
+um deles declarou ter **calibrado a própria razão empírica** nos "~13 mil" da §11.4. Ele
+errou a leitura inicial por **90%** — e a conta dele estava certa; a fonte é que não
+estava. **Número plausível em prosa, citado por terceiro como fonte: C-01 na camada do
+token.**
+
+**Fechado no processo, não na tabela:** `auditoria/tamanho_do_contexto.py` + 8 testes, com
+prova por mutação. A §11.4 não afirma mais valor — aponta para o comando.
+
+**O que a medição abriu e continua aberto:**
+
+| # | o que | classe |
+|---|---|---|
+| 1 | ~~O cache não foi medido~~ **FECHADO em 19/09 na fonte oficial, e ele me derrubou.** O write é **2,0x** e o read 0,1x; como o fator incide sobre todo o prefixo, **cortar X% corta X% do custo, com cache ou sem** — medido, **−25%**. A inversão de prioridade que eu anunciei não existe. O risco do split é a **janela de 20 blocos**, não o prefixo. `docs/auditoria/CACHE-E-O-CORTE.md` | — |
+| 2 | **O variável não tem instrumento.** Resposta, saída de ferramenta e arquivo reescrito são o que custa integral em todo turno, e eu não os meço | `DECISAO_DE_DESENHO` |
+| 3 | **A §11.5 está `NAO_CONFIRMADO`** — ordenação sem número, e o título dizia "medido" | — |
+| 4 | **`## Fechadas` = 7.457 tokens** (7,7% da leitura). Mover para `FECHADAS.md` é o único item de tamanho com número verificado | `DECISAO_DE_DESENHO` |
+| 5 | ~~49% do `CLAUDE.md` são blocos `>`~~ **DECISÃO C EXECUTADA em 19/09.** Critério dele: *otimização sem perder contexto* → triagem por **função**, não por percentual. Saíram 962 linhas e **20.085 tokens** (os 30 achados de 06/09–18/09); ficou um **índice** com a regra de cada um. **−17.816 tok, −33,7% do arquivo**, e **26/26 achados com endereço, medido** | — |
+| 6 | **P-45, P-46 e P-53 têm gatilho vencido há 13 dias** (push, Fase 0, `data/bronze/`). Os três "pilares" de um dos planos são essas três pendências. **O problema não é falta de plano: é que nada dispara o gatilho** — P7 | `BLOQUEIA_O_SISTEMA` |
+
+> **O achado de método, e vale para além de token:** a regra do C-01 (*"achado só entra com
+> a conta escrita"*) é de 12/09; a §11.4 é de 06/09. **Regra nova não audita o passado
+> sozinha.** Nenhum instrumento do projeto varre prosa antiga procurando número sem
+> procedência — e a §11.4 sobreviveu treze dias por isso, com a regra que a condenava
+> escrita dezoito parágrafos acima.
+
+> **26/09/2026 — o item 4 foi executado, e mais que ele.** As fechadas saíram para
+> `docs/historico/pendencias-fechadas.md`, e a história do `CLAUDE.md` para
+> `docs/historico/claude-md-ate-2026-09.md`. Leitura de sessão: **136.443 → 48.135 tokens
+> (−64,7%)**, medido pelo `tamanho_do_contexto.py` antes e depois
+> (`docs/metricas/contexto-de-sessao.md`); 368 códigos de 368 continuam no repositório
+> (`auditoria/codigos_preservados.py`). Segue aberto o item 2.
+
+> **03/10/2026 — o `PENDENCIAS.md` saiu da abertura** (decisão dele, 02/10). Leitura de sessão:
+> **60.791 → 22.779 tokens (−62,5%)**, mais a seção da P da tarefa (mediana de 318 tokens nas 80
+> abertas, máximo de 2.197); `docs/metricas/contexto-de-sessao.md`. O índice é o
+> `docs/estado.md`, que o hook `SessionStart` injeta. Segue aberto o item 2.
+
+**Fechada em 03/10/2026, na triagem do registro:** itens 1, 4 e 5 fechados no próprio texto; o 3 retratado; o 6 resolvido (P-45 e P-46 fechadas, P-53 ativa no caminho crítico). O item 2, "o variável não tem instrumento", tem um desde 03/10: `tools/analisar_sessoes.py` (tempo e tokens das sessões, na máquina dele).
+
+---
+
+## ~~P-136~~ · Ler a licença de redistribuição comercial dos dados da B3 — portão antes de servir outro usuário — **FECHADA em 03/10/2026**
+
+**Dono:** Claude (leitura) · Osvaldo (decisão) · **Gatilho:** **antes de servir qualquer
+usuário além dele** · **Classe:** `DECISAO_DE_DESENHO`
+
+Hoje o dado da B3 (COTAHIST, eventos societários) é guardado para um usuário, num armazém
+privado. A U-01 pergunta *"se esta ferramenta fosse vendida"*: nesse dia o sistema passaria a
+redistribuir dado da B3 sem ninguém ter lido se pode. A leitura é com fonte primária e data de
+acesso, para `docs/fontes/`; a mesma pergunta vale para a CVM (dados abertos) e é
+provavelmente mais simples. Declarada em
+`limitacoes_declaradas.licenca_de_redistribuicao_da_b3_nao_lida`.
+
+> **25/09/2026 — a mesma leitura, feita para o NEFIN, e ela mudou o repositório.** O CSV de
+> fatores estava no git, e portanto redistribuído, desde 04/09, sem ninguém ter lido os termos.
+> Lidos na fonte (`docs/fontes/nefin.md`): uso livre, citação pedida, *"All rights reserved"*,
+> nada sobre redistribuir. O arquivo saiu do git e foi para o armazém com captura diária
+> (`fase0/capturar_nefin.py`), e o limite ficou declarado em `nefin_fora_do_git`. Achado
+> LIC-01. **A B3 e a CVM continuam sem leitura.** O NEFIN mostrou que "dado público" e
+> "redistribuível" são perguntas diferentes.
+
+
+> **25/09/2026, noite — a leitura NÃO foi feita, e o motivo é da ferramenta, não da fonte
+> (§5-B.17).** A sessão na nuvem tentou ler as duas fontes primárias e as duas responderam
+> `EGRESS_BLOCKED` na política de rede **deste ambiente**: `www.b3.com.br`
+> (`/pt_br/termos-de-uso-e-protecao-de-dados/termos-de-uso/` e a página de Séries Históricas) e
+> `dados.cvm.gov.br` (`/dataset/cia_aberta-doc-dfp`). Destrava por dois caminhos: liberar os
+> dois hosts em *Network access* do ambiente, ou a sessão local ler as páginas.
+>
+> **O que um buscador devolveu, e NÃO vale como leitura:** que os termos da B3 proíbem
+> *"distribuição, redistribuição, […] publicação […] de todo ou parte"* do Market Data sem
+> consentimento prévio, e que o portal da CVM publica sob **ODbL**. Os dois são resumo de
+> buscador, sem o texto nem a data de vigência na mão — `NAO_CONFIRMADO` até a leitura.
+>
+> **O que foi medido no índice do git, e não depende da licença:**
+> 1. **Nenhum dado de mercado bruto da B3 está no repositório.** `git grep` por registro
+>    COTAHIST (`01` + data + código, 245 posições) e por payload de evento
+>    (`lastDatePrior`, `closingPricePriorExDate`) não acha nenhum arquivo de dado: os acertos
+>    são prosa de laudo e um comentário de código. Os CSVs de `docs/acervo/` guardam **metadado**:
+>    URL, `Last-Modified`, ETag, sha256, tamanho.
+> 2. **A pergunta tem uma segunda metade que ninguém tinha formulado: direito autoral de
+>    DOCUMENTO, não só redistribuição de dado.** `docs/fontes/SeriesHistoricas_Layout.md`
+>    (394 linhas) e `docs/fontes/Tarifacao_Equities_V5.0_PT.md` (182 linhas) transcrevem
+>    publicações da B3 em seções marcadas *"texto literal"*. É a forma que dá procedência ao
+>    projeto — e é também reprodução de documento de terceiro num repositório público. A
+>    leitura dos termos tem de responder as duas.
+> 3. **Os dois arquivos acima carregam `Fonte: NAO_REGISTRADA`**, o primeiro desde 03/09 —
+>    embora a P-06 tenha fechado a fonte do leiaute em 19/09 (a URL está em
+>    `docs/schemas/cotahist-v02.yaml`). Não troquei: provar que o `.md` transcreve **a mesma
+>    revisão** daquele PDF é medição, não suposição (§5-B.1). O URL da V5.0 da tarifação não
+>    está em lugar nenhum do repositório.
+
+
+> **25/09/2026, 20:02 UTC — LIDA.** Ele liberou os dois hosts, e a leitura foi feita com `curl`
+> (a ferramenta de leitura de página continuou com o bloqueio antigo). Texto das cláusulas,
+> data de acesso e sha256 em `docs/fontes/b3-termos-de-uso.md` e
+> `docs/fontes/cvm-dados-abertos-licenca.md`. O resumo do buscador estava certo nos dois pontos.
+>
+> - **B3:** "uso exclusivamente pessoal"; redistribuir, publicar, reformatar ou fornecer base
+>   a terceiros a partir de dado de mercado é vedado sem consentimento prévio e expresso —
+>   **sem** o qualificador "para fins comerciais". Virou `limitacoes_declaradas.
+>   redistribuir_dado_da_b3_exige_consentimento` (`FISICA`); a entrada "não lida" ficou
+>   `RESOLVIDA`. Servir um segundo usuário exige contrato com a B3.
+> - **CVM:** ODbL no DFP, e citação obrigatória em todo uso secundário. A frase está no `NOTICE`.
+>
+> **O que resta é decisão dele — por isso a pendência continua aberta, agora com dono único:**
+>
+> 1. **DECIDIDA por ele, 25/09/2026: manter, sem mudança** (opção c). As transcrições ficam
+>    como estão; o risco fica declarado aqui, com a leitura dos termos ao lado. Reabre se a B3
+>    pedir a remoção ou mudar os termos (o sha256 em `docs/fontes/b3-termos-de-uso.md` acusa).
+>    O texto abaixo é o que ele tinha diante de si ao decidir.
+>
+>    **As duas transcrições de documento da B3** (`SeriesHistoricas_Layout.md`, 394 linhas;
+>    `Tarifacao_Equities_V5.0_PT.md`, 182). Os termos autorizam uso "exclusivamente pessoal" e a
+>    proibição de "reprodução […] publicação" é ambígua quanto a "fins comerciais"; nenhuma
+>    leitura torna a transcrição **integral** claramente permitida. Saídas: (a) reduzir a
+>    **citação de passagens** com a fonte (Lei 9.610/1998, art. 46, III) — o leiaute como dado já
+>    mora em `docs/schemas/cotahist-v02.yaml`; (b) pedir autorização à B3; (c) manter e declarar
+>    o risco. Recomendação: (a). O histórico do git continua tendo o texto, como no NEFIN.
+> 2. **DECIDIDA por ele, 25/09/2026: "pode ser público", e "pode executar o desenho".**
+>    `docs/decisoes/P-136-cvm-publica.md` — release do GitHub, sem conta nem credencial nova,
+>    porque o acesso público do R2 é do bucket inteiro e abriria a B3. **Executado:**
+>    `fase0/publicar_cvm.py` + passo `Publicar CVM` no workflow. **A P-136 fecha quando a
+>    release `cvm-acervo-2026` existir com as 64 versões** (plano medido) — P7: código escrito
+>    não é rotina rodando. O texto abaixo é o que ele tinha diante de si.
+>
+>    **O armazém da CVM pode ser público.** A ODbL permite redistribuir com atribuição e
+>    *share-alike*; as versões que a CVM já substituiu, que hoje só existem no R2, poderiam ser
+>    servidas a quem reproduz. É escolha, não exigência — e custa banda do R2.
+>
+> **Não lido (P5):** a Política Comercial de Market Data da B3 (é ela que diz como se pede o
+> consentimento) e a página de licença do ITR, FCA e CAD na CVM.
+
+**Fechada em 03/10/2026, na triagem do registro:** a condição de fechamento escrita nela ("quando a release `cvm-acervo-2026` existir com as 64 versões") medida em 03/10/2026: `gh release view cvm-acervo-2026` lista **84** arquivos. As duas decisões dele estão no texto (manter as transcrições; CVM pública). O que ficou sem leitura (a Política Comercial de Market Data da B3) só importa para servir outro usuário: é a P-158 e a limitação `FISICA` `redistribuir_dado_da_b3_exige_consentimento`.
+
+---
+
+## ~~P-137~~ · Conciliar os diários do COTAHIST contra o anual do mês — **FECHADA em 03/10/2026**
+
+**Dono:** Claude Code · **Gatilho:** no primeiro dia 1º com diários e anual no armazém
+(01/10/2026) · **Classe:** `BLOQUEIA_O_SISTEMA`
+
+A B3 responde o mesmo `404` para feriado, fim de semana e dia útil cujo diário não foi
+publicado (medido em 24/09). A captura registra `ausente` e segue — ela **não** sabe qual dos
+três foi. O anual do mês tem todo pregão: o conserto é, depois de capturá-lo, comparar as
+datas de pregão dele (`calendario.py`, que já lê COTAHIST pelo conteúdo) com os diários do
+mês no armazém, e acusar por nome o pregão sem diário — e o diário que diverge do anual
+naquela data. Sem isso, um diário perdido vira buraco calado na série diária até alguém
+reconstruir do anual à mão: a forma do F-02, em que ausência de arquivo parece ausência de
+pregão.
+
+**Acrescentado em 24/09 (CH-01), duas exigências medidas:**
+- a comparação diário × anual é por **multiconjunto** de linhas do dia (ordenar antes do
+  sha256), nunca na ordem do arquivo: 4 dos 5 diários de 17–23/09 têm outra ordem que o
+  anual e o mesmo conteúdo;
+- a mesma rodada compara o anual **novo com o anual anterior** nos pregões em comum, pelo
+  mesmo multiconjunto. É o que transforma o CH-01 (`n = 1` par, nenhum dia revisado) numa
+  série: um par por mês, de graça, porque os dois anuais já estão no armazém. Um dia que
+  mude ali é revisão da B3 — e é a única medição que diria se o anual mensal perde versões.
+
+
+**25/09/2026 — o código existe, e está ligado ao workflow.** `fase0/conciliar_cotahist.py` +
+12 testes (duas mutações reprovam: tirar a ordenação do multiconjunto e tirar o
+`ANTES_DA_ROTINA`). Passo `Conciliar COTAHIST` no `captura_cvm.yml`, com vermelho próprio;
+resultado em `docs/acervo/b3/conciliacoes.csv`, commitado pelo bot. **Medido antes de
+escrever:** o diário tem o mesmo leiaute do anual (header `00COTAHIST.2026BOVESPA 20260924`,
+245 posições, trailer com 15.903), então a leitura é a do `calendario.registros()`.
+
+Duas escolhas de desenho, escritas no módulo: pregão anterior ao primeiro diário capturado é
+`ANTES_DA_ROTINA`, não perda (a rotina começou em 17/09); e a versão anterior do anual é
+escolhida pelo **instante** observado, não pela ordem das linhas do registro.
+
+**O que vai acontecer, simulado sobre o registro real:** em 26/09 ele concilia **agosto** (o
+anual de 24/09 cobre o mês); todos os pregões saem `ANTES_DA_ROTINA`, e a comparação entre o
+anual de 24/09 (`4f2cf2…`) e o íntegro do inventário (`fb3546…`, até 18/09) é o **primeiro
+ponto da série do CH-01** — quantos dias a B3 revisou. Em 01/10, setembro contra os diários.
+**Fecha quando** a conciliação de setembro rodar no executor, com os diários de 17/09 em diante.
+
+**Fechada em 03/10/2026, na triagem do registro:** a condição escrita nela ("a conciliação de setembro rodar no executor, com os diários de 17/09 em diante") medida em `docs/acervo/b3/conciliacoes.csv`, rodada de 2026-10-01T16:30:37Z: setembro com **10 pregões `CONFERE` e 11 `ANTES_DA_ROTINA`, nenhuma falta (n=21)**.
+
+---
+
+## ~~P-171~~ · Vinte e quatro pendências abertas não declaram dono, gatilho nem classe — **FECHADA em 03/10/2026**
+
+**Dono:** Claude Code (propor os campos, sessão de registro em Sonnet) · Osvaldo (confirmar o
+que for dele) · **Gatilho:** a próxima sessão de registro · **Classe:** `DECISAO_DE_DESENHO`
+
+O `tools/estado.py` (03/10) lê os três campos de cada `## P-` aberta. **24 de 80 não têm
+nenhum dos três** (P-44, P-05, P-08, P-28 a P-35, P-22, P-23, P-25, …) e saem no `docs/estado.md`
+como `sem classe`, com `?`: a 5-A.1 diz que pendência sem os três é desabafo, e ela é de 06/09,
+mais nova que a maioria delas. **Mais uma regra que não auditou o passado** (a lição da P-103).
+
+**O que pesa na decisão:** o `estado.md` tem **~1.864 tokens** de um teto de 2.000 (razão de
+2,96 caracteres por token, sem `tiktoken`). Preencher dono e gatilho nas 24 custa cerca de 40
+caracteres cada, ~330 tokens: **estoura o teto**. Então a sessão que preencher também decide,
+para cada uma, se ela ainda é pendência ou se fecha (vai para o histórico com a evidência), e o
+`--conferir` reprova antes do CI se a conta não fechar.
+
+**Fechada em 03/10/2026, na triagem do registro:** a triagem de 03/10/2026 deu dono, gatilho e classe a cada uma das 24 (ou a fechou com a evidência), na divisão ativas × reserva. Guarda: `auditoria/test_plano_e_pendencias.py` reprova pendência aberta sem um dos três, nos dois arquivos.
+
+---
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-171** | pendências abertas sem dono, gatilho nem classe | 03/10 — triagem: as 24 ganharam os três campos ou fecharam; guarda em `auditoria/test_plano_e_pendencias.py` |
+| **P-137** | conciliar os diários do COTAHIST contra o anual do mês | 03/10 — setembro conciliado em 01/10: 10 `CONFERE`, 11 `ANTES_DA_ROTINA`, nenhuma falta (n=21) |
+| **P-136** | ler a licença de redistribuição da B3 antes de servir outro usuário | 03/10 — lida em 25/09; a release `cvm-acervo-2026` tem 84 arquivos (a condição era 64); o resto é P-158 |
+| **P-103** | o `CLAUDE.md` afirmava tokens sem conta | 03/10 — itens fechados no texto; o variável tem instrumento (`tools/analisar_sessoes.py`) |
+| **P-98** | 507 MB em `docs/fontes/` fora do `.gitignore` | 03/10 — a guarda `test_p98_acervo_fora_do_indice.py` substitui o lembrete do `git status` |
+| **P-82** | o repositório guardou uma cópia de si mesmo | 16/09 no corpo; cabeçalho riscado em 03/10; `calc/` está em `docs/historico/` |
+| **P-67** | teste que impede `estado.yaml` no repositório público | 03/10 — `alocacao/test_p67_segredo.py` existe e roda em todo push |
+| **P-63** | nível ou tendência: regra geral ou do bloco C | 26/09 — 63a (por métrica, no YAML); a execução vai com a P-30 |
+| **P-46** | subagentes na leitura de fonte primária | 03/10 — virou regra: `CLAUDE.md` §5-A.10 e o agente `Explore` |
+| **P-44** | o próximo passo não pode ser de engenharia duas vezes seguidas | 03/10 — virou regra: `CLAUDE.md` §5-A.5 e a skill `bastter-proximo-passo` |
+| **P-09** | a Fase 0 como único caminho | 03/10 — superada pelo caminho crítico de 03/10 no `PLANO.md` |
+| **P-08** | constantes vencendo | 03/10 — tabela vencida; o vigiar é rotina (`auditoria/expira_proxima.py` no semanal) |
 | **P-115** | o critério do degrau re-pré-registrado antes da próxima janela (C-02 v2) | 03/10 — opção A: `NAO_CONFIRMADA` em 2016–2020 como saiu (#57, `b331172`); PO-01, P-176, P-177 |
 | **P-165** | onde o motor roda para o usuário | 03/10 — B′, servidor sem estado; consequências na P-175 |
 | **P-163** | as direções visuais como estímulo, a T1 em cada direção | 27/09 — S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |

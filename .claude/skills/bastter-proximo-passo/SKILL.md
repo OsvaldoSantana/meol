@@ -51,6 +51,18 @@ Se a sessão anterior fechou uma pendência de engenharia, a próxima proposta �
 
 Engenharia entra quando **destrava** algo, não quando é o que sobrou de mais fácil.
 
+## Regra 2b — duas sessões de motor para uma de rosto (decisão dele, 03/10/2026)
+
+Motor é o caminho crítico e a frente "primeiro uso" do `PLANO.md` (§3 e §4); rosto é marca,
+UX e pesquisa com pessoas. Antes de propor, conte os três últimos PRs mergeados pela etiqueta
+e pelo assunto: se dois deles já são de rosto, o próximo é de motor. Registro não é sessão: vai
+dentro do PR que o gera. **Sem guarda automática** — a conta é desta skill, e o `PLANO.md` §5
+declara isso.
+
+> **Como o erro aconteceu.** De 26/09 a 03/10, 47 PRs: 14 de rosto, 15 de processo, 9 da série
+> ajustada, e **um** (#15) no caminho da CVM, que parou à espera de dois passos dele. Nenhum
+> tocou a P-65, que ele decidira construir já (65b). Achado IP-01.
+
 ## Regra 3 — prazo vence preferência
 
 Algumas coisas têm janela e não voltam. A **Fase 0** (baixar DFP/ITR da CVM) é a
