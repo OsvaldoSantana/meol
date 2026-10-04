@@ -226,7 +226,11 @@ def test_o_modelo_nao_carrega_ate_alguem_preencher():
     import yaml
     d = yaml.safe_load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                          "estado.exemplo.yaml"), encoding="utf-8"))
-    problemas, _avisos, _ = validar(d)
+    # CX-05: o retorno e (dados, problemas, avisos). Ate 04/10 esta linha desempacotava
+    # `problemas, _avisos, _`, e `problemas` era o dicionario de dados: as chaves do modelo
+    # faziam o teste passar com o validador sem recusa nenhuma (test_cx05_guarda_do_modelo).
+    _dados, problemas, _avisos = validar(d)
+    assert isinstance(problemas, list), f"problemas tem de ser a lista, veio {type(problemas)}"
     assert problemas, "o modelo em branco tem de ser recusado"
     for campo in CADASTRO_MINIMO:
         assert any(campo in p for p in problemas), \
