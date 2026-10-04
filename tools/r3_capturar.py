@@ -101,6 +101,12 @@ def moda_cromatica(pixels: Iterable[tuple[int, int, int]],
     return rgb_hex(cor), cromaticas[cor] / total
 
 
+def em_alta(url: str) -> str:
+    """A lookup da App Store devolve a miniatura (392x696). O servidor de imagens da Apple serve a
+    mesma captura em outra largura trocando o ultimo segmento: pede 1242 de largura."""
+    return re.sub(r"/\d+x\d+bb\.(png|jpg)$", r"/1242x0w.\1", url)
+
+
 def sha256_arquivo(path: str) -> str:
     with open(path, "rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
@@ -135,7 +141,7 @@ def capturar_site(url: str, pasta: str) -> dict[str, Any]:
             ctx = nav.new_context(viewport={"width": w, "height": h}, device_scale_factor=1,
                                   is_mobile=movel, has_touch=movel, locale="pt-BR")
             pg = ctx.new_page()
-            resp = pg.goto(url, wait_until="load", timeout=45000)
+            resp = pg.goto(url, wait_until="load", timeout=90000)
             try:
                 pg.wait_for_load_state("networkidle", timeout=12000)
             except Exception:  # rede que nunca para (chat, analytics): segue com o que tem
@@ -164,6 +170,7 @@ def baixar_app(track_id: str, pasta: str) -> dict[str, Any]:
              "sellerName": d.get("sellerName"), "trackViewUrl": d.get("trackViewUrl"),
              "capturas": []}
     for k, u in enumerate(d.get("screenshotUrls", []), start=1):
+        u = em_alta(u)
         png = os.path.join(pasta, f"app_{k}.png")
         urllib.request.urlretrieve(u, png)
         saida["capturas"].append({"k": k, "url": u, "sha256": sha256_arquivo(png)})

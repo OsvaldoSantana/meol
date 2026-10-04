@@ -226,7 +226,10 @@ paralelo à coleta da P-162; as visitas já podem começar (o sorteio está no `
 
 Livro de códigos v3 (onze categorias, 10 marcas sorteadas por categoria, semente 20261002; a v3 é a ag-b, de 04/10, a luminosidade do matiz),
 plano em [`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml), andamento em
-`docs/marca/pesquisa-marcas-rodada3-2026-09.md` §5. Nenhuma marca visitada até 03/10. Só página
+`docs/marca/pesquisa-marcas-rodada3-2026-09.md` §5. **04/10:** 51 visitadas, 34 classificadas
+(consultoria CVM e assessor com as 10), nenhum código dominante ainda; corretora e gestora
+dependem do degrau 4 (bloqueio para o IP da nuvem, §3.1 de lá), as 34 aguardam o Wayback
+(`tools/r3_arquivar.py`, na máquina dele), e sete categorias seguem sem universo. Só página
 pública; nada de sessão logada (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** uma linha
 por marca (categoria, captura com fonte e data, medidas do `classificar()`) e o `veto()` aplicado
 à direção vencedora.
@@ -252,23 +255,27 @@ ativas.*
 
 **Da sessão local (sem ele):**
 
-1. **P-145, depois do item 3:** `py -3.11 medicoes/p145_ponte_2013_2019.py` e o PR com os
+1. **P-145, depois do item 4:** `py -3.11 medicoes/p145_ponte_2013_2019.py` e o PR com os
    inventários que o envio gravou. É o passo 1 do caminho crítico.
-2. **P-05 e P-169, o degrau 4 da escada:** `curl` de IP residencial no site do BOVV11 e nas
+2. **P-170, o degrau 4 da R3:** a lista da §3.1 de `docs/marca/pesquisa-marcas-rodada3-2026-09.md`
+   (capturas que a nuvem não abre e o resto da ordem de corretora), depois
+   `py -3.11 tools/r3_arquivar.py` e `python tools/r3_dominante.py`. As capturas da nuvem estão
+   em `data/r3/capturas/` da pasta dele (copiadas pela sessão de 04/10).
+3. **P-05 e P-169, o degrau 4 da escada:** `curl` de IP residencial no site do BOVV11 e nas
    páginas dos 11 bancos da regra m-B (os roteiros estão no texto das duas, na reserva).
 
 **Dele:**
 
-3. **O envio ao R2, que destrava a P-145 e a parte 1 da P-150:** com as `R2_*` no ambiente,
+4. **O envio ao R2, que destrava a P-145 e a parte 1 da P-150:** com as `R2_*` no ambiente,
    `py -3.11 fase0/subir_acervo_local.py --aplicar`. O plano de 04/10 deu 393 `SUBIR`, 0
    `PARAR`, 0 `DESCONHECIDO` (1.583 MiB), com o `isinp.zip` e os eventos de 11/09. Depois, os
    `inventario-armazem.csv` que ele gravar vão para um commit (a sessão faz).
-4. **P-115, os PDFs do D1 no armazém:** baixar as 10 provas pelas URLs de
+5. **P-115, os PDFs do D1 no armazém:** baixar as 10 provas pelas URLs de
    `docs/fontes/jcp-amostra-2016-2020.md`, conferir cada sha256 contra a tabela e subir; do 20-F
    da Gerdau, o documento arquivado (sha256 `20f8599e…b512`).
-5. **Token do R2 somente leitura** e os quatro segredos `R2_LEITURA_*` (fila, "Conferência de
+6. **Token do R2 somente leitura** e os quatro segredos `R2_LEITURA_*` (fila, "Conferência de
    um minuto"): destrava toda medição na nuvem. A P-145 na sessão local não precisa dele.
-6. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
+7. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
    além do passo 6.
-7. **Instruções do Projeto no claude.ai:** colar a versão 2 de
+8. **Instruções do Projeto no claude.ai:** colar a versão 2 de
    `docs/ia/instrucoes-projeto-claude.md` (a escada de contorno), se ainda não foi colada.

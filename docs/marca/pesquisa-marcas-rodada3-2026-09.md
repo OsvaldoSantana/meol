@@ -1,8 +1,9 @@
 # Pesquisa de marcas — rodada 3 (P-170, antes P-B5b)
 
 *Aberta em 02/10/2026, sessão local do Claude Code. A rodada leva várias sessões: cada uma
-grava aqui o progresso e o que falta. **Estado em 02/10: o plano e o sorteio estão gravados;
-nenhuma marca foi visitada nem classificada.***
+grava aqui o progresso e o que falta. **Estado em 04/10: 51 marcas visitadas nas quatro
+categorias com sorteio, 34 classificadas (consultoria CVM e assessor com as 10 da af-a), nenhuma
+arquivada no Wayback ainda, e sete categorias sem universo.***
 
 ## 0. Para que serve, e o que mudou antes de começar
 
@@ -84,10 +85,10 @@ normal, um CNPJ uma vez.
 
 | categoria | fonte | em funcionamento | com site declarado (o universo) | classificadas |
 |---|---|---|---|---|
-| `consultoria_cvm` | CVM, `cad_consultor_vlmob_pj` | 575 | **528** | 0 de 10 |
-| `assessor` | CVM, `cad_agente_auton_pj` | 1.396 | **148** | 0 de 10 |
-| `corretora` (com as distribuidoras, onde ficam as plataformas de fundos) | CVM, `cad_intermed` | 161 | **138** | 0 de 10 |
-| `gestora_e_private` | CVM, gestores PJ de fundos em funcionamento (`registro_fundo`), com o site do `cad_adm_cart` | 1.267 gestores; 1.204 no cadastro de administradores | **1.195** | 0 de 10 |
+| `consultoria_cvm` | CVM, `cad_consultor_vlmob_pj` | 575 | **528** | **10 de 10** (visitadas 1 a 12) |
+| `assessor` | CVM, `cad_agente_auton_pj` | 1.396 | **148** | **10 de 10** (visitadas 1 a 12) |
+| `corretora` (com as distribuidoras, onde ficam as plataformas de fundos) | CVM, `cad_intermed` | 161 | **138** | 2 de 10 (visitadas 1 a 12; 2 aguardam o degrau 4; 2 foram para gestora) |
+| `gestora_e_private` | CVM, gestores PJ de fundos em funcionamento (`registro_fundo`), com o site do `cad_adm_cart` | 1.267 gestores; 1.204 no cadastro de administradores | **1.195** | 12 (10 do sorteio, visitadas 1 a 15, mais 2 sorteadas em corretora; 3 aguardam o degrau 4) |
 | `robo`, `consolidador`, `planejador` | lista oficial a procurar, subindo a escada | — | — | — |
 | `banco_tradicional`, `banco_digital`, `pagamentos`, `casa_de_analise_e_educacao` | listas do Banco Central e da CVM a ler na fonte | — | — | — |
 | não auditadas nas rodadas 1 e 2 | Santander, Caixa, Itaú Personnalité e Private, Suno, SPX, Braun, Grand Seiko e Leica | — | — | — |
@@ -99,7 +100,52 @@ cadastro, que muda; a fonte de cada número é o arquivo do dia, com o sha256.
 
 ## 3. Achados
 
-Nenhum ainda: nenhuma marca foi visitada.
+*04/10/2026, sessão na nuvem. As linhas estão em [`rodada3/classificacao.csv`](rodada3/classificacao.csv),
+a leitura de cada uma em [`rodada3/leituras.yaml`](rodada3/leituras.yaml), e a tabela do veto em
+[`rodada3/veto.md`](rodada3/veto.md). 51 visitadas: 34 classificadas, 14 puladas (com o
+motivo), 3 fora do livro (agente fiduciário e duas casas de câmbio).*
+
+1. **Nenhuma categoria tem código dominante até aqui.** A combinação mais frequente não chega à
+   metade em nenhuma:
+
+   | categoria | n | combinação mais frequente | quantas |
+   |---|---|---|---|
+   | consultoria CVM | 10 | claro / celeste / sem serifa / reto (e escuro / neutro / sem serifa / pequeno) | 2 e 2 |
+   | assessor | 10 | claro / celeste / sem serifa / reto (e **claro / laranja / serifa / reto**) | 2 e 2 |
+   | gestora e private | 12 | claro / celeste / sem serifa / reto | 4 |
+   | corretora | 2 | — | — |
+
+   Por variável, o que se repete é o **título sem serifa** (8 de 10 nas consultorias e nos
+   assessores, 10 de 12 nas gestoras) e o **canto reto** (8 de 10 nos assessores, 10 de 12 nas
+   gestoras). A cor se espalha; o celeste é o mais comum nas três.
+2. **O código exato da E aparece em dois assessores** (Septem Capital e MP Investimentos:
+   claro, laranja, serifa, reto). Não é dominante (2 de 10) e não veta, mas é o sinal de que a
+   estética "instrumento de precisão" da E tem parentes no assessor que se vende como private.
+   Na Septem, o laranja vem de 0,17% da tela (o dourado do título "Quem somos"): ver a
+   limitação 8.
+3. **Quase uma visita em seis não se lê da nuvem.** Das 51 visitas, 5 pararam em bloqueio ou
+   verificação de robô para o IP da nuvem (EUA) ou em erro do proxy: XP Gestão, Mérito (duas
+   vezes, em duas categorias), BREI e Morgan Stanley; e, entre as capturadas fora das visitadas,
+   Santander Corretora, StoneX, Galapagos, Coinvalores, Genial e FIDD. Outras 3 tinham o domínio
+   morto (DNS sem endereço: MoneyMark, Pi e Vitreo), e essas saem pela escada inteira, porque o
+   domínio não existe para ninguém. Ver a limitação 7.
+4. **O livro precisou de emenda antes da primeira marca** (ag-b, livro v3): §0.
+
+## 3.1 O que aguarda a sessão local (degrau 4)
+
+| categoria | ordem | marca | o que fazer |
+|---|---|---|---|
+| gestora e private | 3 | XP Gestão | capturar do IP dele; se abrir, ler e classificar |
+| gestora e private | 7 | Mérito DTVM | idem (verificação da Cloudflare) |
+| gestora e private | 10 | BREI | idem |
+| corretora | 3 | Mérito DTVM | é o mesmo domínio da gestora 7: uma captura, e a marca entra numa categoria só |
+| corretora | 4 | Morgan Stanley | idem (502 do proxy da nuvem) |
+| corretora | 13 em diante | o resto do sorteio | a visita continua pela ordem até 10 classificadas |
+| todas | — | as 34 classificadas | `py -3.11 tools/r3_arquivar.py`: o Wayback de cada uma |
+
+Se uma pendente abrir e for classificada, a amostra da categoria se refaz **pela ordem do
+sorteio**: entram as 10 primeiras classificadas, e as do fim saem (gestora: 13, 14 e 15 são as
+primeiras a sair).
 
 ## 4. Limitações declaradas
 
@@ -115,12 +161,32 @@ Nenhum ainda: nenhuma marca foi visitada.
    Store, ou site de venda, contra a tela de uso de E, C e D.
 5. **A classificação é de quem visita.** A família da fonte e o botão principal são lidos no
    olho, com a regra do livro; não há segundo classificador.
+6. **A moda exata dos pixels é instável sobre foto e degradê.** O livro manda medir o fundo
+   pela moda dos pixels; numa foto quase todo pixel é único, e a moda vira a cor de um detalhe.
+   Em 8 das 34 classificadas a cor da moda cobre menos de 15% da tela, e em 6 o fundo da moda
+   discorda da luminância média da tela (Montclair, Amary e Avalon saem "claro" sobre foto
+   escura; Ripen, HGR e Finance Academy, "escuro" com média clara). A regra é a do livro e foi
+   aplicada como está: o livro não muda depois da primeira marca classificada (§10 do
+   pré-registro). **Direção do viés:** desconhecida; o fundo é variável central, então pode
+   criar ou esconder imitação.
+7. **A captura da nuvem é de um IP dos EUA** (`ipinfo.io`, 04/10: Columbus, Ohio). Site que
+   bloqueia, verifica robô ou redireciona por país mostra outra coisa, ou nada: a Hashdex
+   (gestora 16, fora das visitadas) redirecionou `hashdex.com.br` para `/en-US`. As marcas
+   afetadas aguardam o degrau 4 (§3.1). Nas que abriram, não há como saber daqui se o site
+   muda por país; **o que resolveria:** a sessão local recapturar uma amostra das classificadas
+   e conferir se a classificação se mantém.
+8. **Sem botão, o matiz vem de área pequena.** Em 14 classificadas não há botão na primeira
+   tela, e o matiz é a cor cromática de maior área; em 4 delas essa cor cobre menos de 1% da tela
+   (Septem 0,17%, Book Capital 0,02%, Avalon 0,09%, Azimut 0,30%).
+9. **A captura da App Store é arte de marketing** (limitação 22 do pré-registro). Na Onze, a
+   primeira captura mostra o aparelho inclinado e não se recorta como tela: valeu a segunda, a
+   primeira de frente (anotado na leitura).
 
 ## 5. O que falta, em ordem
 
-1. O merge deste PR: a emenda do livro e o sorteio valem a partir dele.
-2. As visitas, categoria por categoria, na ordem dos `sorteio-*.csv`, começando por
-   `consultoria_cvm`, a categoria do MEOL.
+1. ~~O merge do PR do sorteio~~ (#45) e o da emenda ag-b (livro v3), antes deste.
+2. ~~As visitas de consultoria CVM e assessor~~ (04/10). Corretora e gestora: a sessão local
+   (§3.1).
 3. As listas oficiais de robô, consolidador, planejador, bancos, pagamentos e casas de análise.
 4. As não auditadas das rodadas 1 e 2, e a seção fora do Brasil.
 5. A tabela do veto completa **antes do fim da janela de 21 dias** do teste.

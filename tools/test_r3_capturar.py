@@ -52,3 +52,9 @@ def test_moda_cromatica_segue_o_livro_v3_perto_do_branco():
 
 def test_rgb_hex():
     assert C.rgb_hex((0, 128, 255)) == "#0080ff"
+
+
+def test_em_alta_troca_so_o_tamanho():
+    u = "https://is1-ssl.mzstatic.com/image/thumb/a/b/x_1242x2208.png/392x696bb.png"
+    assert C.em_alta(u) == "https://is1-ssl.mzstatic.com/image/thumb/a/b/x_1242x2208.png/1242x0w.png"
+    assert C.em_alta("https://x/y.png") == "https://x/y.png"
