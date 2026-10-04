@@ -108,7 +108,7 @@ def test_mutacao_a_frase_do_plano_antigo_e_pega():
 
 def _ativas(n: int) -> str:
     return "".join(f"## P-{i} · T\n\n**Dono:** C · **Gatilho:** g · **Classe:** "
-                   "`DECISAO_DE_DESENHO`\n\n---\n\n" for i in range(1, n + 1))
+                   "`DECISAO_DE_DESENHO`\n\n---\n\n" for i in range(9001, 9001 + n))
 
 
 def test_mutacao_a_vigesima_primeira_ativa_reprova():
@@ -118,10 +118,10 @@ def test_mutacao_a_vigesima_primeira_ativa_reprova():
 
 def test_mutacao_pendencia_sem_classe_reprova():
     texto = _ativas(2).replace("**Classe:** `DECISAO_DE_DESENHO`", "", 1)
-    assert E.sem_campos(E.pendencias(texto)) == ["P-1 (classe)"]
+    assert E.sem_campos(E.pendencias(texto)) == ["P-9001 (classe)"]
 
 
 def test_mutacao_aberta_e_riscada_ao_mesmo_tempo_reprova():
-    fechadas = "## ~~P-2~~ · T — **FECHADA em 03/10/2026**\n"
-    assert abertas_e_fechadas({"P-1", "P-2"}, fechadas) == {"P-2"}
-    assert abertas_e_fechadas({"P-1"}, fechadas) == set()
+    fechadas = "## ~~P-9002~~ · T — **FECHADA em 03/10/2026**\n"
+    assert abertas_e_fechadas({"P-9001", "P-9002"}, fechadas) == {"P-9002"}
+    assert abertas_e_fechadas({"P-9001"}, fechadas) == set()
