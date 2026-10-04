@@ -72,7 +72,8 @@ def test_testes_clona_com_historico_e_tags():
 def test_pr_roda_o_rapido_e_nunca_o_completo():
     """PR (contribuidor, Dependabot) ganha portao, mas nao segredo: so o rapido."""
     d = _wf("testes.yml")
-    assert d["on"]["pull_request"]["branches"] == ["main"]
+    assert d["on"]["pull_request"]["branches"] == [
+        "main", "claude/p170-livro-v3-luminosidade"]
     assert "pull_request" in d["jobs"]["rapido"]["if"]
     assert "pull_request" not in d["jobs"]["completo"]["if"]
     assert "push" not in d["jobs"]["completo"]["if"]

@@ -100,6 +100,12 @@ captura = [
 # Colocar `pytest-xdist` em `dev` mudaria a impressao sem mudar numero nenhum -- o resultado
 # pre-registrado passaria a acusar ambiente diferente por causa de um executor de teste.
 # Mesma razao do grupo `lint`. Guardado por alocacao/test_p141_paralelo.py.
+# R3 de marcas (P-170, 04/10/2026): tools/r3_capturar.py. So quem captura instala; o CI nao
+# precisa (as funcoes testadas nao importam nenhum dos dois). Nao muda numero do motor.
+r3 = [
+  "playwright==1.56.0",
+  "pillow==12.3.0",
+]
 paralelo = [
   "pytest-xdist==3.8.0",
   "execnet==2.1.2",

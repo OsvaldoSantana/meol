@@ -1,0 +1,441 @@
+# A leitura a olho de cada marca da R3 (P-170) -- DADO (P2). O que o navegador mede fica em
+# data/r3/capturas/<categoria>-<ordem>/medidas.json (fora do git: captura de terceiro); o que o
+# OLHO decide fica aqui: qual e o botao principal, a classe da fonte, os blocos contados, a
+# categoria pela precedencia e o motivo de pular. tools/r3_linhas.py cruza as duas e grava o
+# classificacao.csv pelo classificador congelado. Procedimento: pesquisa-marcas-rodada3 sec. 1.1.
+# Livro de codigos v3 (ag-b, 04/10/2026). Quem leu: sessao Claude de 04/10/2026 (limitacao 5:
+# nao ha segundo classificador).
+data: 2026-10-04
+
+categorias:
+  consultoria_cvm:
+    1:
+      marca: K1 Capital Humano
+      situacao: classificada
+      unidade: site          # sem app: nem link no site nem resultado na App Store BR
+      botao: vazado          # nenhum botao na primeira tela (so o menu)
+      fonte: Montserrat      # "+20.000 horas", 35 px
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "menu; imagem do topo; titulo; paragrafo; +20.000 horas; texto do numero; +R$ 300 Mi"
+    2:
+      marca: Highpar Wealth Solutions
+      situacao: pulada
+      motivo: "sem_marca: pagina de manutencao ('Site under maintenance', HTTP 503) em 04/10/2026"
+    3:
+      marca: Montclair Advisory
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Agende uma conversa
+      fonte: Georgia
+      familia_generica: serif
+      densidade_blocos: 9
+      densidade_lista: "menu; rotulo da secao; titulo; paragrafo; Agende uma conversa; Nossa filosofia; Fee-based e texto; 100% e texto; imagem de fundo"
+      nota: "fundo pela moda dos pixels: #ffffff com 4,8% da area, sobre foto escura; a luminancia media da tela e 0,137 (escuro). limitacao 6 da R3"
+    4:
+      marca: Merotto Consultoria
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: NOSSOS SERVIÇOS
+      fonte: Poppins
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "menu; imagem do topo; titulo; NOSSOS SERVICOS; CONTATO; rotulo NOSSOS SERVICOS; titulo da secao; imagem"
+    5:
+      marca: Hosken & Cunha Investment
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Agendar uma conversa
+      fonte: Playfair Display
+      familia_generica: serif
+      densidade_blocos: 6
+      densidade_lista: "menu; rotulo da secao; titulo; paragrafo; Agendar uma conversa; Documentos e transparencia"
+    6:
+      marca: Portfel
+      situacao: classificada
+      unidade: site
+      botao: cheio            # preenchido por gradiente: a cor e a moda dos pixels da caixa
+      botao_texto: FALAR AGORA COM UM CONSULTOR
+      fonte: Gilroy
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "titulo; paragrafo; FALAR AGORA; aviso de cookies; Aceitar; Preferencias; arte de fundo"
+    7:
+      marca: Helix Consult
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Fale Conosco
+      fonte: Rethink Sans    # "Quem somos", 72 px, ao pe da tela; o titulo do topo e Roboto
+      familia_generica: sans-serif
+      densidade_blocos: 6
+      densidade_lista: "menu; titulo; Fale Conosco; seta para baixo; Quem somos; arte de fundo"
+    8:
+      marca: Stokos Wealth
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: FALE COM UM CONSULTOR
+      fonte: Montserrat
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "menu; selo TRANSPARENCIA; titulo; paragrafo; FALE COM UM CONSULTOR; foto; titulo A evolucao 3.0; texto"
+    9:
+      marca: Ripen Consultoria
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: CONHEÇA NOSSOS PLANOS
+      fonte: Poppins
+      familia_generica: sans-serif
+      densidade_blocos: 6
+      densidade_lista: "menu; foto; icone; titulo; CONHECA NOSSOS PLANOS; titulo Quem Somos"
+    10:
+      marca: WCIA Consultoria
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Agendar uma conversa
+      fonte: Poppins          # o WCIA grande e logotipo (conta 0 e nao e o texto de maior corpo)
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "menu; frase de abertura; titulo; paragrafo; Agendar uma conversa; Entenda como funciona; Transparencia; texto; Foco no cliente"
+    11:
+      marca: Witz Wealth
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Fale com um especialista
+      fonte: Poppins
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "menu; titulo; paragrafo; R$ sob consultoria; familias atendidas; Fee-Only; Fale com um especialista; foto"
+    12:
+      marca: Vita Investimentos
+      situacao: pulada
+      motivo: "nao_atende_pf: 'a aceleradora de MFOs e Consultorias'; o servico e para consultorias, nao para a pessoa fisica"
+  assessor:
+    1:
+      marca: Delfos Investimentos
+      situacao: classificada
+      unidade: site          # assessor do BTG: o app e o do parceiro, nao da marca
+      botao: cheio
+      botao_texto: Fale com um assessor
+      fonte: Manrope
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "menu; selo BTG; foto; rotulo; titulo; paragrafo; Fale com um assessor; Conheca nossas solucoes; icone; Assessores experientes; texto"
+    2:
+      marca: HGR Investimentos
+      situacao: classificada
+      unidade: site
+      botao: vazado          # sem botao de chamada; o carrossel e o aviso de cookies nao contam
+      fonte: Exo             # "Bem-vindo a HGR Investimentos", 36 px, ao pe da tela
+      familia_generica: sans-serif
+      densidade_blocos: 16
+      densidade_lista: "telefone; e-mail; menu; selo XP; rotulo do slide; titulo do slide; texto do slide; seta; seta; aviso de cookies; Minhas opcoes; Nao venda; Aceitar; link da politica; WhatsApp; titulo Bem-vindo"
+    3:
+      marca: Zunar Investimentos
+      situacao: classificada
+      unidade: site
+      botao: vazado          # so o menu redondo e os botoes do aviso de cookies
+      fonte: Montserrat      # o texto de maior corpo e o do aviso de cookies (20 px)
+      familia_generica: sans-serif
+      densidade_blocos: 6
+      densidade_lista: "selo BTG; menu; ilustracao Z; aviso de cookies; SAIBA MAIS; ACEITO"
+      nota: "fundo pela moda: #ffffff (17,9%), que e o aviso de cookies sobre um fundo azul em degrade. limitacao 6 da R3"
+    4:
+      marca: Open Investimentos
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_caixa: [51, 581, 288, 61]   # a pilula cinza; o navegador so lista o link de 19 px dentro dela
+      cor_do_texto: "#ffffff"
+      raio_px: 30                       # medido: a 1 px do topo a borda comeca 22 px para dentro
+      fonte: Lato
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "logotipos; MENU; titulo; paragrafo; FACA UMA SIMULACAO AGORA; Quem Somos; HISTORICO"
+    5:
+      marca: Latomia
+      situacao: pulada
+      motivo: "sem_marca: 'Site em construcao' em 04/10/2026"
+    6:
+      marca: Septem Capital
+      situacao: classificada
+      unidade: site
+      botao: vazado          # nenhum botao na primeira tela (menu e selo do reCAPTCHA)
+      fonte: Prata           # serifada (didone); o CSS da 'sans-serif' so como reserva
+      familia_generica: serif
+      densidade_blocos: 5
+      densidade_lista: "selo BTG; menu; foto; titulo; titulo Quem somos"
+    7:
+      marca: MoneyMark Investimentos
+      situacao: pulada
+      motivo: "site_inacessivel: o dominio declarado nao existe (DNS NXDOMAIN)"
+      escada: "1) curl https www, https, http: CONNECT 502 e 'Could not resolve host'; 2) archive.org/wayback/available: ultimo arquivamento 2025-03-22, nao e o site de hoje; 3) dns.google: Status 3 (NXDOMAIN); busca: so LinkedIn e Facebook, nenhum site novo; 4) dominio inexistente nao depende de quem acessa"
+    8:
+      marca: Finance Academy
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      botao_texto: Inicie seus investimentos
+      fonte: Helvetica       # Wix sem versao para celular: a pagina chega na largura do computador
+      familia_generica: sans-serif
+      densidade_blocos: 6
+      densidade_lista: "faixa do topo; Inicie seus investimentos; foto; titulo cortado; aviso de cookies; Recusar tudo"
+    9:
+      marca: Kithera Capital
+      situacao: classificada
+      unidade: site
+      escada: "1) o site do cadastro (kitheracapital.com.br) nao resolve; 3) busca: o site atual e kithera.com.br/capital/ (capturado)"
+      botao: cheio
+      botao_caixa: [90, 376, 210, 43]   # 'Conheca nosso modelo': div sem papel de botao
+      cor_do_texto: "#ffffff"
+      raio_px: 1                        # a 1 px do topo a borda comeca 1 px para dentro
+      fonte: Poppins
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "menu; selo XP; foto de fundo; titulo; Conheca nosso modelo; titulo Nosso modelo; aviso de cookies; PERMITIR"
+    10:
+      marca: MP Investimentos
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: FALE COM UM ASSESSOR
+      fonte: "titulo em imagem, serifado"   # 'Invista no Brasil e no Mundo...', conferido no recorte
+      familia_generica: serif
+      densidade_blocos: 7
+      densidade_lista: "menu; selo Genial; titulo; frase; seta; FALE COM UM ASSESSOR; selo de agente autonomo"
+    11:
+      marca: Taurus Investimentos
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: FALE CONOSCO
+      fonte: Sofia Pro
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "selo BTG; menu; foto; titulo; FALE CONOSCO; rotulo Sobre nos; titulo Quem e a Taurus; paragrafo; WhatsApp"
+    12:
+      marca: Monetae Investimentos
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Abra sua conta
+      fonte: system-ui
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "selo Necton; menu; foto; titulo; paragrafo; Conheca a Monetae; Abra sua conta; R$ 500 mi; 2.000 clientes; 15 anos; chat"
+  gestora_e_private:
+    # "Atende pessoa fisica" (plano.yaml, pular_se) so se pula com EVIDENCIA na pagina: publico
+    # declarado institucional, profissional, qualificado, empresa ou estrangeiro, ou so veiculo
+    # restrito por norma (FIP, private equity, FIDC-NP). Sem evidencia, classifica (P6).
+    1:
+      marca: RX Asset
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      botao_texto: CONHEÇA A RX ASSET
+      fonte: ui-sans-serif   # o "RX Asset" de 60 px e o logotipo em texto; o resto e a mesma familia
+      familia_generica: sans-serif
+      densidade_blocos: 5
+      densidade_lista: "menu; titulo-logotipo; rotulo ASSET MANAGEMENT; frase; CONHECA A RX ASSET"
+      nota: "fundos e credito estruturado: nao ha publico restrito declarado na pagina (P6)"
+    2:
+      marca: Nikos Gestao
+      situacao: classificada
+      unidade: site
+      botao: vazado          # so setas e pontos do carrossel
+      fonte: Inter
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "menu; grafico do slide; seta; seta; titulo; pontos do carrossel; icone; titulo do fundo; texto"
+      nota: "o HTML traz texto escondido de cassino (SEO injetado), invisivel na tela; a pagina visivel e da Nikos. Fundo de renda fixa com cotistas de varejo"
+    3:
+      marca: XP Gestao de Recursos
+      situacao: pulada
+      motivo: "site_inacessivel: HTTP 403 'A sua requisicao foi bloqueada' para o IP da nuvem (EUA). AGUARDA DEGRAU 4"
+      escada: "1) Chromium e curl: 403 da CDN da XP; 4) pendente: captura na maquina dele, IP brasileiro. Se abrir, a linha passa a classificada e a amostra se refaz pela ordem"
+    4:
+      marca: Ativore Asset Management
+      situacao: pulada
+      motivo: "nao_atende_pf: 'U.S. real estate private equity', 'serving global investors' (private equity, estrangeiro)"
+    5:
+      marca: Book Capital
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      fonte: Playfair Display
+      familia_generica: serif
+      densidade_blocos: 5
+      densidade_lista: "menu; titulo; titulo em italico; frase LEMOS O MERCADO; marca ///"
+      nota: "estruturacao de equity e divida, sem publico restrito declarado (P6)"
+    6:
+      marca: Hedge Investments
+      situacao: classificada
+      unidade: site
+      botao: vazado          # o botao da janela 'Importante!' nao e o da tela (procedimento 1.1)
+      fonte: Compasse
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "logotipo da faixa; bandeiras; menu; janela Importante; texto da janela; icones de rede; ilustracao; QUERO PARTICIPAR; titulo atras"
+    7:
+      marca: Merito DTVM
+      situacao: pulada
+      motivo: "site_inacessivel: verificacao 'confirme que e humano' (Cloudflare) para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: pagina de verificacao da Cloudflare; contornar verificacao e proibido; 4) pendente: maquina dele"
+    8:
+      marca: Sameside
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      fonte: Archivo Light
+      familia_generica: sans-serif
+      densidade_blocos: 6
+      densidade_lista: "menu; foto; rotulo PROPOSITO; titulo; paragrafo; paragrafo"
+    9:
+      marca: Kuara Capital
+      situacao: pulada
+      motivo: "nao_atende_pf: estrategias 'estruturadas em FIDC/FIDC-NP e FIP' (veiculos restritos)"
+    10:
+      marca: BREI
+      situacao: pulada
+      motivo: "site_inacessivel: 'Sorry, you have been blocked' (Cloudflare) para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: bloqueio da Cloudflare; 4) pendente: maquina dele"
+    11:
+      marca: 2S Capital
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      fonte: Lato            # o 2S CAPITAL grande e imagem do logotipo
+      familia_generica: sans-serif
+      densidade_blocos: 4
+      densidade_lista: "menu; busca; faixa com o logotipo (0); paragrafo; selos do rodape"
+    12:
+      marca: Amary Capital
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      fonte: "fonte propria do Wix, serifada"   # 'Transparencia Eficiencia Controle', conferida no olho
+      familia_generica: serif
+      densidade_blocos: 7
+      densidade_lista: "logotipo (0); menu A AMARY; ESTRATEGIAS; foto; titulo de tres palavras; frase; seta"
+      nota: "pagina sem versao de celular; fundo pela moda #a6e1ff com 3,2% sobre foto. limitacao 6 da R3"
+    13:
+      marca: Valora Investimentos
+      situacao: classificada
+      unidade: site
+      botao: vazado          # os cartoes de fundo sao links; o Aceitar e do aviso de cookies
+      fonte: bilo
+      familia_generica: sans-serif
+      densidade_blocos: 12
+      densidade_lista: "menu; frase; titulo; Absolute; Guardian; Horizon; VGIR11; VGIP11; VGHF11; aviso de cookies; Configuracoes; Aceitar"
+    14:
+      marca: Onze
+      situacao: classificada
+      unidade: app           # 'Onze', Onze Gestora de Investimentos Ltda., App Store BR id 1519138919
+      botao: cheio
+      botao_caixa: [31, 476, 181, 24]   # 'Faca um aporte adicional!' no recorte de 390 px
+      cor_do_texto: "#ffffff"
+      raio_px: 12                       # pilula: altura 24, canto 7 px para dentro na 1a linha
+      fonte: "fonte sem serifa do app (geometrica)"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "barra de status; avatar; saudacao; chat; sino; saldo; rentabilidade; olho; Atualizar saldo; cartao Em 10 anos; cartao Seu dinheiro; Faca um aporte; Para voce; Consultoria"
+      nota: "a captura 1 da loja mostra a interface inclinada e nao se recorta como tela; usada a 2 (a primeira de frente). Recorte 168,630,1080,2208 sobre 1242x2208, levado a 390 px; a tela fica cortada embaixo pela arte da loja"
+    15:
+      marca: Avalon Asset
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      fonte: Zalando Sans Expanded   # a primeira tela so tem foto e logotipo; e a fonte do primeiro titulo da pagina
+      familia_generica: sans-serif
+      densidade_blocos: 2
+      densidade_lista: "menu; foto"
+      nota: "fundo pela moda #ffffff com 0,7% e matiz por 0,09% da area, ambos sobre foto. limitacao 6 da R3"
+  corretora:
+    # Na nuvem (IP dos EUA), 9 das 20 primeiras do sorteio nao abriram ou abriram bloqueadas.
+    # A visita parou na 12; o resto da ordem e a sessao local (degrau 4).
+    1:
+      marca: MyCAP
+      situacao: classificada
+      unidade: app           # 'MyCAP Power Broker', ICap do Brasil CTVM, App Store BR id 1510570429 (o site aponta para ele)
+      botao: cheio
+      botao_caixa: [97, 254, 235, 39]   # 'Fundos', o primeiro dos tres botoes do cartao Recomendacoes
+      cor_do_texto: "#0a3b66"
+      raio_px: 4                        # canto 3 px para dentro na 1a linha
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 15
+      densidade_lista: "barra de status; logotipo (0); conta LUCAS; olho; sino; busca; cartao Recomendacoes; texto; Fundos; Renda Fixa; Acoes; ilustracao; Ver mais; Subscricao; Alerta de Precos; Termo; Ordens"
+      nota: "o site diz 'MyCAP agora e Nomos' (migracao de contas); a marca e o app seguem no ar em 04/10. Captura 1 da loja, ja sem moldura (1242x2208), levada a 390 px. Fundo pela moda #fcfcfc com 15% sobre degrade azul. limitacao 6 da R3"
+    2:
+      marca: Bradesco BBI
+      situacao: pulada
+      motivo: "nao_atende_pf: banco de investimento ('originar, estruturar e executar operacoes', M&A, mercado de capitais)"
+    3:
+      marca: Merito DTVM
+      situacao: pulada
+      motivo: "site_inacessivel: verificacao da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4 (o mesmo dominio da gestora_e_private 7)"
+      escada: "1) Chromium: pagina de verificacao; 4) pendente: maquina dele"
+    4:
+      marca: Morgan Stanley
+      situacao: pulada
+      motivo: "site_inacessivel: 'upstream request failed' (502 do proxy da nuvem), em duas tentativas. AGUARDA DEGRAU 4"
+      escada: "1) curl: 200 com e sem www; Chromium: 502 do proxy em 45 s e em 90 s; 4) pendente: maquina dele"
+    5:
+      marca: Oliveira Trust
+      situacao: fora_do_livro
+      motivo: "agente fiduciario, administracao e escrituracao: atividade sem categoria no livro (ac-a, ad-a)"
+    6:
+      marca: Azimut Brasil Wealth Management
+      categoria: gestora_e_private   # 'Gestora de Patrimonio'; sem app proprio de investimento, nao cabe em corretora
+      situacao: classificada
+      unidade: site
+      botao: vazado          # 'Saiba mais' e link de texto; os botoes sao do aviso de cookies
+      fonte: Futura Light
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "menu; logotipo (0); foto; paragrafo; Saiba mais; aviso de cookies; Permitir; Dispensar; Preferencias"
+    7:
+      marca: Deboni
+      situacao: fora_do_livro
+      motivo: "casa de cambio ('Sua casa de cambio ha 48 anos'): atividade sem categoria no livro"
+    8:
+      marca: Ebadival
+      situacao: fora_do_livro
+      motivo: "casa de cambio (cotacoes de moeda): atividade sem categoria no livro"
+    9:
+      marca: 4UM Investimentos
+      categoria: gestora_e_private   # 'EXCELENCIA EM GESTAO', asset management; sem app proprio
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: Saiba mais
+      fonte: Montserrat
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "Fale Conosco; acessibilidade; busca; PT; EN; menu; titulo; paragrafo; Saiba mais; aviso de cookies; ACEITAR; RECUSAR"
+    10:
+      marca: Santander DTVM (Pi)
+      situacao: pulada
+      motivo: "site_inacessivel: o dominio declarado (invistacompi.com.br) nao existe (DNS NXDOMAIN)"
+      escada: "1) curl: CONNECT 502 e 'Could not resolve host'; 2) archive.org/wayback/available: ultimo arquivamento 2022-01-08; 3) dns.google: Status 3 (NXDOMAIN); 4) dominio inexistente nao depende de quem acessa"
+    11:
+      marca: Guru CTVM
+      situacao: classificada
+      unidade: site          # sem app na App Store BR pela busca 'guru investimentos'
+      botao: vazado
+      fonte: Fraunces
+      familia_generica: serif
+      densidade_blocos: 4
+      densidade_lista: "menu; titulo; paragrafo; paragrafo"
+    12:
+      marca: Vitreo
+      situacao: pulada
+      motivo: "site_inacessivel: vitreo.com.br sem endereco no DNS (sem registro A) e www NXDOMAIN"
+      escada: "1) curl: CONNECT 502 e 'Could not resolve host'; 2) archive.org/wayback/available: ultimo arquivamento 2023-12-14; 3) dns.google: sem resposta A; busca: so a central de atendimento (atendimento.vitreo.com.br), nenhum site da marca; 4) dominio sem endereco nao depende de quem acessa"
