@@ -12,7 +12,7 @@
 vivos:
   CLAUDE.md: "instrucao, doutrina e historia -- lido em toda sessao"
   PLANO.md: "onde queremos chegar e a ordem do que falta"
-  PENDENCIAS.md: "registro vivo do que esta aberto"
+  PENDENCIAS.md: "as pendencias ativas, ate 20 (o resto aberto em docs/pendencias-reserva.md)"
   ACHADOS.md: "historia dos achados, sob demanda"
   README.md: "porta de entrada para quem chega de fora -- decisao dele, 25/09/2026"
   LICENSE: "Apache-2.0, o codigo -- decisao dele, 25/09/2026"

@@ -1,410 +1,122 @@
-# PLANO.md — onde queremos chegar, o que já existe, e o que vem antes de quê
+# PLANO.md — destino, marcos e a ordem do que falta
 
-*Criado em 18/09/2026, por pergunta dele: **"você tem um arquivo de planejamento onde
-você tem listado tudo que foi feito e tudo que precisa ser feito e onde queremos
-chegar?"*** A resposta honesta era **não**.
+*Reescrito em 03/10/2026 por decisão dele (dieta completa do processo). O anterior, inteiro e com
+a lista do que ele afirmava errado, está em
+[`docs/historico/plano-ate-2026-10-03.md`](docs/historico/plano-ate-2026-10-03.md).* Este arquivo
+ganha de qualquer fila (`CLAUDE.md` §1). Se discordar do `PENDENCIAS.md` sobre o que vem
+primeiro, um dos dois está com defeito, e corrige-se no mesmo dia.
 
-O projeto tinha três registros e nenhum plano. `CLAUDE.md` mistura doutrina com história
-e cresceu para 2.270 linhas; `PENDENCIAS.md` tem **64 entradas sem ordem entre si**;
-`ACHADOS.md` guarda o passado. **Nenhum dos três responde "onde queremos chegar"**, e a
-"fila" da §7 do `CLAUDE.md` é um retrato do próximo passo, não um plano — foi reescrita
-quatro vezes e ficou desatualizada em três delas.
+## 1. Destino
 
-> **A divisão de trabalho, daqui em diante.** Este arquivo tem **destino e ordem**.
-> `PENDENCIAS.md` tem o detalhe de cada item. `ACHADOS.md` tem a história. `CLAUDE.md` tem
-> a doutrina. Se este arquivo discordar dos outros sobre **o que vem primeiro**, ele ganha
-> — e a divergência é um defeito a corrigir, não um empate a tolerar.
+> A cada aporte, o sistema diz **quanto** vai **para onde** (e, quando a régua existir, **para
+> qual papel**), com **procedência em cada número**: de onde ele veio, quem escolheu a regra, e
+> o que aconteceria se a escolha fosse outra.
 
----
+**Limitação de hoje (P5):** decide classe e rota, ainda não papel. A régua de empresa depende do
+dado da CVM lido (M2) e do backtest que ele destrava (M3). É lacuna com caminho, não recusa
+(decisão dele de 18/09).
 
-## 1. Onde queremos chegar
+**Não é** otimizador (DeMiguel, Garlappi & Uppal, 2009) nem robô que opera: o sistema decide e
+registra, e a ordem é dele.
 
-**Decisão dele, 18/09/2026**, ao retirar do `CLAUDE.md` as duas linhas que diziam que o
-sistema *"recusa-se a nomear empresas"*:
+## 2. Marcos, com o estado medido
 
-> *"o projeto talvez hoje não consiga fazer isso, mas o objetivo dele é tomar decisões
-> sobre alocação de investimento — por isso as linhas foram tiradas."*
+**"Pronto" exige uso real por ele, do começo ao fim** (decisão de 03/10). Código com teste verde
+é "código pronto", e o marco não fecha nisso.
 
-**E ele está certo contra mim.** Eu tinha escrito a incapacidade de hoje como se fosse
-identidade permanente. **É a P6 virada contra o próprio projeto:** ausência de régua não é
-critério de exclusão — nem de um ativo, nem do escopo. O certo é declarar o **objetivo**
-(o que se quer fazer) e declarar a **limitação** (o que ainda não se sabe fazer), que é a
-P5. "Não faz" vira prazo; "recusa-se" vira doutrina, e doutrina não se revoga com dado.
-
-### O destino, em uma frase
-
-> A cada aporte, o sistema diz **quanto** vai **para onde** — e, quando a régua existir,
-> **para qual papel** —, com **procedência em cada número**: de onde ele veio, quem
-> escolheu a regra, e o que aconteceria se a escolha fosse outra.
-
-### A limitação declarada de hoje (P5)
-
-O sistema decide **classe e rota**. Ele ainda **não decide papel**: não há régua de
-seleção de empresa, porque ela depende do dado da Fase 0 e do backtest que a Fase 0
-destrava. Isso é uma **lacuna com caminho**, não uma recusa — e o caminho está na §3.
-
-### Os quatro marcos, e o que separa um do outro
-
-| marco | o sistema passa a | estado |
+| marco | o sistema passa a | estado em 03/10/2026 |
 |---|---|---|
-| **M1 · decidir o aporte** | dizer quanto entra, para qual classe e por qual rota, com custo e imposto medidos e nove portões nomeados | **pronto**, e ocioso até a reserva existir |
-| **M2 · decidir com dado próprio** | ler balanço e evento societário do acervo dele, sem depender de terceiro nem de tela | **em andamento** — B3 e CVM no disco; falta ler |
-| **M3 · decidir o papel** | aplicar uma régua de empresa **pré-registrada** e medida, com o corte que a família de testes exige | **bloqueado** em M2 |
-| **M4 · fazer isso sozinho** | rodar a captura semanal sem ninguém lembrar, e acusar a falha em vez de a esconder | **rodando** desde 25/09: primeira execução agendada verde (`36148547193`), CVM e COTAHIST; NEFIN falta (P-147). A falha visível é o `acervo.frescor()` |
+| **M1 · decidir o aporte** | dizer quanto entra, em qual classe e por qual rota, com custo, imposto e nove portões nomeados | **código pronto, nunca usado.** Ele nunca usou o sistema e não o considera funcional. E não há porta de uso: dos três módulos que leem o `estado.yaml` (`aporte.py`, `reserva.py`, `estado_io.py`), nenhum chama `alocar()` nem `motor_aporte()` (`grep`, 03/10). Frente "primeiro uso", §4 |
+| **M2 · decidir com dado próprio** | ler balanço do acervo próprio, sem terceiro nem tela | **em andamento.** CVM (DFP, ITR, CAD), COTAHIST e eventos da B3 no armazém; nada disso é lido ainda como balanço. Caminho crítico, §3 |
+| **M3 · decidir o papel** | aplicar régua de empresa pré-registrada e medida, com o corte da família de testes | **bloqueado em M2.** M3 sem M2 é backtest sobre dado de outra pessoa (*look-ahead* contábil) |
+| **M4 · fazer isso sozinho** | capturar sem ninguém lembrar e acusar a falha | **feito.** `captura_cvm.yml`, diário desde 24/09: CVM, COTAHIST (diário e anual mensal), NEFIN (desde 26/09, P-147 fechada), eventos da B3 às segundas (desde 28/09) e a conciliação mensal (setembro: 10 `CONFERE`, nenhuma falta). Parada levanta `CapturaParada`. Sobra a formalidade dos eventos em `regimes_de_captura` (P-150, reserva) |
 
-**A ordem não é negociável e a razão é de dado, não de gosto:** M3 sem M2 é backtest sobre
-o dado de outra pessoa, que é o desconto D3 da literatura (*look-ahead* contábil) entrando
-pela porta da frente. E M4 sem M2 é automatizar uma esteira que ainda não existe.
+**A série ajustada do COTAHIST não é marco.** O C-02 saiu `NAO_CONFIRMADA` em 2016–2020 (P-115,
+opção A): K2 e K3 sem poder, e nenhuma janela do acervo dá ao K2 o n que ele pede (PO-01, PO-02).
+Por decisão de 03/10 ela vira **limitação declarada** (P-180), e o oráculo externo (P-127) corre
+em paralelo, sem bloquear nada.
 
----
+## 3. Caminho crítico — o motor (decisão de 03/10)
 
-## 2. O que já está feito
+**M2 pela CVM:** ponte → bitemporalidade → bloco C. Cada passo destrava o seguinte e nenhum
+depende de dado de usuário.
 
-### As camadas do blueprint
+| # | passo | destrava | o que impede hoje |
+|---|---|---|---|
+| 1 | **Ponte ticker → CD_CVM de 2013–2019** (P-145). A medição existe: `medicoes/p145_ponte_2013_2019.py` | o universo com CD_CVM, sem o qual DFP/ITR não se liga a papel; e os 13 eventos sem ticker (P-93) | **nada na sessão local:** o `isinp.zip` de 25/09 está no disco dele, e o `acervo.abrir` lê de lá. Na nuvem, faltam dois passos dele (token R2 de leitura, `isinp.zip` no armazém) |
+| 2 | **Bitemporalidade** `dt_captura` × `DT_REFER`: DFP/ITR lidos *as-of*, com duas regras já escritas: só `ÚLTIMO`, partição pelo ano do arquivo (P-51); Parquet imutável e consulta DuckDB, ponte também bitemporal (P-53) | o direito de dizer que o backtest não vaza futuro | o passo 1 |
+| 3 | **Bloco C sobre dado real** (P-30): primeiro portão que olha empresa, e é de **exclusão**, não de ordenação. Vão junto: C-04 e C-05 (P-17, o escopo já está no repositório), a contagem de `SETOR_ATIV` (P-18), os regimes de leitura (P-58 a P-61), portão × dossiê (P-64) e, por métrica, nível, tendência ou híbrido (63a) | o M3 | o passo 2 |
 
-| camada | estado |
-|---|---|
-| 0 · pipeline de dados | **em andamento** — ver o detalhe abaixo |
-| 1 · motor de custo | completa |
-| 2 · portões G0–G8 | completa, com a ordem como **dado** (`politica.yaml`), não como código |
-| 3 · alocação alvo | completa |
-| 4 · custo de discordar | completa |
-| 5 · motor de aporte | completa, ociosa até a reserva fechar |
-| 6 · catálogo de campos (blocos A–M) | **especificada**; os regimes de solvência e de instituição financeira escritos, a execução depende da camada 0 |
-| 7 · backtest | **pré-registrado e agora com mecanismo** — ver abaixo |
-| — · fatores NEFIN | completa, fora do plano original |
-| — · fase de reserva | completa, fora do plano original |
+**Decidida e fora do caminho de 03/10:** a P-65, segunda esteira (notas explicativas e IPE),
+**65b, "construir já"**, de 26/09. Ficou oito dias sem nenhum PR (0 de 47, IP-01). Onde ela
+entra é decisão dele (§6).
 
-### A camada 0, em detalhe — é onde o projeto está
+## 4. Frente "primeiro uso" (decisão de 03/10)
 
-| fonte | estado |
-|---|---|
-| **B3 — eventos societários** | **completo.** 74/74 emissoras, ~8 mil proventos, `dt_captura=2026-09-11`. Acervo bruto com sha256 |
-| **B3 — silver** | **escrito.** `refinar.py`, 9.272 linhas, `factor` desambiguado (C-01), `data_ex` derivada por calendário real de pregão |
-| **COTAHIST** | **41 anos no disco**; série **ajustada** de 2021–2025 contíguos desde 21/09 (C-02 na janela), com o controle fechando nos cinco anos. Antes de 2024 ela carrega bonificações que o silver não tem (A-11, P-112) |
-| **CVM — DFP/ITR** | **baixada em 18/09.** 33 ZIPs: DFP 2010–2026, ITR 2011–2026. Falta o manifesto com sha256 |
-| **CVM — cadastro** | **obtido em 03/09**, status COMPLETO. É por ele que a ponte ticker↔CD_CVM se faz |
-| **bitemporalidade** | desenhada (`docs/referencia/DESENHO-PIPELINE.md`), **não implementada** |
+O M1 só fecha quando ele usar o sistema num aporte real, do começo ao fim, sem a sessão no meio.
+Conta como sessão de motor no ritmo da §5.
 
-### O aparato de pré-registro (fechado em 18/09)
+1. **Uma porta de uso** (P-181): um comando que lê o `estado.yaml` e devolve o "quanto, para
+   onde e por quê" do mês, com a procedência. Hoje não existe (§2).
+2. **Ele usa** no aporte seguinte. Cada passo em que travar vira pendência com o nome do passo;
+   o que ele não entender é defeito do sistema, não dele.
+3. **P-179**, o investimento mínimo do Tesouro: o primeiro aporte (P-164, fechada em 03/10 com
+   a regra **(c)** dele) pode mandar R$ 40 para o Tesouro Selic, e a casa recusar. O mínimo se lê
+   na fonte antes de ele usar.
 
-As quatro decisões de 13/09 estão implementadas. O que era documento sobre intenções virou
-mecanismo: o `m` é **calculado** dos dois lados, o `pesquisa_id` é **derivado** do dado, o
-corte sai da **distribuição medida** e não da tabela, e divergência de veredito **bloqueia**
-até estar escrita. Isso não aproxima nenhum marco sozinho — **mas é o que torna o M3
-defensável quando ele chegar.** Ver `docs/auditoria/ROMANO-WOLF.md`.
+## 5. Ritmo e a fila do rosto
 
-### O estado financeiro real (é dado de um usuário e nunca bloqueia desenvolvimento)
+**Duas sessões de motor para uma de rosto** (decisão de 03/10). Motor é a §3 e a §4; rosto é
+marca, UX e pesquisa com pessoas. **Registro vai dentro do PR que o gera**, nunca em PR próprio.
+O ritmo se confere ao escolher o próximo passo (skill `bastter-proximo-passo`), contando os PRs
+mergeados pela etiqueta: **sem guarda automática ainda**, e isso fica declarado aqui.
 
-Fase A — formar a reserva, até **~mai/2031**. Reserva **zero** por decisão declarada dele;
-o aporte deixou de ser zero em 10/09. O M-01 mediu que o **destino** do aporte move 3 meses
-e o **valor** move 33 — e nenhum portão decide o segundo.
+A ordem do rosto é dele ([`docs/decisoes/rosto-v1.md`](docs/decisoes/rosto-v1.md)): pesquisa →
+design → mercado → UX → brandbook. A v1 é estímulo e protótipo sobre dado sintético.
 
----
-
-## 3. O que falta, em ordem — e o que cada passo destrava
-
-### ~~1 · Baixar a CVM~~ — **FEITO em 18/09/2026.** 33 ZIPs, acervo completo
-
-> Manifesto gravado em 18/09 — **39 arquivos, 716 MB** —, mas no lugar errado
-> (`data/`, que o git ignora) e por defeito meu; corrigido para `docs/acervo/cvm/`, e
-> precisa ser regravado uma vez. E o download
-> rendeu um achado que muda o desenho da rotina semanal — ver `docs/auditoria/CVM-PRIMEIRO-RETRATO.md`
-> e a **P-91**: comparar por hash de arquivo declara reapresentação onde houve só
-> reordenação de linhas.
-
-<details><summary>o registro do passo, como estava</summary>
-
-### 1 · Baixar a CVM · **escolhido em 18/09** · ⚙ desktop
-
-**O que destrava:** o M2 inteiro. Sem DFP/ITR não há balanço, sem balanço não há bloco C,
-sem bloco C não há portão de exclusão, e sem portão não há backtest — é o único item da
-lista de que os outros três marcos dependem.
-
-**Por que agora e não depois:** os arquivos de 2021–2026 são **reescritos toda semana** com
-reapresentações, sob o mesmo nome. Cada semana sem retrato é uma rodada de correções que
-deixou de ser observável — e é exatamente o número **entregue na época** que um backtest
-honesto precisa, porque a decisão de compra teria sido tomada com ele.
-
-**Como:** `docs/auditoria/CVM-DOWNLOAD-MANUAL.md`, revisado em 18/09. 12 ZIPs com prazo (6 DFP +
-6 ITR), `data\bronze\cvm\`, **sem descompactar**, e o `sha256` + a hora do download
-registrados junto — *um retrato sem hash não é um retrato: é um arquivo*.
-
-**O que impede hoje:** nada além de estar na máquina. `dados.cvm.gov.br` me responde
-`ROBOTS_DISALLOWED` e eu não contorno.
-
-> ⚠ **RETRATAÇÃO — 24/09/2026:** tratada como manual; um script na máquina dele resolve. A limitação era da ferramenta de quem respondia, não da tarefa. Hoje é `py -3.11 fase0/capturar_cvm.py` (CLAUDE.md §3, §5-B.17).
-
-</details>
-
-### ~~2 · A série ajustada de 2023~~ — **FEITO em 18/09/2026**
-
-```
-O DEGRAU DO DIA DA DATA EX -- 293 casos
-  retorno BRUTO     media -1.6265%   t  -9.88
-  retorno AJUSTADO  media -0.0360%   t  -0.29
-  CONTROLE: 86.736 pares sem evento; divergencia maxima 1.0e-27 (arredondamento)
-```
-
-`fase0/ajustar.py` + 32 testes (8 contra o acervo). Duas mutações presas na suíte: data-ex
-deslocada devolve o degrau inteiro (−1,63%, t −9,88) **e cria um falso na véspera**
-(+1,91%, t +11,20); fator invertido **dobra** o degrau (−3,16%, t −12,98). *Nenhuma
-leitura errada de fator encolhe um degrau* — é isso que faz da medição uma prova.
-
-> **CORREÇÃO DA MINHA ESPECIFICAÇÃO, e ela é o ponto desta rodada.** Eu escrevi aqui que
-> o teste *"responde se o degrau desaparece quando o fator é aplicado; se não desaparecer,
-> o C-01 está errado"*. **A população não dá esse poder ao teste.** Das 293 datas-ex de
-> 2023, **292 são provento em dinheiro e apenas UMA é evento de quantidade** (a bonificação
-> da FLRY). O C-01 é sobre o campo `factor` dos eventos de **quantidade** — e a leitura
-> percentual continua apoiada na **distribuição** dos 180 valores mais **um** caso de preço,
-> que é exatamente o que já era.
->
-> **O que a medição DE FATO confirmou, e não é pouco — são três coisas, em 293 casos:**
-> a **data-ex derivada do calendário observado** (que tinha 1 caso em 16/09), o **sentido
-> do fator** (multiplicador de preço, e não o inverso) e a **fórmula do fator de provento**.
->
-> A régua §5-B pegou isto antes da publicação, do lado de lá: *a conclusão que eu ia
-> imprimir é mais larga que a medição*. O relatório do módulo agora imprime as duas
-> metades separadas — o que confirma e o que não confirma. Ver `docs/auditoria/C02-O-DEGRAU-MEDIDO.md`.
-
-<details><summary>a especificação, como estava</summary>
-
-### 2 · A série ajustada de 2023 — o primeiro produto ponta a ponta · ⚙ Claude Code
-
-**O que destrava:** a confiança no pipeline, antes de investir mais dado nele. Junta as duas
-metades que nunca se encontraram — o silver de eventos e o COTAHIST 2023 — e responde se o
-degrau de preço **desaparece** quando o fator é aplicado. Se não desaparecer, o C-01 está
-errado e é melhor descobrir com um ano do que com vinte.
-
-**O que impede hoje:** nada. Os dois insumos já estão no disco.
-
-**A especificação, para a sessão do Claude Code abrir com ela na mão:**
-
-| | |
-|---|---|
-| **entra** | `fase0/refinar.py` (silver de eventos, 9.272 linhas) + `data\…\COTAHIST_A2023.TXT` (557 MB, layout de 245 posições) |
-| **sai** | `fase0/ajustar.py` + `test_ajustar.py`, e uma série ajustada por ticker para 2023 |
-| **a regra** | fator acumulado **de trás para frente**: o preço de antes da data-ex é multiplicado pelo produto dos fatores de todos os eventos posteriores. `data_ex` já é o **primeiro dia SEM** o direito (corrigido em 16/09) |
-| **o teste que decide** | pegar os eventos de 2023 com fator calculado e medir o retorno do dia da data-ex **antes e depois** do ajuste. Se o degrau não encolher, o C-01 está errado |
-| **o controle** | dias **sem** evento não podem mudar de retorno. Se mudarem, o ajuste vazou para onde não devia |
-| **o que NÃO fazer** | não recalcular `factor`; não inventar preço para `SEM_PRECO`; não ajustar linha com `fator_status != CALCULADO` — essas entram na série com a lacuna declarada, nunca corrigidas por interpolação |
-| **o parser do COTAHIST JÁ EXISTE** | `fase0/calendario.py` tem `TIPO_COTACAO = "01"`, `POS_DATA`, e a varredura que abre ZIP **ou** TXT. **Extrair de lá, nunca reescrever** — duas leituras do mesmo layout de 245 posições concordam por acidente até o dia em que não concordam, e foi exatamente isso o A-06. O que falta é só acrescentar as posições de papel e de fechamento, no mesmo lugar |
-
-> **Um aviso para quem abrir esta especificação:** o degrau de preço **não é prova sozinho**.
-> Um provento em dinheiro também derruba o preço na data-ex, e a queda medida é a soma dos
-> dois efeitos. O teste tem de separar: use os eventos de **quantidade** (desdobramento,
-> grupamento, bonificação) para medir o ajuste de fator, e trate os de **caixa** à parte —
-> senão o resultado mistura duas coisas e "o degrau encolheu" deixa de significar algo.
-
-**Por que o teste decide alguma coisa:** o C-01 foi fechado por **assinatura aritmética**
-(onze valores caindo em razões canônicas), não por preço. Esta é a primeira vez que a
-regra encosta em preço de verdade — e um ano de COTAHIST é amostra suficiente para
-derrubá-la se ela estiver errada.
-
-</details>
-
-### 3 · COTAHIST 2021 a 2025 — **contíguos**, e não só 2021 e 2025 · ⚙ desktop
-
-> **FEITO em 21/09/2026.** `python fase0/ajustar.py --raiz data/bronze/b3/cotahist --anos
-> 2021-2025`. Destravou o que prometia: **(a)** o C-01 tem 54 eventos de quantidade com preço
-> (49 encolhem; os primeiros grupamentos confirmados); **(b)** as duas bordas de 2023 fecharam.
-> E trouxe o que não prometia: o critério por ano **reprovou em 4 de 5** porque o nulo estava
-> errado (o dividendo tira do preço 1,16× o que paga), e o silver não tem bonificações
-> anteriores a 2025 que o COTAHIST marca (A-11, P-112). Ver `docs/auditoria/C02-JANELA-2021-2025.md`.
-
-**O que destrava:** duas coisas ao mesmo tempo, e a segunda não estava na proposta.
-
-**(a) A corroboração por preço sai de 1 para ~51 eventos de quantidade.** É o único
-caminho para o C-01 deixar de se apoiar em distribuição mais um caso — e 2025 traz 31
-dos eventos, incluindo os grandes, que o preço resolve com folga.
-
-**(b) A CONTIGUIDADE elimina bordas, e isso não é detalhe.** O ajuste é retroativo: ele
-reescala o passado a partir do **fim** da série, então todo evento cuja data-ex caia
-depois do fim da janela **não entra**, e desloca o nível *sem produzir degrau visível* —
-é a P-94, e ela é invisível no controle e na suíte.
-
-| acervo | blocos | **bordas** |
+| etapa | item | estado ou portão |
 |---|---|---|
-| só 2023 | 1 | 2 |
-| 2021 + 2023 + 2025 | **3** | **6** |
-| **2021…2025** | **1** | **2** |
+| 2 · design | P-166, anterioridade da marca e do domínio | aberta, na reserva |
+| 3 · mercado | **P-162**, teste de marca | pré-registro e página prontos; pôr no ar e o commit das datas são dele |
+| 3 · mercado | **P-170**, rodada 3 de marcas (veto de distinção) | sorteio gravado; visitas a fazer. A direção só sai com ela fechada |
+| 3 · mercado | P-153, P-154; posicionamento e tom | reserva; o tom depois da P-162 |
+| 4 · UX | mapa v2 (P-160); esquema da F0; P-167 (WCAG); protótipo F1, F3, F6; P-156 | mapa depois da P-162; o veredito da F0 (item 20) está no PR #59, ainda aberto |
+| 5 · brandbook | brandbook, P-168 | P-155, P-162 e P-156 fechadas |
 
-**Baixar os cinco anos custa o mesmo trabalho manual que baixar dois** — é a mesma página,
-três cliques a mais, ~350 MB — e **elimina quatro das seis bordas.** Anos salteados não
-formam série: o ajuste retroativo só atravessa um bloco contíguo, e 2022 e 2024 são a
-emenda. **2024 em particular é o que fecha a borda de 2023**, o bloco que já está medido.
+**Portão que vale sempre:** P-158 (parecer jurídico) antes de qualquer usuário além dele ou de
+texto comercial público.
 
-**O que impede hoje:** nada além de estar na máquina — e **um CAPTCHA por ano**.
+## 6. Bloqueios e decisões abertas
 
-> **18/09/2026 — o caminho foi medido, e a automação está fora.** Escolher o ano abre uma
-> janela com **CAPTCHA**; só depois aparece o botão
-> `AbrirArquivo('COTAHIST_A<ANO>.ZIP')`. **Eu não passo por CAPTCHA**, e a decisão não é
-> técnica: é a B3 dizendo que um humano tem de pedir o arquivo. Um script que o obtenha
-> sem esse pedido contorna o que a fonte declarou — e contorna igual por qualquer
-> endereço, o que torna irrelevante qual endereço o JS monta. Detalhe, transcrição e a
-> regra que sai daí (*a porta que o publicador abriu para máquina é a que a máquina usa*)
-> em `docs/fontes/b3-series-historicas-cotahist.md`. Declarada em `politica.yaml`
-> 1.21.0 → `limitacoes_declaradas.captura_do_cotahist_passa_por_captcha`.
->
-> **E isso pesa menos do que parece.** O arquivo anual de um ano fechado não tem motivo
-> para mudar: baixado uma vez, está baixado para sempre. O custo total do histórico é um
-> número fixo de cliques, **uma vez** — não é dívida técnica, é o preço inteiro. A P7 só
-> morde no arquivo do **ano corrente**, de que o projeto ainda não depende.
->
-> *(Que ano fechado não muda é suposição minha — a B3 não afirma isso em lugar nenhum.
-> A **P-96** mede, e custa um sexto CAPTCHA: rebaixar 2023 e comparar o sha256.)*
+**Bloqueios reais, três:**
 
-**A ordem é por evento corroborado, não cronológica (P-92):** 2025 (31 eventos), 2021
-(19), depois 2024 e 2022 pela contiguidade.
+1. **O M1 não tem porta de uso** (P-181). Sem ela, "primeiro uso" é impossível, não adiado.
+2. **A bitemporalidade não existe em código** (passo 2 da §3).
+3. **A ponte de 2013–2019 não foi medida** (P-145). Na sessão local, nada a impede.
 
-### 4 · Bitemporalidade — `dt_captura` × `DT_REFER` · ⚙ Claude Code
+**Decisões dele, abertas:**
 
-**O que destrava:** o direito de dizer que o backtest não vaza futuro. Está desenhada e não
-existe em código; o acervo já guarda `dt_captura` no caminho, então o custo é de leitura, não
-de coleta.
+| decisão | onde | o que muda |
+|---|---|---|
+| onde entra a P-65 (65b) no caminho de 03/10 | fila, bloco 23 | se a segunda esteira disputa vaga com a bitemporalidade, ou espera o bloco C |
+| se o mínimo do Tesouro entra no "caber" do primeiro aporte | P-179 | ordem executável ou aviso na ordem |
+| o `PLANO.md` continua na abertura | P-172, em 17/10 | abertura de ~21,0 mil tokens com ele, ~18,2 mil sem ele (medido em 03/10) |
+| parecer jurídico | P-158 | qualquer usuário além dele |
 
-### 5 · O bloco C sobre dado real — o primeiro portão que olha empresa
+## 7. As pendências
 
-**O que destrava:** o M3. É o primeiro momento em que o sistema aplica régua a uma empresa,
-e ele é de **exclusão**, não de ordenação — a evidência local sustenta excluir as ruins e
-não sustenta ordenar as boas (`criterio_nao_e_previsao`).
+Em 03/10: **76 abertas**, 16 ativas no [`PENDENCIAS.md`](PENDENCIAS.md) (teto 20, lidas em toda
+sessão) e 60 em [`docs/pendencias-reserva.md`](docs/pendencias-reserva.md) (por busca). Doze
+fecharam na triagem, com a evidência em `docs/historico/pendencias-fechadas.md`. O número do dia
+sai do `docs/estado.md`, não daqui.
 
-**O que impede hoje:** o passo 1.
+## 8. Como este arquivo se mantém honesto
 
-### ~~6 · A rotina semanal sem humano~~ — **RODANDO desde 24/09/2026**, diária
-
-`.github/workflows/captura_cvm.yml`, 09:15 UTC, sem a máquina dele: CVM (DFP, ITR, CAD) e,
-no mesmo job, COTAHIST (diário a cada pregão, anual uma vez por mês), para o Cloudflare R2
-com teto de 9 GB no código. Primeiras execuções verdes: `36043565046` (CVM) e `36045126980`
-(com o COTAHIST), e a primeira **agendada**, `36148547193` (25/09). O regime automático é
-dado desde 25/09 (`politica.yaml → regimes_de_captura`), e as limitações de captura da CVM e
-do COTAHIST ficaram `RESOLVIDA` (P-57 e P-135 fechadas). **O que sobra:** o NEFIN no executor
-(P-147) e a conciliação dos diários contra o anual (P-137, gatilho 01/10).
-
-### F0 · O contrato de saída — trilha paralela de produto · nuvem
-
-**Decisão dele, 26/09/2026** ([`docs/decisoes/F0-trilha-de-produto.md`](docs/decisoes/F0-trilha-de-produto.md)).
-Fora da fila numerada acima, de propósito: é produto, não motor.
-
-**O que é:** o esquema do relatório de decisão, com os campos que o [mapa de telas
-v1](docs/ux/mapa-de-telas-v1.md) lista na §6. É o contrato entre o motor e qualquer tela, e
-parte dos [requisitos de interface v1](docs/marca/requisitos-interface-v1.md).
-
-**As regras da trilha:**
-
-- **Não disputa o caminho crítico com a P-115.** Se as duas couberem numa sessão, a P-115 vai
-  primeiro, e a F0 nunca é motivo para adiar a sessão local que a P-115 pede. *(A P-115 fechou
-  em 03/10/2026; a regra vale para o que a substituir no caminho crítico.)*
-- **O primeiro entregável é uma especificação em `docs/ux/`, não código:** cada campo com o
-  tipo, a origem no motor e a tela que o usa. Código de esquema só depois de ele ler.
-- **Não bloqueia o motor.** O motor decide sem ela; ela destrava a interface.
-
-**O que destrava:** a construção de qualquer tela, e o teste com pessoas (P-156), cujos
-estímulos dependem de campos reais. **O que a impede hoje:** nada; é escrita, na nuvem.
-
-### A fila do rosto — continuação da F0 · decisão dele, 26/09/2026
-
-[`docs/decisoes/rosto-v1.md`](docs/decisoes/rosto-v1.md). Mesmas regras da F0: **não
-disputa o caminho crítico com a P-115** e **não conta como a engenharia que destrava**.
-A ordem é a dele: pesquisa → design → mercado → UX → brandbook. A v1 é estímulo e
-protótipo sobre dado sintético, para teste com pessoas.
-
-| etapa | item | onde | portão para começar | pronto quando |
-|---|---|---|---|---|
-| 1 · pesquisa | rodadas 1 e 2, Pix | — | — | **feita**; bloco de marcas encerrado por decisão |
-| 2 · design | ~~P-155 WCAG na fonte~~ | nuvem | — | **feita em 27/09**: RI-22 a RI-34, cada um com verificação (`docs/fontes/wcag-22-w3c.md`) |
-| 2 · design | P-166 busca de anterioridade da marca | nuvem, e ele | — | resultado transcrito com data; colisão vai para ele antes de qualquer logotipo |
-| 2 · design | ~~P-163 direções visuais como estímulo~~ | Claude Code, nuvem | P-155 fechada; bloco 16 da fila respondido | **feita em 27/09**: S4 (PR #38) aprovada por ele; seis PNG com sha256 na fila |
-| 3 · mercado | P-162 teste de marca (H1 a H3; a H4 foi para a P-156) | ele recruta; Claude faz os estímulos | pré-registro final **empurrado antes** de qualquer estímulo (P4); blocos 16 e 17 respondidos. *27/09, S5 v2: [pré-registro final 2](docs/marca/teste-de-marca/preregistro-final.md) gravado (a v1, com Google Forms, ficou superada sem uso); primeiro convite só depois do merge dele e da página (S6) no `main`, e do commit com as datas da janela; a direção só sai com a R3 fechada (veto de distinção; a R3 é a P-170, e as categorias do veto ficaram fechadas pela ac-a em 02/10)* | direção escolhida pela regra, ou empate decidido por ele com critério escrito |
-| 3 · mercado | P-153 e P-154 | nuvem, e ele | — | como estão escritas |
-| 3 · mercado | posicionamento e tom de voz | nuvem | P-162 fechada | documento interno em `docs/marca/`; nenhum texto público (P-158) |
-| 4 · UX | mapa v2, que resolve a P-160 | Claude, e ele | P-162 e P-165 decididas | toda tela com campo, ou fora com o motivo |
-| 4 · UX | a F0 em esquema | Claude Code | ele leu a F0 (bloco 20 da fila) | esquema em `docs/schemas/`, validado contra `alocar()` do usuário novo |
-| 4 · UX | P-167 os critérios da WCAG que a P-155 não leu (o 3.3.4 primeiro) | nuvem | — | cada um lido na fonte: RI com verificação, ou sem aplicação com o motivo |
-| 4 · UX | protótipo F1, F3 e F6 | Claude Code | esquema pronto; tokens da direção escolhida | os sete estados do mapa §4 renderizam; axe sem violação; RI-02, RI-08, RI-10, RI-17 e RI-18 com teste |
-| 4 · UX | P-156 teste de interface | ele, e Claude | critério gravado antes (P4) | H-C1, H-C2 e RI-15 medidos |
-| 5 · brandbook | brandbook | — | P-155, P-162 e P-156 fechadas | — |
-| motor | ~~P-164 primeiro aporte com patrimônio zero~~ **fechada em 03/10** | Claude Code | ~~P-115 fechada~~ ~~bloco 19 respondido~~ **(c)**, 03/10 | **feito:** uma ordem na rota de maior peso que caiba, ou `NENHUMA_ROTA_CABE` com o motivo (política 1.37.0); o mínimo do Tesouro ficou na P-179 |
-
-**Portões que valem sempre:** P-158 antes de qualquer usuário além dele ou de texto
-comercial público. O texto de recrutamento do teste é convite de pesquisa, sem
-promessa de produto. As respostas são anônimas, e nenhum dado de participante
-entra no repositório (só o agregado).
-
-**O que destrava:** a escolha da direção visual com evidência, e a primeira tela
-com dado real depois dela. **O que impede hoje:** nada; a etapa 2 roda na nuvem.
-
-### Fora da fila, mas com custo em toda sessão
-
-- ~~**`CLAUDE.md` tem 2.270 linhas / ~40 mil tokens**, e `PENDENCIAS.md` outros ~29 mil. A
-  §11.4 registrou em 06/09 que o corte tinha levado o custo por sessão a ~13 mil; hoje é
-  **cinco vezes isso**. A doutrina da retratação declarou a troca e nomeou a saída: *"se um
-  dia o custo virar impeditivo, a saída é mover o histórico para um arquivo de achados — não
-  deletá-lo."* **Virou.** Alvo: `CLAUDE.md` ≤ 600 linhas de instrução; todo bloco datado vai
-  para `ACHADOS.md`.~~ **Medido em 27/09/2026:** `CLAUDE.md` tem **399 linhas**
-  (`wc -l`; o `tamanho_do_contexto.py` conta 400) e **~7,9 mil tokens**; o `PENDENCIAS.md`,
-  **~35 mil**; a leitura de sessão (os quatro arquivos `SEMPRE`), **~55 mil**. Tokens
-  pelo proxy de 2,96 caracteres por token, ±15%: esta sessão na nuvem mediu sem `tiktoken`.
-  O alvo de ≤ 600 linhas foi cumprido pelo corte de 26/09 (`7d8a566`), depois da decisão C
-  executada em 19/09 (P-103, item 5), e a história foi para `docs/historico/`, não para o `ACHADOS.md`. O que mais pesa na
-  leitura de sessão hoje é o `PENDENCIAS.md`. O antes e depois de cada corte:
-  `docs/metricas/contexto-de-sessao.md`.
-- **Trabalho de repositório pertence ao Claude Code.** A tabela §11.2 já diz isso e as
-  rodadas de 16 e 18/09 foram feitas da nuvem mesmo assim — pagando transferência de arquivo
-  e sem alcançar o git. A nuvem é para **pesquisa com fonte primária, subagentes e
-  processamento de dado pesado**.
-- ~~**16 commits nunca empurrados.**~~ *(Resolvido em 18/09: o repositório foi empurrado, e
-  desde 25/09 os marcos têm tags anotadas. O verificador externo que o
-  `PREREGISTRO-EVIDENCIA.md` exige existe.)*
-
----
-
-## 4. Os bloqueios reais, e quantos são
-
-| # | bloqueio | classe | o que o levanta |
-|---|---|---|---|
-| 1 | ~~CVM não baixada~~ — **levantado em 18/09** | — | o acervo existe; falta o manifesto |
-| 2 | ~~COTAHIST cobre 1 ano, e a janela isolada tem duas bordas~~ — **levantado em 21/09** (2021–2025 contíguos; 41 anos no acervo) | — | resolvido |
-| 3 | bitemporalidade não implementada | `BLOQUEIA_O_SISTEMA` | passo 4 |
-| 4 | a segunda esteira — nota explicativa e IPE — **nunca orçada** (X-01) | `BLOQUEIA_O_SISTEMA` | precisa de decisão de escopo antes de código |
-| 5 | ~~duas cópias do projeto na máquina (P-87)~~ — **apagada por ele em 18/09** | — | resolvido |
-
-**E um defeito do próprio registro:** das 64 entradas do `PENDENCIAS.md`, **só 34 declaram
-classe** — a regra que exige dono, gatilho e classe é de 06/09, e as 30 anteriores nunca
-foram classificadas. *Pendência sem classe é desabafo*, pela regra dele.
-
----
-
-## 5. Decisões que são dele, e o plano não anda sem elas
-
-| # | decisão | por que é dele | custo de adiar |
-|---|---|---|---|
-| ~~A~~ | ~~destino da cópia do OneDrive~~ | — | **decidida em 18/09: apagada** |
-| B | a segunda esteira (X-01) entra no escopo, e quando? | é orçamento de esforço, não questão técnica | o M3 nasce cobrindo só parte do universo, e sem isso escrito |
-| ~~C~~ | ~~`CLAUDE.md` cortado agora ou depois do passo 1?~~ | — | **riscada em 27/09/2026 (resposta o-A dele):** decidida em 19/09 (P-103, item 5) e feita em 26/09 (`7d8a566`); a linha ficou velha e foi apontada na S1 |
-| D | nível ou tendência nos blocos de balanço (P-16/P-63) | é escolha de método, não de dado | trava o bloco C no passo 4 |
-
----
-
-## 6. O que NÃO está no plano, de propósito
-
-- **Otimizador de carteira.** DeMiguel, Garlappi & Uppal: 14 modelos, nenhum bateu 1/N fora
-  da amostra. Regra declarada e testável, nunca ótimo derivado.
-- **Robô que opera.** O sistema decide e registra; a ordem é dele.
-- **Mais engenharia de qualidade sem destravar nada.** A regra da §11.1 é permanente: o
-  próximo passo proposto não pode ser de engenharia duas vezes seguidas, e engenharia entra
-  quando **destrava**, não quando é o que sobrou de mais fácil.
-
----
-
-## 7. Como este arquivo se mantém honesto
-
-1. **Um passo concluído sai da §3 e entra na §2, com a data.** A fila não guarda item pronto
-   — isso já aconteceu três vezes neste projeto e fila desatualizada parece confiável.
-2. **Todo passo declara o que destrava e o que o impede hoje.** Sem as duas coisas é lista
-   de desejos.
-3. **Todo passo declara onde roda:** ⚙ desktop (PowerShell, git, download, dado bruto) ou
-   nuvem (pesquisa, subagente, processamento).
-4. **Este arquivo não guarda história.** Quando um passo fecha, a medição vai para
-   `auditoria/` e a narrativa para `ACHADOS.md`. Se ele começar a crescer como o
-   `CLAUDE.md`, está errado.
+1. **Estado medido, com o comando ao lado.** "Pronto" é usado por ele (§2), e "rodando" é a
+   execução com número.
+2. **Passo feito sai da §3 com a data**, e a narrativa vai para `ACHADOS.md` ou para o histórico.
+   Este arquivo não guarda história.
+3. **Até ~150 linhas.** Passou disso, está guardando o que não é plano.
+4. **Afirmação sobre fonte só com a entrada de `limitacoes_declaradas` lida**, inclusive as
+   `RETIRADA` (§5-B.13). O plano anterior repetiu por duas semanas uma limitação retirada no dia
+   em que foi escrita; `auditoria/test_plano_e_pendencias.py` prende esse caso.

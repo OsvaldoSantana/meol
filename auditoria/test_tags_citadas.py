@@ -52,7 +52,8 @@ def test_faltando_acusa_a_tag_citada_e_nao_criada():
 def test_toda_tag_citada_no_PENDENCIAS_existe():
     # 26/09: os marcos sairam para o historico com as pendencias fechadas; os dois contam.
     texto = ""
-    for nome in ("PENDENCIAS.md", os.path.join("docs", "historico", "pendencias-fechadas.md")):
+    for nome in ("PENDENCIAS.md", os.path.join("docs", "pendencias-reserva.md"),
+                 os.path.join("docs", "historico", "pendencias-fechadas.md")):
         with open(os.path.join(RAIZ, nome), encoding="utf-8") as f:
             texto += f.read()
     assert citadas(texto), "o PENDENCIAS deixou de citar os marcos -- a guarda ficou muda"

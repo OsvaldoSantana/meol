@@ -5,6 +5,45 @@
 absoluto). O que é `SEMPRE` é declarado no próprio instrumento. Nenhum destes números é copiado
 para o `CLAUDE.md`.*
 
+## 03/10/2026, à noite — a dieta completa: `PLANO.md` curto, pendências em ativas e reserva
+
+Decisão dele, 03/10 (fila, "Decisões dele, 03/10/2026, depois da P-115"). O `PENDENCIAS.md`
+volta à abertura **só com as ativas** (teto 20, lidas inteiras), o resto aberto vai para
+`docs/pendencias-reserva.md` (por busca), e o `docs/estado.md` passa a levar só códigos.
+
+| arquivo | antes (linhas / tokens) | depois (linhas / tokens) | diferença |
+|---|---|---|---|
+| `CLAUDE.md` | 436 / 8.924 | 437 / 8.957 | +33 (o §1 diz como ler as duas listas) |
+| `PLANO.md` | 411 / 8.850 | 123 / 2.802 | **−6.048** |
+| `PENDENCIAS.md` (16 ativas, inteiras) | fora da abertura | 263 / 5.376 | +5.376 |
+| `docs/estado.md` | 101 / 1.892 | 19 / 339 | −1.553 |
+| `docs/doutrinas.md` | 185 / 3.478 | 185 / 3.478 | 0 |
+| **leitura de sessão** | **1.133 / 23.144** | **1.027 / 20.952** | **−2.192 (−9,5%)** |
+
+Antes: `origin/main` em `b6b7f80` (com a #60). Depois: o commit que trouxe esta seção.
+
+**A triagem, das 86 abertas em `82600e2`:** 14 ficaram ativas, 60 foram para a reserva e 12
+fecharam com a evidência (`docs/historico/pendencias-fechadas.md`: P-08, P-09, P-44, P-46, P-63,
+P-67, P-82, P-98, P-103, P-136, P-137, P-171). Duas novas entraram ativas (P-180, P-181): **76
+abertas**, 16 ativas. No mesmo dia a #60 fechou a P-164 e abriu a P-179, que entrou ativa no
+lugar dela (frente "primeiro uso"): seguem 76 e 16. As 24 sem dono, gatilho ou classe (P-171) ganharam os três ou fecharam; a
+guarda é `auditoria/test_plano_e_pendencias.py`.
+
+**Para onde foi o texto** (movido, não apagado): o `PLANO.md` anterior, inteiro, em
+`docs/historico/plano-ate-2026-10-03.md`; o texto integral das ativas e a seção "Ao voltar ao
+desktop" como estava, em `docs/historico/pendencias-ativas-ate-2026-10-03.md`; o roteiro da página
+do teste de marca, em `docs/marca/teste-de-marca/roteiro-no-ar.md`. `auditoria/codigos_preservados.py`:
+**408 códigos, 0 sumidos** da linha de base.
+
+**O que estes números não são (P5):**
+
+- **O "antes" não somava a seção da P da tarefa** (mediana de 318 tokens). Somada, a diferença
+  é de ~2.500. O "depois" já tem as 16 ativas inteiras: não há seção a mais para ler.
+- **O ganho é pequeno de propósito.** A sessão passou a ler o texto das ativas em vez de uma
+  linha de 86; o corte veio do `PLANO.md`. O maior pedaço que sobrou é o `CLAUDE.md` (~9 mil),
+  fora desta decisão.
+- Mesma razão de 2,96 caracteres por token, sem `tiktoken` (±15%).
+
 ## 03/10/2026 — o `PENDENCIAS.md` sai da abertura, e entra o `docs/estado.md`
 
 Decisão dele, 02/10 ([`docs/decisoes/modelos-por-tarefa.md`](../decisoes/modelos-por-tarefa.md)).

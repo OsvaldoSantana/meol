@@ -90,11 +90,33 @@ def test_campos_lidos_nos_dois_formatos_do_registro():
     assert ps["P-115"]["classe"] == "DESENHO"
 
 
-def test_campo_ausente_sai_vazio_e_aparece_como_interrogacao():
-    """P5: o gerador nao inventa dono para quem nao declarou."""
+RES = """# Reserva
+
+## P-90 · Na reserva, com os tres
+
+**Dono:** Claude · **Gatilho:** x · **Classe:** `DECISAO_DE_DESENHO`
+
+---
+
+## P-91 · Na reserva, sem classe
+
+**Dono:** Claude · **Gatilho:** y
+"""
+
+
+def test_campo_ausente_sai_vazio_e_aparece_nomeado():
+    """P5: o gerador nao inventa dono para quem nao declarou; diz o que falta, e de quem."""
     assert _por_codigo(PEND)["P-44"]["dono"] == ""
-    texto = E.gerar(PEND, FILA)
-    assert "### sem classe (1)" in texto and "P-44 · Regra sem campos" in texto
+    texto = E.gerar(PEND, RES, FILA)
+    assert "## Sem dono, gatilho ou classe: P-44 (dono, gatilho, classe), P-91 (classe)" in texto
+
+
+def test_ativas_e_reserva_saem_separadas_e_a_reserva_por_classe():
+    """03/10: as ativas se leem inteiras; o estado so diz quais sao e quanto ha na reserva."""
+    texto = E.gerar(PEND, RES, FILA)
+    assert "## Ativas: 3 de 20" in texto and "P-44 · P-48 · P-115" in texto
+    assert "## Reserva: 2" in texto
+    assert "- DESENHO (1): P-90" in texto and "- sem classe (1): P-91" in texto
 
 
 def test_riscada_e_o_roteiro_do_desktop_ficam_de_fora():
@@ -115,29 +137,23 @@ def test_mutacao_apagar_a_resposta_devolve_o_bloco_para_a_fila():
 
 
 def test_mutacao_pendencia_nova_sem_regenerar_reprova():
-    antes = E.gerar(PEND, FILA)
+    antes = E.gerar(PEND, RES, FILA)
     nova = PEND.replace("## Ao voltar ao desktop",
                         "## P-171 · Nova\n\n**Dono:** Claude · **Gatilho:** ja · "
                         "**Classe:** `BLOQUEIA_O_SISTEMA`\n\n---\n\n## Ao voltar ao desktop")
-    depois = E.gerar(nova, FILA)
-    assert "P-171 · Nova · Claude · ja" in depois
+    depois = E.gerar(nova, RES, FILA)
+    assert "P-115 · P-171" in depois and "## Ativas: 4 de 20" in depois
     assert E.problemas(depois, antes, 2.96) and not E.problemas(antes, antes, 2.96)
 
 
 def test_mutacao_arquivo_acima_do_teto_reprova():
-    grande = PEND.replace("## Ao voltar ao desktop", "".join(
+    # 03/10: so codigos na saida; o teto so estoura com milhares deles.
+    grande = "".join(
         f"## P-{n} · Titulo {n}\n\n**Dono:** Claude · **Gatilho:** x · "
-        "**Classe:** `DECISAO_DE_DESENHO`\n\n---\n\n" for n in range(300, 600))
-        + "## Ao voltar ao desktop")
-    texto = E.gerar(grande, FILA)
+        "**Classe:** `DECISAO_DE_DESENHO`\n\n---\n\n" for n in range(1000, 3000))
+    texto = E.gerar(PEND, grande, FILA)
     erros = E.problemas(texto, texto, 2.96)
     assert any("teto" in e for e in erros), erros
-
-
-def test_corte_marca_o_que_cortou():
-    assert E._corta("curto", 10) == "curto"
-    c = E._corta("uma frase bem mais longa que o limite", 15)
-    assert c.endswith("…") and len(c) <= 15
 
 
 @pytest.mark.repositorio

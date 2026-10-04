@@ -11,7 +11,7 @@ investigacao e fica com cara de rigor.
 
 O portao: toda entrada operante diz se o limite e do MUNDO (`FISICA`) ou NOSSO
 (`NAO_CONSERTADA`). A segunda so entra com o que a desfaz (`o_que_resolveria`) e com o
-endereco da divida (`pendencia`, aberta em PENDENCIAS.md). Pendencia fechada com
+endereco da divida (`pendencia`, aberta em PENDENCIAS.md ou na reserva). Pendencia fechada com
 limitacao de pe e a P-118: declaracao que o repositorio ja contradiz.
 
 ALCANCE (P5 aplicada ao instrumento): mede que os campos EXISTEM e que a pendencia esta
@@ -45,7 +45,9 @@ def _pendencias():
     # 26/09: as fechadas moram no historico; as duas pontas contam (sem a segunda, toda
     # pendencia fechada viraria "inexistente", e a ancora P-57/P-100 deixaria de medir).
     texto = ""
-    for nome in ("PENDENCIAS.md", os.path.join("docs", "historico", "pendencias-fechadas.md")):
+    # 03/10: o PENDENCIAS.md virou so as ativas; a reserva tambem e aberta, e conta.
+    for nome in ("PENDENCIAS.md", os.path.join("docs", "pendencias-reserva.md"),
+                 os.path.join("docs", "historico", "pendencias-fechadas.md")):
         with io.open(os.path.join(RAIZ, nome), encoding="utf-8") as f:
             texto += f.read() + "\n"
     estado = {}
@@ -78,7 +80,7 @@ def defeitos(lims, pendencias):
             if not PEND.match(p):
                 falta.append(f"`pendencia` {p!r} nao e P-NN")
             elif p not in pendencias:
-                falta.append(f"{p} nao existe em PENDENCIAS.md")
+                falta.append(f"{p} nao existe nas pendencias (ativas, reserva ou fechadas)")
             elif not pendencias[p]:
                 falta.append(f"{p} esta FECHADA -- ou a limitacao saiu, ou a pendencia reabre")
         if falta:
@@ -105,9 +107,12 @@ def test_5B16_a_leitura_das_pendencias_ve_aberta_e_fechada():
     for achado, toda pendencia vira 'nao existe' -- e o teste acima falharia pelo motivo
     errado. Falhar aqui explica."""
     p = _pendencias()
-    # A ancora aberta era a P-57, que fechou em 25/09. A P-44 e regra permanente de
-    # sessao, e e a que menos tende a fechar; se fechar, troque a ancora, nao o teste.
-    assert p.get("P-44") is True, "P-44 deveria estar aberta"
+    # A ancora aberta era a P-57, que fechou em 25/09, e depois a P-44, que fechou em 03/10
+    # ao virar regra (CLAUDE.md 5-A.5). A P-48 (vies de sobrevivencia) mora na reserva e so
+    # fecha com a composicao historica do indice; se fechar, troque a ancora, nao o teste.
+    assert p.get("P-48") is True, "P-48 deveria estar aberta (na reserva)"
+    assert p.get("P-145") is True, "P-145 deveria estar aberta (nas ativas)"
+    assert p.get("P-44") is False, "P-44 fechou em 03/10"
     assert p.get("P-100") is False, "P-100 fechou em 23/09"
     assert p.get("P-57") is False, "P-57 fechou em 25/09"
 

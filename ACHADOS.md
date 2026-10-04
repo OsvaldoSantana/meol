@@ -3174,3 +3174,69 @@ não por guarda.
 **Conserto:** regra no `CLAUDE.md` §5. É **uma sessão local por pasta**; sessões paralelas
 usam `git worktree`, uma pasta por branch. Guarda automática: nenhuma. Duas sessões não se veem,
 e a regra é de quem as abre.
+
+---
+
+## PO-02 · O K2 sem poder era o resultado esperado, e foi tratado como risco
+
+*03/10/2026. Retratação do claude.ai, registrada pela sessão local a pedido dele. Complementa o
+PO-01: aquele é o limiar calculado na convenção errada; este é a leitura errada do que os
+números já diziam antes da corrida.*
+
+**O resultado da P-115, como saiu** (opção A; `b331172`, #57). K2 do JCP: σ̂ = **0,097**
+(0,0971, n=555, bootstrap por pregão) contra σ_max = **0,0416**. Para chegar ao σ_max, o K2
+pediria ~**3.024** JCPs (4.725 pela regra de 0,8 × σ_max); o acervo inteiro de 2013–2025 tem
+~**1.658**. **Nenhuma janela do acervo atinge o n.** O K3 do dividendo também ficou sem poder
+(σ̂ 0,0778 > 0,0463, n=416). Veredito: `NAO_CONFIRMADA`.
+
+**A retratação, nas palavras do claude.ai:** *"tratei o sem poder do K2 como risco quando era o
+resultado esperado"*. **A evidência que a derruba**, com os números do PO-01 (conta do registro,
+não releitura da §9): a própria projeção da §9 dava σ ≈ 0,058 para n = 555, já acima do σ_max de
+0,0416. Mesmo na convenção otimista, 2016–2020 não tinha poder no K2. "Pode faltar poder" era a
+frase; "vai faltar poder" era a conta.
+
+**A consequência em termos do projeto.** A corrida foi decidida como quem aceita um risco, e não
+como quem já sabe o resultado do K2. Com a leitura certa, a pergunta para ele seria a do PO-01
+("o K2 não tem poder em janela nenhuma; roda assim mesmo?"), e a série ajustada teria virado
+limitação declarada uma semana antes (é a decisão de 03/10, P-180). Nesse intervalo, 9 dos 47
+PRs de 26/09 a 03/10 foram da série (IP-01).
+
+**Causa raiz do erro de método.** Probabilidade dita onde havia aritmética. Pela régua (5-B,
+pergunta 1), a frase "é um risco" era mais fraca que a medição que existia: o n do acervo e o
+σ projetado já fechavam a conta.
+
+**O que muda no processo.** Pré-registro com teste de poder escreve, antes de rodar, o poder
+**previsto** de cada critério com a conta ao lado (`PREVISTO: sem poder`, não "risco"); se algum
+sai sem poder em toda janela possível, a pergunta vai para ele antes da corrida. **Guarda:
+nenhuma**, e não há critério v3 em vista: a série é limitação declarada desde 03/10.
+
+---
+
+## IP-01 · A decisão 65b ficou oito dias sem PR, atrás de outros 47
+
+*03/10/2026. Inversão de prioridade, apontada na conversa de 03/10 no claude.ai e medida pelo
+registro.*
+
+**O que se mediu.** `gh pr list --search "created:>=2026-09-26"`: **47 PRs, de #13 a #59**;
+nenhum título cita P-65, nota explicativa, IPE ou esteira. `git log --since=2026-09-26`: **103
+commits**, nenhum assunto cita a P-65. Ele tinha decidido em 26/09 **65b, construir já** (fila,
+bloco 4). Pelo título, classificação do registro: 15 de processo e registro, **14 de rosto**,
+**9 da série ajustada** (P-115 e P-117), 4 de captura, 4 do motor do M1 (teses, G-07) e **1 no
+caminho da CVM** (#15, o `medir.yml` da P-145, que parou à espera de dois passos dele).
+
+**A consequência em termos do projeto.** "Construir já" virou, na prática, "não construir", sem
+ninguém decidir isso. E o `PLANO.md` continuou listando a segunda esteira na §5, entre as
+"decisões que são dele e o plano não anda sem elas": **a decisão tomada parecia pendente**, e
+quem lia o plano não tinha como ver a inversão.
+
+**O padrão, e ele é o de sempre** (F-05, N-01, R-01, S-02): um arquivo declara um comportamento,
+e nada o executa. Aqui o arquivo é a fila, e o comportamento é a ordem do trabalho. A resposta
+foi registrada na pendência e na fila; o `PLANO.md` não a absorveu; e a escolha do próximo passo
+não olha decisão sem PR.
+
+**O que muda.** (1) O caminho crítico de 03/10 está no `PLANO.md`, e decisão respondida sai da
+lista de abertas no mesmo commit. (2) Ritmo de duas sessões de motor para uma de rosto, contado
+na skill `bastter-proximo-passo` (regra 2b). (3) A P-65 está nas ativas, e a posição dela é o
+bloco 23 da fila, porque o caminho de 03/10 não a nomeia e escolher entre as duas decisões não é
+da sessão. **Guarda automática: nenhuma** para "decisão sem PR", declarado no `PLANO.md` §5. A
+parte do plano que repetia limitação retirada tem guarda (`auditoria/test_plano_e_pendencias.py`).

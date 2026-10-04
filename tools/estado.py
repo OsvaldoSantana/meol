@@ -9,14 +9,19 @@ indice: as pendencias abertas (codigo, titulo, dono, gatilho, classe) e os bloco
 Osvaldo que ainda nao tem resposta. O hook SessionStart (`.claude/settings.json`) injeta o
 resultado; a secao inteira se le sob demanda.
 
+03/10/2026 (decisao dele, dieta completa): o PENDENCIAS.md virou so as ATIVAS (ate 20), lidas
+inteiras em toda sessao, e o resto aberto foi para docs/pendencias-reserva.md, lido por busca.
+Com as ativas lidas inteiras, repetir uma linha de cada aqui seria pagar duas vezes: o estado
+passa a levar os codigos (das ativas e da reserva, por classe), quem esta sem dono, gatilho ou
+classe, e a fila sem resposta.
+
     python tools/estado.py             # regenera docs/estado.md
     python tools/estado.py --conferir  # sai 1 se o arquivo estiver velho ou passar do teto
 
 O QUE ELE NAO FAZ (P5):
-  1. NAO resume a pendencia. Titulo e campos saem cortados no limite de cada coluna, com
-     reticencias; quem decide le a secao (`grep -n "^## P-115" PENDENCIAS.md`).
-  2. NAO inventa campo. Pendencia sem `**Dono:**`, `**Gatilho:**` ou classe declarada sai com
-     `?` no campo -- e isso e uma violacao da 5-A.1 visivel, nao um defeito deste gerador.
+  1. NAO resume a pendencia: so o codigo. Quem decide le a secao.
+  2. NAO inventa campo. Pendencia sem `**Dono:**`, `**Gatilho:**` ou classe declarada sai na
+     linha "sem dono, gatilho ou classe" -- violacao da 5-A.1 visivel, nao defeito do gerador.
   3. NAO mede o tokenizador do Claude. O teto usa a razao de chars/token do
      `auditoria/tamanho_do_contexto.py` (proxy, +-15%), a mesma regua das medicoes de contexto.
   4. "Sem resposta" na fila e uma regra de texto, nao leitura: um bloco numerado esta
@@ -34,6 +39,7 @@ import sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PENDENCIAS = os.path.join(RAIZ, "PENDENCIAS.md")
+RESERVA = os.path.join(RAIZ, "docs", "pendencias-reserva.md")
 FILA = os.path.join(RAIZ, "docs", "decisoes", "fila-do-osvaldo.md")
 SAIDA = os.path.join(RAIZ, "docs", "estado.md")
 
@@ -45,9 +51,8 @@ LIMITE_CHARS_HOOK = 10_000
 
 CLASSES = {"BLOQUEIA_O_SISTEMA": "BLOQUEIA", "DECISAO_DE_DESENHO": "DESENHO",
            "DADO_DE_UM_USUARIO": "DADO"}
-# Larguras por coluna: o que cabe em 2 mil tokens com 80 pendencias (03/10/2026). Medido no primeiro
-# gerado; quem passar do teto ajusta aqui, e o --conferir reprova antes do CI.
-LARGURA = {"titulo": 28, "dono": 16, "gatilho": 24}
+# Decisao dele, 03/10/2026: as ativas sao lidas inteiras em toda sessao, e por isso tem teto.
+LIMITE_ATIVAS = 20
 
 
 def _chars_por_token() -> float:
@@ -66,13 +71,6 @@ def _limpo(s: str) -> str:
     s = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", s)
     s = s.replace("**", "").replace("`", "").replace("*", "")
     return re.sub(r"\s+", " ", s).strip(" .·—-")
-
-
-def _corta(s: str, n: int) -> str:
-    if len(s) <= n:
-        return s
-    corte = s[: n - 1].rsplit(" ", 1)[0] if " " in s[: n - 1] else s[: n - 1]
-    return corte.rstrip(" ,;:·—(") + "…"
 
 
 def _blocos(texto: str, cabecalho: str) -> list[tuple[str, str]]:
@@ -126,34 +124,42 @@ def fila_sem_resposta(texto: str) -> list[dict[str, str]]:
     return saida
 
 
-def _linha(p: dict[str, str]) -> str:
-    L = LARGURA
-    campos = [p["codigo"], _corta(p["titulo"], L["titulo"])]
-    if p["dono"] or p["gatilho"]:
-        # O parentese do dono diz QUE parte e de quem; a secao tem o resto.
-        dono = re.split(r" \(| ·", p["dono"], maxsplit=1)[0]
-        campos += [_corta(dono, L["dono"]) or "?", _corta(p["gatilho"], L["gatilho"]) or "?"]
-    return " · ".join(campos)
+def sem_campos(ps: list[dict[str, str]]) -> list[str]:
+    """Codigo e o que falta, das que nao declaram os tres campos (5-A.1, P-171)."""
+    saida = []
+    for p in ps:
+        falta = [c for c in ("dono", "gatilho", "classe") if not p[c]]
+        if falta:
+            saida.append(f"{p['codigo']} ({', '.join(falta)})")
+    return saida
 
 
-def gerar(texto_pend: str, texto_fila: str) -> str:
-    ps = pendencias(texto_pend)
+def gerar(texto_ativas: str, texto_reserva: str, texto_fila: str) -> str:
+    ativas = pendencias(texto_ativas)
+    reserva = pendencias(texto_reserva)
     fs = fila_sem_resposta(texto_fila)
+    faltam = sem_campos(ativas + reserva)
     linhas = [
         "# Estado do projeto",
         "",
-        "*Gerado por `tools/estado.py` de `PENDENCIAS.md` e da fila; não editar à mão. "
-        "Cada linha: código · título · dono · gatilho, cortados (…); a seção inteira: "
-        "`grep -n \"^## P-NN\" PENDENCIAS.md`. `?` = campo não declarado (5-A.1).*",
+        "*Gerado por `tools/estado.py` de `PENDENCIAS.md`, `docs/pendencias-reserva.md` e da "
+        "fila; não editar à mão. As ativas se leem **inteiras** no `PENDENCIAS.md`; a reserva, "
+        "só por busca: `grep -n \"^## P-NN\" docs/pendencias-reserva.md`.*",
         "",
-        f"## Pendências abertas: {len(ps)}",
+        f"## Ativas: {len(ativas)} de {LIMITE_ATIVAS} (`PENDENCIAS.md`, ler inteiro)",
+        "",
+        " · ".join(p["codigo"] for p in ativas),
+        "",
+        f"## Reserva: {len(reserva)} (`docs/pendencias-reserva.md`, por busca)",
+        "",
     ]
-    # Agrupar pela classe tira uma coluna de 80 linhas: e o que faz caber nos 2 mil tokens.
-    grupos = [(c, [p for p in ps if p["classe"] == c]) for c in CLASSES.values()]
-    grupos.append(("sem classe", [p for p in ps if not p["classe"]]))
+    # Agrupar pela classe: o leitor ve o que esta parado sem abrir o arquivo.
+    grupos = [(c, [p for p in reserva if p["classe"] == c]) for c in CLASSES.values()]
+    grupos.append(("sem classe", [p for p in reserva if not p["classe"]]))
     for nome, membros in grupos:
         if membros:
-            linhas += ["", f"### {nome} ({len(membros)})", *(_linha(p) for p in membros)]
+            linhas.append(f"- {nome} ({len(membros)}): " + " ".join(p["codigo"] for p in membros))
+    linhas += ["", "## Sem dono, gatilho ou classe: " + (", ".join(faltam) or "nenhuma")]
     linhas += ["", f"## Fila do Osvaldo, sem resposta: {len(fs)}", ""]
     for f in fs:
         linhas.append(f"- {f['bloco']} · {f['titulo']}" + (f" · {f['ref']}" if f["ref"] else ""))
@@ -172,7 +178,7 @@ def problemas(gerado: str, atual: str | None, chars_por_token: float) -> list[st
     tokens = len(gerado) / chars_por_token
     if tokens >= LIMITE_TOKENS:
         erros.append(f"docs/estado.md tem ~{tokens:.0f} tokens; o teto e {LIMITE_TOKENS} "
-                     f"(decisao de 02/10). Estreite LARGURA ou feche pendencias")
+                     f"(decisao de 02/10). Feche pendencias ou encurte a fila")
     if len(gerado) > LIMITE_CHARS_HOOK:
         erros.append(f"{len(gerado)} caracteres: o hook so injeta {LIMITE_CHARS_HOOK}")
     return erros
@@ -183,7 +189,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--conferir", action="store_true",
                     help="nao grava; sai 1 se docs/estado.md estiver velho ou passar do teto")
     a = ap.parse_args(argv)
-    gerado = gerar(_ler(PENDENCIAS), _ler(FILA))
+    gerado = gerar(_ler(PENDENCIAS), _ler(RESERVA), _ler(FILA))
     cpt = _chars_por_token()
     if a.conferir:
         atual = _ler(SAIDA) if os.path.exists(SAIDA) else None

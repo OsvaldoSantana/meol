@@ -225,6 +225,29 @@ Dada pelo formulário do Projeto no claude.ai.
 |---|---|---|---|
 | **18 · B′** | **servidor sem estado.** O aparelho envia a situação, o servidor calcula e devolve, e nada é gravado, nem em log. O dado continua morando no aparelho; a P-157 fica de pé | [`P-165-onde-o-motor-roda.md`](P-165-onde-o-motor-roda.md), com as três consequências e o status de cada uma | A (motor no aparelho), B (servidor com banco de dados) |
 
+### Decisões dele, 03/10/2026, depois da P-115 `NAO_CONFIRMADA`
+
+Dadas no claude.ai e registradas pela sessão local de 03/10 (o PR da dieta). O texto de cada
+decisão é o do prompt dele; **as alternativas foram reconstruídas pelo registro, não transcritas
+da conversa** (o prompt trouxe as decisões, não as opções), e nenhuma razão é atribuída a ele.
+
+| # | decisão | onde ficou | alternativas não escolhidas |
+|---|---|---|---|
+| 1 | **Caminho crítico = M2 pela CVM:** ponte ticker → CD_CVM (P-145) → DFP/ITR com bitemporalidade (passo 4) → bloco C sobre dado real. **A série ajustada vira limitação declarada; a P-127 corre em paralelo, sem bloquear** | `PLANO.md` §3; P-180 (a limitação); P-127 | seguir pela série com um critério v3 numa janela nova (sem n: PO-01, PO-02); a P-127 como portão da série, antes da CVM; a segunda esteira (65b) na frente |
+| 2 | **Ritmo: duas sessões de motor para uma de rosto; registro vai dentro do PR que o gera, não em PR próprio** | `PLANO.md` §5; skill `bastter-proximo-passo`, regra 2b | sem ritmo declarado, como até 03/10 (de 47 PRs, 14 de rosto e um no caminho da CVM; IP-01); 1:1; registro em PR próprio (#54, #56, #59) |
+| 3 | **Dieta completa do processo** | este PR: `PLANO.md` reescrito; `PENDENCIAS.md` em ativas (até 20) e `docs/pendencias-reserva.md`; `docs/estado.md` só com códigos; antes e depois em `docs/metricas/contexto-de-sessao.md` | um corte de cada vez, esperando a P-172 em 17/10 (a 22a); cortar só o `PLANO.md` |
+| 4 | **O MEOL nunca foi usado por ele, que não o considera funcional. "Pronto" passa a exigir uso real por ele, do começo ao fim** | `PLANO.md` §2 (M1 = "código pronto, nunca usado") e §4 (frente "primeiro uso"); P-181 | manter o M1 "pronto" pelo teste verde (`test_usuario_novo.py`); "pronto" pelo teste com pessoas (P-156) |
+
+**O que o registro achou ao executar, e que as decisões não tinham como saber:**
+
+1. **Não existe porta de uso.** Dos três módulos que leem o `estado.yaml`, nenhum chama
+   `alocar()` nem `motor_aporte()`. O "primeiro uso" começa por construí-la (P-181).
+2. **A cabeça do caminho crítico não espera por ele.** O `isinp.zip` de 25/09 está no disco da
+   máquina dele, e a medição da P-145 roda na sessão local; o token de leitura do R2 deixa de ser
+   pré-requisito.
+3. **A 65b ficou sem lugar.** O caminho de 03/10 não nomeia a P-65, decidida "construir já" em
+   26/09. A posição dela é pergunta nova: bloco 23.
+
 ### Resposta dele, 26/09/2026, sobre o critério v2 do degrau (P-115)
 
 **"Pode empurrar", dado no claude.ai**, com o teto combinado de ~19% à vista: a linha 231 do
@@ -681,6 +704,24 @@ sobrou depois do `CLAUDE.md`: **8.779 tokens** (`auditoria/tamanho_do_contexto.p
 
 **Recomendação: 22a por enquanto**, até a regra de volta ter duas semanas de dado: medir um corte
 de cada vez.
+
+---
+
+## 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10
+
+Em 26/09 você decidiu **65b, construir já** (só extração determinística). Em 03/10, o caminho
+crítico ficou ponte → bitemporalidade → bloco C, sem a P-65. Nos oito dias entre as duas, nenhum
+PR a tocou (IP-01). As duas decisões não dizem qual vem primeiro.
+
+- **23a** — **depois do bloco C.** → O consumidor da esteira é o dossiê (P-64), que só roda na
+  lista curta, e a lista curta é o que o bloco C produz. Antes disso a extração não tem quem a
+  leia (o padrão da P-144: função sem consumidor).
+- **23b** — **em paralelo, como a P-127:** uma sessão de motor em cada três, começando por medir o
+  formato do Empresas.NET. → Honra o "já" da 65b; tira vaga do caminho crítico.
+- **23c** — **na frente da bitemporalidade**, como a 65b mandava. → Desfaz a ordem de 03/10.
+
+**Recomendação: 23a**, porque construir a esteira antes do dossiê existir é construir sem
+consumidor. A 65b continua valendo: muda o quando, não o se nem a condição dele.
 
 ---
 
