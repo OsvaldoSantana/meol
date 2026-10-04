@@ -64,10 +64,14 @@ def test_mutacao_a_auditoria_com_os_nomes_originais_reprova():
 
 
 def test_controle_a_auditoria_registrada_nao_colide():
+    """Com CX, o codigo mora no registro da auditoria e, depois do conserto, no ACHADOS.md: a
+    mesma coisa em dois lugares, gravada na linha de base no PR de cada conserto. Em lugar
+    nenhum mais."""
     defs = R.definicoes()
     assert {"CX-04", "CX-05", "CX-06"} <= set(defs)
     for cod in ("CX-04", "CX-05", "CX-06"):
-        assert defs[cod] == {REGISTRO}, f"{cod} tem de ter um endereco so: {defs[cod]}"
+        assert REGISTRO in defs[cod] and defs[cod] <= {REGISTRO, "ACHADOS.md"}, (
+            f"{cod} fora do registro e do ACHADOS.md: {defs[cod]}")
 
 
 def test_o_achados_ancorados_nao_via_a_colisao(tmp_path):

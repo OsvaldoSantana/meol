@@ -143,6 +143,8 @@ C-09;docs/auditoria/escopo-fii-e-universo.md
 C-09;docs/referencia/laudo-auditoria-consolidado.md
 C-10;docs/auditoria/escopo-fii-e-universo.md
 C-10;docs/referencia/laudo-auditoria-consolidado.md
+CX-04;ACHADOS.md
+CX-04;docs/auditoria/AUDITORIA-CODEX-2026-10-03.md
 D-01;docs/auditoria/escopo-campos-de-analise.md
 D-01;docs/auditoria/escopo-fii-e-universo.md
 D-01;docs/historico/claude-md-ate-2026-09.md
