@@ -990,7 +990,10 @@ def test_residuo_de_lote_vai_para_caixa():
 
 def test_rota_sem_lote_nao_e_arredondada_por_magnitude_de_preco():
     rotas = {r.id: r for r in catalogo(C)}
-    assert rotas["td_selic"].negocia_em_lote is False
+    # P-179 (04/10/2026): o exemplo de rota sem lote era a td_selic, e ela passou a ter lote
+    # (0,01 titulo, decisao dele). O B-04 continua o mesmo: o lote e flag declarada.
+    assert rotas["rdb_100"].negocia_em_lote is False
+    assert rotas["td_selic"].negocia_em_lote is True and rotas["td_selic"].lote_fracao == 0.01
     assert rotas["bova11"].negocia_em_lote is True
 
 

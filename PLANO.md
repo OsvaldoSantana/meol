@@ -60,9 +60,10 @@ Conta como sessão de motor no ritmo da §5.
    onde e por quê" do mês, com a procedência. Hoje não existe (§2).
 2. **Ele usa** no aporte seguinte. Cada passo em que travar vira pendência com o nome do passo;
    o que ele não entender é defeito do sistema, não dele.
-3. **P-179**, o investimento mínimo do Tesouro: o primeiro aporte (P-164, fechada em 03/10 com
-   a regra **(c)** dele) pode mandar R$ 40 para o Tesouro Selic, e a casa recusar. O mínimo se lê
-   na fonte antes de ele usar.
+3. **P-179**, o investimento mínimo do Tesouro: **decidida em 04/10 (entra no "caber", como
+   lote) e feita em 10/10.** O lote do Tesouro é 0,01 título, lido na fonte primária; com o PU do
+   Selic em ~R$ 20 mil, R$ 40 não compram e o aporte cede à próxima rota. Falta o PU do dia
+   chegar sem ninguém digitar e o nome que a tela mostra (P-179).
 
 ## 5. Ritmo e a fila do rosto
 
@@ -99,7 +100,6 @@ texto comercial público.
 | decisão | onde | o que muda |
 |---|---|---|
 | onde entra a P-65 (65b) no caminho de 03/10 | fila, bloco 23 | se a segunda esteira disputa vaga com a bitemporalidade, ou espera o bloco C |
-| se o mínimo do Tesouro entra no "caber" do primeiro aporte | P-179 | ordem executável ou aviso na ordem |
 | o `PLANO.md` continua na abertura | P-172, em 17/10 | abertura de ~21,0 mil tokens com ele, ~18,2 mil sem ele (medido em 03/10) |
 | parecer jurídico | P-158 | qualquer usuário além dele |
 

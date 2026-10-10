@@ -201,9 +201,18 @@ Junto, e menor: o nome da rota é **"Tesouro Selic acima de R$10k"**, e é ele q
 primeiro aporte mostra para um aporte de R$ 500. O nome descreve o regime de custo da rota, e
 o leigo o lê como condição de entrada.
 
-**O que fecha:** o mínimo lido na fonte, com `trecho_conferido`, e a resposta dele: o mínimo
-entra no "caber" como a verificação de lote que já existe (dado novo, mesma regra), ou fica de
-fora e a ordem traz o aviso. E o nome que a tela mostra para a `td_selic`.
+**Decidida em 04/10/2026, pelo formulário: o mínimo entra no "caber", como lote** (fila, bloco
+26). Lido na fonte primária em 10/10 (tesourodireto.com.br, "Regras e regulamento", item 9): as
+aplicações tradicionais são múltiplas de **0,01 título**. Feito: `td_selic` e `td_ipca` com
+`negocia_em_lote: true` e `lote_fracao: 0.01` no `catalogo.yaml`, e `preco_do_lote()` converte o
+PU do dia no preço de um lote (`alocacao/test_p179_minimo_do_tesouro.py`: R$ 40 não compram
+Tesouro Selic; R$ 500 compram 0,02 título e o resto vai para o caixa). O `td_reserva` ficou sem
+lote: a regra dele não foi lida (`NAO_CONFIRMADO` na procedência).
+
+**O que falta para fechar:** (1) o PU do dia chegar ao motor com data e hash, sem ninguém
+digitar: a porta de uso (P-181) o lê do CSV do Tesouro Transparente; a forma P7 é a captura
+diária; (2) o nome que a tela mostra para a `td_selic` ("acima de R$10k" é o regime de custo,
+e o leigo lê como condição de entrada); (3) a regra de mínimo do Tesouro Reserva, lida na fonte.
 
 ## P-162 · Teste de marca das direções visuais (H1 a H3)
 

@@ -237,6 +237,9 @@ class RotaAloc:
     isento_ir_rendimento: bool = False   # juros/dividendos/aluguel recebidos
     aliquota_ganho: Optional[float] = None  # None = usa a tabela geral da rota
     negocia_em_lote: bool = False      # B-04: nao inferir por magnitude do preco
+    # P-179 (decisao dele, 04/10/2026): o lote do Tesouro Direto e 0,01 titulo. Com a fracao
+    # declarada, o preco de um lote e `preco_do_lote(r, PU)`; None = o lote e uma unidade.
+    lote_fracao: Optional[float] = None
     emissor: Optional[str] = None      # para o teto do FGC por conglomerado
     # P-24 / achado K-02. TETO DE SALDO nao e teto do FGC, e confundir os dois e um
     # erro de categoria com consequencias opostas:
@@ -1861,6 +1864,13 @@ def custo_de_discordar(alvo, proposta, C, aporte, anos, rotas_por_id):
                      "para isso existe o backtest com pre-registro, nao esta funcao")
 
 # ══ CAMADA 5 — MOTOR DE APORTE ═══════════════════════════════════════════════
+def preco_do_lote(r, preco_unitario):
+    """O preco que o motor recebe em `precos`: o de UM lote. P-179: no Tesouro o lote e 0,01
+    titulo, e quem tem o PU do dia passa por aqui para nao entregar o PU como preco do lote
+    (o que faria R$ 40 parecerem 0 lotes por um fator de 100, ou o contrario)."""
+    return preco_unitario * r.lote_fracao if r.lote_fracao is not None else preco_unitario
+
+
 def _primeiro_aporte(estado, pesos, A, C, P, precos, rotas_por_id, k_max):
     """P-164 (decisao dele, 03/10/2026, bloco 19, opcao c): com patrimonio zero o aporte
     vai INTEIRO para uma rota so -- a de maior peso-alvo que caiba no valor do mes.
