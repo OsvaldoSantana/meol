@@ -170,6 +170,7 @@ auditoria/         os INSTRUMENTOS; os laudos moram em docs/auditoria/
   tamanho_do_contexto.py   quanto custa ler este projeto
   achados_ancorados.py     todo achado citado tem onde ser lido
   codigos_preservados.py   nenhum codigo (P-, A-, 5-B.n) some do repositorio
+  codigos_redefinidos.py   nenhum codigo ganha segunda definicao num arquivo novo (CX-04 a 06)
   escada_contorno.py       NAO_CONFIRMADO por falta de acesso so com a escada (5-B.18)
 medicoes/          scripts de medicao sobre o acervo; push em `medir/<nome>` roda
                    `<nome>.py` no Actions, com o token de LEITURA (5-A.11); saida em resultados/
