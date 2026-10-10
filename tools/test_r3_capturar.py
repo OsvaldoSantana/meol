@@ -58,3 +58,12 @@ def test_em_alta_troca_so_o_tamanho():
     u = "https://is1-ssl.mzstatic.com/image/thumb/a/b/x_1242x2208.png/392x696bb.png"
     assert C.em_alta(u) == "https://is1-ssl.mzstatic.com/image/thumb/a/b/x_1242x2208.png/1242x0w.png"
     assert C.em_alta("https://x/y.png") == "https://x/y.png"
+
+
+def test_o_chromium_da_maquina_so_entra_quando_a_variavel_existe():
+    """10/10/2026: o Playwright 1.63.0 espera o Chromium 1243 e a nuvem tem o 1194, o das 51
+    primeiras visitas. Sem `R3_CHROMIUM` o lancamento e o padrao do Playwright (nada muda para
+    quem instalou o navegador); com ela, o executavel vai no lancamento."""
+    assert C.chromium_do_ambiente({}) is None
+    assert C.chromium_do_ambiente({"R3_CHROMIUM": "  "}) is None
+    assert C.chromium_do_ambiente({"R3_CHROMIUM": " /opt/chromium "}) == "/opt/chromium"

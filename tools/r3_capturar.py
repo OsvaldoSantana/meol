@@ -19,6 +19,12 @@ Nao grava nada no git: as capturas sao de terceiros e ficam em data/r3/capturas/
     python tools/r3_capturar.py site <url> <pasta>     # 390.png, 1280.png, medidas.json
     python tools/r3_capturar.py app <trackId> <pasta>  # as capturas da App Store do Brasil
     python tools/r3_capturar.py recortar <png> <x0> <y0> <x1> <y1> <pasta>  # a tela, em 390 px
+
+O NAVEGADOR (10/10/2026). A captura usa o Chromium que o Playwright instalado espera. Quando a
+maquina tem outro (a nuvem traz o build 1194, o das 51 primeiras visitas da R3, e o Playwright
+1.63.0 espera o 1243), `R3_CHROMIUM=<caminho do executavel>` o aponta: o instrumento das visitas
+nao muda no meio da rodada. O `medidas.json` guarda `navegador` (a versao do Chromium), para que
+a versao de cada captura se confira depois.
 """
 from __future__ import annotations
 
@@ -107,6 +113,12 @@ def em_alta(url: str) -> str:
     return re.sub(r"/\d+x\d+bb\.(png|jpg)$", r"/1242x0w.\1", url)
 
 
+def chromium_do_ambiente(ambiente: dict[str, str] | None = None) -> str | None:
+    """`R3_CHROMIUM` aponta o executavel do Chromium; sem ela (None), o do Playwright."""
+    exe = (os.environ if ambiente is None else ambiente).get("R3_CHROMIUM", "").strip()
+    return exe or None
+
+
 def sha256_arquivo(path: str) -> str:
     with open(path, "rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
@@ -135,7 +147,8 @@ def capturar_site(url: str, pasta: str) -> dict[str, Any]:
     os.makedirs(pasta, exist_ok=True)
     saida: dict[str, Any] = {"url_pedida": url}
     with sync_playwright() as p:
-        nav = p.chromium.launch()
+        nav = p.chromium.launch(executable_path=chromium_do_ambiente())
+        saida["navegador"] = nav.version
         for nome, w, h, movel in (("390", LARGURA, ALTURA, True),
                                   ("1280", LARGURA_DESKTOP, ALTURA_DESKTOP, False)):
             ctx = nav.new_context(viewport={"width": w, "height": h}, device_scale_factor=1,
