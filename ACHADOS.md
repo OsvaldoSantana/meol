@@ -3162,6 +3162,38 @@ em `alocacao/test_cx05_guarda_do_modelo.py`.
 
 ---
 
+## CX-06 · A guarda de política fixa aceitava `7e+1` e `7_0`, e recusava `70.0`
+
+*04/10/2026. Achado externo (auditoria do Codex de 03/10, `A-03` no original; registro em
+`docs/auditoria/AUDITORIA-CODEX-2026-10-03.md`). Conferido e consertado pelo Claude (Cowork).*
+
+**É o padrão do F-05**, na guarda que existe contra ele: o V-03 criou
+`test_nenhum_literal_de_politica_fixo_no_modulo` para garantir que nenhuma constante de
+política mora no Python, e o teste media "nenhum número escrito do jeito que a regex conhece".
+Ele recortava o **texto** de `alocacao.py` no marcador `# ══ PORTOES ══`, tirava docstring,
+comentário e string por regex, e procurava `\d+\.?\d*(?:e-?\d+)?`. O expoente com sinal (`7e+1`)
+e o separador de dígitos (`7_0`) são Python válido e escapavam.
+
+**Medição.** Trocando `P["motor_aporte"]["k_max"]` por uma constante numa cópia em memória do
+módulo, compilada antes de ir à guarda: `70.0` reprova, `7e+1` e `7_0` passam (n=3, no `main`
+`0247a21`). A mesma decisão de política, fixa no motor, dependia só da grafia.
+
+**Conserto.** O módulo inteiro é lido por AST, e o recorte passa a ser pela **linha do nó**
+depois do marcador, e não pelo texto: compara-se o **valor** de cada `ast.Constant` numérica
+(`type` em `int`/`float`, para o `True` não contar como 1) contra os permitidos, também como
+valor. Recortar o texto e parsear o pedaço quebra no próprio separador (a auditoria mediu o
+`SyntaxError` em U+2550). No módulo de hoje: 181 constantes numéricas depois da linha 775, 13
+valores distintos, todos permitidos; nenhum literal que a regex escondia apareceu.
+
+**Testes** (`alocacao/test_cx06_literais_por_ast.py`): as três escritas (o `70.0` é o controle
+que já passava), a guarda verde sobre o módulo real, e o alcance preso: literal **antes** do
+marcador continua fora, como era.
+
+**O que não cobre:** constante antes do marcador, número montado em tempo de execução
+(`int("70")`), e constante em outro módulo.
+
+---
+
 ## PO-01 · O limiar de poder do C-02 foi calculado numa convenção, e o resultado foi lido em outra
 
 *03/10/2026. Achado na leitura do resultado da corrida de 2016–2020 (`b331172`), depois da

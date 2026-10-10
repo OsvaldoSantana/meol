@@ -147,6 +147,8 @@ CX-04;ACHADOS.md
 CX-04;docs/auditoria/AUDITORIA-CODEX-2026-10-03.md
 CX-05;ACHADOS.md
 CX-05;docs/auditoria/AUDITORIA-CODEX-2026-10-03.md
+CX-06;ACHADOS.md
+CX-06;docs/auditoria/AUDITORIA-CODEX-2026-10-03.md
 D-01;docs/auditoria/escopo-campos-de-analise.md
 D-01;docs/auditoria/escopo-fii-e-universo.md
 D-01;docs/historico/claude-md-ate-2026-09.md

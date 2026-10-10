@@ -311,21 +311,29 @@ def test_k_max_vem_do_yaml():
 def test_nenhum_literal_de_politica_fixo_no_modulo():
     """V-03, o caminho inverso do teste de cobertura: a cobertura garante que toda
     chave do YAML e lida; este garante que nao ha constante de politica fixa no
-    Python. A lista de excecoes e explicita de proposito."""
-    import re
+    Python. A lista de excecoes e explicita de proposito.
+
+    CX-06 (auditoria do Codex, 03/10/2026): a versao anterior recortava o TEXTO no marcador e
+    procurava numeros por regex, e `7e+1` e `7_0` -- o mesmo 70 de `70.0` -- passavam. Agora o
+    modulo inteiro e lido por AST, e o recorte e pela LINHA do no, depois do marcador: o que
+    se compara e o VALOR da constante, escrito como for. Recortar o texto e parsear o pedaco
+    quebra no proprio separador (`SyntaxError` em U+2550, medido pela auditoria)."""
     fonte = open(os.path.join(AQUI, "alocacao.py"), encoding="utf-8").read()
-    corpo = fonte.split("# ══ PORTOES ══")[1]
-    corpo = re.sub(r'""".*?"""', "", corpo, flags=re.S)
-    corpo = re.sub(r"#.*", "", corpo)
-    corpo = re.sub(r'"[^"]*"|\'[^\']*\'', "", corpo)
+    marcador = [i for i, linha in enumerate(fonte.splitlines(), start=1)
+                if linha.startswith("# ══ PORTOES ══")]
+    assert len(marcador) == 1, f"o marcador do recorte tem de existir uma vez: {marcador}"
     PERMITIDOS = {
-        "0", "1", "2", "12", "100",      # aritmetica, meses do ano, conversao para %
-        "3", "4", "5",                   # indices de tupla e casas de arredondamento
-        "1e-9", "1e-12", "1e-6",         # tolerancias de ponto flutuante
-        "0.0", "1.0", "0.01", "365.25",  # identidades, centavo, dias do ano
+        0, 1, 2, 12, 100,                # aritmetica, meses do ano, conversao para %
+        3, 4, 5,                         # indices de tupla e casas de arredondamento
+        1e-9, 1e-12, 1e-6,               # tolerancias de ponto flutuante
+        0.0, 1.0, 0.01, 365.25,          # identidades, centavo, dias do ano
     }
-    achados = set(re.findall(r"(?<![\w.])(\d+\.?\d*(?:e-?\d+)?)(?![\w.])", corpo)) - PERMITIDOS
-    assert not achados, f"literais numericos nao declarados no modulo: {sorted(achados)}"
+    # `type(...) in (int, float)` e nao isinstance: True e False sao int para o isinstance
+    # e nao sao literal de politica.
+    achados = sorted({(n.lineno, n.value) for n in ast.walk(ast.parse(fonte))
+                      if isinstance(n, ast.Constant) and type(n.value) in (int, float)
+                      and n.lineno > marcador[0] and n.value not in PERMITIDOS})
+    assert not achados, f"literais numericos nao declarados no modulo (linha, valor): {achados}"
 
 
 # ══ V-06 a V-15 ══════════════════════════════════════════════════════════════
