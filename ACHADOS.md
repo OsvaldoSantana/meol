@@ -3135,6 +3135,33 @@ campo numérico novo do `estado.exemplo.yaml` que fique sem prova.
 
 ---
 
+## CX-05 · A guarda do modelo em branco conferia o dicionário de dados, não os problemas
+
+*04/10/2026. Achado externo (auditoria do Codex de 03/10, `A-02` no original; registro em
+`docs/auditoria/AUDITORIA-CODEX-2026-10-03.md`). Conferido e consertado pelo Claude (Cowork).*
+
+**É o padrão do F-05/N-01/R-01/S-02**: o teste declarava "o modelo em branco é recusado, e a
+recusa nomeia cada campo obrigatório", e media outra coisa. `validar()` devolve
+`(dados, problemas, avisos)`; `test_o_modelo_nao_carrega_ate_alguem_preencher` desempacotava
+`problemas, _avisos, _ = validar(d)`, e `problemas` era o **dicionário de dados**. O modelo tem
+as chaves obrigatórias, com valor nulo: `assert problemas` passava porque o dicionário não é
+vazio, e `campo in p` achava cada nome entre as chaves. Os dois concordavam por acaso.
+
+**Medição.** Os dois mutantes da §9.9 (o validador sem recusa nenhuma; só com a recusa do
+status MODELO) deixam o teste verde no `main` (`0247a21`): `DID NOT RAISE AssertionError`, n=2.
+Dos 9 desempacotamentos de `estado_io.validar()` e `estado_io.carregar()` no `main` (`grep`, 04/10), este é o
+único na ordem errada.
+
+**Consequência.** A recusa do modelo em branco, que impede uma recomendação feita a partir de
+nada, podia sumir do `validar()` sem nenhum teste deste arquivo reprovar. A auditoria não mediu
+se outro teste da suíte pegaria a mesma regressão, e eu também não.
+
+**Conserto:** `_dados, problemas, _avisos = validar(d)`, e o teste confere que `problemas` é uma
+lista antes de conferir o conteúdo. Os dois mutantes, um controle e o contrato do retorno ficam
+em `alocacao/test_cx05_guarda_do_modelo.py`.
+
+---
+
 ## PO-01 · O limiar de poder do C-02 foi calculado numa convenção, e o resultado foi lido em outra
 
 *03/10/2026. Achado na leitura do resultado da corrida de 2016–2020 (`b331172`), depois da
