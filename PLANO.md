@@ -59,8 +59,9 @@ Conta como sessão de motor no ritmo da §5.
 1. **Uma porta de uso** (P-181): **feita em 10/10.** `py -3.11 alocacao/aporte_do_mes.py` lê o
    `estado.yaml` e devolve o "quanto, para onde e por quê" do mês, com a procedência de cada
    número e o portão que eliminou cada rota. Sem o preço de uma rota em lote, recusa e pede.
-2. **Ele usa** no aporte seguinte. Cada passo em que travar vira pendência com o nome do passo;
-   o que ele não entender é defeito do sistema, não dele.
+2. **Ele usa** no aporte seguinte, pelo roteiro [`docs/uso/aporte-do-mes.md`](docs/uso/aporte-do-mes.md)
+   (dez passos). Cada passo em que travar vira pendência com o nome do passo; o que ele não
+   entender é defeito do sistema, não dele.
 3. **P-179**, o investimento mínimo do Tesouro: **decidida em 04/10 (entra no "caber", como
    lote) e feita em 10/10.** O lote do Tesouro é 0,01 título, lido na fonte primária; com o PU do
    Selic em ~R$ 20 mil, R$ 40 não compram e o aporte cede à próxima rota. Falta o PU do dia

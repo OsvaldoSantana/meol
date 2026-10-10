@@ -184,7 +184,8 @@ o CX-04), roda `alocar()` e `motor_aporte()`, e responde em três blocos: o que 
 (com cada rota de fora e o portão que a tirou) e de onde veio cada número. O PU do Tesouro Selic
 vem do CSV do Tesouro Transparente, com data e sha256; preço de ETF a pessoa informa
 (`--preco`). Sem o preço de uma rota em lote que o motor consultou, o comando recusa e pede
-esse preço (P-182). **Falta (2) e (3).**
+esse preço (P-182). O roteiro do uso, passo a passo, é
+[`docs/uso/aporte-do-mes.md`](docs/uso/aporte-do-mes.md). **Falta (2) e (3).**
 
 ## P-179 · O catálogo não conhece o investimento mínimo do Tesouro, e o primeiro aporte pode sair inexecutável
 
