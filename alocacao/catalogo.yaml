@@ -90,6 +90,10 @@ rotas:
         Regulamento do Tesouro Direto. O teto da isencao NAO esta copiado aqui: e
         `custos.yaml -> tesouro.isencao_selic`, lido por `retorno_liquido_aa` e pela
         composicao do G2. O nome da rota cita "R$10k" so como rotulo humano.
+        P-179 (10/10/2026): o minimo de aplicacao desta rota esta NAO_CONFIRMADO. A regra
+        de 0,01 titulo das aplicacoes tradicionais (td_selic, td_ipca) nao foi lida para o
+        Tesouro Reserva, e a pagina inicial do Tesouro Direto fala em minimo "a partir de
+        R$ 2"; sem a regra lida, a rota fica sem `lote_fracao`.
       revisar_se: "a isencao de custodia do Tesouro mudar de valor ou de regra"
 
   rdb_100:
@@ -204,6 +208,8 @@ rotas:
     duracao_anos: 0.0
     indexador: selic
     emissor: TESOURO_NACIONAL
+    negocia_em_lote: true
+    lote_fracao: 0.01
     nota: >-
       pos-fixado: sem marcacao a mercado. Serve LASTRO e tambem DATADO de qualquer
       prazo, porque duracao zero casa com qualquer objetivo
@@ -213,6 +219,12 @@ rotas:
       base: >
         `duracao_anos: 0.0` nao e uma medicao: e a definicao de pos-fixado. E o que
         autoriza a rota a ocupar DATADO de qualquer prazo sem casar vencimento.
+        P-179 (decisao dele, 04/10/2026: o minimo entra no "caber" como lote). Fonte
+        primaria lida em 10/10/2026: tesourodireto.com.br/sobre-o-tesouro/regras-e-regulamento,
+        item 9, sha256 da pagina 8cc217a0...d2fd: "As aplicacoes tradicionais no Tesouro
+        Direto devem ser multiplas de 0,01 titulo ou 1% (um por cento) do valor de um
+        titulo". Por isso `negocia_em_lote: true` e `lote_fracao: 0.01`; o preco de um lote
+        e 1% do PU de compra do dia (`preco_do_lote`).
       revisar_se: "nunca — e propriedade do instrumento, nao numero de mercado"
 
   td_ipca:
@@ -226,6 +238,8 @@ rotas:
     duracao_anos: null
     indexador: ipca
     emissor: TESOURO_NACIONAL
+    negocia_em_lote: true
+    lote_fracao: 0.01
     nota: >-
       marcacao a mercado: +2 p.p. de juro real derruba ~47% o vencimento 2060. A
       duracao vem do compromisso registrado, e o teto de compromissos decide ate qual
@@ -239,6 +253,12 @@ rotas:
         usuario se compromete a carregar (registro CARREGO, portao G8). Supor uma
         duracao aqui seria supor um compromisso que ninguem assumiu — foi assim que a
         versao 1.0.0 alocou 17% num NTN-B de duracao 18 sem prazo nenhum a casar.
+        P-179 (decisao dele, 04/10/2026: o minimo entra no "caber" como lote). Fonte
+        primaria lida em 10/10/2026: tesourodireto.com.br/sobre-o-tesouro/regras-e-regulamento,
+        item 9, sha256 da pagina 8cc217a0...d2fd: "As aplicacoes tradicionais no Tesouro
+        Direto devem ser multiplas de 0,01 titulo ou 1% (um por cento) do valor de um
+        titulo". Por isso `negocia_em_lote: true` e `lote_fracao: 0.01`; o preco de um lote
+        e 1% do PU de compra do dia (`preco_do_lote`).
       revisar_se: "nunca preencher com um numero. Se estiver preenchido, e defeito"
 
   # ══ CRESCIMENTO — ETF e acao ══════════════════════════════════════════════

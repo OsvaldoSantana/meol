@@ -777,6 +777,30 @@ ponto flutuante o põe em "vermelho". O exemplo certo é o `#F5F3EE` (retrataç�
 
 ---
 
+## 26 · O mínimo do Tesouro entra no "caber" do primeiro aporte? · P-179 · **respondido em 04/10: entra, como lote**
+
+Lido na fonte antes da pergunta (04/10/2026): desde 18/11/2024 o Tesouro Direto não tem piso em
+reais, e o mínimo é 0,01 título (B3, Bora Investir, 18/11/2024). O PU de compra do Tesouro
+Selic em 02/10/2026 ia de R$ 19.943 a R$ 20.017 (CSV `PrecoTaxaTesouroDireto.csv` do Tesouro
+Transparente, sha256 `a2ebe116…b533`): o mínimo era ~R$ 200, e a ordem de R$ 40 do instantâneo
+da P-164 seria recusada pela corretora.
+
+- **Entra, como lote** — 0,01 título vira o lote da `td_selic`, pela mesma regra (c) dos ETFs:
+  se não cabe, a rota cai e o motor passa para a próxima. Ordem sempre executável; exige o PU
+  do dia, com data e hash.
+- **Entra, e acumula no caixa** — se não cabe, a ordem diz "guarde até somar ~R$ 200". Mantém a
+  classe, mas o mês não tem compra.
+- **Entra com piso fixo** — um piso em reais no `catalogo.yaml`, revisto por teste. Mais
+  simples, erra por alguns reais perto do limite.
+- **Não entra: só aviso** — a tela diria "compre" algo que a casa recusa.
+
+**Recomendação: entra, como lote. Resposta dele, 04/10/2026, pelo formulário: entra, como
+lote.** Confirmado na fonte primária em 10/10 (tesourodireto.com.br, "Regras e regulamento",
+item 9: "múltiplas de 0,01 título ou 1% (um por cento) do valor de um título"). Implementado no
+PR da P-179; o que falta está na P-179.
+
+---
+
 ## Conferência de um minuto, com data
 
 - **Token do R2 somente leitura (P-145, destrava toda medição na nuvem):** no Cloudflare, R2 →
