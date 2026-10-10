@@ -55,7 +55,7 @@
 
 [project]
 name = "meol"
-version = "1.19.0"                 # acompanha politica.yaml -> meta.versao
+version = "1.20.0"                 # acompanha politica.yaml -> meta.versao
 description = "Sistema pessoal de analise e aporte — motor de alocacao, custos com procedencia e backtest pre-registrado"
 requires-python = "==3.11.*"
 license = "Apache-2.0"               # a prosa (.md) e CC-BY-4.0: ver NOTICE

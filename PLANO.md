@@ -45,11 +45,12 @@ depende de dado de usuário.
 |---|---|---|---|
 | 1 | **Ponte ticker → CD_CVM de 2013–2019** (P-145). A medição existe: `medicoes/p145_ponte_2013_2019.py` | o universo com CD_CVM, sem o qual DFP/ITR não se liga a papel; e os 13 eventos sem ticker (P-93) | **um passo dele:** o envio ao R2 (`subir_acervo_local.py --aplicar`), que grava o inventário do `isinp.zip`; sem ele o `acervo.abrir` recusa o arquivo do disco (rodado em 04/10). Na nuvem, falta também o token de leitura |
 | 2 | **Bitemporalidade** `dt_captura` × `DT_REFER`: DFP/ITR lidos *as-of* (`fase0/leitor_cvm.py`, 10/10): só `ÚLTIMO`, partição pelo ano do arquivo (P-51), versão vigente na `dt_captura` (P-53), sem pacote novo. Começou antes da P-145 por decisão de 10/10 (`docs/decisoes/2026-10-10-leitor-asof-cvm.md`): DFP/ITR são chaveados por `CD_CVM`, e a ponte só entra no join com o papel | o direito de dizer que o backtest não vaza futuro | **o leitor responde desde 24/09/2026, a primeira captura.** Para o histórico, falta a data de conhecimento por `DT_RECEB` (P-183); para ligar papel, a ponte bitemporal (P-53b), que espera o passo 1 |
-| 3 | **Bloco C sobre dado real** (P-30): primeiro portão que olha empresa, e é de **exclusão**, não de ordenação. Vão junto: C-04 e C-05 (P-17, o escopo já está no repositório), a contagem de `SETOR_ATIV` (P-18), os regimes de leitura (P-58 a P-61), portão × dossiê (P-64) e, por métrica, nível, tendência ou híbrido (63a) | o M3 | o passo 2 |
+| 3 | **Bloco C sobre dado real** (P-30): primeiro portão que olha empresa, e é de **exclusão**, não de ordenação. Vão junto: C-04 e C-05 (P-17: nomeados em 10/10; o C-05 calcula e marca até o limiar, fila bloco 27, e o C-04 espera a P-65), a contagem de `SETOR_ATIV` (P-18), os regimes de leitura (P-58 a P-61), portão × dossiê (P-64) e, por métrica, nível, tendência ou híbrido (63a) | o M3 | o passo 2 |
 
-**Decidida e fora do caminho de 03/10:** a P-65, segunda esteira (notas explicativas e IPE),
-**65b, "construir já"**, de 26/09. Ficou oito dias sem nenhum PR (0 de 47, IP-01). Onde ela
-entra é decisão dele (§6).
+**Depois do passo 3 (23a, decisão dele de 10/10):** a P-65, segunda esteira (notas explicativas
+e IPE), **65b**, de 26/09, só extração determinística. Entra quando o bloco C rodar, porque o
+consumidor dela é o dossiê (P-64), que lê a lista curta do bloco C. O C-04 (moeda da dívida)
+espera por ela.
 
 ## 4. Frente "primeiro uso" (decisão de 03/10)
 
@@ -100,7 +101,7 @@ texto comercial público.
 
 | decisão | onde | o que muda |
 |---|---|---|
-| onde entra a P-65 (65b) no caminho de 03/10 | fila, bloco 23 | se a segunda esteira disputa vaga com a bitemporalidade, ou espera o bloco C |
+| o limiar do C-05 (caixa / dívida de curto prazo) | fila, bloco 27 (P-17) | se o C-05 corta em 1,0 já, só marca, ou corta depois de contar quantas empresas saem |
 | o `PLANO.md` continua na abertura | P-172, em 17/10 | abertura de ~21,0 mil tokens com ele, ~18,2 mil sem ele (medido em 03/10) |
 | parecer jurídico | P-158 | qualquer usuário além dele |
 

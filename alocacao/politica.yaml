@@ -13,10 +13,20 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.39.0
+  versao: 1.40.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.40.0: >-
+      10/10/2026, P-17. `bloco_C_solvencia.lacuna_declarada` ("a identidade de C-04 e C-05")
+      sai e da lugar a `campos_C04_C05`, lido em docs/auditoria/escopo-campos-de-analise.md.
+      C-04, moeda da divida x moeda da receita: Fase B, nota de instrumentos financeiros,
+      NAO_CONSERTADA com pendencia P-65 (a segunda esteira, que entra depois do bloco C pela
+      resposta 23a dele); ate la marca e nunca exclui (P6). C-05, caixa / divida de curto
+      prazo: Fase A, do balanco estruturado; limiar PENDENTE, decisao dele no bloco 27 da
+      fila; ate la calcula e marca. Nenhum limiar escolhido aqui. Medido de passagem: o
+      metadado do FRE estruturado nao tem campo de moeda (730 campos). Nenhum modulo le o
+      bloco C (P-30): nenhuma regra em uso mudou.
     1.39.0: >-
       10/10/2026, P-51 e P-53 (parte do leitor). `limitacoes_declaradas
       .dt_captura_nao_e_data_de_conhecimento_do_mercado`, NAO_CONSERTADA, pendencia P-183: o
@@ -1274,7 +1284,7 @@ fase_A_recalculada:
 # ══ BLOCO C — SOLVENCIA (regime de exclusao) ═════════════════════════════════
 # Especificado em 05/09/2026. Especifica o REGIME: quando o bloco se aplica, quando
 # recusa, em que ordem, e o que decide um corte. NAO redefine a lista de campos —
-# ela ja existe em docs/auditoria/escopo-campos-de-analise.md. Ver `lacuna_declarada`.
+# ela ja existe em docs/auditoria/escopo-campos-de-analise.md. Ver `campos_C04_C05`.
 bloco_C_solvencia:
   status: REGIME_ESPECIFICADO
   papel: >
@@ -1417,28 +1427,103 @@ bloco_C_solvencia:
           empresa que nao paga o juro do que deve nao continua existindo"
     - "2. C-02 divida liquida/EBITDA — nivel de alavancagem"
     - "3. C-03 perfil de vencimento — quando a divida vence, nao so quanto e"
-    - "4. C-04 e C-05 — VER LACUNA DECLARADA ABAIXO"
+    - "4. C-04 e C-05, sem ordem entre si (nunca decidida) -- ver `campos_C04_C05`:
+          C-05 calcula e MARCA, sem cortar, ate o limiar ser decidido (fila, bloco 27);
+          C-04 NAO SE APLICA ate a segunda esteira (P-65): marca 'C-04 nao medido' e
+          nunca exclui"
   nota_da_ordem: >
     C-01 primeiro porque e o unico proximo de uma condicao objetiva de insolvencia; os
     demais graduam risco em quem ja passou. Mesma logica do B01 no regime de banco.
 
-  # ── 6. O que esta faltando, dito em voz alta ──────────────────────────────
-  lacuna_declarada:
-    o_que_falta: "a identidade de C-04 e C-05"
-    por_que: >
-      A lista de campos do bloco C vive em docs/auditoria/escopo-campos-de-analise.md, na
-      maquina do usuario. A ponte estava fora do ar em 05/09/2026 e o arquivo nao pode
-      ser lido. C-01 a C-03 sao conhecidos por referencia cruzada dentro do proprio
-      politica.yaml (secao fora_de_escopo.instituicoes_financeiras); C-04 e C-05 sao
-      citados como existentes e nunca nomeados ali.
+  # ── 6. C-04 e C-05: a identidade, lida no escopo (P-17, 10/10/2026) ───────
+  # Ate a 1.39.0 aqui morava `lacuna_declarada` ("a identidade de C-04 e C-05"): em
+  # 05/09 o escopo estava na maquina do usuario e nao pode ser lido. Ele esta no
+  # repositorio, foi lido em 10/10, e a lacuna fechou na leitura. O texto anterior fica no
+  # git (1.39.0); `test_p17_c04_c05.py` reprova se ela voltar.
+  campos_C04_C05:
+    fonte: >
+      docs/auditoria/escopo-campos-de-analise.md: a tabela do bloco C (secao 4), as fases
+      (secao 8) e a secao 7 ("Nenhum limiar aparece neste documento ... de proposito").
     o_que_NAO_foi_feito: >
-      Nao inventei os dois campos. Um bloco de exclusao com criterio inventado excluiria
-      empresas por uma regra que ninguem escolheu, e seria pior que bloco nenhum.
-    para_fechar: >
-      Ler docs/auditoria/escopo-campos-de-analise.md na proxima sessao de desktop e
-      reconciliar: se C-04/C-05 ja estiverem definidos la, esta secao so os cita; se
-      estiverem em aberto, sao decisao do usuario com o mesmo tratamento dos demais
-      (corte declarado, sem ancora legal, com custo de discordar).
+      Nenhum limiar foi escolhido aqui. Um bloco de exclusao com criterio inventado
+      excluiria empresas por uma regra que ninguem escolheu, e seria pior que bloco nenhum.
+      Os dois seguem o tratamento dos demais (corte declarado, sem ancora legal, com custo
+      de discordar: `natureza_dos_cortes`).
+    C-04:
+      nome: "moeda da divida x moeda da receita"
+      formula_no_escopo: "Da nota de instrumentos financeiros"
+      modo_de_falha_no_escopo: >
+        Campo critico no Brasil e frequentemente ausente dos sistemas. Divida em dolar com
+        receita em real e risco cambial estrutural.
+      fase: B
+      fase_no_escopo: "Fase B -- exige o FRE ou dado adicional"
+      fonte_do_dado: >
+        Nota explicativa de instrumentos financeiros da DFP/ITR: documento, nao CSV. Nenhum
+        leitor do projeto a alcanca; e o objeto da segunda esteira (P-65).
+      _registros: [aplica_hoje]   # P-81: registra o estado de hoje; a P-30 o le ao ligar o bloco
+      aplica_hoje: false
+      tipo: NAO_CONSERTADA
+      o_que_resolveria: >
+        A segunda esteira (P-65, 65b): extracao DETERMINISTICA da nota de instrumentos
+        financeiros, todo numero com trecho, posicao e sha256 da origem, e numero sem trecho
+        recusado (P1). Com o numero existindo, o corte do C-04 vira decisao do usuario, como
+        o do C-05; antes dele, nao ha o que decidir.
+      pendencia: P-65
+      quando: "depois do bloco C (P-30): resposta 23a dele, 10/10/2026 (fila, bloco 23)"
+      enquanto_falta: >
+        ADMITIR COM MARCACAO (`empresa_sem_dado`, P-16b). O C-04 nao produz numero, nao vira
+        zero e nao tira ninguem do universo: a empresa segue com a marca "C-04 nao medido",
+        contavel no relatorio final ("N empresas sem C-04"). Falta de dado nunca e criterio
+        de exclusao (P6).
+      direcao_do_vies: >
+        OTIMISTA no universo: passa empresa com divida em moeda estrangeira e receita em
+        real, que e justamente o risco que o C-04 existe para pegar. O bloco C fica cego a
+        risco cambial ate a P-65, e diz que esta cego.
+      o_FRE_estruturado_nao_basta: >
+        Medido em 10/10/2026 no metadado dos dados abertos do FRE da CVM
+        (dados.cvm.gov.br/dados/CIA_ABERTA/DOC/FRE/META/meta_fre_cia_aberta.zip, sha256
+        4648509cedeafa14ab90bc943ba4c0322f8d564d4d6b6c83cbe3bc13a6eb8253): 50 arquivos, 730
+        campos, nenhum com "moeda" no nome ou na descricao. A tabela de divida no exterior
+        (`titulo_exterior`) traz Saldo_Devedor e datas, sem a moeda, e cobre valor mobiliario,
+        nao emprestimo bancario. O "exige o FRE" da Fase B nao resolve o C-04 pelo CSV: a
+        moeda esta na nota, e a nota e da P-65. Alcance da medicao: o metadado, nao o dado.
+    C-05:
+      nome: "caixa / divida de curto prazo"
+      formula_no_escopo: "Padrao"
+      modo_de_falha_no_escopo: "nenhum declarado (o escopo traz um travessao)"
+      fase: A
+      fonte_do_dado: >
+        DFP/ITR estruturados da CVM (balanco patrimonial ativo e passivo), lidos as-of pelo
+        fase0/leitor_cvm.py (P-51 e P-53, fechadas em 10/10): o mesmo caminho de C-01 a C-03.
+        O leitor responde desde 24/09/2026, a primeira captura; o historico espera a P-183.
+      _registros: [aplica_hoje]   # P-81: registra o estado de hoje; a P-30 o le ao ligar o bloco
+      aplica_hoje: false
+      por_que_nao_hoje: >
+        O dado e da Fase A, esta no acervo e ja tem leitor; falta o bloco C rodar (P-30),
+        como para C-01 a C-03. Quando rodar, o C-05 calcula e MARCA. O que ele nao faz e cortar.
+      limiar: PENDENTE
+      limiar_decide: usuario
+      limiar_onde: "docs/decisoes/fila-do-osvaldo.md, bloco 27"
+      enquanto_o_limiar_falta: >
+        Calcula e marca, nao corta: sem limiar escolhido nao ha criterio, e ausencia de
+        criterio nao e criterio de exclusao (P6).
+      o_que_o_escopo_diz_do_limiar: >
+        Nada, como regra. O unico criterio do documento e o EXEMPLO do bloco L (catalogo
+        especulativo), onde uma aposta ilustrativa sai com "reprova: ... C-05 (caixa < divida
+        CP)". E ilustracao do formato do registro, nao corte escolhido por alguem, e a secao
+        7 do mesmo documento diz que nenhum limiar aparece nele. Ler o 1,0 de la como regra
+        seria apresentar como derivado o que e escolha (`natureza_dos_cortes.o_que_isso_proibe`).
+      composicao_pendente: >
+        "Padrao" nao e formula explicita, e o proprio escopo (secao 1) exige uma. Que contas
+        somam o caixa (caixa e equivalentes; aplicacoes de curto prazo?) e a divida de curto
+        prazo (emprestimos, debentures; arrendamento?) sai do plano de contas da DFP, que o
+        leitor ja le, ao codificar o bloco C (P-30); o arrendamento do IFRS 16 e da P-58. Nao
+        se decide aqui.
+    fora_da_ordem_de_exclusao: >
+      O escopo tem mais dois campos no bloco C que esta secao nunca citou: C-06 (escore de
+      insolvencia, Altman Z ou Ohlson O, "rastreio, nunca veredito") e C-07 (covenants e
+      garantias, Fase D, texto livre, provavel NAO OBTIDO). Nenhum dos dois e corte pelo
+      proprio escopo; o lugar deles no bloco nao foi decidido, e nao se decide aqui.
 
 # ══ REGIME DE ANALISE: INSTITUICAO FINANCEIRA (pendencia 20) ═════════════════
 # Especificado em 05/09/2026. Fecha a ESPECIFICACAO da pendencia 20; nao fecha a

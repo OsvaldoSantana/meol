@@ -708,7 +708,7 @@ de cada vez.
 
 ---
 
-## 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10
+## 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10 · **respondido em 10/10: 23a**
 
 Em 26/09 você decidiu **65b, construir já** (só extração determinística). Em 03/10, o caminho
 crítico ficou ponte → bitemporalidade → bloco C, sem a P-65. Nos oito dias entre as duas, nenhum
@@ -723,6 +723,11 @@ PR a tocou (IP-01). As duas decisões não dizem qual vem primeiro.
 
 **Recomendação: 23a**, porque construir a esteira antes do dossiê existir é construir sem
 consumidor. A 65b continua valendo: muda o quando, não o se nem a condição dele.
+
+**Resposta dele, 10/10/2026, pelo formulário no claude.ai: 23a.** A P-65 entra **depois do bloco
+C** (P-30), e a 65b segue com a condição dele (só extração determinística). Registrado na P-65
+(gatilho novo) e no `PLANO.md` §3; o C-04, que só ela alcança, ficou na `politica.yaml` como
+lacuna com caminho até lá (P-17, `campos_C04_C05`).
 
 ---
 
@@ -798,6 +803,46 @@ da P-164 seria recusada pela corretora.
 lote.** Confirmado na fonte primária em 10/10 (tesourodireto.com.br, "Regras e regulamento",
 item 9: "múltiplas de 0,01 título ou 1% (um por cento) do valor de um título"). Implementado no
 PR da P-179; o que falta está na P-179.
+
+---
+
+## 27 · O limiar do C-05 (caixa / dívida de curto prazo) · P-17
+
+Lido no escopo em 10/10/2026 (`docs/auditoria/escopo-campos-de-analise.md`): o C-05 é **caixa /
+dívida de curto prazo**, Fase A, do balanço estruturado da CVM, e a fórmula diz só "Padrão". O
+documento **não dá limiar como regra** — a §7 diz que nenhum aparece nele, de propósito. O único
+critério escrito é o **exemplo** do bloco L (catálogo especulativo): uma aposta ilustrativa sai
+com "reprova: … C-05 (caixa < dívida CP)". É ilustração do formato do registro, não um corte que
+alguém escolheu; tratá-lo como regra seria o erro que o projeto corrige (apresentar como derivado
+o que é escolha). Hoje a `politica.yaml` marca o limiar `PENDENTE`, e até você responder o C-05
+calcula e **marca, sem cortar** (P6).
+
+Visto ao lado, e muda o peso da resposta: **nenhum dos cortes do bloco C tem limiar no YAML**
+(C-01 a C-03 também não; `grep` em 10/10). O jeito de decidir este tende a virar o dos outros
+três. E nenhum número de "quantas empresas saem" existe ainda: o bloco C não roda (P-30).
+
+- **27a** — **corte em 1,0** agora: caixa menor que a dívida de curto prazo reprova (o número do
+  exemplo). → Simples e reproduzível. Reprova quem paga a dívida curta com a geração do ano, e
+  não com caixa parado; e sai sem o "muda o universo em N empresas" que `natureza_dos_cortes`
+  exige de todo corte, porque N ainda não foi contado.
+- **27b** — **o C-05 não corta nunca, só marca**, como a tendência no híbrido (63a). O risco de
+  rolagem fica com o C-03 (perfil de vencimento) e o C-01. → Nenhuma exclusão por número que
+  ninguém escolheu; perde-se o único corte do bloco que olha liquidez imediata, e o C-03 mede
+  quanto vence, não com o que se paga.
+- **27c** — **decidir depois da contagem:** o bloco C roda com o C-05 só marcando; antes de ligar
+  o corte, mede-se **quantas empresas sairiam** em 0,5 · 1,0 · 1,5 (só a contagem, sem nome e sem
+  retorno), e você escolhe vendo isso; a escolha é gravada com impressão digital antes de
+  qualquer backtest que use o bloco (P4). → Até lá vale o 27b. É o único caminho que entrega o
+  "contra o corte X, que muda o universo em N" que o YAML promete; o risco é escolher de olho
+  em quem sai, e por isso a contagem não traz nomes.
+
+**Recomendação: 27c**, porque o próprio `politica.yaml` proíbe corte sem o custo de discordar, e
+esse custo só existe contado. Na prática a escolha de hoje é entre fixar 1,0 já (27a) ou depois
+de contar (27c). Quais contas somam o caixa e a dívida curta (aplicações de curto prazo?
+arrendamento?) **não** é desta pergunta: sai do plano de contas, que o leitor as-of já lê (P-51), e
+o arrendamento é da P-58.
+**Destrava:** o corte do C-05 no bloco C (P-30); e, se você quiser, o mesmo caminho para C-01 a
+C-03.
 
 ---
 

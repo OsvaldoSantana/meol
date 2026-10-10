@@ -15,4 +15,4 @@ P-145 · P-53b · P-183 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 �
 
 ## Fila do Osvaldo, sem resposta: 1
 
-- 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10
+- 27 · O limiar do C-05 (caixa / dívida de curto prazo) · P-17
