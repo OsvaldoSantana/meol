@@ -13,10 +13,15 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.37.0
+  versao: 1.38.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.38.0: >-
+      10/10/2026, P-181. `porta_de_uso`: os textos da porta de uso (`aporte_do_mes.py`), o
+      comando que le o estado.yaml e devolve o quanto, o para onde e o porque do mes. Por que
+      cada rota ficou de fora, portao a portao, em linguagem comum, e o aviso de que a decisao
+      e da pessoa. Nenhuma regra de decisao mudou: so o texto que a pessoa le saiu do Python.
     1.37.0: >-
       03/10/2026, P-164 fechada. `motor_aporte.primeiro_aporte`: com patrimonio zero o motor
       deixa de devolver SEM_POSICAO e emite UMA ordem, com o aporte inteiro, na rota de
@@ -935,6 +940,34 @@ motor_aporte:
       espalha pelas outras partes, sempre para a que estiver mais longe do alvo.
     motivo_sem_rota: >-
       O valor deste mes ainda nao alcanca nenhuma rota; ele fica guardado para o proximo.
+
+# ── P-181: A PORTA DE USO -- o texto que a pessoa le ────────────────────────────
+# Lido por `aporte_do_mes.py`. Texto de tela e dado (P2), nao literal no Python. A forma e
+# provisoria: quem decide o que trava e o primeiro uso real dele (PLANO §4), e o rosto
+# (P-160, P-162) redesenha depois. ASCII como o resto do arquivo.
+porta_de_uso:
+  _registros: [decidido_em, decidido_por]
+  decidido_em: 2026-10-10
+  decidido_por: >-
+    Claude (Cowork), decisao tecnica da P-181. O texto e de primeira versao e nao passou por
+    ninguem leigo; cada frase em que ele travar vira pendencia com o nome do passo.
+  # Por que uma rota ficou de fora. A chave e o portao de `portoes`; {motivo} e {rival} vem
+  # do proprio motor, nunca deste arquivo.
+  fora_por_portao:
+    G3_atrito: "o custo para entrar consome uma parte grande demais deste valor"
+    G4_dominancia: "existe um caminho igual e mais barato: {rival}"
+    G5_status: "falta uma informacao confiavel sobre ela ({motivo})"
+    G6_coerencia_funcao: "ela nao cumpre o papel para o qual entraria na carteira ({motivo})"
+    G7_tese_registrada: "so entra com uma tese escrita e assinada por voce ({motivo})"
+    G8_compromisso_de_carrego: >-
+      so entra quando voce assumir o compromisso de levar o titulo ate o vencimento ({motivo})
+  falta_preco: >-
+    Para dizer quanto comprar, falta o preco de hoje de: {rotas}. Veja na sua corretora e rode
+    de novo com --preco ROTA=VALOR (exemplo: --preco {exemplo}). No Tesouro, informe o preco de
+    1 titulo (o PU).
+  aviso: >-
+    Isto nao e recomendacao de investimento: e o resultado das regras que voce declarou, sobre
+    os numeros do seu estado.yaml. A ordem e sua; o sistema nao compra nem vende nada.
 
 # ── ALOCACAO DENTRO DE CRESCIMENTO ────────────────────────────────────────────
 # ATENCAO: esta e a unica secao que contem uma PREFERENCIA, e ela esta declarada
