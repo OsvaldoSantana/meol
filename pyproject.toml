@@ -113,7 +113,7 @@ paralelo = [
 # Metricas (25/09/2026), fora da impressao pela mesma razao: medem, nao mudam numero.
 metricas = [
   "pytest-cov==7.1.0",
-  "coverage==7.16.1",
+  "coverage==7.16.2",
 ]
 # So no workflow manual Linux: "To run mutmut on Windows, please use the WSL" (medido
 # nesta maquina em 25/09, e ela nao tem WSL).
