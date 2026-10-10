@@ -132,6 +132,49 @@ def versoes(recurso, arquivo, repo=None):
     return out
 
 
+def vigencias(recurso, arquivo, repo=None):
+    """[(instante, sha256)] em ordem de captura: a partir de cada instante, a versao que a
+    rotina deixou no lugar. E a linha do tempo da consulta as-of (P-53, 10/10/2026):
+    o que se tinha em D e o sha256 da ultima vigencia com instante <= D.
+
+    So o REGISTRO entra, e so as linhas que trouxeram byte e o deixaram vigente (`novo`,
+    `atualizado`; um `inalterado` com sha256 so confirma). Ficam fora, de proposito:
+      - `deslocado`: diz que uma versao existiu, nao desde quando. Na migracao de 24/09 a
+        linha dele tem a MESMA dt_captura do `atualizado` que o substituiu (12:16:32Z), e
+        conta-la faria o `max(<= D)` empatar entre a versao velha e a nova;
+      - o inventario da carga inicial: a data dele e a da versao (membro do ZIP, CV-03) e a
+        do envio, nenhuma das duas e a da captura. A versao continua em `versoes()`.
+
+    UMA EXCECAO, e ela e a premissa do proprio portao HEAD: o `inalterado` sem sha256 que
+    abre a linha do tempo atesta o canonico do inventario, se ha um so com o tamanho dele. O
+    portao so escreve `inalterado` quando Last-Modified e tamanho batem com o que se tinha, e
+    nos 34 arquivos da carga inicial (medido em 10/10) o que se tinha era esse byte. Dois
+    canonicos do mesmo tamanho, ou nenhum: a linha nao atesta nada."""
+    repo = repo or raiz_repo()
+    canonicos = [ln for ln in _inventarios(repo) if ln.get("recurso") == recurso
+                 and ln.get("arquivo") == arquivo and ln.get("papel") == "canonico"]
+    out: list[tuple[dt.datetime, str]] = []
+    for rel in REGISTROS.values():
+        for ln in _ler(os.path.join(repo, rel)):
+            if (ln.get("recurso") != recurso or ln.get("arquivo") != arquivo
+                    or ln.get("situacao") not in VIGENTES):
+                continue
+            sha = ln.get("sha256")
+            if not sha:
+                atesta = [c["sha256"] for c in canonicos if c.get("bytes") == ln.get("bytes")]
+                if out or ln.get("situacao") != "inalterado" or len(atesta) != 1:
+                    continue
+                sha = atesta[0]
+            quando = _instante(ln.get("dt_captura"))
+            if quando is None:
+                raise ValueError(f"{rel}: dt_captura ilegivel {ln.get('dt_captura')!r} em "
+                                 f"{recurso}/{arquivo} -- sem ela a vigencia nao tem inicio")
+            if not out or out[-1][1] != sha:
+                out.append((quando, sha))
+    # estavel: o registro e cronologico, e a ordem do arquivo desempata o mesmo instante
+    return sorted(out, key=lambda par: par[0])
+
+
 def _escolher(vs, recurso, arquivo, versao):
     if not vs:
         raise VersaoDesconhecida(f"{recurso}/{arquivo}: nenhum registro nem inventario")

@@ -2754,10 +2754,62 @@ Selic) abriu a **P-179**.
 
 ---
 
+## ~~P-51~~ · Só `ÚLTIMO`, e a partição é o ano do arquivo — regra do leitor da CVM — **FECHADA em 10/10/2026**
+
+**Dono:** Claude · **Gatilho:** ao escrever o leitor de DFP/ITR (passo 2 do caminho crítico) ·
+**Classe:** `BLOQUEIA_O_SISTEMA`
+
+`PENÚLTIMO` é o ano anterior já reapresentado: usar a linha `PENÚLTIMO` do arquivo de 2025 para
+saber o que se sabia em 2024 é *look-ahead*. O leitor usa **só `ÚLTIMO`, do arquivo daquele
+ano**, e particiona pelo **ano do arquivo**, não do dado (o DFP de 2025 corrige 2023).
+**Fecha com:** o leitor e um teste que falha se uma linha `PENÚLTIMO` entrar na série.
+
+
+**FECHADA em 10/10/2026.** `fase0/leitor_cvm.py` lê só `ORDEM_EXERC = ÚLTIMO` (a enumeração
+`OBSERVADO` e o `usado` vêm do `docs/schemas/cvm-dfp-itr-v1.yaml`) e abre só o arquivo do ano do
+`DT_REFER`. Evidência: `fase0/test_leitor_cvm.py::test_a_linha_PENULTIMO_nao_entra_na_serie` e
+`::test_c_DFP_de_2025_que_corrige_2023_nao_altera_o_que_se_sabia`. **Mutação:** sem o filtro de
+`ORDEM_EXERC`, a (a) reprova; com o `DT_REFER` procurado em todo arquivo capturado, a (c)
+reprova. Desenho e medições: `docs/decisoes/2026-10-10-leitor-asof-cvm.md`. **Consequência
+declarada lá:** uma reapresentação que só apareça como comparativo de ano posterior nunca alcança
+o ano corrigido.
+
+---
+
+## ~~P-53~~ · O acervo lido não depende de engine, e a ponte também é bitemporal — **FECHADA em 10/10/2026 na parte do leitor; a ponte é a P-53b**
+
+**Dono:** Claude · **Gatilho:** ao escrever a bitemporalidade (passo 2) · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Recomendação da pesquisa (`docs/fontes/pesquisa-bases-e-apis-2026-09.md` §3): **Parquet
+imutável particionado por `dt_captura`, DuckDB como consulta**, e o `.duckdb` sempre
+reconstruível, nunca registro. Duas armadilhas que entram no desenho: `dt_captura` não é data de
+conhecimento do mercado, e **o mapeamento ticker ↔ CNPJ ↔ CD_CVM também precisa ser
+bitemporal**, senão o join vaza futuro. Hoje o byte de cada versão já está no armazém por sha256
+(M4); o que falta é a camada de leitura. **Fecha com:** a consulta *as-of* sobre DFP/ITR e um
+teste com duas versões do mesmo `DT_REFER` capturadas em dias diferentes.
+
+**FECHADA em 10/10/2026, na parte do leitor.** A consulta *as-of*: `acervo.vigencias()` dá a
+linha do tempo do registro, e `leitor_cvm.valor()` usa a última vigência com instante ≤ D.
+Evidência: `fase0/test_leitor_cvm.py::test_b_consulta_antes_da_segunda_captura_devolve_a_primeira`
+(duas versões do mesmo `DT_REFER`, capturadas em 15/05 e 20/08) e os testes de `vigencias` em
+`fase0/test_acervo.py`. **Mutação:** a versão de hoje no lugar da vigente em D reprova a (b);
+`deslocado` contando como vigência reprova o teste do empate de 24/09. **Engine:** nenhum pacote
+novo. O acervo já é imutável e independente de engine (o ZIP por sha256 no armazém), e o índice
+do leitor é reconstruível; Parquet e DuckDB ficam para quando o custo em escala for medido, num
+grupo fora da impressão (a decisão, com a razão, está no `docs/decisoes/2026-10-10-leitor-asof-cvm.md`).
+**As duas armadilhas:** `dt_captura` ≠ conhecimento do mercado virou a limitação
+`dt_captura_nao_e_data_de_conhecimento_do_mercado` (NAO_CONSERTADA) e a **P-183**; a ponte
+bitemporal virou a **P-53b**, com gatilho na P-145 fechada.
+
+---
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-53** | o acervo lido não depende de engine; a ponte também é bitemporal | 10/10 — parte do leitor: `leitor_cvm.valor()` *as-of* pela `dt_captura` (`acervo.vigencias`), teste (b) com duas versões do mesmo `DT_REFER`; sem pacote novo; a ponte é a P-53b, o conhecimento do mercado é a P-183 |
+| **P-51** | só `ÚLTIMO`, e a partição é o ano do arquivo | 10/10 — `fase0/leitor_cvm.py` e os testes (a) e (c), com mutação; `docs/decisoes/2026-10-10-leitor-asof-cvm.md` |
 | **P-164** | primeiro aporte com patrimônio zero devolvia `SEM_POSICAO` | 03/10 — bloco 19, opção (c): uma ordem na rota de maior peso que caiba; `NENHUMA_ROTA_CABE` com motivo; política 1.37.0; P-179 |
 | **P-171** | pendências abertas sem dono, gatilho nem classe | 03/10 — triagem: as 24 ganharam os três campos ou fecharam; guarda em `auditoria/test_plano_e_pendencias.py` |
 | **P-137** | conciliar os diários do COTAHIST contra o anual do mês | 03/10 — setembro conciliado em 01/10: 10 `CONFERE`, 11 `ANTES_DA_ROTINA`, nenhuma falta (n=21) |
