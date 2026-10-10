@@ -178,6 +178,14 @@ eliminaram cada rota, nascido com teste sobre um estado sintético; (2) ele usa 
 sem a sessão no meio; (3) cada passo em que travou vira pendência com o nome do passo.
 Nenhum número dele entra no repositório (o `estado.yaml` é privado, P-67).
 
+**(1) feito em 10/10/2026:** `alocacao/aporte_do_mes.py`, testado sobre estados sintéticos em
+`alocacao/test_aporte_do_mes.py`. Lê o `estado.yaml` pela mesma porta (`estado_io.validar`, com
+o CX-04), roda `alocar()` e `motor_aporte()`, e responde em três blocos: o que fazer, por quê
+(com cada rota de fora e o portão que a tirou) e de onde veio cada número. O PU do Tesouro Selic
+vem do CSV do Tesouro Transparente, com data e sha256; preço de ETF a pessoa informa
+(`--preco`). Sem o preço de uma rota em lote que o motor consultou, o comando recusa e pede
+esse preço (P-182). **Falta (2) e (3).**
+
 ## P-179 · O catálogo não conhece o investimento mínimo do Tesouro, e o primeiro aporte pode sair inexecutável
 
 **Dono:** Osvaldo (decide se o mínimo entra no "caber") · Claude (lê a fonte e modela) ·

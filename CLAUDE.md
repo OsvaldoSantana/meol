@@ -147,6 +147,7 @@ alocacao/
                    COMPROMISSO_ATIVO (G-01)
   estado.yaml      situacao financeira real -- PRIVADO, fora do git (test_p67_segredo)
   estado_io.py     validacao do estado
+  aporte_do_mes.py A PORTA DE USO (P-181): o quanto, o para onde e o porque do mes
   reserva.py, aporte.py, sleeve.py, cenarios.py, corretoras.py, fatores.py
   multiplicidade.py, preregistro.py   Romano-Wolf, o `m` dos dois lados
   dados/nefin_factors.csv   FORA DO GIT (termos do NEFIN); o materializador o poe no lugar

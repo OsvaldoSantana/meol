@@ -451,6 +451,7 @@ REGIME_DAS_SECOES = {
     "tetos":         (OPERACIONAL,   "limites que o alocador aplica"),
     "compromissos":  (OPERACIONAL,   "teto absoluto de duracao — decisao A04"),
     "motor_aporte":  (OPERACIONAL,   "regras do aporte mensal"),
+    "porta_de_uso":  (OPERACIONAL,   "os textos da porta de uso, aporte_do_mes.py (P-181)"),
     "corretora":     (OPERACIONAL,   "pontuacao do ranking de instituicoes (N-01)"),
     "aporte_extraordinario": (OPERACIONAL, "destino do dinheiro fora do aporte mensal"),
     "sleeves":       (OPERACIONAL,   "indexado x selecao ativa"),

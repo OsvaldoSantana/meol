@@ -1339,6 +1339,20 @@ a da entrada é a P-178.
 
 ---
 
+## P-182 · `motor_aporte` calcula rota em lote a R$ 1,00 quando falta o preço
+
+**Dono:** Claude (decisão técnica) · **Gatilho:** antes de qualquer porta além da
+`aporte_do_mes.py` chamar o motor (protótipo F1, servidor da B′) · **Classe:**
+`DECISAO_DE_DESENHO`
+
+Visto ao escrever a porta de uso (P-181, 10/10/2026). `motor_aporte()` e `_primeiro_aporte()` usam
+`precos.get(rota, 1.0)`: sem preço, uma rota com `negocia_em_lote` vira lote de R$ 1,00, e a
+ordem sai com quantidade e preço errados e aparência perfeita (a classe do F-02: ausência
+virando número). A `aporte_do_mes.py` se protege vigiando quais preços o motor consultou
+(`PrecosVigiados`) e recusando a saída; o `demo_aporte.py` e os testes passam preço ou aceitam o
+1,0 de propósito. **Fecha com:** o motor devolver um status `FALTA_PRECO` com as rotas, no lugar
+do 1,0, e um teste que falha na versão de hoje; a vigilância da porta vira conferência redundante.
+
 ## P-178 · Contrato de ENTRADA do motor: quais campos do Estado viajam do aparelho
 
 **Dono:** sessão de especificação, com aprovação do Osvaldo · **Gatilho:** antes do primeiro

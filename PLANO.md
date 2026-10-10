@@ -26,7 +26,7 @@ registra, e a ordem é dele.
 
 | marco | o sistema passa a | estado em 03/10/2026 |
 |---|---|---|
-| **M1 · decidir o aporte** | dizer quanto entra, em qual classe e por qual rota, com custo, imposto e nove portões nomeados | **código pronto, nunca usado.** Ele nunca usou o sistema e não o considera funcional. E não há porta de uso: dos três módulos que leem o `estado.yaml` (`aporte.py`, `reserva.py`, `estado_io.py`), nenhum chama `alocar()` nem `motor_aporte()` (`grep`, 03/10). Frente "primeiro uso", §4 |
+| **M1 · decidir o aporte** | dizer quanto entra, em qual classe e por qual rota, com custo, imposto e nove portões nomeados | **código pronto e porta de uso pronta, nunca usado.** Ele nunca usou o sistema e não o considera funcional. A porta existe desde 10/10: `alocacao/aporte_do_mes.py` lê o `estado.yaml` e devolve o quanto, o para onde e o porquê (P-181). Falta o uso real. Frente "primeiro uso", §4 |
 | **M2 · decidir com dado próprio** | ler balanço do acervo próprio, sem terceiro nem tela | **em andamento.** CVM (DFP, ITR, CAD), COTAHIST e eventos da B3 no armazém; nada disso é lido ainda como balanço. Caminho crítico, §3 |
 | **M3 · decidir o papel** | aplicar régua de empresa pré-registrada e medida, com o corte da família de testes | **bloqueado em M2.** M3 sem M2 é backtest sobre dado de outra pessoa (*look-ahead* contábil) |
 | **M4 · fazer isso sozinho** | capturar sem ninguém lembrar e acusar a falha | **feito.** `captura_cvm.yml`, diário desde 24/09: CVM, COTAHIST (diário e anual mensal), NEFIN (desde 26/09, P-147 fechada), eventos da B3 às segundas (desde 28/09) e a conciliação mensal (setembro: 10 `CONFERE`, nenhuma falta). Parada levanta `CapturaParada`. Sobra a formalidade dos eventos em `regimes_de_captura` (P-150, reserva) |
@@ -56,8 +56,9 @@ entra é decisão dele (§6).
 O M1 só fecha quando ele usar o sistema num aporte real, do começo ao fim, sem a sessão no meio.
 Conta como sessão de motor no ritmo da §5.
 
-1. **Uma porta de uso** (P-181): um comando que lê o `estado.yaml` e devolve o "quanto, para
-   onde e por quê" do mês, com a procedência. Hoje não existe (§2).
+1. **Uma porta de uso** (P-181): **feita em 10/10.** `py -3.11 alocacao/aporte_do_mes.py` lê o
+   `estado.yaml` e devolve o "quanto, para onde e por quê" do mês, com a procedência de cada
+   número e o portão que eliminou cada rota. Sem o preço de uma rota em lote, recusa e pede.
 2. **Ele usa** no aporte seguinte. Cada passo em que travar vira pendência com o nome do passo;
    o que ele não entender é defeito do sistema, não dele.
 3. **P-179**, o investimento mínimo do Tesouro: **decidida em 04/10 (entra no "caber", como
@@ -89,11 +90,10 @@ texto comercial público.
 
 ## 6. Bloqueios e decisões abertas
 
-**Bloqueios reais, três:**
+**Bloqueios reais, dois** (o terceiro, a porta de uso do M1, caiu em 10/10 com a P-181):
 
-1. **O M1 não tem porta de uso** (P-181). Sem ela, "primeiro uso" é impossível, não adiado.
-2. **A bitemporalidade não existe em código** (passo 2 da §3).
-3. **A ponte de 2013–2019 não foi medida** (P-145). Falta o envio ao R2, que é dele.
+1. **A bitemporalidade não existe em código** (passo 2 da §3).
+2. **A ponte de 2013–2019 não foi medida** (P-145). Falta o envio ao R2, que é dele.
 
 **Decisões dele, abertas:**
 
