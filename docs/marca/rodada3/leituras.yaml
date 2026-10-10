@@ -439,3 +439,697 @@ categorias:
       situacao: pulada
       motivo: "site_inacessivel: vitreo.com.br sem endereco no DNS (sem registro A) e www NXDOMAIN"
       escada: "1) curl: CONNECT 502 e 'Could not resolve host'; 2) archive.org/wayback/available: ultimo arquivamento 2023-12-14; 3) dns.google: sem resposta A; busca: so a central de atendimento (atendimento.vitreo.com.br), nenhum site da marca; 4) dominio sem endereco nao depende de quem acessa"
+  bancos:
+    # Plano v2 (10/10/2026): um universo (BCB, 143 bancos com site) para banco_tradicional e
+    # banco_digital; a categoria sai da leitura (`categoria:`) e a visita segue ate as duas
+    # fecharem 10. Criterios de pular, aplicados da mesma forma em todas as marcas (10/10):
+    #   nao_atende_pf    = a primeira tela de 390 px e o menu nao oferecem nada a pessoa fisica
+    #                      (institucional, so empresas, estrangeiro, banco de atacado);
+    #   fora_do_livro    = oferece a pessoa fisica, mas a atividade nao e varejo com agencia nem
+    #                      banco de app (financeira de montadora, cartao de varejista, cambio);
+    #   site_inacessivel = a captura nao abriu, com a escada (5-B.18) transcrita.
+    # Capturas em 10/10/2026, Chromium 141.0.7390.37 (build 1194; R3_CHROMIUM).
+    1:
+      marca: Banco GM (GM Financial)
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de montadora (financiamento e consorcio Chevrolet; 'Estamos unificando nossas comunicacoes sob a marca GM Financial'); sem conta, cartao nem investimento"
+      data: 2026-10-10
+    2:
+      marca: Bank of China (Brasil)
+      situacao: pulada
+      motivo: "nao_atende_pf: primeira tela e noticias institucionais; os servicos do menu sao boleto de leasing/CDC e extrato 'apenas para CNPJ', e os produtos em destaque sao ACC/ACE e capital de giro para empresas (o consignado de pessoa fisica e produto lateral do menu)"
+      data: 2026-10-10
+    3:
+      marca: Banco Caixa Geral - Brasil
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: banco de empresas e de investimento (tres areas na primeira tela: banco de empresas, banco de investimentos, 'pessoa fisica e investidor institucional'), site nao responsivo (1.002 px de largura), sem produto de varejo"
+      data: 2026-10-10
+    4:
+      marca: Credit Agricole CIB
+      situacao: pulada
+      motivo: "nao_atende_pf: o site do cadastro redireciona para ca-cib.com, pagina global em ingles de um banco corporativo e de investimento ('Credit Agricole CIB')"
+      escada: "1) Chromium: ERR_TUNNEL_CONNECTION_FAILED em https://www.ca-cib.com.br/; curl http://ca-cib.com.br: 200, redireciona para www.ca-cib.com/en/credit-agricole-cib-brazil-our-global-markets; 2) archive.org/wayback/available: ultimo arquivamento 2022-08-15"
+      data: 2026-10-10
+    5:
+      marca: Banco Sofisa
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (o Sofisa Direto e banco digital para pessoa fisica: se abrir, pode ser classificado)"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www 200 (so HTML, sem renderizar), https sem www 502 do proxy, http www 200; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele (IP brasileiro). Nao se altera o user-agent: seria contornar a deteccao de robo"
+      data: 2026-10-10
+    6:
+      marca: Ouribank
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: banco de cambio e remessas ('o banco que abre o mundo'; menu para empresas, para voce, para advogados, para correspondentes cambiais); precedente da R3 de 04/10 para casas de cambio"
+      data: 2026-10-10
+    7:
+      marca: Banco Komatsu
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de fabricante de equipamentos (Finame, leasing, CDC, consorcio); a primeira tela e coberta por um aviso de novo site"
+      data: 2026-10-10
+    8:
+      marca: Banco Rodobens
+      situacao: pulada
+      motivo: "site_inacessivel: rodobensbanco.com.br sem endereco no DNS (Status 3, NXDOMAIN)"
+      escada: "1) curl https www e https: 502 do proxy ('Tunnel connection failed'), http: 'Name or service not known'; Chromium: ERR_TUNNEL_CONNECTION_FAILED; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 3; busca na web: nenhum site oficial achado (so demonstracoes financeiras de terceiros e um agregador de codigos de banco); 4) dominio sem endereco nao depende de quem acessa"
+      data: 2026-10-10
+    9:
+      marca: Banco KDB do Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: subsidiaria brasileira do Korea Development Bank, banco de desenvolvimento; site institucional bilingue, sem oferta a pessoa fisica"
+      data: 2026-10-10
+    10:
+      marca: Banco Arbi
+      situacao: pulada
+      motivo: "nao_atende_pf: primeira tela diz 'para empresas e para fintechs' e 'Banking as a Service'"
+      data: 2026-10-10
+    11:
+      marca: Intex Bank
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: banco de cambio ('Cambio estrategico para negocios globais'; menu para sua empresa e para voce); precedente da R3 de 04/10 para casas de cambio"
+      data: 2026-10-10
+    12:
+      marca: Banco Inbursa
+      situacao: pulada
+      motivo: "site_inacessivel: o servidor devolve 'upstream connect error or disconnect/reset before headers' (503) em http, e conexao reiniciada/certificado invalido em https. AGUARDA DEGRAU 4"
+      escada: "1) curl https www: conexao reiniciada, https: certificado invalido, http www: 503, http: certificado invalido; Chromium em http://www.bancoinbursa.com.br/: pagina de erro 'upstream connect error'; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 207.248.129.63; 4) pendente: maquina dele"
+      data: 2026-10-10
+    13:
+      marca: ABN AMRO Clearing Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Conectando o mundo ao mercado de capitais brasileiro', clearing e servicos para o mercado de capitais"
+      data: 2026-10-10
+    14:
+      marca: Banco Itau Veiculos (Banco Fiat)
+      situacao: pulada
+      motivo: "site_inacessivel: bancofiat.com.br sem registro A no DNS (Status 0, sem resposta)"
+      escada: "1) curl https www e https: 502 do proxy, http: 'No address associated with hostname'; Chromium: ERR_TUNNEL_CONNECTION_FAILED; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 0 sem registro A; busca na web: o financiamento Fiat/Itau hoje esta em itau.com.br (pagina do Itau), nao ha site do banco; 4) dominio sem endereco nao depende de quem acessa"
+      data: 2026-10-10
+    15:
+      marca: UBS Brasil
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: banco de investimento e wealth management; a primeira tela (UBS Brasil, pesquisa sobre colecionismo e familias) e coberta pelo aviso de cookies e nao mostra oferta de varejo. Poderia ser gestora_e_private, mas a pagina inicial nao diz private banking"
+      escada: "1) o site do cadastro (/BR/PT.HTML, com o caminho em maiusculas) deu 404 'Oops'; o mesmo caminho em minusculas (https://www.ubs.com/br/pt.html) abriu e foi o capturado"
+      data: 2026-10-10
+    17:
+      marca: Banco Finaxis
+      situacao: pulada
+      motivo: "nao_atende_pf: administracao fiduciaria e servicos para fundos estruturados (controladoria, custodia qualificada, escrituracao)"
+      data: 2026-10-10
+    18:
+      marca: Citibank
+      situacao: pulada
+      motivo: "nao_atende_pf: o site do cadastro leva ao corporateportal.brazil.citibank.com ('O banco mais global do mundo', solucoes para empresas e emissoes); a unica mencao a pessoa fisica e um comunicado a antigos clientes de cartao Citi"
+      data: 2026-10-10
+    19:
+      marca: Banco Toyota do Brasil
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de montadora (financiamento, seguros e consorcio de veiculos Toyota e Lexus)"
+      data: 2026-10-10
+    21:
+      marca: Omni Banco
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financiamento de carro, moto e caminhao e microcredito; sem conta nem investimento"
+      escada: "1) o site do cadastro e um link de WhatsApp (rebrand.ly), que respondeu com a verificacao da Cloudflare; usado o dominio verificado pelo BCB para o mesmo CNPJ (omni.com.br), que abriu"
+      data: 2026-10-10
+    22:
+      marca: Itau Unibanco
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (Itau e a referencia de banco_tradicional: este e o que mais pesa)"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-08; 4) pendente: maquina dele (IP brasileiro). Dominio verificado pelo BCB: itau-unibanco.com.br"
+      data: 2026-10-10
+    24:
+      marca: Scotiabank Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: 'O Scotiabank Brasil atua exclusivamente como banco de atacado'"
+      data: 2026-10-10
+    25:
+      marca: Bradescard
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: emissor de cartoes de marca de varejista ('o cartao Bradescard combina com voce', Amazon Prime Mastercard; saque pelo app); sem conta nem investimento"
+      data: 2026-10-10
+    26:
+      marca: Banco Industrial do Brasil
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    27:
+      marca: Mobilize Financial Services (Banco RCI)
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de montadora (financiamento, consorcio e locadora de veiculos)"
+      data: 2026-10-10
+    28:
+      marca: BofA Brasil (Bank of America Merrill Lynch)
+      situacao: pulada
+      motivo: "nao_atende_pf: 'No Brasil, nao atendemos pessoas fisicas e atuamos exclusivamente com empresas e investidores institucionais'"
+      data: 2026-10-10
+    30:
+      marca: Banco Mercedes-Benz
+      situacao: pulada
+      motivo: "site_inacessivel: certificado invalido em https e 400/403 em http. AGUARDA DEGRAU 4 (financeira de montadora: provavel fora_do_livro)"
+      escada: "1) Chromium: ERR_CERT_COMMON_NAME_INVALID; curl https www: certificado invalido, https: 403, http www: 400, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.44.201.154; 3) busca na web: so noticias, nenhum site oficial achado; 4) pendente: maquina dele"
+      data: 2026-10-10
+    31:
+      marca: Banco CSF (Carrefour Solucoes Financeiras)
+      situacao: pulada
+      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (cartao e conta Carrefour: pessoa fisica)"
+      escada: "1) Chromium: bloqueio da Cloudflare ('Attention Required'); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    32:
+      marca: HSBC Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Our wholesale presence in Brazil' (business.hsbc.com.br), em ingles, so empresas"
+      data: 2026-10-10
+    33:
+      marca: Banco Guanabara
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    34:
+      marca: Banco CNH Industrial Capital
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de fabricante de maquinas agricolas e de construcao ('Solucoes financeiras para o seu negocio', simule seu financiamento, cote seu seguro)"
+      data: 2026-10-10
+    35:
+      marca: Banco Paccar (PACCAR Financial)
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de fabricante de caminhoes (produtos, tarifas, concessionarias)"
+      data: 2026-10-10
+    36:
+      marca: Banco Fator
+      situacao: pulada
+      motivo: "nao_atende_pf: primeira tela institucional ('um conglomerado financeiro dinamico, pronto para os desafios de seus clientes'; banco, gestoras, seguradora), sem produto a pessoa fisica"
+      data: 2026-10-10
+    37:
+      marca: Banco StoneX
+      situacao: pulada
+      motivo: "site_inacessivel: pagina de verificacao da Cloudflare ('Executando verificacao de seguranca'). AGUARDA DEGRAU 4"
+      escada: "1) Chromium: verificacao da Cloudflare; contornar verificacao e proibido; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2024-08-29; 4) pendente: maquina dele"
+      data: 2026-10-10
+    38:
+      marca: Banco Fibra
+      situacao: pulada
+      motivo: "nao_atende_pf: primeira tela 'Solucoes financeiras para quem empreende e transforma' e 'Nossos segmentos' (empresas); a plataforma de CDB e LCA aparece abaixo da dobra"
+      data: 2026-10-10
+    39:
+      marca: Banco B3
+      situacao: pulada
+      motivo: "site_inacessivel: www2.bmfbovespa.com.br sem registro A no DNS (Status 0)"
+      escada: "1) curl https www e https: 502 do proxy, http: 'No address associated with hostname'; Chromium: ERR_TUNNEL_CONNECTION_FAILED; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 0 sem registro A; busca na web: so normativos no dominio b3.com.br, nenhum site proprio do banco; 4) dominio sem endereco nao depende de quem acessa"
+      data: 2026-10-10
+    40:
+      marca: Banco Sistema (BTG Pactual)
+      situacao: pulada
+      motivo: "site_inacessivel: o Chromium recebe ERR_HTTP e o curl 403 em todas as variantes de btgpactual.com. AGUARDA DEGRAU 4 (BTG Pactual e referencia de corretora; pela precedencia entraria la)"
+      escada: "1) Chromium: net::ERR_HTTP em https://www.btgpactual.com/; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.39.174.148; 4) pendente: maquina dele. Dominio verificado pelo BCB para este CNPJ: bancobesa.com.br"
+      data: 2026-10-10
+    16:
+      marca: Banco Cedula
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: banco comercial de pequeno porte, com uma agencia no BCB (a sede) e sem app (a busca da App Store BR so devolve apps colombianos); site institucional de largura fixa (1.000 px) com areas para sua empresa, para investir e conta corrente; nem varejo com rede nem banco de app"
+      escada: "1) o https tem certificado invalido (curl e Chromium: ERR_CERT_COMMON_NAME_INVALID); http www: 200, usado para ler a pagina"
+      data: 2026-10-10
+    20:
+      marca: Agibank
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app           # 'Agibank: Conta, Credito', Banco Agibank SA, App Store BR id 1173498435 (o site aponta para ele)
+      botao: cheio
+      botao_caixa: [17, 267, 123, 93]   # 'Pix', o primeiro dos tres atalhos (Pix, Pagar conta, Emprestimo) do cartao branco sobre o cabecalho azul
+      cor_do_texto: "#0b2c9c"
+      raio_px: 10                       # canto: 8, 5, 3, 2, 1, 1 px para dentro nas seis primeiras linhas (circulo de raio 10 a 11)
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 20
+      densidade_lista: "barra de status; avatar; saudacao; chat; sino; Saldo em conta e valor; rendimento; olho; Ver extrato; Pix; Pagar conta; Emprestimo; cartao A conta nao fecha; cartao seguinte; Margem Extra; Emprestimo Consignado; Portabilidade; Emprestimo Pessoal; Emprestimo FGTS; Trazer salario"
+      nota: "captura 2 da loja, a primeira de interface (a 1 e arte com a modelo). Recorte 262,950,1003,2536 sobre 1242x2692. Hibrido: o site diz 'digital sempre, fisico quando voce quiser' e a loja '+1.000 lojas fisicas', mas o produto e o app sao digitais ('conta digital gratuita'); lida como banco_digital. Fundo pela moda #002fb1 com 10% (cabecalho azul): limitacao 6 da R3"
+      data: 2026-10-10
+    23:
+      marca: Caixa Economica Federal
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app           # 'CAIXA', Caixa Economica Federal, App Store BR id 490813624 (achado pela busca da loja)
+      botao: vazado
+      botao_caixa: [30, 326, 62, 16]    # 'Simular >', o primeiro dos links do cartao Credito do Trabalhador; so texto azul
+      raio_px: 12                       # sem caixa propria: o canto do cartao que o contem, medido a olho (cerca de 12 px)
+      fonte: "fonte sem serifa arredondada do app (Caixa)"
+      familia_generica: sans-serif
+      densidade_blocos: 26
+      densidade_lista: "seta de voltar; titulo; cartao 1: icone, etiqueta Novo, titulo, texto, Simular; cartao 2: icone, titulo, texto, Simular; cartao Emprestimo Consignado: icone, titulo, texto; cartao Cartao de Credito: icone, titulo, etiqueta, texto; dois cartoes de baixo: icone, titulo, rotulo-valor, seta (cada)"
+      nota: "captura 3 da loja, a primeira de interface DE FRENTE (a 1, a 2, a 4 e a 5 mostram o aparelho inclinado; mesmo criterio da Onze em 04/10). Recorte 166,963,1080,2692 sobre 1242x2692. O site nao traz link para a App Store: o app foi achado pela busca da loja (itunes.apple.com/search, que respondeu 403 em duas tentativas e 200 na terceira)"
+      escada: "1) o site do cadastro (caixa.gov.br/ATENDIMENTOBACEN/) e uma pagina de ouvidoria; usado o dominio verificado pelo BCB (caixa.gov.br), capturado como 2a captura"
+      data: 2026-10-10
+    29:
+      marca: Banco Bmg
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app           # 'Banco Bmg: cartao e emprestimo', Banco BMG S.A., App Store BR id 1396096726 (o site aponta para ele)
+      botao: vazado
+      botao_caixa: [35, 453, 128, 18]   # 'VER SIMULACAO', o primeiro link do primeiro cartao; so texto laranja
+      raio_px: 6                        # sem caixa propria: o canto do cartao que o contem, medido a olho (cerca de 6 px)
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 16
+      densidade_lista: "avatar; nome; sino; ajuda; titulo; cartao 1: etiqueta, nome, taxa, texto, VER SIMULACAO; cartao 2: etiqueta, nome, taxa, texto, VER SIMULACAO; botao flutuante cortado"
+      nota: "captura 8 da loja, a primeira de interface DE FRENTE (1, 2, 6 e 7 inclinadas; 3, 4 e 5 sao arte sem tela; a 9 e a tela de entrada). Recorte 134,737,1106,2688 sobre 1242x2688; a tela e cortada embaixo pelo limite da imagem. A moda cromatica da imagem e o verde-claro da etiqueta (#d4edda, 5%), mas a cor lida e a do texto do link. Marca de credito consignado com conta digital: lida como banco_digital"
+      data: 2026-10-10
+    41:
+      marca: BNP Paribas Brasil
+      situacao: pulada
+      motivo: "site_inacessivel: 504 'An error occurred while processing your request' da CDN (Akamai) ao Chromium; o curl expira em todas as variantes. AGUARDA DEGRAU 4 (banco corporativo: provavel nao_atende_pf)"
+      escada: "1) Chromium: 504 (errors.edgesuite.net); curl https www, https, http www e http: TimeoutError; 2) archive.org/wayback/available: ultimo arquivamento 2021-07-31; 4) pendente: maquina dele"
+      data: 2026-10-10
+    42:
+      marca: Afinz
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: emissor de cartao ('Cartao Afinz Visa: um cartao para voce fazer mais', abas para sua empresa e para voce); a primeira tela e o cartao, sem conta nem investimento"
+      data: 2026-10-10
+    44:
+      marca: Tribanco
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: 'o banco parceiro do pequeno e medio varejista' (aba 'Para sua empresa' aberta; existe a aba 'Para voce'); banco de atacarejo e varejo, sem varejo bancario a pessoa fisica na primeira tela"
+      data: 2026-10-10
+    45:
+      marca: Banco C6
+      situacao: pulada
+      motivo: "site_inacessivel: pagina de verificacao da Cloudflare ('Executando verificacao de seguranca'). AGUARDA DEGRAU 4 (C6 e referencia de banco_digital: este e o que mais pesa)"
+      escada: "1) o site do cadastro e um link de WhatsApp (api.whatsapp.com), pagina 404 da loja de mensagens; o BCB nao tem dominio verificado para este CNPJ; 3) usado c6bank.com.br (o dominio da marca), que respondeu com a verificacao da Cloudflare em Chromium e 403 no curl, nas quatro variantes; contornar verificacao e proibido; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    46:
+      marca: Banco Original
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (banco digital)"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-08-09; 4) pendente: maquina dele. Dominio verificado pelo BCB: original.com.br"
+      data: 2026-10-10
+    48:
+      marca: Citibank (Banco Citibank S.A.)
+      situacao: pulada
+      motivo: "duplicada: mesma marca e mesmo site (corporateportal.brazil.citibank.com) da ordem 18, ja visitada (nao_atende_pf)"
+      data: 2026-10-10
+    49:
+      marca: Banco Yamaha
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de montadora ('o banco que aproxima voce dos seus sonhos'; CDC e financiamento de motocicleta)"
+      escada: "1) o site do cadastro (/BANCO, em maiusculas) deu 404; em minusculas (/banco) abriu e foi o capturado"
+      data: 2026-10-10
+    51:
+      marca: Banco Safra (Banco J. Safra S.A.)
+      situacao: pulada
+      motivo: "duplicada: mesma marca e mesmo site (safra.com.br) da ordem 50 (Banco Alfa), que o cadastro tambem aponta para a ouvidoria do Safra"
+      data: 2026-10-10
+    52:
+      marca: Banco Randon
+      situacao: pulada
+      motivo: "site_inacessivel: 'Acesso Bloqueado! O acesso a esta aplicacao foi bloqueado pelo sistema de seguranca' ao Chromium; o curl recebe 200. AGUARDA DEGRAU 4 (financeira de fabricante: provavel fora_do_livro)"
+      escada: "1) Chromium: pagina 'Acesso Bloqueado' com codigo de erro; curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: ultimo arquivamento 2026-06-11; 4) pendente: maquina dele"
+      data: 2026-10-10
+    53:
+      marca: Banco Crefisa
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (credito pessoal e conta para pessoa fisica)"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www 200, https conexao reiniciada, http www 200, http 503 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    54:
+      marca: Banco Bmg (Banco BMG S.A.)
+      situacao: pulada
+      motivo: "duplicada: mesma marca e mesmo site (bancobmg.com.br) da ordem 29, ja classificada como banco_digital"
+      data: 2026-10-10
+    55:
+      marca: SMBC Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: primeira tela institucional ('solucoes inteligentes, orientacoes objetivas, servico incomparavel'; 'conheca o SMBC Brasil'; alerta de fraude), sem oferta a pessoa fisica"
+      data: 2026-10-10
+    56:
+      marca: Banco Tricury
+      situacao: pulada
+      motivo: "nao_atende_pf: 'nossa expertise e o fator fundamental para o seu sucesso'; produtos de capital de giro e linhas de credito para empresas"
+      data: 2026-10-10
+    57:
+      marca: Banco BTG Pactual
+      situacao: pulada
+      motivo: "site_inacessivel: o Chromium nao carrega o site (o mesmo da ordem 40) e o curl recebe 403. AGUARDA DEGRAU 4 (BTG Pactual e referencia de corretora; pela precedencia entraria la)"
+      escada: "1) o site do cadastro e uma pagina de apoio ao cliente (/APOIO-AO-CLIENTE.HTML); Chromium sem carregar; curl no dominio btgpactual.com (ordem 40): 403 nas quatro variantes; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele. Mesma marca da ordem 40"
+      data: 2026-10-10
+    58:
+      marca: Banco XP
+      situacao: pulada
+      motivo: "site_inacessivel: 'Acesso Bloqueado, a sua requisicao foi bloqueada' da CDN ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (XP e referencia de corretora)"
+      escada: "1) o site do cadastro e uma pagina de chat (xp.inc/chat-atendente-humano, que redireciona para go.xp.inc): Chromium em 'Acesso Bloqueado'; 3) usado o dominio da marca (xp.com.br): curl 403 nas quatro variantes; 2) archive.org/wayback/available: ultimo arquivamento 2018-10-12; 4) pendente: maquina dele"
+      data: 2026-10-10
+    59:
+      marca: Banco Classico
+      situacao: pulada
+      motivo: "nao_atende_pf: site institucional ('Banco Multiplo, com carteira de credito, financiamento...'; menu de area de atuacao e dados financeiros; 'para empresas')"
+      data: 2026-10-10
+    61:
+      marca: Banco Itaubank
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium; o cadastro aponta para itau.com.br, o mesmo dominio da ordem 22. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); a escada do dominio itau.com.br esta na ordem 22; 4) pendente: maquina dele"
+      data: 2026-10-10
+    62:
+      marca: Banco Pine
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: 'somos um banco de negocios' (solucoes estruturadas), com renda fixa e app para pessoa fisica em segundo plano; nem varejo com agencia nem banco de app"
+      data: 2026-10-10
+    63:
+      marca: Woori Bank Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: subsidiaria do banco coreano ('banco lider global representando a Coreia'), site institucional bilingue, sem oferta a pessoa fisica"
+      data: 2026-10-10
+    65:
+      marca: Deutsche Bank Brasil
+      situacao: pulada
+      motivo: "nao_atende_pf: site institucional (quem somos, reguladores, RSAC, imprensa, envie seu curriculo), sem oferta a pessoa fisica"
+      data: 2026-10-10
+    66:
+      marca: Banco Caterpillar
+      situacao: pulada
+      motivo: "site_inacessivel: catfinancial.com.br sem registro A no DNS (Status 0)"
+      escada: "1) curl https www e https: 502 do proxy, http: 'No address associated with hostname'; Chromium: ERR_TUNNEL_CONNECTION_FAILED; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 0 sem registro A; 4) dominio sem endereco nao depende de quem acessa (financeira de fabricante: fora_do_livro de qualquer forma)"
+      data: 2026-10-10
+    67:
+      marca: Banco Rendimento
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    68:
+      marca: Ebury Bank
+      situacao: pulada
+      motivo: "nao_atende_pf: 'facilitando negocios globais: faca o seu negocio crescer a nivel global', contas internacionais e cross-border para empresas"
+      data: 2026-10-10
+    69:
+      marca: Banco Western Union
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: remessas internacionais ('obtenha estimativas e envie dinheiro rapidamente', aplicativo Western Union); nao e conta nem investimento; precedente da R3 de 04/10 para cambio"
+      data: 2026-10-10
+    70:
+      marca: Banco XCMG
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de fabricante de maquinas (produtos financeiros, investimentos e cambio 'customizados de acordo com a necessidade dos nossos clientes')"
+      data: 2026-10-10
+    71:
+      marca: Banco MUFG Brasil
+      situacao: pulada
+      motivo: "site_inacessivel: 403 vazio ao Chromium e ao curl. AGUARDA DEGRAU 4 (banco corporativo japones: provavel nao_atende_pf)"
+      escada: "1) Chromium: 403 sem titulo nem texto; curl https www 403, https 502 do proxy, http www 403, http sem endereco; 2) archive.org/wayback/available: ultimo arquivamento 2026-09-30; dns.google: sem registro A no dominio sem www; 4) pendente: maquina dele"
+      data: 2026-10-10
+    72:
+      marca: Banco BRP (Ribeirao Preto)
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: a primeira tela e um aviso do Credito do Trabalhador (consignado) com o telefone do banco; menu para voce e para sua empresa; banco de credito, sem conta nem app na primeira tela"
+      data: 2026-10-10
+    73:
+      marca: Bradesco Financiamentos
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: portal de servicos de financiamento (2a via de boleto e de carne, liquidacao antecipada, extrato do contrato), sem conta nem investimento"
+      data: 2026-10-10
+    74:
+      marca: DLL (Banco De Lage Landen)
+      situacao: pulada
+      motivo: "nao_atende_pf: 'banco lider em vendor finance apoiando fabricantes de equipamentos e tecnologia, distribuidores e revendedores'"
+      data: 2026-10-10
+    76:
+      marca: Bradesco BBI
+      situacao: pulada
+      motivo: "nao_atende_pf: 'somos responsaveis por originar, estruturar...' (banco de investimento; ofertas publicas)"
+      data: 2026-10-10
+    77:
+      marca: Banco Bari
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: 'especialistas em emprestimo com garantia de imovel' (home equity) para pessoa fisica; credito, sem conta nem app"
+      data: 2026-10-10
+    78:
+      marca: Travelex Bank
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: 'banco especializado em cambio' (abrir conta, internet banking, pessoa fisica e juridica); precedente da R3 de 04/10 para cambio"
+      data: 2026-10-10
+    79:
+      marca: Banco Cargill
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: 'seu melhor parceiro no campo', credito ao produtor rural do grupo Cargill; sem conta nem investimento"
+      data: 2026-10-10
+    80:
+      marca: Parana Banco
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: banco de emprestimo consignado ('PB Consignado', simule e acompanhe sua proposta); sem conta nem investimento na primeira tela"
+      data: 2026-10-10
+    43:
+      marca: BRB (Banco de Brasilia)
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app           # 'Banco BRB: Ainda mais seu', BRB Banco de Brasilia SA, App Store BR id 1005747186 (o site aponta para ele)
+      botao: cheio
+      botao_caixa: [262, 109, 81, 23]   # 'Ver extrato', a pilula escura sobre o cartao azul da conta corrente
+      cor_do_texto: "#ffffff"
+      raio_px: 11                       # pilula: altura 23 px
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 28
+      densidade_lista: "barra de status; avatar; saudacao; olho; chat; sino; cartao Conta Corrente; Ver extrato; Saldo e valor; faixa Confira suas opcoes de credito; Meus atalhos; Personalizar; cinco atalhos; banner Credito; Meu banco; oito itens da grade"
+      nota: "captura 1 da loja, a primeira de interface DE FRENTE (o aparelho aparece reto). Recorte 172,1096,1086,2688 sobre 1242x2688; a tela e cortada embaixo pelo limite da imagem. Banco publico do DF com 46 agencias no BCB; a loja tambem diz 'abra sua conta 100% digital'. Fundo pela moda #ebebeb com 3,9% (cinza do aplicativo sobre cartoes): limitacao 6 da R3"
+      data: 2026-10-10
+    47:
+      marca: Social Bank
+      categoria: banco_digital
+      situacao: classificada
+      unidade: site          # sem app achado: a busca 'social bank' na App Store BR devolveu so apps de outras empresas, e o site nao traz link da loja
+      botao: vazado          # sem chamada em botao: o 'EU QUERO!' e o 'NAO, OBRIGADO' sao do aviso de notificacoes, que nunca e o botao principal (R3, sec. 1.1); o resto sao links de texto
+      raio_px: 0             # sem cartao: raio 0
+      fonte: "EloquiaText Semibold (o texto de maior corpo: 30 px); sem serifa"
+      familia_generica: sans-serif
+      densidade_blocos: 12
+      densidade_lista: "aviso de notificacoes: icone, texto, EU QUERO, NAO OBRIGADO; foto; titulo; subtitulo; Social Bank; Informe de Rendimentos; Transparencia; Termos e Politicas; Relatorio e Documentos"
+      nota: "banco digital para a familia ('o banco bom alem da conta'; cartao socialbank na foto), sem agencia no BCB. O aviso de notificacoes fica na captura. Cromatica de maior area: azul #1b38ea com 42%"
+      data: 2026-10-10
+    50:
+      marca: Banco Safra
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: site          # o app 'Safra: investimentos e conta' (id 422705275) existe, mas nenhuma das 6 capturas da loja e tela mensuravel: sao fotos do aparelho na mao ou sobre a mesa, com a interface em menos de 15% da imagem
+      botao: vazado
+      botao_texto: Conheça agora
+      fonte: "Source Serif 4 (o texto de maior corpo, 32 px, no CSS)"
+      familia_generica: serif
+      densidade_blocos: 10
+      densidade_lista: "botao Abra sua conta; menu; foto; titulo; paragrafo; Conheca agora; carrossel; aviso de cookies: texto, Aceitar cookies, Gerenciar cookies"
+      nota: "o site do cadastro e uma pagina de chat de ouvidoria (safra.com.br/chat-ouvidoria.htm, 404); usado safra.com.br. Mesmo site das ordens 50 (Banco Alfa) e 51 (Banco J. Safra). O botao 'Abra sua conta' e do cabecalho; vale a chamada do conteudo principal, 'Conheca agora' (borda de 1 px). Regra nova de unidade, escrita aqui: app cuja loja nao tem captura de interface mensuravel cai para o site, como 'sem app'"
+      escada: "1) o site do cadastro (safra.com.br/chat-ouvidoria.htm) deu 404 e o Banco Alfa nao tem dominio verificado no BCB; capturado safra.com.br, o dominio da marca"
+      data: 2026-10-10
+    60:
+      marca: Daycoval
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app           # 'Daycoval', Banco Daycoval S.A., App Store BR id 1231632610 (o site aponta para ele)
+      botao: cheio
+      botao_caixa: [123, 120, 65, 38]   # 'Todos', a aba selecionada: pilula branca sobre o cabecalho azul
+      cor_do_texto: "#1b87c9"
+      raio_px: 19                       # pilula: altura 38 px
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 22
+      densidade_lista: "seta de voltar; titulo; filtro; selo 99; cinco abas (Destaques, Todos, CDB, LCI/LCA, LF); cartao 1: etiqueta Conservador, etiqueta Novo, nome, quatro pares rotulo-valor; cartao 2: etiqueta, nome, quatro pares"
+      nota: "captura 3 da loja, a primeira de interface DE FRENTE (1 e 2 inclinadas). Recorte 182,684,1107,2208 sobre 1242x2208. A tela e uma lista de CDB (investimentos). Banco com 52 agencias no BCB. Fundo pela moda #fdfdfd com 25%"
+      data: 2026-10-10
+    64:
+      marca: Banestes
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app           # 'Banestes', Banestes S/A Banco do Estado do Espirito Santo, App Store BR id 978346271 (achado pela busca da loja)
+      botao: vazado
+      botao_caixa: [293, 704, 56, 20]   # 'Entrar', texto azul no cartao branco 'Ola, Usuario'
+      raio_px: 12                       # sem caixa propria: o canto do cartao branco que o contem, medido a olho
+      fonte: "fonte sem serifa do app (Rubik)"
+      familia_generica: sans-serif
+      densidade_blocos: 12
+      densidade_lista: "logotipo (0); menu; frase juntos para o futuro; foto; cartao Ola Usuario: avatar, nome, agencia e conta, Entrar; Alternar conta; Pix; Btoken; mao desenhada (anotacao da loja)"
+      nota: "captura 1 da loja, a primeira de interface DE FRENTE: o aparelho e um desenho de contorno com a tela de entrada (foto de tres mulheres). Recorte 300,105,941,1493 sobre 1242x2208. Banco publico do Espirito Santo com 85 agencias no BCB. Cromatica de maior area: azul do texto da frase (#0307f8)"
+      escada: "1) o site (banestes.com.br) nao traz link da loja; o app foi achado pela busca da loja"
+      data: 2026-10-10
+    75:
+      marca: Banco da Amazonia
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app           # 'Banco da Amazonia', Banco da Amazonia SA, App Store BR id 986930742 (achado pela busca da loja)
+      botao: vazado
+      botao_caixa: [16, 580, 362, 33]   # 'CADASTRAR / ALTERAR ACESSO', so a borda branca e o texto branco sobre o verde
+      raio_px: 5                        # canto: 3 px para dentro na 1a linha
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "barra de status; logotipo; avatar; texto Acesse sua conta; seta; botao CADASTRAR / ALTERAR ACESSO; barra inferior com cinco icones"
+      nota: "captura 2 da loja, a primeira de interface (a 1 e a tela de abertura com o logotipo). Sao capturas de tela inteiras, sem aparelho: unidade tomada inteira, 1242x2208 levada a 390 px. Banco publico com 115 agencias no BCB"
+      escada: "1) o site (bancoamazonia.com.br) nao traz link da loja; o app foi achado pela busca da loja, que respondeu 403 em quatro tentativas com o termo 'banco da amazonia' e 200 com 'banco da amazonia basa'"
+      data: 2026-10-10
+  pagamentos:
+    # Plano v2 (10/10/2026): instituicoes de pagamento autorizadas pelo BCB (136 com site). A
+    # maioria e B2B (adquirencia, gateway, BaaS, gestao de despesas): sai por nao_atende_pf com a
+    # evidencia da primeira tela. Mesmos criterios do bloco bancos (comentario la).
+    1:
+      marca: Biz
+      situacao: pulada
+      motivo: "nao_atende_pf: multibeneficios corporativos ('se voce paga pelos beneficios, e a sua marca que deve aparecer'; PAT/PCT, vale-transporte); cliente e a empresa"
+      data: 2026-10-10
+    2:
+      marca: Strada Pay
+      situacao: pulada
+      motivo: "nao_atende_pf: logistica e pagamentos para embarcadores, transportadoras e caminhoneiros ('conectamos embarcadores, transportadoras e caminhoneiros')"
+      data: 2026-10-10
+    3:
+      marca: LaFinteca
+      situacao: pulada
+      motivo: "nao_atende_pf: gateway de pagamento na America Latina para empresas e desenvolvedores (menu: metodos por pais, industrias, para desenvolvedores)"
+      escada: "1) o site do cadastro (/PT/, maiusculas) deu 404; em minusculas (https://www.la-finteca.com/pt/) abriu e foi o capturado"
+      data: 2026-10-10
+    4:
+      marca: Infinia
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Global Money Movement and Account Infrastructure' (payouts transfronteiricos e contas virtuais para empresas), em ingles, com 'Book a Demo'"
+      data: 2026-10-10
+    5:
+      marca: Uzzipay
+      situacao: pulada
+      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: bloqueio da Cloudflare ('Attention Required'); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2025-10-14; 4) pendente: maquina dele"
+      data: 2026-10-10
+    6:
+      marca: Efex Finance
+      situacao: pulada
+      motivo: "nao_atende_pf: 'intermediacao de pagamentos cross-border' (a Efex conecta empresas)"
+      data: 2026-10-10
+    7:
+      marca: Aarin
+      situacao: pulada
+      motivo: "nao_atende_pf: 'boutique de tecnologia regulada' de Invisible Banking para outras empresas; sem produto a pessoa fisica"
+      data: 2026-10-10
+    8:
+      marca: Banqi (Casas Bahia Pay)
+      situacao: pulada
+      motivo: "site_inacessivel: 403 ('Ops! Algo deu errado') da CDN ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (conta digital da Casas Bahia: pessoa fisica, e a categoria pagamentos)"
+      escada: "1) Chromium: pagina de erro 403 sem titulo; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-04-18; 4) pendente: maquina dele"
+      data: 2026-10-10
+    9:
+      marca: Cielo
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: adquirente ('a maquininha que faz mais, por muito menos', taxas para o lojista); nao e carteira nem conta de pagamento"
+      data: 2026-10-10
+    10:
+      marca: Okto Pay
+      situacao: pulada
+      motivo: "site_inacessivel: 403 Forbidden do servidor (LiteSpeed) ao Chromium; o curl recebe 200. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: '403 Forbidden, Access to this resource on the server is denied' em oktopayments.com/pt/home-portugues/; curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
+      data: 2026-10-10
+    11:
+      marca: 3X Pay
+      situacao: pulada
+      motivo: "sem_marca: 'Site Not Found, there is no site configured at this address' (pagina de erro da Framer, 3xpay.co)"
+      data: 2026-10-10
+    12:
+      marca: PagCerto
+      situacao: pulada
+      motivo: "nao_atende_pf: o site do cadastro leva a vindi.com.br ('PagCerto agora integra a Vindi'), plataforma de cobranca e pagamentos para empresas"
+      data: 2026-10-10
+    13:
+      marca: Pay4Fun
+      situacao: pulada
+      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); 4) pendente: maquina dele"
+      data: 2026-10-10
+    14:
+      marca: Iniciador
+      situacao: pulada
+      motivo: "nao_atende_pf: 'a infraestrutura que escala o Open Finance no Brasil' para empresas ('fale com nossa equipe comercial')"
+      data: 2026-10-10
+    15:
+      marca: Galax Pay
+      situacao: pulada
+      motivo: "nao_atende_pf: o site do cadastro leva a celcoin.com.br/cel_payments, gateway de pagamento para gestao de cobrancas de empresas"
+      data: 2026-10-10
+    16:
+      marca: Featbank (Festor)
+      situacao: pulada
+      motivo: "site_inacessivel: https com certificado invalido e, em http, a pagina 'Error. Page cannot be displayed. Please contact your service provider'"
+      escada: "1) curl https www e https: certificado invalido, http www e http: 200 com a pagina de erro; Chromium em http://www.featbank.com.br/: a mesma pagina de erro; 2) archive.org/wayback/available: ultimo arquivamento 2026-01-08; 4) pendente: maquina dele"
+      data: 2026-10-10
+    17:
+      marca: Delend
+      situacao: pulada
+      motivo: "nao_atende_pf: 'venda a prazo, receba em dia', ciclo do recebivel de empresas (duplicatas, cobranca, antecipacao)"
+      data: 2026-10-10
+    18:
+      marca: Antom (AIBR)
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Antom, plataforma global de adquirencia, payment solutions for global businesses'"
+      escada: "1) o site do cadastro (/BR, maiusculas) deu 404 em ingles; em minusculas (https://www.antom.com/br) abriu e foi o capturado"
+      data: 2026-10-10
+    19:
+      marca: Gowd
+      situacao: pulada
+      motivo: "nao_atende_pf: 'infraestrutura regulada para pagamentos e operacoes bancarias na America Latina para empresas lancarem e escalarem servicos financeiros'"
+      data: 2026-10-10
+    20:
+      marca: PagCorp (ACG)
+      situacao: pulada
+      motivo: "nao_atende_pf: 'solucao completa para gestao de despesas corporativas'; 'abra sua conta PJ'"
+      data: 2026-10-10
+    21:
+      marca: Getnet
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: adquirente ('maquinas de cartao e solucoes financeiras para o seu negocio'); nao e carteira nem conta de pagamento"
+      data: 2026-10-10
+    23:
+      marca: iugu
+      situacao: pulada
+      motivo: "nao_atende_pf: 'infraestrutura financeira para sua empresa crescer' (cobranca, recorrencia, split, BaaS)"
+      data: 2026-10-10
+    24:
+      marca: Mentore
+      situacao: pulada
+      motivo: "site_inacessivel: 'ERROR: The request could not be satisfied. Request blocked' (CloudFront) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 da CDN; 4) pendente: maquina dele"
+      data: 2026-10-10
+    25:
+      marca: PagBrasil
+      situacao: pulada
+      motivo: "nao_atende_pf: 'pagamentos digitais' para lojistas (RoamingPay, plugin Shopify, Apple Pay plug and play)"
+      data: 2026-10-10
+    26:
+      marca: Repom (Edenred Mobilidade)
+      situacao: pulada
+      motivo: "nao_atende_pf: 'gestao de frotas e logistica' (frota, frete, despesa), 'solicite proposta'"
+      data: 2026-10-10
+    27:
+      marca: Pagare
+      situacao: pulada
+      motivo: "nao_atende_pf: plataforma BaaS ('sua fintech, nossa licenca regulada'; APIs REST, white-label)"
+      data: 2026-10-10
+    28:
+      marca: Flagship
+      situacao: pulada
+      motivo: "sem_marca: a pagina traz so '[MPBOX id=495]', os canais de atendimento e o CNPJ (pagina em branco de CMS)"
+      data: 2026-10-10
+    29:
+      marca: Cappta
+      situacao: pulada
+      motivo: "nao_atende_pf: 'sua empresa, seu ecossistema financeiro', plataforma white label para empresas"
+      data: 2026-10-10
+    30:
+      marca: Listo
+      situacao: pulada
+      motivo: "nao_atende_pf: 'a solucao ideal para acelerar seu negocio', gestao empresarial com servicos financeiros"
+      data: 2026-10-10
+    22:
+      marca: Humu (Inovanti)
+      categoria: pagamentos
+      situacao: classificada
+      unidade: app           # 'Humu', Inovanti Bank SA, App Store BR id 6444220469 (o site traz os dois links da loja)
+      botao: vazado          # a tela e uma lista de configuracoes com setas: nenhum botao nem cartao (livro, sem botao)
+      raio_px: 0             # sem cartao: raio 0 (R3, sec. 1.1)
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "barra de status; saudacao; doze linhas do menu (Perfil, Dispositivos Conectados, Dispositivos Bloqueados, Alterar senha, Alterar PIN, Configuracoes, Imposto de renda, Me ajuda, Multi acesso, Meus Limites, Solicitar conta escrow, Quantidade de aprovadores)"
+      nota: "captura 4 da loja, a primeira de interface DE FRENTE (1, 2 e 3 inclinadas). Recorte 92,922,1153,2697 sobre 1242x2697. A tela e um menu de configuracoes, e o menu (multi acesso, conta escrow, quantidade de aprovadores) sugere conta de empresa; o site diz 'conta de pagamento' sem dizer para quem, entao nao ha evidencia para nao_atende_pf. A cor cromatica (verde-limao do texto) cobre 0,05% da tela (limitacao 8 da R3). Marca do app (Humu) difere da do site (Inovanti)"
+      data: 2026-10-10

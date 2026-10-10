@@ -67,3 +67,25 @@ def test_o_chromium_da_maquina_so_entra_quando_a_variavel_existe():
     assert C.chromium_do_ambiente({}) is None
     assert C.chromium_do_ambiente({"R3_CHROMIUM": "  "}) is None
     assert C.chromium_do_ambiente({"R3_CHROMIUM": " /opt/chromium "}) == "/opt/chromium"
+
+
+def test_com_tentativas_repete_so_erro_de_rede_e_espera_cada_vez_mais():
+    esperas, chamadas = [], []
+
+    def cai_duas_vezes():
+        chamadas.append(1)
+        if len(chamadas) < 3:
+            raise ConnectionResetError("Connection reset by peer")
+        return "ok"
+    assert C.com_tentativas(cai_duas_vezes, dormir=esperas.append) == "ok"
+    assert esperas == [2, 4] and len(chamadas) == 3
+
+    def sempre_cai():
+        raise ConnectionResetError("x")
+    with pytest.raises(ConnectionResetError):
+        C.com_tentativas(sempre_cai, tentativas=3, dormir=lambda s: None)
+
+    def erro_de_codigo():
+        raise KeyError("results")      # nao e rede: nao se repete
+    with pytest.raises(KeyError):
+        C.com_tentativas(erro_de_codigo, dormir=lambda s: pytest.fail("repetiu um erro de codigo"))

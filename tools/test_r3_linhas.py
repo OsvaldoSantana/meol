@@ -45,3 +45,60 @@ def test_achar_botao_pelo_comeco_do_texto():
     assert L.achar_botao(bs, "FALE COM UM CONSULTOR")["texto"].startswith("FALE")
     with pytest.raises(ValueError):
         L.achar_botao(bs, "Abra sua conta")
+
+
+# ── 10/10/2026: acrescentar sem regravar as linhas que a maquina nao tem como refazer ───────────
+
+def test_chaves_novas_sao_as_entradas_que_o_csv_ainda_nao_tem():
+    """A sessao na nuvem de 10/10 nao tem as capturas das 51 linhas de 04/10 (fora do git, de
+    terceiros). Regravar tudo as perderia; acrescentar so toca o que falta."""
+    existentes = [{"categoria_sorteada": "assessor", "ordem_no_sorteio": "1"},
+                  {"categoria_sorteada": "assessor", "ordem_no_sorteio": "2"}]
+    leituras = {"assessor": {1: {}, 2: {}, 3: {}}, "bancos": {2: {}, 1: {}}}
+    assert L.chaves_novas(existentes, leituras) == [("assessor", 3), ("bancos", 1), ("bancos", 2)]
+    assert L.chaves_novas([], {}) == []
+
+
+def test_classificada_sem_captura_e_erro_nomeado_e_nao_nameerror(tmp_path, monkeypatch):
+    """Antes, `linha` chegava a `a = m["390"]` com `m` nunca definido: um NameError que nao diz
+    qual marca nem onde faltou a captura. A captura e a procedencia: sem ela, nao ha linha."""
+    monkeypatch.setattr(L, "CAPTURAS", str(tmp_path))
+    leitura = {"marca": "X", "situacao": "classificada", "data": "2026-10-10"}
+    with pytest.raises(ValueError, match="bancos-07.*sem captura"):
+        L.linha("bancos", 7, leitura, {"cnpj": "1"}, {})
+
+
+def test_marca_pulada_sem_captura_continua_valendo(tmp_path, monkeypatch):
+    """Pulada por site que nao abre nao tem captura, e a linha existe com o motivo (R3, sec. 3)."""
+    monkeypatch.setattr(L, "CAPTURAS", str(tmp_path))
+    leitura = {"marca": "X", "situacao": "pulada", "motivo": "site_inacessivel: DNS",
+               "data": "2026-10-10", "url": "https://x.com.br/"}
+    r = L.linha("bancos", 7, leitura, {"cnpj": "00000001"}, {})
+    assert (r["situacao"], r["url"], r["categoria_sorteada"]) == ("pulada", "https://x.com.br/",
+                                                                   "bancos")
+
+
+def test_botao_vazado_de_app_le_a_cor_do_texto_e_nao_o_fundo():
+    """10/10/2026, BMG: 'VER SIMULACAO' e laranja sobre branco e nao tem caixa nem borda. O
+    caminho do botao cheio (mediana dos pixels sem o texto) devolveria o BRANCO do fundo e o
+    matiz sairia neutro; o livro manda a cor do texto."""
+    fundo, laranja, borda = (255, 255, 255), (242, 106, 27), (240, 150, 100)
+    px = [fundo] * 600 + [laranja] * 50 + [borda] * 20 + [(250, 245, 240)] * 30
+    assert L.cor_do_texto_por_pixels(px) == "#f26a1b"
+    assert L.cor_do_texto_por_pixels([fundo] * 10) == "#ffffff"
+    # o cheio continua como era: o fundo, sem os pixels do texto
+    assert L.preenchimento_por_pixels(px, "#f26a1b") == "#ffffff"
+
+
+def test_sem_chaves_tira_so_as_pedidas_e_recusa_chave_inexistente():
+    """10/10/2026: o Banco Cedula foi lido como banco_tradicional e relido como fora_do_livro
+    (uma agencia no BCB, sem app) antes do commit; `--acrescentar` sozinho nao troca linha ja
+    gravada, e deixar as duas na tabela do veto contaria a marca duas vezes."""
+    linhas = [{"categoria_sorteada": "bancos", "ordem_no_sorteio": "16"},
+              {"categoria_sorteada": "bancos", "ordem_no_sorteio": "20"},
+              {"categoria_sorteada": "assessor", "ordem_no_sorteio": "16"}]
+    resto = L.sem_chaves(linhas, ["bancos:16"])
+    assert [(r["categoria_sorteada"], r["ordem_no_sorteio"]) for r in resto] == [
+        ("bancos", "20"), ("assessor", "16")]
+    with pytest.raises(ValueError, match="bancos.*17"):
+        L.sem_chaves(linhas, ["bancos:17"])

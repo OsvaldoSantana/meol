@@ -4,11 +4,11 @@
 
 | categoria | n (so app) | codigo dominante | E | C | D | so app: E | C | D |
 |---|---|---|---|---|---|---|---|---|
-| banco_tradicional | 0 (0) | sem dominante | - | - | - | - | - | - |
-| banco_digital | 0 (0) | sem dominante | - | - | - | - | - | - |
+| banco_tradicional | 6 (5) | claro/celeste/sem_serifa/grande | - | - | - | - | - | - |
+| banco_digital | 3 (2) | sem dominante | - | - | - | - | - | - |
 | corretora | 2 (1) | sem dominante | - | - | - | - | - | - |
 | gestora_e_private | 12 (1) | sem dominante | - | - | - | - | - | - |
-| pagamentos | 0 (0) | sem dominante | - | - | - | - | - | - |
+| pagamentos | 1 (1) | sem dominante | - | - | - | - | - | - |
 | consolidador | 0 (0) | sem dominante | - | - | - | - | - | - |
 | casa_de_analise_e_educacao | 0 (0) | sem dominante | - | - | - | - | - | - |
 | consultoria_cvm | 10 (0) | sem dominante | - | - | - | - | - | - |
@@ -16,4 +16,4 @@
 | robo | 0 (0) | sem dominante | - | - | - | - | - | - |
 | planejador | 0 (0) | sem dominante | - | - | - | - | - | - |
 
-**Arquivamento:** 34 linha(s) classificada(s) com `PENDENTE_LOCAL`. A R3 so fecha com zero (tools/r3_arquivar.py, na maquina dele).
+**Arquivamento:** 44 linha(s) classificada(s) com `PENDENTE_LOCAL`. A R3 so fecha com zero (tools/r3_arquivar.py, na maquina dele).
