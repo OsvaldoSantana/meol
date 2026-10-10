@@ -3092,6 +3092,49 @@ instrumento incluiu o que não devia. Conserto e ordem em P-173; teste ainda nã
 
 ---
 
+## CX-04 · A porta de entrada aceitava NaN, infinito e booleano como dinheiro
+
+*04/10/2026. Achado externo (auditoria do Codex de 03/10, `A-01` no original; registro e de/para
+em `docs/auditoria/AUDITORIA-CODEX-2026-10-03.md`). Conferido e consertado pelo Claude (Cowork).*
+
+`estado_io._num()` testava `isinstance(v, (int, float))`, e `bool` é subclasse de `int`:
+`despesa_mensal: true` virava R$ 1,00 de despesa. `float(s)` aceita `"nan"`, `"inf"` e
+`"Infinity"`, e o YAML lê `.nan` e `.inf` como float; nada conferia finitude. E dois campos nem
+passavam por `_num()`: `posicoes` e `dependentes` entravam crus.
+
+**O agravante que a auditoria não mediu:** o YAML 1.1, que o PyYAML implementa, lê `yes`, `no`,
+`on` e `off` sem aspas como booleano. Quem escreve `caixa: no` (de "não tenho") entregava ao
+motor um `False`, isto é, zero, sem aviso nenhum.
+
+**Medição.** As três provas da §9.9 falham no `main` (`0247a21`) como a auditoria transcreve
+(`DID NOT RAISE EstadoInvalido`, n=3). A ampliação, em
+`alocacao/test_cx04_porta_de_entrada.py`, cobre os 17 campos numéricos que o `validar()` lê
+(os 5 de `NUMERICOS`, `reserva_disponivel`, `reserva_empenhada`, `dependentes`, um valor de
+`reserva_por_rota` e de `posicoes`, e os campos numéricos de `Divida`, `Objetivo` e
+`MatchEmpregador`, lidos da própria classe). No `main`: **306 de 306 casos passavam pela
+porta** (17 campos × 8 valores do Python, mais 17 × 10 grafias escritas como texto de YAML).
+
+**Consequência medida pela auditoria:** `NaN` em `aporte_mensal` chegava ao `alocar()` e
+terminava em `ValueError`; `true` em `despesa_mensal` produzia a diretiva `G2_reserva` a partir
+de uma despesa de R$ 1,00. É dado inválido com aparência de dado válido, a classe do A-01 de
+11/09 em outra porta.
+
+**Conserto, num ponto só:** `_num()` recusa o booleano antes do teste de número, e todo número
+passa por `_finito()`. `posicoes` (função `_posicoes`) e `dependentes` passam a usar `_num()`;
+`dependentes` inteiro volta `int`, porque `Estado.dependentes` é `int`, e ausente continua
+sendo zero.
+
+**Instantâneo dourado** (11 estados sintéticos válidos, `validar` + `alocar` + `motor_aporte`,
+campo a campo): **nenhum valor mudou**. A única diferença é de tipo: os valores de `posicoes`
+escritos como inteiro (`bova11: 900`) saem `float` (`900.0`), como todo outro campo numérico já
+saía. As ordens do motor são idênticas.
+
+**O que não cobre:** intervalo econômico (despesa negativa, taxa de 900% ao mês), rota
+desconhecida em `posicoes`, e campo que o `validar()` não lê. Um teste de cobertura reprova
+campo numérico novo do `estado.exemplo.yaml` que fique sem prova.
+
+---
+
 ## PO-01 · O limiar de poder do C-02 foi calculado numa convenção, e o resultado foi lido em outra
 
 *03/10/2026. Achado na leitura do resultado da corrida de 2016–2020 (`b331172`), depois da

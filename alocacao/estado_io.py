@@ -14,7 +14,7 @@ Mesmo desenho do validador de tese: devolve TODOS os problemas de uma vez, separ
 o que bloqueia do que e aviso, e nao inventa valor nenhum.
 """
 from __future__ import annotations
-import dataclasses, os, re, sys, typing, datetime as dt
+import dataclasses, math, os, re, sys, typing, datetime as dt
 import yaml
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -28,11 +28,33 @@ NUMERICOS = ("despesa_mensal", "reserva_atual", "aporte_mensal", "caixa", "horiz
 class EstadoInvalido(Exception):
     pass
 
+def _finito(n, campo, problemas):
+    """CX-04: o UNICO lugar onde um numero vira dinheiro. `float()` aceita "nan", "inf" e
+    "Infinity", e o YAML le `.nan` e `.inf` como float: sem esta conferencia, NaN atravessava a
+    porta e estourava no motor (ValueError), e infinito virava saldo."""
+    if not math.isfinite(n):
+        problemas.append(f"{campo}: {n!r} nao e um numero finito. Escreva o valor em reais, "
+                         f"com ponto decimal")
+        return None
+    return n
+
 def _num(v, campo, problemas):
-    """Converte para float recusando as armadilhas de preenchimento manual."""
+    """Converte para float recusando as armadilhas de preenchimento manual.
+
+    CX-04 (auditoria do Codex, 03/10/2026): `bool` e subclasse de `int`, e o teste de tipo
+    `isinstance(v, (int, float))` deixava `true` virar R$ 1,00. O YAML 1.1, que o PyYAML
+    implementa, le `yes`, `no`, `on` e `off` sem aspas como booleano -- `caixa: no` chegava ao
+    motor como zero. O booleano e recusado ANTES do teste de numero, e todo numero passa por
+    `_finito()`. Todo campo numerico do estado passa por aqui, `posicoes` e `dependentes`
+    inclusive (antes, os dois entravam crus)."""
     if v is None:
         problemas.append(f"{campo}: nao preenchido"); return None
-    if isinstance(v, (int, float)): return float(v)
+    if isinstance(v, bool):
+        problemas.append(
+            f"{campo}: {str(v).lower()} nao e numero. O YAML le true/false, e tambem "
+            f"yes/no/on/off sem aspas, como booleano; escreva o valor em reais")
+        return None
+    if isinstance(v, (int, float)): return _finito(float(v), campo, problemas)
     if isinstance(v, str):
         s = v.strip()
         if re.fullmatch(r"-?\d{1,3}(\.\d{3})*,\d+", s) or re.fullmatch(r"-?\d+,\d+", s):
@@ -42,7 +64,7 @@ def _num(v, campo, problemas):
                 f"separador decimal. Escreva {convertido:.2f}. Interpretei como "
                 f"{convertido:.2f} para seguir, mas corrija o arquivo")
             return convertido
-        try: return float(s)
+        try: return _finito(float(s), campo, problemas)
         except ValueError:
             problemas.append(f"{campo}: '{v}' nao e numero"); return None
     problemas.append(f"{campo}: tipo inesperado {type(v).__name__}"); return None
@@ -117,6 +139,14 @@ def _match(doc, problemas):
     return mv, (None if me is None else
                 _registro(me, MatchEmpregador, "match_empregador", problemas))
 
+def _posicoes(pos, problemas):
+    """rota -> valor investido. CX-04: ate 04/10 entrava cru, e `bova11: yes` virava uma
+    posicao de R$ 1,00. Ausente e `{}` (nenhuma posicao), como antes."""
+    if pos is None: return {}
+    if not isinstance(pos, dict):
+        problemas.append("posicoes tem de ser um mapa rota -> valor"); return {}
+    return {k: _num(v, f"posicoes.{k}", problemas) for k, v in pos.items()}
+
 def validar(doc, P=None, hoje=None):
     """(dados, problemas, avisos). `problemas` impedem o uso como estado REAL."""
     hoje = hoje or dt.date.today()
@@ -124,9 +154,14 @@ def validar(doc, P=None, hoje=None):
 
     for c in NUMERICOS:
         d[c] = _num(doc.get(c), c, problemas)
-    d["dependentes"] = doc.get("dependentes") or 0
+    # Ausente continua sendo zero dependentes; presente passa pela mesma porta (CX-04), e o
+    # inteiro volta inteiro, porque `Estado.dependentes` e `int`.
+    dep = doc.get("dependentes")
+    d["dependentes"] = 0 if dep is None else _num(dep, "dependentes", problemas)
+    if isinstance(d["dependentes"], float) and d["dependentes"].is_integer():
+        d["dependentes"] = int(d["dependentes"])
     d["estabilidade_renda"] = doc.get("estabilidade_renda")
-    d["posicoes"] = doc.get("posicoes") or {}
+    d["posicoes"] = _posicoes(doc.get("posicoes"), problemas)
     # P-24. Onde a reserva esta, rota por rota. AUSENTE e diferente de VAZIO:
     #   ausente = o motor nao sabe, e o G2 diz isso em voz alta;
     #   {}      = nao ha reserva em lugar nenhum, que e afirmacao, nao ignorancia.
