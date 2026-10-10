@@ -84,7 +84,7 @@ def defeitos_c04(c04, pendencias):
 
 
 def test_a_lacuna_de_c04_c05_nao_volta():
-    """Falha na 1.38.0: la havia `lacuna_declarada` e a ordem dizia "VER LACUNA DECLARADA"."""
+    """Falha na 1.39.0: la havia `lacuna_declarada`, e a ordem dizia "VER LACUNA DECLARADA"."""
     b = _bloco_c()
     assert "lacuna_declarada" not in b, "a lacuna de C-04/C-05 voltou ao bloco C"
     ordem = " ".join(b["ordem"])
@@ -109,7 +109,7 @@ def test_c04_e_c05_tem_o_nome_e_a_fase_do_escopo():
 
 @pytest.mark.repositorio   # 146b: le o repositorio, a mutacao exclui
 def test_c04_nao_e_exclusao_enquanto_a_p65_nao_existir():
-    """Falha na 1.38.0 (o C-04 nem existia como entrada). Com a P-65 aberta, o C-04 e
+    """Falha na 1.39.0 (o C-04 nem existia como entrada). Com a P-65 aberta, o C-04 e
     lacuna com caminho e marca 'nao medido'; quando ela fechar, este teste obriga a revisar."""
     pend = L._pendencias()
     assert "P-65" in pend, "a P-65 sumiu dos tres arquivos de pendencias"

@@ -839,7 +839,7 @@ três. E nenhum número de "quantas empresas saem" existe ainda: o bloco C não 
 **Recomendação: 27c**, porque o próprio `politica.yaml` proíbe corte sem o custo de discordar, e
 esse custo só existe contado. Na prática a escolha de hoje é entre fixar 1,0 já (27a) ou depois
 de contar (27c). Quais contas somam o caixa e a dívida curta (aplicações de curto prazo?
-arrendamento?) **não** é desta pergunta: sai do plano de contas quando o leitor existir (P-51), e
+arrendamento?) **não** é desta pergunta: sai do plano de contas, que o leitor as-of já lê (P-51), e
 o arrendamento é da P-58.
 **Destrava:** o corte do C-05 no bloco C (P-30); e, se você quiser, o mesmo caminho para C-01 a
 C-03.

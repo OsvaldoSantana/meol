@@ -4,7 +4,7 @@
 
 ## Ativas: 16 de 20 (`PENDENCIAS.md`, ler inteiro)
 
-P-145 · P-51 · P-53 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 · P-180 · P-127 · P-181 · P-179 · P-162 · P-170 · P-172
+P-145 · P-53b · P-183 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 · P-180 · P-127 · P-181 · P-179 · P-162 · P-170 · P-172
 
 ## Reserva: 61 (`docs/pendencias-reserva.md`, por busca)
 

@@ -43,32 +43,36 @@ Saída só com contagem, código e rótulo (P-136).
 > escrito sem tentar X. **O que muda:** afirmação de que um passo roda sai com a execução ao lado.
 **Fecha com:** cada emissor de 2013–2019 classificado, e os três últimos rótulos conferidos à mão.
 
-## P-51 · Só `ÚLTIMO`, e a partição é o ano do arquivo — regra do leitor da CVM
+## P-53b · A ponte ticker ↔ CNPJ ↔ CD_CVM também é bitemporal — a sobra da P-53
 
-**Dono:** Claude · **Gatilho:** ao escrever o leitor de DFP/ITR (passo 2 do caminho crítico) ·
-**Classe:** `BLOQUEIA_O_SISTEMA`
+**Dono:** Claude Code · **Gatilho:** P-145 fechada · **Classe:** `BLOQUEIA_O_SISTEMA`
 
-`PENÚLTIMO` é o ano anterior já reapresentado: usar a linha `PENÚLTIMO` do arquivo de 2025 para
-saber o que se sabia em 2024 é *look-ahead*. O leitor usa **só `ÚLTIMO`, do arquivo daquele
-ano**, e particiona pelo **ano do arquivo**, não do dado (o DFP de 2025 corrige 2023).
-**Fecha com:** o leitor e um teste que falha se uma linha `PENÚLTIMO` entrar na série.
+O leitor *as-of* (P-53, fechada em 10/10) responde por `CD_CVM` e não liga papel a empresa. O
+join papel × `CD_CVM` precisa da ponte **no tempo**: um código de negociação de 2010 pode apontar
+hoje para outra entidade (CV-06: `EMBR`, `JBSS`, `TRPL`, `PMAM`), e uma ponte de hoje aplicada
+ao passado vaza futuro em silêncio. **Fecha com:** a ponte da P-145 consultada *as-of*, e um
+teste em que um código reaproveitado liga o papel de 2010 ao emissor de 2010, não ao de hoje.
 
-## P-53 · O acervo lido não depende de engine, e a ponte também é bitemporal
+## P-183 · A data de conhecimento do mercado: `DT_RECEB` por versão e as cópias de terceiro
 
-**Dono:** Claude · **Gatilho:** ao escrever a bitemporalidade (passo 2) · **Classe:**
-`DECISAO_DE_DESENHO`
+**Dono:** Claude Code · **Gatilho:** antes de o leitor *as-of* servir qualquer mês anterior a
+24/09/2026 (o histórico do bloco C, P-30, e o backtest) · **Classe:** `BLOQUEIA_O_SISTEMA`
 
-Recomendação da pesquisa (`docs/fontes/pesquisa-bases-e-apis-2026-09.md` §3): **Parquet
-imutável particionado por `dt_captura`, DuckDB como consulta**, e o `.duckdb` sempre
-reconstruível, nunca registro. Duas armadilhas que entram no desenho: `dt_captura` não é data de
-conhecimento do mercado, e **o mapeamento ticker ↔ CNPJ ↔ CD_CVM também precisa ser
-bitemporal**, senão o join vaza futuro. Hoje o byte de cada versão já está no armazém por sha256
-(M4); o que falta é a camada de leitura. **Fecha com:** a consulta *as-of* sobre DFP/ITR e um
-teste com duas versões do mesmo `DT_REFER` capturadas em dias diferentes.
+O leitor (`fase0/leitor_cvm.py`) responde o que **o sistema capturou** até D. Antes da primeira
+linha do registro, 24/09/2026, não responde nada, e o backtest de 2010 a 2026 está inteiro antes
+dela (`limitacoes_declaradas.dt_captura_nao_e_data_de_conhecimento_do_mercado`, NAO_CONSERTADA).
+A fonte tem a segunda data: o índice de cada ZIP lista **todas** as versões com o `DT_RECEB` de
+cada uma (ITR 2024, medido em 10/10: 238 de 2.161 documentos com mais de uma versão), e o
+demonstrativo traz só a última. "`DT_RECEB` da versão presente ≤ D" reconstrói sem *look-ahead*,
+mas esconde o documento até a última reapresentação. **A medição que decide:** quantos
+documento-meses isso esconde em 2010–2025, e quantas versões antigas a Wayback guarda (o CDX
+pelo `medir/`; da nuvem só a API de disponibilidade respondeu, e achou o dfp 2022 de 26/03/2026).
+**Fecha com:** o modo de reconstrução no leitor, com teste, a medição do que ele esconde, e a
+limitação passando a RESOLVIDA ou a FISICA pelo resíduo.
 
 ## P-30 · O bloco C sobre dado real — o passo 3 do caminho crítico
 
-**Dono:** Claude Code · **Gatilho:** a bitemporalidade pronta (P-53) · **Classe:**
+**Dono:** Claude Code · **Gatilho:** a bitemporalidade pronta (P-53, fechada em 10/10: o leitor responde desde 24/09/2026); para o histórico, a P-183 · **Classe:**
 `BLOQUEIA_O_SISTEMA` *(campos dados na triagem de 03/10/2026, P-171)*
 
 `bloco_C_solvencia` tem 48 chaves escritas em 05/09, e nenhum módulo as aplica: os testes
@@ -84,7 +88,7 @@ motivo nomeado, e a 63a lida do YAML.
 ligar o corte do C-05 no bloco C (P-30) · **Classe:** `DECISAO_DE_DESENHO` *(era
 `BLOQUEIA_O_SISTEMA` até 10/10: a identidade caiu na leitura, e o bloco C roda sem o corte)*
 
-**Feito em 10/10/2026** (`politica.yaml` 1.39.0, `bloco_C_solvencia.campos_C04_C05`, guarda
+**Feito em 10/10/2026** (`politica.yaml` 1.40.0, `bloco_C_solvencia.campos_C04_C05`, guarda
 `alocacao/test_p17_c04_c05.py`): os dois lidos no escopo e reconciliados com o YAML.
 **C-04**, moeda da dívida × moeda da receita: Fase B, nota de instrumentos financeiros;
 `NAO_CONSERTADA` com `pendencia: P-65`, e até lá marca "C-04 não medido" e nunca exclui (P6).
