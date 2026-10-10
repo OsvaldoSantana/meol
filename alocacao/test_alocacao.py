@@ -1562,13 +1562,14 @@ def test_bloco_C_declara_que_nenhum_corte_tem_ancora_legal():
     assert banco["B01_indice_de_basileia"]["tem_piso_legal"] is True
 
 def test_bloco_C_admite_em_voz_alta_o_que_nao_sabe():
-    """C-04 e C-05 nao foram inventados. Um bloco de exclusao com criterio
-    inventado excluiria empresa por regra que ninguem escolheu."""
-    lac = P["bloco_C_solvencia"]["lacuna_declarada"]
-    assert "C-04" in lac["o_que_falta"] and "C-05" in lac["o_que_falta"]
-    assert lac["para_fechar"]
+    """C-04 e C-05 nao foram inventados. Ate 10/10 eram lacuna declarada; a P-17 os leu no
+    escopo, e o que ainda nao se sabe (o limiar do C-05, o dado do C-04) segue escrito.
+    A guarda inteira, com o escopo e a P-65, e o test_p17_c04_c05.py."""
+    campos = P["bloco_C_solvencia"]["campos_C04_C05"]
+    assert campos["C-05"]["limiar_decide"] == "usuario"
+    assert campos["C-04"]["tipo"] == "NAO_CONSERTADA"
     ordem = " ".join(P["bloco_C_solvencia"]["ordem"])
-    assert "LACUNA DECLARADA" in ordem, "a ordem tem de carregar a lacuna, nao escondê-la"
+    assert "campos_C04_C05" in ordem, "a ordem tem de carregar o que falta, nao escondê-lo"
 
 
 # ── P-07 / I-01: a ordem dos portoes virou dado ──────────────────────────────
