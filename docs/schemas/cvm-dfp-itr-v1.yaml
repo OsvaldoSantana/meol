@@ -1,0 +1,62 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# CVM DFP/ITR -- leiaute como DADO, lido por fase0/leitor_cvm.py (P-51, P-53, 10/10/2026).
+#
+# Mesmo desenho do cotahist-v02.yaml (P2): a forma de uma fonte externa nao mora em Python.
+# Tres procedencias diferentes, e cada bloco diz a sua:
+#   - os CAMPOS sao do dicionario da CVM (meta_dfp_cia_aberta_*.txt, meta_itr_*), transcrito
+#     em docs/fontes/cvm-dfp-dicionario-dados.md e cvm-itr-dicionario-dados.md. O dicionario
+#     da tipo e tamanho, NAO a lista de valores;
+#   - as ENUMERACOES sao OBSERVADO (P1): contadas no dado real, 04/09/2026, 96 arquivos,
+#     12,8 M linhas (docs/fontes/cvm-enumeracoes-observadas.md). Valor fora da lista derruba
+#     a leitura;
+#   - as COLUNAS DE PERIODO foram medidas em 10/10/2026 no itr_cia_aberta_2024.zip (n = 1
+#     arquivo, 16 demonstrativos): BPA/BPP so com DT_FIM_EXERC, os fluxos com DT_INI_EXERC
+#     tambem, a DMPL ainda com COLUNA_DF. Por ser n = 1, o leitor NAO fixa qual demonstrativo
+#     tem qual coluna: usa as desta lista que o cabecalho trouxer.
+#
+# ASCII (CLAUDE.md 5): os acentos do dado vao como escape YAML (Ú = U maiusculo agudo).
+# ══════════════════════════════════════════════════════════════════════════════
+
+meta:
+  fonte: "CVM -- dados abertos, CIA_ABERTA/DOC/DFP/DADOS e CIA_ABERTA/DOC/ITR/DADOS"
+  campos: "docs/fontes/cvm-dfp-dicionario-dados.md; docs/fontes/cvm-itr-dicionario-dados.md"
+  enumeracoes: "docs/fontes/cvm-enumeracoes-observadas.md (OBSERVADO, 04/09/2026)"
+  periodo_medido_em: 2026-10-10
+  desenho: "docs/decisoes/2026-10-10-leitor-asof-cvm.md"
+
+arquivo:
+  recursos: [dfp, itr]
+  nome: "{recurso}_cia_aberta_{ano}.zip"
+  membro: "{recurso}_cia_aberta_{demonstrativo}_{ano}.csv"
+  codificacao: latin-1
+  separador: ";"
+
+# Os oito demonstrativos que carregam ORDEM_EXERC/ESCALA_MOEDA/MOEDA, nas duas variantes.
+# Fora de proposito: o indice ({recurso}_cia_aberta_{ano}.csv), composicao_capital e parecer
+# -- nao tem conta nem as tres colunas (cvm-dfp-dicionario-dados.md).
+demonstrativos: [BPA, BPP, DFC_MD, DFC_MI, DMPL, DRA, DRE, DVA]
+variantes: [con, ind]
+
+# Toda coluna sem a qual a chave (CD_CVM, DT_REFER, CD_CONTA) nao e unica em ULTIMO.
+# Medido em 10/10: sem DT_INI_EXERC, 32.901 de 48.907 chaves da DRE consolidada repetem
+# (trimestre e acumulado); sem COLUNA_DF, 40.080 de 40.080 na DMPL.
+colunas_de_periodo: [DT_INI_EXERC, DT_FIM_EXERC, COLUNA_DF]
+
+colunas_obrigatorias: [CD_CVM, DT_REFER, VERSAO, ORDEM_EXERC, MOEDA, ESCALA_MOEDA,
+                       DT_FIM_EXERC, CD_CONTA, VL_CONTA]
+
+enumeracoes:
+  ORDEM_EXERC:
+    status: OBSERVADO
+    valores: ["ÚLTIMO", "PENÚLTIMO"]
+    # P-51: PENULTIMO e o ano anterior JA reapresentado. Usa-lo para o ano anterior e
+    # look-ahead; o leitor le so este.
+    usado: "ÚLTIMO"
+  ESCALA_MOEDA:
+    status: OBSERVADO
+    # valor -> multiplicador para reais. Medido em 10/10: as duas no mesmo arquivo, em todo
+    # demonstrativo do ITR 2024, por emissor.
+    valores: {MIL: 1000, UNIDADE: 1}
+  MOEDA:
+    status: OBSERVADO
+    valores: [REAL]

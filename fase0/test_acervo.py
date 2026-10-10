@@ -197,3 +197,63 @@ def test_abrir_mede_o_frescor_de_recurso_com_rotina(tmp_path, monkeypatch):
     repo = _repo(tmp_path, [_ln("2026-09-20T09:15:00Z", S1)])
     V.abrir("dfp", ARQ, armazem=_armazem((S1, B1)), repo=repo)
     assert chamados == ["dfp"]
+
+
+# ── vigencias: a linha do tempo do que se tinha capturado (P-53, 10/10/2026) ──────
+
+def test_vigencias_e_a_sequencia_de_quem_ficou_no_lugar(tmp_path):
+    repo = _repo(tmp_path, [_ln("2026-09-20T09:15:00Z", S1),
+                            _ln("2026-09-21T09:15:00Z", "", "inalterado"),
+                            _ln("2026-09-27T09:15:00Z", S2, "atualizado")])
+    assert [(str(i), s) for i, s in V.vigencias("dfp", ARQ, repo)] == [
+        ("2026-09-20 09:15:00+00:00", S1), ("2026-09-27 09:15:00+00:00", S2)]
+
+
+def test_vigencias_ignora_o_deslocado_que_empata_no_instante_da_migracao(tmp_path):
+    """O registro REAL de 24/09: a migracao gravou o `atualizado` (519a0317...) e o
+    `deslocado` (00a5f1e6..., versao de 13/09) com a MESMA `dt_captura`, 12:16:32Z. A
+    linha `deslocado` diz que uma versao existiu, nao desde quando ela era a vigente:
+    contada, o `max(dt_captura <= D)` empata e pode devolver a versao velha.
+
+    Mutacao: aceite `deslocado` em `vigencias` e a ultima vigente passa a ser S1."""
+    repo = _repo(tmp_path, [_ln("2026-09-24T12:16:32Z", S2, "atualizado"),
+                            _ln("2026-09-24T12:16:32Z", S1, "deslocado")])
+    assert [s for _, s in V.vigencias("dfp", ARQ, repo)] == [S2]
+
+
+def test_vigencias_nao_inventa_data_para_a_versao_so_do_inventario(tmp_path):
+    """O inventario da carga inicial diz o que havia no disco dele, com a data da VERSAO
+    (o membro do ZIP, CV-03) e a do ENVIO -- nenhuma das duas e quando ela foi capturada.
+    Sem linha no registro, a versao nao entra na linha do tempo (fica em `versoes`)."""
+    inv = [dict(fonte="cvm", recurso="dfp", arquivo=ARQ, sha256=S1, papel="snapshot",
+                versao="20260913", dt_envio="2026-09-24T18:17:37Z")]
+    repo = _repo(tmp_path, [_ln("2026-09-27T09:15:00Z", S2, "atualizado")], inv)
+    assert [s for _, s in V.vigencias("dfp", ARQ, repo)] == [S2]
+    assert {v["sha256"] for v in V.versoes("dfp", ARQ, repo)} == {S1, S2}
+
+
+def test_vigencias_o_inalterado_sem_byte_atesta_o_canonico_do_inventario(tmp_path):
+    """Medido no registro real em 10/10: 34 arquivos (os anos congelados) so tem linhas
+    `inalterado` sem sha256 -- o byte veio da carga inicial, pelo inventario, e o portao
+    HEAD so escreve `inalterado` quando Last-Modified e tamanho batem com a versao que ja
+    se tinha. A primeira dessas linhas atesta o canonico do inventario daquele instante em
+    diante. Sem isto, 2010-2021 responderiam SemCaptura para sempre.
+
+    Mutacao: ignore o `inalterado` sem sha256 e a lista sai vazia."""
+    inv = [dict(fonte="cvm", recurso="dfp", arquivo=ARQ, sha256=S1, bytes="9",
+                papel="canonico", dt_envio="2026-09-24T18:17:37Z")]
+    repo = _repo(tmp_path, [_ln("2026-09-24T13:36:00Z", "", "inalterado"),
+                            _ln("2026-09-25T12:24:16Z", "", "inalterado")], inv)
+    assert [(str(i), s) for i, s in V.vigencias("dfp", ARQ, repo)] == [
+        ("2026-09-24 13:36:00+00:00", S1)]
+
+
+def test_vigencias_nao_atesta_canonico_de_outro_tamanho_nem_ambiguo(tmp_path):
+    """O portao compara o tamanho; um canonico de outro tamanho nao e o byte que ele
+    atestou. Dois canonicos do mesmo tamanho: nao ha como saber qual -- nenhum."""
+    um = [dict(fonte="cvm", recurso="dfp", arquivo=ARQ, sha256=S1, bytes="8",
+               papel="canonico")]
+    dois = [dict(um[0], bytes="9"), dict(um[0], sha256=S2, bytes="9")]
+    for inv in (um, dois):
+        repo = _repo(tmp_path, [_ln("2026-09-24T13:36:00Z", "", "inalterado")], inv)
+        assert V.vigencias("dfp", ARQ, repo) == []
