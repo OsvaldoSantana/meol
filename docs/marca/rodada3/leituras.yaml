@@ -2586,3 +2586,212 @@ categorias:
       situacao: pulada
       motivo: "nao_atende_pf: 'Solucao de pagamentos segura em mercados emergentes para empresas do mundo todo' (Payin, Payout, Settlement); o site do cadastro abre so sem www"
       data: 2026-10-10
+  casa_de_analise_e_educacao:
+    1:
+      marca: "Scotiabank"
+      situacao: pulada
+      motivo: "excedente_da_categoria: a marca e um banco (banco_tradicional pela precedencia do livro), categoria que ja tinha as 10 primeiras; nao visitada"
+      data: 2026-10-10
+    2:
+      marca: "Dolarame"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [44, 231, 49, 49]
+      cor_do_texto: "#222222"
+      raio_px: 24
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 24
+      densidade_lista: "barra de status; saudacao; data; avatar; cartao Patrimonio; olho; valor; retorno; Adicionar; Carteira; Atalho; Atalho; periodo; grafico; chips YTD a 5Y; cartao Destaques de hoje; seis ativos; quatro atalhos; barra de abas; busca"
+      nota: "o cadastro da APIMEC nao traz site: o dominio (dolarame.com.br) veio da busca pelo nome e a pagina confirma a marca ('Dolarame reune Consultoria, analises, carteiras'); a loja (id 6781749665) traz o mesmo dominio como vendedor. Captura 1 da loja, a primeira de interface, ja sem moldura (1242x2699). O botao e o atalho Adicionar (circulo branco sobre cartao cinza claro)"
+      data: 2026-10-10
+    3:
+      marca: "Altivuz Investimentos"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "conhe"
+      fonte: "Hanken Grotesk"
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "logotipo; menu; titulo; paragrafo; conheca os planos; cartao escuro com logotipo, titulo e texto"
+      nota: "dominio achado por teste direto (altivuz.com.br) e confirmado pelo nome na pagina; sem app na loja ('altivuz': 0). Botao preto, canto de 12 px"
+      data: 2026-10-10
+    4:
+      marca: "Capitalizo"
+      situacao: classificada
+      unidade: app
+      botao: vazado
+      raio_px: 0
+      fonte: "logotipo sem texto"
+      familia_generica: sans-serif
+      densidade_blocos: 1
+      densidade_lista: "logotipo"
+      nota: "app 'Capitalizo' (id 1310986248, achado pela busca da loja). A captura 1 da loja e a tela de abertura, branca, so com o logotipo: pelo livro e a primeira com o aparelho em pe e vira 'sem botao' (raio 0, botao vazado, matiz da area mais cromatica); as seguintes (menu lateral sobre a tela, notificacoes) seriam outra leitura. Recorte da imagem inteira, 1242x2208"
+      data: 2026-10-10
+    5:
+      marca: "Trade ao Vivo"
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      botao_texto: "QUERO CONHECER"
+      fonte: "Anek Latin"
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "logotipo; menu; titulo; dois paragrafos; laptop com logotipo; aviso de cookies; botao do aviso; balao de chat; botao QUERO CONHECER"
+      nota: "dominio por teste (tradeaovivo.com.br; o curl recebeu 403, o Chromium abriu): a pagina diz 'Trade ao Vivo'. O botao QUERO CONHECER esta sob o aviso de cookies e o computado e transparente com texto branco: pode haver imagem de fundo que a cor computada nao mostra. Registrado pela regra do instrumento (computado), com essa ressalva"
+      data: 2026-10-10
+    6:
+      marca: "Agora Investimentos"
+      situacao: pulada
+      motivo: "excedente_da_categoria: a marca e uma corretora (corretora pela precedencia do livro), categoria que ja tinha as 10 primeiras; nao visitada"
+      data: 2026-10-10
+    7:
+      marca: "MSX Invest"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Conhe"
+      fonte: "Open Sans"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "logotipo; menu; setas do carrossel; frase do carrossel; Conheca a MSX Invest; foto com tres pessoas; faixa"
+      nota: "dominio por teste (msxinvest.com.br) e confirmado pelo nome na pagina. Botao preto (#101010), canto de 10 px, sobre foto escurecida"
+      data: 2026-10-10
+    8:
+      marca: "Finclass"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [41, 392, 150, 51]
+      cor_do_texto: "#111111"
+      raio_px: 5
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 12
+      densidade_lista: "barra de status; busca; foto; titulo; autor; duracao e aulas; Assistir; Detalhes; indicadores; Continue assistindo; miniatura; barra de abas"
+      nota: "app 'Finclass - Aprenda a Investir' (id 1575280028, o site aponta para ele). Capturas 1 a 3 sao arte ou aparelho inclinado; a 4 e a primeira com o aparelho em pe. Recorte 250,508,990,2054 sobre 1242x2208; botao Assistir quase branco (#f1eff4), sobre fundo preto"
+      data: 2026-10-10
+    9:
+      marca: "BB-BI"
+      situacao: pulada
+      motivo: "excedente_da_categoria: a marca e do Banco do Brasil (banco_tradicional pela precedencia do livro), categoria que ja tinha as 10 primeiras; nao visitada"
+      data: 2026-10-10
+    10:
+      marca: "Desmistificando Research"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_caixa: [102, 527, 171, 35]
+      cor_do_texto: "#ffffff"
+      raio_px: 17
+      fonte: "Inter"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "logotipo; tema; menu; busca; cotacoes (3); cartaz com foto e titulo; CONHECER; indicadores; Ultimos relatorios; dois cartoes de relatorio"
+      nota: "o dominio (desmistificandofii.com.br) veio da busca pelo nome; os relatorios citam a razao social RCM Consultoria Financeira, e a marca do cadastro e Desmistificando Research. O botao CONHECER e parte da imagem do cartaz (nao esta no DOM): caixa e raio medidos a olho sobre a 390.png; pilula cinza escura com aro claro. O primeiro candidato testado (desmistificando.com.br) era um site de advocacia e foi descartado"
+      data: 2026-10-10
+    11:
+      marca: "Simpla Club"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Quero conhecer"
+      fonte: "Antic Didone"
+      familia_generica: serif
+      densidade_blocos: 9
+      densidade_lista: "logotipo; menu; titulo; paragrafo; Quero conhecer; avatares com texto; quatro cartazes verticais"
+      nota: "o dominio (simplainvest.com.br) veio da busca pelo nome; a pagina cita 'o Simpla Club' e traz o CNPJ do grupo (Simpla Invest Wealth LTDA), nao o do cadastro: a identidade e pela marca. Botao preto (#171717), reto"
+      data: 2026-10-10
+    12:
+      marca: "Quant Inside"
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
+      escada: "1) dominios provaveis testados (quantinside.com.br e quantinside.com: sem registro A (NXDOMAIN)); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
+      data: 2026-10-10
+    13:
+      marca: "DOUP Analise"
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
+      escada: "1) dominios provaveis testados (doupanalise.com.br: NXDOMAIN; doup.com.br e uma escola de ingles, descartada); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
+      data: 2026-10-10
+    14:
+      marca: "Ativa Investimentos"
+      situacao: pulada
+      motivo: "excedente_da_categoria: a marca e uma corretora (corretora pela precedencia do livro), categoria que ja tinha as 10 primeiras; o site tambem recusou a nuvem ('Access Denied' da Akamai, 403)"
+      data: 2026-10-10
+    15:
+      marca: "L&S Educacao"
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
+      escada: "1) dominios provaveis testados (lseducacao.com.br: NXDOMAIN); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
+      data: 2026-10-10
+    16:
+      marca: "Zero Markets Brasil"
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      raio_px: 0
+      fonte: "Plus Jakarta Sans"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "logotipo; tema; menu; etiqueta Invista Com Confianca; titulo; texto; mapa de pontos"
+      nota: "dominio por teste (zeromarketsbrasil.com.br) e confirmado pelo nome na pagina: o Brasil da corretora de CFD mostra so 'conteudos educacionais' na primeira tela, por isso fica na categoria. Sem botao na primeira tela (so a etiqueta): raio 0, botao vazado, matiz da area mais cromatica"
+      data: 2026-10-10
+    17:
+      marca: "ICL Research"
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
+      escada: "1) dominios provaveis testados (icl-research.com.br: NXDOMAIN; a busca so devolve o grupo israelense ICL); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
+      data: 2026-10-10
+    18:
+      marca: "HM Research"
+      situacao: pulada
+      motivo: "site_inacessivel: o unico dominio provavel (hmresearch.com.br) recusa a nuvem e a identidade nao se confirma sem abrir a pagina. AGUARDA DEGRAU 4"
+      escada: "1) curl: 403 em https e http; Chromium: tempo esgotado na navegacao; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.18.3.183; 3) busca pelo nome: so devolve a OHMResearch, outra casa; 4) pendente: maquina dele. Se abrir e for a marca, pode entrar antes da Invius (21)"
+      data: 2026-10-10
+    19:
+      marca: "Team BullBear"
+      situacao: pulada
+      motivo: "site_inacessivel: o dominio provavel (bullbear.com.br) e de 'Bull&Bear Consultoria Empresarial', consultoria de empresas; nada o liga a Team BullBear"
+      escada: "1) bullbear.com.br: 200, pagina de consultoria empresarial; 3) busca pelo nome: devolve um app de Londres e comunidades americanas, nenhuma brasileira; 4) so se a APIMEC ou a maquina dele tiver o endereco"
+      data: 2026-10-10
+    20:
+      marca: "ABC Brasil DTVM"
+      situacao: pulada
+      motivo: "duplicada: a marca ABC Brasil ja foi lida em bancos 114 (Banco ABC Brasil, nao_atende_pf: banco de atacado)"
+      data: 2026-10-10
+    21:
+      marca: "Invius"
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      botao_texto: "CONHE"
+      fonte: "Cinzel"
+      familia_generica: serif
+      densidade_blocos: 8
+      densidade_lista: "logotipo; menu; titulo; filete; paragrafo; CONHECA NOSSAS SOLUCOES; aviso de cookies; ACEITAR"
+      nota: "dominio por teste (invius.com.br) e confirmado pelo nome na pagina. Botao com so a borda branca (2 px), canto de 2 px; o botao ACEITAR dourado e do aviso de cookies"
+      data: 2026-10-10
+    22:
+      marca: "Vallaris Investimentos"
+      situacao: pulada
+      motivo: "excedente_da_categoria: casa_de_analise_e_educacao ja tinha as 10 primeiras (Dolarame 2, Altivuz 3, Capitalizo 4, Trade ao Vivo 5, MSX 7, Finclass 8, Desmistificando 10, Simpla 11, Zero Markets 16, Invius 21); o site foi capturado (vallarisinvestimentos.com.br, 'casa de analise independente') e fica sem classificar"
+      data: 2026-10-10
+    23:
+      marca: "Diamonds Trading System"
+      situacao: pulada
+      motivo: "excedente_da_categoria: casa_de_analise_e_educacao ja tinha as 10 primeiras quando esta marca apareceu; o site foi capturado (diamonds.com.br) e fica sem classificar"
+      data: 2026-10-10
+    28:
+      marca: "Suno"
+      situacao: pulada
+      motivo: "site_inacessivel: verificacao da Cloudflare ('Confirme que e humano') no suno.com.br para o IP da nuvem; o desafio nao se resolve nem se contorna. Depois das 10 primeiras, entao so conta se alguma das de antes cair. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: pagina de verificacao com caixa de selecao; 4) pendente: maquina dele"
+      data: 2026-10-10
+    34:
+      marca: "Empiricus Research"
+      situacao: pulada
+      motivo: "excedente_da_categoria: casa_de_analise_e_educacao ja tinha as 10 primeiras quando esta marca apareceu; o site (empiricus.com.br) e o app 'Empiricus+' (id 1189255812) foram capturados e ficam sem classificar"
+      data: 2026-10-10
