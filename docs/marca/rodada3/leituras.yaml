@@ -1962,3 +1962,627 @@ categorias:
       densidade_lista: "barra de status; saudacao; doze linhas do menu (Perfil, Dispositivos Conectados, Dispositivos Bloqueados, Alterar senha, Alterar PIN, Configuracoes, Imposto de renda, Me ajuda, Multi acesso, Meus Limites, Solicitar conta escrow, Quantidade de aprovadores)"
       nota: "captura 4 da loja, a primeira de interface DE FRENTE (1, 2 e 3 inclinadas). Recorte 92,922,1153,2697 sobre 1242x2697. A tela e um menu de configuracoes, e o menu (multi acesso, conta escrow, quantidade de aprovadores) sugere conta de empresa; o site diz 'conta de pagamento' sem dizer para quem, entao nao ha evidencia para nao_atende_pf. A cor cromatica (verde-limao do texto) cobre 0,05% da tela (limitacao 8 da R3). Marca do app (Humu) difere da do site (Inovanti)"
       data: 2026-10-10
+    32:
+      marca: "SBXPay (Superbid)"
+      situacao: pulada
+      motivo: "fora_do_livro: o site do cadastro e o marketplace de leiloes online Superbid Exchange; sem conta nem carteira para o usuario"
+      data: 2026-10-10
+    33:
+      marca: "NuPay for Business (Nubank)"
+      situacao: pulada
+      motivo: "excedente_da_categoria: o site do cadastro e nubank.com.br, a marca Nubank, que o livro poe em banco_digital, categoria que ja tinha as 10 primeiras quando esta apareceu; nao foi visitada"
+      data: 2026-10-10
+    34:
+      marca: "Caju"
+      situacao: pulada
+      motivo: "nao_atende_pf: beneficios e premiacoes que a empresa contrata para os colaboradores ('Contrate agora', 'transforme a experiencia dos seus colaboradores')"
+      data: 2026-10-10
+    36:
+      marca: "Conta Pronta"
+      situacao: pulada
+      motivo: "nao_atende_pf: contas para segmentos de empresa (gestao de comissoes no setor imobiliario, de reembolso na saude)"
+      data: 2026-10-10
+    37:
+      marca: "Worldpay"
+      situacao: pulada
+      motivo: "nao_atende_pf: adquirencia para comerciantes ('abre um mundo de oportunidades para cada comerciante')"
+      data: 2026-10-10
+    38:
+      marca: "PagHiper"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Comece a usar"
+      fonte: "Montserrat"
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "logotipo; menu; foto com cartoes flutuantes; Pix na PagHiper; titulo; Comece a usar; WhatsApp; aviso de cookies"
+      nota: "o titulo da pagina diz 'Pix e Boleto para Pessoa Fisica e Empresa'; e gateway de cobranca para vendedores, nao carteira: o caso mais duvidoso da categoria. Sem app na loja (a busca por 'paghiper' devolve 0). Botao verde (#24d17a), pilula, sob o aviso de cookies"
+      data: 2026-10-10
+    39:
+      marca: "Maree"
+      situacao: classificada
+      unidade: app
+      botao: vazado
+      raio_px: 0
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 2
+      densidade_lista: "barra de status; logotipo"
+      nota: "app 'Maree: Conta e Credito' (id 6756925132, achado pela busca da loja; o site mostra a conta digital). Captura 1 da loja, a primeira com o aparelho em pe: e a tela de abertura, laranja, sem botao (sem botao: raio 0, botao vazado, matiz da area mais cromatica, #fb5e01). A captura 2 tem o botao 'Continuar com Shopee', mas o procedimento manda a primeira. Recorte 211,739,1024,2208 sobre 1242x2208"
+      data: 2026-10-10
+    40:
+      marca: "CloudWalk"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'The transaction layer is alive': infraestrutura de transacoes para vendedores, em ingles"
+      data: 2026-10-10
+    41:
+      marca: "AstroPay"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [237, 66, 98, 32]
+      cor_do_texto: "#06302b"
+      raio_px: 16
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "barra de status; ilha; avatar LB; Ganhe 5 USD; olho; Saldo total e valor; cartao USD; cartao BRL; Adicionar dinheiro; Enviar; Receber; Converter; faixa de ganho no mes; cartao Peca seu cartao"
+      nota: "o cadastro (astropay.com/PT, maiuscula) da 404; o site abre em /pt (lowercase). App 'AstroPay - Conta Global' (id 1128476912, achado pela busca da loja). Captura 1 da loja, a primeira com o aparelho em pe. Recorte 105,940,1140,2699 sobre 1242x2699; botao 'Ganhe 5 USD' agua (#46e8d4), pilula. Carteira global para quem envia dinheiro ao exterior"
+      data: 2026-10-10
+    42:
+      marca: "Swile"
+      situacao: pulada
+      motivo: "nao_atende_pf: cartao multibeneficio 'para empresas'"
+      data: 2026-10-10
+    43:
+      marca: "Attrus"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'One platform for your global financial operation': tesouraria multimoeda por API, em ingles"
+      data: 2026-10-10
+    44:
+      marca: "Pay2All (Nuvei)"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'The infrastructure for every payment', adquirencia para empresas, em ingles"
+      data: 2026-10-10
+    45:
+      marca: "Smart Solutions Group (SSG)"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'A perfeita integracao para sua empresa': processo integrado de solucoes para o cliente corporativo"
+      data: 2026-10-10
+    46:
+      marca: "Friday Instituicao de Pagamentos"
+      situacao: pulada
+      motivo: "nao_atende_pf: iniciacao de transacao de pagamento; paginas Quem somos, Servicos e Ouvidoria, sem oferta ao consumidor"
+      data: 2026-10-10
+    47:
+      marca: "Maps Instituicao de Pagamentos"
+      situacao: pulada
+      motivo: "nao_atende_pf: MAPS Pay oferece 'solucoes financeiras para transformar a forma como' as empresas transacionam ('Conectando negocios inteligentes ao futuro das transacoes financeiras')"
+      escada: "1) Chromium: o cadastro (www.mapsip.com.br) deu net::ERR_CERT_COMMON_NAME_INVALID; curl: cert em https www, 200 em https, http www e http; o dominio sem www abre e redireciona para mapspay.com.br (lido)"
+      data: 2026-10-10
+    48:
+      marca: "Bolt Card"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.21.20.94; 4) pendente: maquina dele"
+      data: 2026-10-10
+    49:
+      marca: "MW Pay"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infraestrutura de pagamentos via API, com participacao direta no Pix'"
+      data: 2026-10-10
+    50:
+      marca: "Cactvs"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [7, 555, 375, 46]
+      cor_do_texto: "#ffffff"
+      raio_px: 23
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 5
+      densidade_lista: "barra de status; logotipo; Criar conta; Acessar conta; faixa roxa de baixo"
+      nota: "app 'Cactvs' (id 1545439564, o site aponta para ele). Captura 1 da loja, a tela de boas-vindas inteira, sem aparelho (1242x2692). Botao Criar conta roxo escuro, pilula, sobre verde claro. O site oferece 'conta digital gratis' e microcredito a microempreendedores"
+      data: 2026-10-10
+    51:
+      marca: "Flash"
+      situacao: pulada
+      motivo: "nao_atende_pf: multibeneficios, pessoas e despesas para a gestao da empresa"
+      data: 2026-10-10
+    52:
+      marca: "99Pay"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Ponto de verificacao de seguranca da Vercel' (HTTP 429, 'Falha ao verificar seu navegador') para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 429 'Vercel Security Checkpoint'; curl https www: 429, https: 429, http www: 429, http: 429; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 76.76.21.21; 4) pendente: maquina dele"
+      data: 2026-10-10
+    53:
+      marca: "Belvo"
+      situacao: pulada
+      motivo: "nao_atende_pf: plataforma de dados e pagamentos de open finance para desenvolvedores, em ingles"
+      data: 2026-10-10
+    54:
+      marca: "Calcard"
+      situacao: pulada
+      motivo: "fora_do_livro: portal de cartao: 'Como pagar sua fatura', 2a via de boleto e clube de vantagens; sem conta nem carteira"
+      data: 2026-10-10
+    55:
+      marca: "Banco Senff"
+      situacao: pulada
+      motivo: "excedente_da_categoria: o site do cadastro e o do Banco Senff (senff.com.br, 'Para voce' e 'Para empresas'): banco, e banco_tradicional e banco_digital ja tinham as 10 primeiras quando esta apareceu; nao foi visitada"
+      data: 2026-10-10
+    56:
+      marca: "Pluggy"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infraestrutura de Open Finance' para empresas"
+      data: 2026-10-10
+    57:
+      marca: "Lend"
+      situacao: pulada
+      motivo: "nao_atende_pf: o endereco do cadastro (lend.tech/PT) e erro 404; a pagina que carrega fala em 'Inteligencia para decidir', para empresas"
+      data: 2026-10-10
+    58:
+      marca: "EBANX"
+      situacao: pulada
+      motivo: "nao_atende_pf: o endereco do cadastro (ebanx.com/PT-BR/) e erro 404; o portal lista Pay-in, Payout e B2B Payments, para empresas"
+      data: 2026-10-10
+    59:
+      marca: "Eagle (Grupo Futuro)"
+      situacao: pulada
+      motivo: "nao_atende_pf: portal do correspondente bancario do Grupo Futuro ('Seja nosso parceiro')"
+      data: 2026-10-10
+    60:
+      marca: "Stripe"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infraestrutura financeira para aumentar as suas receitas', para empresas"
+      data: 2026-10-10
+    61:
+      marca: "Pagme"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infratech financeira que transforma negocios': incorpora um servico financeiro ao produto da empresa"
+      data: 2026-10-10
+    62:
+      marca: "Localpayment"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'One API. Endless solutions': pagamentos transfronteiricos por API, em ingles"
+      data: 2026-10-10
+    63:
+      marca: "Woovi"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Conta PJ, API Pix e BaaS'"
+      data: 2026-10-10
+    64:
+      marca: "Wise Brasil"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [16, 199, 89, 31]
+      cor_do_texto: "#163300"
+      raio_px: 15
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 13
+      densidade_lista: "barra de status; avatar; olho; Saldo total e valor; grafico; Enviar; Adicionar; Solicitar; cartao BRL; cartao USD; Transacoes; Ver todas; item Ana Fernandes"
+      nota: "o cadastro (wise.com/BR/, maiuscula) da 404; o site abre em /br/ (lowercase). App 'Wise: Conta internacional' (id 612261027, o site aponta para ele). Captura 1 da loja, a primeira com o aparelho em pe. Recorte 225,1011,1015,2208 sobre 1242x2208; botao Enviar verde limao (#9fe870), pilula"
+      data: 2026-10-10
+    65:
+      marca: "NSTech IP (efrete)"
+      situacao: pulada
+      motivo: "nao_atende_pf: gestao de pagamento de frete para transportadoras"
+      data: 2026-10-10
+    66:
+      marca: "RendimentoPay"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 191.235.228.32; 4) pendente: maquina dele"
+      data: 2026-10-10
+    67:
+      marca: "Fits (Fitbank)"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Acelere a digitalizacao de produtos e servicos financeiros': infraestrutura para empresas"
+      data: 2026-10-10
+    68:
+      marca: "Roadcard"
+      situacao: pulada
+      motivo: "nao_atende_pf: pagamento de frete, vale-pedagio e gestao de frotas"
+      data: 2026-10-10
+    69:
+      marca: "Dock"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Spread financial power': infraestrutura de contas e cartoes para empresas, em ingles"
+      data: 2026-10-10
+    71:
+      marca: "BS2 Payments"
+      situacao: pulada
+      motivo: "nao_atende_pf: a marca BS2 e a do Banco BS2, cujo app da loja e o 'Banco BS2 Empresas' (ver bancos 103); o cadastro traz so um link de WhatsApp"
+      data: 2026-10-10
+    72:
+      marca: "PayPal"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [293, 480, 81, 49]
+      cor_do_texto: "#ffffff"
+      raio_px: 24
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 10
+      densidade_lista: "barra de status; voltar; titulo Pagar; avatar; nome; valor R$ 80 e BRL; campo de mensagem; Continuar; teclado numerico; microfone"
+      nota: "app 'PayPal' (id 283646709, achado pela busca da loja). Captura 2 da loja, a primeira com o aparelho em pe (1 e arte). Recorte 152,559,1091,2594 sobre 1242x2688; botao Continuar azul marinho, pilula, ao lado do campo de mensagem. O site do cadastro (paypal.com/br/home) abre com um aviso para trocar para o site dos EUA"
+      data: 2026-10-10
+    74:
+      marca: "Afinz"
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [17, 529, 358, 69]
+      cor_do_texto: "#ffffff"
+      raio_px: 34
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "voltar; titulo Pagamento de fatura; Boleto para pagamento; valor; vencimento; aviso do prazo; codigo de barras; Copiar codigo de barras; Baixar PDF; Compartilhar; nota"
+      nota: "app 'Afinz' (id 1416167782, o site aponta para ele, do mesmo grupo: vendedor Sorocred). Captura 4 da loja, a primeira com o aparelho em pe (1 a 3 inclinadas). Recorte 238,700,1004,2208 sobre 1242x2208; botao Copiar codigo de barras agua (#00c4cc), pilula. O site oferece cartao Afinz Visa 'Para voce' e 'Para sua empresa'"
+      data: 2026-10-10
+    76:
+      marca: "PagSeguro"
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro aponta para a ouvidoria (pagseguro.vc) e o dominio da marca e negado pelo proxy da nuvem ('Blocked by egress policy', 403), nao pelo site. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Blocked by egress policy' do proxy da nuvem em pagseguro.com.br/404; curl https www: 200, https: 200, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.18.2.49; 4) pendente: maquina dele"
+      data: 2026-10-10
+    77:
+      marca: "Pomelo"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Tecnologia para o seu negocio de cartoes': emissao como servico para empresas"
+      data: 2026-10-10
+    78:
+      marca: "Boku"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Local Payment Methods Platform for Global Growth', para empresas, em ingles"
+      data: 2026-10-10
+    79:
+      marca: "PinPag"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Solucao completa em meio eletronico de pagamento': adquirencia para estabelecimentos"
+      data: 2026-10-10
+    81:
+      marca: "Credishop"
+      situacao: classificada
+      unidade: app
+      botao: vazado
+      botao_caixa: [306, 560, 63, 18]
+      cor_do_texto: "#d62b2b"
+      raio_px: 0
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "ilha; nome e empresa; ajuda; sino; Meus limites e saldos; cartao A vista; cartao seguinte; indicadores; cartao Fatura aberta; Ultimas transacoes; Ver todas; tres itens da lista"
+      nota: "app 'Meu Novo Credishop' (id 6714449954, o site aponta para ele). Captura 4 da loja, a primeira com o aparelho em pe (1 e a abertura, 2 e 3 inclinadas). Recorte 190,925,1052,2699 sobre 1242x2699. Nenhum botao com caixa: o unico controle de texto e o link vermelho Ver todas (botao vazado). Cartao de loja (Credi-Shop S.A. Administradora de Cartoes)"
+      data: 2026-10-10
+    82:
+      marca: "PagueVeloz"
+      situacao: pulada
+      motivo: "site_inacessivel: 403 do servidor, sem corpo, para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 sem pagina; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 45.223.20.245; 4) pendente: maquina dele"
+      data: 2026-10-10
+    83:
+      marca: "Foris GFS (Crypto.com)"
+      situacao: pulada
+      motivo: "fora_do_livro: bolsa e carteira de criptoativos ('Buy, Sell & Trade Crypto'): atividade sem categoria no livro; o endereco do cadastro (crypto.com/BR) redireciona para o portal global"
+      data: 2026-10-10
+    84:
+      marca: "iFood Pago (Zoop)"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Servicos financeiros com a sua marca': infraestrutura para empresas"
+      data: 2026-10-10
+    85:
+      marca: "Blu"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Comunidade Blu': conteudos e primeiros passos para o negocio do lojista"
+      data: 2026-10-10
+    86:
+      marca: "Mr Pay"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Solucoes de pagamento com tecnologia de ponta': maquininhas e portal do lojista"
+      data: 2026-10-10
+    87:
+      marca: "Nu Pagamentos"
+      situacao: pulada
+      motivo: "duplicada: a marca Nubank ja foi lida em pagamentos 33 (excedente de banco_digital)"
+      data: 2026-10-10
+    88:
+      marca: "Redecard (Rede)"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.48.10.197; 4) pendente: maquina dele"
+      data: 2026-10-10
+    90:
+      marca: "Trio"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Conta Corporativa para o time financeiro'"
+      data: 2026-10-10
+    91:
+      marca: "Clara"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Gestao financeira inteligente para empresas no Brasil'; o endereco do cadastro (clara.com/pt-br) da 404 em minuscula"
+      data: 2026-10-10
+    92:
+      marca: "Asaas"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Conta digital PJ completa e sem mensalidade'"
+      data: 2026-10-10
+    93:
+      marca: "Zro"
+      situacao: pulada
+      motivo: "nao_atende_pf: o endereco do cadastro (zrobank.com) redireciona para zro.global, infraestrutura de contas e pagamentos globais"
+      data: 2026-10-10
+    94:
+      marca: "Pinbank"
+      situacao: pulada
+      motivo: "site_inacessivel: verificacao de seguranca da Cloudflare ('Um momento...') para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: pagina de verificacao da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.20.44.49; 4) pendente: maquina dele"
+      data: 2026-10-10
+    95:
+      marca: "Muevy"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Aumente a conversao dos seus recebimentos com Pix': links de cobranca para empresas"
+      data: 2026-10-10
+    97:
+      marca: "Lina"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infraestrutura completa para Open Finance e pagamentos Pix', para empresas"
+      data: 2026-10-10
+    98:
+      marca: "WxPay"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Solucoes Financeiras Inteligentes' para o comercio"
+      data: 2026-10-10
+    99:
+      marca: "Bullla"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Credito com beneficios' contratado pelas empresas para os colaboradores ('Para todos os colaboradores')"
+      data: 2026-10-10
+    100:
+      marca: "MagaluPay"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Acessar"
+      fonte: "Magalu UI Variable"
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "logotipo; menu; Acessar; foto circular; tres quadrados; titulo; paragrafo; aviso de cookies"
+      nota: "sem app proprio: o app da loja e o 'Magalupay Empresas' (PJ) e o 'Magalu: compras com descontos', da plataforma. O site mostra Carteira digital e Conta digital para empresas. Botao Acessar azul, sobre fundo do cabecalho, sem fundo computado (medido nos pixels)"
+      data: 2026-10-10
+    101:
+      marca: "Mercado Bitcoin (MB Pay)"
+      situacao: pulada
+      motivo: "fora_do_livro: carteira e pagamentos em criptoativos; atividade sem categoria no livro"
+      data: 2026-10-10
+    102:
+      marca: "Efi"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Conta digital para empresas'"
+      data: 2026-10-10
+    103:
+      marca: "Claro Pay"
+      situacao: pulada
+      motivo: "nao_atende_pf: o aviso da primeira tela diz que 'as contas Claro pay foram encerradas em 17/04/2026': nao ha mais oferta"
+      data: 2026-10-10
+    104:
+      marca: "Servnet (Valecard)"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Attention Required!' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.66.146.131; 4) pendente: maquina dele"
+      data: 2026-10-10
+    105:
+      marca: "Ewally"
+      situacao: pulada
+      motivo: "nao_atende_pf: infraestrutura de pagamentos para empresas"
+      data: 2026-10-10
+    106:
+      marca: "Checkout.com"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Servicos de pagamento para sua performance', para comerciantes"
+      data: 2026-10-10
+    107:
+      marca: "Adyen"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Fintech platform for enterprises', em ingles"
+      data: 2026-10-10
+    108:
+      marca: "Unlimit Brasil"
+      situacao: pulada
+      motivo: "sem_marca: o dominio do cadastro (unlimit.com.br) e de uma consultoria de TI ('Unlimit Consultoria: Solucoes em Agilidade, ITSM e Governanca'), nao da instituicao de pagamento"
+      data: 2026-10-10
+    109:
+      marca: "V3 (Onnibank)"
+      situacao: pulada
+      motivo: "site_inacessivel: o endereco do cadastro redireciona para ringgo.com.br, que responde 'Attention Required!' da Cloudflare. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: redirecionamento para ringgo.com.br e 'Attention Required!' da Cloudflare; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.66.144.161; 4) pendente: maquina dele"
+      data: 2026-10-10
+    110:
+      marca: "OneKey Payments"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Online Payment Gateway', em ingles"
+      data: 2026-10-10
+    111:
+      marca: "Stone"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'O Banco pra Quem Empreende'"
+      data: 2026-10-10
+    112:
+      marca: "NG.CASH"
+      situacao: pulada
+      motivo: "excedente_da_categoria: pagamentos ja tinha as 10 primeiras (Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, Wise 64, PayPal 72, Afinz 74, Credishop 81, MagaluPay 100) quando esta marca apareceu; o site (ng.cash) e o app (id 1480105326, capturado) sao de conta digital para o consumidor, mas a marca nao foi classificada"
+      data: 2026-10-10
+    113:
+      marca: "PicPay Instituicao de Pagamento"
+      situacao: pulada
+      motivo: "duplicada: a marca PicPay ja foi classificada em bancos 102 (PicPay Bank), com categoria pagamentos pela precedencia do livro"
+      data: 2026-10-10
+    114:
+      marca: "Vox (Cartao Tenda)"
+      situacao: pulada
+      motivo: "excedente_da_categoria: pagamentos ja tinha as 10 primeiras (Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, Wise 64, PayPal 72, Afinz 74, Credishop 81, MagaluPay 100) quando esta marca apareceu; o site do cadastro (voxcred.com.br) redireciona para cartaotenda.com.br, cartao de loja ('Peca ja o seu!'); nao foi classificada"
+      data: 2026-10-10
+    115:
+      marca: "Edenred Pay"
+      situacao: pulada
+      motivo: "nao_atende_pf: solucoes de beneficios e pagamentos para empresas"
+      data: 2026-10-10
+    116:
+      marca: "pay.com.br"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Sua operacao financeira. Uma unica PAY': conta digital, cartoes corporativos e gestao financeira para empresas"
+      data: 2026-10-10
+    117:
+      marca: "Finnet"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'O futuro da inteligencia financeira com IA': servicos para tesourarias de empresas"
+      data: 2026-10-10
+    118:
+      marca: "Belluno"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Attention Required!' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.67.160.149; 4) pendente: maquina dele"
+      data: 2026-10-10
+    119:
+      marca: "F&F (FF Digital)"
+      situacao: pulada
+      motivo: "fora_do_livro: a primeira tela e a de planos de saude (FF Saude): atividade sem categoria no livro"
+      data: 2026-10-10
+    120:
+      marca: "Pagaleve"
+      situacao: pulada
+      motivo: "excedente_da_categoria: pagamentos ja tinha as 10 primeiras (Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, Wise 64, PayPal 72, Afinz 74, Credishop 81, MagaluPay 100) quando esta marca apareceu; parcelamento via Pix para o consumidor, com botao 'Baixe o app' (preto, pilula); nao foi classificada"
+      data: 2026-10-10
+    121:
+      marca: "Zimpler"
+      situacao: pulada
+      motivo: "nao_atende_pf: o endereco do cadastro (zimpler.com/BR/) da 404; o portal e de pagamentos por transferencia para comerciantes, em ingles"
+      data: 2026-10-10
+    122:
+      marca: "BEES"
+      situacao: pulada
+      motivo: "nao_atende_pf: BEES Fintech, servicos financeiros para a rede de varejistas da AB InBev"
+      data: 2026-10-10
+    123:
+      marca: "Transfeera"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Plataforma para automatizar suas rotinas de pagamentos', para empresas"
+      data: 2026-10-10
+    124:
+      marca: "dLocal"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Payment Infrastructure to Scale in Emerging Markets', em ingles"
+      data: 2026-10-10
+    125:
+      marca: "WE Pay Out (WEpayments)"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Solucoes de Pagamento Cross-Border', para empresas"
+      data: 2026-10-10
+    126:
+      marca: "Mercado Pago"
+      situacao: pulada
+      motivo: "site_inacessivel: 403 do servidor, sem corpo, para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 sem pagina; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 3.171.38.55; 4) pendente: maquina dele"
+      data: 2026-10-10
+    127:
+      marca: "Bankly"
+      situacao: pulada
+      motivo: "nao_atende_pf: banking as a service ('Bankly') para empresas"
+      data: 2026-10-10
+    128:
+      marca: "Prototype (Treeal)"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infraestrutura Financeira Completa para o seu Negocio'"
+      data: 2026-10-10
+    129:
+      marca: "Kiwify"
+      situacao: pulada
+      motivo: "nao_atende_pf: plataforma de vendas e checkout para criadores de produtos digitais"
+      data: 2026-10-10
+    131:
+      marca: "Neon Pagamentos"
+      situacao: pulada
+      motivo: "duplicada: a marca Neon ja foi classificada em corretora 63 (cadastro da Magliano, app id 1127996388), na categoria banco_digital"
+      data: 2026-10-10
+    132:
+      marca: "Hinova Pay"
+      situacao: pulada
+      motivo: "nao_atende_pf: instituicao de pagamento autorizada pelo Bacen especializada em solucoes para associacoes e empresas do setor automotivo"
+      data: 2026-10-10
+    133:
+      marca: "A27"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'A27 - Home': instituicao de pagamentos para empresas e parceiros"
+      data: 2026-10-10
+    134:
+      marca: "Celcoin"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Infraestrutura financeira: Banking, Credit, Payments, Regulatory', para empresas"
+      data: 2026-10-10
+    135:
+      marca: "Swap"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Swap Financial', infraestrutura de pagamentos para empresas"
+      data: 2026-10-10
+    136:
+      marca: "Payface"
+      situacao: pulada
+      motivo: "nao_atende_pf: a primeira tela diz 'Redirecionando para Fortface'; solucao de reconhecimento facial para pagamentos de empresas"
+      data: 2026-10-10
+    35:
+      marca: "Cooper Card"
+      situacao: pulada
+      motivo: "site_inacessivel: conexao reiniciada em https e 503 em http para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: net::ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 177.72.253.5; 4) pendente: maquina dele"
+      data: 2026-10-10
+    70:
+      marca: "Quero-Quero Verdecard"
+      situacao: pulada
+      motivo: "site_inacessivel: 503 em http e conexao encerrada em https para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 503 sem pagina; curl https www: erro:RemoteDisconnected, https: erro:RemoteDisconnected, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 206.41.72.3; 4) pendente: maquina dele"
+      data: 2026-10-10
+    73:
+      marca: "SRM Bank (Trusthub)"
+      situacao: pulada
+      motivo: "site_inacessivel: tempo esgotado em todas as variantes, no curl e no Chromium, com o DNS resolvendo. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: net::ERR_TIMED_OUT; curl https www: timeout, https: timeout, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 189.125.100.35; 4) pendente: maquina dele"
+      data: 2026-10-10
+    75:
+      marca: "Quanto Network"
+      situacao: pulada
+      motivo: "site_inacessivel: o dominio do cadastro (quan.to) nao tem registro A no DNS"
+      escada: "1) Chromium: net::ERR_NAME_NOT_RESOLVED; curl: 502 do proxy e 'No address associated'; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: Status 0 (sem registro A); 3) dns.google: Status 0 (sem registro A)"
+      data: 2026-10-10
+    80:
+      marca: "Protege Cash"
+      situacao: pulada
+      motivo: "site_inacessivel: o certificado do dominio do cadastro (paycashprotege.com.br) esta vencido; o navegador recusa e nao se desliga a verificacao do certificado"
+      escada: "1) Chromium: net::ERR_CERT_DATE_INVALID em https; curl: cert em https www, https, http www e http; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 179.191.177.33"
+      data: 2026-10-10
+    89:
+      marca: "BSN Pagamentos"
+      situacao: pulada
+      motivo: "site_inacessivel: o dominio do cadastro (bsndigitalcom.br) nao existe no DNS (NXDOMAIN)"
+      escada: "1) Chromium: net::ERR_TUNNEL_CONNECTION_FAILED; curl: 502 do proxy e DNS?; 2) archive.org/wayback/available: indisponivel (HTTPError); 3) dns.google: Status 3 (sem registro A)"
+      data: 2026-10-10
+    96:
+      marca: "Cooper Beneficios"
+      situacao: pulada
+      motivo: "site_inacessivel: mesmo dominio de pagamentos 35: conexao reiniciada em https e 503 em http para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: net::ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 177.72.253.5; 4) pendente: maquina dele"
+      data: 2026-10-10
+    130:
+      marca: "Nvio Brasil (Bitso)"
+      situacao: pulada
+      motivo: "fora_do_livro: bolsa e app de criptoativos ('App de investimento em cripto'): atividade sem categoria no livro, como Crypto.com (83) e Mercado Bitcoin (101)"
+      data: 2026-10-10
+    31:
+      marca: "Beeteller"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Solucao de pagamentos segura em mercados emergentes para empresas do mundo todo' (Payin, Payout, Settlement); o site do cadastro abre so sem www"
+      data: 2026-10-10

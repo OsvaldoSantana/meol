@@ -117,3 +117,15 @@ def test_app_classificado_nao_exige_o_site_aberto(tmp_path, monkeypatch):
     # na unidade site, a prova continua sendo o medidas.json
     with pytest.raises(ValueError, match=r"bancos-87.*medidas\.json"):
         L.linha("bancos", 87, {**leitura, "unidade": "site"}, {"cnpj": "1"}, {})
+
+
+def test_cor_do_texto_ignora_o_suavizado_quando_o_miolo_da_letra_e_pouco():
+    """10/10/2026, Credishop: 'Ver todas' vermelho em uma caixa de 63x18 px com ruido. A moda dos
+    pixels fora do fundo era o rosa palido do suavizado (#f9d5d9, matiz neutro); o texto, que o
+    livro manda ler, e o vermelho do miolo, que tem poucos pixels e distancia maior do fundo."""
+    fundo, rosa, vermelho = (255, 255, 255), (249, 213, 217), (214, 43, 43)
+    suave = (246, 211, 209)
+    px = [fundo] * 700 + [rosa] * 120 + [suave] * 60 + [vermelho] * 25 + [(200, 60, 60)] * 10
+    cor = L.cor_do_texto_por_pixels(px)
+    r, g, b = (int(cor[i:i + 2], 16) for i in (1, 3, 5))
+    assert r > 190 and g < 80 and b < 80, cor

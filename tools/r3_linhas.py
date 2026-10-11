@@ -72,12 +72,25 @@ def destaque_do_botao(b: dict[str, Any], botao: str,
 
 def cor_do_texto_por_pixels(px: list[tuple[int, int, int]]) -> str:
     """Botao VAZADO sem borda numa captura de app (so a imagem existe): a cor que o livro manda
-    ler e a do texto ('so a borda ou o texto tiverem cor'). E a moda dos pixels que NAO sao o
-    fundo da caixa (moda da caixa), tirando os de distancia < 60 (soma dos canais) do fundo,
-    que sao o suavizado das bordas das letras. Caixa toda de fundo: devolve o fundo."""
+    ler e a do texto ('so a borda ou o texto tiverem cor'). O fundo e a moda da caixa; o texto,
+    os pixels mais longe dele (a partir de 3/4 da maior distancia, soma dos canais, e nunca menos
+    que 60). A moda dos pixels 'que nao sao o fundo' (a primeira versao) caia no suavizado das
+    bordas das letras: no Credishop (10/10/2026) devolveu um rosa palido (#f9d5d9, neutro) para um
+    texto vermelho, porque a imagem ampliada tem ruido e o miolo da letra tem poucos pixels.
+    Agrupa em faixas de 32 niveis por canal e devolve a media do grupo mais frequente. Caixa
+    toda de fundo: devolve o fundo."""
     fundo = Counter(px).most_common(1)[0][0]
-    outros = [p for p in px if sum(abs(a - b) for a, b in zip(p, fundo)) >= 60]
-    return C.rgb_hex(Counter(outros).most_common(1)[0][0] if outros else fundo)
+    dist = [(sum(abs(a - b) for a, b in zip(p, fundo)), p) for p in px]
+    maior = max(d for d, _ in dist)
+    if maior < 60:
+        return C.rgb_hex(fundo)
+    corte = max(60, 0.75 * maior)
+    fortes = [p for d, p in dist if d >= corte]
+    faixa = Counter(tuple(c >> 5 for c in p) for p in fortes).most_common(1)[0][0]
+    grupo = [p for p in fortes if tuple(c >> 5 for c in p) == faixa]
+    return C.rgb_hex((round(sum(p[0] for p in grupo) / len(grupo)),
+                      round(sum(p[1] for p in grupo) / len(grupo)),
+                      round(sum(p[2] for p in grupo) / len(grupo))))
 
 
 def preenchimento_por_pixels(px: list[tuple[int, int, int]], cor_do_texto: str | None) -> str:
