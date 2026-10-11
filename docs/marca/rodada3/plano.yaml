@@ -5,8 +5,13 @@
 # categoria em docs/marca/rodada3/sorteio-<categoria>.csv.
 # A classificacao visual segue o livro de codigos versao 2
 # (docs/marca/teste-de-marca/codigos-visuais.yaml: ad-a, ae-a, af-a, 02/10/2026).
-versao: 1
-data: 2026-10-02
+versao: 2
+data: 2026-10-10
+# v1 (02/10/2026): as quatro categorias da CVM. v2 (10/10/2026): ACRESCENTA tres universos do
+# Banco Central e da APIMEC (bancos, pagamentos, casa de analise e educacao) e declara por que
+# robo, consolidador e planejador nao tem universo. Nao muda a semente, o livro (v3), nem as
+# quatro categorias da v1: tools/r3_universo.py --ordem confere que os quatro sorteios de 02/10
+# continuam a permutacao da semente. A v2 foi empurrada ANTES da primeira visita aos tres.
 
 # Uma semente para todas as categorias. A ordem base, antes da permutacao, e o CNPJ crescente:
 # quem baixar os mesmos arquivos (o sha256 abaixo) chega a mesma ordem.
@@ -39,8 +44,30 @@ fontes:
     arquivo_local: data/r3/cvm/registro_fundo_classe.zip
     sha256: eae256cd9c5ffd0bf8b0498ac7b602e2aa27d19320696f2fcb4fd08029d0ad14
     baixado_em: 2026-10-02
+  # 10/10/2026 (v2). Servico OData "Instituicoes_em_funcionamento" do Banco Central (dados
+  # abertos, base analitica do Unicad), baixado inteiro por tools/r3_baixar_bcb.py, que pagina
+  # (o servico responde 500 a `$skip=0`; a primeira pagina vai sem $skip) e imprime o sha256.
+  bcb_sedes_bancos:
+    url: "https://olinda.bcb.gov.br/olinda/servico/Instituicoes_em_funcionamento/versao/v1/odata/SedesBancoComMultCE"
+    arquivo_local: data/r3/bcb/sedes_banco_com_mult_ce.json
+    sha256: b9f56a4c37b43f0b1f7d9003d589c384f0fc5b68b10944c369d5b0580ba779ca
+    baixado_em: 2026-10-10
+  bcb_sedes_sociedades:
+    url: "https://olinda.bcb.gov.br/olinda/servico/Instituicoes_em_funcionamento/versao/v1/odata/SedesSociedades"
+    arquivo_local: data/r3/bcb/sedes_sociedades.json
+    sha256: 9b267af422db56f43fdc7b4d64e09b432dca7581d13adb1b193e86eee1d3cd5d
+    baixado_em: 2026-10-10
+  # APIMEC Brasil: a entidade credenciadora de analistas de valores mobiliarios que a CVM
+  # nomeia (Resolucao CVM 20; pagina da CVM "Analistas de Valores Mobiliarios"). A pagina
+  # publica da APIMEC monta a tabela a partir deste .xlsx.
+  apimec_pj:
+    url: "https://www.apimecbrasil.com.br/wp-content/uploads/sites/1125/2026/10/analistas-de-valores-mobiliarios-pessoa-juridica.xlsx"
+    arquivo_local: data/r3/apimec/analistas_pj.xlsx
+    sha256: d6c81fa8b66dc8ea857da567fc61ac077ac06f38f752979a842db26c4b9cd8bf
+    baixado_em: 2026-10-10
 
-# Os universos com lista oficial. Todos: PJ "EM FUNCIONAMENTO NORMAL", um CNPJ uma vez, e SO
+# Os universos com lista oficial. Os da CVM (consultoria_cvm, assessor, corretora,
+# gestora_e_private): PJ "EM FUNCIONAMENTO NORMAL", um CNPJ uma vez, e SO
 # quem declara site no cadastro (vies declarado: quem nao tem site fica fora, e a amostra
 # descreve as marcas que se mostram na internet).
 universos:
@@ -67,6 +94,49 @@ universos:
     membro_site: cad_adm_cart_pj.csv
     coluna_site: SITE_ADMIN
 
+  # ---- v2 (10/10/2026) -------------------------------------------------------------------
+  bancos:
+    # UM universo, DUAS categorias: o cadastro do BCB nao separa banco de varejo de banco
+    # digital, o livro separa por agencia fisica x app, e isso so se ve na visita. A visita segue
+    # por esta lista ate banco_tradicional e banco_digital fecharem 10 cada (ou a lista acabar);
+    # filtrar uma permutacao sorteada e tomar as primeiras k e amostra simples. SEM filtro por
+    # carteira comercial, de proposito (10/10, antes de qualquer visita): o filtro tirava o Digio
+    # e o Agibank, bancos digitais pelo que o livro define, e quem sai por proxy sai sem ninguem
+    # ter olhado (P6). Banco que nao e varejo (montadora, cambio, atacado) sai na visita, com o
+    # motivo escrito: nao_atende_pf ou fora_do_livro.
+    tipo: json
+    fonte: bcb_sedes_bancos
+    categorias: [banco_tradicional, banco_digital]
+    chave: CNPJ                       # a raiz de 8 digitos; o servico nao traz o CNPJ inteiro
+    nome: NOME_INSTITUICAO
+    coluna_site: SITIO_NA_INTERNET
+  pagamentos:
+    # instituicoes de pagamento autorizadas (carteira ou conta de pagamento, no livro). Muitas
+    # sao B2B (adquirencia, BaaS, cambio): saem na visita por nao_atende_pf.
+    tipo: json
+    fonte: bcb_sedes_sociedades
+    chave: CNPJ
+    nome: NOME_INSTITUICAO
+    coluna_site: SITIO_NA_INTERNET
+    onde: {SEGMENTO: "Institui\u00e7\u00e3o de Pagamento"}
+  casa_de_analise_e_educacao:
+    # analistas PJ credenciados (CREDENCIADO, nao LICENCIADO: o licenciado esta afastado da
+    # atividade). A planilha nao traz CNPJ nem site: o identificador e o numero de registro da
+    # APIMEC, e quem nao tem site que a escada ache sai na visita (site_inacessivel). As colunas
+    # sao pela LETRA (A razao social, B nome fantasia, C numero de registro, F status): o rotulo
+    # do cabecalho da planilha nao acompanha o conteudo (ler_planilha). A categoria cobre
+    # casa de analise e parte da educacao financeira (a que e analista credenciada); a educacao
+    # sem credenciamento (Me Poupe!, Primo Rico) nao tem cadastro e fica fora, declarado.
+    tipo: planilha
+    fonte: apimec_pj
+    chave: C
+    prefixo_chave: "APIMEC-"
+    zeros: 3
+    nome: B
+    nome_alternativo: A
+    coluna_site: null
+    onde: {F: CREDENCIADO}
+
 # A visita: na ordem do sorteio, ate classificar `amostra_sorteada_por_categoria` marcas
 # (livro, af-a). Quem nao passa num criterio e PULADO com o motivo, e a visita segue para a
 # proxima da lista. Os criterios foram escritos antes de qualquer visita.
@@ -75,18 +145,29 @@ pular_se:
   nao_atende_pf: "o site nao oferece servico a pessoa fisica no Brasil (so institucional, so empresa, so estrangeiro)"
   duplicada: "a marca ja foi classificada (mesmo grupo e mesma marca comercial)"
   sem_marca: "o site nao tem marca propria (pagina em construcao, cartao de visita, pagina de terceiro)"
+  # v2 (10/10/2026), valido so onde um universo alimenta duas categorias (bancos): a visita
+  # continua para fechar a outra, e quem aparece depois de a sua categoria ter as 10 primeiras
+  # entra no CSV como pulada, para a lista visitada ficar inteira.
+  excedente_da_categoria: "a categoria do livro ja tinha as 10 primeiras classificadas (af-a) quando esta marca apareceu"
+# v2: o site do cadastro nem sempre e o site da marca. Quando e um link de ouvidoria, chat ou
+# WhatsApp (o cadastro do BCB tem varios: Inter, C6, XP), a escada usa o dominio que o proprio BCB
+# verificou para o mesmo CNPJ (recurso DominiosVerificados do mesmo servico, 1.892 linhas em
+# 10/10/2026) e transcreve na coluna `escada`. Quando a fonte nao traz site (APIMEC), o degrau 3
+# (busca pelo nome) e o primeiro, e nao achar e site_inacessivel.
 # Marca cuja categoria pela precedencia do livro e OUTRA (ex.: uma consultoria que e um robo)
 # e classificada na categoria dela, e nao conta para a categoria em que foi sorteada.
 
-# O que ainda nao tem universo medido. Cada um sobe a escada (5-B.18) atras de uma lista
-# oficial antes de qualquer lista por busca; se for por busca, fica declarado.
+# O que NAO tem universo, e por que (v2, 10/10/2026). Cada um subiu a escada (5-B.18); os degraus
+# e o que resolveria estao na pesquisa (sec. 2.1). Sem universo, a categoria fica com 0 marcas e,
+# pela regra do livro (n_minimo_de_marcas), nao tem dominante e nao aciona o veto. Lista por
+# busca seria escolha de quem busca, que e o que o sorteio existe para impedir; so entra por
+# decisao dele.
+sem_universo:
+  robo: "nao existe cadastro: robo de investimento nao e categoria regulatoria na CVM nem no BCB, e o robo que exige registro entra como consultor, gestor ou corretora (ja sorteados nessas categorias, onde a precedencia do livro o reclassifica como robo)"
+  consolidador: "nao existe cadastro: app de acompanhamento de carteira nao e atividade autorizada por ninguem; o diretorio do Open Finance (105 organizacoes) nao tem Kinvo nem Gorila e nao e lista de consolidadores"
+  planejador: "o cadastro existe (Planejar, certificacao CFP) e a busca esta atras de reCAPTCHA de caixa de selecao; contornar verificacao de robo e proibido (pesquisa, sec. 1.1); a unidade do cadastro e a pessoa, nao a marca"
+
+# O que ainda nao e sorteio.
 a_fazer:
-  robo: "lista oficial de robos (CVM, ANBIMA) a procurar"
-  consolidador: "lista oficial a procurar"
-  planejador: "a certificacao e a associacao que os listam, lidas na fonte"
-  banco_tradicional: "lista do Banco Central a ler na fonte"
-  banco_digital: "lista do Banco Central a ler na fonte"
-  pagamentos: "lista do Banco Central (instituicoes de pagamento) a ler na fonte"
-  casa_de_analise_e_educacao: "lista oficial a procurar (casas de analise registradas na CVM)"
-  fora_do_brasil: "secao separada (decisao dele, 27/09); nao entra no dominante brasileiro"
-  nao_auditadas_r1_r2: "Santander, Caixa, Itau Personnalite e Private, Suno, SPX, Braun, Grand Seiko e Leica"
+  fora_do_brasil: "secao separada (decisao dele, 27/09); nao entra no dominante brasileiro; universo a declarar na fonte, e o livro nao a lista como categoria"
+  nao_auditadas_r1_r2: "Santander, Caixa, Itau Personnalite e Private, Suno, SPX, Braun, Grand Seiko e Leica: lista NOMINAL, nao sorteio; Santander e Caixa tambem estao no universo bancos, Suno na APIMEC e SPX na CVM, e a marca ja sorteada vale pelo sorteio. Grand Seiko e Leica sao referencia de sentimento (fora do veto)"

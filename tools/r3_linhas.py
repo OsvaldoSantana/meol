@@ -10,14 +10,26 @@ classificador congelado (tools/codigos_visuais.classificar): nenhum limiar mora 
 O QUE ELE NAO FAZ (P5). Nao decide o botao nem a familia: le o que a leitura escreveu. Sem a
 pasta da captura, recusa a linha (a captura e a procedencia).
 
-    python tools/r3_linhas.py            # regrava docs/marca/rodada3/classificacao.csv
+    python tools/r3_linhas.py                 # regrava docs/marca/rodada3/classificacao.csv
+    python tools/r3_linhas.py --acrescentar   # so as entradas que ainda nao estao no CSV
+    python tools/r3_linhas.py --acrescentar --refazer bancos:16   # e refaz estas, de leituras.yaml
+
+`--acrescentar` (10/10/2026). Regravar o CSV inteiro exige a captura de CADA linha antiga, e as
+capturas (de terceiros, fora do git) moram so na maquina que as fez: a sessao na nuvem de 10/10
+nao tem as 51 de 04/10. Acrescentar mantem as linhas gravadas como estao e junta as entradas de
+`leituras.yaml` cuja chave (categoria sorteada, ordem) o CSV ainda nao tem. Consequencia
+declarada: mudar a leitura de uma entrada JA gravada nao a atualiza por aqui; isso e `--tudo`
+(o padrao), na maquina que tem a captura. A data de uma entrada pode vir na propria entrada
+(`data:`); a do arquivo vale para as que nao a trazem.
 """
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import os
 import sys
+from collections import Counter
 from typing import Any
 
 import yaml
@@ -58,6 +70,29 @@ def destaque_do_botao(b: dict[str, Any], botao: str,
     return borda or (C.css_para_hex(b["cor"]) or "#000000")
 
 
+def cor_do_texto_por_pixels(px: list[tuple[int, int, int]]) -> str:
+    """Botao VAZADO sem borda numa captura de app (so a imagem existe): a cor que o livro manda
+    ler e a do texto ('so a borda ou o texto tiverem cor'). O fundo e a moda da caixa; o texto,
+    os pixels mais longe dele (a partir de 3/4 da maior distancia, soma dos canais, e nunca menos
+    que 60). A moda dos pixels 'que nao sao o fundo' (a primeira versao) caia no suavizado das
+    bordas das letras: no Credishop (10/10/2026) devolveu um rosa palido (#f9d5d9, neutro) para um
+    texto vermelho, porque a imagem ampliada tem ruido e o miolo da letra tem poucos pixels.
+    Agrupa em faixas de 32 niveis por canal e devolve a media do grupo mais frequente. Caixa
+    toda de fundo: devolve o fundo."""
+    fundo = Counter(px).most_common(1)[0][0]
+    dist = [(sum(abs(a - b) for a, b in zip(p, fundo)), p) for p in px]
+    maior = max(d for d, _ in dist)
+    if maior < 60:
+        return C.rgb_hex(fundo)
+    corte = max(60, 0.75 * maior)
+    fortes = [p for d, p in dist if d >= corte]
+    faixa = Counter(tuple(c >> 5 for c in p) for p in fortes).most_common(1)[0][0]
+    grupo = [p for p in fortes if tuple(c >> 5 for c in p) == faixa]
+    return C.rgb_hex((round(sum(p[0] for p in grupo) / len(grupo)),
+                      round(sum(p[1] for p in grupo) / len(grupo)),
+                      round(sum(p[2] for p in grupo) / len(grupo))))
+
+
 def preenchimento_por_pixels(px: list[tuple[int, int, int]], cor_do_texto: str | None) -> str:
     """Gradiente ou imagem de fundo: a moda e o texto (cada pixel do degrade e unico). Tira os
     pixels perto da cor do texto (distancia < 60 por canal somado) e da a MEDIANA por canal."""
@@ -77,6 +112,29 @@ def _pixels_caixa(png: str, caixa: list[int]) -> list[tuple[int, int, int]]:
         return [(int(p[0]), int(p[1]), int(p[2])) for p in dados]
 
 
+def chaves_novas(existentes: list[dict[str, str]],
+                 leituras: dict[str, dict[int, Any]]) -> list[tuple[str, int]]:
+    """As (categoria sorteada, ordem) de `leituras` que o CSV ainda nao tem, na ordem do arquivo."""
+    tem = {(r["categoria_sorteada"], int(r["ordem_no_sorteio"])) for r in existentes}
+    return [(cat, ordem) for cat, por_ordem in leituras.items() for ordem in sorted(por_ordem)
+            if (cat, ordem) not in tem]
+
+
+def sem_chaves(linhas: list[dict[str, str]], quais: list[str]) -> list[dict[str, str]]:
+    """As linhas sem as de `quais` (cada uma 'categoria:ordem'): o `--refazer` de uma entrada ja
+    gravada que mudou de leitura. Chave que nao existe e erro, para um erro de digitacao nao
+    parecer que refez."""
+    chaves = set()
+    for q in quais:
+        cat, _, ordem = q.rpartition(":")
+        chaves.add((cat, int(ordem)))
+    tem = {(r["categoria_sorteada"], int(r["ordem_no_sorteio"])) for r in linhas}
+    if chaves - tem:
+        raise ValueError(f"--refazer: sem linha gravada para {sorted(chaves - tem)}")
+    return [r for r in linhas
+            if (r["categoria_sorteada"], int(r["ordem_no_sorteio"])) not in chaves]
+
+
 def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str],
           livro: dict[str, Any]) -> dict[str, str]:
     base = {c: "" for c in R.COLUNAS}
@@ -86,6 +144,12 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
                 escada=leitura.get("escada", ""), data=leitura["data"])
     pasta = os.path.join(CAPTURAS, f"{cat}-{ordem:02d}")
     mpath = os.path.join(pasta, "medidas.json")
+    if leitura["situacao"] == "classificada":
+        # a captura e a procedencia (docstring): classificada sem ela nao tem de onde vir. Na
+        # unidade app a captura e a da loja (app_390.json); o site pode nem ter aberto (BV, 10/10)
+        prova = "app_390.json" if leitura.get("unidade") == "app" else "medidas.json"
+        if not os.path.exists(os.path.join(pasta, prova)):
+            raise ValueError(f"{cat}-{ordem:02d}: classificada sem captura em {pasta} ({prova})")
     if os.path.exists(mpath):
         with open(mpath, encoding="utf-8") as f:
             m = json.load(f)
@@ -94,9 +158,11 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
     if leitura["situacao"] != "classificada":
         base["url"] = base["url"] or leitura.get("url", "")
         return base
-    a = m["390"]
     png = os.path.join(pasta, "390.png")
-    if leitura["unidade"] == "app":
+    a: dict[str, Any] = {}
+    if leitura["unidade"] != "app":
+        a = m["390"]
+    else:
         # ae-a: a captura da App Store, recortada na tela do aparelho (r3_capturar recortar)
         with open(os.path.join(pasta, "app_390.json"), encoding="utf-8") as f:
             rec = json.load(f)
@@ -116,7 +182,8 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
         # o botao que o navegador nao listou (div com clique, texto em imagem): a caixa e o raio
         # foram medidos no olho sobre a 390.png e estao na leitura, com a nota
         px = _pixels_caixa(png, leitura["botao_caixa"])
-        destaque = preenchimento_por_pixels(px, leitura.get("cor_do_texto"))
+        destaque = (cor_do_texto_por_pixels(px) if botao == "vazado"
+                    else preenchimento_por_pixels(px, leitura.get("cor_do_texto")))
         raio = float(leitura["raio_px"])
     else:  # sem botao: livro e procedimento da R3, sec. 1.1
         crom = C.moda_cromatica(C._pixels(png), livro)
@@ -133,17 +200,30 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
     return base
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=(__doc__ or "").split("\n")[0])
+    ap.add_argument("--acrescentar", action="store_true")
+    ap.add_argument("--refazer", nargs="+", metavar="CATEGORIA:ORDEM",
+                    help="com --acrescentar: descarta estas linhas e as refaz da leitura")
+    a = ap.parse_args(argv)
+    if a.refazer and not a.acrescentar:
+        ap.error("--refazer so vale com --acrescentar (sem ele o CSV inteiro ja e refeito)")
     livro = V.ler_livro()
     with open(LEITURAS, encoding="utf-8") as f:
         leituras = yaml.safe_load(f)
-    linhas = []
-    for cat, por_ordem in leituras["categorias"].items():
-        with open(os.path.join(R.PASTA, f"sorteio-{cat}.csv"), encoding="utf-8") as f:
-            sorteio = {int(r["ordem"]): r for r in csv.DictReader(f)}
-        for ordem in sorted(por_ordem):
-            linhas.append(linha(cat, ordem, {**por_ordem[ordem], "data": leituras["data"]},
-                                sorteio[ordem], livro))
+    linhas = R.ler() if a.acrescentar else []
+    if a.refazer:
+        linhas = sem_chaves(linhas, a.refazer)
+    quais = (chaves_novas(linhas, leituras["categorias"]) if a.acrescentar else
+             [(c, o) for c, po in leituras["categorias"].items() for o in sorted(po)])
+    sorteios: dict[str, dict[int, dict[str, str]]] = {}
+    for cat, ordem in quais:
+        if cat not in sorteios:
+            with open(os.path.join(R.PASTA, f"sorteio-{cat}.csv"), encoding="utf-8") as f:
+                sorteios[cat] = {int(r["ordem"]): r for r in csv.DictReader(f)}
+        entrada = leituras["categorias"][cat][ordem]
+        linhas.append(linha(cat, ordem, {**entrada, "data": entrada.get("data", leituras["data"])},
+                            sorteios[cat][ordem], livro))
     probs = R.validar(linhas, livro)
     for p in probs:
         print(p)

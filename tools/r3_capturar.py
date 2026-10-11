@@ -19,6 +19,12 @@ Nao grava nada no git: as capturas sao de terceiros e ficam em data/r3/capturas/
     python tools/r3_capturar.py site <url> <pasta>     # 390.png, 1280.png, medidas.json
     python tools/r3_capturar.py app <trackId> <pasta>  # as capturas da App Store do Brasil
     python tools/r3_capturar.py recortar <png> <x0> <y0> <x1> <y1> <pasta>  # a tela, em 390 px
+
+O NAVEGADOR (10/10/2026). A captura usa o Chromium que o Playwright instalado espera. Quando a
+maquina tem outro (a nuvem traz o build 1194, o das 51 primeiras visitas da R3, e o Playwright
+1.63.0 espera o 1243), `R3_CHROMIUM=<caminho do executavel>` o aponta: o instrumento das visitas
+nao muda no meio da rodada. O `medidas.json` guarda `navegador` (a versao do Chromium), para que
+a versao de cada captura se confira depois.
 """
 from __future__ import annotations
 
@@ -28,9 +34,10 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 from collections import Counter
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from typing import Any
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -107,6 +114,28 @@ def em_alta(url: str) -> str:
     return re.sub(r"/\d+x\d+bb\.(png|jpg)$", r"/1242x0w.\1", url)
 
 
+def chromium_do_ambiente(ambiente: dict[str, str] | None = None) -> str | None:
+    """`R3_CHROMIUM` aponta o executavel do Chromium; sem ela (None), o do Playwright."""
+    exe = (os.environ if ambiente is None else ambiente).get("R3_CHROMIUM", "").strip()
+    return exe or None
+
+
+def com_tentativas(fazer: Callable[[], Any], tentativas: int = 4,
+                   dormir: Callable[[float], None] = time.sleep) -> Any:
+    """Repete `fazer` ate `tentativas` vezes com espera crescente (2, 4, 8 s) quando a rede
+    derruba a conexao. 10/10/2026: o proxy da nuvem reinicia conexoes ao acaso (`Connection reset
+    by peer`) e a mesma consulta funciona na tentativa seguinte; sem a repeticao, a marca virava
+    'sem app' por um erro de transporte, que e o que a 5-B.16 manda nao chamar de limitacao."""
+    for n in range(tentativas):
+        try:
+            return fazer()
+        except OSError:
+            if n == tentativas - 1:
+                raise
+            dormir(2 ** (n + 1))
+    raise AssertionError("inalcancavel")
+
+
 def sha256_arquivo(path: str) -> str:
     with open(path, "rb") as f:
         return hashlib.sha256(f.read()).hexdigest()
@@ -135,7 +164,8 @@ def capturar_site(url: str, pasta: str) -> dict[str, Any]:
     os.makedirs(pasta, exist_ok=True)
     saida: dict[str, Any] = {"url_pedida": url}
     with sync_playwright() as p:
-        nav = p.chromium.launch()
+        nav = p.chromium.launch(executable_path=chromium_do_ambiente())
+        saida["navegador"] = nav.version
         for nome, w, h, movel in (("390", LARGURA, ALTURA, True),
                                   ("1280", LARGURA_DESKTOP, ALTURA_DESKTOP, False)):
             ctx = nav.new_context(viewport={"width": w, "height": h}, device_scale_factor=1,
@@ -164,15 +194,20 @@ def capturar_site(url: str, pasta: str) -> dict[str, Any]:
 def baixar_app(track_id: str, pasta: str) -> dict[str, Any]:
     os.makedirs(pasta, exist_ok=True)
     url = f"https://itunes.apple.com/lookup?id={int(track_id)}&country=br"
-    with urllib.request.urlopen(url, timeout=30) as r:
-        d = json.load(r)["results"][0]
+    def _lookup() -> dict[str, Any]:
+        with urllib.request.urlopen(url, timeout=30) as r:
+            achado: dict[str, Any] = json.load(r)["results"][0]
+            return achado
+    d = com_tentativas(_lookup)
     saida = {"lookup": url, "trackName": d.get("trackName"), "artistName": d.get("artistName"),
              "sellerName": d.get("sellerName"), "trackViewUrl": d.get("trackViewUrl"),
              "capturas": []}
     for k, u in enumerate(d.get("screenshotUrls", []), start=1):
         u = em_alta(u)
         png = os.path.join(pasta, f"app_{k}.png")
-        urllib.request.urlretrieve(u, png)
+        def _baixar(u: str = u, png: str = png) -> None:
+            urllib.request.urlretrieve(u, png)
+        com_tentativas(_baixar)
         saida["capturas"].append({"k": k, "url": u, "sha256": sha256_arquivo(png)})
     with open(os.path.join(pasta, "app.json"), "w", encoding="utf-8") as f:
         json.dump(saida, f, ensure_ascii=False, indent=1)

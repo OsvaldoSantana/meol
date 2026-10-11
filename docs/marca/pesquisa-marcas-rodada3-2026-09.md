@@ -37,7 +37,11 @@ funcionaria:
   num critério é **pulado com o motivo**, e a visita segue. São quatro motivos, escritos antes
   de qualquer visita: site inacessível depois da escada, não atende pessoa física, duplicada,
   sem marca própria. Marca cuja categoria pela precedência é outra é classificada na dela e não
-  conta para a categoria em que foi sorteada.
+  conta para a categoria em que foi sorteada. **Desde 10/10 (plano v2, antes de qualquer visita
+  aos três universos novos):** um quinto motivo, `excedente_da_categoria`, para onde um universo
+  alimenta duas categorias (`bancos`: tradicional e digital); a visita segue pela mesma lista até
+  as duas fecharem 10, e quem aparece depois de a sua categoria ter as 10 primeiras entra como
+  pulada, para a lista visitada ficar inteira.
 - **Por marca:** posicionamento, promessa, modelo de receita (comissão, taxa, assinatura) e
   regime regulatório, lidos no site e no cadastro; códigos novos continuam no prefixo **MC**,
   depois do MC-29; requisitos novos no **RI**, depois do RI-34.
@@ -67,6 +71,8 @@ técnicas, foram escritas antes de qualquer linha classificada e valem para toda
 | família | o nome da fonte computada do texto de maior corpo fora o logotipo; a classe genérica (serifa, sem serifa, monoespaçada) sai do desenho da fonte nomeada, conferido no olho | o CSS nomeia a fonte, não a classe; limitação 5 |
 | densidade | contada no olho, na `390.png`, pela regra do livro | não entra no veto (aa-a) |
 | unidade app | a marca **tem app** se o site oficial aponta para a App Store, ou se a busca da App Store do Brasil (`itunes.apple.com/search`, `country=br`) devolve app do mesmo grupo e com a marca; app da plataforma parceira (o do BTG para um assessor do BTG) **não** é app da marca | ae-a: classifica-se o app da marca, não o do parceiro |
+| navegador | **10/10/2026:** o Playwright subiu para 1.63.0 (PR #69) e espera o Chromium 1243; a nuvem traz o **1194 (Chromium 141.0.7390.37)**, o build das 51 primeiras visitas (Playwright 1.56.0). A captura usa o 1194 por `R3_CHROMIUM=<executável>`, e o `medidas.json` guarda `navegador`. Não rodei `playwright install`: baixaria um build novo no meio da rodada, e o instrumento ficaria diferente entre as visitas de 04/10 e as de 10/10 | o que se mede (moda dos pixels, estilos computados) depende do motor de renderização; trocar de build no meio é mexer no instrumento sem ninguém ter decidido |
+| site do cadastro que não é o da marca | o cadastro do BCB traz, em vários bancos, um link de ouvidoria, chat ou WhatsApp no campo de site (Inter: `intergo.app`; C6: `api.whatsapp.com`; XP: página de chat). A escada usa o domínio que o próprio BCB verificou para o mesmo CNPJ (recurso `DominiosVerificados`, mesmo serviço) e transcreve na coluna `escada`. Fonte sem site (APIMEC): o degrau 3, a busca pelo nome, é o primeiro; não achar é `site_inacessivel` | o site declarado é o da instituição, não necessariamente o da marca que o cliente vê (limitação 2) |
 | site inacessível | a escada, transcrita na coluna `escada`: (1) `curl` com e sem `www` e `http`; (2) a API `archive.org/wayback/available`; (3) o site atual por busca; (4) a sessão local, pelo IP dele. Verificação "confirme que é humano" (Cloudflare) **não se resolve aqui**: é degrau 4 | contornar verificação de robô é proibido; o IP residencial dele pode não receber a verificação |
 | arquivamento | a nuvem **não alcança** `web.archive.org` (degraus abaixo); a linha leva `PENDENTE_LOCAL`, e `tools/r3_arquivar.py`, na máquina dele, arquiva e escreve o link. **A R3 não fecha com nenhuma linha pendente** (`tools/r3_dominante.py` conta) | degrau 4 da escada |
 | as capturas | ficam em `data/r3/capturas/<categoria>-<ordem>/`, fora do git, com cópia na pasta dele | são de terceiros (§1); o sha256 está no CSV |
@@ -89,14 +95,65 @@ normal, um CNPJ uma vez.
 | `assessor` | CVM, `cad_agente_auton_pj` | 1.396 | **148** | **10 de 10** (visitadas 1 a 12) |
 | `corretora` (com as distribuidoras, onde ficam as plataformas de fundos) | CVM, `cad_intermed` | 161 | **138** | 2 de 10 (visitadas 1 a 12; 2 aguardam o degrau 4; 2 foram para gestora) |
 | `gestora_e_private` | CVM, gestores PJ de fundos em funcionamento (`registro_fundo`), com o site do `cad_adm_cart` | 1.267 gestores; 1.204 no cadastro de administradores | **1.195** | 12 (10 do sorteio, visitadas 1 a 15, mais 2 sorteadas em corretora; 3 aguardam o degrau 4) |
-| `robo`, `consolidador`, `planejador` | lista oficial a procurar, subindo a escada | — | — | — |
-| `banco_tradicional`, `banco_digital`, `pagamentos`, `casa_de_analise_e_educacao` | listas do Banco Central e da CVM a ler na fonte | — | — | — |
-| não auditadas nas rodadas 1 e 2 | Santander, Caixa, Itaú Personnalité e Private, Suno, SPX, Braun, Grand Seiko e Leica | — | — | — |
-| **fora do Brasil** (seção separada, decisão dele de 27/09) | universo a declarar na fonte; não entra no dominante brasileiro (o livro não diz o contrário) | — | — | — |
+| `bancos` → `banco_tradicional` e `banco_digital` | BCB, serviço `Instituicoes_em_funcionamento`, recurso `SedesBancoComMultCE` (10/10) | 153 sedes | **143** | 0 de 10 e 0 de 10 |
+| `pagamentos` | BCB, mesmo serviço, recurso `SedesSociedades`, segmento Instituição de Pagamento (10/10) | 195 | **136** | 0 de 10 |
+| `casa_de_analise_e_educacao` | APIMEC, analistas de valores mobiliários PJ credenciados (10/10) | 141 (131 credenciados, 10 licenciados) | **131** (a planilha não declara site: o filtro não se aplica ao cadastro, e quem não tem site sai na visita) | 0 de 10 |
+| `robo`, `consolidador`, `planejador` | **sem universo**: §2.1 | — | — | — |
+| não auditadas nas rodadas 1 e 2 | Santander, Caixa, Itaú Personnalité e Private, Suno, SPX, Braun, Grand Seiko e Leica: lista **nominal**, não sorteio (plano, `a_fazer`) | — | — | — |
+| **fora do Brasil** (seção separada, decisão dele de 27/09) | universo a declarar na fonte; não entra no dominante brasileiro; o livro não a lista como categoria | — | — | — |
+
+**Os três universos de 10/10, como foram feitos.** Os arquivos estão em `data/r3/` (fora do git),
+com o sha256 no plano; `tools/r3_baixar_bcb.py` os baixa. O que entra no git é, para cada marca,
+o identificador, o nome e o site que a instituição declara, nada de e-mail nem telefone; a
+licença de reuso do conjunto do BCB **não foi lida** nesta sessão (`NAO_CONFIRMADO`).
+
+- **`bancos`: um universo, duas categorias.** O cadastro do BCB não separa banco de varejo de
+  banco digital; o livro separa por agência física × app, e isso só se vê na visita. Em vez de
+  inventar um limiar de agências (o cadastro tem 70 bancos com exatamente uma agência, a sede, e
+  entre eles estão o Inter, o C6 e o JPMorgan), sorteia-se uma lista só e a categoria sai da
+  leitura. Filtrar uma permutação sorteada por uma propriedade e tomar as primeiras *k* é amostra
+  simples dessa propriedade. **Sem filtro por carteira comercial**: ele tiraria o Digio e o
+  Agibank (`Não`), bancos digitais pelo que o livro define. O preço é visitar também os 40 bancos
+  sem carteira comercial (montadoras, câmbio, atacado), que saem com o motivo escrito. A chave é a
+  raiz de 8 dígitos do CNPJ, que é o que o serviço traz.
+- **`pagamentos`:** as 195 instituições de pagamento autorizadas; muitas são B2B (adquirência,
+  BaaS) e saem por `nao_atende_pf`.
+- **`casa_de_analise_e_educacao`:** a CVM não mantém lista de analistas; delega o credenciamento à
+  APIMEC (Resolução CVM 20; a página da CVM remete a ela). A planilha pública tem razão social,
+  nome fantasia, número de registro e status, sem CNPJ nem site. Entram os **credenciados**; os
+  10 licenciados estão afastados da atividade. A categoria cobre a casa de análise e a parte da
+  educação financeira que é analista credenciada; a educação sem credenciamento (Me Poupe!, Primo
+  Rico) **não tem cadastro e fica fora**, declarado. Contei 30 de 141 que são bancos ou
+  corretoras (um quinto), que a precedência do livro reclassifica.
+- **O que a planilha tem de estranho:** o rótulo do cabeçalho não acompanha o conteúdo (a coluna
+  "Solicitação" traz o número de registro; "Vencimento" e "Credenciamento" estão trocadas), e três
+  credenciados têm vencimento anterior à data do arquivo e seguem `Regular`. O plano lê as colunas
+  pela letra e usa só o status.
 
 **A recontagem das consultorias.** O claude.ai contou 573 PJ em funcionamento normal em 27/09;
 em 02/10 são 576 linhas e 575 CNPJ (um CNPJ aparece duas vezes). A diferença de 3 é do
 cadastro, que muda; a fonte de cada número é o arquivo do dia, com o sha256.
+
+### 2.1 As categorias sem universo, e por quê (10/10/2026, sessão na nuvem)
+
+Para cada uma subiu-se a escada (§5-B.18), com o erro ou a ausência transcritos. **Nenhuma ficou
+"não confirmada por falta de acesso": para as três, a ausência é o resultado da busca, não do
+acesso.** Sem universo, a categoria fica com 0 marcas e, pela regra do livro
+(`n_minimo_de_marcas: 5`), **não tem dominante e não aciona o veto**. Lista montada por busca seria
+escolha de quem busca, que é o que o sorteio existe para impedir; só entra por decisão dele.
+
+| categoria | o que se tentou, e o que voltou | por que não há universo | o que resolveria |
+|---|---|---|---|
+| `robo` | (1) `dados.cvm.gov.br/dados/`: HTTP 200, **24 pastas** (ADM_CART … SECURIT), nenhuma de robô; página "Consultas por participante" da CVM: analistas, consultores etc., sem robô. (2) busca na web por lista oficial de robôs na CVM ou na ANBIMA: nenhuma; só artigos sobre o enquadramento. (3) nenhuma outra fonte primária. | **Robô não é categoria regulatória.** Quem exige registro entra como consultor, gestor ou corretora, que já têm sorteio, onde a precedência do livro o reclassifica como robô | decisão dele: aceitar a categoria sem veto, ou autorizar uma lista por busca com a regra escrita **antes** de ver qualquer marca |
+| `consolidador` | (1) mesmas pastas da CVM e cadastros do BCB: nada. (2) o diretório do Open Finance (`data.directory.openbankingbrasil.org.br/participants`, HTTP 200, 4,5 MB) tem **105 organizações**; Kinvo, Gorila, Mobills, Organizze, Guiabolso, Warren e Magnetis **não estão**; a Pluggy está, como instituição de pagamento. (3) nenhuma outra. | **App de acompanhamento de carteira não é atividade autorizada por ninguém**, e o diretório do Open Finance lista participantes do Open Finance, não consolidadores | idem |
+| `planejador` | (1) `www.planejar.org.br/encontre-um-profissional-cfp` (HTTP 200) leva ao portal `portal.planejar.org.br/legado/busca-planejador`, uma aplicação de página única que carrega o **reCAPTCHA v2 de caixa de seleção** (`google.com/recaptcha/api2/anchor`, `size=normal`) e chama `novaplanejar-api.planejar.org.br` (`obter-especialidades`, `obter-estados`; a chamada de busca **não foi feita**). (2) a Planejar é a única entidade que concede o CFP no Brasil, e a lista de certificados só existe nessa busca; a imprensa cita 10.634 certificados no fim de 2024 (fonte secundária). | O cadastro existe, mas **atrás de uma verificação de robô**, e o procedimento da R3 (§1.1) proíbe contorná-la; chamar a API direto, sem o desafio, seria o mesmo contorno. Além disso a **unidade do cadastro é a pessoa**, e a categoria do livro é a marca própria que atende pessoa física | degrau 4: ele busca como pessoa (especialidade × estado × modalidade) e envia a lista; ou aceitar a categoria sem veto. Mesmo assim, o registro de pessoa não é lista de marcas |
+
+**Fora do sorteio por desenho** (plano, `a_fazer`): as **8 marcas nominais** das rodadas 1 e 2
+(Santander, Caixa, Itaú Personnalité e Private, Suno, SPX, Braun, Grand Seiko, Leica) são lista
+nominal, não universo: Santander e Caixa estão em `bancos`, a Suno na APIMEC e a SPX na CVM, e a
+marca já sorteada vale pelo sorteio; Grand Seiko e Leica são referência de sentimento, fora do
+veto. A seção **fora do Brasil** segue sem universo declarado e o livro não a lista como
+categoria.
 
 ## 3. Achados
 
