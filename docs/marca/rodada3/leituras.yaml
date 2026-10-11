@@ -665,8 +665,8 @@ categorias:
       data: 2026-10-10
     46:
       marca: "H.H. Picchioni"
-      situacao: pulada
-      motivo: "fora_do_livro: casa de cambio ('Picchioni Cambio, desde 1945'): atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "casa de cambio ('Picchioni Cambio, desde 1945'): atividade sem categoria no livro"
       data: 2026-10-10
     47:
       marca: "XP Servicos Financeiros DTVM (Modal)"
@@ -733,8 +733,8 @@ categorias:
       data: 2026-10-10
     56:
       marca: "Carol DTVM"
-      situacao: pulada
-      motivo: "fora_do_livro: comercializacao de ouro e metais preciosos ('a pioneira no segmento de comercializacao de ouro'): atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "comercializacao de ouro e metais preciosos ('a pioneira no segmento de comercializacao de ouro'): atividade sem categoria no livro"
       data: 2026-10-10
     57:
       marca: "OXY DTVM"
@@ -754,8 +754,8 @@ categorias:
       data: 2026-10-10
     60:
       marca: "Levycam"
-      situacao: pulada
-      motivo: "fora_do_livro: cambio e pagamentos internacionais para empresas e PSPs: atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "cambio e pagamentos internacionais para empresas e PSPs: atividade sem categoria no livro"
       data: 2026-10-10
     61:
       marca: "Finaxis CTVM"
@@ -801,8 +801,8 @@ categorias:
       data: 2026-10-10
     67:
       marca: "Unicred DTVM"
-      situacao: pulada
-      motivo: "fora_do_livro: cooperativa de credito (o site e o do sistema Unicred, 'sou visitante / sou cooperado'); a pagina da DTVM do cadastro (/SOLUCOES/ZIIN) e erro 404"
+      situacao: fora_do_livro
+      motivo: "cooperativa de credito (o site e o do sistema Unicred, 'sou visitante / sou cooperado'); a pagina da DTVM do cadastro (/SOLUCOES/ZIIN) e erro 404"
       data: 2026-10-10
     68:
       marca: "Planner Corretora"
@@ -811,8 +811,8 @@ categorias:
       data: 2026-10-10
     69:
       marca: "Ourominas (OM DTVM)"
-      situacao: pulada
-      motivo: "fora_do_livro: compra e venda de ouro e cambio: atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "compra e venda de ouro e cambio: atividade sem categoria no livro"
       data: 2026-10-10
     70:
       marca: "GDC Partners DTVM"
@@ -1439,8 +1439,8 @@ categorias:
       data: 2026-10-10
     93:
       marca: "Banco Losango"
-      situacao: pulada
-      motivo: "fora_do_livro: portal 'Atendimento das suas solucoes contratadas' (2a via, extrato do contrato), sem conta nem investimento"
+      situacao: fora_do_livro
+      motivo: "portal 'Atendimento das suas solucoes contratadas' (2a via, extrato do contrato), sem conta nem investimento"
       data: 2026-10-10
     94:
       marca: "Banco Investcred Unibanco"
@@ -1488,13 +1488,13 @@ categorias:
       data: 2026-10-10
     100:
       marca: "Scania Banco"
-      situacao: pulada
-      motivo: "fora_do_livro: financiamento de veiculos da Scania (pagina scania.com/br/.../finance); sem conta nem investimento"
+      situacao: fora_do_livro
+      motivo: "financiamento de veiculos da Scania (pagina scania.com/br/.../finance); sem conta nem investimento"
       data: 2026-10-10
     101:
       marca: "Braza Bank"
-      situacao: pulada
-      motivo: "fora_do_livro: banco de cambio ('o maior banco de cambio do Brasil'), com 'Para sua empresa' e transferencia internacional; atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "banco de cambio ('o maior banco de cambio do Brasil'), com 'Para sua empresa' e transferencia internacional; atividade sem categoria no livro"
       data: 2026-10-10
     102:
       marca: PicPay
@@ -1529,13 +1529,13 @@ categorias:
       data: 2026-10-10
     106:
       marca: "Banco Volkswagen"
-      situacao: pulada
-      motivo: "fora_do_livro: Volkswagen Financial Services: financiamento de veiculos; sem conta nem investimento"
+      situacao: fora_do_livro
+      motivo: "Volkswagen Financial Services: financiamento de veiculos; sem conta nem investimento"
       data: 2026-10-10
     107:
       marca: "Banco Volvo Brasil"
-      situacao: pulada
-      motivo: "fora_do_livro: Volvo Financial Services (banco, consorcio, locadora, corretora de seguros): financiamento de equipamentos; sem conta nem investimento. O site do cadastro so abre em http"
+      situacao: fora_do_livro
+      motivo: "Volvo Financial Services (banco, consorcio, locadora, corretora de seguros): financiamento de equipamentos; sem conta nem investimento. O site do cadastro so abre em http"
       data: 2026-10-10
     108:
       marca: "Banco RNX"
@@ -1565,8 +1565,8 @@ categorias:
       data: 2026-10-10
     111:
       marca: "Banco Honda"
-      situacao: pulada
-      motivo: "fora_do_livro: financiamento de motos e carros Honda ('Simular Financiamento'); sem conta nem investimento"
+      situacao: fora_do_livro
+      motivo: "financiamento de motos e carros Honda ('Simular Financiamento'); sem conta nem investimento"
       data: 2026-10-10
     112:
       marca: "Banco Morgan Stanley"
@@ -1598,8 +1598,8 @@ categorias:
       data: 2026-10-10
     117:
       marca: "Banco Topazio"
-      situacao: pulada
-      motivo: "fora_do_livro: cambio e capital de giro para empresas e renegociacao de dividas; a primeira tela nao oferece conta nem investimento"
+      situacao: fora_do_livro
+      motivo: "cambio e capital de giro para empresas e renegociacao de dividas; a primeira tela nao oferece conta nem investimento"
       data: 2026-10-10
     118:
       marca: "Banco Bmg Consignado"
@@ -1619,8 +1619,8 @@ categorias:
       data: 2026-10-10
     121:
       marca: "Moneycorp Banco de Cambio"
-      situacao: pulada
-      motivo: "fora_do_livro: cambio ('moneycorp.com/en-br'); atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "cambio ('moneycorp.com/en-br'); atividade sem categoria no livro"
       data: 2026-10-10
     122:
       marca: "Banco Bradesco"
@@ -1773,8 +1773,8 @@ categorias:
       data: 2026-10-10
     140:
       marca: "Banco Moneo"
-      situacao: pulada
-      motivo: "fora_do_livro: banco da Marcopolo: portal do cliente com contratos e boletos, antecipacao de recebiveis; sem conta nem investimento"
+      situacao: fora_do_livro
+      motivo: "banco da Marcopolo: portal do cliente com contratos e boletos, antecipacao de recebiveis; sem conta nem investimento"
       data: 2026-10-10
     141:
       marca: Banrisul
@@ -1964,8 +1964,8 @@ categorias:
       data: 2026-10-10
     32:
       marca: "SBXPay (Superbid)"
-      situacao: pulada
-      motivo: "fora_do_livro: o site do cadastro e o marketplace de leiloes online Superbid Exchange; sem conta nem carteira para o usuario"
+      situacao: fora_do_livro
+      motivo: "o site do cadastro e o marketplace de leiloes online Superbid Exchange; sem conta nem carteira para o usuario"
       data: 2026-10-10
     33:
       marca: "NuPay for Business (Nubank)"
@@ -2104,8 +2104,8 @@ categorias:
       data: 2026-10-10
     54:
       marca: "Calcard"
-      situacao: pulada
-      motivo: "fora_do_livro: portal de cartao: 'Como pagar sua fatura', 2a via de boleto e clube de vantagens; sem conta nem carteira"
+      situacao: fora_do_livro
+      motivo: "portal de cartao: 'Como pagar sua fatura', 2a via de boleto e clube de vantagens; sem conta nem carteira"
       data: 2026-10-10
     55:
       marca: "Banco Senff"
@@ -2268,8 +2268,8 @@ categorias:
       data: 2026-10-10
     83:
       marca: "Foris GFS (Crypto.com)"
-      situacao: pulada
-      motivo: "fora_do_livro: bolsa e carteira de criptoativos ('Buy, Sell & Trade Crypto'): atividade sem categoria no livro; o endereco do cadastro (crypto.com/BR) redireciona para o portal global"
+      situacao: fora_do_livro
+      motivo: "bolsa e carteira de criptoativos ('Buy, Sell & Trade Crypto'): atividade sem categoria no livro; o endereco do cadastro (crypto.com/BR) redireciona para o portal global"
       data: 2026-10-10
     84:
       marca: "iFood Pago (Zoop)"
@@ -2357,8 +2357,8 @@ categorias:
       data: 2026-10-10
     101:
       marca: "Mercado Bitcoin (MB Pay)"
-      situacao: pulada
-      motivo: "fora_do_livro: carteira e pagamentos em criptoativos; atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "carteira e pagamentos em criptoativos; atividade sem categoria no livro"
       data: 2026-10-10
     102:
       marca: "Efi"
@@ -2450,8 +2450,8 @@ categorias:
       data: 2026-10-10
     119:
       marca: "F&F (FF Digital)"
-      situacao: pulada
-      motivo: "fora_do_livro: a primeira tela e a de planos de saude (FF Saude): atividade sem categoria no livro"
+      situacao: fora_do_livro
+      motivo: "a primeira tela e a de planos de saude (FF Saude): atividade sem categoria no livro"
       data: 2026-10-10
     120:
       marca: "Pagaleve"
@@ -2578,8 +2578,8 @@ categorias:
       data: 2026-10-10
     130:
       marca: "Nvio Brasil (Bitso)"
-      situacao: pulada
-      motivo: "fora_do_livro: bolsa e app de criptoativos ('App de investimento em cripto'): atividade sem categoria no livro, como Crypto.com (83) e Mercado Bitcoin (101)"
+      situacao: fora_do_livro
+      motivo: "bolsa e app de criptoativos ('App de investimento em cripto'): atividade sem categoria no livro, como Crypto.com (83) e Mercado Bitcoin (101)"
       data: 2026-10-10
     31:
       marca: "Beeteller"

@@ -13,6 +13,7 @@ P-145 · P-53b · P-183 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 �
 
 ## Sem dono, gatilho ou classe: nenhuma
 
-## Fila do Osvaldo, sem resposta: 1
+## Fila do Osvaldo, sem resposta: 2
 
 - 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10
+- 27 · Robô, consolidador e planejador: sem universo oficial · P-170 · a responder

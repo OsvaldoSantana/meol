@@ -149,6 +149,9 @@ pular_se:
   # continua para fechar a outra, e quem aparece depois de a sua categoria ter as 10 primeiras
   # entra no CSV como pulada, para a lista visitada ficar inteira.
   excedente_da_categoria: "a categoria do livro ja tinha as 10 primeiras classificadas (af-a) quando esta marca apareceu"
+  # v2, 11/10/2026: vale tambem onde a precedencia do livro leva a marca a OUTRA categoria (um banco ou
+  # uma corretora na lista da APIMEC): ela cai na categoria dela, que ja tinha as 10, e a leitura
+  # diz qual. O que ja foi lido nao muda; a regra so diz como a linha se escreve.
 # v2: o site do cadastro nem sempre e o site da marca. Quando e um link de ouvidoria, chat ou
 # WhatsApp (o cadastro do BCB tem varios: Inter, C6, XP), a escada usa o dominio que o proprio BCB
 # verificou para o mesmo CNPJ (recurso DominiosVerificados do mesmo servico, 1.892 linhas em

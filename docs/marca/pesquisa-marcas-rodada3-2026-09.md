@@ -1,9 +1,11 @@
 # Pesquisa de marcas — rodada 3 (P-170, antes P-B5b)
 
 *Aberta em 02/10/2026, sessão local do Claude Code. A rodada leva várias sessões: cada uma
-grava aqui o progresso e o que falta. **Estado em 04/10: 51 marcas visitadas nas quatro
-categorias com sorteio, 34 classificadas (consultoria CVM e assessor com as 10 da af-a), nenhuma
-arquivada no Wayback ainda, e sete categorias sem universo.***
+grava aqui o progresso e o que falta. **Estado em 11/10: 413 marcas lidas nas sete listas com
+sorteio, 85 classificadas (as 10 da af-a em consultoria CVM, assessor, gestora e private,
+corretora, banco tradicional, banco digital, pagamentos e casa de análise e educação), nenhuma
+arquivada no Wayback ainda, três categorias sem universo e nenhum código dominante em categoria
+nenhuma.***
 
 ## 0. Para que serve, e o que mudou antes de começar
 
@@ -93,11 +95,11 @@ normal, um CNPJ uma vez.
 |---|---|---|---|---|
 | `consultoria_cvm` | CVM, `cad_consultor_vlmob_pj` | 575 | **528** | **10 de 10** (visitadas 1 a 12) |
 | `assessor` | CVM, `cad_agente_auton_pj` | 1.396 | **148** | **10 de 10** (visitadas 1 a 12) |
-| `corretora` (com as distribuidoras, onde ficam as plataformas de fundos) | CVM, `cad_intermed` | 161 | **138** | 2 de 10 (visitadas 1 a 12; 2 aguardam o degrau 4; 2 foram para gestora) |
-| `gestora_e_private` | CVM, gestores PJ de fundos em funcionamento (`registro_fundo`), com o site do `cad_adm_cart` | 1.267 gestores; 1.204 no cadastro de administradores | **1.195** | 12 (10 do sorteio, visitadas 1 a 15, mais 2 sorteadas em corretora; 3 aguardam o degrau 4) |
-| `bancos` → `banco_tradicional` e `banco_digital` | BCB, serviço `Instituicoes_em_funcionamento`, recurso `SedesBancoComMultCE` (10/10) | 153 sedes | **143** | 0 de 10 e 0 de 10 |
-| `pagamentos` | BCB, mesmo serviço, recurso `SedesSociedades`, segmento Instituição de Pagamento (10/10) | 195 | **136** | 0 de 10 |
-| `casa_de_analise_e_educacao` | APIMEC, analistas de valores mobiliários PJ credenciados (10/10) | 141 (131 credenciados, 10 licenciados) | **131** (a planilha não declara site: o filtro não se aplica ao cadastro, e quem não tem site sai na visita) | 0 de 10 |
+| `corretora` (com as distribuidoras, onde ficam as plataformas de fundos) | CVM, `cad_intermed` | 161 | **138** | **10 de 10** (visitadas 1 a 70; 16 aguardam o degrau 4; 3 foram para gestora e 1 para banco digital) |
+| `gestora_e_private` | CVM, gestores PJ de fundos em funcionamento (`registro_fundo`), com o site do `cad_adm_cart` | 1.267 gestores; 1.204 no cadastro de administradores | **1.195** | **14** (10 do sorteio, visitadas 1 a 15, mais 3 sorteadas em corretora e 1 em bancos; 3 aguardam o degrau 4) |
+| `bancos` → `banco_tradicional` e `banco_digital` | BCB, serviço `Instituicoes_em_funcionamento`, recurso `SedesBancoComMultCE` (10/10) | 153 sedes | **143** | **10 de 10 e 10 de 10** (visitadas 1 a 143, a lista inteira; 42 aguardam o degrau 4; a 10ª de banco digital veio de corretora) |
+| `pagamentos` | BCB, mesmo serviço, recurso `SedesSociedades`, segmento Instituição de Pagamento (10/10) | 195 | **136** | **11 de 10** (visitadas 1 a 136, a lista inteira; 20 aguardam o degrau 4; 1 veio de bancos) |
+| `casa_de_analise_e_educacao` | APIMEC, analistas de valores mobiliários PJ credenciados (10/10) | 141 (131 credenciados, 10 licenciados) | **131** (a planilha não declara site: o filtro não se aplica ao cadastro, e quem não tem site sai na visita) | **10 de 10** (visitadas 1 a 34; 2 aguardam o degrau 4; 4 saem por precedência, para banco ou corretora, e 3 são excedentes depois da 10ª) |
 | `robo`, `consolidador`, `planejador` | **sem universo**: §2.1 | — | — | — |
 | não auditadas nas rodadas 1 e 2 | Santander, Caixa, Itaú Personnalité e Private, Suno, SPX, Braun, Grand Seiko e Leica: lista **nominal**, não sorteio (plano, `a_fazer`) | — | — | — |
 | **fora do Brasil** (seção separada, decisão dele de 27/09) | universo a declarar na fonte; não entra no dominante brasileiro; o livro não a lista como categoria | — | — | — |
@@ -188,6 +190,49 @@ motivo), 3 fora do livro (agente fiduciário e duas casas de câmbio).*
    domínio não existe para ninguém. Ver a limitação 7.
 4. **O livro precisou de emenda antes da primeira marca** (ag-b, livro v3): §0.
 
+### 3.2 A fase 2 (10 e 11/10/2026, sessão na nuvem): o que saiu do resultado
+
+*O que se mediu: 413 linhas, 85 classificadas pela regra do livro v3 sobre a captura da nuvem; a
+conclusão não passa dessa frase (§5-B, pergunta 1).*
+
+5. **Nenhuma das oito categorias tem código dominante** (`python tools/r3_dominante.py`, 11/10;
+   `rodada3/veto.md`). Com n = 10 (11 em pagamentos, 14 em gestora), a combinação mais frequente
+   dos quatro códigos centrais:
+
+   | categoria | n (só app) | combinação mais frequente | quantas |
+   |---|---|---|---|
+   | banco tradicional | 10 (8) | claro / celeste / sem serifa / grande | 3 |
+   | banco digital | 10 (7) | claro ou escuro / neutro / sem serifa / grande | 2 e 2 |
+   | corretora | 10 (1) | claro / celeste / sem serifa / grande | 2 |
+   | gestora e private | 14 (1) | claro / celeste / sem serifa / reto | 4 |
+   | pagamentos | 11 (9) | claro / verde-água / sem serifa / grande | 2 |
+   | casa de análise e educação | 10 (3) | **claro / neutro / sem serifa / grande** | **4** |
+   | consultoria CVM, assessor | 10 e 10 | (§3, item 1) | 2 |
+   | robô, consolidador, planejador | 0 | sem universo (§2.1) | — |
+
+   O mais perto de dominar é a casa de análise (4 de 10), e o limiar do livro não foi alcançado.
+   **Resultado: "nenhum dominante", como saiu.** A ressalva está nas limitações 10 a 13: o que
+   falta (42 de 143 bancos, 20 de 136 instituições de pagamento) é justamente o que a nuvem não
+   abre.
+6. **Por variável, o que se repete é o título sem serifa** (10 de 10 em banco digital, 11 de 11
+   em pagamentos, 9 de 10 em banco tradicional e em corretora, 8 de 10 em casa de análise) e, nas
+   que são app, o **canto grande** (7 de 10 em banco digital, 7 de 11 em pagamentos, 5 de 10 em
+   banco tradicional). A cor se espalha; nas casas de análise o matiz "neutro" aparece em 8 de
+   10, e a causa é de medida, não de estética: o botão principal é preto, branco ou cinza (limitação 12).
+7. **Um quinto de cada lista de IP residencial.** Bancos: 46 de 143 pularam por `site_inacessivel`
+   (42 aguardam o degrau 4, 4 têm domínio morto); pagamentos: 24 de 136 (20 aguardam). Os que
+   bloquearam são os grandes: Itaú (em quatro linhas), Banco do Brasil, Santander (em duas,
+   fora a corretora), Sicredi, Sofisa, C6, Original, XP e BTG, Digio, Rendimento e Mercado Pago. O banco tradicional
+   da amostra é feito de bancos menores (Caixa, BRB, Safra, Daycoval, Banestes, Banco da
+   Amazônia, BNB, Bradesco, Nación e Banpará). **Direção do viés:** os grandes têm app e site
+   caprichados; a amostra descreve o banco que se deixa abrir por um IP dos EUA, e o resultado
+   "nenhum dominante" pode mudar quando o degrau 4 entrar (limitação 10).
+8. **O universo de pagamentos é B2B em 83 de 136** (`nao_atende_pf`), e o de bancos tem 33
+   `nao_atende_pf` e 34 `fora_do_livro` (financiamento de montadora, câmbio, atacado). A precedência do livro
+   reclassifica entre universos: o Neon (cadastro da Magliano DTVM, corretora) é banco digital, o
+   PicPay Bank (bancos) é pagamentos, o Andbank (bancos) e o Rio Bravo, o Azimut e a 4UM
+   (corretora) são gestora e private.
+
 ## 3.1 O que aguarda a sessão local (degrau 4)
 
 | categoria | ordem | marca | o que fazer |
@@ -197,12 +242,18 @@ motivo), 3 fora do livro (agente fiduciário e duas casas de câmbio).*
 | gestora e private | 10 | BREI | idem |
 | corretora | 3 | Mérito DTVM | é o mesmo domínio da gestora 7: uma captura, e a marca entra numa categoria só |
 | corretora | 4 | Morgan Stanley | idem (502 do proxy da nuvem) |
-| corretora | 13 em diante | o resto do sorteio | a visita continua pela ordem até 10 classificadas |
-| todas | — | as 34 classificadas | `py -3.11 tools/r3_arquivar.py`: o Wayback de cada uma |
+| bancos | 42 linhas | as que a nuvem não abre (Itaú, Banco do Brasil, Santander, Sicredi, C6, Original, Sofisa, XP, BTG, Digio e outras) | `grep "AGUARDA DEGRAU 4" docs/marca/rodada3/classificacao.csv`: capturar do IP dele, ler, e `r3_linhas.py --acrescentar --refazer bancos:N` |
+| pagamentos | 20 linhas | idem (Mercado Pago, PagSeguro, Rede, Pinbank, Uzzipay, Okto e outras) | idem |
+| corretora | 16 linhas | StoneX, Galápagos, Santander Corretora, Genial, Apex, Terra, Trustee, XP, Qore e outras | idem; a corretora já tem as 10, e quem abrir entra **pela ordem do sorteio** |
+| gestora e private | 3 linhas | XP Gestão, Mérito, BREI | idem (as de 04/10) |
+| casa de análise e educação | 2 linhas | HM Research (o domínio é suposição: confirmar a marca ao abrir) e Suno | idem; a Suno vem depois da 10ª e só conta se alguma anterior cair |
+| todas | — | as 85 classificadas | `py -3.11 tools/r3_arquivar.py`: o Wayback de cada uma |
+| robô, consolidador, planejador | — | sem universo | decisão dele (fila, bloco 27) |
 
 Se uma pendente abrir e for classificada, a amostra da categoria se refaz **pela ordem do
 sorteio**: entram as 10 primeiras classificadas, e as do fim saem (gestora: 13, 14 e 15 são as
-primeiras a sair).
+primeiras a sair). Com os universos de 10/10, a regra vale em todas as categorias: se uma
+pendente abrir e for classificada, a 10ª sai e ganha a linha `excedente_da_categoria`.
 
 ## 4. Limitações declaradas
 
@@ -239,11 +290,43 @@ primeiras a sair).
    primeira captura mostra o aparelho inclinado e não se recorta como tela: valeu a segunda, a
    primeira de frente (anotado na leitura).
 
+10. **O degrau 4 pesa mais nos bancos e nos pagamentos do que nas outras categorias.** Dos 143
+    bancos, 42 aguardam, e entre eles estão os maiores; o banco tradicional da amostra é de
+    bancos menores. **O que resolveria:** a sessão local abrir as 42 e as 20, em ordem. Até lá, o
+    "nenhum dominante" de bancos e pagamentos vale para a parte que a nuvem alcança.
+11. **O instrumento da unidade app muda de uma marca para outra.** 24 das 31 classificadas em
+    banco tradicional, banco digital e pagamentos são lidas pela captura da loja (arte de
+    marketing, limitação 9); na casa de análise, 3 de 10, e na corretora, 1 de 10. Na Safra a loja
+    não traz captura de interface mensurável e valeu o site; na Maree e na Capitalizo a primeira
+    captura em pé é uma tela de abertura sem botão ("sem botão", matiz da área mais cromática).
+    A unidade, portanto, não é a mesma entre categorias (consultoria, assessor e gestora são
+    site), e a comparação entre categorias herda essa diferença.
+12. **Botão preto, branco ou cinza dá matiz "neutro".** Em 8 das 10 casas de análise o destaque é
+    neutro (Altivuz, MSX, Finclass, Desmistificando, Simpla, Trade ao Vivo, Invius, Dolarame). É a
+    regra do livro (o destaque é a cor do botão); o efeito é um "neutro" frequente que **pode
+    esconder ou criar** semelhança entre marcas que só diferem no tom do botão.
+13. **A cor do botão vazado de app saía da moda dos pixels fora do fundo.** Em 5 leituras
+    (Caixa, Bmg, Banestes, BASA, Credishop) isso pegava o suavizado das letras: o Credishop,
+    vermelho, saiu rosa pálido e neutro. `r3_linhas.cor_do_texto_por_pixels` passou a tomar o grupo
+    mais frequente entre os pixels mais longe do fundo (teste que falha na versão anterior); as
+    cinco linhas foram refeitas, e só a do Credishop mudou de matiz (neutro → vermelho). O livro
+    não mudou: a regra "cor do texto" é a mesma, o que mudou foi a medida dela.
+14. **Domínio achado por busca ou por teste direto só vale com a marca na página.** Nas casas de
+    análise o cadastro não traz site: os 10 classificados vieram de teste de domínio, de busca ou
+    da loja de apps, e cada site foi aceito só quando a página nomeava a marca (o Simpla Club, pelo texto da página;
+    o `bullbear.com.br`, de uma consultoria empresarial, foi recusado para a Team BullBear;
+    `doup.com.br` era uma escola de inglês e `desmistificando.com.br`, um escritório de advocacia).
+    A Simpla traz o CNPJ do grupo na página, e não o do cadastro: a identidade é pela marca.
+
 ## 5. O que falta, em ordem
 
 1. ~~O merge do PR do sorteio~~ (#45) e o da emenda ag-b (livro v3), antes deste.
 2. ~~As visitas de consultoria CVM e assessor~~ (04/10). Corretora e gestora: a sessão local
    (§3.1).
-3. As listas oficiais de robô, consolidador, planejador, bancos, pagamentos e casas de análise.
+3. ~~As listas oficiais de bancos, pagamentos e casas de análise~~ (10/10, nuvem; §2) e as
+   visitas delas (11/10). **Robô, consolidador e planejador: sem universo (§2.1); a decisão é
+   dele (fila, bloco 27).**
+3b. O degrau 4: as 83 linhas `AGUARDA DEGRAU 4` e o Wayback das 85 (`tools/r3_arquivar.py`), na
+   máquina dele (§3.1).
 4. As não auditadas das rodadas 1 e 2, e a seção fora do Brasil.
 5. A tabela do veto completa **antes do fim da janela de 21 dias** do teste.

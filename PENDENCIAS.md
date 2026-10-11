@@ -251,11 +251,14 @@ paralelo à coleta da P-162; as visitas já podem começar (o sorteio está no `
 
 Livro de códigos v3 (onze categorias, 10 marcas sorteadas por categoria, semente 20261002; a v3 é a ag-b, de 04/10, a luminosidade do matiz),
 plano em [`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml), andamento em
-`docs/marca/pesquisa-marcas-rodada3-2026-09.md` §5. **04/10:** 51 visitadas, 34 classificadas
-(consultoria CVM e assessor com as 10), nenhum código dominante ainda; corretora e gestora
-dependem do degrau 4 (bloqueio para o IP da nuvem, §3.1 de lá), as 34 aguardam o Wayback
-(`tools/r3_arquivar.py`, na máquina dele), e sete categorias seguem sem universo. Só página
-pública; nada de sessão logada (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** uma linha
+`docs/marca/pesquisa-marcas-rodada3-2026-09.md` §5. **11/10:** 413 marcas lidas, 85 classificadas,
+as 10 da af-a em oito categorias (os universos de bancos, pagamentos e casas de análise saíram de
+cadastro oficial, §2) e **nenhum código dominante em categoria nenhuma** (`rodada3/veto.md`);
+robô, consolidador e planejador **sem universo**, com a escada transcrita (§2.1; decisão dele, fila
+27). Falta o que a nuvem não alcança: 83 linhas `AGUARDA DEGRAU 4` (42 de bancos, 20 de
+pagamentos, 16 de corretora, 3 de gestora, 2 de casa de análise; §3.1) e o Wayback das 85
+(`tools/r3_arquivar.py`), os dois na máquina dele. Só página pública; nada de sessão logada
+(§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** o degrau 4 e o arquivamento, uma linha
 por marca (categoria, captura com fonte e data, medidas do `classificar()`) e o `veto()` aplicado
 à direção vencedora.
 
@@ -282,10 +285,16 @@ ativas.*
 
 1. **P-145, depois do item 4:** `py -3.11 medicoes/p145_ponte_2013_2019.py` e o PR com os
    inventários que o envio gravou. É o passo 1 do caminho crítico.
-2. **P-170, o degrau 4 da R3:** a lista da §3.1 de `docs/marca/pesquisa-marcas-rodada3-2026-09.md`
-   (capturas que a nuvem não abre e o resto da ordem de corretora), depois
-   `py -3.11 tools/r3_arquivar.py` e `python tools/r3_dominante.py`. As capturas da nuvem estão
-   em `data/r3/capturas/` da pasta dele (copiadas pela sessão de 04/10).
+2. **P-170, o degrau 4 da R3:** as 83 linhas `AGUARDA DEGRAU 4` (`grep "AGUARDA DEGRAU 4"
+   docs/marca/rodada3/classificacao.csv`; a lista e o roteiro estão na §3.1 de
+   `docs/marca/pesquisa-marcas-rodada3-2026-09.md`): `py -3.11 tools/r3_capturar.py site <url>
+   data/r3/capturas/<categoria>-<ordem>` do IP dele, ler, acrescentar a entrada em
+   `leituras.yaml` e `python tools/r3_linhas.py --acrescentar --refazer <categoria>:<ordem>`. Depois
+   `py -3.11 tools/r3_arquivar.py` (o Wayback das 85) e `python tools/r3_dominante.py`. Para o
+   `playwright`, o Chromium da máquina dele (a nuvem usa o build 1194 por `R3_CHROMIUM`). As
+   capturas das 85 classificadas (390.png, medidas e imagens da loja, 12 MB) foram enviadas por
+   arquivo na sessão de 11/10: descompactar em `data/r3/` (cria `capturas/<categoria>-<ordem>/`);
+   site de terceiros, fora do git.
 3. **P-05 e P-169, o degrau 4 da escada:** `curl` de IP residencial no site do BOVV11 e nas
    páginas dos 11 bancos da regra m-B (os roteiros estão no texto das duas, na reserva).
 

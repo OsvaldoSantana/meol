@@ -801,6 +801,29 @@ PR da P-179; o que falta está na P-179.
 
 ---
 
+## 27 · Robô, consolidador e planejador: sem universo oficial · P-170 · **a responder**
+
+A R3 sorteia marcas de cadastro oficial, e para três categorias do livro **não existe cadastro**
+(`pesquisa-marcas-rodada3-2026-09.md` §2.1, com a escada transcrita): para o `robo` e o
+`consolidador`, nem a CVM nem o BCB mantêm lista (o Open Finance traz 105 organizações, sem a
+Kinvo, a Gorila nem a Warren); para o `planejador`, a lista da Planejar está atrás de um reCAPTCHA
+de caixa de seleção, que não se resolve nem se contorna. Sem universo, a categoria fica com 0
+marcas e, pela regra do livro (`n_minimo_de_marcas: 5`), **não tem dominante e não aciona o veto**.
+
+- **27a** — **Aceitar "sem veto" nas três.** → A R3 fecha com oito categorias medidas e três
+  declaradas sem lista. Nenhuma lista nova, nenhuma escolha de quem busca.
+- **27b** — **Autorizar uma lista por busca**, com critério escrito antes (por exemplo, "os
+  dez primeiros apps da categoria na App Store do Brasil"). → Dá n para as três, mas é escolha de
+  quem busca, que é o que o sorteio existe para impedir; entra como **limitação declarada** e com
+  o critério pré-registrado, não como universo.
+- **27c** — **Pedir a lista da Planejar a você**, que abre o portal num navegador e exporta o
+  resultado. → Só o `planejador` ganha universo; as outras duas ficam como na 27a.
+
+**Recomendação: 27a**, e a 27c só se o planejador pesar na direção vencedora. Nenhuma das três muda
+o que a R3 já mediu: oito categorias, nenhum dominante.
+
+---
+
 ## Conferência de um minuto, com data
 
 - **Token do R2 somente leitura (P-145, destrava toda medição na nuvem):** no Cloudflare, R2 →
