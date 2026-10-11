@@ -131,9 +131,12 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
                 escada=leitura.get("escada", ""), data=leitura["data"])
     pasta = os.path.join(CAPTURAS, f"{cat}-{ordem:02d}")
     mpath = os.path.join(pasta, "medidas.json")
-    if leitura["situacao"] == "classificada" and not os.path.exists(mpath):
-        # a captura e a procedencia (docstring): classificada sem ela nao tem de onde vir
-        raise ValueError(f"{cat}-{ordem:02d}: classificada sem captura em {pasta}")
+    if leitura["situacao"] == "classificada":
+        # a captura e a procedencia (docstring): classificada sem ela nao tem de onde vir. Na
+        # unidade app a captura e a da loja (app_390.json); o site pode nem ter aberto (BV, 10/10)
+        prova = "app_390.json" if leitura.get("unidade") == "app" else "medidas.json"
+        if not os.path.exists(os.path.join(pasta, prova)):
+            raise ValueError(f"{cat}-{ordem:02d}: classificada sem captura em {pasta} ({prova})")
     if os.path.exists(mpath):
         with open(mpath, encoding="utf-8") as f:
             m = json.load(f)
@@ -142,9 +145,11 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
     if leitura["situacao"] != "classificada":
         base["url"] = base["url"] or leitura.get("url", "")
         return base
-    a = m["390"]
     png = os.path.join(pasta, "390.png")
-    if leitura["unidade"] == "app":
+    a: dict[str, Any] = {}
+    if leitura["unidade"] != "app":
+        a = m["390"]
+    else:
         # ae-a: a captura da App Store, recortada na tela do aparelho (r3_capturar recortar)
         with open(os.path.join(pasta, "app_390.json"), encoding="utf-8") as f:
             rec = json.load(f)

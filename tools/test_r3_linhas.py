@@ -102,3 +102,18 @@ def test_sem_chaves_tira_so_as_pedidas_e_recusa_chave_inexistente():
         ("bancos", "20"), ("assessor", "16")]
     with pytest.raises(ValueError, match="bancos.*17"):
         L.sem_chaves(linhas, ["bancos:17"])
+
+def test_app_classificado_nao_exige_o_site_aberto(tmp_path, monkeypatch):
+    """10/10/2026, BV: o site recusou todas as variantes, mas o app da loja tem captura. Na
+    unidade app a prova e a captura da loja (app_390.json); exigir o medidas.json do site
+    derrubaria uma marca que o livro manda classificar pelo app (ae-a)."""
+    monkeypatch.setattr(L, "CAPTURAS", str(tmp_path))
+    pasta = tmp_path / "bancos-87"
+    pasta.mkdir()
+    leitura = {"marca": "X", "situacao": "classificada", "unidade": "app", "data": "2026-10-10"}
+    # sem a captura da loja, o erro e nomeado e diz qual arquivo falta
+    with pytest.raises(ValueError, match=r"bancos-87.*app_390\.json"):
+        L.linha("bancos", 87, leitura, {"cnpj": "1"}, {})
+    # na unidade site, a prova continua sendo o medidas.json
+    with pytest.raises(ValueError, match=r"bancos-87.*medidas\.json"):
+        L.linha("bancos", 87, {**leitura, "unidade": "site"}, {"cnpj": "1"}, {})

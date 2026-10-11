@@ -1102,7 +1102,7 @@ categorias:
       situacao: classificada
       unidade: site          # o app 'Safra: investimentos e conta' (id 422705275) existe, mas nenhuma das 6 capturas da loja e tela mensuravel: sao fotos do aparelho na mao ou sobre a mesa, com a interface em menos de 15% da imagem
       botao: vazado
-      botao_texto: Conheça agora
+      botao_texto: Conhe
       fonte: "Source Serif 4 (o texto de maior corpo, 32 px, no CSS)"
       familia_generica: serif
       densidade_blocos: 10
@@ -1154,6 +1154,455 @@ categorias:
       densidade_lista: "barra de status; logotipo; avatar; texto Acesse sua conta; seta; botao CADASTRAR / ALTERAR ACESSO; barra inferior com cinco icones"
       nota: "captura 2 da loja, a primeira de interface (a 1 e a tela de abertura com o logotipo). Sao capturas de tela inteiras, sem aparelho: unidade tomada inteira, 1242x2208 levada a 390 px. Banco publico com 115 agencias no BCB"
       escada: "1) o site (bancoamazonia.com.br) nao traz link da loja; o app foi achado pela busca da loja, que respondeu 403 em quatro tentativas com o termo 'banco da amazonia' e 200 com 'banco da amazonia basa'"
+      data: 2026-10-10
+    81:
+      marca: "Banco John Deere"
+      situacao: pulada
+      motivo: "site_inacessivel: 'ERROR: The request could not be satisfied' (CloudFront) para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 da CDN no caminho do cadastro; curl https www: 200, https: cert, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 54.237.99.113; 4) pendente: maquina dele"
+      data: 2026-10-10
+    82:
+      marca: "Banco Paulista"
+      situacao: pulada
+      motivo: "site_inacessivel: 403 Forbidden do servidor, com 'Transaction ID', para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 Forbidden; curl https www: 403, https: erro:Tunnel connection failed: 502 , http www: 403, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
+      data: 2026-10-10
+    83:
+      marca: "Banco KEB Hana do Brasil"
+      situacao: pulada
+      motivo: "nao_atende_pf: banco sul-coreano 'especializado em operacoes de cambio, credito corporativo e investimentos'; o Internet Banking e para clientes corporativos"
+      data: 2026-10-10
+    84:
+      marca: "Banco Stellantis"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Request Blocked: Cybersecurity Policy Violation' para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Sorry, you have been blocked'; curl https www: 200, https: erro:Tunnel connection failed: 502 , http www: 200, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2026-03-08; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
+      data: 2026-10-10
+    85:
+      marca: "Banco BBC Digital"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [15, 226, 92, 88]
+      cor_do_texto: "#222222"
+      raio_px: 6
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 13
+      densidade_lista: "barra de status; voltar; Saldo disponivel e valor; Transferir; Pagar; Emprestimo; Pedir extrato; Movimentacoes; abas Recentes e Futuras; data; saldo do dia; item Pix; item recarga"
+      nota: "app 'BBC Digital' (id 1480048382, o site aponta para ele; 1 agencia no BCB). Captura 2 da loja, a primeira com interface em pe (a 1 e arte com o aparelho inclinado). Recorte 185,349,1061,2249 sobre 1242x2688. O botao e o atalho Transferir, cartao cinza claro (#f4f4f4), unico elemento de acao da tela"
+      data: 2026-10-10
+    86:
+      marca: Bancoseguro
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro aponta para o ouvidoria do PagSeguro; o dominio da marca e negado pelo proxy da nuvem ('Blocked by egress policy', HTTP 403), nao pelo site. AGUARDA DEGRAU 4 (o dominio verificado do cadastro e vazio: o BCB nao registra site para este CNPJ)"
+      escada: "1) Chromium: 403 'Blocked by egress policy' do proxy da nuvem em pagseguro.com.br/404; curl https www: 200, https: 200, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.18.3.49; 4) pendente: maquina dele"
+      data: 2026-10-10
+    87:
+      marca: "Banco Votorantim (BV)"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [265, 424, 105, 50]
+      cor_do_texto: "#0a28e0"
+      raio_px: 25
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "barra de status; ilha; avatar BO; sino; olho; Modo IA; ilustracao do envelope; titulo; texto; Aderir; cartao Conta"
+      nota: "app 'banco BV: Conta, Credito e +' (id 1494202346, achado pela busca da loja: o site bv.com.br recusou todas as variantes; 3 agencias no BCB). Captura 4 da loja, a primeira com interface em pe (1 e 3 inclinadas, 2 e arte de cartoes). Recorte 220,1485,1000,2688 sobre 1242x2688. A captura esta na pasta de 124 (Banco BV S.A.), que e a mesma marca, e foi copiada para esta"
+      data: 2026-10-10
+    88:
+      marca: "Banco Digimais"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Saiba mais"
+      fonte: "Red Hat Display"
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "logotipo; menu; etiqueta Confianca e tradicao; titulo; paragrafo; Saiba mais; aviso de seguranca (janela); aviso de cookies"
+      nota: "sem app na loja (a busca por Digi+ devolve o Digio, outro banco). 2 agencias no BCB. Classificado digital pelo controle de agencias, mas o site fala em 'tradicao' e vende credito (consignado, CDC, capital de giro): e o caso mais duvidoso da categoria. Uma janela de aviso de fraude e o aviso de cookies cobrem a primeira tela; as caixas sao as do DOM"
+      data: 2026-10-10
+    89:
+      marca: "Banco Semear"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Unico, multiplo e personalizado para a sua empresa'; credito, cambio e investimentos para pessoa juridica (a 2a via de boleto e de renegociacao)"
+      data: 2026-10-10
+    90:
+      marca: "Banco Mizuho do Brasil"
+      situacao: pulada
+      motivo: "site_inacessivel: o endereco do cadastro (mizuhobank.com/brazil/pt/) nao abre: erro de tunel do proxy em https e nome nao resolvido em http. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: net::ERR_TUNNEL_CONNECTION_FAILED em https://www.mizuhobank.com/brazil/pt/ e /brazil/; net::ERR_NAME_NOT_RESOLVED em http; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2012-08-29; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
+      data: 2026-10-10
+    91:
+      marca: "Banco Bandepe"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) no site do Santander, de que o Bandepe e parte, para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.172; 4) pendente: maquina dele"
+      data: 2026-10-10
+    92:
+      marca: "Banco J. Safra"
+      situacao: pulada
+      motivo: "duplicada: a marca Safra ja foi classificada em bancos 50 (Banco Safra, site safra.com.br)"
+      data: 2026-10-10
+    93:
+      marca: "Banco Losango"
+      situacao: pulada
+      motivo: "fora_do_livro: portal 'Atendimento das suas solucoes contratadas' (2a via, extrato do contrato), sem conta nem investimento"
+      data: 2026-10-10
+    94:
+      marca: "Banco Investcred Unibanco"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai no site do Itau, o mesmo dominio de bancos 22 e 61, para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.53.11.141; 4) pendente: maquina dele"
+      data: 2026-10-10
+    95:
+      marca: "Banco da China Brasil"
+      situacao: pulada
+      motivo: "site_inacessivel: o endereco do cadastro redireciona para um aviso do portal global em chines (boc.cn/custserv/.../t20090928_846317.html), sem pagina do Brasil; pode ser desvio por origem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: redirecionamento para boc.cn, aviso 'tishi xinxi' sem conteudo; curl https www: 200, https: erro:Tunnel connection failed: 502 , http www: 200, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
+      data: 2026-10-10
+    96:
+      marca: "Banco Inter"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [24, 324, 81, 37]
+      cor_do_texto: "#ef6c00"
+      raio_px: 18
+      fonte: "fonte sem serifa arredondada do app"
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "barra de status; ilha; titulo Investimentos; olho; busca; engrenagem; Total investido e valor; filete; Disponivel para resgate; Investir; Resgatar; Performance"
+      nota: "app 'Inter: Conta, Cartao e Pix' (id 839711154; o cadastro traz um link de ouvidoria, a marca vem do dominio verificado bancointer.com.br, que o site aponta para a loja). Captura 4 da loja, a primeira com interface em pe (1 e 5 inclinadas, 2 arte, 3 aparelho de lado no bolso). Recorte 206,1208,1038,2208 sobre 1242x2208; pilulas pessego sobre branco"
+      data: 2026-10-10
+    97:
+      marca: "Goldman Sachs do Brasil"
+      situacao: pulada
+      motivo: "nao_atende_pf: banco de investimento; a pagina do cadastro (goldmansachs.com/worldwide/brazil/) nao existe mais e o portal global e institucional"
+      data: 2026-10-10
+    98:
+      marca: "Novo Banco Continental"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Error 403 Web Page Blocked' de um WAF, com o IP da nuvem na mensagem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Web Page Blocked'; curl https www: 403, https: 403, http www: erro:EOF occurred in violation of p, http: erro:EOF occurred in violation of p; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 20.206.185.73; 4) pendente: maquina dele"
+      data: 2026-10-10
+    99:
+      marca: "Banco C6 Consignado"
+      situacao: pulada
+      motivo: "site_inacessivel: o cadastro traz so um link de WhatsApp e o BCB nao verifica dominio para este CNPJ; o dominio do grupo (c6bank.com.br, bancos 45) e bloqueado para a nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 404 em api.whatsapp.com; dominio do grupo bloqueado como em bancos 45; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-03; dns.google: A 162.159.153.238; 4) pendente: maquina dele"
+      data: 2026-10-10
+    100:
+      marca: "Scania Banco"
+      situacao: pulada
+      motivo: "fora_do_livro: financiamento de veiculos da Scania (pagina scania.com/br/.../finance); sem conta nem investimento"
+      data: 2026-10-10
+    101:
+      marca: "Braza Bank"
+      situacao: pulada
+      motivo: "fora_do_livro: banco de cambio ('o maior banco de cambio do Brasil'), com 'Para sua empresa' e transferencia internacional; atividade sem categoria no livro"
+      data: 2026-10-10
+    102:
+      marca: PicPay
+      categoria: pagamentos
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [37, 371, 152, 40]
+      cor_do_texto: "#ffffff"
+      raio_px: 20
+      fonte: "fonte sem serifa geometrica do app"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "ilha; avatar; busca; ajuda; chat; sino; chip PicPay; chip PicPay PJ; cartao Conta; Ver extrato; Saldo em conta e valor; olho; Trazer saldo; Guardar"
+      nota: "cadastrado como PicPay Bank (banco multiplo, 1 agencia no BCB); a marca e a mesma do PicPay Instituicao de Pagamento (pagamentos 113) e, pela precedencia do livro (pagamentos antes de banco_digital), conta em pagamentos. App 'PicPay: Conta, Cartao e Pix' (id 561524792, achado pela busca da loja). Captura 1 da loja, a unica de interface em pe antes da 4; a tela esta esmaecida pela arte (verde translucido sobre o aparelho), e isso entra na limitacao: o fundo e o destaque saem dessa tela. Recorte 126,1115,1094,2699 sobre 1242x2699"
+      data: 2026-10-10
+    103:
+      marca: "Banco BS2"
+      situacao: pulada
+      motivo: "nao_atende_pf: o app da loja (id 1485273498) e o 'Banco BS2 Empresas' ('o banco digital da sua empresa'); o cadastro traz so um link de WhatsApp"
+      data: 2026-10-10
+    104:
+      marca: "Banco Rabobank International Brasil"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Parece que algo deu errado' (Akamai, 'Reference id') para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Parece que algo deu errado'; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.39.174.151; 4) pendente: maquina dele"
+      data: 2026-10-10
+    105:
+      marca: "Banco Societe Generale Brasil"
+      situacao: pulada
+      motivo: "nao_atende_pf: pagina institucional do grupo (informacoes a investidores, sala de imprensa, canais de atendimento); banco de atacado"
+      data: 2026-10-10
+    106:
+      marca: "Banco Volkswagen"
+      situacao: pulada
+      motivo: "fora_do_livro: Volkswagen Financial Services: financiamento de veiculos; sem conta nem investimento"
+      data: 2026-10-10
+    107:
+      marca: "Banco Volvo Brasil"
+      situacao: pulada
+      motivo: "fora_do_livro: Volvo Financial Services (banco, consorcio, locadora, corretora de seguros): financiamento de equipamentos; sem conta nem investimento. O site do cadastro so abre em http"
+      data: 2026-10-10
+    108:
+      marca: "Banco RNX"
+      situacao: pulada
+      motivo: "site_inacessivel: verificacao de seguranca da Cloudflare ('Um momento...') para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: pagina de verificacao da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.26.13.65; 4) pendente: maquina dele"
+      data: 2026-10-10
+    109:
+      marca: "Banco Cooperativo Sicoob"
+      situacao: pulada
+      motivo: "duplicada: a marca Sicoob ja foi classificada em corretora 18 (Sicoob DTVM, portal sicoob.com.br); precedencia do livro: corretora antes de banco_tradicional"
+      data: 2026-10-10
+    110:
+      marca: "Banco do Nordeste"
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [63, 240, 263, 42]
+      cor_do_texto: "#a6193c"
+      raio_px: 8
+      fonte: "fonte humanista sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "barra de status; logotipo; Acesse sua conta; Localize um terminal; Telefones uteis; Dicas de seguranca; Sobre"
+      nota: "app 'Banco do Nordeste Mobile' (id 655083328, achado pela busca da loja; 300 agencias no BCB). Captura 1 da loja, a tela inicial de verdade (sem aparelho), 1242x2208 inteira. Botoes brancos com o canto direito arredondado e o esquerdo reto: o raio e o do canto arredondado, medido a olho"
+      data: 2026-10-10
+    111:
+      marca: "Banco Honda"
+      situacao: pulada
+      motivo: "fora_do_livro: financiamento de motos e carros Honda ('Simular Financiamento'); sem conta nem investimento"
+      data: 2026-10-10
+    112:
+      marca: "Banco Morgan Stanley"
+      situacao: pulada
+      motivo: "site_inacessivel: o site nao abre da nuvem: 502 do proxy no Chromium, como em corretora 4 (Morgan Stanley, mesmo grupo). AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 502 do proxy em duas tentativas, como em corretora 4; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.53.35.175; 4) pendente: maquina dele"
+      data: 2026-10-10
+    113:
+      marca: "Banco IBM"
+      situacao: pulada
+      motivo: "nao_atende_pf: banco cativo do grupo IBM; o site do cadastro (ibm.com/br-pt) e o comercial de software, sem oferta financeira"
+      data: 2026-10-10
+    114:
+      marca: "Banco ABC Brasil"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'Aceleramos o sucesso do seu negocio'; secao 'Para sua empresa'; banco de atacado"
+      data: 2026-10-10
+    115:
+      marca: "Banco do Brasil"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Ops! Erro no acesso' (403) com identificador de suporte, para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Ops! Erro no acesso'; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; dns.google: A 104.18.29.245; 4) pendente: maquina dele"
+      data: 2026-10-10
+    116:
+      marca: "Banco Genial"
+      situacao: pulada
+      motivo: "site_inacessivel: sem resposta (timeout) em todas as variantes, como em corretora 19 (mesmo dominio). AGUARDA DEGRAU 4"
+      escada: "1) Chromium: tempo esgotado na navegacao, como em corretora 19; curl https www: erro:TimeoutError, https: erro:TimeoutError, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.174; 4) pendente: maquina dele"
+      data: 2026-10-10
+    117:
+      marca: "Banco Topazio"
+      situacao: pulada
+      motivo: "fora_do_livro: cambio e capital de giro para empresas e renegociacao de dividas; a primeira tela nao oferece conta nem investimento"
+      data: 2026-10-10
+    118:
+      marca: "Banco Bmg Consignado"
+      situacao: pulada
+      motivo: "duplicada: a marca Bmg ja foi classificada em bancos 29 (Banco Bmg, app id 1396096726)"
+      data: 2026-10-10
+    119:
+      marca: "Banco Luso Brasileiro"
+      situacao: pulada
+      motivo: "site_inacessivel: o dominio do cadastro (lusobrasileiro.com.br) nao resolve e o verificado pelo BCB (lusobank.com.br) falha no tunel do proxy. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: ERR_NAME_NOT_RESOLVED em lusobrasileiro.com.br; ERR_TUNNEL_CONNECTION_FAILED em lusobank.com.br; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
+      data: 2026-10-10
+    120:
+      marca: "Daycoval Leasing"
+      situacao: pulada
+      motivo: "duplicada: a marca Daycoval ja foi classificada em bancos 60 (Banco Daycoval, app id 1231632610)"
+      data: 2026-10-10
+    121:
+      marca: "Moneycorp Banco de Cambio"
+      situacao: pulada
+      motivo: "fora_do_livro: cambio ('moneycorp.com/en-br'); atividade sem categoria no livro"
+      data: 2026-10-10
+    122:
+      marca: "Banco Bradesco"
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [28, 619, 344, 53]
+      cor_do_texto: "#ffffff"
+      raio_px: 26
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "voltar; titulo Investimentos; ajuda; Escolha as instituicoes; Brasil; tres logotipos; Dados atualizados; Valor ate e valor; olho; Rentabilidade mes; Personalizar; cartao Composicao da carteira; Saldo em conta; Investir; Resgatar"
+      nota: "app 'Banco Bradesco' (id 336954985, achado pela busca da loja; 1.922 agencias no BCB). Captura 5 da loja, a primeira com interface em pe (1 a 4 inclinadas). Recorte 148,991,1066,2692 sobre 1242x2692; botao Investir vermelho, pilula"
+      data: 2026-10-10
+    123:
+      marca: "Banco Bocom BBM"
+      situacao: pulada
+      motivo: "nao_atende_pf: banco de investimento e wealth management ('IB Wealth Management', 'visao global'); pagina institucional"
+      data: 2026-10-10
+    124:
+      marca: "Banco BV"
+      situacao: pulada
+      motivo: "duplicada: a marca BV ja foi classificada em bancos 87 (Banco Votorantim, app id 1494202346); a captura do app foi feita nesta pasta e copiada para a de 87"
+      data: 2026-10-10
+    125:
+      marca: "Banco Santander (Brasil)"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.172; 4) pendente: maquina dele"
+      data: 2026-10-10
+    126:
+      marca: "Intesa Sanpaolo Brasil"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'instituicao de atacado da divisao IMI Corporate & Investment Banking'"
+      data: 2026-10-10
+    127:
+      marca: "Banco Cooperativo Sicredi"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.176; 4) pendente: maquina dele"
+      data: 2026-10-10
+    128:
+      marca: "ICBC do Brasil"
+      situacao: pulada
+      motivo: "nao_atende_pf: o site do cadastro (icbc.com.cn) e o portal global em chines, sem pagina do Brasil; banco de atacado"
+      data: 2026-10-10
+    129:
+      marca: "Banco Pan"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [44, 580, 145, 48]
+      cor_do_texto: "#ffffff"
+      raio_px: 17
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "barra de status; avatar Rebeca; olho; ajuda; sino; cartao escuro; cartao azul; indicadores; Fatura de Julho em aberto; valor; Pagar fatura; Parcelar; barra Usado e Disponivel; Vencimento"
+      nota: "app 'Banco PAN: Conta, Cartao e +' (id 1410400504, achado pela busca da loja; o cadastro traz um link do bit.ly para o chat). 1 agencia no BCB. Captura 2 da loja, a primeira com interface em pe (1 e foto). Recorte 287,596,957,2052 sobre 1242x2208; botao Pagar fatura azul claro (#08a8ff)"
+      data: 2026-10-10
+    130:
+      marca: "Itau Unibanco Holding"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem (a mesma de bancos 22, 61 e 94). AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.53.11.141; 4) pendente: maquina dele"
+      data: 2026-10-10
+    131:
+      marca: "JPMorgan Chase Bank, N.A."
+      situacao: pulada
+      motivo: "nao_atende_pf: banco americano; o site do cadastro (jpmorganchase.com) e o portal global institucional"
+      data: 2026-10-10
+    132:
+      marca: "Banco Mercantil do Brasil"
+      situacao: pulada
+      motivo: "site_inacessivel: o servidor responde 'Invalid URL [no URL]' (Akamai) em http e falha o TLS em https. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: http: 400 'Invalid URL'; https: ERR_SSL_PROTOCOL_ERROR e ERR_CONNECTION_RESET; curl https www: erro:[SSL: TLSV1_ALERT_INTERNAL_ERR, https: erro:[Errno 104] Connection reset b, http www: 400, http: 503; 2) archive.org/wayback/available: ultimo arquivamento 2021-11-05; dns.google: A 177.154.95.111; 4) pendente: maquina dele"
+      data: 2026-10-10
+    133:
+      marca: "Banco de la Nacion Argentina"
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      fonte: "Kievit"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "logotipo BNA; foto da cidade; Pessoa Fisica; Pessoa Juridica; Comercio Exterior; ESPANOL; PORTUGUES"
+      nota: "banco estrangeiro de agencia unica em Sao Paulo (1 no BCB), com abas Pessoa Fisica e Pessoa Juridica; nenhum botao: so menu de texto, centralizado, sobre verde escuro. Classificado tradicional pela agencia fisica, nao pela escala; foco em comercio exterior"
+      data: 2026-10-10
+    134:
+      marca: Banpara
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [21, 405, 350, 42]
+      cor_do_texto: "#ffffff"
+      raio_px: 4
+      fonte: "fonte sem serifa do app"
+      familia_generica: sans-serif
+      densidade_blocos: 13
+      densidade_lista: "barra de status; voltar; titulo Transferencias; estrela; menu; texto de instrucao; cartao; cabecalho Conta de Destino; Tipo de Transacao; Tipo da Conta de Destino; Agencia; Numero da Conta; CONTINUAR"
+      nota: "app 'Banpara' (id 1484074097, o site aponta para ele; 164 agencias no BCB). Captura 2 da loja, a primeira com interface em pe (1 mostra o Touch ID do sistema). Recorte 100,1010,1141,2208 sobre 1242x2208; o botao CONTINUAR (azul marinho) e cortado pela borda de baixo da captura, entao a altura medida e a parte visivel e o raio e o do canto de cima"
+      data: 2026-10-10
+    135:
+      marca: "Banco VR"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Conhecer produtos"
+      fonte: "Montserrat"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "logotipo; menu; foto; logotipo grande; titulo; paragrafo; Conhecer produtos"
+      nota: "sem app do banco na loja (o 'SuperApp VR' e da VR, a marca parceira); site de consumidor ('Digital, sem burocracias'), credito do trabalhador, antecipacao do FGTS e Conta Negocios; 1 agencia no BCB. Botao verde escuro, pilula"
+      data: 2026-10-10
+    136:
+      marca: "BNY Mellon Banco"
+      situacao: pulada
+      motivo: "nao_atende_pf: banco de investimento e custodia; a pagina do cadastro nao existe (404) e o portal global e institucional"
+      data: 2026-10-10
+    137:
+      marca: "Banco do Estado de Sergipe (Banese)"
+      situacao: pulada
+      motivo: "site_inacessivel: 'upstream connect error' (503) em http e ERR_CONNECTION_RESET em https. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: http: 503 'upstream connect error or disconnect/reset before headers'; https: ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: ultimo arquivamento 2026-04-14; dns.google: A 20.201.22.33; 4) pendente: maquina dele"
+      data: 2026-10-10
+    138:
+      marca: "Banco Digio"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: ultimo arquivamento 2026-09-21; dns.google: A 18.154.227.52; 4) pendente: maquina dele"
+      data: 2026-10-10
+    139:
+      marca: "Andbank Brasil"
+      categoria: gestora_e_private
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "ASSISTIR"
+      fonte: "Source Sans Pro"
+      familia_generica: sans-serif
+      densidade_blocos: 10
+      densidade_lista: "logotipo; seletor de site; Acesse sua conta; Fale conosco; Seja Cliente; busca; faixa com o lema e menu; foto; ASSISTIR; titulo"
+      nota: "'private bank' ('Beyond Private. Bespoken.'): pela precedencia do livro (gestora_e_private antes de banco_tradicional) conta como gestora_e_private. Uma janela de selecao de pais cobre a primeira tela; as caixas sao as do DOM. Botao vermelho escuro, canto de 4 px"
+      data: 2026-10-10
+    140:
+      marca: "Banco Moneo"
+      situacao: pulada
+      motivo: "fora_do_livro: banco da Marcopolo: portal do cliente com contratos e boletos, antecipacao de recebiveis; sem conta nem investimento"
+      data: 2026-10-10
+    141:
+      marca: Banrisul
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_tradicional ja tinha as 10 primeiras (Caixa 23, BRB 43, Safra 50, Daycoval 60, Banestes 64, BASA 75, BNB 110, Bradesco 122, Nacion 133, Banpara 134) quando esta marca apareceu; o app (id 1177452393) foi capturado e fica sem classificar"
+      data: 2026-10-10
+    142:
+      marca: "Banco Hyundai Capital Brasil"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.37; 4) pendente: maquina dele"
+      data: 2026-10-10
+    143:
+      marca: "Banco J.P. Morgan"
+      situacao: pulada
+      motivo: "nao_atende_pf: banco de investimento; o site do cadastro (jpmorgan.com/global) e o portal global institucional"
       data: 2026-10-10
   pagamentos:
     # Plano v2 (10/10/2026): instituicoes de pagamento autorizadas pelo BCB (136 com site). A
