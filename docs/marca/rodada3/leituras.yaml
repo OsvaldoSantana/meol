@@ -466,7 +466,7 @@ categorias:
     16:
       marca: Santander Corretora
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) para o IP da nuvem. AGUARDA DEGRAU 4"
+      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) para o IP da nuvem. AGUARDA DEGRAU 4. A mesma marca visual (Santander Corretora) abriu em corretora 58 pelo subdominio site.santandercorretora.com.br; se o www abrir no degrau 4, e duplicada de 58"
       escada: "1) curl: 403 nas quatro variantes; Chromium: Access Denied; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
       data: 2026-10-10
     17:
@@ -630,6 +630,194 @@ categorias:
       situacao: pulada
       motivo: "site_inacessivel: o dominio do cadastro (indigoinvestimentos.com.br) nao tem registro A no DNS"
       escada: "1) Chromium: ERR_TUNNEL_CONNECTION_FAILED; curl: 502 do proxy e 'No address associated'; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 0 (sem registro A)"
+      data: 2026-10-10
+    41:
+      marca: "Finvest DTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: servicos de fundo de credito para cedentes; canais de ouvidoria e denuncia; sem oferta a pessoa fisica"
+      data: 2026-10-10
+    42:
+      marca: "Citibank DTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: portal corporativo do Citi Brasil ('o banco mais global do mundo', solucoes para empresas)"
+      data: 2026-10-10
+    43:
+      marca: "Parmetal (Unida DTVM)"
+      situacao: pulada
+      motivo: "nao_atende_pf: Banking as a Service para empresas ('atue como uma fintech em ate 5 dias')"
+      data: 2026-10-10
+    44:
+      marca: "BRB DTVM"
+      situacao: pulada
+      motivo: "duplicada: a marca BRB ja foi classificada em bancos 43 (Banco de Brasilia, app id 1005747186); o site do cadastro e o do banco"
+      data: 2026-10-10
+    45:
+      marca: "Banrisul Corretora"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Saiba mais"
+      fonte: "Poppins"
+      familia_generica: sans-serif
+      densidade_blocos: 9
+      densidade_lista: "menu; logotipo; icone; faixa roxa; marca do asset; titulo; Saiba mais; Invista em fundos; aviso de cookies"
+      nota: "o site da corretora (banrisulcorretora.com.br), sem app proprio de investimento na busca da loja que o site aponte; a marca-mae Banrisul entrou em bancos 141 como excedente. Botao azul (#0b45e4), canto de 10 px"
+      data: 2026-10-10
+    46:
+      marca: "H.H. Picchioni"
+      situacao: pulada
+      motivo: "fora_do_livro: casa de cambio ('Picchioni Cambio, desde 1945'): atividade sem categoria no livro"
+      data: 2026-10-10
+    47:
+      marca: "XP Servicos Financeiros DTVM (Modal)"
+      situacao: pulada
+      motivo: "sem_marca: o dominio do cadastro (modaldtvm.com.br) hoje e de um site de anagramas (Word Unscrambler), nao do Modal nem da XP"
+      escada: "1) curl: cert em https e http www, 200 em http; Chromium: https falha no TLS, http abre o site de anagramas; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: A 3.136.55.208 (hospedagem generica)"
+      data: 2026-10-10
+    48:
+      marca: "EQI Investimentos"
+      situacao: classificada
+      unidade: site
+      botao: cheio
+      botao_texto: "Conhe"
+      fonte: "Aeonik"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "logotipo; Apresenta; marca do espetaculo; titulo do espetaculo; mensagem de erro 'An unknown error occurred'; titulo Planejar o futuro; Conheca a experiencia"
+      nota: "a primeira tela e uma campanha patrocinada (Cirque du Soleil) sobre fundo preto, com um bloco que mostra uma mensagem de erro do player; botao 'Conheca a experiencia' verde (#00c796), canto de 4 px. O site fala em 'Abra sua conta' e 'mais de 1.000 oportunidades de investimento'"
+      data: 2026-10-10
+    49:
+      marca: "Convencao (Tullett Prebon)"
+      situacao: pulada
+      motivo: "nao_atende_pf: intermediadora de liquidez para instituicoes ('A market-leading intermediary'), em ingles"
+      data: 2026-10-10
+    50:
+      marca: "Credit Suisse Hedging-Griffo"
+      situacao: pulada
+      motivo: "nao_atende_pf: a pagina do cadastro (ubs.com/global/pt/legal/country/brazil.html) nao existe (404); o portal e o global do UBS, institucional"
+      data: 2026-10-10
+    51:
+      marca: "Qore"
+      situacao: pulada
+      motivo: "site_inacessivel: a pagina carrega com o aviso 'We couldn't verify the security of your connection. Access to this content has been restricted'. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: aviso de restricao de acesso sobre o conteudo; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 185.173.111.86; 4) pendente: maquina dele"
+      data: 2026-10-10
+    52:
+      marca: "Integral Access DTVM"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.67.199.246; 4) pendente: maquina dele"
+      data: 2026-10-10
+    53:
+      marca: "CV Invest DTVM"
+      situacao: classificada
+      unidade: site
+      botao: vazado
+      botao_texto: "Abrir minha conta"
+      fonte: "Montserrat"
+      familia_generica: sans-serif
+      densidade_blocos: 7
+      densidade_lista: "faixa com as abas Pessoa fisica e Publico institucional; logotipo; menu; foto; titulo; texto; Abrir minha conta"
+      nota: "botao do heroi 'Abrir minha conta': so a borda verde (1 px), sem preenchimento; as abas Pessoa fisica (cheia, verde) e Publico institucional sao seletores de publico, nao a acao principal"
+      data: 2026-10-10
+    54:
+      marca: "BGC Liquidez"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Your request was blocked.' para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 'Your request was blocked.'; curl https www: 403, https: cert, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.196.201.182; 4) pendente: maquina dele"
+      data: 2026-10-10
+    55:
+      marca: "Lastro RDV DTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: administracao fiduciaria e servicos para fundos"
+      data: 2026-10-10
+    56:
+      marca: "Carol DTVM"
+      situacao: pulada
+      motivo: "fora_do_livro: comercializacao de ouro e metais preciosos ('a pioneira no segmento de comercializacao de ouro'): atividade sem categoria no livro"
+      data: 2026-10-10
+    57:
+      marca: "OXY DTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: 'infraestrutura para o mercado de capitais' e servicos fiduciarios; em fase de habilitacao na CVM"
+      data: 2026-10-10
+    58:
+      marca: "Toro (Santander Corretora)"
+      situacao: pulada
+      motivo: "excedente_da_categoria: corretora ja tinha as 10 primeiras (1, 11, 14, 18, 25, 27, 37, 45, 48, 53) quando esta marca apareceu; o site do cadastro e site.santandercorretora.com.br, a Santander Corretora (a Toro foi adquirida); a primeira tela traria o botao vermelho 'Entrar com o Santander' (#ec0000, canto de 4 px, Santander Headline), mas nao foi classificada. O www.santandercorretora.com.br de corretora 16 continua bloqueado para a nuvem"
+      data: 2026-10-10
+    59:
+      marca: "Ideal CTVM"
+      situacao: pulada
+      motivo: "site_inacessivel: 403 Forbidden do servidor para o IP da nuvem. AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 403 Forbidden; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 166.117.129.8; 4) pendente: maquina dele"
+      data: 2026-10-10
+    60:
+      marca: "Levycam"
+      situacao: pulada
+      motivo: "fora_do_livro: cambio e pagamentos internacionais para empresas e PSPs: atividade sem categoria no livro"
+      data: 2026-10-10
+    61:
+      marca: "Finaxis CTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: administracao fiduciaria, controladoria e custodia para fundos estruturados"
+      data: 2026-10-10
+    62:
+      marca: "Commcor"
+      situacao: pulada
+      motivo: "nao_atende_pf: o comunicado da primeira tela diz que a carteira de investimentos foi migrada para o BTG Pactual em 02/09/2024: nao ha mais oferta propria"
+      data: 2026-10-10
+    63:
+      marca: "Neon"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app
+      botao: cheio
+      botao_caixa: [31, 197, 73, 58]
+      cor_do_texto: "#2d4a8a"
+      raio_px: 11
+      fonte: "fonte sem serifa arredondada do app"
+      familia_generica: sans-serif
+      densidade_blocos: 18
+      densidade_lista: "barra de status; ilha; avatar; Ola Vanessa; olho; presente; Saldo e valor; seta; Lente Neon; Enviar Pix; Pagar; Recarga; banner CDB; indicadores; cartao Cartao; cartao Fatura; cartao Investimentos; cartao Emprestimo"
+      nota: "o cadastro e o da Magliano DTVM, mas o dominio declarado (neon.com.br) e o da Neon: a marca visitada e a Neon. O livro (codigos-visuais, definicao de banco_digital) cita a Neon nessa categoria, ao lado de Nubank, Inter e C6. App 'Neon: cartao de credito' (id 1127996388, achado pela busca da loja). Captura 3 da loja, a primeira com interface em pe (1 e foto, 2 inclinada). Recorte 288,901,954,2208 sobre 1242x2208; o botao e o atalho Lente Neon, tile claro de vidro fosco"
+      data: 2026-10-10
+    64:
+      marca: "XP Distribuidora de Titulos e Valores Mobiliarios"
+      situacao: pulada
+      motivo: "site_inacessivel: 'Acesso Bloqueado' pela CDN (bloqueio-cdn@xpi.com.br) para o IP da nuvem (a mesma de corretora 38). AGUARDA DEGRAU 4"
+      escada: "1) Chromium: 'A sua requisicao foi bloqueada'; (escada.py nao respondeu); 4) pendente: maquina dele"
+      data: 2026-10-10
+    65:
+      marca: "Limine Trust DTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: administracao de fundos para o mercado financeiro"
+      data: 2026-10-10
+    66:
+      marca: "Genial Investimentos"
+      situacao: pulada
+      motivo: "site_inacessivel: sem resposta (timeout) em todas as variantes, como em corretora 19 e bancos 116 (mesmo grupo). AGUARDA DEGRAU 4"
+      escada: "1) Chromium: tempo esgotado na navegacao; curl https www: erro:TimeoutError, https: erro:TimeoutError, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.221.227.209; 4) pendente: maquina dele"
+      data: 2026-10-10
+    67:
+      marca: "Unicred DTVM"
+      situacao: pulada
+      motivo: "fora_do_livro: cooperativa de credito (o site e o do sistema Unicred, 'sou visitante / sou cooperado'); a pagina da DTVM do cadastro (/SOLUCOES/ZIIN) e erro 404"
+      data: 2026-10-10
+    68:
+      marca: "Planner Corretora"
+      situacao: pulada
+      motivo: "excedente_da_categoria: corretora ja tinha as 10 primeiras (1, 11, 14, 18, 25, 27, 37, 45, 48, 53) quando esta marca apareceu; o site tem 'Em destaque: Cambio' e o botao roxo 'Saiba mais' (#7b17e5, canto de 14 px, Raleway), sob um aviso de telefonia e o de cookies; nao foi classificada"
+      data: 2026-10-10
+    69:
+      marca: "Ourominas (OM DTVM)"
+      situacao: pulada
+      motivo: "fora_do_livro: compra e venda de ouro e cambio: atividade sem categoria no livro"
+      data: 2026-10-10
+    70:
+      marca: "GDC Partners DTVM"
+      situacao: pulada
+      motivo: "nao_atende_pf: a primeira tela e um alerta de fraude: 'nao concede emprestimos, financiamento, ou investimentos'; so institucional"
       data: 2026-10-10
   bancos:
     # Plano v2 (10/10/2026): um universo (BCB, 143 bancos com site) para banco_tradicional e
@@ -1373,7 +1561,7 @@ categorias:
       familia_generica: sans-serif
       densidade_blocos: 7
       densidade_lista: "barra de status; logotipo; Acesse sua conta; Localize um terminal; Telefones uteis; Dicas de seguranca; Sobre"
-      nota: "app 'Banco do Nordeste Mobile' (id 655083328, achado pela busca da loja; 300 agencias no BCB). Captura 1 da loja, a tela inicial de verdade (sem aparelho), 1242x2208 inteira. Botoes brancos com o canto direito arredondado e o esquerdo reto: o raio e o do canto arredondado, medido a olho"
+      nota: "app 'Banco do Nordeste Mobile' (id 655083328, achado pela busca da loja; 300 agencias no BCB). Captura 1 da loja, a tela inicial de verdade (sem aparelho), 1242x2208 inteira. Botoes brancos com o canto direito arredondado e o esquerdo reto: o raio e o do canto arredondado, medido a olho. O fundo bordo e um degrade sem cor mais frequente: a moda do livro cai no branco dos botoes (#ffffff, fundo claro), e o procedimento fica como o livro manda"
       data: 2026-10-10
     111:
       marca: "Banco Honda"
