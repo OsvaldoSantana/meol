@@ -31,12 +31,22 @@ custa mais que o erro em si.
 | **1 · outra ferramenta** | a mesma fonte por outro cliente ou outro formato | `curl` no terminal no lugar da busca web; `git clone` no lugar da página do GitHub; a **API** no lugar da página (OData, JSON do PyPI); `curl -r 0-4095` para ler só o cabeçalho de um CSV grande; o CSV no lugar do painel |
 | **2 · outra cópia** | o mesmo documento guardado em outro lugar | Wayback Machine (`archive.org/wayback/available?url=`); espelho oficial; portal de dados abertos que republica o arquivo |
 | **3 · outra fonte primária** | o mesmo **dado** publicado por outro dono | CVM no lugar do site do gestor; o regulamento no lugar da lâmina; o Banco Central no lugar do agregador |
-| **4 · outro executor** | alguém que alcança o que esta sessão não alcança | sessão local na máquina dele (IP residencial, disco); workflow `medir/` (§5-A.11, só para medir); script que ele roda com um comando |
+| **4 · outro executor**, nesta ordem (16/10) | alguém que alcança o que esta sessão não alcança | **4a** o workflow de captura do repositório, no servidor do GitHub (`captura_r3.yml`: push em `capturar-r3/<nome>`; `medir/` quando é medição, §5-A.11); **4b** o runner `br-sp`, quando existir (hoje não existe: transcreva isso); **4c** só então a sessão local na máquina dele (IP residencial, disco). "Aguarda a máquina dele" só com 4a e 4b transcritos |
 | **5 · `NAO_CONFIRMADO`** | só agora, e com a escada na linha | `escada: 1 curl → 403 (Akamai); 2 Wayback → túnel caiu; 3 CVM → sem campo; 4 → P-05` |
 
 **Transcreva cada degrau com o erro exato** (código HTTP, servidor, mensagem), a data e o
 comando. "Bloqueado" sem o erro não é medição (§5-B.13). O degrau 4 vira roteiro para quem o
 executa, nunca "visita manual" (§5-B.17).
+
+**Antes de subir a escada, pergunte se a página é a unidade.** Uma marca com app se lê pela
+App Store (livro de códigos, ae-a), e o site que recusou o IP não importa para ela. Em 16/10, 83
+linhas da R3 estavam em `AGUARDA DEGRAU 4` porque o site recusou, e a maioria das marcas tinha
+app (EX-02). A escada é para o que a tarefa precisa, não para o primeiro endereço que apareceu.
+
+**Na linha, os degraus 4 vão com a letra:** `4a) workflow captura_r3 no servidor do GitHub (run
+<id>): 403 Akamai; 4b) runner br-sp: não existe (16/10); 4c) sessão local (IP BR): 200`. A
+guarda `auditoria/test_degrau4.py` reprova `AGUARDA DEGRAU 4` e reprova a linha que põe a
+máquina dele como próximo executor sem `4a)` e `4b)` transcritos.
 
 ## Os casos que criaram a regra (medidos em 27/09/2026)
 

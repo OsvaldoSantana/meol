@@ -233,7 +233,48 @@ conclusão não passa dessa frase (§5-B, pergunta 1).*
    PicPay Bank (bancos) é pagamentos, o Andbank (bancos) e o Rio Bravo, o Azimut e a 4UM
    (corretora) são gestora e private.
 
+### 3.3 A fase 3 (16/10/2026, sessão local): a rota da loja e o degrau 4 em ordem
+
+*O que se mediu: as 89 linhas paradas na máquina dele (83 `AGUARDA DEGRAU 4` e 6 que a guarda nova
+achou sem o status), refeitas pela ae-a e pela escada com o degrau 4 em ordem (4a, 4b, 4c), e a
+amostra refeita pela ordem do sorteio (plano v3). A conclusão não passa disso (§5-B, pergunta 1).*
+
+9. **Sessenta das 89 marcas tinham app na App Store do Brasil** (31 em bancos, 18 em pagamentos,
+   9 em corretora, 1 em gestora, 1 em casa de análise), achado pela busca `country=br` com o
+   critério escrito antes no plano v3 (`tools/r3_loja.py`, 4 s entre consultas: **zero 403** em
+   ~180 consultas). Para essas, o site que recusou o IP **nunca foi a unidade** (ae-a): Itaú, Banco
+   do Brasil, Santander, C6, Sofisa Direto, Crefisa, Mercado Pago, XP, BTG, Genial e outras.
+10. **O degrau 4 em ordem, nos 29 sem app.** 4a, o servidor do GitHub (`captura_r3.yml`, run
+    38900940103, Cheyenne/EUA, AS8075 Microsoft): **abriram 3 de 23** (Original, MUFG, Qore). 4b,
+    o runner `br-sp`: não existe. 4c, esta sessão (Campinas, AS16735 Algar): **abriram 4 de 23**
+    (Trustee, Integral Access, BREI, Mizuho), e **o resto recusou também daqui**: verificação da
+    Cloudflare (StoneX, RNX, Integral Brei), "Acesso Bloqueado" (Randon, XP Gestão), 403 da Akamai
+    (Pay4Fun, Hyundai, BNP com 504) e erro de HTTP/2 (Morgan Stanley, Genial). Ver a limitação 15.
+11. **Desfecho das 89:** 13 classificadas, 15 `nao_atende_pf`, 4 `fora_do_livro`, 12 duplicadas,
+    25 excedentes (a categoria fechou antes delas) e 20 `site_inacessivel` com a escada inteira
+    transcrita. **Nenhuma linha espera a máquina dele.** Com a amostra refeita, **18 classificadas
+    de 10 e 11/10 saíram como excedentes** (Bradesco, Inter, Pan, BCN, Banpará, Banco VR, EQI,
+    Banrisul Corretora, CV Invest, Afinz, Credishop, MagaluPay; e as de outro universo pela regra
+    `de_outro_universo`: Azimut, 4UM, Rio Bravo, Andbank, PicPay e Neon).
+12. **Robô e consolidador ganharam universo** (fila 28): nos três quadros de Finanças da loja de
+    16/10 (100 + 100 + 96 apps, 291 distintos, sha256 no plano) há **5 consolidadores** pelo
+    critério escrito antes (Só Dividendos, TradeMap, Investidor10, Status Invest, Dividendos.me) e
+    **nenhum robô**; o segundo quadro (termos fixos) achou **1** (Warren). Planejador: 28c, com ele.
+13. **`tools/r3_dominante.py` de novo, 16/10:** **nenhum código dominante em categoria nenhuma.**
+    n = 10 em todas as oito categorias de cadastro (antes, 14 em gestora e 11 em pagamentos),
+    5 em consolidador, 1 em robô. A combinação mais frequente: banco tradicional
+    claro/celeste/sem serifa/grande e claro/neutro/sem serifa/grande (3 e 3); banco digital
+    escuro/neutro/sem serifa/grande (3); corretora escuro/neutro/sem serifa/pequeno (2); gestora
+    claro/celeste/sem serifa/reto (3); pagamentos claro/verde-água/sem serifa/grande (2); casa de
+    análise claro/neutro/sem serifa/grande (4, a mais perto do limiar de 5); consolidador, cinco
+    combinações diferentes. **Resultado: "nenhum dominante", como em 11/10**, agora sem o viés da
+    limitação 10 (os grandes bancos entraram).
+
 ## 3.1 O que aguarda a sessão local (degrau 4)
+
+*16/10/2026: **resolvido na fase 3 (§3.3)**; a tabela abaixo fica como foi escrita, e o que ela
+mandava esperar da máquina dele foi feito pela loja e pelo degrau 4 em ordem. O Wayback das 86
+continua (§5).*
 
 | categoria | ordem | marca | o que fazer |
 |---|---|---|---|
@@ -318,6 +359,27 @@ pendente abrir e for classificada, a 10ª sai e ganha a linha `excedente_da_cate
     `doup.com.br` era uma escola de inglês e `desmistificando.com.br`, um escritório de advocacia).
     A Simpla traz o CNPJ do grupo na página, e não o do cadastro: a identidade é pela marca.
 
+15. **O bloqueio era ao navegador sem interface, não só ao IP estrangeiro** (16/10). Das 20
+    páginas que o servidor do GitHub não abriu, 17 também falharam no Chromium sem interface do IP
+    residencial de Campinas: 9 em bloqueio ou verificação de robô (o mesmo que o IP dos EUA viu) e
+    8 em erro de rede, de certificado ou de HTTP/2. O registro de 04/10 atribuía o bloqueio ao IP dos EUA; ele explica
+    parte (a Hashdex em `/en-US`), não o todo. Contornar verificação de robô é proibido, e o
+    instrumento não muda: essas marcas ficam `site_inacessivel` com a escada inteira. **Direção
+    do viés:** desconhecida; são, na maioria, bancos e corretoras de atacado que a leitura já
+    tendia a pular por `nao_atende_pf`.
+16. **O universo de consolidador é o quadro de Finanças da loja de um dia** (16/10, sha256 no
+    plano): o ranking muda toda semana, e ele mede quem paga ou é baixado, não a categoria.
+    **Robô tem n = 1**, e vem do segundo quadro (os quatro termos fixos são escolha de quem busca):
+    abaixo do mínimo de 5, sem dominante e sem veto, declarado.
+17. **Três leituras de categoria são duvidosas e mudam a amostra se forem refeitas:** o
+    Rendimento lido `banco_digital` (6 agências, mas o app se vende como "100% digital"), o
+    RendimentoPay lido `nao_atende_pf` (cartões pré-pagos corporativos) e a Santander Corretora
+    lida como marca comercial própria (como o Itaú Private no livro). Em cada caso a alternativa
+    está escrita na leitura.
+18. **Captura de loja sem tela inteira vale o site, e o site recusou:** a Genial (todas as capturas
+    em perspectiva) e o Casas Bahia Pay (a tela partida entre duas capturas) ficaram
+    `site_inacessivel`, pelo precedente do Safra (10/10).
+
 ## 5. O que falta, em ordem
 
 1. ~~O merge do PR do sorteio~~ (#45) e o da emenda ag-b (livro v3), antes deste.
@@ -326,7 +388,9 @@ pendente abrir e for classificada, a 10ª sai e ganha a linha `excedente_da_cate
 3. ~~As listas oficiais de bancos, pagamentos e casas de análise~~ (10/10, nuvem; §2) e as
    visitas delas (11/10). **Robô, consolidador e planejador: sem universo (§2.1); a decisão é
    dele (fila, bloco 28).**
-3b. O degrau 4: as 83 linhas `AGUARDA DEGRAU 4` e o Wayback das 85 (`tools/r3_arquivar.py`), na
-   máquina dele (§3.1).
+3b. ~~O degrau 4: as 83 linhas `AGUARDA DEGRAU 4`~~ (16/10, §3.3: pela loja e pelo degrau 4 em
+   ordem; nenhuma espera a máquina dele). **O Wayback das 86** (`tools/r3_arquivar.py`) continua:
+   é publicar no archive.org, e a ordem do degrau 4 vale para ele também (4a primeiro).
+3c. Robô e consolidador: ~~sem universo~~ (16/10, §3.3, item 12). **Planejador: fila 28c, dele.**
 4. As não auditadas das rodadas 1 e 2, e a seção fora do Brasil.
 5. A tabela do veto completa **antes do fim da janela de 21 dias** do teste.

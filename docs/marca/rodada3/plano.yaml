@@ -5,8 +5,13 @@
 # categoria em docs/marca/rodada3/sorteio-<categoria>.csv.
 # A classificacao visual segue o livro de codigos versao 2
 # (docs/marca/teste-de-marca/codigos-visuais.yaml: ad-a, ae-a, af-a, 02/10/2026).
-versao: 2
-data: 2026-10-10
+versao: 3
+data: 2026-10-16
+# v3 (16/10/2026, sessao local, P-170): ACRESCENTA a rota da App Store para as linhas que o site
+# recusou (`loja`, ae-a) e o universo de robo e consolidador pelo quadro publico da loja
+# (`universos_da_loja`, fila 28, resposta dele de 10/10). Nao muda a semente, o livro, os sete
+# universos de cadastro nem os sorteios gravados. Escrita e empurrada ANTES da primeira busca na
+# loja e da primeira classificacao de robo ou consolidador.
 # v1 (02/10/2026): as quatro categorias da CVM. v2 (10/10/2026): ACRESCENTA tres universos do
 # Banco Central e da APIMEC (bancos, pagamentos, casa de analise e educacao) e declara por que
 # robo, consolidador e planejador nao tem universo. Nao muda a semente, o livro (v3), nem as
@@ -165,10 +170,86 @@ pular_se:
 # pela regra do livro (n_minimo_de_marcas), nao tem dominante e nao aciona o veto. Lista por
 # busca seria escolha de quem busca, que e o que o sorteio existe para impedir; so entra por
 # decisao dele.
+# v3 (16/10/2026): a decisao veio (fila 28, 10/10): robo e consolidador ganham universo pelo
+# quadro publico da App Store (`universos_da_loja`, abaixo). O texto da v2 fica como foi escrito:
+# o que ele diz dos cadastros continua verdade; o que mudou e que o universo deixou de ser cadastro.
 sem_universo:
   robo: "nao existe cadastro: robo de investimento nao e categoria regulatoria na CVM nem no BCB, e o robo que exige registro entra como consultor, gestor ou corretora (ja sorteados nessas categorias, onde a precedencia do livro o reclassifica como robo)"
   consolidador: "nao existe cadastro: app de acompanhamento de carteira nao e atividade autorizada por ninguem; o diretorio do Open Finance (105 organizacoes) nao tem Kinvo nem Gorila e nao e lista de consolidadores"
   planejador: "o cadastro existe (Planejar, certificacao CFP) e a busca esta atras de reCAPTCHA de caixa de selecao; contornar verificacao de robo e proibido (pesquisa, sec. 1.1); a unidade do cadastro e a pessoa, nao a marca"
+
+# ---- v3 (16/10/2026) ---------------------------------------------------------------------
+# A ROTA DA LOJA (ae-a). Marca COM app se le pela 1a captura de interface da App Store; o site em
+# 390 px so vale para marca SEM app. As 83 linhas `AGUARDA DEGRAU 4` de 04 a 11/10 pularam marcas
+# porque o SITE recusou, sem perguntar se o site era a unidade delas. tools/r3_loja.py faz a busca.
+loja:
+  busca: "https://itunes.apple.com/search?term=<termo>&country=br&entity=software&limit=<limite>"
+  limite: 15
+  # 10/10 (arquitetura, da nuvem): a Apple respondeu 403 na 6a consulta seguida e 200 depois de
+  # esperar. E frequencia, nao bloqueio: intervalo minimo entre consultas e espera crescente no
+  # 403. Depois da ultima espera a busca falha alto (nunca vira "sem app": 5-B.16).
+  intervalo_minimo_s: 4
+  espera_no_403_s: [30, 60, 120, 240]
+  # Os termos, na ordem; o segundo so se o primeiro nao achar app que passe no criterio.
+  termos:
+    - "a marca como esta na coluna `marca` da linha"
+    - "o nome do dominio do site da linha, sem www e sem o sufixo publico (sofisa.com.br -> sofisa)"
+  # O criterio e o do livro (R3 sec. 1, unidade app), escrito aqui antes da primeira busca.
+  criterio_app_da_marca: "o app e do mesmo grupo e tem a marca: o vendedor (sellerName) ou o desenvolvedor (artistName) e a pessoa juridica da linha ou outra do mesmo grupo economico, E o nome do app traz a marca comercial da linha. App de plataforma parceira (o do BTG para um assessor do BTG) nao e app da marca."
+  mais_de_um_app: "vale o app da conta ou da plataforma principal para pessoa fisica; app so para empresa (Empresas, PJ, Business), de produto lateral (cartao, seguro, consorcio, pontos) ou de segmento (Personnalite, Private) so vale se for o unico que passa no criterio. Entre dois que restem, o primeiro na ordem da busca."
+  sem_app: "nenhum termo devolve app que passe no criterio: a linha segue pelo site (ae-a, sem_app) e o site sobe o degrau 4 na ordem de CLAUDE.md 5-B.18 (4a o workflow de captura no servidor do GitHub; 4b o runner br-sp, que nao existe em 16/10; 4c a sessao local), cada um transcrito na coluna `escada`"
+  # A amostra se refaz pela ordem do sorteio (af-a): a linha que passa a classificada entra no
+  # lugar dela, e a ultima classificada da categoria que fica alem da 10a sai como
+  # excedente_da_categoria, com o motivo dizendo qual linha a deslocou. Vale para toda categoria.
+  amostra: "as 10 primeiras classificadas na ordem do sorteio; a que sai leva excedente_da_categoria"
+  # 16/10/2026, ANTES da primeira classificacao da v3: a marca de OUTRO universo que a precedencia
+  # do livro leva a uma categoria (Azimut, 4UM e Rio Bravo da corretora e o Andbank dos bancos em
+  # gestora_e_private, o PicPay dos bancos em pagamentos, o Neon da corretora em banco_digital) nao
+  # tem lugar na ordem do sorteio daquela categoria. Ate 11/10 ela entrava se a categoria ainda nao
+  # tivesse 10 na hora da visita, e a gestora ficou com 14. Com a amostra refeita, a regra e uma so:
+  de_outro_universo: "primeiro as classificadas do universo da propria categoria, pela ordem do sorteio dele, ate 10; se nao chegar a 10, completam as de outros universos, na ordem dos universos neste plano e, dentro de cada um, a do sorteio; a que fica alem da 10a leva excedente_da_categoria, com o motivo dizendo qual"
+
+# O UNIVERSO DE ROBO E CONSOLIDADOR (fila 28, resposta dele de 10/10/2026): o quadro publico de
+# apps de Financas da App Store do Brasil, com data e sha256. O criterio de quem entra em cada
+# categoria esta escrito aqui ANTES de classificar (e antes de baixar os quadros).
+universos_da_loja:
+  quadros:
+    topfree: "https://itunes.apple.com/br/rss/topfreeapplications/limit=200/genre=6015/json"
+    topgrossing: "https://itunes.apple.com/br/rss/topgrossingapplications/limit=200/genre=6015/json"
+    toppaid: "https://itunes.apple.com/br/rss/toppaidapplications/limit=200/genre=6015/json"
+  # baixado_em e sha256 de cada quadro: tools/r3_loja.py quadros grava os arquivos em
+  # data/r3/loja/quadros/ (fora do git) e o sha256 entra em `quadros_baixados`, no commit seguinte.
+  ordem_base: "a uniao dos tres quadros, um app (trackId) uma vez, na ordem topfree, topgrossing, toppaid e, dentro de cada, a posicao no quadro"
+  como_decidir: "pelo resumo do app no proprio quadro (campo summary, que esta no arquivo com sha256), lido pela sessao; a categoria e a da atividade principal do app, pela precedencia do livro (ad-a)"
+  categorias:
+    robo: "o produto principal e investir por uma carteira que o app monta e rebalanceia sozinho a partir de um perfil (livro: 'a pessoa responde um perfil e o app monta e rebalanceia a carteira sozinho'). App de banco ou corretora que TEM um robo entre outros produtos nao entra: a atividade principal e a do banco ou da corretora (ad-a)"
+    consolidador: "o produto principal e acompanhar investimentos que estao em outras instituicoes (importar notas ou posicoes, consolidar a carteira), sem ser a custodia. Controle de gastos e orcamento que nao acompanha investimento nao entra (fora_do_livro, nao consolidador)"
+  # Com mais de 10 elegiveis, a amostra sai pela semente sobre o trackId crescente (a mesma
+  # permutacao de tools/r3_universo.sortear); com 10 ou menos, entram todos.
+  amostra: "ate 10 por categoria (af-a)"
+  # Com menos de 5 marcas numa categoria (n_minimo_de_marcas do livro), o SEGUNDO QUADRO: a busca
+  # da loja com estes termos fixos, na ordem, os mesmos criterios e o mesmo intervalo. E escolha de
+  # quem busca (os termos), e por isso entra como LIMITACAO declarada da R3, nunca como universo.
+  minimo_para_dispensar_o_segundo: 5
+  segundo_quadro:
+    limite_por_termo: 50
+    robo: ["robo de investimentos", "robo advisor", "investimento automatico", "carteira automatica"]
+    consolidador: ["consolidador de investimentos", "acompanhar investimentos", "carteira de investimentos", "controle de investimentos"]
+  # O planejador nao tem quadro: fila 28c, tarefa dele (exportar a busca da Planejar), sem prazo.
+  # Gravado DEPOIS do criterio acima (commit 98655ac, 16/10/2026): o que foi baixado e lido.
+  # Os arquivos ficam em data/r3/loja/ (fora do git). Resultado: 5 consolidadores nos quadros,
+  # 0 robo nos quadros e 1 no segundo quadro (docs/marca/rodada3/sorteio-robo.csv e
+  # sorteio-consolidador.csv, a permutacao da semente sobre o trackId).
+  quadros_baixados:
+    topfree: {baixado_em: 2026-10-16, apps: 100, sha256: 829db779cbbc88dd710b80bc0c8b92a8780d88bb6d82176ca8755b611134c89d}
+    topgrossing: {baixado_em: 2026-10-16, apps: 100, sha256: 56e7bd0fcb344bf2b441a4f345e3c38258ed348c12432cca84e85ff54c29139a}
+    toppaid: {baixado_em: 2026-10-16, apps: 96, sha256: 3d073bbe2056bf9ccc8493f221541666fbbffba527a2c1da89a90daec78ed00f}
+  segundo_quadro_baixado:
+    robo:
+      - {termo: "robo de investimentos", baixado_em: 2026-10-16, sha256: ec24a142d467a98a8ccf4fbe30c3df3eae3090de247fb1793856b40a4ce1c8fa}
+      - {termo: "robo advisor", baixado_em: 2026-10-16, sha256: c65715e1564f397f4cf9d183310cb9546bba2c50471fd575d871700be07e0379}
+      - {termo: "investimento automatico", baixado_em: 2026-10-16, sha256: 5438150b373217f9cb5f2021262663029850db503b710dacf25eded630e56b6e}
+      - {termo: "carteira automatica", baixado_em: 2026-10-16, sha256: d5b82f72955050eb095b9ea6446ed152ecaa24b1b991d7cf8dd740137e7a740c}
 
 # O que ainda nao e sorteio.
 a_fazer:

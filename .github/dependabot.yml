@@ -33,3 +33,6 @@ updates:
     ignore:
       - dependency-name: "numpy"
       - dependency-name: "pandas"
+      # 16/10/2026 (P-170): o instrumento da R3 (pyproject -> instrumento_r3). O PR #69 trocou o
+      # Playwright no meio da rodada. SAI quando a R3 fechar.
+      - dependency-name: "playwright"
