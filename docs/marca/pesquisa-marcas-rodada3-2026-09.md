@@ -375,7 +375,11 @@ pendente abrir e for classificada, a 10ª sai e ganha a linha `excedente_da_cate
     Rendimento lido `banco_digital` (6 agências, mas o app se vende como "100% digital"), o
     RendimentoPay lido `nao_atende_pf` (cartões pré-pagos corporativos) e a Santander Corretora
     lida como marca comercial própria (como o Itaú Private no livro). Em cada caso a alternativa
-    está escrita na leitura.
+    está escrita na leitura. **Decisão dele, 16/10/2026 (formulário no claude.ai): as três ficam
+    como estão.** Medido pela arquitetura antes da decisão: nenhuma alternativa cria código
+    dominante. Nessas categorias a combinação mais frequente fica em 2 ou 3 de 10, com ou sem a
+    troca, e o livro exige pelo menos 5 (`fracao_minima` 0,5 de n = 10). A limitação continua
+    declarada: a leitura é de uma sessão só, sem segundo classificador (limitação 5).
 18. **Captura de loja sem tela inteira vale o site, e o site recusou:** a Genial (todas as capturas
     em perspectiva) e o Casas Bahia Pay (a tela partida entre duas capturas) ficaram
     `site_inacessivel`, pelo precedente do Safra (10/10).

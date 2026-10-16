@@ -37,8 +37,10 @@ COLUNAS = ["marca", "categoria", "categoria_sorteada", "ordem_no_sorteio", "cnpj
            "escada"]
 SITUACOES = ("classificada", "pulada", "fora_do_livro")
 # 04/10/2026: a sessao na nuvem nao alcanca web.archive.org (conexao derrubada pelo proxy; os
-# degraus estao na R3, sec. 1). O arquivamento e o degrau 4, na maquina dele
-# (tools/r3_arquivar.py). Ate la a linha diz PENDENTE_LOCAL -- e a R3 nao fecha com nenhuma assim.
+# degraus estao na R3, sec. 1). O arquivamento sobe o degrau 4 em ordem (CLAUDE.md 5-B.18): 4a o
+# workflow arquivar_r3.yml no servidor do GitHub, 4b o br-sp, 4c a sessao local
+# (tools/r3_arquivar.py). Ate la a linha diz PENDENTE_LOCAL, e a R3 nao fecha com nenhuma assim
+# sem a escada transcrita.
 WAYBACK = "https://web.archive.org/web/"
 PENDENTE = "PENDENTE_LOCAL"
 
@@ -120,7 +122,9 @@ def texto_veto(linhas: list[dict[str, str]], livro: dict[str, Any]) -> str:
     pend = sum(1 for r in linhas if r["situacao"] == "classificada"
                and r["arquivo_wayback"] == PENDENTE)
     rod = (f"\n**Arquivamento:** {pend} linha(s) classificada(s) com `{PENDENTE}`. A R3 so "
-           "fecha com zero (tools/r3_arquivar.py, na maquina dele).\n") if pend else ""
+           "fecha com zero, ou com cada uma levando a escada e o proximo executor "
+           "(tools/r3_arquivar.py pelo degrau 4 em ordem, 4a o workflow arquivar_r3.yml no "
+           "servidor do GitHub; CLAUDE.md 5-B.18).\n") if pend else ""
     return cab + "\n".join(linhas_md) + "\n" + rod
 
 

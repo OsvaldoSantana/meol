@@ -119,6 +119,8 @@ PERMITIDOS_POR_WORKFLOW = {
     "mutacao.yml": {},
     # 16/10/2026 (P-170): o degrau 4a da R3 abre paginas publicas e nao usa segredo nenhum.
     "captura_r3.yml": {},
+    # 16/10/2026 (P-170): o Wayback da R3 pelo Save Page Now anonimo, sem segredo nenhum.
+    "arquivar_r3.yml": {},
     "captura_cvm.yml": {("captura", n): _R2 for n in (
         "Capturar", "Capturar COTAHIST", "Capturar NEFIN", "Capturar eventos B3",
         "Conciliar COTAHIST", "Publicar CVM")},

@@ -314,8 +314,10 @@ ativas.*
    um minuto"): destrava toda medição na nuvem. A P-145 na sessão local não precisa dele.
 7. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
    além do passo 6.
-8. **Instruções do Projeto no claude.ai:** colar a versão 2 de
-   `docs/ia/instrucoes-projeto-claude.md` (a escada de contorno), se ainda não foi colada; e a versão 3, de 16/10 (a ordem dos executores na escada).
+8. ~~**Instruções do Projeto no claude.ai:** colar a versão 4 de
+   `docs/ia/instrucoes-projeto-claude.md`~~ **Feito; conferido em 16/10/2026:** o texto que ele
+   colou na sessão é idêntico, linha a linha, à seção copiável da versão 4 (a ordem dos
+   executores na escada).
 9. **Fila 28c, o planejador da R3 (sem prazo):** abrir a busca da Planejar (certificação CFP) num
    navegador e exportar a lista uma vez; a sessão monta o universo a partir dela. O reCAPTCHA de
    caixa de seleção não se contorna (pesquisa da R3, §2.1).

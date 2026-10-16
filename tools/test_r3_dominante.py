@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -82,3 +83,20 @@ def test_arquivo_wayback_so_link_do_wayback_ou_pendente_declarado():
     ruim = [_m("assessor", *E_CODIGO, arquivo_wayback="arquivar depois")]
     assert R.validar(ruim, livro)
     assert "PENDENTE_LOCAL" in R.texto_veto(ok, livro)
+
+
+def test_o_arquivamento_nao_manda_esperar_a_maquina_dele():
+    """16/10/2026 (CLAUDE.md 5-B.18): o rodape do veto.md dizia 'tools/r3_arquivar.py, na maquina
+    dele', e o degrau 4 comeca no servidor do GitHub (4a). A frase reprova no rodape gerado, no
+    veto.md gravado e no codigo das ferramentas da R3 que mandam executar."""
+    frase = re.compile(r"m[aá]quina dele", re.IGNORECASE)
+    linha = {c: "" for c in R.COLUNAS}
+    linha.update(situacao="classificada", categoria="assessor", arquivo_wayback=R.PENDENTE)
+    rodape = R.texto_veto([linha], V.ler_livro()).split("**Arquivamento:**")[1]
+    assert not frase.search(rodape) and "4a" in rodape
+    with open(R.VETO, encoding="utf-8") as f:
+        assert not frase.search(f.read())
+    for nome in ("r3_dominante.py", "r3_arquivar.py"):
+        with open(os.path.join(R.RAIZ, "tools", nome),
+                  encoding="utf-8") as f:
+            assert not frase.search(f.read()), nome
