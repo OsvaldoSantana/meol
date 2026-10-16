@@ -75,7 +75,8 @@ def test_etiqueta_fora_da_tabela_reprova():
 
 def test_a_tabela_tem_as_classes_da_decisao_e_fable_fora():
     m = M.ler_modelos()
-    assert m["classes"]["registro"] == "sonnet" and m["classes"]["engenharia"] == "opusplan"
+    # 16/10/2026: o registro VOLTOU de sonnet para opusplan pela propria regra (21d, issue #71).
+    assert m["classes"]["registro"] == "opusplan" and m["classes"]["engenharia"] == "opusplan"
     assert m["classes"]["p-115"] == "opus" and "fable" not in m["ordem"]
 
 

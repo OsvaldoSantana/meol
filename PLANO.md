@@ -27,7 +27,7 @@ registra, e a ordem é dele.
 | marco | o sistema passa a | estado em 03/10/2026 |
 |---|---|---|
 | **M1 · decidir o aporte** | dizer quanto entra, em qual classe e por qual rota, com custo, imposto e nove portões nomeados | **código pronto e porta de uso pronta, nunca usado.** Ele nunca usou o sistema e não o considera funcional. A porta existe desde 10/10: `alocacao/aporte_do_mes.py` lê o `estado.yaml` e devolve o quanto, o para onde e o porquê (P-181). Falta o uso real. Frente "primeiro uso", §4 |
-| **M2 · decidir com dado próprio** | ler balanço do acervo próprio, sem terceiro nem tela | **em andamento.** CVM (DFP, ITR, CAD), COTAHIST e eventos da B3 no armazém; nada disso é lido ainda como balanço. Caminho crítico, §3 |
+| **M2 · decidir com dado próprio** | ler balanço do acervo próprio, sem terceiro nem tela | **em andamento.** CVM (DFP, ITR, CAD), COTAHIST e eventos da B3 no armazém; DFP/ITR já se leem *as-of* (`fase0/leitor_cvm.py`, 10/10), mas só desde 24/09/2026 (P-183). Caminho crítico, §3 |
 | **M3 · decidir o papel** | aplicar régua de empresa pré-registrada e medida, com o corte da família de testes | **bloqueado em M2.** M3 sem M2 é backtest sobre dado de outra pessoa (*look-ahead* contábil) |
 | **M4 · fazer isso sozinho** | capturar sem ninguém lembrar e acusar a falha | **feito.** `captura_cvm.yml`, diário desde 24/09: CVM, COTAHIST (diário e anual mensal), NEFIN (desde 26/09, P-147 fechada), eventos da B3 às segundas (desde 28/09) e a conciliação mensal (setembro: 10 `CONFERE`, nenhuma falta). Parada levanta `CapturaParada`. Sobra a formalidade dos eventos em `regimes_de_captura` (P-150, reserva) |
 
@@ -45,7 +45,7 @@ depende de dado de usuário.
 |---|---|---|---|
 | 1 | **Ponte ticker → CD_CVM de 2013–2019** (P-145). A medição existe: `medicoes/p145_ponte_2013_2019.py` | o universo com CD_CVM, sem o qual DFP/ITR não se liga a papel; e os 13 eventos sem ticker (P-93) | **um passo dele:** o envio ao R2 (`subir_acervo_local.py --aplicar`), que grava o inventário do `isinp.zip`; sem ele o `acervo.abrir` recusa o arquivo do disco (rodado em 04/10). Na nuvem, falta também o token de leitura |
 | 2 | **Bitemporalidade** `dt_captura` × `DT_REFER`: DFP/ITR lidos *as-of* (`fase0/leitor_cvm.py`, 10/10): só `ÚLTIMO`, partição pelo ano do arquivo (P-51), versão vigente na `dt_captura` (P-53), sem pacote novo. Começou antes da P-145 por decisão de 10/10 (`docs/decisoes/2026-10-10-leitor-asof-cvm.md`): DFP/ITR são chaveados por `CD_CVM`, e a ponte só entra no join com o papel | o direito de dizer que o backtest não vaza futuro | **o leitor responde desde 24/09/2026, a primeira captura.** Para o histórico, falta a data de conhecimento por `DT_RECEB` (P-183); para ligar papel, a ponte bitemporal (P-53b), que espera o passo 1 |
-| 3 | **Bloco C sobre dado real** (P-30): primeiro portão que olha empresa, e é de **exclusão**, não de ordenação. Vão junto: C-04 e C-05 (P-17: nomeados em 10/10; o C-05 calcula e marca até o limiar, fila bloco 27, e o C-04 espera a P-65), a contagem de `SETOR_ATIV` (P-18), os regimes de leitura (P-58 a P-61), portão × dossiê (P-64) e, por métrica, nível, tendência ou híbrido (63a) | o M3 | o passo 2 |
+| 3 | **Bloco C sobre dado real** (P-30): primeiro portão que olha empresa, e é de **exclusão**, não de ordenação. Vão junto: C-04 e C-05 (P-17: nomeados em 10/10; o C-05 calcula e marca, e o limiar sai da contagem, 27c de 16/10; o C-04 espera a P-65), a contagem de `SETOR_ATIV` (P-18), os regimes de leitura (P-58 a P-61), portão × dossiê (P-64) e, por métrica, nível, tendência ou híbrido (63a) | o M3 | o passo 2 |
 
 **Depois do passo 3 (23a, decisão dele de 10/10):** a P-65, segunda esteira (notas explicativas
 e IPE), **65b**, de 26/09, só extração determinística. Entra quando o bloco C rodar, porque o
@@ -92,17 +92,18 @@ texto comercial público.
 
 ## 6. Bloqueios e decisões abertas
 
-**Bloqueios reais, dois** (o terceiro, a porta de uso do M1, caiu em 10/10 com a P-181):
+**Bloqueios reais, dois** (a porta de uso do M1 caiu em 10/10 com a P-181; o leitor *as-of* existe
+desde 10/10, e o que falta nele é o histórico):
 
-1. **A bitemporalidade não existe em código** (passo 2 da §3).
+1. **O leitor *as-of* não responde antes de 24/09/2026** (P-183): o backtest de 2010 a 2026 precisa
+   da data de conhecimento por `DT_RECEB`.
 2. **A ponte de 2013–2019 não foi medida** (P-145). Falta o envio ao R2, que é dele.
 
 **Decisões dele, abertas:**
 
 | decisão | onde | o que muda |
 |---|---|---|
-| o limiar do C-05 (caixa / dívida de curto prazo) | fila, bloco 27 (P-17) | se o C-05 corta em 1,0 já, só marca, ou corta depois de contar quantas empresas saem |
-| o `PLANO.md` continua na abertura | P-172, em 17/10 | abertura de ~21,0 mil tokens com ele, ~18,2 mil sem ele (medido em 03/10) |
+| o limiar do C-05, **depois da contagem** | 27c (16/10): o bloco C conta quantas empresas sairiam em 0,5 · 1,0 · 1,5, sem nomes | o número que ele grava com impressão digital antes de qualquer backtest |
 | parecer jurídico | P-158 | qualquer usuário além dele |
 
 ## 7. As pendências

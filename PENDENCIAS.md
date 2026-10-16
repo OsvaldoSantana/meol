@@ -82,7 +82,7 @@ se lê nível, tendência ou híbrido. Dependem dela P-17, P-18, P-58 a P-61 e P
 banco é a P-31, na reserva. **Fecha com:** o bloco rodando sobre o acervo, cada exclusão com o
 motivo nomeado, e a 63a lida do YAML.
 
-## P-17 · C-04 e C-05 nomeados; falta o limiar do C-05 (fila, bloco 27)
+## P-17 · C-04 e C-05 nomeados; o limiar do C-05 sai da contagem (27c)
 
 **Dono:** Osvaldo (o limiar, bloco 27) · Claude Code (gravá-lo no YAML) · **Gatilho:** antes de
 ligar o corte do C-05 no bloco C (P-30) · **Classe:** `DECISAO_DE_DESENHO` *(era
@@ -96,7 +96,10 @@ ligar o corte do C-05 no bloco C (P-30) · **Classe:** `DECISAO_DE_DESENHO` *(er
 não dá limiar como regra: o "caixa < dívida CP" é o exemplo do bloco L, e a §7 dele diz que
 nenhum limiar aparece no documento. Medido de passagem: o metadado do FRE estruturado da CVM não
 tem campo de moeda (730 campos), então o "exige o FRE" da Fase B não resolve o C-04 pelo CSV.
-**Fecha com:** a resposta dele ao bloco 27 gravada no `campos_C04_C05.C-05.limiar`.
+**16/10/2026: ele respondeu 27c** (fila, bloco 27): o limiar sai da contagem do bloco C em 0,5 ·
+1,0 · 1,5, só o número de empresas, e até lá o C-05 marca e não corta. **Fecha com:** a contagem
+rodada na P-30, a escolha dele vendo ela, e o limiar gravado no `campos_C04_C05.C-05.limiar` com
+impressão digital.
 
 ## P-18 · `SETOR_ATIV` da CVM nunca foi contado
 
@@ -267,18 +270,6 @@ dependem do degrau 4 (bloqueio para o IP da nuvem, §3.1 de lá), as 34 aguardam
 pública; nada de sessão logada (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** uma linha
 por marca (categoria, captura com fonte e data, medidas do `classificar()`) e o `veto()` aplicado
 à direção vencedora.
-
-## P-172 · O PLANO.md na abertura volta à decisão em 17/10
-
-**Dono:** Osvaldo (decidir) · Claude Code (levar os números) · **Gatilho:** 17/10/2026, com duas
-semanas de dado da regra de volta · **Classe:** `DECISAO_DE_DESENHO`
-
-Resposta 22a de 03/10: o `PLANO.md` segue na abertura. Na mesma data ele foi reescrito curto
-(dieta de 03/10), e a pergunta de 17/10 fica menor. A sessão de 17/10 leva: a tabela da regra de
-volta (`python auditoria/metricas_processo.py --prs prs.json`, com `gh pr list --state merged
---base main --json number,title,mergedAt,author`) e os semanais de 05/10 e 12/10; o tamanho da
-abertura (`python auditoria/tamanho_do_contexto.py`); e se o piso da 21d ficou alto demais para o
-`registro` (limiar 0,21 com referência 1/7).
 
 ---
 
