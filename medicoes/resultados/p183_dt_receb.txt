@@ -1,0 +1,84 @@
+# P-183: o que o modo dt_receb esconde (documento-meses, 2010-2025)
+
+horizonte: 2026-08-31 (o ultimo fim de mes antes da 1a captura)
+
+## por ano do arquivo (dfp + itr; n = documentos do indice)
+
+| ano | documentos | com >1 versao | com mes oculto | documento-meses | ocultos | % | meses ocultos por doc oculto (mediana, max) | versao com 2 datas |
+|---|---|---|---|---|---|---|---|---|
+| 2010 | 663 | 297 | 151 | 122982 | 701 | 0.6% | 2, 65 | 0 |
+| 2011 | 2681 | 599 | 294 | 479567 | 2096 | 0.4% | 3, 97 | 0 |
+| 2012 | 2654 | 546 | 272 | 443128 | 1493 | 0.3% | 2, 85 | 0 |
+| 2013 | 2614 | 468 | 222 | 405244 | 1262 | 0.3% | 2, 59 | 0 |
+| 2014 | 2580 | 394 | 143 | 368894 | 1164 | 0.3% | 2, 68 | 0 |
+| 2015 | 2558 | 328 | 144 | 335315 | 1143 | 0.3% | 3, 56 | 0 |
+| 2016 | 2485 | 335 | 152 | 296042 | 1116 | 0.4% | 4, 43 | 0 |
+| 2017 | 2494 | 386 | 156 | 266980 | 868 | 0.3% | 2, 39 | 0 |
+| 2018 | 2500 | 362 | 163 | 237857 | 768 | 0.3% | 2, 38 | 0 |
+| 2019 | 2503 | 346 | 122 | 207320 | 560 | 0.3% | 3, 26 | 0 |
+| 2020 | 2709 | 327 | 164 | 191583 | 655 | 0.3% | 1, 46 | 0 |
+| 2021 | 2999 | 360 | 149 | 177055 | 750 | 0.4% | 2, 34 | 3 |
+| 2022 | 2953 | 387 | 176 | 139549 | 937 | 0.7% | 3, 32 | 0 |
+| 2023 | 2891 | 326 | 159 | 101571 | 750 | 0.7% | 3, 24 | 1 |
+| 2024 | 2870 | 377 | 179 | 66522 | 502 | 0.8% | 2, 14 | 0 |
+| 2025 | 2751 | 236 | 81 | 31013 | 190 | 0.6% | 1, 15 | 0 |
+| **total** | 40905 | 6074 | 2727 | 3870622 | 14955 | 0.4% | 2, 97 | 4 |
+
+RESUMO: dfp 2010-2025: 6312 de 1020216 documento-meses ocultos (0.6%), 1347 de 10852 documentos
+
+RESUMO: itr 2010-2025: 8643 de 2850406 documento-meses ocultos (0.3%), 1380 de 30053 documentos
+
+## por demonstrativo (dfp + itr, todos os anos; n = documentos no membro)
+
+| demonstrativo | documentos | com mes oculto | documento-meses | ocultos | % | presente != maior do indice | presente fora do indice | >1 versao no membro | 2 datas | arquivos sem o membro |
+|---|---|---|---|---|---|---|---|---|---|---|
+| BPA_con | 23256 | 1886 | 2101228 | 10847 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| BPA_ind | 40569 | 2713 | 3834670 | 14911 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+| BPP_con | 23256 | 1886 | 2101228 | 10847 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| BPP_ind | 40581 | 2713 | 3835567 | 14911 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+| DFC_MD_con | 653 | 68 | 56186 | 219 | 0.4% | 0 | 0 | 0 | 0 | 0 |
+| DFC_MD_ind | 1304 | 89 | 125558 | 416 | 0.3% | 0 | 0 | 0 | 1 | 0 |
+| DFC_MI_con | 22600 | 1818 | 2044615 | 10628 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| DFC_MI_ind | 39249 | 2622 | 3706975 | 14488 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+| DMPL_con | 23254 | 1886 | 2100924 | 10847 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| DMPL_ind | 40548 | 2711 | 3832055 | 14904 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+| DRA_con | 23189 | 1878 | 2090390 | 10837 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| DRA_ind | 40449 | 2705 | 3816258 | 14889 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+| DRE_con | 23253 | 1886 | 2100803 | 10847 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| DRE_ind | 40539 | 2713 | 3830976 | 14911 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+| DVA_con | 23237 | 1885 | 2098397 | 10846 | 0.5% | 0 | 0 | 0 | 2 | 0 |
+| DVA_ind | 40504 | 2711 | 3826360 | 14908 | 0.4% | 0 | 0 | 0 | 4 | 0 |
+
+## insumos (sha256 conferido contra docs/acervo/cvm/)
+
+- dfp_cia_aberta_2010.zip c6a9c95c2510e8a71bb583084492e9c52c3f423a3be56f1c5d2dd4f6960677ff
+- dfp_cia_aberta_2011.zip 858423fba40124d7a30abea4e70248f7251e1d2c792e9fcece5a57afd3115f34
+- dfp_cia_aberta_2012.zip 3aff7a726d324d29924887eed45bbc58bc30b66cd9079bafe701d55efdfe0849
+- dfp_cia_aberta_2013.zip ef379ac9aab9567434ca6d36053d8bd1f0a2a47a0c65a2e1d218259da530e224
+- dfp_cia_aberta_2014.zip b8795dba134754475a485c0f88b6542face6613bb418d261caa011d90e032f28
+- dfp_cia_aberta_2015.zip 39a7001be9eaa91a6acc83831c816794df4f92441d7702b80da6c4b234352b4e
+- dfp_cia_aberta_2016.zip 772f06a73c5fe80534b61365ea5d03f9d8fcce21b87823bd5c9d48699bcf71d5
+- dfp_cia_aberta_2017.zip 1ff8185d61759e49b406c55c5d0b593587c2e76e9032c95f836f7fea02fc9d58
+- dfp_cia_aberta_2018.zip 280dcf5acd7bdb529acc186c9a1195092a1e06cf1e33ddcdca0b11c31261296f
+- dfp_cia_aberta_2019.zip bc82a1162b44686e8953b521e3424a5938b6661ff4655f832db4ea9488296a0d
+- dfp_cia_aberta_2020.zip 8fb97d1887aed1e1e2d85e54cb133baf9f65b9f46f60fa8720f09c1f7a74362e
+- dfp_cia_aberta_2021.zip 64b8693b709538a0357c5179ae02231cb380d0000956ee57a873a21d4efda2e4
+- dfp_cia_aberta_2022.zip 14af8f3e11bdbd4d21398eb0c6be8e68b1e409ca7abe2658528bfe8e7fa1a636
+- dfp_cia_aberta_2023.zip 9b301ce4bb1b6b351435a683784deec9d38c3f90ab6f2cb01729c12a9abf5bde
+- dfp_cia_aberta_2024.zip f52caa45b6fc202334d7b87bb9bb24830280f5ff6a29b8b8557894b26fed1be8
+- dfp_cia_aberta_2025.zip 9fa64012518d104b7ceb294648331bf852bf4014b1ac141a67976823ce2b278d
+- itr_cia_aberta_2011.zip 11f0d8cc47bad618a6e705a4615f8444d652967cc210dd29af8d18cad11b2a9a
+- itr_cia_aberta_2012.zip f1d642a1a644e2528ae96c7963e6319a87537d083d003f965cee637ff9d39842
+- itr_cia_aberta_2013.zip a336c9d5d5f2e4650bf2c16a80600daf3a423d7bbcd594f1d8dd94bf12f148ea
+- itr_cia_aberta_2014.zip c10271ea978a7da9c0fb2ef57d6b485dc9eb8032c0634479d8f4afa90ba0ead9
+- itr_cia_aberta_2015.zip 2755f06e74668144620b4265e59db8149284252a1b3a5bb6404c0db22b21c64b
+- itr_cia_aberta_2016.zip 3c2954a0d7e2c4c1c6dec157134e959fd0dea0ba53001d4bab01d04727d67c21
+- itr_cia_aberta_2017.zip f2e626260461ec4e04614d32212ca8dc5a1be7c5b56c261343eb8866c9ed5f26
+- itr_cia_aberta_2018.zip a551278c83e5c0584edd2a29b6035e34e833176176827e3f04a28f8373df536b
+- itr_cia_aberta_2019.zip dbfe1e32296563a9efdcb993ed5811876e3d50b778bc547fe004af15b9a75021
+- itr_cia_aberta_2020.zip 4ca11b431eb21aa98f813a3c18086ca600f234f5eb0dcec0c51a8641fccbca0a
+- itr_cia_aberta_2021.zip c8723d5ccd4a6e99e9bc1566f2a558139cee1c2d96e4b940c4bcbedcb46a173a
+- itr_cia_aberta_2022.zip a45fb17f725c5170bcb92cf88b493671307e3975e716b0e66bef4ae467f4fe32
+- itr_cia_aberta_2023.zip 0b961e8621724acc738dbb8028728af9f5caf8f2f1c4c1b089b991a7a6f3f355
+- itr_cia_aberta_2024.zip 18bd7c2c3b45d42a1a408edb16e43bf62ba59bb27d0d592f12c69316e9600ccd
+- itr_cia_aberta_2025.zip bbca6411f19c9b58be2692b3ffb23f204d08eac8cb95ead571cd30622d33dad2

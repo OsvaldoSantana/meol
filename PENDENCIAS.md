@@ -53,26 +53,26 @@ hoje para outra entidade (CV-06: `EMBR`, `JBSS`, `TRPL`, `PMAM`), e uma ponte de
 ao passado vaza futuro em silêncio. **Fecha com:** a ponte da P-145 consultada *as-of*, e um
 teste em que um código reaproveitado liga o papel de 2010 ao emissor de 2010, não ao de hoje.
 
-## P-183 · A data de conhecimento do mercado: `DT_RECEB` por versão e as cópias de terceiro
+## P-184 · O valor da versão substituída, lido do ENET pelo `LINK_DOC`
 
-**Dono:** Claude Code · **Gatilho:** antes de o leitor *as-of* servir qualquer mês anterior a
-24/09/2026 (o histórico do bloco C, P-30, e o backtest) · **Classe:** `BLOQUEIA_O_SISTEMA`
+**Dono:** Claude Code · **Gatilho:** antes de o backtest usar o modo `conhecimento="dt_receb"` do
+leitor *as-of* numa estratégia que não tolere documento ausente · **Classe:** `BLOQUEIA_O_SISTEMA`
 
-O leitor (`fase0/leitor_cvm.py`) responde o que **o sistema capturou** até D. Antes da primeira
-linha do registro, 24/09/2026, não responde nada, e o backtest de 2010 a 2026 está inteiro antes
-dela (`limitacoes_declaradas.dt_captura_nao_e_data_de_conhecimento_do_mercado`, NAO_CONSERTADA).
-A fonte tem a segunda data: o índice de cada ZIP lista **todas** as versões com o `DT_RECEB` de
-cada uma (ITR 2024, medido em 10/10: 238 de 2.161 documentos com mais de uma versão), e o
-demonstrativo traz só a última. "`DT_RECEB` da versão presente ≤ D" reconstrói sem *look-ahead*,
-mas esconde o documento até a última reapresentação. **A medição que decide:** quantos
-documento-meses isso esconde em 2010–2025, e quantas versões antigas a Wayback guarda (o CDX
-pelo `medir/`; da nuvem só a API de disponibilidade respondeu, e achou o dfp 2022 de 26/03/2026).
-**Fecha com:** o modo de reconstrução no leitor, com teste, a medição do que ele esconde, e a
-limitação passando a RESOLVIDA ou a FISICA pelo resíduo.
+O modo `dt_receb` (P-183, fechada em 16/10) responde 2010–2026 sem *look-ahead*, mas esconde
+**14.955 de 3.870.622 documento-meses (0,4%)**: os meses em que o mercado conhecia uma versão
+que o demonstrativo não traz mais (`medicoes/resultados/p183_dt_receb.txt`; n = 40.905
+documentos, 2.727 com mês oculto). O índice de cada ZIP dá um `LINK_DOC` por versão, e o ENET da
+CVM serviu as versões substituídas pelo `https`, com o XML estruturado inteiro (`NumeroConta`,
+`ValorConta1..12`), nos 2 documentos testados (DFP 2015 do CD_CVM 1023, ITR 31/03/2024 do
+CD_CVM 14206). O pacote é cortado no PDF (curl 56 perto de 12–16 MB), que vem depois do XML, e
+o servidor ignora `Range`. **Fecha com:** as versões substituídas dos 2.727 documentos baixadas
+pela ordem do degrau 4 (4a, o workflow no servidor do GitHub, primeiro), o leitor do XML com teste
+e com o mesmo leiaute de conta, o modo `dt_receb` devolvendo a versão que o mercado conhecia, e a
+limitação passando a RESOLVIDA, ou a FISICA só pelas versões que nem o ENET guardar.
 
 ## P-30 · O bloco C sobre dado real — o passo 3 do caminho crítico
 
-**Dono:** Claude Code · **Gatilho:** a bitemporalidade pronta (P-53, fechada em 10/10: o leitor responde desde 24/09/2026); para o histórico, a P-183 · **Classe:**
+**Dono:** Claude Code · **Gatilho:** a bitemporalidade pronta (P-53, fechada em 10/10: o leitor responde desde 24/09/2026); para o histórico, o modo `dt_receb` (P-183, fechada em 16/10), com 0,4% de documento-meses ocultos até a P-184 · **Classe:**
 `BLOQUEIA_O_SISTEMA` *(campos dados na triagem de 03/10/2026, P-171)*
 
 `bloco_C_solvencia` tem 48 chaves escritas em 05/09, e nenhum módulo as aplica: os testes

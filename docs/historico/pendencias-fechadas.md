@@ -2822,10 +2822,42 @@ bitemporal virou a **P-53b**, com gatilho na P-145 fechada.
 
 ---
 
+## ~~P-183~~ · A data de conhecimento do mercado: `DT_RECEB` por versão e as cópias de terceiro — **FECHADA em 16/10/2026**
+
+**Dono:** Claude Code · **Gatilho:** antes de o leitor *as-of* servir qualquer mês anterior a
+24/09/2026 (o histórico do bloco C, P-30, e o backtest) · **Classe:** `BLOQUEIA_O_SISTEMA`
+
+O leitor (`fase0/leitor_cvm.py`) responde o que **o sistema capturou** até D. Antes da primeira
+linha do registro, 24/09/2026, não responde nada, e o backtest de 2010 a 2026 está inteiro antes
+dela (`limitacoes_declaradas.dt_captura_nao_e_data_de_conhecimento_do_mercado`, NAO_CONSERTADA).
+A fonte tem a segunda data: o índice de cada ZIP lista **todas** as versões com o `DT_RECEB` de
+cada uma (ITR 2024, medido em 10/10: 238 de 2.161 documentos com mais de uma versão), e o
+demonstrativo traz só a última. "`DT_RECEB` da versão presente ≤ D" reconstrói sem *look-ahead*,
+mas esconde o documento até a última reapresentação. **A medição que decide:** quantos
+documento-meses isso esconde em 2010–2025, e quantas versões antigas a Wayback guarda (o CDX
+pelo `medir/`; da nuvem só a API de disponibilidade respondeu, e achou o dfp 2022 de 26/03/2026).
+**Fecha com:** o modo de reconstrução no leitor, com teste, a medição do que ele esconde, e a
+limitação passando a RESOLVIDA ou a FISICA pelo resíduo.
+
+**FECHADA em 16/10/2026.** O modo de reconstrução: `leitor_cvm.valor(..., conhecimento="dt_receb")`
+lê a versão mais recente do arquivo e responde só o documento cuja versão presente no
+demonstrativo tem `DT_RECEB` ≤ D, com a data tirada do índice do próprio ZIP. Evidência:
+`fase0/test_leitor_cvm.py::test_e_*` (oito testes; o de duas versões e o de versão única pedidos
+no prompt), mutação 3 de 3, e a consulta de ponta a ponta no ITR 2024 real (CD_CVM 14206: em
+01/08/2024, `ContaAusente` nomeando a VERSAO 1 recebida em 20/07; em 22/11, a VERSAO 2). **A
+medição:** `medicoes/p183_dt_receb.py` sobre as 31 versões vigentes (DFP 2010–2025, ITR
+2011–2025, release `cvm-acervo-2026`, sha256 conferido): 14.955 de 3.870.622 documento-meses
+ocultos (0,4%), por ano e por demonstrativo com o n. **A limitação** continua `NAO_CONSERTADA`
+(política 1.42.0), reescrita: o resíduo não é físico, porque o ENET guarda as versões substituídas
+(CV-08). O que sobra é a **P-184**. Decisão em `docs/decisoes/2026-10-16-leitor-dt-receb.md`.
+
+---
+
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-183** | a data de conhecimento do mercado: `DT_RECEB` por versão | 16/10 — modo `conhecimento="dt_receb"` no leitor, testes (e) com mutação; 14.955 de 3.870.622 documento-meses ocultos (0,4%); o resíduo é a P-184 |
 | **P-172** | o `PLANO.md` na abertura volta à decisão em 17/10 | 16/10 — 22a confirmada por ele; abertura 23.009 tokens; regra de volta aplicada ao `registro` (#71) |
 | **P-53** | o acervo lido não depende de engine; a ponte também é bitemporal | 10/10 — parte do leitor: `leitor_cvm.valor()` *as-of* pela `dt_captura` (`acervo.vigencias`), teste (b) com duas versões do mesmo `DT_REFER`; sem pacote novo; a ponte é a P-53b, o conhecimento do mercado é a P-183 |
 | **P-51** | só `ÚLTIMO`, e a partição é o ano do arquivo | 10/10 — `fase0/leitor_cvm.py` e os testes (a) e (c), com mutação; `docs/decisoes/2026-10-10-leitor-asof-cvm.md` |
