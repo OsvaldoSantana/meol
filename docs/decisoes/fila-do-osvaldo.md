@@ -706,6 +706,13 @@ sobrou depois do `CLAUDE.md`: **8.779 tokens** (`auditoria/tamanho_do_contexto.p
 **Recomendação: 22a por enquanto**, até a regra de volta ter duas semanas de dado: medir um corte
 de cada vez.
 
+
+**Confirmada em 16/10/2026 (P-172), pelo formulário no claude.ai: 22a continua.** O `PLANO.md`
+segue na abertura. Números levados: abertura de 23.009 tokens com ele (3.133 do `PLANO.md`), contra
+~21,0 mil em 03/10 (`auditoria/tamanho_do_contexto.py`, proxy de 2,96 caracteres por token, ±15%).
+A regra de volta disparou para o `registro` (issue #71) e foi aplicada como saiu, sem mexer no
+limiar: mover a régua depois do disparo seria o erro que a P4 proíbe.
+
 ---
 
 ## 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10 · **respondido em 10/10: 23a**
@@ -806,7 +813,7 @@ PR da P-179; o que falta está na P-179.
 
 ---
 
-## 27 · O limiar do C-05 (caixa / dívida de curto prazo) · P-17
+## 27 · O limiar do C-05 (caixa / dívida de curto prazo) · P-17 · **respondido em 16/10: 27c**
 
 Lido no escopo em 10/10/2026 (`docs/auditoria/escopo-campos-de-analise.md`): o C-05 é **caixa /
 dívida de curto prazo**, Fase A, do balanço estruturado da CVM, e a fórmula diz só "Padrão". O
@@ -843,6 +850,11 @@ arrendamento?) **não** é desta pergunta: sai do plano de contas, que o leitor 
 o arrendamento é da P-58.
 **Destrava:** o corte do C-05 no bloco C (P-30); e, se você quiser, o mesmo caminho para C-01 a
 C-03.
+
+**Resposta dele, 16/10/2026, pelo formulário no claude.ai: 27c.** Até a contagem, vale o 27b (marca,
+não corta). A contagem sai do bloco C (P-30) em 0,5 · 1,0 · 1,5, só o número de empresas, sem nome
+nem retorno; ele escolhe vendo isso, e a escolha é gravada com impressão digital antes de qualquer
+backtest que use o bloco (P4). Não decidido aqui: se C-01 a C-03 seguem o mesmo caminho.
 
 ---
 

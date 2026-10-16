@@ -13,10 +13,14 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.40.0
+  versao: 1.41.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.41.0: >-
+      16/10/2026, fila 27 respondida (27c). `campos_C04_C05.C-05`: o limiar continua PENDENTE
+      e o C-05 so marca; o limiar sai da contagem do bloco C em 0,5, 1,0 e 1,5 (P-30). Nenhuma
+      regra de decisao mudou.
     1.40.0: >-
       10/10/2026, P-17. `bloco_C_solvencia.lacuna_declarada` ("a identidade de C-04 e C-05")
       sai e da lugar a `campos_C04_C05`, lido em docs/auditoria/escopo-campos-de-analise.md.
@@ -1503,10 +1507,13 @@ bloco_C_solvencia:
         como para C-01 a C-03. Quando rodar, o C-05 calcula e MARCA. O que ele nao faz e cortar.
       limiar: PENDENTE
       limiar_decide: usuario
-      limiar_onde: "docs/decisoes/fila-do-osvaldo.md, bloco 27"
+      limiar_onde: "docs/decisoes/fila-do-osvaldo.md, bloco 27 (respondido em 16/10: 27c)"
       enquanto_o_limiar_falta: >
         Calcula e marca, nao corta: sem limiar escolhido nao ha criterio, e ausencia de
-        criterio nao e criterio de exclusao (P6).
+        criterio nao e criterio de exclusao (P6). Decisao dele de 16/10 (27c): o bloco C
+        conta quantas empresas sairiam em 0,5, 1,0 e 1,5, so o numero, sem nome nem retorno;
+        ele escolhe vendo a contagem, e o limiar e gravado aqui com impressao digital antes de
+        qualquer backtest que use o bloco (P4).
       o_que_o_escopo_diz_do_limiar: >
         Nada, como regra. O unico criterio do documento e o EXEMPLO do bloco L (catalogo
         especulativo), onde uma aposta ilustrativa sai com "reprova: ... C-05 (caixa < divida

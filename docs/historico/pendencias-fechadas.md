@@ -1,7 +1,25 @@
 # Pendências fechadas — e o que saiu do `PENDENCIAS.md` em 26/09/2026
 
 *Movido em 26/09/2026, sem edição de texto, do `PENDENCIAS.md` da raiz (commit `c85ce59`):
-todo bloco de pendência fechada, a tabela `## Fechadas`, os marcos auditáveis, o achado U-01
+todo bloco de pendência fechada, a tabela `## ~~P-172~~ · O PLANO.md na abertura volta à decisão em 17/10 — **FECHADA em 16/10/2026**
+
+**Dono:** Osvaldo (decidir) · Claude Code (levar os números) · **Gatilho:** 17/10/2026, com duas
+semanas de dado da regra de volta · **Classe:** `DECISAO_DE_DESENHO`
+
+Resposta 22a de 03/10: o `PLANO.md` segue na abertura. Na mesma data ele foi reescrito curto
+(dieta de 03/10), e a pergunta de 17/10 fica menor. A sessão de 17/10 leva: a tabela da regra de
+volta (`python auditoria/metricas_processo.py --prs prs.json`, com `gh pr list --state merged
+--base main --json number,title,mergedAt,author`) e os semanais de 05/10 e 12/10; o tamanho da
+abertura (`python auditoria/tamanho_do_contexto.py`); e se o piso da 21d ficou alto demais para o
+`registro` (limiar 0,21 com referência 1/7).
+
+**Fechada em 16/10/2026:** ele confirmou a 22a pelo formulário no claude.ai (o `PLANO.md` segue
+na abertura). Números levados: abertura de 23.009 tokens, 3.133 do `PLANO.md`
+(`auditoria/tamanho_do_contexto.py`); regra de volta do dia: só o `registro` volta (2 eventos em 4
+PRs, taxa 0,50, limite 0,21), aplicada no mesmo PR. O piso da 21d não foi mexido depois de
+disparar (P4). Registro na fila, bloco 22.
+
+## Fechadas`, os marcos auditáveis, o achado U-01
 que abria o arquivo e as notas antigas de "Ao voltar ao desktop". O arquivo vivo ficou só com
 as abertas. Os links relativos foram reescritos para esta pasta.*
 
@@ -2808,6 +2826,7 @@ bitemporal virou a **P-53b**, com gatilho na P-145 fechada.
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-172** | o `PLANO.md` na abertura volta à decisão em 17/10 | 16/10 — 22a confirmada por ele; abertura 23.009 tokens; regra de volta aplicada ao `registro` (#71) |
 | **P-53** | o acervo lido não depende de engine; a ponte também é bitemporal | 10/10 — parte do leitor: `leitor_cvm.valor()` *as-of* pela `dt_captura` (`acervo.vigencias`), teste (b) com duas versões do mesmo `DT_REFER`; sem pacote novo; a ponte é a P-53b, o conhecimento do mercado é a P-183 |
 | **P-51** | só `ÚLTIMO`, e a partição é o ano do arquivo | 10/10 — `fase0/leitor_cvm.py` e os testes (a) e (c), com mutação; `docs/decisoes/2026-10-10-leitor-asof-cvm.md` |
 | **P-164** | primeiro aporte com patrimônio zero devolvia `SEM_POSICAO` | 03/10 — bloco 19, opção (c): uma ordem na rota de maior peso que caiba; `NENHUMA_ROTA_CABE` com motivo; política 1.37.0; P-179 |

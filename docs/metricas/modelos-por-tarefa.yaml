@@ -8,7 +8,8 @@ vigente_desde: 2026-10-03     # evento com data a partir daqui leva a etiqueta [
 ordem: [haiku, sonnet, opusplan, opus]
 
 classes:
-  registro: sonnet            # PENDENCIAS, fila, eventos, changelog, bilhete
+  registro: opusplan          # PENDENCIAS, fila, eventos, changelog, bilhete. VOLTOU em 16/10
+                              # (21d, issue #71): 2 eventos / 4 PRs em sonnet, taxa 0,50 > 0,21
   pesquisa: sonnet            # com subagentes haiku (.claude/agents/Explore.md) na leitura larga
   engenharia: opusplan        # Opus planeja, Sonnet executa
   pre-registro: opus
