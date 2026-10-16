@@ -315,7 +315,8 @@ ativas.*
 7. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
    além do passo 6.
 8. **Instruções do Projeto no claude.ai:** colar a versão 2 de
-   `docs/ia/instrucoes-projeto-claude.md` (a escada de contorno), se ainda não foi colada; e a versão 3, de 16/10 (a ordem dos executores na escada).
+   `docs/ia/instrucoes-projeto-claude.md` (a escada de contorno), se ainda não foi colada; e a versão 4, de 16/10 (a ordem dos executores na escada; numerada 3 por engano até
+   16/10, quando já existia a 3 de 03/10).
 9. **Fila 28c, o planejador da R3 (sem prazo):** abrir a busca da Planejar (certificação CFP) num
    navegador e exportar a lista uma vez; a sessão monta o universo a partir dela. O reCAPTCHA de
    caixa de seleção não se contorna (pesquisa da R3, §2.1).

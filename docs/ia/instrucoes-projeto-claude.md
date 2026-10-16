@@ -1,6 +1,6 @@
 # Instruções do Projeto no claude.ai
 
-*Versão 3, 16/10/2026.*
+*Versão 4, 16/10/2026.*
 
 **Este arquivo é a fonte; as instruções do Projeto no claude.ai são cópia dele.** Mudar uma
 exige mudar a outra no mesmo dia, com uma linha no changelog abaixo (regra no `CLAUDE.md`).
@@ -52,5 +52,5 @@ Erro seu: reconheça em uma frase, registre como retratação e siga. Sem autoab
 |---|---|---|
 | 1 | 26/09/2026 | Primeira versão no repositório, copiada do texto que ele colou no chat em 26/09. O texto veio com os itens de lista emendados numa linha só (a colagem perdeu as quebras); cada item `- ` voltou para a sua própria linha. Nenhuma palavra foi alterada. |
 | 2 | 27/09/2026 | O item "Nada fica de fora por falta de acesso" ganha a escada de contorno da regra 18 do `CLAUDE.md` §5-B (outra ferramenta, outra cópia, outra fonte primária, outro executor, e só então o status não confirmado, com os degraus e a pendência). Motivo: na rodada do claude.ai de 27/09 a ferramenta web deu `PERMISSIONS_ERROR` e o `git clone` pelo terminal funcionou; três "bloqueados" do repositório caíram no primeiro degrau. **A cópia no Projeto do claude.ai precisa ser atualizada por ele no mesmo dia.** |
-| 3 | 16/10/2026 | O degrau 4 da escada ganha ordem: (4a) o workflow de captura no servidor do GitHub, (4b) o runner br-sp quando existir, (4c) só então a sessão local; "aguarda a máquina dele" só com 4a e 4b transcritos. E, antes de pular um item por acesso, conferir se aquela página é a unidade dele. Motivo: 83 linhas da R3 de marcas estavam paradas à espera da máquina dele, e a maioria das marcas tinha app, que é a unidade do livro de códigos (ae-a); o prompt da arquitetura de 10/10 tinha autorizado estacionar ("o que só abre de IP residencial vai para Ao voltar ao desktop"). EX-01 a EX-04 no `ACHADOS.md`. **A cópia no Projeto do claude.ai precisa ser atualizada por ele no mesmo dia.** |
 | 3 | 03/10/2026 | A lista do que ler antes de afirmar estado ganha `docs/pendencias-reserva.md`: o `PENDENCIAS.md` foi dividido em ativas (até 20) e reserva, por decisão dele de 03/10 (dieta completa do processo). Sem isto, o claude.ai diria "não está aberta" de uma pendência que só mudou de arquivo. **A cópia no Projeto do claude.ai precisa ser atualizada por ele no mesmo dia.** |
+| 4 | 16/10/2026 | O degrau 4 da escada ganha ordem: (4a) o workflow de captura no servidor do GitHub, (4b) o runner br-sp quando existir, (4c) só então a sessão local; "aguarda a máquina dele" só com 4a e 4b transcritos. E, antes de pular um item por acesso, conferir se aquela página é a unidade dele. Motivo: 83 linhas da R3 de marcas estavam paradas à espera da máquina dele, e a maioria das marcas tinha app, que é a unidade do livro de códigos (ae-a); o prompt da arquitetura de 10/10 tinha autorizado estacionar ("o que só abre de IP residencial vai para Ao voltar ao desktop"). EX-01 a EX-04 no `ACHADOS.md`. **A cópia no Projeto do claude.ai precisa ser atualizada por ele no mesmo dia.** |
