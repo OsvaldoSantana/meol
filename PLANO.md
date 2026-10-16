@@ -82,7 +82,7 @@ design → mercado → UX → brandbook. A v1 é estímulo e protótipo sobre da
 |---|---|---|
 | 2 · design | P-166, anterioridade da marca e do domínio | aberta, na reserva |
 | 3 · mercado | **P-162**, teste de marca | pré-registro e página prontos; plano da Vercel decidido (24b, 04/10); pôr no ar, o commit das datas e o convite são dele, pelo [roteiro](docs/marca/teste-de-marca/roteiro-no-ar.md) |
-| 3 · mercado | **P-170**, rodada 3 de marcas (veto de distinção) | livro v3 (ag-b, 04/10); 34 classificadas em 04/10, nenhum dominante ainda; faltam o degrau 4 (corretora e gestora), o Wayback e sete universos. A direção só sai com ela fechada |
+| 3 · mercado | **P-170**, rodada 3 de marcas (veto de distinção) | livro v3 (ag-b, 04/10); 85 classificadas em 11/10, as 10 em oito categorias, **nenhum dominante**; faltam o degrau 4 (83 linhas), o Wayback e a decisão sobre as três categorias sem universo (fila 27). A direção só sai com ela fechada |
 | 3 · mercado | P-153, P-154; posicionamento e tom | reserva; o tom depois da P-162 |
 | 4 · UX | mapa v2 (P-160); esquema da F0; P-167 (WCAG); protótipo F1, F3, F6; P-156 | mapa depois da P-162; o veredito da F0 (item 20) entrou no `main` pelo PR #59, em 03/10 |
 | 5 · brandbook | brandbook, P-168 | P-155, P-162 e P-156 fechadas |
