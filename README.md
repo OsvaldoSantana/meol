@@ -24,6 +24,8 @@ Adota a disciplina do método e diverge em pontos documentados, um a um, em
 > Rules live in versioned YAML, assets pass through named gates rather than a score, and
 > hypotheses are pre-registered with hashes before any data is touched. Written in Portuguese.
 
+**Arquitetura e requisitos:** [levantamento aplicado ao MEOL](docs/arquitetura/levantamento-aplicado-2026-10-16.md) e [matriz de aderência](docs/arquitetura/matriz-de-aderencia.md). A avaliação não altera a ordem do PLANO.
+
 **Por onde começar:** o [guia do leitor](docs/guia-do-leitor.md) tem três caminhos — 5 minutos
 para saber o que é, 30 para auditar um número de ponta a ponta, e o de quem quer contribuir.
 
