@@ -888,6 +888,12 @@ com o critério de quem entra escrito antes de classificar; planejador pela **28
 busca da Planejar uma vez). A recomendação 28a acima ("sem veto") ficou como foi escrita; a crítica
 a ela (P6) é registro da sessão A da R3.
 
+**Executada em 16/10/2026 (sessão local).** O critério de quem entra foi escrito no plano da R3 (v3)
+antes de baixar os quadros. Nos três quadros de Finanças (291 apps distintos, sha256 no plano):
+**5 consolidadores** e **nenhum robô**; o segundo quadro, de termos fixos, achou **1 robô** (Warren),
+declarado como limitação. Nenhum dos dois tem código dominante (`rodada3/veto.md`). A 28c está em
+"Ao voltar ao desktop", item 9, sem prazo. A crítica à 28a é o EX-03 do `ACHADOS.md`.
+
 ---
 
 ## Conferência de um minuto, com data

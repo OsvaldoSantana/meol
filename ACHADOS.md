@@ -3342,3 +3342,116 @@ na skill `bastter-proximo-passo` (regra 2b). (3) A P-65 está nas ativas, e a po
 bloco 23 da fila, porque o caminho de 03/10 não a nomeia e escolher entre as duas decisões não é
 da sessão. **Guarda automática: nenhuma** para "decisão sem PR", declarado no `PLANO.md` §5. A
 parte do plano que repetia limitação retirada tem guarda (`auditoria/test_plano_e_pendencias.py`).
+
+## EX-01 · O prompt da arquitetura de 10/10 autorizou estacionar em vez de contornar
+
+*16/10/2026. Retratação da arquitetura (sessão do Projeto no claude.ai), registrada pela sessão
+local a pedido dela. Família EX: o executor do degrau 4.*
+
+**O que se mediu.** O prompt de 10/10 mandava: *"o que só abre de IP residencial vai para Ao voltar
+ao desktop"*. O texto não está no repositório (vive no chat); o rastro está: a seção 3.1 da
+pesquisa da R3 ("O que aguarda a sessão local"), o item 2 de "Ao voltar ao desktop" e **83 linhas
+`AGUARDA DEGRAU 4`** no `classificacao.csv` do #81 (`ff13309`), mais **6** que a guarda nova achou
+com "4) pendente: máquina dele" na escada e sem o status (EX-02). Nenhuma das 89 tentou um
+executor que não dependesse dele.
+
+**A consequência em termos do projeto.** A R3 só fechava com a máquina dele ligada: o "nenhum
+dominante" de bancos e pagamentos valia para a parte que a nuvem abre (limitação 10), e o
+caminho para tirar a ressalva era uma tarefa no colo dele. É a P7 violada pela mesma via de
+sempre: **pôr o Osvaldo no caminho crítico de algo que é do sistema** (U-01, W-01). A escada da
+5-B.18 dizia "outro executor (sessão local, workflow, script na máquina dele)" sem ordem, e o
+prompt escolheu o que depende dele.
+
+**O que muda.** O degrau 4 ganhou ordem (CLAUDE.md §5-B.18, instruções do Projeto v3, skill
+`bastter-contorno`): 4a o workflow de captura no servidor do GitHub (`captura_r3.yml`), 4b o
+runner `br-sp` quando existir, 4c só então a sessão local; "aguarda a máquina dele" só com 4a e 4b
+transcritos. **Guarda:** `auditoria/test_degrau4.py` reprova `AGUARDA DEGRAU 4` e linha da R3 (ou
+item de "Ao voltar ao desktop") que põe a máquina dele no degrau 4 sem 4a e 4b; o teste falha nas
+89 linhas do CSV do #81.
+
+## EX-02 · A sessão do #81 parou no executor que depende dele e ignorou a ae-a
+
+*16/10/2026. Achado da arquitetura sobre a sessão da nuvem de 10 e 11/10 (Sonnet, classe
+pesquisa), medido pela sessão local.*
+
+**O que se mediu.** Das 89 linhas paradas (as 83 com o status e as 6 sem ele), **60 eram de
+marcas com app na App Store do Brasil** pelo critério que o livro escreve ("app do mesmo grupo e
+com a marca"), achado por `tools/r3_loja.py` (`country=br`, 4 s entre consultas, zero 403 em
+cerca de 180 consultas): Itaú, Banco do Brasil, Santander, C6, Sofisa Direto, Mercado Pago, XP,
+BTG, Genial, Crefisa e outras. A decisão ae-a (dele, 02/10) manda ler a marca com app **pela
+loja**; o site só vale para a marca sem app. A mesma sessão aplicou a ae-a quando o site abria
+(Caixa, Agibank, Bmg e BV têm "achado pela busca da loja" na leitura) e **deixou de aplicá-la quando
+o site recusava**: a pergunta "esta marca tem app?" só era feita depois de o site abrir. E 6 linhas
+(Featbank e cinco casas da APIMEC) foram fechadas como `site_inacessivel` com "4) pendente: máquina
+dele" na escada, sem o status: estacionadas sem aparecer na contagem das 83.
+
+**A consequência em termos do projeto.** A amostra de banco tradicional era feita dos bancos que se
+deixam abrir por um IP dos EUA (Caixa, BRB, Safra, Daycoval, Banestes...), e o resultado vinha com
+a ressalva de que os grandes faltavam. Refeita em 16/10 pela ordem do sorteio, ela tem Itaú,
+Santander e Banco do Brasil, e o "nenhum dominante" se manteve (§3.3 da pesquisa, item 13). **O
+padrão é o de sempre** (F-05, N-01, R-01, S-02): o livro declarava a unidade (o app), e o
+procedimento da visita executava outra (o site), e os dois concordavam por acaso sempre que o site
+abria.
+
+**O que muda.** A regra da 5-B.18 ganhou a pergunta antes da escada: *antes de pular uma marca por
+acesso, confira se o site é mesmo a unidade dela*. A guarda do degrau 4 pega também a linha que
+estaciona sem o status.
+
+## EX-03 · O bloco 28 recomendou deixar três categorias sem veto, contra a P6
+
+*16/10/2026. Retratação registrada a pedido da arquitetura; o bloco foi escrito pela sessão do #81
+(`b7094b0`, 11/10).*
+
+**O que se mediu.** A recomendação do bloco 28 (então 27) da fila era a **28a: "Aceitar 'sem veto'
+nas três"** (robô, consolidador, planejador), porque não há cadastro oficial. A resposta dele (10/10)
+foi outra: universo pelo quadro público da loja e 28c para o planejador. Feito em 16/10, o quadro de
+Finanças tem **5 consolidadores** em 291 apps (critério escrito no plano antes de baixar), e o
+segundo quadro achou **1 robô**.
+
+**A consequência em termos do projeto.** "Sem lista, sem veto" é ausência de critério virando
+exclusão, que é o que a P6 proíbe, e pela quarta via: aqui o que saía não era um ativo, era uma
+categoria inteira da comparação de marca. O consolidador é a categoria mais próxima do produto do
+MEOL; recomendar tirá-la do veto por falta de cadastro era recomendar não olhar o concorrente
+direto.
+
+**O que muda.** Nada de regra nova: a P6 já dizia. O que muda é o registro: a recomendação fica
+escrita como foi, com a crítica ao lado (fila, bloco 28), e o resultado da opção escolhida está na
+pesquisa (§3.3, item 12) e no `veto.md` (consolidador n = 5, robô n = 1, sem dominante).
+
+## EX-04 · O merge do Dependabot #69 trocou o instrumento no meio da R3
+
+*16/10/2026. Retratação da arquitetura.*
+
+**O que se mediu.** O PR #69 (Playwright 1.56.0 → 1.63.0) foi mesclado em 10/10 às 08:46
+(`4ed1727`), entre as visitas de 04/10 (Chromium 1194) e as de 10/10. O 1.63.0 espera o Chromium
+1243. A sessão da nuvem percebeu e apontou o 1194 por `R3_CHROMIUM`, e o `medidas.json` grava o
+navegador: **as capturas de 10 e 11/10 não mudaram de motor**. O que mudou foi o padrão: quem
+instalasse o grupo `r3` do zero ganharia o 1243.
+
+**A consequência em termos do projeto.** Não infla: zero captura mudou. Mas o instrumento da rodada
+passou a depender de uma variável de ambiente lembrada por alguém (P7), e o workflow do degrau 4a,
+criado hoje, teria capturado no 1243.
+
+**O que muda.** `playwright==1.56.0` de volta, o `dependabot.yml` ignora o `playwright` até a R3
+fechar, e a lista que justifica é `tool.meol.dependencias.instrumento_r3` (a guarda P-148 confere as
+duas juntas). Decisão em `docs/decisoes/R3-instrumento-playwright.md`. As capturas de 16/10 (local e
+GitHub) são todas do Chromium 141.0.7390.37, build 1194.
+
+## EX-05 · O bloqueio que se atribuía ao IP dos EUA era, na maior parte, ao navegador sem interface
+
+*16/10/2026. Achado da sessão local, medido no degrau 4c. Retrata em parte o achado de 04/10 da
+rodada 3 de marcas ("a captura da R3 na nuvem sai de um IP dos EUA [...] vai para o degrau 4,
+máquina dele").*
+
+**O que se mediu.** Das 23 páginas sem app mandadas ao servidor do GitHub (EUA), abriram 3. As 20
+restantes foram para esta sessão, do IP residencial de Campinas, com o mesmo instrumento: **17
+falharam de novo**, 9 por bloqueio ou verificação de robô (Cloudflare, "Acesso Bloqueado", 403 da
+Akamai: os mesmos que o IP dos EUA viu) e 8 por erro de rede, certificado ou HTTP/2.
+
+**A consequência em termos do projeto.** O plano de 04/10 dizia que "se abrir [da máquina dele], a
+linha passa a classificada": para essas, não passava. Esperar a máquina dele teria custado uma
+tarefa a ele para chegar ao mesmo `site_inacessivel`. A medição de 04/10 estava certa (o IP era dos
+EUA); errada era a pergunta que se achou que ela respondia (5-B, cabeçalho).
+
+**O que muda.** As 20 estão como `site_inacessivel` com os três degraus transcritos (limitação 15 da
+pesquisa). Contornar verificação de robô continua proibido, e o instrumento não muda.

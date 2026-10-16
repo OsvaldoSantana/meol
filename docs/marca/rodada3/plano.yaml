@@ -236,6 +236,20 @@ universos_da_loja:
     robo: ["robo de investimentos", "robo advisor", "investimento automatico", "carteira automatica"]
     consolidador: ["consolidador de investimentos", "acompanhar investimentos", "carteira de investimentos", "controle de investimentos"]
   # O planejador nao tem quadro: fila 28c, tarefa dele (exportar a busca da Planejar), sem prazo.
+  # Gravado DEPOIS do criterio acima (commit 98655ac, 16/10/2026): o que foi baixado e lido.
+  # Os arquivos ficam em data/r3/loja/ (fora do git). Resultado: 5 consolidadores nos quadros,
+  # 0 robo nos quadros e 1 no segundo quadro (docs/marca/rodada3/sorteio-robo.csv e
+  # sorteio-consolidador.csv, a permutacao da semente sobre o trackId).
+  quadros_baixados:
+    topfree: {baixado_em: 2026-10-16, apps: 100, sha256: 829db779cbbc88dd710b80bc0c8b92a8780d88bb6d82176ca8755b611134c89d}
+    topgrossing: {baixado_em: 2026-10-16, apps: 100, sha256: 56e7bd0fcb344bf2b441a4f345e3c38258ed348c12432cca84e85ff54c29139a}
+    toppaid: {baixado_em: 2026-10-16, apps: 96, sha256: 3d073bbe2056bf9ccc8493f221541666fbbffba527a2c1da89a90daec78ed00f}
+  segundo_quadro_baixado:
+    robo:
+      - {termo: "robo de investimentos", baixado_em: 2026-10-16, sha256: ec24a142d467a98a8ccf4fbe30c3df3eae3090de247fb1793856b40a4ce1c8fa}
+      - {termo: "robo advisor", baixado_em: 2026-10-16, sha256: c65715e1564f397f4cf9d183310cb9546bba2c50471fd575d871700be07e0379}
+      - {termo: "investimento automatico", baixado_em: 2026-10-16, sha256: 5438150b373217f9cb5f2021262663029850db503b710dacf25eded630e56b6e}
+      - {termo: "carteira automatica", baixado_em: 2026-10-16, sha256: d5b82f72955050eb095b9ea6446ed152ecaa24b1b991d7cf8dd740137e7a740c}
 
 # O que ainda nao e sorteio.
 a_fazer:
