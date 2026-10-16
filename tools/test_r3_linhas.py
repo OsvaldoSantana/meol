@@ -78,6 +78,16 @@ def test_marca_pulada_sem_captura_continua_valendo(tmp_path, monkeypatch):
                                                                    "bancos")
 
 
+def test_pulada_refeita_sem_a_captura_guarda_o_sha256_e_a_url_da_leitura(tmp_path, monkeypatch):
+    """16/10/2026: a captura de 10/10 so existe na nuvem; a linha refeita aqui (excedente da
+    amostra refeita) ficava sem procedencia. Sem a leitura trazer os dois, sai vazio (antes)."""
+    monkeypatch.setattr(L, "CAPTURAS", str(tmp_path))
+    leitura = {"marca": "X", "situacao": "pulada", "motivo": "excedente_da_categoria: x",
+               "data": "2026-10-16", "sha256_captura": "ab" * 32, "url": "https://x.com.br/"}
+    r = L.linha("bancos", 7, leitura, {"cnpj": "00000001"}, {})
+    assert r["sha256_captura"] == "ab" * 32 and r["url"] == "https://x.com.br/"
+
+
 def test_botao_vazado_de_app_le_a_cor_do_texto_e_nao_o_fundo():
     """10/10/2026, BMG: 'VER SIMULACAO' e laranja sobre branco e nao tem caixa nem borda. O
     caminho do botao cheio (mediana dos pixels sem o texto) devolveria o BRANCO do fundo e o

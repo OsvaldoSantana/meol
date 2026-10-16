@@ -156,7 +156,10 @@ def linha(cat: str, ordem: int, leitura: dict[str, Any], sorteio: dict[str, str]
         base["url"] = m["390"].get("url_final") or m["url_pedida"]
         base["sha256_captura"] = m["390"]["sha256"]
     if leitura["situacao"] != "classificada":
+        # 16/10/2026: a linha refeita numa maquina que nao tem a captura dela (as de 10/10 so
+        # existem na nuvem) perdia o sha256 e a url; a leitura os traz, copiados do CSV anterior
         base["url"] = base["url"] or leitura.get("url", "")
+        base["sha256_captura"] = base["sha256_captura"] or leitura.get("sha256_captura", "")
         return base
     png = os.path.join(pasta, "390.png")
     a: dict[str, Any] = {}

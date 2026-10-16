@@ -267,12 +267,19 @@ plano em [`docs/marca/rodada3/`](docs/marca/rodada3/plano.yaml), andamento em
 as 10 da af-a em oito categorias (os universos de bancos, pagamentos e casas de análise saíram de
 cadastro oficial, §2) e **nenhum código dominante em categoria nenhuma** (`rodada3/veto.md`);
 robô, consolidador e planejador **sem universo**, com a escada transcrita (§2.1; decisão dele, fila
-27). Falta o que a nuvem não alcança: 83 linhas `AGUARDA DEGRAU 4` (42 de bancos, 20 de
-pagamentos, 16 de corretora, 3 de gestora, 2 de casa de análise; §3.1) e o Wayback das 85
-(`tools/r3_arquivar.py`), os dois na máquina dele. Só página pública; nada de sessão logada
-(§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** o degrau 4 e o arquivamento, uma linha
-por marca (categoria, captura com fonte e data, medidas do `classificar()`) e o `veto()` aplicado
-à direção vencedora.
+28). ~~Falta o que a nuvem não alcança: 83 linhas `AGUARDA DEGRAU 4` [...], na máquina dele.~~
+**16/10 (sessão local, §3.3 da pesquisa):** as 83, e mais 6 que a guarda nova achou sem o status,
+saíram pela loja (ae-a: 60 das 89 marcas tinham app) e pelo degrau 4 em ordem (4a o servidor do
+GitHub, 4b o `br-sp`, que não existe, 4c esta sessão); **nenhuma linha espera a máquina dele**
+(guarda `auditoria/test_degrau4.py`). A amostra se refez pela ordem do sorteio (plano v3): 10 em
+cada categoria de cadastro, consolidador 5 e robô 1 pelo quadro da loja (fila 28), e **nenhum
+código dominante** em categoria nenhuma (`rodada3/veto.md`). Falta o Wayback das 86 classificadas
+(`tools/r3_arquivar.py`; ver "Ao voltar ao desktop") e o planejador (fila 28c, dele). Só página
+pública; nada de sessão logada (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** o
+arquivamento, uma linha por marca (categoria, captura com fonte e data, medidas do `classificar()`)
+e o `veto()` aplicado à direção vencedora. **E, no mesmo commit do fechamento,** sai o
+`instrumento_r3` do `pyproject.toml` e o `ignore` do `playwright` no `dependabot.yml`
+(`docs/decisoes/R3-instrumento-playwright.md`).
 
 ---
 
@@ -285,16 +292,12 @@ ativas.*
 
 1. **P-145, depois do item 4:** `py -3.11 medicoes/p145_ponte_2013_2019.py` e o PR com os
    inventários que o envio gravou. É o passo 1 do caminho crítico.
-2. **P-170, o degrau 4 da R3:** as 83 linhas `AGUARDA DEGRAU 4` (`grep "AGUARDA DEGRAU 4"
-   docs/marca/rodada3/classificacao.csv`; a lista e o roteiro estão na §3.1 de
-   `docs/marca/pesquisa-marcas-rodada3-2026-09.md`): `py -3.11 tools/r3_capturar.py site <url>
-   data/r3/capturas/<categoria>-<ordem>` do IP dele, ler, acrescentar a entrada em
-   `leituras.yaml` e `python tools/r3_linhas.py --acrescentar --refazer <categoria>:<ordem>`. Depois
-   `py -3.11 tools/r3_arquivar.py` (o Wayback das 85) e `python tools/r3_dominante.py`. Para o
-   `playwright`, o Chromium da máquina dele (a nuvem usa o build 1194 por `R3_CHROMIUM`). As
-   capturas das 85 classificadas (390.png, medidas e imagens da loja, 12 MB) foram enviadas por
-   arquivo na sessão de 11/10: descompactar em `data/r3/` (cria `capturas/<categoria>-<ordem>/`);
-   site de terceiros, fora do git.
+2. ~~**P-170, as 83 linhas paradas da R3**~~ (16/10: resolvidas pela loja e pela escada em
+   ordem; §3.3 da pesquisa). **O que sobra da P-170 é o Wayback das 86** (`tools/r3_arquivar.py`):
+   pela ordem nova, 4a) o passo de arquivar no `captura_r3.yml` (não tentado: o workflow só
+   captura hoje); 4b) `br-sp`: não existe; só depois a sessão local. As capturas das 85 de 10 e
+   11/10 (12 MB, enviadas por arquivo em 11/10) continuam sem descompactar nesta máquina; as de
+   16/10 estão em `data/r3/capturas/` do worktree `Bastter-p170-appstore` (fora do git).
 3. **P-05 e P-169, o degrau 4 da escada:** `curl` de IP residencial no site do BOVV11 e nas
    páginas dos 11 bancos da regra m-B (os roteiros estão no texto das duas, na reserva).
 
@@ -312,4 +315,7 @@ ativas.*
 7. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
    além do passo 6.
 8. **Instruções do Projeto no claude.ai:** colar a versão 2 de
-   `docs/ia/instrucoes-projeto-claude.md` (a escada de contorno), se ainda não foi colada.
+   `docs/ia/instrucoes-projeto-claude.md` (a escada de contorno), se ainda não foi colada; e a versão 3, de 16/10 (a ordem dos executores na escada).
+9. **Fila 28c, o planejador da R3 (sem prazo):** abrir a busca da Planejar (certificação CFP) num
+   navegador e exportar a lista uma vez; a sessão monta o universo a partir dela. O reCAPTCHA de
+   caixa de seleção não se contorna (pesquisa da R3, §2.1).

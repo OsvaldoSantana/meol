@@ -89,3 +89,20 @@ def test_com_tentativas_repete_so_erro_de_rede_e_espera_cada_vez_mais():
         raise KeyError("results")      # nao e rede: nao se repete
     with pytest.raises(KeyError):
         C.com_tentativas(erro_de_codigo, dormir=lambda s: pytest.fail("repetiu um erro de codigo"))
+
+
+def test_lote_le_os_alvos_na_ordem_do_arquivo():
+    texto = ("categoria_sorteada,ordem,url" + chr(10) + "bancos,5,https://www.sofisa.com.br/"
+             + chr(10) + "corretora,3, x" + chr(10))
+    assert C.ler_alvos(texto) == [("bancos", 5, "https://www.sofisa.com.br/"),
+                                  ("corretora", 3, "x")]
+
+
+def test_lote_transcreve_o_erro_e_o_que_separa_marca_de_bloqueio():
+    assert C.resumo_do_alvo(None, "TimeoutError: 90000ms") == {"erro": "TimeoutError: 90000ms"}
+    s = {"navegador": "141", "390": {"status_http": 403, "url_final": "u",
+                                     "titulo": "Access Denied", "texto_da_pagina": "x" * 500,
+                                     "sha256": "ab"}}
+    r = C.resumo_do_alvo(s, None)
+    assert r["status_http"] == 403 and r["titulo"] == "Access Denied"
+    assert len(r["texto"]) == 200 and r["sha256_390"] == "ab" and "erro" not in r

@@ -4,16 +4,16 @@
 
 | categoria | n (so app) | codigo dominante | E | C | D | so app: E | C | D |
 |---|---|---|---|---|---|---|---|---|
-| banco_tradicional | 10 (8) | sem dominante | - | - | - | - | - | - |
-| banco_digital | 10 (7) | sem dominante | - | - | - | - | - | - |
-| corretora | 10 (1) | sem dominante | - | - | - | - | - | - |
-| gestora_e_private | 14 (1) | sem dominante | - | - | - | - | - | - |
-| pagamentos | 11 (9) | sem dominante | - | - | - | - | - | - |
-| consolidador | 0 (0) | sem dominante | - | - | - | - | - | - |
+| banco_tradicional | 10 (9) | sem dominante | - | - | - | - | - | - |
+| banco_digital | 10 (8) | sem dominante | - | - | - | - | - | - |
+| corretora | 10 (4) | sem dominante | - | - | - | - | - | - |
+| gestora_e_private | 10 (1) | sem dominante | - | - | - | - | - | - |
+| pagamentos | 10 (9) | sem dominante | - | - | - | - | - | - |
+| consolidador | 5 (5) | sem dominante | - | - | - | - | - | - |
 | casa_de_analise_e_educacao | 10 (3) | sem dominante | - | - | - | - | - | - |
 | consultoria_cvm | 10 (0) | sem dominante | - | - | - | - | - | - |
 | assessor | 10 (0) | sem dominante | - | - | - | - | - | - |
-| robo | 0 (0) | sem dominante | - | - | - | - | - | - |
+| robo | 1 (1) | sem dominante | - | - | - | - | - | - |
 | planejador | 0 (0) | sem dominante | - | - | - | - | - | - |
 
-**Arquivamento:** 85 linha(s) classificada(s) com `PENDENTE_LOCAL`. A R3 so fecha com zero (tools/r3_arquivar.py, na maquina dele).
+**Arquivamento:** 86 linha(s) classificada(s) com `PENDENTE_LOCAL`. A R3 so fecha com zero (tools/r3_arquivar.py, na maquina dele).
