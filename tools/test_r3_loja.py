@@ -22,6 +22,13 @@ def test_dominio_base_tira_www_e_sufixo_publico():
     assert L.dominio_base("https://brei.com.br/") == "brei"
     assert L.dominio_base("caixa.gov.br") == "caixa"
     assert L.dominio_base("https://www.bancointer.com/") == "bancointer"
+    assert L.dominio_base("WWW.GENIAL.COM.VC") == "genial"       # 16/10: caia no "com"
+    assert L.dominio_base("HTTPS://WWW.COOPERCARD.COM.BR") == "coopercard"
+
+
+def test_linha_sem_url_usa_o_site_do_cadastro():
+    """16/10: a coluna url fica vazia quando o site nao abriu; o termo 2 vem do cadastro."""
+    assert L.dominio_base(L.site_do_sorteio("corretora", 19)) == "genial"
 
 
 def test_termos_na_ordem_do_plano_sem_repetir():
@@ -112,6 +119,8 @@ def test_pendentes_so_aguarda_e_na_ordem_do_sorteio():
     assert [(r["categoria_sorteada"], r["ordem_no_sorteio"]) for r in L.pendentes(linhas)] == [
         ("assessor", "9"), ("bancos", "5"), ("bancos", "12")]
     assert [r["ordem_no_sorteio"] for r in L.pendentes(linhas, ["bancos:12"])] == ["12"]
+    # nomeada, a linha entra mesmo sem o status (as seis que a guarda do degrau 4 achou)
+    assert [r["ordem_no_sorteio"] for r in L.pendentes(linhas, ["bancos:7"])] == ["7"]
 
 
 def _entrada(i, nome, vendedor="V", resumo="r"):

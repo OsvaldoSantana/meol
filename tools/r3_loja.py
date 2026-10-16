@@ -53,6 +53,7 @@ AGUARDA = "AGUARDA DEGRAU 4"
 SUFIXOS = ("com.br", "net.br", "org.br", "gov.br", "coop.br", "art.br", "inf.br", "b.br",
            "bank.br", "com", "net", "org", "io", "app", "br", "co", "digital", "finance",
            "bank", "investments", "capital", "tech")
+GENERICOS = ("com", "net", "org", "gov", "edu", "co")
 
 
 # ------------------------------------------------------------------ funcoes puras (testadas) ---
@@ -68,6 +69,9 @@ def dominio_base(url: str) -> str:
         partes = suf.split(".")
         if len(rotulos) > len(partes) and rotulos[-len(partes):] == partes:
             return rotulos[-len(partes) - 1]
+    # 16/10/2026: sufixo de dois niveis de outro pais (genial.com.vc) caia no "com"
+    if len(rotulos) >= 3 and rotulos[-2] in GENERICOS and len(rotulos[-1]) == 2:
+        return rotulos[-3]
     return rotulos[-2] if len(rotulos) >= 2 else (rotulos[0] if rotulos else "")
 
 
@@ -130,12 +134,15 @@ def resumo_app(r: dict[str, Any]) -> dict[str, Any]:
 
 def pendentes(linhas: list[dict[str, str]], so: list[str] | None = None
               ) -> list[dict[str, str]]:
-    """As linhas AGUARDA DEGRAU 4, pela ordem do sorteio dentro de cada categoria sorteada."""
-    alvo = None
+    """As linhas AGUARDA DEGRAU 4, pela ordem do sorteio dentro de cada categoria sorteada. Com
+    `so`, as linhas nomeadas, com ou sem o status: 16/10/2026, a guarda do degrau 4 achou seis
+    paradas na maquina dele sem o AGUARDA (auditoria/degrau4.py)."""
     if so:
         alvo = {(c, int(o)) for c, _, o in (s.rpartition(":") for s in so)}
-    out = [r for r in linhas if AGUARDA in r["motivo"]
-           and (alvo is None or (r["categoria_sorteada"], int(r["ordem_no_sorteio"])) in alvo)]
+        out = [r for r in linhas
+               if (r["categoria_sorteada"], int(r["ordem_no_sorteio"])) in alvo]
+    else:
+        out = [r for r in linhas if AGUARDA in r["motivo"]]
     return sorted(out, key=lambda r: (r["categoria_sorteada"], int(r["ordem_no_sorteio"])))
 
 
@@ -203,6 +210,18 @@ def buscar(termo: str, loja: dict[str, Any], esp: Espacador, destino: str) -> di
             "resultados": [resumo_app(r) for r in res]}
 
 
+def site_do_sorteio(categoria: str, ordem: int) -> str:
+    """O site que o cadastro declara para a linha (sorteio-<categoria>.csv). 16/10/2026: linha
+    cujo site nao abriu ficou com a coluna `url` vazia, e o termo 2 do plano (o dominio do site da
+    linha) nao era buscado; a Genial Institucional declara genial.com.vc."""
+    caminho = os.path.join(os.path.dirname(CSV), f"sorteio-{categoria}.csv")
+    with open(caminho, encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if int(r["ordem"]) == ordem:
+                return (r.get("site_declarado") or "").strip()
+    return ""
+
+
 def _ler_csv() -> list[dict[str, str]]:
     with open(CSV, encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
@@ -214,7 +233,8 @@ def cmd_pendentes(so: list[str] | None) -> int:
     for r in pendentes(_ler_csv(), so):
         chave = f"{r['categoria_sorteada']}-{int(r['ordem_no_sorteio']):03d}"
         buscas = []
-        for k, termo in enumerate(termos_da_linha(r["marca"], r["url"]), start=1):
+        site = r["url"] or site_do_sorteio(r["categoria_sorteada"], int(r["ordem_no_sorteio"]))
+        for k, termo in enumerate(termos_da_linha(r["marca"], site), start=1):
             buscas.append(buscar(termo, loja, esp,
                                  os.path.join(SAIDA, "busca", f"{chave}-termo{k}.json")))
         reg = {"categoria_sorteada": r["categoria_sorteada"],
