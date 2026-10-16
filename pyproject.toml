@@ -55,7 +55,7 @@
 
 [project]
 name = "meol"
-version = "1.21.0"                 # acompanha politica.yaml -> meta.versao
+version = "1.22.0"                 # acompanha politica.yaml -> meta.versao
 description = "Sistema pessoal de analise e aporte — motor de alocacao, custos com procedencia e backtest pre-registrado"
 requires-python = "==3.11.*"
 license = "Apache-2.0"               # a prosa (.md) e CC-BY-4.0: ver NOTICE
@@ -102,8 +102,13 @@ captura = [
 # Mesma razao do grupo `lint`. Guardado por alocacao/test_p141_paralelo.py.
 # R3 de marcas (P-170, 04/10/2026): tools/r3_capturar.py. So quem captura instala; o CI nao
 # precisa (as funcoes testadas nao importam nenhum dos dois). Nao muda numero do motor.
+# 16/10/2026 (P-170, docs/decisoes/R3-instrumento-playwright.md): VOLTA a 1.56.0, o Playwright das
+# 51 visitas de 04/10 (Chromium 1194). O PR #69 do Dependabot subiu para 1.63.0 (Chromium 1243) no
+# meio da rodada, e o motor de renderizacao e parte do instrumento: o que a captura mede (moda dos
+# pixels, estilos computados) depende dele. Fica fixo ate a R3 fechar; o dependabot.yml o ignora
+# (tool.meol.dependencias.instrumento_r3), e test_workflows.py confere as duas listas juntas.
 r3 = [
-  "playwright==1.63.0",
+  "playwright==1.56.0",
   "pillow==12.3.0",
 ]
 paralelo = [
@@ -150,6 +155,10 @@ markers = [
 [tool.meol.dependencias]
 numericas = ["numpy", "pandas"]
 ferramentas = ["PyYAML", "pytest"]
+# 16/10/2026 (P-170): o instrumento da R3 nao troca no meio da rodada. NAO e numerica (nao entra
+# na impressao do ambiente: o grupo r3 fica fora dela); e o Dependabot ignora as duas listas.
+# SAI quando a R3 fechar (P-170 na tabela das fechadas): apagar a chave e o ignore no mesmo commit.
+instrumento_r3 = ["playwright"]
 # PyYAML e ferramenta e nao numerica porque ele so transporta valores: um YAML lido
 # por duas versoes diferentes do parser entrega os mesmos floats, ou entrega erro.
 

@@ -19,6 +19,14 @@ Nao grava nada no git: as capturas sao de terceiros e ficam em data/r3/capturas/
     python tools/r3_capturar.py site <url> <pasta>     # 390.png, 1280.png, medidas.json
     python tools/r3_capturar.py app <trackId> <pasta>  # as capturas da App Store do Brasil
     python tools/r3_capturar.py recortar <png> <x0> <y0> <x1> <y1> <pasta>  # a tela, em 390 px
+    python tools/r3_capturar.py lote <alvos.csv>       # o degrau 4a: varias, sem parar no erro
+
+O LOTE (16/10/2026, degrau 4a da escada, CLAUDE.md 5-B.18). O workflow .github/workflows/
+captura_r3.yml roda `lote` no servidor do GitHub sobre docs/marca/rodada3/degrau4a.csv
+(categoria_sorteada, ordem, url): cada alvo vai para data/r3/capturas/<categoria>-<ordem>/, um
+erro nao para os outros, e `lote.json` diz, por alvo, o status HTTP, a URL final, o titulo e o
+comeco do texto (e o que distingue a pagina da marca da pagina de bloqueio da CDN). Quem le o
+resultado decide: o lote nao classifica bloqueio, so transcreve.
 
 O NAVEGADOR (10/10/2026). A captura usa o Chromium que o Playwright instalado espera. Quando a
 maquina tem outro (a nuvem traz o build 1194, o das 51 primeiras visitas da R3, e o Playwright
@@ -230,6 +238,44 @@ def recortar(png: str, caixa: tuple[int, int, int, int], pasta: str) -> dict[str
     return info
 
 
+def ler_alvos(texto: str) -> list[tuple[str, int, str]]:
+    """As linhas de degrau4a.csv: (categoria sorteada, ordem, url), na ordem do arquivo."""
+    import csv
+    import io
+    out = []
+    for r in csv.DictReader(io.StringIO(texto)):
+        out.append((r["categoria_sorteada"].strip(), int(r["ordem"]), r["url"].strip()))
+    return out
+
+
+def resumo_do_alvo(saida: dict[str, Any] | None, erro: str | None) -> dict[str, Any]:
+    """O que o lote.json guarda de cada alvo: o bastante para separar marca de bloqueio."""
+    if erro is not None or saida is None:
+        return {"erro": (erro or "sem saida")[:300]}
+    m = saida.get("390", {})
+    return {"navegador": saida.get("navegador"), "status_http": m.get("status_http"),
+            "url_final": m.get("url_final"), "titulo": (m.get("titulo") or "")[:120],
+            "texto": (m.get("texto_da_pagina") or "")[:200], "sha256_390": m.get("sha256")}
+
+
+def capturar_lote(alvos_csv: str, raiz_capturas: str) -> dict[str, Any]:
+    with open(alvos_csv, encoding="utf-8") as f:
+        alvos = ler_alvos(f.read())
+    lote: dict[str, Any] = {}
+    for cat, ordem, url in alvos:
+        chave = f"{cat}-{ordem:02d}"
+        try:
+            lote[chave] = {"url": url, **resumo_do_alvo(
+                capturar_site(url, os.path.join(raiz_capturas, chave)), None)}
+        except Exception as e:  # o lote transcreve o erro e segue (degrau 4a)
+            lote[chave] = {"url": url, **resumo_do_alvo(None, f"{type(e).__name__}: {e}")}
+        print(chave, json.dumps(lote[chave], ensure_ascii=False)[:400], flush=True)
+    os.makedirs(raiz_capturas, exist_ok=True)
+    with open(os.path.join(raiz_capturas, "lote.json"), "w", encoding="utf-8") as f:
+        json.dump(lote, f, ensure_ascii=False, indent=1)
+    return lote
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=(__doc__ or "").split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -243,7 +289,15 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("png")
     r.add_argument("caixa", nargs=4, type=int)
     r.add_argument("pasta")
+    lo = sub.add_parser("lote")
+    lo.add_argument("alvos_csv")
+    lo.add_argument("--destino", default=os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "r3", "capturas"))
     a = ap.parse_args(argv)
+    if a.cmd == "lote":
+        lote = capturar_lote(a.alvos_csv, a.destino)
+        print(f"RESUMO: {len(lote)} alvos, {sum('erro' in v for v in lote.values())} com erro")
+        return 0
     if a.cmd == "site":
         out = capturar_site(a.url, a.pasta)
     elif a.cmd == "app":

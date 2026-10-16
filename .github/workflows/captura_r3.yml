@@ -1,0 +1,53 @@
+# O degrau 4a da escada (CLAUDE.md 5-B.18): a captura da R3 no servidor do GitHub -- 16/10/2026.
+#
+# O PROBLEMA. De 04 a 11/10, 83 linhas da R3 pararam em "AGUARDA DEGRAU 4" com o proximo executor
+# sendo a maquina dele, sem tentar o executor que nao depende dele (EX-01, EX-02). A regra nova
+# poe o degrau 4 nesta ordem: 4a este workflow, 4b o runner br-sp quando existir, 4c a sessao local.
+#
+# O FLUXO. Um push numa branch `capturar-r3/<nome>` roda `tools/r3_capturar.py lote` sobre
+# docs/marca/rodada3/degrau4a.csv (categoria_sorteada, ordem, url). O log diz, por alvo, o status
+# HTTP, a URL final, o titulo e o comeco do texto; quem le decide se abriu a marca ou a pagina de
+# bloqueio, e transcreve na coluna `escada` do classificacao.csv.
+#
+# O QUE NAO FAZ. Nao usa segredo nenhum e so le o repositorio (`contents: read`): nao commita.
+# As capturas sao de terceiros e NAO vao para o git: sobem como artefato do run, que expira em
+# 3 dias, so para a sessao baixa-las (`gh run download`) para data/r3/capturas/. O repositorio e
+# publico, e o artefato tambem: so paginas publicas, abertas sem login nem clique (5-A.7).
+# O instrumento e o da R3 (Playwright 1.56.0, Chromium 1194): o grupo `r3` do pyproject o fixa.
+
+name: Captura R3
+
+on:
+  push:
+    branches: ['capturar-r3/**']
+
+concurrency:
+  group: captura-r3-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  capturar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      # Mesmos SHAs dos outros workflows (checkout v7.0.1, setup-python v7.0.0, upload v7.0.1).
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Instalar
+        run: |
+          python -m pip install ".[r3]"
+          python -m playwright install --with-deps chromium
+      - name: De onde sai a captura
+        run: curl -s https://ipinfo.io/json | python -c "import json,sys; d=json.load(sys.stdin); print(d.get('city'), d.get('country'), d.get('org'))" || true
+      - name: Capturar
+        run: python tools/r3_capturar.py lote docs/marca/rodada3/degrau4a.csv --destino data/r3/capturas
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+        with:
+          name: capturas-r3
+          path: data/r3/capturas
+          retention-days: 3

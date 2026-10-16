@@ -256,10 +256,11 @@ categorias:
       densidade_lista: "menu; grafico do slide; seta; seta; titulo; pontos do carrossel; icone; titulo do fundo; texto"
       nota: "o HTML traz texto escondido de cassino (SEO injetado), invisivel na tela; a pagina visivel e da Nikos. Fundo de renda fixa com cotistas de varejo"
     3:
-      marca: XP Gestao de Recursos
+      marca: "XP Gestao de Recursos"
       situacao: pulada
-      motivo: "site_inacessivel: HTTP 403 'A sua requisicao foi bloqueada' para o IP da nuvem (EUA). AGUARDA DEGRAU 4"
-      escada: "1) Chromium e curl: 403 da CDN da XP; 4) pendente: captura na maquina dele, IP brasileiro. Se abrir, a linha passa a classificada e a amostra se refaz pela ordem"
+      motivo: "site_inacessivel: 'Acesso Bloqueado' pela CDN da XP (bloqueio-cdn@xpi.com.br) nos tres executores, inclusive do IP brasileiro; sem app da gestora"
+      escada: "1) Chromium e curl: 403 da CDN da XP; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403 'Acesso Bloqueado'; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403 'Acesso Bloqueado'"
+      data: 2026-10-16
     4:
       marca: Ativore Asset Management
       situacao: pulada
@@ -284,10 +285,11 @@ categorias:
       densidade_blocos: 9
       densidade_lista: "logotipo da faixa; bandeiras; menu; janela Importante; texto da janela; icones de rede; ilustracao; QUERO PARTICIPAR; titulo atras"
     7:
-      marca: Merito DTVM
+      marca: "Merito DTVM"
       situacao: pulada
-      motivo: "site_inacessivel: verificacao 'confirme que e humano' (Cloudflare) para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: pagina de verificacao da Cloudflare; contornar verificacao e proibido; 4) pendente: maquina dele"
+      motivo: "duplicada: a marca Merito foi classificada em corretora 3 (app id 6766672226); precedencia do livro: corretora antes de gestora_e_private"
+      escada: "1) Chromium: pagina de verificacao da Cloudflare; contornar verificacao e proibido; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado"
+      data: 2026-10-16
     8:
       marca: Sameside
       situacao: classificada
@@ -302,10 +304,11 @@ categorias:
       situacao: pulada
       motivo: "nao_atende_pf: estrategias 'estruturadas em FIDC/FIDC-NP e FIP' (veiculos restritos)"
     10:
-      marca: BREI
+      marca: "BREI (Integral Brei)"
       situacao: pulada
-      motivo: "site_inacessivel: 'Sorry, you have been blocked' (Cloudflare) para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: bloqueio da Cloudflare; 4) pendente: maquina dele"
+      motivo: "nao_atende_pf: brei.com.br redireciona para integralbrei.com.br, Integral Trust: servicos financeiros para financas corporativas e FIDCs (degrau 4c, 16/10/2026)"
+      escada: "1) Chromium: bloqueio da Cloudflare; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403, verificacao da Cloudflare; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 200, a pagina abriu"
+      data: 2026-10-16
     11:
       marca: 2S Capital
       situacao: classificada
@@ -378,15 +381,27 @@ categorias:
       situacao: pulada
       motivo: "nao_atende_pf: banco de investimento ('originar, estruturar e executar operacoes', M&A, mercado de capitais)"
     3:
-      marca: Merito DTVM
-      situacao: pulada
-      motivo: "site_inacessivel: verificacao da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4 (o mesmo dominio da gestora_e_private 7)"
-      escada: "1) Chromium: pagina de verificacao; 4) pendente: maquina dele"
+      marca: "Merito DTVM"
+      categoria: corretora
+      situacao: classificada
+      unidade: app         # 'Merito: Investimentos e mais', MERITO DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA, App Store BR id 6766672226 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [25, 748, 335, 45]
+      cor_do_texto: "#ffffff"
+      raio_px: 22
+      fonte: "fonte sem serifa do app (Merito)"
+      familia_generica: sans-serif
+      densidade_blocos: 5
+      densidade_lista: "barra de status; foto; titulo Seu dinheiro trabalhando por voce todos os dias; texto; Iniciar"
+      nota: "captura 1 da loja; recorte 167,448,995,2134 sobre 1242x2688. A tela de entrada do app, de frente. Botao Iniciar verde, pilula. A moda dos pixels e o verde do botao (#2a8c39, 3,8%) sobre foto: limitacao 6. DTVM com conta digital e investimentos para pessoa fisica; a marca tambem foi sorteada em gestora_e_private 7 (duplicada la)"
+      escada: "1) Chromium: pagina de verificacao; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     4:
-      marca: Morgan Stanley
+      marca: "Morgan Stanley"
       situacao: pulada
-      motivo: "site_inacessivel: 'upstream request failed' (502 do proxy da nuvem), em duas tentativas. AGUARDA DEGRAU 4"
-      escada: "1) curl: 200 com e sem www; Chromium: 502 do proxy em 45 s e em 90 s; 4) pendente: maquina dele"
+      motivo: "nao_atende_pf: pagina institucional ('Areas de Negocios', 'Informacoes Regulatorias', 'Demonstracoes Financeiras'), lida pelo curl (degrau 1) do IP brasileiro em 16/10/2026; a captura de 390 px falhou nos dois executores (ERR_HTTP2_PROTOCOL_ERROR)"
+      escada: "1) curl: 200 com e sem www; Chromium: 502 do proxy em 45 s e em 90 s; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): so os apps do Morgan Stanley nos EUA; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): net::ERR_HTTP2_PROTOCOL_ERROR; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): o mesmo erro; curl daqui: 200"
+      data: 2026-10-16
     5:
       marca: Oliveira Trust
       situacao: fora_do_livro
@@ -394,13 +409,16 @@ categorias:
     6:
       marca: Azimut Brasil Wealth Management
       categoria: gestora_e_private   # 'Gestora de Patrimonio'; sem app proprio de investimento, nao cabe em corretora
-      situacao: classificada
       unidade: site
       botao: vazado          # 'Saiba mais' e link de texto; os botoes sao do aviso de cookies
       fonte: Futura Light
       familia_generica: sans-serif
       densidade_blocos: 9
       densidade_lista: "menu; logotipo (0); foto; paragrafo; Saiba mais; aviso de cookies; Permitir; Dispensar; Preferencias"
+      situacao: pulada
+      motivo: "excedente_da_categoria: de outro universo; gestora_e_private tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026)"
+      url: "http://www.azimutbrasil.com.br/AZWEALTH/"
+      sha256_captura: "9c336fd4c01aab41eed4b38072cc01d1f6105b20e7e81a9022fcf547c779358d"
     7:
       marca: Deboni
       situacao: fora_do_livro
@@ -412,7 +430,6 @@ categorias:
     9:
       marca: 4UM Investimentos
       categoria: gestora_e_private   # 'EXCELENCIA EM GESTAO', asset management; sem app proprio
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: Saiba mais
@@ -420,6 +437,10 @@ categorias:
       familia_generica: sans-serif
       densidade_blocos: 11
       densidade_lista: "Fale Conosco; acessibilidade; busca; PT; EN; menu; titulo; paragrafo; Saiba mais; aviso de cookies; ACEITAR; RECUSAR"
+      situacao: pulada
+      motivo: "excedente_da_categoria: de outro universo; gestora_e_private tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026)"
+      url: "https://www.4um.com.br/"
+      sha256_captura: "eee800446b38e6641dd9c58c71e19b0a24bb68352d10f89965e4d81b06cf65a7"
     10:
       marca: Santander DTVM (Pi)
       situacao: pulada
@@ -440,11 +461,11 @@ categorias:
       motivo: "site_inacessivel: vitreo.com.br sem endereco no DNS (sem registro A) e www NXDOMAIN"
       escada: "1) curl: CONNECT 502 e 'Could not resolve host'; 2) archive.org/wayback/available: ultimo arquivamento 2023-12-14; 3) dns.google: sem resposta A; busca: so a central de atendimento (atendimento.vitreo.com.br), nenhum site da marca; 4) dominio sem endereco nao depende de quem acessa"
     13:
-      marca: StoneX DTVM
+      marca: "StoneX DTVM"
       situacao: pulada
-      motivo: "site_inacessivel: verificacao de seguranca da Cloudflare ('Um momento...') para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) curl: 403 em https www, https, http www e http; Chromium: pagina de verificacao; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: verificacao de robo da Cloudflare nos tres executores, inclusive do IP brasileiro; a pagina do cadastro e /empresas/dtvm/"
+      escada: "1) curl: 403 em https www, https, http www e http; Chromium: pagina de verificacao; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca no Brasil; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403, verificacao da Cloudflare; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403, a mesma verificacao"
+      data: 2026-10-16
     14:
       marca: Coinvalores
       situacao: classificada
@@ -458,17 +479,27 @@ categorias:
       nota: "DTVM com area de fundos imobiliarios para o investidor; botao azul com aro, raio de 24 px no CSS. Chromium, 390 px, sem clique"
       data: 2026-10-10
     15:
-      marca: Galapagos Capital
+      marca: "Galapagos Capital"
       situacao: pulada
-      motivo: "site_inacessivel: 403 Forbidden do servidor no Chromium, no caminho do cadastro e na raiz. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 em /investimentos/ e na raiz; urllib: 200 na raiz com https www, 403 com http (mudar o user-agent do Chromium para passar seria contornar a deteccao: nao feito); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: de outro universo; gestora_e_private tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026): o app 'Galapagos Capital' (id 1671269450) e de gestao de patrimonio ('um novo patamar de gestao de patrimonio'), categoria gestora_e_private"
+      escada: "1) Chromium: 403 em /investimentos/ e na raiz; urllib: 200 na raiz com https www, 403 com http (mudar o user-agent do Chromium para passar seria contornar a deteccao: nao feito); 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     16:
-      marca: Santander Corretora
-      situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) para o IP da nuvem. AGUARDA DEGRAU 4. A mesma marca visual (Santander Corretora) abriu em corretora 58 pelo subdominio site.santandercorretora.com.br; se o www abrir no degrau 4, e duplicada de 58"
-      escada: "1) curl: 403 nas quatro variantes; Chromium: Access Denied; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Santander Corretora"
+      categoria: corretora
+      situacao: classificada
+      unidade: app         # 'Santander Corretora: taxa 0', Toro Investimentos Ltda., App Store BR id 1490105579 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [37, 469, 58, 62]
+      cor_do_texto: "#c00000"
+      raio_px: 6
+      fonte: "Santander Text (sem serifa)"
+      familia_generica: sans-serif
+      densidade_blocos: 20
+      densidade_lista: "barra de status; Bom dia, Joao; Conta Exclusiva; Valor Investido; ajuda; olho; valor; variacao; Saldo em conta; Lancamentos futuros; Investir; Pix; Carteira; Extrato; Deposito; Oportunidades; etiqueta Produto Exclusivo; LCA Banco Santander; texto; cartao seguinte"
+      nota: "captura 4 da loja; recorte 172,1046,1040,2692 sobre 1242x2692. A 1 a 3 mostram o aparelho inclinado. O vendedor e a Toro Investimentos, do grupo Santander, e o app tem a marca: 'Santander Corretora' e marca comercial propria (como o Itau Private no livro), distinta do banco. Botao: o primeiro atalho (Investir), quadrado cinza claro sobre fundo branco: cheio"
+      escada: "1) curl: 403 nas quatro variantes; Chromium: Access Denied; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     17:
       marca: Hedgepoint Global Markets
       situacao: pulada
@@ -487,11 +518,11 @@ categorias:
       nota: "o botao Invista agora fica sob o aviso de cookies na primeira tela (no DOM, nao no recorte); a marca visual e a do Sicoob, com a pagina da DTVM dentro do portal"
       data: 2026-10-10
     19:
-      marca: Genial Institucional
+      marca: "Genial"
       situacao: pulada
-      motivo: "site_inacessivel: sem resposta (timeout) nas quatro variantes e no Chromium; o DNS resolve (Akamai). AGUARDA DEGRAU 4"
-      escada: "1) curl: TimeoutError em https www, https, http www e http; Chromium: tempo esgotado na navegacao; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.174; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o app da marca ('Genial Investimentos', id 1501881719) nao traz captura de interface de frente (as seis sao arte ou aparelho em perspectiva), como o Safra em 10/10; e o site (genial.com.vc, do cadastro, e genialinvestimentos.com.br) falha nos dois executores com ERR_HTTP2_PROTOCOL_ERROR"
+      escada: "1) curl: TimeoutError em https www, https, http www e http; Chromium: tempo esgotado na navegacao; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.174; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (genial, do site do cadastro) devolve o app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): net::ERR_HTTP2_PROTOCOL_ERROR; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): o mesmo erro em genialinvestimentos.com.br"
+      data: 2026-10-16
     20:
       marca: FIDD DTVM
       situacao: pulada
@@ -511,7 +542,6 @@ categorias:
     23:
       marca: Rio Bravo Investimentos
       categoria: gestora_e_private   # 'Gestora de recursos focada em ativos reais'; precedencia do livro
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: Conhe     # 'Conheca a Rio Bravo', o botao preto do slide mostrado na primeira tela
@@ -521,12 +551,16 @@ categorias:
       densidade_lista: "logotipo; menu; foto com titulo; texto; botao; seta; indicadores do carrossel; titulo Nossos fundos em destaque"
       nota: "carrossel de seis slides; o botao e o mesmo estilo (preto, pilula) nos tres textos medidos"
       data: 2026-10-10
-    24:
-      marca: Apex Group DTVM (BRL Trust)
       situacao: pulada
-      motivo: "site_inacessivel: conexao reiniciada (https) e 503 (http) para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) curl: [Errno 104] Connection reset em https, 503 em http; Chromium: tempo esgotado; 2) archive.org/wayback/available: ultimo arquivamento 2024-08-23; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: de outro universo; gestora_e_private tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026)"
+      url: "https://www.riobravo.com.br/"
+      sha256_captura: "db54a582f906cc47f958141401ee4d9c68a4528f1e5dcfdf1cbc72320ae6c93e"
+    24:
+      marca: "Apex Group DTVM (BRL Trust)"
+      situacao: pulada
+      motivo: "site_inacessivel: o certificado nao e de autoridade reconhecida (ERR_CERT_AUTHORITY_INVALID) nos dois executores; administradora fiduciaria (BRL Trust, hoje Apex), o que nao muda a amostra"
+      escada: "1) curl: [Errno 104] Connection reset em https, 503 em http; Chromium: tempo esgotado; 2) archive.org/wayback/available: ultimo arquivamento 2024-08-23; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): net::ERR_CERT_AUTHORITY_INVALID; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): net::ERR_CERT_AUTHORITY_INVALID"
+      data: 2026-10-16
     25:
       marca: ActivTrades
       situacao: classificada
@@ -540,11 +574,21 @@ categorias:
       nota: "corretora de cambio e valores; oferta de acoes americanas ao investidor pessoa fisica"
       data: 2026-10-10
     26:
-      marca: Terra Investimentos
-      situacao: pulada
-      motivo: "site_inacessivel: 403 Forbidden do servidor no Chromium, no caminho do cadastro e na raiz. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 Forbidden; urllib: 200 em https www, 403 em http (mudar o user-agent do Chromium seria contornar a deteccao: nao feito); 2) archive.org/wayback/available: ultimo arquivamento 2025-10-11; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Terra Investimentos"
+      categoria: corretora
+      situacao: classificada
+      unidade: app         # 'Terra Investimentos', Terra Investimentos Distribuidora de Titulos E Valores M, App Store BR id 1550325170 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [25, 312, 151, 153]
+      cor_do_texto: "#ffffff"
+      raio_px: 8
+      fonte: "fonte sem serifa do app (Terra)"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "barra de status; voltar; Investir; suporte; Investidor Moderado; editar; frase; Pesquisar; Renda Variavel; Renda Fixa; terceiro cartao (cortado); Aprovacoes; icone; Trading"
+      nota: "captura 2 da loja; recorte 173,626,1060,2208 sobre 1242x2208. A 1 mostra o aparelho inclinado. Botao: o primeiro cartao (Renda Variavel), cinza escuro sobre o fundo quase preto: cheio"
+      escada: "1) Chromium: 403 Forbidden; urllib: 200 em https www, 403 em http (mudar o user-agent do Chromium seria contornar a deteccao: nao feito); 2) archive.org/wayback/available: ultimo arquivamento 2025-10-11; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     27:
       marca: Oslo DTVM
       situacao: classificada
@@ -578,11 +622,11 @@ categorias:
       motivo: "nao_atende_pf: a primeira tela e o comunicado de encerramento das atividades junto ao Banco Central; sem oferta de servico"
       data: 2026-10-10
     32:
-      marca: Trustee DTVM
+      marca: "Trustee DTVM"
       situacao: pulada
-      motivo: "site_inacessivel: verificacao de seguranca da Cloudflare ('Um momento...') para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) curl: 403 nas quatro variantes; Chromium: pagina de verificacao; 2) archive.org/wayback/available: ultimo arquivamento 2025-11-25; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: em liquidacao extrajudicial desde 03/09/2026 (Ato do Presidente do BCB n. 1.389); o site e o canal institucional da liquidacao (degrau 4c, 16/10/2026)"
+      escada: "1) curl: 403 nas quatro variantes; Chromium: pagina de verificacao; 2) archive.org/wayback/available: ultimo arquivamento 2025-11-25; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403, verificacao da Cloudflare; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 200, a pagina abriu"
+      data: 2026-10-16
     33:
       marca: J.P. Morgan DTVM
       situacao: pulada
@@ -614,11 +658,13 @@ categorias:
       densidade_lista: "faixa Corretora de Valores | Gestao de Recursos; logotipo; menu; titulo; paragrafo; aviso de cookies; Aceitar"
       data: 2026-10-10
     38:
-      marca: XP Investimentos
       situacao: pulada
-      motivo: "site_inacessivel: 'Acesso Bloqueado' pela CDN (bloqueio-cdn@xpi.com.br) para o IP da nuvem. AGUARDA DEGRAU 4 (o mesmo grupo da marca XP em bancos 58)"
-      escada: "1) curl: 403 em https www, http www e http, cert em https; Chromium: 'A sua requisicao foi bloqueada'; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37); app 'XP Investimentos' (id 1300713021)"
+      url: "https://www.xpi.com.br/"
+      sha256_captura: "de1ce25d4a79fe14d477186df52fe69475d4009a14c625b5f5095f9c708b08dc"
+      marca: "XP Investimentos"
+      escada: "1) curl: 403 em https www, http www e http, cert em https; Chromium: 'A sua requisicao foi bloqueada'; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     39:
       marca: D'Gold DTVM
       situacao: pulada
@@ -653,7 +699,6 @@ categorias:
       data: 2026-10-10
     45:
       marca: "Banrisul Corretora"
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: "Saiba mais"
@@ -663,6 +708,10 @@ categorias:
       densidade_lista: "menu; logotipo; icone; faixa roxa; marca do asset; titulo; Saiba mais; Invista em fundos; aviso de cookies"
       nota: "o site da corretora (banrisulcorretora.com.br), sem app proprio de investimento na busca da loja que o site aponte; a marca-mae Banrisul entrou em bancos 141 como excedente. Botao azul (#0b45e4), canto de 10 px"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37)"
+      url: "https://www.banrisulcorretora.com.br/lxa/link/home.html"
+      sha256_captura: "21e748de7b6a5aed9c4e179db96353d381e101f61c23996c60564a5e18219949"
     46:
       marca: "H.H. Picchioni"
       situacao: fora_do_livro
@@ -676,7 +725,6 @@ categorias:
       data: 2026-10-10
     48:
       marca: "EQI Investimentos"
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: "Conhe"
@@ -686,6 +734,10 @@ categorias:
       densidade_lista: "logotipo; Apresenta; marca do espetaculo; titulo do espetaculo; mensagem de erro 'An unknown error occurred'; titulo Planejar o futuro; Conheca a experiencia"
       nota: "a primeira tela e uma campanha patrocinada (Cirque du Soleil) sobre fundo preto, com um bloco que mostra uma mensagem de erro do player; botao 'Conheca a experiencia' verde (#00c796), canto de 4 px. O site fala em 'Abra sua conta' e 'mais de 1.000 oportunidades de investimento'"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37)"
+      url: "https://www.eqi.com.br/"
+      sha256_captura: "8c84ce10edcbb8043d5e6a58e8ac006f05dcb72e628e378504fd80da9f6264c8"
     49:
       marca: "Convencao (Tullett Prebon)"
       situacao: pulada
@@ -697,20 +749,21 @@ categorias:
       motivo: "nao_atende_pf: a pagina do cadastro (ubs.com/global/pt/legal/country/brazil.html) nao existe (404); o portal e o global do UBS, institucional"
       data: 2026-10-10
     51:
-      marca: "Qore"
       situacao: pulada
-      motivo: "site_inacessivel: a pagina carrega com o aviso 'We couldn't verify the security of your connection. Access to this content has been restricted'. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: aviso de restricao de acesso sobre o conteudo; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 185.173.111.86; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37); o site abriu no degrau 4a (200)"
+      url: "https://qore.com.br/"
+      sha256_captura: "48f4b796c546aed53206725ed0e7adc9e7f880880f157fa6e17cf179dd8bec15"
+      marca: "Qore"
+      escada: "1) Chromium: aviso de restricao de acesso sobre o conteudo; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 185.173.111.86; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     52:
       marca: "Integral Access DTVM"
       situacao: pulada
-      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.67.199.246; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: Integral Trust, servicos financeiros e tecnologia para financas corporativas e FIDCs (degrau 4c, 16/10/2026)"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.67.199.246; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403, verificacao da Cloudflare; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 200, a pagina abriu"
+      data: 2026-10-16
     53:
       marca: "CV Invest DTVM"
-      situacao: classificada
       unidade: site
       botao: vazado
       botao_texto: "Abrir minha conta"
@@ -720,12 +773,18 @@ categorias:
       densidade_lista: "faixa com as abas Pessoa fisica e Publico institucional; logotipo; menu; foto; titulo; texto; Abrir minha conta"
       nota: "botao do heroi 'Abrir minha conta': so a borda verde (1 px), sem preenchimento; as abas Pessoa fisica (cheia, verde) e Publico institucional sao seletores de publico, nao a acao principal"
       data: 2026-10-10
-    54:
-      marca: "BGC Liquidez"
       situacao: pulada
-      motivo: "site_inacessivel: 'Your request was blocked.' para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Your request was blocked.'; curl https www: 403, https: cert, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.196.201.182; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37)"
+      url: "https://cvinvest.com.br/"
+      sha256_captura: "c11b2fbf3c656f230825dd708b8a7426fced163adc6297cdf36370b9041c602f"
+    54:
+      situacao: pulada
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37); o site recusa nos tres executores ('Your request was blocked')"
+      url: "https://www.bgcliquidez.com/"
+      sha256_captura: "1819e38eefea15c6e7d971bc33ce37ec33e4ca81fbfd42b5297981c6375ae602"
+      marca: "BGC Liquidez"
+      escada: "1) Chromium: 403 'Your request was blocked.'; curl https www: 403, https: cert, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.196.201.182; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     55:
       marca: "Lastro RDV DTVM"
       situacao: pulada
@@ -747,11 +806,13 @@ categorias:
       motivo: "excedente_da_categoria: corretora ja tinha as 10 primeiras (1, 11, 14, 18, 25, 27, 37, 45, 48, 53) quando esta marca apareceu; o site do cadastro e site.santandercorretora.com.br, a Santander Corretora (a Toro foi adquirida); a primeira tela traria o botao vermelho 'Entrar com o Santander' (#ec0000, canto de 4 px, Santander Headline), mas nao foi classificada. O www.santandercorretora.com.br de corretora 16 continua bloqueado para a nuvem"
       data: 2026-10-10
     59:
-      marca: "Ideal CTVM"
       situacao: pulada
-      motivo: "site_inacessivel: 403 Forbidden do servidor para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 Forbidden; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 166.117.129.8; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37); app 'Ideal Investimentos' (id 6475605688)"
+      url: "https://www.idealctvm.com.br/"
+      sha256_captura: "b2bd92b3ce8841ed900f68ca4cba7fc537625fcae8562c0c22b64ff48c3aa765"
+      marca: "Ideal CTVM"
+      escada: "1) Chromium: 403 Forbidden; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 166.117.129.8; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     60:
       marca: "Levycam"
       situacao: fora_do_livro
@@ -770,7 +831,6 @@ categorias:
     63:
       marca: "Neon"
       categoria: banco_digital
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [31, 197, 73, 58]
@@ -782,23 +842,29 @@ categorias:
       densidade_lista: "barra de status; ilha; avatar; Ola Vanessa; olho; presente; Saldo e valor; seta; Lente Neon; Enviar Pix; Pagar; Recarga; banner CDB; indicadores; cartao Cartao; cartao Fatura; cartao Investimentos; cartao Emprestimo"
       nota: "o cadastro e o da Magliano DTVM, mas o dominio declarado (neon.com.br) e o da Neon: a marca visitada e a Neon. O livro (codigos-visuais, definicao de banco_digital) cita a Neon nessa categoria, ao lado de Nubank, Inter e C6. App 'Neon: cartao de credito' (id 1127996388, achado pela busca da loja). Captura 3 da loja, a primeira com interface em pe (1 e foto, 2 inclinada). Recorte 288,901,954,2208 sobre 1242x2208; o botao e o atalho Lente Neon, tile claro de vidro fosco"
       data: 2026-10-10
-    64:
-      marca: "XP Distribuidora de Titulos e Valores Mobiliarios"
       situacao: pulada
-      motivo: "site_inacessivel: 'Acesso Bloqueado' pela CDN (bloqueio-cdn@xpi.com.br) para o IP da nuvem (a mesma de corretora 38). AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 'A sua requisicao foi bloqueada'; (escada.py nao respondeu); 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: de outro universo; banco_digital tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026)"
+      url: "https://apps.apple.com/br/app/neon-cart%C3%A3o-de-cr%C3%A9dito/id1127996388"
+      sha256_captura: "22d0904e8274272fd5789e75a287242b0621a8cd7d454d6d8f6a94383aac1649"
+    64:
+      marca: "XP"
+      situacao: pulada
+      motivo: "duplicada: o site do cadastro e xpi.com.br, a marca XP da corretora 38"
+      escada: "1) Chromium: 'A sua requisicao foi bloqueada'; (escada.py nao respondeu); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (xpi) devolve o app da 38"
+      data: 2026-10-16
     65:
       marca: "Limine Trust DTVM"
       situacao: pulada
       motivo: "nao_atende_pf: administracao de fundos para o mercado financeiro"
       data: 2026-10-10
     66:
-      marca: "Genial Investimentos"
       situacao: pulada
-      motivo: "site_inacessivel: sem resposta (timeout) em todas as variantes, como em corretora 19 e bancos 116 (mesmo grupo). AGUARDA DEGRAU 4"
-      escada: "1) Chromium: tempo esgotado na navegacao; curl https www: erro:TimeoutError, https: erro:TimeoutError, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.221.227.209; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: corretora fechou as 10 na amostra refeita de 16/10/2026 (plano v3: MyCAP 1, Merito 3, Guru 11, Coinvalores 14, Santander Corretora 16, Sicoob 18, ActivTrades 25, Terra 26, Oslo 27, RJI 37); app 'Genial Investimentos' (id 1501881719)"
+      url: ""
+      sha256_captura: ""
+      marca: "Genial Investimentos"
+      escada: "1) Chromium: tempo esgotado na navegacao; curl https www: erro:TimeoutError, https: erro:TimeoutError, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.221.227.209; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     67:
       marca: "Unicred DTVM"
       situacao: fora_do_livro
@@ -851,11 +917,20 @@ categorias:
       escada: "1) Chromium: ERR_TUNNEL_CONNECTION_FAILED em https://www.ca-cib.com.br/; curl http://ca-cib.com.br: 200, redireciona para www.ca-cib.com/en/credit-agricole-cib-brazil-our-global-markets; 2) archive.org/wayback/available: ultimo arquivamento 2022-08-15"
       data: 2026-10-10
     5:
-      marca: Banco Sofisa
-      situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (o Sofisa Direto e banco digital para pessoa fisica: se abrir, pode ser classificado)"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www 200 (so HTML, sem renderizar), https sem www 502 do proxy, http www 200; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele (IP brasileiro). Nao se altera o user-agent: seria contornar a deteccao de robo"
-      data: 2026-10-10
+      marca: "Banco Sofisa (Sofisa Direto)"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app         # 'Sofisa Direto: Conta e Cartao', Banco Sofisa S.A., App Store BR id 1047252691 (busca da loja, termo 1)
+      botao: vazado
+      botao_caixa: [33, 395, 67, 33]
+      raio_px: 16
+      fonte: "fonte sem serifa do app (Sofisa Direto)"
+      familia_generica: sans-serif
+      densidade_blocos: 20
+      densidade_lista: "voltar e titulo Carteira; ajuda; olho; Saldo conta corrente e valor; Total investido e valor; aba Resumo; aba Carteira; aba Rentabilidade; titulo Rentabilidade Carteira; info; Comparar com; CDI; Periodo; 2023; Rentabilidade; 2,96%; grafico; legenda Carteira; legenda CDI; legenda Poupanca"
+      nota: "captura 3 da loja; recorte 228,170,1017,1885 sobre 1242x2688. A 1 e a 2 mostram o aparelho inclinado. Botao: a pilula 'CDI' (seletor), o primeiro controle da tela; so borda e texto verde-agua. O app e a conta digital (Sofisa Direto); 23 agencias no BCB (posicao 15/10/2026), corporativas: lido banco_digital pela atividade do app classificado (ad-a)"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www 200 (so HTML, sem renderizar), https sem www 502 do proxy, http www 200; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     6:
       marca: Ouribank
       situacao: fora_do_livro
@@ -888,11 +963,11 @@ categorias:
       motivo: "fora_do_livro: banco de cambio ('Cambio estrategico para negocios globais'; menu para sua empresa e para voce); precedente da R3 de 04/10 para casas de cambio"
       data: 2026-10-10
     12:
-      marca: Banco Inbursa
+      marca: "Banco Inbursa"
       situacao: pulada
-      motivo: "site_inacessivel: o servidor devolve 'upstream connect error or disconnect/reset before headers' (503) em http, e conexao reiniciada/certificado invalido em https. AGUARDA DEGRAU 4"
-      escada: "1) curl https www: conexao reiniciada, https: certificado invalido, http www: 503, http: certificado invalido; Chromium em http://www.bancoinbursa.com.br/: pagina de erro 'upstream connect error'; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 207.248.129.63; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o site nao abre em nenhum executor (tempo esgotado) e o unico app do grupo na loja e mexicano ('Autoexpress Inbursa', credito automotivo no Mexico), que nao e a marca no Brasil"
+      escada: "1) curl https www: conexao reiniciada, https: certificado invalido, http www: 503, http: certificado invalido; Chromium em http://www.bancoinbursa.com.br/: pagina de erro 'upstream connect error'; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 207.248.129.63; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca no Brasil (o grupo tem 'Autoexpress Inbursa', do Grupo Financiero Inbursa, Mexico); 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): tempo esgotado em 90 s; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): net::ERR_CONNECTION_TIMED_OUT"
+      data: 2026-10-16
     13:
       marca: ABN AMRO Clearing Brasil
       situacao: pulada
@@ -932,11 +1007,20 @@ categorias:
       escada: "1) o site do cadastro e um link de WhatsApp (rebrand.ly), que respondeu com a verificacao da Cloudflare; usado o dominio verificado pelo BCB para o mesmo CNPJ (omni.com.br), que abriu"
       data: 2026-10-10
     22:
-      marca: Itau Unibanco
-      situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (Itau e a referencia de banco_tradicional: este e o que mais pesa)"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-08; 4) pendente: maquina dele (IP brasileiro). Dominio verificado pelo BCB: itau-unibanco.com.br"
-      data: 2026-10-10
+      marca: "Itau Unibanco"
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app         # 'Banco Itau: Conta, Cartao e +', Banco Itau S.A., App Store BR id 474505665 (busca da loja, termo 1)
+      botao: vazado
+      botao_caixa: [27, 113, 106, 106]
+      raio_px: 12
+      fonte: "Itau Text (sem serifa)"
+      familia_generica: sans-serif
+      densidade_blocos: 12
+      densidade_lista: "barra de status; Produtos; Recolher; Transacoes; Extrato; Cartoes; Credito; Investir e gerenciar; Poupanca; Cambio; Seguros e planos; Itau Shop"
+      nota: "captura 4 da loja; recorte 103,951,1140,2208 sobre 1242x2208. A 1 a 3 mostram o aparelho inclinado; a tela e cortada embaixo pelo limite da imagem. Botao: o primeiro atalho (Transacoes), cartao branco sobre fundo cinza com icone laranja e texto preto: vazado, e a cor lida e a do texto (livro). Banco de varejo com rede de agencias"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-08; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     24:
       marca: Scotiabank Brasil
       situacao: pulada
@@ -948,11 +1032,11 @@ categorias:
       motivo: "fora_do_livro: emissor de cartoes de marca de varejista ('o cartao Bradescard combina com voce', Amazon Prime Mastercard; saque pelo app); sem conta nem investimento"
       data: 2026-10-10
     26:
-      marca: Banco Industrial do Brasil
+      marca: "Banco Industrial do Brasil (BIB)"
       situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'BIB' (id 1448405699, da marca) e de conta de empresa: a tela inicial mostra 'Limite disponivel cheque empresa' e o destinatario de exemplo e um CNPJ; 10 agencias no BCB"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     27:
       marca: Mobilize Financial Services (Banco RCI)
       situacao: fora_do_livro
@@ -964,28 +1048,28 @@ categorias:
       motivo: "nao_atende_pf: 'No Brasil, nao atendemos pessoas fisicas e atuamos exclusivamente com empresas e investidores institucionais'"
       data: 2026-10-10
     30:
-      marca: Banco Mercedes-Benz
+      marca: "Banco Mercedes-Benz"
       situacao: pulada
-      motivo: "site_inacessivel: certificado invalido em https e 400/403 em http. AGUARDA DEGRAU 4 (financeira de montadora: provavel fora_do_livro)"
-      escada: "1) Chromium: ERR_CERT_COMMON_NAME_INVALID; curl https www: certificado invalido, https: 403, http www: 400, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.44.201.154; 3) busca na web: so noticias, nenhum site oficial achado; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: certificado invalido para o dominio em todos os executores (ERR_CERT_COMMON_NAME_INVALID); sem app; financeira de montadora (como GM e Paccar, fora_do_livro), o que nao muda a amostra"
+      escada: "1) Chromium: ERR_CERT_COMMON_NAME_INVALID; curl https www: certificado invalido, https: 403, http www: 400, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.44.201.154; 3) busca na web: so noticias, nenhum site oficial achado; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): net::ERR_CERT_COMMON_NAME_INVALID; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): net::ERR_CERT_COMMON_NAME_INVALID"
+      data: 2026-10-16
     31:
-      marca: Banco CSF (Carrefour Solucoes Financeiras)
-      situacao: pulada
-      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (cartao e conta Carrefour: pessoa fisica)"
-      escada: "1) Chromium: bloqueio da Cloudflare ('Attention Required'); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Cartao Carrefour (Banco CSF)"
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: o app da marca e o do cartao de varejista ('Cartao Carrefour: Credito e +', id 1156553924): cartao, emprestimo e limite, sem conta; o mesmo criterio dos bancos (cartao de varejista)"
+      escada: "1) Chromium: bloqueio da Cloudflare ('Attention Required'); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     32:
       marca: HSBC Brasil
       situacao: pulada
       motivo: "nao_atende_pf: 'Our wholesale presence in Brazil' (business.hsbc.com.br), em ingles, so empresas"
       data: 2026-10-10
     33:
-      marca: Banco Guanabara
+      marca: "Banco Guanabara"
       situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'Banco Guanabara' (id 1581298372) e de conta de empresa: a conta de exemplo e 'VIACAO NORMANDY DO TRIANGULO LTDA', e o app so tem Pix e dados de agencia e conta; 2 agencias no BCB"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     34:
       marca: Banco CNH Industrial Capital
       situacao: fora_do_livro
@@ -1002,11 +1086,11 @@ categorias:
       motivo: "nao_atende_pf: primeira tela institucional ('um conglomerado financeiro dinamico, pronto para os desafios de seus clientes'; banco, gestoras, seguradora), sem produto a pessoa fisica"
       data: 2026-10-10
     37:
-      marca: Banco StoneX
+      marca: "Banco StoneX"
       situacao: pulada
-      motivo: "site_inacessivel: pagina de verificacao da Cloudflare ('Executando verificacao de seguranca'). AGUARDA DEGRAU 4"
-      escada: "1) Chromium: verificacao da Cloudflare; contornar verificacao e proibido; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2024-08-29; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: verificacao de robo da Cloudflare ('Executando verificacao de seguranca') nos tres executores, inclusive do IP brasileiro; contornar e proibido. A pagina do cadastro e /empresas/banco/"
+      escada: "1) Chromium: verificacao da Cloudflare; contornar verificacao e proibido; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2024-08-29; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca no Brasil (os apps StoneX sao do grupo nos EUA); 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403, verificacao da Cloudflare; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403, a mesma verificacao"
+      data: 2026-10-16
     38:
       marca: Banco Fibra
       situacao: pulada
@@ -1019,11 +1103,11 @@ categorias:
       escada: "1) curl https www e https: 502 do proxy, http: 'No address associated with hostname'; Chromium: ERR_TUNNEL_CONNECTION_FAILED; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 0 sem registro A; busca na web: so normativos no dominio b3.com.br, nenhum site proprio do banco; 4) dominio sem endereco nao depende de quem acessa"
       data: 2026-10-10
     40:
-      marca: Banco Sistema (BTG Pactual)
+      marca: "BTG Pactual (Banco Sistema)"
       situacao: pulada
-      motivo: "site_inacessivel: o Chromium recebe ERR_HTTP e o curl 403 em todas as variantes de btgpactual.com. AGUARDA DEGRAU 4 (BTG Pactual e referencia de corretora; pela precedencia entraria la)"
-      escada: "1) Chromium: net::ERR_HTTP em https://www.btgpactual.com/; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.39.174.148; 4) pendente: maquina dele. Dominio verificado pelo BCB para este CNPJ: bancobesa.com.br"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: de outro universo; corretora tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026): a marca e o BTG Pactual, app 'BTG Pactual Investimentos' (id 1041958375), que o livro poe em corretora"
+      escada: "1) Chromium: net::ERR_HTTP em https://www.btgpactual.com/; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.39.174.148; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado (BTG Pactual)"
+      data: 2026-10-16
     16:
       marca: Banco Cedula
       situacao: fora_do_livro
@@ -1075,11 +1159,11 @@ categorias:
       nota: "captura 8 da loja, a primeira de interface DE FRENTE (1, 2, 6 e 7 inclinadas; 3, 4 e 5 sao arte sem tela; a 9 e a tela de entrada). Recorte 134,737,1106,2688 sobre 1242x2688; a tela e cortada embaixo pelo limite da imagem. A moda cromatica da imagem e o verde-claro da etiqueta (#d4edda, 5%), mas a cor lida e a do texto do link. Marca de credito consignado com conta digital: lida como banco_digital"
       data: 2026-10-10
     41:
-      marca: BNP Paribas Brasil
+      marca: "BNP Paribas Brasil"
       situacao: pulada
-      motivo: "site_inacessivel: 504 'An error occurred while processing your request' da CDN (Akamai) ao Chromium; o curl expira em todas as variantes. AGUARDA DEGRAU 4 (banco corporativo: provavel nao_atende_pf)"
-      escada: "1) Chromium: 504 (errors.edgesuite.net); curl https www, https, http www e http: TimeoutError; 2) archive.org/wayback/available: ultimo arquivamento 2021-07-31; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: 504 da CDN (Akamai, errors.edgesuite.net) nos tres executores; sem app no Brasil (os da loja sao do BNP Paribas na Franca e na Polonia)"
+      escada: "1) Chromium: 504 (errors.edgesuite.net); curl https www, https, http www e http: TimeoutError; 2) archive.org/wayback/available: ultimo arquivamento 2021-07-31; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 504 (Akamai); 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 504 (Akamai)"
+      data: 2026-10-16
     42:
       marca: Afinz
       situacao: fora_do_livro
@@ -1091,17 +1175,27 @@ categorias:
       motivo: "fora_do_livro: 'o banco parceiro do pequeno e medio varejista' (aba 'Para sua empresa' aberta; existe a aba 'Para voce'); banco de atacarejo e varejo, sem varejo bancario a pessoa fisica na primeira tela"
       data: 2026-10-10
     45:
-      marca: Banco C6
-      situacao: pulada
-      motivo: "site_inacessivel: pagina de verificacao da Cloudflare ('Executando verificacao de seguranca'). AGUARDA DEGRAU 4 (C6 e referencia de banco_digital: este e o que mais pesa)"
-      escada: "1) o site do cadastro e um link de WhatsApp (api.whatsapp.com), pagina 404 da loja de mensagens; o BCB nao tem dominio verificado para este CNPJ; 3) usado c6bank.com.br (o dominio da marca), que respondeu com a verificacao da Cloudflare em Chromium e 403 no curl, nas quatro variantes; contornar verificacao e proibido; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "C6 Bank"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app         # 'C6 Bank: Cartao, conta e mais!', BANCO C6 S.A., App Store BR id 1463463143 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [17, 281, 145, 99]
+      cor_do_texto: "#ffffff"
+      raio_px: 10
+      fonte: "fonte sem serifa do app (C6)"
+      familia_generica: sans-serif
+      densidade_blocos: 20
+      densidade_lista: "voltar; Extrato; olho; Real; Dolar; Euro; Atomos; Saldo disponivel; US$1.600; atualizar; Comprar dolar; Converter para real; Transferir (cortado); puxador; Filtros; Ultimos 30 dias; Entrada; Hoje; R$ 1.000,00; R$ 100,00"
+      nota: "captura 2 da loja; recorte 220,1043,1044,2208 sobre 1242x2208. A 1 mostra o aparelho inclinado. Botao: o primeiro atalho (Comprar dolar), cartao cinza sobre o fundo preto: cheio. Tela escura; a tela e cortada embaixo pelo limite da imagem"
+      escada: "1) o site do cadastro e um link de WhatsApp (api.whatsapp.com), pagina 404 da loja de mensagens; o BCB nao tem dominio verificado para este CNPJ; 3) usado c6bank.com.br (o dominio da marca), que respondeu com a verificacao da Cloudflare em Chromium e 403 no curl, nas quatro variantes; contornar verificacao e proibido; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     46:
-      marca: Banco Original
+      marca: "Banco Original"
       situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (banco digital)"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-08-09; 4) pendente: maquina dele. Dominio verificado pelo BCB: original.com.br"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: 'Seu negocio e unico. Seu banco e Original' - segmentos Corporate, Agronegocio e Middle (captura do degrau 4a, 16/10/2026); o banco digital de pessoa fisica foi para o PicPay. Sem app da marca na loja"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-08-09; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca (a busca devolve o PicPay); 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 200, a pagina abriu"
+      data: 2026-10-16
     48:
       marca: Citibank (Banco Citibank S.A.)
       situacao: pulada
@@ -1119,17 +1213,27 @@ categorias:
       motivo: "duplicada: mesma marca e mesmo site (safra.com.br) da ordem 50 (Banco Alfa), que o cadastro tambem aponta para a ouvidoria do Safra"
       data: 2026-10-10
     52:
-      marca: Banco Randon
+      marca: "Banco Randon"
       situacao: pulada
-      motivo: "site_inacessivel: 'Acesso Bloqueado! O acesso a esta aplicacao foi bloqueado pelo sistema de seguranca' ao Chromium; o curl recebe 200. AGUARDA DEGRAU 4 (financeira de fabricante: provavel fora_do_livro)"
-      escada: "1) Chromium: pagina 'Acesso Bloqueado' com codigo de erro; curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: ultimo arquivamento 2026-06-11; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: 'Acesso Bloqueado' pelo sistema de seguranca do site nos tres executores, inclusive do IP brasileiro (o bloqueio e ao navegador sem interface, nao ao pais); o app 'Randoncorp' e de comunicacao interna do grupo"
+      escada: "1) Chromium: pagina 'Acesso Bloqueado' com codigo de erro; curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: ultimo arquivamento 2026-06-11; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403 'Acesso Bloqueado'; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403 'Acesso Bloqueado'"
+      data: 2026-10-16
     53:
-      marca: Banco Crefisa
-      situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (credito pessoal e conta para pessoa fisica)"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www 200, https conexao reiniciada, http www 200, http 503 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Crefisa"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app         # 'Crefisa +: Emprestimos online', Crefisa SA Credito Financiamento e Investimentos, App Store BR id 1500057294 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [4, 569, 303, 65]
+      cor_do_texto: "#ffffff"
+      raio_px: 8
+      fonte: "Lato (sem serifa)"
+      familia_generica: sans-serif
+      densidade_blocos: 11
+      densidade_lista: "logotipo; titulo Um unico acesso, muitos servicos; texto; foto; O que voce encontra no Crefisa Mais; Conta-Corrente; Emprestimo (ampliado pela arte); Pre-pago; Cambio (cortado); Acessar como Cristiane; botao de subir"
+      nota: "captura 1 da loja; recorte 209,814,1049,2208 sobre 1242x2208. A primeira de interface de frente, com arte sobre a tela (o cartao Emprestimo ampliado), como no PicPay de 10/10: entra na limitacao. Botao Acessar como Cristiane, azul. 1 agencia do banco no BCB; as lojas sao da financeira: lido banco_digital, como o Agibank"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www 200, https conexao reiniciada, http www 200, http 503 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     54:
       marca: Banco Bmg (Banco BMG S.A.)
       situacao: pulada
@@ -1146,28 +1250,28 @@ categorias:
       motivo: "nao_atende_pf: 'nossa expertise e o fator fundamental para o seu sucesso'; produtos de capital de giro e linhas de credito para empresas"
       data: 2026-10-10
     57:
-      marca: Banco BTG Pactual
+      marca: "BTG Pactual"
       situacao: pulada
-      motivo: "site_inacessivel: o Chromium nao carrega o site (o mesmo da ordem 40) e o curl recebe 403. AGUARDA DEGRAU 4 (BTG Pactual e referencia de corretora; pela precedencia entraria la)"
-      escada: "1) o site do cadastro e uma pagina de apoio ao cliente (/APOIO-AO-CLIENTE.HTML); Chromium sem carregar; curl no dominio btgpactual.com (ordem 40): 403 nas quatro variantes; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele. Mesma marca da ordem 40"
-      data: 2026-10-10
+      motivo: "duplicada: a marca BTG Pactual ja foi lida em bancos 40 (Banco Sistema, site btgpactual.com)"
+      escada: "1) o site do cadastro e uma pagina de apoio ao cliente (/APOIO-AO-CLIENTE.HTML); Chromium sem carregar; curl no dominio btgpactual.com (ordem 40): 403 nas quatro variantes; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado (BTG Pactual)"
+      data: 2026-10-16
     58:
-      marca: Banco XP
+      marca: "XP"
       situacao: pulada
-      motivo: "site_inacessivel: 'Acesso Bloqueado, a sua requisicao foi bloqueada' da CDN ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (XP e referencia de corretora)"
-      escada: "1) o site do cadastro e uma pagina de chat (xp.inc/chat-atendente-humano, que redireciona para go.xp.inc): Chromium em 'Acesso Bloqueado'; 3) usado o dominio da marca (xp.com.br): curl 403 nas quatro variantes; 2) archive.org/wayback/available: ultimo arquivamento 2018-10-12; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: de outro universo; corretora tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026): a marca e a XP, app 'XP Investimentos' (id 1300713021); a linha propria dela, corretora 38, tambem ficou alem da 10a"
+      escada: "1) o site do cadastro e uma pagina de chat (xp.inc/chat-atendente-humano, que redireciona para go.xp.inc): Chromium em 'Acesso Bloqueado'; 3) usado o dominio da marca (xp.com.br): curl 403 nas quatro variantes; 2) archive.org/wayback/available: ultimo arquivamento 2018-10-12; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado (XP)"
+      data: 2026-10-16
     59:
       marca: Banco Classico
       situacao: pulada
       motivo: "nao_atende_pf: site institucional ('Banco Multiplo, com carteira de credito, financiamento...'; menu de area de atuacao e dados financeiros; 'para empresas')"
       data: 2026-10-10
     61:
-      marca: Banco Itaubank
+      marca: "Itau"
       situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium; o cadastro aponta para itau.com.br, o mesmo dominio da ordem 22. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); a escada do dominio itau.com.br esta na ordem 22; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: a marca Itau ja foi classificada em bancos 22 (app id 474505665)"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); a escada do dominio itau.com.br esta na ordem 22; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): o app e o mesmo da 22"
+      data: 2026-10-16
     62:
       marca: Banco Pine
       situacao: fora_do_livro
@@ -1190,11 +1294,20 @@ categorias:
       escada: "1) curl https www e https: 502 do proxy, http: 'No address associated with hostname'; Chromium: ERR_TUNNEL_CONNECTION_FAILED; 2) archive.org/wayback/available: nenhum arquivamento; 3) dns.google: Status 0 sem registro A; 4) dominio sem endereco nao depende de quem acessa (financeira de fabricante: fora_do_livro de qualquer forma)"
       data: 2026-10-10
     67:
-      marca: Banco Rendimento
-      situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Banco Rendimento"
+      categoria: banco_digital
+      situacao: classificada
+      unidade: app         # 'Banco Rendimento', Banco Rendimento SA, App Store BR id 1262033407 (busca da loja, termo 1)
+      botao: vazado
+      botao_caixa: [15, 88, 357, 145]
+      raio_px: 14
+      fonte: "fonte sem serifa do app (Rendimento)"
+      familia_generica: sans-serif
+      densidade_blocos: 13
+      densidade_lista: "voltar; Area Pix; ajuda; Transferir; Pagar QR code; Pagar copia e cola; Receber; Pix Automatico; Contestar Pix; Minhas chaves; Meus limites; aviso; fechar"
+      nota: "captura 2 da loja; recorte 364,1268,834,2498 sobre 1242x2697. A primeira com o aparelho em pe (a 1 e a mao com o aparelho girado); a tela e pequena na imagem (470 px), ampliada para 390. Botao: o cartao Transferir, so contorno e texto. Conta de pessoa fisica completa (Pix, cartao, cheque especial, investimentos); 6 agencias no BCB, mas o app se vende como 'atendimento 100% digital': lido banco_digital, caso duvidoso"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     68:
       marca: Ebury Bank
       situacao: pulada
@@ -1211,11 +1324,11 @@ categorias:
       motivo: "fora_do_livro: financeira de fabricante de maquinas (produtos financeiros, investimentos e cambio 'customizados de acordo com a necessidade dos nossos clientes')"
       data: 2026-10-10
     71:
-      marca: Banco MUFG Brasil
+      marca: "MUFG Brasil"
       situacao: pulada
-      motivo: "site_inacessivel: 403 vazio ao Chromium e ao curl. AGUARDA DEGRAU 4 (banco corporativo japones: provavel nao_atende_pf)"
-      escada: "1) Chromium: 403 sem titulo nem texto; curl https www 403, https 502 do proxy, http www 403, http sem endereco; 2) archive.org/wayback/available: ultimo arquivamento 2026-09-30; dns.google: sem registro A no dominio sem www; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: noticias corporativas, analises e a plataforma de cambio MUFG E-FX para empresas (captura do degrau 4a, 16/10/2026); sem app no Brasil"
+      escada: "1) Chromium: 403 sem titulo nem texto; curl https www 403, https 502 do proxy, http www 403, http sem endereco; 2) archive.org/wayback/available: ultimo arquivamento 2026-09-30; dns.google: sem registro A no dominio sem www; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca no Brasil (os da loja sao do MUFG nos EUA e no Japao); 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 200, a pagina abriu"
+      data: 2026-10-16
     72:
       marca: Banco BRP (Ribeirao Preto)
       situacao: fora_do_livro
@@ -1345,16 +1458,16 @@ categorias:
       data: 2026-10-10
     81:
       marca: "Banco John Deere"
-      situacao: pulada
-      motivo: "site_inacessivel: 'ERROR: The request could not be satisfied' (CloudFront) para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 da CDN no caminho do cadastro; curl https www: 200, https: cert, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 54.237.99.113; 4) pendente: maquina dele"
-      data: 2026-10-10
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: o app 'Banco John Deere - Meu Banco' (id 1583769465) e de gestao do financiamento de maquinas; financeira de fabricante, como GM e Paccar"
+      escada: "1) Chromium: 403 da CDN no caminho do cadastro; curl https www: 200, https: cert, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 54.237.99.113; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     82:
-      marca: "Banco Paulista"
-      situacao: pulada
-      motivo: "site_inacessivel: 403 Forbidden do servidor, com 'Transaction ID', para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 Forbidden; curl https www: 403, https: erro:Tunnel connection failed: 502 , http www: 403, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Banco Paulista (BPD Investimentos)"
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: o app 'BPD Banco Paulista' (id 6741807459) e so de renda fixa (CDB e afins), e o banco atende empresas; o mesmo criterio do Banco Pine (bancos 66): nem varejo com agencia nem banco de app"
+      escada: "1) Chromium: 403 Forbidden; curl https www: 403, https: erro:Tunnel connection failed: 502 , http www: 403, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: Status 0 (sem registro A); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     83:
       marca: "Banco KEB Hana do Brasil"
       situacao: pulada
@@ -1362,10 +1475,10 @@ categorias:
       data: 2026-10-10
     84:
       marca: "Banco Stellantis"
-      situacao: pulada
-      motivo: "site_inacessivel: 'Request Blocked: Cybersecurity Policy Violation' para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Sorry, you have been blocked'; curl https www: 200, https: erro:Tunnel connection failed: 502 , http www: 200, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2026-03-08; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
-      data: 2026-10-10
+      situacao: fora_do_livro
+      motivo: "fora_do_livro: financeira de montadora; o unico app ('Banco Stellantis Card', id 6753219959) e o do cartao de credito corporativo"
+      escada: "1) Chromium: 403 'Sorry, you have been blocked'; curl https www: 200, https: erro:Tunnel connection failed: 502 , http www: 200, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2026-03-08; dns.google: Status 0 (sem registro A); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     85:
       marca: "Banco BBC Digital"
       categoria: banco_digital
@@ -1382,11 +1495,11 @@ categorias:
       nota: "app 'BBC Digital' (id 1480048382, o site aponta para ele; 1 agencia no BCB). Captura 2 da loja, a primeira com interface em pe (a 1 e arte com o aparelho inclinado). Recorte 185,349,1061,2249 sobre 1242x2688. O botao e o atalho Transferir, cartao cinza claro (#f4f4f4), unico elemento de acao da tela"
       data: 2026-10-10
     86:
-      marca: Bancoseguro
+      marca: "PagBank"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro aponta para o ouvidoria do PagSeguro; o dominio da marca e negado pelo proxy da nuvem ('Blocked by egress policy', HTTP 403), nao pelo site. AGUARDA DEGRAU 4 (o dominio verificado do cadastro e vazio: o BCB nao registra site para este CNPJ)"
-      escada: "1) Chromium: 403 'Blocked by egress policy' do proxy da nuvem em pagseguro.com.br/404; curl https www: 200, https: 200, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.18.3.49; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: o site do cadastro e pagseguro.com.br, a marca PagBank (app id 1186059012), cuja linha propria e pagamentos 76 (categoria pagamentos pela precedencia do livro)"
+      escada: "1) Chromium: 403 'Blocked by egress policy' do proxy da nuvem em pagseguro.com.br/404; curl https www: 200, https: 200, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.18.3.49; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (pagseguro) devolve o app da marca"
+      data: 2026-10-16
     87:
       marca: "Banco Votorantim (BV)"
       categoria: banco_digital
@@ -1421,17 +1534,26 @@ categorias:
       motivo: "nao_atende_pf: 'Unico, multiplo e personalizado para a sua empresa'; credito, cambio e investimentos para pessoa juridica (a 2a via de boleto e de renegociacao)"
       data: 2026-10-10
     90:
-      marca: "Banco Mizuho do Brasil"
+      marca: "Mizuho Brasil"
       situacao: pulada
-      motivo: "site_inacessivel: o endereco do cadastro (mizuhobank.com/brazil/pt/) nao abre: erro de tunel do proxy em https e nome nao resolvido em http. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: net::ERR_TUNNEL_CONNECTION_FAILED em https://www.mizuhobank.com/brazil/pt/ e /brazil/; net::ERR_NAME_NOT_RESOLVED em http; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2012-08-29; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: 'nao oferece servicos de credito a pessoas fisicas' (aviso na pagina do Banco Mizuho do Brasil, mizuhogroup.com/americas/brazil, degrau 4c em 16/10/2026); o unico app da marca e um token para correntistas"
+      escada: "1) Chromium: net::ERR_TUNNEL_CONNECTION_FAILED em https://www.mizuhobank.com/brazil/pt/ e /brazil/; net::ERR_NAME_NOT_RESOLVED em http; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2012-08-29; dns.google: Status 0 (sem registro A); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): so o 'Mizuho - Token Digital' (id 6444009057); 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao tentado, o endereco do cadastro (mizuhobank.com/brazil) nao resolve; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): o cadastro nao resolve (ERR_NAME_NOT_RESOLVED); a pagina atual do grupo abriu (200)"
+      data: 2026-10-16
     91:
-      marca: "Banco Bandepe"
-      situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) no site do Santander, de que o Bandepe e parte, para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.172; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Santander (Banco Bandepe)"
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app         # 'Banco Santander Brasil', Banco Santander Brasil SA, App Store BR id 613365711 (busca da loja, termo 2)
+      botao: vazado
+      botao_caixa: [30, 128, 62, 62]
+      raio_px: 31
+      fonte: "Santander Text (sem serifa)"
+      familia_generica: sans-serif
+      densidade_blocos: 22
+      densidade_lista: "barra de status; Pagar e transferir; Comprovantes; Consultar fatura; Gerenciar pagamentos; Mais acoes rapidas; pergunta; texto; campo de busca; camera; Transfira novamente; cinco contatos; Acessar todos os contatos; Meus pagamentos; seletor de conta; DEZ 2024; JAN; FEV"
+      nota: "captura 2 da loja; recorte 376,338,1149,2064 sobre 1242x2692. O site do cadastro e santander.com.br: a marca e a Santander (o Bandepe e do grupo), e a 125 e duplicada desta. Botao: o primeiro atalho (Comprovantes), circulo branco sobre o cabecalho vermelho: o branco e o fundo da moda, entao vazado, e a cor e a do icone. Banco de varejo com rede de agencias"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.172; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     92:
       marca: "Banco J. Safra"
       situacao: pulada
@@ -1443,21 +1565,20 @@ categorias:
       motivo: "portal 'Atendimento das suas solucoes contratadas' (2a via, extrato do contrato), sem conta nem investimento"
       data: 2026-10-10
     94:
-      marca: "Banco Investcred Unibanco"
+      marca: "Itau"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai no site do Itau, o mesmo dominio de bancos 22 e 61, para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.53.11.141; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: o site do cadastro e itau.com.br, a marca Itau ja classificada em bancos 22"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.53.11.141; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (itau) devolve o app da 22"
+      data: 2026-10-16
     95:
-      marca: "Banco da China Brasil"
+      marca: "Bank of China"
       situacao: pulada
-      motivo: "site_inacessivel: o endereco do cadastro redireciona para um aviso do portal global em chines (boc.cn/custserv/.../t20090928_846317.html), sem pagina do Brasil; pode ser desvio por origem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: redirecionamento para boc.cn, aviso 'tishi xinxi' sem conteudo; curl https www: 200, https: erro:Tunnel connection failed: 502 , http www: 200, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: a marca Bank of China ja foi lida em bancos 2 (nao_atende_pf)"
+      escada: "1) Chromium: redirecionamento para boc.cn, aviso 'tishi xinxi' sem conteudo; curl https www: 200, https: erro:Tunnel connection failed: 502 , http www: 200, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; dns.google: Status 0 (sem registro A); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): so o app do Bank of China na China"
+      data: 2026-10-16
     96:
       marca: "Banco Inter"
       categoria: banco_digital
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [24, 324, 81, 37]
@@ -1469,23 +1590,29 @@ categorias:
       densidade_lista: "barra de status; ilha; titulo Investimentos; olho; busca; engrenagem; Total investido e valor; filete; Disponivel para resgate; Investir; Resgatar; Performance"
       nota: "app 'Inter: Conta, Cartao e Pix' (id 839711154; o cadastro traz um link de ouvidoria, a marca vem do dominio verificado bancointer.com.br, que o site aponta para a loja). Captura 4 da loja, a primeira com interface em pe (1 e 5 inclinadas, 2 arte, 3 aparelho de lado no bolso). Recorte 206,1208,1038,2208 sobre 1242x2208; pilulas pessego sobre branco"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_digital fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Sofisa 5, Agibank 20, Bmg 29, C6 45, Social Bank 47, Crefisa 53, Rendimento 67, BBC 85, BV 87, Digimais 88)"
+      url: "https://apps.apple.com/br/app/inter-conta-cart%C3%A3o-e-pix/id839711154"
+      sha256_captura: "8c78249b4418b847651980fb0ac6e259a3d607ad13ede1bd1faabb2f9c8c866c"
     97:
       marca: "Goldman Sachs do Brasil"
       situacao: pulada
       motivo: "nao_atende_pf: banco de investimento; a pagina do cadastro (goldmansachs.com/worldwide/brazil/) nao existe mais e o portal global e institucional"
       data: 2026-10-10
     98:
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_digital fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Sofisa 5, Agibank 20, Bmg 29, C6 45, Social Bank 47, Crefisa 53, Rendimento 67, BBC 85, BV 87, Digimais 88); app 'NBC Bank: Conta' (id 6448391351), 'para voce e sua empresa', 1 agencia no BCB: seria banco_digital"
+      url: "https://www.nbcbank.com.br/"
+      sha256_captura: "14f185e61627a360fcf77a7bb62e14dbf099007b58b513c6e117d1ec80e73b1f"
       marca: "Novo Banco Continental"
-      situacao: pulada
-      motivo: "site_inacessivel: 'Error 403 Web Page Blocked' de um WAF, com o IP da nuvem na mensagem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Web Page Blocked'; curl https www: 403, https: 403, http www: erro:EOF occurred in violation of p, http: erro:EOF occurred in violation of p; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 20.206.185.73; 4) pendente: maquina dele"
-      data: 2026-10-10
+      escada: "1) Chromium: 403 'Web Page Blocked'; curl https www: 403, https: 403, http www: erro:EOF occurred in violation of p, http: erro:EOF occurred in violation of p; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 20.206.185.73; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     99:
-      marca: "Banco C6 Consignado"
+      marca: "C6 Bank"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro traz so um link de WhatsApp e o BCB nao verifica dominio para este CNPJ; o dominio do grupo (c6bank.com.br, bancos 45) e bloqueado para a nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 404 em api.whatsapp.com; dominio do grupo bloqueado como em bancos 45; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-03; dns.google: A 162.159.153.238; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: a marca C6 ja foi classificada em bancos 45 (app id 1463463143)"
+      escada: "1) Chromium: 404 em api.whatsapp.com; dominio do grupo bloqueado como em bancos 45; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-03; dns.google: A 162.159.153.238; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 1 devolve o app da 45"
+      data: 2026-10-16
     100:
       marca: "Scania Banco"
       situacao: fora_do_livro
@@ -1499,7 +1626,6 @@ categorias:
     102:
       marca: PicPay
       categoria: pagamentos
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [37, 371, 152, 40]
@@ -1511,17 +1637,21 @@ categorias:
       densidade_lista: "ilha; avatar; busca; ajuda; chat; sino; chip PicPay; chip PicPay PJ; cartao Conta; Ver extrato; Saldo em conta e valor; olho; Trazer saldo; Guardar"
       nota: "cadastrado como PicPay Bank (banco multiplo, 1 agencia no BCB); a marca e a mesma do PicPay Instituicao de Pagamento (pagamentos 113) e, pela precedencia do livro (pagamentos antes de banco_digital), conta em pagamentos. App 'PicPay: Conta, Cartao e Pix' (id 561524792, achado pela busca da loja). Captura 1 da loja, a unica de interface em pe antes da 4; a tela esta esmaecida pela arte (verde translucido sobre o aparelho), e isso entra na limitacao: o fundo e o destaque saem dessa tela. Recorte 126,1115,1094,2699 sobre 1242x2699"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: de outro universo; pagamentos tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026)"
+      url: "https://apps.apple.com/br/app/picpay-conta-cart%C3%A3o-e-pix/id561524792"
+      sha256_captura: "f71599b6c151fd1847c0b21c398832fb62988909b7c027a9c9f2bc9e8e9ecfb5"
     103:
       marca: "Banco BS2"
       situacao: pulada
       motivo: "nao_atende_pf: o app da loja (id 1485273498) e o 'Banco BS2 Empresas' ('o banco digital da sua empresa'); o cadastro traz so um link de WhatsApp"
       data: 2026-10-10
     104:
-      marca: "Banco Rabobank International Brasil"
+      marca: "Rabobank Brasil"
       situacao: pulada
-      motivo: "site_inacessivel: 'Parece que algo deu errado' (Akamai, 'Reference id') para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Parece que algo deu errado'; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.39.174.151; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app da marca no Brasil ('Rabobank Digital Brasil', id 1450358428) e de cotacao e ordem de NDF de commodities para clientes do agronegocio, pela mesa de vendas; nenhuma conta ou produto para pessoa fisica"
+      escada: "1) Chromium: 403 'Parece que algo deu errado'; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.39.174.151; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (rabobank) devolve o app da marca no Brasil"
+      data: 2026-10-16
     105:
       marca: "Banco Societe Generale Brasil"
       situacao: pulada
@@ -1540,9 +1670,9 @@ categorias:
     108:
       marca: "Banco RNX"
       situacao: pulada
-      motivo: "site_inacessivel: verificacao de seguranca da Cloudflare ('Um momento...') para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: pagina de verificacao da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.26.13.65; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: verificacao de robo da Cloudflare nos tres executores, inclusive do IP brasileiro; contornar e proibido"
+      escada: "1) Chromium: pagina de verificacao da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.26.13.65; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403, verificacao da Cloudflare; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403, a mesma verificacao"
+      data: 2026-10-16
     109:
       marca: "Banco Cooperativo Sicoob"
       situacao: pulada
@@ -1569,11 +1699,11 @@ categorias:
       motivo: "financiamento de motos e carros Honda ('Simular Financiamento'); sem conta nem investimento"
       data: 2026-10-10
     112:
-      marca: "Banco Morgan Stanley"
+      marca: "Morgan Stanley"
       situacao: pulada
-      motivo: "site_inacessivel: o site nao abre da nuvem: 502 do proxy no Chromium, como em corretora 4 (Morgan Stanley, mesmo grupo). AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 502 do proxy em duas tentativas, como em corretora 4; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.53.35.175; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: mesma marca e mesmo site (morganstanley.com.br) da corretora 4 (nao_atende_pf)"
+      escada: "1) Chromium: 502 do proxy em duas tentativas, como em corretora 4; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.53.35.175; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): so os apps do Morgan Stanley nos EUA; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): net::ERR_HTTP2_PROTOCOL_ERROR; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): o mesmo erro; curl (degrau 1, daqui): 200, pagina institucional"
+      data: 2026-10-16
     113:
       marca: "Banco IBM"
       situacao: pulada
@@ -1586,16 +1716,25 @@ categorias:
       data: 2026-10-10
     115:
       marca: "Banco do Brasil"
-      situacao: pulada
-      motivo: "site_inacessivel: 'Ops! Erro no acesso' (403) com identificador de suporte, para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Ops! Erro no acesso'; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; dns.google: A 104.18.29.245; 4) pendente: maquina dele"
-      data: 2026-10-10
+      categoria: banco_tradicional
+      situacao: classificada
+      unidade: app         # 'BB: Banco, Cartao, Credito', Banco do Brasil, App Store BR id 330984271 (busca da loja, termo 1)
+      botao: vazado
+      botao_caixa: [16, 362, 80, 100]
+      raio_px: 12
+      fonte: "BB Text (sem serifa)"
+      familia_generica: sans-serif
+      densidade_blocos: 17
+      densidade_lista: "voltar e Central Pix; ocultar; ajuda; menu; Saldo disponivel; valor oculto; Pagar; Fazer um Pix; Ler QR Code; Pix Copia e Cola; Pix de presente; campo da chave; Colar; Receber; Criar QR Code; Minhas Chaves Pix; Pix de presente (cortado)"
+      nota: "captura 2 da loja; recorte 119,802,1001,2699 sobre 1242x2699. A primeira com interface em pe (a 1 e foto); o aparelho tem leve perspectiva e o recorte retangular leva um canto do fundo amarelo e da borda: limitacao. Botao: o primeiro atalho (Fazer um Pix), cartao branco sobre cinza claro, icone azul e texto escuro: vazado. Banco de varejo com rede de agencias"
+      escada: "1) Chromium: 403 'Ops! Erro no acesso'; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-10-09; dns.google: A 104.18.29.245; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     116:
-      marca: "Banco Genial"
+      marca: "Genial"
       situacao: pulada
-      motivo: "site_inacessivel: sem resposta (timeout) em todas as variantes, como em corretora 19 (mesmo dominio). AGUARDA DEGRAU 4"
-      escada: "1) Chromium: tempo esgotado na navegacao, como em corretora 19; curl https www: erro:TimeoutError, https: erro:TimeoutError, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.174; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: de outro universo; corretora tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026): a marca e a Genial (app 'Genial Investimentos', id 1501881719), cuja linha propria, corretora 19, nao abriu"
+      escada: "1) Chromium: tempo esgotado na navegacao, como em corretora 19; curl https www: erro:TimeoutError, https: erro:TimeoutError, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.174; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado (Genial)"
+      data: 2026-10-16
     117:
       marca: "Banco Topazio"
       situacao: fora_do_livro
@@ -1607,11 +1746,13 @@ categorias:
       motivo: "duplicada: a marca Bmg ja foi classificada em bancos 29 (Banco Bmg, app id 1396096726)"
       data: 2026-10-10
     119:
-      marca: "Banco Luso Brasileiro"
       situacao: pulada
-      motivo: "site_inacessivel: o dominio do cadastro (lusobrasileiro.com.br) nao resolve e o verificado pelo BCB (lusobank.com.br) falha no tunel do proxy. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: ERR_NAME_NOT_RESOLVED em lusobrasileiro.com.br; ERR_TUNNEL_CONNECTION_FAILED em lusobank.com.br; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: Status 0 (sem registro A); 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: as duas categorias do universo (banco_tradicional ate a 115, banco_digital ate a 88) fecharam as 10 antes desta linha na amostra refeita de 16/10/2026; app 'Banco Luso Brasileiro' (id 6739589652, 'Internet Banking Pessoa Fisica')"
+      url: ""
+      sha256_captura: ""
+      marca: "Banco Luso Brasileiro"
+      escada: "1) Chromium: ERR_NAME_NOT_RESOLVED em lusobrasileiro.com.br; ERR_TUNNEL_CONNECTION_FAILED em lusobank.com.br; curl https www: erro:Tunnel connection failed: 502 , https: erro:Tunnel connection failed: 502 , http www: erro:[Errno -5] No address associat, http: erro:[Errno -5] No address associat; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: Status 0 (sem registro A); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     120:
       marca: "Daycoval Leasing"
       situacao: pulada
@@ -1625,7 +1766,6 @@ categorias:
     122:
       marca: "Banco Bradesco"
       categoria: banco_tradicional
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [28, 619, 344, 53]
@@ -1637,6 +1777,10 @@ categorias:
       densidade_lista: "voltar; titulo Investimentos; ajuda; Escolha as instituicoes; Brasil; tres logotipos; Dados atualizados; Valor ate e valor; olho; Rentabilidade mes; Personalizar; cartao Composicao da carteira; Saldo em conta; Investir; Resgatar"
       nota: "app 'Banco Bradesco' (id 336954985, achado pela busca da loja; 1.922 agencias no BCB). Captura 5 da loja, a primeira com interface em pe (1 a 4 inclinadas). Recorte 148,991,1066,2692 sobre 1242x2692; botao Investir vermelho, pilula"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_tradicional fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Itau 22, Caixa 23, BRB 43, Safra 50, Daycoval 60, Banestes 64, BASA 75, Santander 91, BNB 110, BB 115)"
+      url: "https://apps.apple.com/br/app/banco-bradesco/id336954985"
+      sha256_captura: "61155d47d9b1d18adb87b75e924b4bdab3e59888346e36f38c2ccdd2542df53e"
     123:
       marca: "Banco Bocom BBM"
       situacao: pulada
@@ -1648,22 +1792,24 @@ categorias:
       motivo: "duplicada: a marca BV ja foi classificada em bancos 87 (Banco Votorantim, app id 1494202346); a captura do app foi feita nesta pasta e copiada para a de 87"
       data: 2026-10-10
     125:
-      marca: "Banco Santander (Brasil)"
+      marca: "Santander"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai (errors.edgesuite.net) para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.172; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: a marca Santander ja foi classificada em bancos 91 (Banco Bandepe, site santander.com.br)"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.172; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): o app e o mesmo da 91"
+      data: 2026-10-16
     126:
       marca: "Intesa Sanpaolo Brasil"
       situacao: pulada
       motivo: "nao_atende_pf: 'instituicao de atacado da divisao IMI Corporate & Investment Banking'"
       data: 2026-10-10
     127:
-      marca: "Banco Cooperativo Sicredi"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.176; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: as duas categorias do universo (banco_tradicional ate a 115, banco_digital ate a 88) fecharam as 10 antes desta linha na amostra refeita de 16/10/2026; apps do Sicredi na loja (id 1041468908 e 1481471046)"
+      url: "https://www.sicredi.com.br/"
+      sha256_captura: "1774e1368cd641604badabacb2fe16b7a7cbbc2b28a89b5ba9db8658279a2635"
+      marca: "Banco Cooperativo Sicredi"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.176; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     128:
       marca: "ICBC do Brasil"
       situacao: pulada
@@ -1672,7 +1818,6 @@ categorias:
     129:
       marca: "Banco Pan"
       categoria: banco_digital
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [44, 580, 145, 48]
@@ -1684,27 +1829,32 @@ categorias:
       densidade_lista: "barra de status; avatar Rebeca; olho; ajuda; sino; cartao escuro; cartao azul; indicadores; Fatura de Julho em aberto; valor; Pagar fatura; Parcelar; barra Usado e Disponivel; Vencimento"
       nota: "app 'Banco PAN: Conta, Cartao e +' (id 1410400504, achado pela busca da loja; o cadastro traz um link do bit.ly para o chat). 1 agencia no BCB. Captura 2 da loja, a primeira com interface em pe (1 e foto). Recorte 287,596,957,2052 sobre 1242x2208; botao Pagar fatura azul claro (#08a8ff)"
       data: 2026-10-10
-    130:
-      marca: "Itau Unibanco Holding"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem (a mesma de bancos 22, 61 e 94). AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.53.11.141; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: banco_digital fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Sofisa 5, Agibank 20, Bmg 29, C6 45, Social Bank 47, Crefisa 53, Rendimento 67, BBC 85, BV 87, Digimais 88)"
+      url: "https://apps.apple.com/br/app/banco-pan-conta-cart%C3%A3o-e/id1410400504"
+      sha256_captura: "efefb292e348eca545043c790e45314344467f176a3094e122529a1948ea471a"
+    130:
+      marca: "Itau"
+      situacao: pulada
+      motivo: "duplicada: a marca Itau ja foi classificada em bancos 22"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.53.11.141; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): o app e o mesmo da 22"
+      data: 2026-10-16
     131:
       marca: "JPMorgan Chase Bank, N.A."
       situacao: pulada
       motivo: "nao_atende_pf: banco americano; o site do cadastro (jpmorganchase.com) e o portal global institucional"
       data: 2026-10-10
     132:
-      marca: "Banco Mercantil do Brasil"
       situacao: pulada
-      motivo: "site_inacessivel: o servidor responde 'Invalid URL [no URL]' (Akamai) em http e falha o TLS em https. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: http: 400 'Invalid URL'; https: ERR_SSL_PROTOCOL_ERROR e ERR_CONNECTION_RESET; curl https www: erro:[SSL: TLSV1_ALERT_INTERNAL_ERR, https: erro:[Errno 104] Connection reset b, http www: 400, http: 503; 2) archive.org/wayback/available: ultimo arquivamento 2021-11-05; dns.google: A 177.154.95.111; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: as duas categorias do universo (banco_tradicional ate a 115, banco_digital ate a 88) fecharam as 10 antes desta linha na amostra refeita de 16/10/2026; app 'Banco Mercantil' (id 842565101)"
+      url: "http://www.mercantil.com.br/"
+      sha256_captura: "458a03cc604e51090ede56364c3862b6eafb98ac0bd763158acd01e126fa9f6e"
+      marca: "Banco Mercantil do Brasil"
+      escada: "1) Chromium: http: 400 'Invalid URL'; https: ERR_SSL_PROTOCOL_ERROR e ERR_CONNECTION_RESET; curl https www: erro:[SSL: TLSV1_ALERT_INTERNAL_ERR, https: erro:[Errno 104] Connection reset b, http www: 400, http: 503; 2) archive.org/wayback/available: ultimo arquivamento 2021-11-05; dns.google: A 177.154.95.111; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     133:
       marca: "Banco de la Nacion Argentina"
       categoria: banco_tradicional
-      situacao: classificada
       unidade: site
       botao: vazado
       fonte: "Kievit"
@@ -1713,10 +1863,13 @@ categorias:
       densidade_lista: "logotipo BNA; foto da cidade; Pessoa Fisica; Pessoa Juridica; Comercio Exterior; ESPANOL; PORTUGUES"
       nota: "banco estrangeiro de agencia unica em Sao Paulo (1 no BCB), com abas Pessoa Fisica e Pessoa Juridica; nenhum botao: so menu de texto, centralizado, sobre verde escuro. Classificado tradicional pela agencia fisica, nao pela escala; foco em comercio exterior"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_tradicional fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Itau 22, Caixa 23, BRB 43, Safra 50, Daycoval 60, Banestes 64, BASA 75, Santander 91, BNB 110, BB 115)"
+      url: "https://www.bnabr.com.br/"
+      sha256_captura: "ce40ac0da6feaee8839baaafa818f6db245fb08e87e26e205253f6aa195e795b"
     134:
       marca: Banpara
       categoria: banco_tradicional
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [21, 405, 350, 42]
@@ -1728,10 +1881,13 @@ categorias:
       densidade_lista: "barra de status; voltar; titulo Transferencias; estrela; menu; texto de instrucao; cartao; cabecalho Conta de Destino; Tipo de Transacao; Tipo da Conta de Destino; Agencia; Numero da Conta; CONTINUAR"
       nota: "app 'Banpara' (id 1484074097, o site aponta para ele; 164 agencias no BCB). Captura 2 da loja, a primeira com interface em pe (1 mostra o Touch ID do sistema). Recorte 100,1010,1141,2208 sobre 1242x2208; o botao CONTINUAR (azul marinho) e cortado pela borda de baixo da captura, entao a altura medida e a parte visivel e o raio e o do canto de cima"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_tradicional fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Itau 22, Caixa 23, BRB 43, Safra 50, Daycoval 60, Banestes 64, BASA 75, Santander 91, BNB 110, BB 115)"
+      url: "https://apps.apple.com/br/app/banpar%C3%A1/id1484074097"
+      sha256_captura: "f32c56b64753a25624a4191e9c9cc83686c93228c08c6a52e4227f6fcd3308d0"
     135:
       marca: "Banco VR"
       categoria: banco_digital
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: "Conhecer produtos"
@@ -1741,27 +1897,34 @@ categorias:
       densidade_lista: "logotipo; menu; foto; logotipo grande; titulo; paragrafo; Conhecer produtos"
       nota: "sem app do banco na loja (o 'SuperApp VR' e da VR, a marca parceira); site de consumidor ('Digital, sem burocracias'), credito do trabalhador, antecipacao do FGTS e Conta Negocios; 1 agencia no BCB. Botao verde escuro, pilula"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: banco_digital fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Sofisa 5, Agibank 20, Bmg 29, C6 45, Social Bank 47, Crefisa 53, Rendimento 67, BBC 85, BV 87, Digimais 88)"
+      url: "https://www.bancovr.com.br/"
+      sha256_captura: "5aeee252bc1a30e28fa9c4261633c1c04d0aacdcc4b601411fd67e3f3dddae3c"
     136:
       marca: "BNY Mellon Banco"
       situacao: pulada
       motivo: "nao_atende_pf: banco de investimento e custodia; a pagina do cadastro nao existe (404) e o portal global e institucional"
       data: 2026-10-10
     137:
+      situacao: pulada
+      motivo: "excedente_da_categoria: as duas categorias do universo (banco_tradicional ate a 115, banco_digital ate a 88) fecharam as 10 antes desta linha na amostra refeita de 16/10/2026; app 'Banese' (id 727238928)"
+      url: "http://www.banese.com.br/"
+      sha256_captura: "0132da19ffcef6a76c4b9855993bda84c494da7639ba1fbdaede54e42abcf21a"
       marca: "Banco do Estado de Sergipe (Banese)"
-      situacao: pulada
-      motivo: "site_inacessivel: 'upstream connect error' (503) em http e ERR_CONNECTION_RESET em https. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: http: 503 'upstream connect error or disconnect/reset before headers'; https: ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: ultimo arquivamento 2026-04-14; dns.google: A 20.201.22.33; 4) pendente: maquina dele"
-      data: 2026-10-10
+      escada: "1) Chromium: http: 503 'upstream connect error or disconnect/reset before headers'; https: ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: ultimo arquivamento 2026-04-14; dns.google: A 20.201.22.33; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     138:
-      marca: "Banco Digio"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: ultimo arquivamento 2026-09-21; dns.google: A 18.154.227.52; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: as duas categorias do universo (banco_tradicional ate a 115, banco_digital ate a 88) fecharam as 10 antes desta linha na amostra refeita de 16/10/2026; app 'Digio' (id 1128793569): seria banco_digital"
+      url: "https://www.digio.com.br/"
+      sha256_captura: "cb697f72a7600942ddff469dd89164087363f7fdd646b62565b6b251515ea3eb"
+      marca: "Banco Digio"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: ultimo arquivamento 2026-09-21; dns.google: A 18.154.227.52; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     139:
       marca: "Andbank Brasil"
       categoria: gestora_e_private
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: "ASSISTIR"
@@ -1771,6 +1934,10 @@ categorias:
       densidade_lista: "logotipo; seletor de site; Acesse sua conta; Fale conosco; Seja Cliente; busca; faixa com o lema e menu; foto; ASSISTIR; titulo"
       nota: "'private bank' ('Beyond Private. Bespoken.'): pela precedencia do livro (gestora_e_private antes de banco_tradicional) conta como gestora_e_private. Uma janela de selecao de pais cobre a primeira tela; as caixas sao as do DOM. Botao vermelho escuro, canto de 4 px"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: de outro universo; gestora_e_private tem as 10 do proprio universo (plano v3, de_outro_universo, 16/10/2026)"
+      url: "https://www.andbank.com/brasil/"
+      sha256_captura: "854e56e14cc5d136073cd7a2447ed811f4800bb4ec244e4f432f5b5439bead5c"
     140:
       marca: "Banco Moneo"
       situacao: fora_do_livro
@@ -1782,11 +1949,13 @@ categorias:
       motivo: "excedente_da_categoria: banco_tradicional ja tinha as 10 primeiras (Caixa 23, BRB 43, Safra 50, Daycoval 60, Banestes 64, BASA 75, BNB 110, Bradesco 122, Nacion 133, Banpara 134) quando esta marca apareceu; o app (id 1177452393) foi capturado e fica sem classificar"
       data: 2026-10-10
     142:
-      marca: "Banco Hyundai Capital Brasil"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.37; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: as duas categorias do universo (banco_tradicional ate a 115, banco_digital ate a 88) fecharam as 10 antes desta linha na amostra refeita de 16/10/2026; o site recusa nos tres executores (403 da Akamai), sem app"
+      url: "https://www.bhcb.com.br/"
+      sha256_captura: "fc1e4bfd2dd9d94162a53ec9569044c60db369d1d91c9d8a3f2f2829703e379e"
+      marca: "Banco Hyundai Capital Brasil"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 23.48.203.37; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     143:
       marca: "Banco J.P. Morgan"
       situacao: pulada
@@ -1818,11 +1987,21 @@ categorias:
       motivo: "nao_atende_pf: 'Global Money Movement and Account Infrastructure' (payouts transfronteiricos e contas virtuais para empresas), em ingles, com 'Book a Demo'"
       data: 2026-10-10
     5:
-      marca: Uzzipay
-      situacao: pulada
-      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: bloqueio da Cloudflare ('Attention Required'); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2025-10-14; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Uzzipay"
+      categoria: pagamentos
+      situacao: classificada
+      unidade: app         # 'Uzzipay', Uzzipay Instituicao de Pagamento S.A, App Store BR id 1480482223 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [39, 464, 312, 53]
+      cor_do_texto: "#ffffff"
+      raio_px: 5
+      fonte: "fonte sem serifa do app (Uzzipay)"
+      familia_generica: sans-serif
+      densidade_blocos: 8
+      densidade_lista: "barra de status; logotipo; titulo UzziPay E PARA TODO MUNDO!; texto; ENTRAR; CRIAR CONTA; Perguntas frequentes; versao"
+      nota: "captura 1 da loja; recorte 0,0,1242,2208 (captura de tela inteira, sem aparelho). Capturas de tela inteiras, sem aparelho: a 1 e a tela de entrada do app, tomada inteira (como o BASA em 10/10). Botao ENTRAR verde. Conta digital para pessoa fisica ('fintech da Amazonia')"
+      escada: "1) Chromium: bloqueio da Cloudflare ('Attention Required'); curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2025-10-14; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     6:
       marca: Efex Finance
       situacao: pulada
@@ -1834,22 +2013,22 @@ categorias:
       motivo: "nao_atende_pf: 'boutique de tecnologia regulada' de Invisible Banking para outras empresas; sem produto a pessoa fisica"
       data: 2026-10-10
     8:
-      marca: Banqi (Casas Bahia Pay)
+      marca: "Casas Bahia Pay (banQi)"
       situacao: pulada
-      motivo: "site_inacessivel: 403 ('Ops! Algo deu errado') da CDN ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4 (conta digital da Casas Bahia: pessoa fisica, e a categoria pagamentos)"
-      escada: "1) Chromium: pagina de erro 403 sem titulo; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-04-18; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o app da marca ('Casas Bahia Pay (banQi)', id 1457893925) nao traz captura de interface inteira (a tela aparece partida entre as capturas 2 e 3), como o Safra em 10/10; e o site recusa nos tres executores (403 'Ops! Algo deu errado' do IP brasileiro)"
+      escada: "1) Chromium: pagina de erro 403 sem titulo; curl https www, https, http www e http: 403; 2) archive.org/wayback/available: ultimo arquivamento 2026-04-18; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao tentado (o app vinha antes); 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403"
+      data: 2026-10-16
     9:
       marca: Cielo
       situacao: fora_do_livro
       motivo: "fora_do_livro: adquirente ('a maquininha que faz mais, por muito menos', taxas para o lojista); nao e carteira nem conta de pagamento"
       data: 2026-10-10
     10:
-      marca: Okto Pay
+      marca: "Okto Pay"
       situacao: pulada
-      motivo: "site_inacessivel: 403 Forbidden do servidor (LiteSpeed) ao Chromium; o curl recebe 200. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: '403 Forbidden, Access to this resource on the server is denied' em oktopayments.com/pt/home-portugues/; curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: 403 Forbidden do servidor (LiteSpeed) nos tres executores, inclusive do IP brasileiro"
+      escada: "1) Chromium: '403 Forbidden, Access to this resource on the server is denied' em oktopayments.com/pt/home-portugues/; curl https www, https, http www e http: 200 (so HTML, sem renderizar); 2) archive.org/wayback/available: nenhum arquivamento; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403 (LiteSpeed); 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403 (LiteSpeed)"
+      data: 2026-10-16
     11:
       marca: 3X Pay
       situacao: pulada
@@ -1861,11 +2040,11 @@ categorias:
       motivo: "nao_atende_pf: o site do cadastro leva a vindi.com.br ('PagCerto agora integra a Vindi'), plataforma de cobranca e pagamentos para empresas"
       data: 2026-10-10
     13:
-      marca: Pay4Fun
+      marca: "Pay4Fun"
       situacao: pulada
-      motivo: "site_inacessivel: 403 'Access Denied' da CDN (Akamai) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: 403 'Access Denied' da Akamai nos tres executores, inclusive do IP brasileiro"
+      escada: "1) Chromium: 403 'Access Denied' (errors.edgesuite.net); ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): 403 (Akamai); 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): 403 (Akamai)"
+      data: 2026-10-16
     14:
       marca: Iniciador
       situacao: pulada
@@ -1877,11 +2056,11 @@ categorias:
       motivo: "nao_atende_pf: o site do cadastro leva a celcoin.com.br/cel_payments, gateway de pagamento para gestao de cobrancas de empresas"
       data: 2026-10-10
     16:
-      marca: Featbank (Festor)
+      marca: "Featbank"
       situacao: pulada
-      motivo: "site_inacessivel: https com certificado invalido e, em http, a pagina 'Error. Page cannot be displayed. Please contact your service provider'"
-      escada: "1) curl https www e https: certificado invalido, http www e http: 200 com a pagina de erro; Chromium em http://www.featbank.com.br/: a mesma pagina de erro; 2) archive.org/wayback/available: ultimo arquivamento 2026-01-08; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'Featbank: Conta Digital' (id 6471595335) e de servicos financeiros para donos e gerentes de postos de combustivel e seus colaboradores: o cliente e a empresa"
+      escada: "1) curl https www e https: certificado invalido, http www e http: 200 com a pagina de erro; Chromium em http://www.featbank.com.br/: a mesma pagina de erro; 2) archive.org/wayback/available: ultimo arquivamento 2026-01-08; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (featbank) devolve quatro apps da marca, todos do mesmo publico"
+      data: 2026-10-16
     17:
       marca: Delend
       situacao: pulada
@@ -1914,11 +2093,11 @@ categorias:
       motivo: "nao_atende_pf: 'infraestrutura financeira para sua empresa crescer' (cobranca, recorrencia, split, BaaS)"
       data: 2026-10-10
     24:
-      marca: Mentore
+      marca: "Mentore"
       situacao: pulada
-      motivo: "site_inacessivel: 'ERROR: The request could not be satisfied. Request blocked' (CloudFront) ao Chromium para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 da CDN; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'Mentore NOVO' (id 6747187944) e a conta dos colaboradores de empresas clientes ('solucoes digitais para facilitar a rotina financeira de empresas e colaboradores'): o cliente e a empresa, como nos cartoes de beneficio"
+      escada: "1) Chromium: 403 da CDN; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     25:
       marca: PagBrasil
       situacao: pulada
@@ -2064,9 +2243,9 @@ categorias:
     48:
       marca: "Bolt Card"
       situacao: pulada
-      motivo: "site_inacessivel: 'Sorry, you have been blocked' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.21.20.94; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'Bolt Card' (id 6480200381) e para lojistas que usam as maquininhas BoltCard"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.21.20.94; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     49:
       marca: "MW Pay"
       situacao: pulada
@@ -2093,10 +2272,20 @@ categorias:
       data: 2026-10-10
     52:
       marca: "99Pay"
-      situacao: pulada
-      motivo: "site_inacessivel: 'Ponto de verificacao de seguranca da Vercel' (HTTP 429, 'Falha ao verificar seu navegador') para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 429 'Vercel Security Checkpoint'; curl https www: 429, https: 429, http www: 429, http: 429; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 76.76.21.21; 4) pendente: maquina dele"
-      data: 2026-10-10
+      categoria: pagamentos
+      situacao: classificada
+      unidade: app         # '99Pay', 99Pay S.A, App Store BR id 1588184260 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [21, 316, 107, 58]
+      cor_do_texto: "#000000"
+      raio_px: 6
+      fonte: "fonte sem serifa do app (99Pay)"
+      familia_generica: sans-serif
+      densidade_blocos: 10
+      densidade_lista: "voltar; Comprar Bitcoin; R$10 (cartao ampliado pela arte); limite; R$ 10; R$ 25; R$ 100; R$ 200; limite diario e mensal; teclado"
+      nota: "captura 1 da loja; recorte 237,958,1032,2208 sobre 1242x2208. A primeira de interface de frente, com arte sobre a tela (o cartao R$10 ampliado): limitacao. Botao: a opcao R$ 10 selecionada, verde. Conta digital da 99"
+      escada: "1) Chromium: 429 'Vercel Security Checkpoint'; curl https www: 429, https: 429, http www: 429, http: 429; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 76.76.21.21; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     53:
       marca: "Belvo"
       situacao: pulada
@@ -2172,11 +2361,11 @@ categorias:
       motivo: "nao_atende_pf: gestao de pagamento de frete para transportadoras"
       data: 2026-10-10
     66:
-      marca: "RendimentoPay"
+      marca: "RendimentoPay (Agillitas)"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 191.235.228.32; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'Rendimentopay' (id 630047689) e o dos cartoes pre-pagos corporativo, de incentivo e de viagem; a conta de pagamentos e o cartao de viagem PF aparecem como compatibilidade, e o cliente e a empresa, como nos cartoes de beneficio. Caso duvidoso: se for lido pagamentos, entra como 9a e o PayPal sai"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 191.235.228.32; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     67:
       marca: "Fits (Fitbank)"
       situacao: pulada
@@ -2213,7 +2402,6 @@ categorias:
       data: 2026-10-10
     74:
       marca: "Afinz"
-      situacao: classificada
       unidade: app
       botao: cheio
       botao_caixa: [17, 529, 358, 69]
@@ -2225,12 +2413,18 @@ categorias:
       densidade_lista: "voltar; titulo Pagamento de fatura; Boleto para pagamento; valor; vencimento; aviso do prazo; codigo de barras; Copiar codigo de barras; Baixar PDF; Compartilhar; nota"
       nota: "app 'Afinz' (id 1416167782, o site aponta para ele, do mesmo grupo: vendedor Sorocred). Captura 4 da loja, a primeira com o aparelho em pe (1 a 3 inclinadas). Recorte 238,700,1004,2208 sobre 1242x2208; botao Copiar codigo de barras agua (#00c4cc), pilula. O site oferece cartao Afinz Visa 'Para voce' e 'Para sua empresa'"
       data: 2026-10-10
-    76:
-      marca: "PagSeguro"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro aponta para a ouvidoria (pagseguro.vc) e o dominio da marca e negado pelo proxy da nuvem ('Blocked by egress policy', 403), nao pelo site. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 'Blocked by egress policy' do proxy da nuvem em pagseguro.com.br/404; curl https www: 200, https: 200, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.18.2.49; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72)"
+      url: "https://apps.apple.com/br/app/afinz/id1416167782"
+      sha256_captura: "4d964c0a341685d79e647d954ff535610089291822b17ae828c6ffd017749fc7"
+    76:
+      situacao: pulada
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'Banco PagBank' (id 1186059012)"
+      url: "http://pagseguro.com.br/404"
+      sha256_captura: "f2159afcb2fca5d50616bcb48452788bc43775a8f19e655f10e5752b4567ea82"
+      marca: "PagSeguro"
+      escada: "1) Chromium: 403 'Blocked by egress policy' do proxy da nuvem em pagseguro.com.br/404; curl https www: 200, https: 200, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.18.2.49; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     77:
       marca: "Pomelo"
       situacao: pulada
@@ -2248,7 +2442,6 @@ categorias:
       data: 2026-10-10
     81:
       marca: "Credishop"
-      situacao: classificada
       unidade: app
       botao: vazado
       botao_caixa: [306, 560, 63, 18]
@@ -2260,12 +2453,18 @@ categorias:
       densidade_lista: "ilha; nome e empresa; ajuda; sino; Meus limites e saldos; cartao A vista; cartao seguinte; indicadores; cartao Fatura aberta; Ultimas transacoes; Ver todas; tres itens da lista"
       nota: "app 'Meu Novo Credishop' (id 6714449954, o site aponta para ele). Captura 4 da loja, a primeira com o aparelho em pe (1 e a abertura, 2 e 3 inclinadas). Recorte 190,925,1052,2699 sobre 1242x2699. Nenhum botao com caixa: o unico controle de texto e o link vermelho Ver todas (botao vazado). Cartao de loja (Credi-Shop S.A. Administradora de Cartoes)"
       data: 2026-10-10
-    82:
-      marca: "PagueVeloz"
       situacao: pulada
-      motivo: "site_inacessivel: 403 do servidor, sem corpo, para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 sem pagina; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 45.223.20.245; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72)"
+      url: "https://apps.apple.com/br/app/meu-novo-credishop/id6714449954"
+      sha256_captura: "5113b7e117c0c6d95ce8625002540d934438367916d6e3bbe41242428c22db2b"
+    82:
+      situacao: pulada
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'PagueVeloz', para quem vende: seria nao_atende_pf"
+      url: "https://www.pagueveloz.com.br/"
+      sha256_captura: "a454ade260786b3c5f7874432762a589fcabc344ee3f0e9f9f2a24ec39e40a1a"
+      marca: "PagueVeloz"
+      escada: "1) Chromium: 403 sem pagina; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 45.223.20.245; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     83:
       marca: "Foris GFS (Crypto.com)"
       situacao: fora_do_livro
@@ -2292,11 +2491,13 @@ categorias:
       motivo: "duplicada: a marca Nubank ja foi lida em pagamentos 33 (excedente de banco_digital)"
       data: 2026-10-10
     88:
-      marca: "Redecard (Rede)"
       situacao: pulada
-      motivo: "site_inacessivel: 'Access Denied' da Akamai para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.48.10.197; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'Rede', maquininha: seria nao_atende_pf"
+      url: "https://www.userede.com.br/"
+      sha256_captura: "e41940ecb2c1ae7653aa592b200a35bca951065fb40f31e742725ba49bbfcbf7"
+      marca: "Redecard (Rede)"
+      escada: "1) Chromium: Access Denied da Akamai; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 23.48.10.197; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     90:
       marca: "Trio"
       situacao: pulada
@@ -2318,11 +2519,13 @@ categorias:
       motivo: "nao_atende_pf: o endereco do cadastro (zrobank.com) redireciona para zro.global, infraestrutura de contas e pagamentos globais"
       data: 2026-10-10
     94:
-      marca: "Pinbank"
       situacao: pulada
-      motivo: "site_inacessivel: verificacao de seguranca da Cloudflare ('Um momento...') para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: pagina de verificacao da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.20.44.49; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'pinbank' (id 1162122328)"
+      url: "https://www.pinbank.com.br/"
+      sha256_captura: "71710b5ec17ef41f570cd47f0c8dbabcfd3b2a804ca261571f24199940e5a231"
+      marca: "Pinbank"
+      escada: "1) Chromium: pagina de verificacao da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 104.20.44.49; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     95:
       marca: "Muevy"
       situacao: pulada
@@ -2345,7 +2548,6 @@ categorias:
       data: 2026-10-10
     100:
       marca: "MagaluPay"
-      situacao: classificada
       unidade: site
       botao: cheio
       botao_texto: "Acessar"
@@ -2355,6 +2557,10 @@ categorias:
       densidade_lista: "logotipo; menu; Acessar; foto circular; tres quadrados; titulo; paragrafo; aviso de cookies"
       nota: "sem app proprio: o app da loja e o 'Magalupay Empresas' (PJ) e o 'Magalu: compras com descontos', da plataforma. O site mostra Carteira digital e Conta digital para empresas. Botao Acessar azul, sobre fundo do cabecalho, sem fundo computado (medido nos pixels)"
       data: 2026-10-10
+      situacao: pulada
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72)"
+      url: "https://www.magalupay.com.br/"
+      sha256_captura: "bcee5a24a7ae6e070ef3a8b35164c89305ca91c6bd361a99fb1b38db2ac3ede7"
     101:
       marca: "Mercado Bitcoin (MB Pay)"
       situacao: fora_do_livro
@@ -2371,11 +2577,13 @@ categorias:
       motivo: "nao_atende_pf: o aviso da primeira tela diz que 'as contas Claro pay foram encerradas em 17/04/2026': nao ha mais oferta"
       data: 2026-10-10
     104:
-      marca: "Servnet (Valecard)"
       situacao: pulada
-      motivo: "site_inacessivel: 'Attention Required!' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.66.146.131; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'ValeCard' (id 6741156191)"
+      url: "https://www.valecard.com.br/"
+      sha256_captura: "6febf28d9bf6447a8c4d7e597adc0b94443bd80e7121ef4f1f90a5cb7009f7cc"
+      marca: "Servnet (Valecard)"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.66.146.131; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     105:
       marca: "Ewally"
       situacao: pulada
@@ -2397,11 +2605,13 @@ categorias:
       motivo: "sem_marca: o dominio do cadastro (unlimit.com.br) e de uma consultoria de TI ('Unlimit Consultoria: Solucoes em Agilidade, ITSM e Governanca'), nao da instituicao de pagamento"
       data: 2026-10-10
     109:
-      marca: "V3 (Onnibank)"
       situacao: pulada
-      motivo: "site_inacessivel: o endereco do cadastro redireciona para ringgo.com.br, que responde 'Attention Required!' da Cloudflare. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: redirecionamento para ringgo.com.br e 'Attention Required!' da Cloudflare; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.66.144.161; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'Ringgo' (Onnibank), conta de colaboradores"
+      url: "https://www.ringgo.com.br/"
+      sha256_captura: "9ace9919bf47def71d3b6ea8fad091e98742bc21ce0737f1c853f88aabd04c18"
+      marca: "V3 (Onnibank)"
+      escada: "1) Chromium: redirecionamento para ringgo.com.br e 'Attention Required!' da Cloudflare; curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.66.144.161; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     110:
       marca: "OneKey Payments"
       situacao: pulada
@@ -2443,11 +2653,13 @@ categorias:
       motivo: "nao_atende_pf: 'O futuro da inteligencia financeira com IA': servicos para tesourarias de empresas"
       data: 2026-10-10
     118:
-      marca: "Belluno"
       situacao: pulada
-      motivo: "site_inacessivel: 'Attention Required!' da Cloudflare para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.67.160.149; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'Belluno Digital Bank', conta PJ: seria nao_atende_pf"
+      url: "https://bellunopag.com.br/"
+      sha256_captura: "a8bf7786ee6df3f40b4d9d61272019cc337d9c93377693921be1735764c893b9"
+      marca: "Belluno"
+      escada: "1) Chromium: 'Attention Required!' da Cloudflare (403); curl https www: 403, https: 403, http www: 403, http: 403; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 172.67.160.149; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     119:
       marca: "F&F (FF Digital)"
       situacao: fora_do_livro
@@ -2484,11 +2696,13 @@ categorias:
       motivo: "nao_atende_pf: 'Solucoes de Pagamento Cross-Border', para empresas"
       data: 2026-10-10
     126:
-      marca: "Mercado Pago"
       situacao: pulada
-      motivo: "site_inacessivel: 403 do servidor, sem corpo, para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 403 sem pagina; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 3.171.38.55; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: pagamentos fechou as 10 na amostra refeita de 16/10/2026 (plano v3: Uzzipay 5, Humu 22, PagHiper 38, Maree 39, AstroPay 41, Cactvs 50, 99Pay 52, Wise 64, Quero-Quero 70, PayPal 72); app 'Mercado Pago' (id 925436649)"
+      url: "https://www.mercadopago.com.br/"
+      sha256_captura: "ec12d4d14bf53601b0de3561893a00b75d5f19f6008de6a608bcaa515e98c6ec"
+      marca: "Mercado Pago"
+      escada: "1) Chromium: 403 sem pagina; curl https www: 200, https: 200, http www: 200, http: 200; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 3.171.38.55; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     127:
       marca: "Bankly"
       situacao: pulada
@@ -2537,21 +2751,31 @@ categorias:
     35:
       marca: "Cooper Card"
       situacao: pulada
-      motivo: "site_inacessivel: conexao reiniciada em https e 503 em http para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: net::ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 177.72.253.5; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "nao_atende_pf: o app 'Cooper Card App' (id 1301519395) e dos cartoes de beneficio e premiacao que a empresa contrata (Multi Beneficios, Farmacia, Ajuda de Custo, Premiacao): o mesmo criterio dos cartoes de beneficio de 10/10"
+      escada: "1) Chromium: net::ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 177.72.253.5; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade"
+      data: 2026-10-16
     70:
-      marca: "Quero-Quero Verdecard"
-      situacao: pulada
-      motivo: "site_inacessivel: 503 em http e conexao encerrada em https para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: 503 sem pagina; curl https www: erro:RemoteDisconnected, https: erro:RemoteDisconnected, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 206.41.72.3; 4) pendente: maquina dele"
-      data: 2026-10-10
+      marca: "Quero-Quero PAG"
+      categoria: pagamentos
+      situacao: classificada
+      unidade: app         # 'Quero-Quero PAG: Cartao e Pix', QUERO-QUERO VERDECARD INSTITUICAO DE PAGAMENTO SA, App Store BR id 1335844228 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [237, 509, 78, 35]
+      cor_do_texto: "#ffffff"
+      raio_px: 17
+      fonte: "fonte sem serifa do app (Quero-Quero)"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "voltar; Meus Cartoes; ajuda; cartao; paginacao; Minhas Faturas; Cartao Virtual; Apple Pay e etiqueta Novo; Gerenciar (cortado); Minhas faturas; fatura atual e valor; Pagar; situacao e vencimento; Meus limites"
+      nota: "captura 2 da loja; recorte 191,793,1025,2208 sobre 1242x2208. A 1 e foto. Botao Pagar verde, pilula. A conta digital das Lojas Quero-Quero (Pix, pagamentos, cartao e emprestimo), como o MagaluPay de 10/10"
+      escada: "1) Chromium: 503 sem pagina; curl https www: erro:RemoteDisconnected, https: erro:RemoteDisconnected, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 206.41.72.3; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): app da marca achado, e o app e a unidade (o site que recusou nao e o que se classifica)"
+      data: 2026-10-16
     73:
       marca: "SRM Bank (Trusthub)"
       situacao: pulada
-      motivo: "site_inacessivel: tempo esgotado em todas as variantes, no curl e no Chromium, com o DNS resolvendo. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: net::ERR_TIMED_OUT; curl https www: timeout, https: timeout, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 189.125.100.35; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "site_inacessivel: tempo esgotado (4a) e conexao reiniciada (4c) em trusthub.com.br, o site do cadastro; nenhum app da marca"
+      escada: "1) Chromium: net::ERR_TIMED_OUT; curl https www: timeout, https: timeout, http www: erro:TimeoutError, http: erro:TimeoutError; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 189.125.100.35; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): sem app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): net::ERR_TIMED_OUT; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): net::ERR_CONNECTION_RESET"
+      data: 2026-10-16
     75:
       marca: "Quanto Network"
       situacao: pulada
@@ -2571,11 +2795,11 @@ categorias:
       escada: "1) Chromium: net::ERR_TUNNEL_CONNECTION_FAILED; curl: 502 do proxy e DNS?; 2) archive.org/wayback/available: indisponivel (HTTPError); 3) dns.google: Status 3 (sem registro A)"
       data: 2026-10-10
     96:
-      marca: "Cooper Beneficios"
+      marca: "Cooper Card"
       situacao: pulada
-      motivo: "site_inacessivel: mesmo dominio de pagamentos 35: conexao reiniciada em https e 503 em http para o IP da nuvem. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: net::ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 177.72.253.5; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "duplicada: o site do cadastro e coopercard.com.br, a marca Cooper Card da linha 35 (nao_atende_pf)"
+      escada: "1) Chromium: net::ERR_CONNECTION_RESET; curl https www: erro:[Errno 104] Connection reset b, https: erro:[Errno 104] Connection reset b, http www: 503, http: 503; 2) archive.org/wayback/available: indisponivel (HTTPError); dns.google: A 177.72.253.5; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): termo 2 (coopercard) devolve os apps da 35"
+      data: 2026-10-16
     130:
       marca: "Nvio Brasil (Bitso)"
       situacao: fora_do_livro
@@ -2707,15 +2931,15 @@ categorias:
     12:
       marca: "Quant Inside"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
-      escada: "1) dominios provaveis testados (quantinside.com.br e quantinside.com: sem registro A (NXDOMAIN)); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site, a loja nao tem app da marca e a busca pelo nome do IP brasileiro nao achou um site que se confirme como a marca"
+      escada: "1) dominios provaveis testados (quantinside.com.br e quantinside.com: sem registro A (NXDOMAIN)); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nenhum app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao se aplica, nao ha endereco para o workflow abrir; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): busca pelo nome no Bing do IP brasileiro (16/10/2026; o DuckDuckGo respondeu 202, desafio de robo): nenhum site da marca"
+      data: 2026-10-16
     13:
       marca: "DOUP Analise"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
-      escada: "1) dominios provaveis testados (doupanalise.com.br: NXDOMAIN; doup.com.br e uma escola de ingles, descartada); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site, a loja nao tem app da marca e a busca pelo nome do IP brasileiro nao achou um site que se confirme como a marca"
+      escada: "1) dominios provaveis testados (doupanalise.com.br: NXDOMAIN; doup.com.br e uma escola de ingles, descartada); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nenhum app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao se aplica, nao ha endereco para o workflow abrir; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): busca pelo nome no Bing do IP brasileiro (16/10/2026; o DuckDuckGo respondeu 202, desafio de robo): nenhum site da marca"
+      data: 2026-10-16
     14:
       marca: "Ativa Investimentos"
       situacao: pulada
@@ -2724,9 +2948,9 @@ categorias:
     15:
       marca: "L&S Educacao"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
-      escada: "1) dominios provaveis testados (lseducacao.com.br: NXDOMAIN); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site, a loja nao tem app da marca e a busca pelo nome do IP brasileiro nao achou um site que se confirme como a marca"
+      escada: "1) dominios provaveis testados (lseducacao.com.br: NXDOMAIN); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nenhum app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao se aplica, nao ha endereco para o workflow abrir; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): busca pelo nome no Bing do IP brasileiro (16/10/2026; o DuckDuckGo respondeu 202, desafio de robo): nenhum site da marca"
+      data: 2026-10-16
     16:
       marca: "Zero Markets Brasil"
       situacao: classificada
@@ -2742,21 +2966,21 @@ categorias:
     17:
       marca: "ICL Research"
       situacao: pulada
-      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site e a escada nao achou um que se confirme como o da marca"
-      escada: "1) dominios provaveis testados (icl-research.com.br: NXDOMAIN; a busca so devolve o grupo israelense ICL); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; 4) so se alguem da APIMEC ou a maquina dele tiver o endereco"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site, a loja nao tem app da marca e a busca pelo nome do IP brasileiro nao achou um site que se confirme como a marca"
+      escada: "1) dominios provaveis testados (icl-research.com.br: NXDOMAIN; a busca so devolve o grupo israelense ICL); 3) busca pelo nome (WebSearch, so EUA): nenhum site da marca; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nenhum app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao se aplica, nao ha endereco para o workflow abrir; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): busca pelo nome no Bing do IP brasileiro (16/10/2026; o DuckDuckGo respondeu 202, desafio de robo): nenhum site da marca"
+      data: 2026-10-16
     18:
       marca: "HM Research"
       situacao: pulada
-      motivo: "site_inacessivel: o unico dominio provavel (hmresearch.com.br) recusa a nuvem e a identidade nao se confirma sem abrir a pagina. AGUARDA DEGRAU 4"
-      escada: "1) curl: 403 em https e http; Chromium: tempo esgotado na navegacao; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.18.3.183; 3) busca pelo nome: so devolve a OHMResearch, outra casa; 4) pendente: maquina dele. Se abrir e for a marca, pode entrar antes da Invius (21)"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site, a loja nao tem app da marca e a busca pelo nome do IP brasileiro nao achou um site que se confirme como a marca"
+      escada: "1) curl: 403 em https e http; Chromium: tempo esgotado na navegacao; 2) archive.org/wayback/available: nenhum arquivamento; dns.google: A 104.18.3.183; 3) busca pelo nome: so devolve a OHMResearch, outra casa; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nenhum app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao se aplica, nao ha endereco para o workflow abrir; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): busca pelo nome no Bing do IP brasileiro (16/10/2026; o DuckDuckGo respondeu 202, desafio de robo): nenhum site da marca"
+      data: 2026-10-16
     19:
       marca: "Team BullBear"
       situacao: pulada
-      motivo: "site_inacessivel: o dominio provavel (bullbear.com.br) e de 'Bull&Bear Consultoria Empresarial', consultoria de empresas; nada o liga a Team BullBear"
-      escada: "1) bullbear.com.br: 200, pagina de consultoria empresarial; 3) busca pelo nome: devolve um app de Londres e comunidades americanas, nenhuma brasileira; 4) so se a APIMEC ou a maquina dele tiver o endereco"
-      data: 2026-10-10
+      motivo: "site_inacessivel: o cadastro da APIMEC nao traz site, a loja nao tem app da marca e a busca pelo nome do IP brasileiro nao achou um site que se confirme como a marca"
+      escada: "1) bullbear.com.br: 200, pagina de consultoria empresarial; 3) busca pelo nome: devolve um app de Londres e comunidades americanas, nenhuma brasileira; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nenhum app da marca; 4a) workflow captura_r3 no servidor do GitHub (run 38900940103, 16/10/2026; Cheyenne, EUA, AS8075 Microsoft): nao se aplica, nao ha endereco para o workflow abrir; 4b) runner br-sp: nao existe (16/10/2026); 4c) sessao local (16/10/2026; Campinas, AS16735 Algar Telecom; Playwright 1.56.0, Chromium 141.0.7390.37): busca pelo nome no Bing do IP brasileiro (16/10/2026; o DuckDuckGo respondeu 202, desafio de robo): nenhum site da marca"
+      data: 2026-10-16
     20:
       marca: "ABC Brasil DTVM"
       situacao: pulada
@@ -2785,13 +3009,105 @@ categorias:
       motivo: "excedente_da_categoria: casa_de_analise_e_educacao ja tinha as 10 primeiras quando esta marca apareceu; o site foi capturado (diamonds.com.br) e fica sem classificar"
       data: 2026-10-10
     28:
-      marca: "Suno"
       situacao: pulada
-      motivo: "site_inacessivel: verificacao da Cloudflare ('Confirme que e humano') no suno.com.br para o IP da nuvem; o desafio nao se resolve nem se contorna. Depois das 10 primeiras, entao so conta se alguma das de antes cair. AGUARDA DEGRAU 4"
-      escada: "1) Chromium: pagina de verificacao com caixa de selecao; 4) pendente: maquina dele"
-      data: 2026-10-10
+      motivo: "excedente_da_categoria: casa_de_analise_e_educacao ja tinha as 10 primeiras antes desta linha (a 10a e a Invius, 21); app 'Suno' (id 1530566311)"
+      url: "https://www.suno.com.br/"
+      sha256_captura: "f9c5cb7ee920572e938a784efce9956e6e9ad5bbad944ef3391631659bd1a560"
+      marca: "Suno"
+      escada: "1) Chromium: pagina de verificacao com caixa de selecao; ae-a) busca da App Store BR (tools/r3_loja.py, 16/10/2026, data/r3/loja/busca/): nao buscada para classificar: a categoria fechou antes desta linha"
+      data: 2026-10-16
     34:
       marca: "Empiricus Research"
       situacao: pulada
       motivo: "excedente_da_categoria: casa_de_analise_e_educacao ja tinha as 10 primeiras quando esta marca apareceu; o site (empiricus.com.br) e o app 'Empiricus+' (id 1189255812) foram capturados e ficam sem classificar"
       data: 2026-10-10
+  robo:
+    # Plano v3 (16/10/2026): nenhum robo nos tres quadros; o segundo quadro (termos fixos) achou um, e isso e limitacao declarada (n abaixo de 5, sem dominante)
+    1:
+      marca: "Warren"
+      categoria: robo
+      situacao: classificada
+      unidade: app         # 'Warren Investimentos', Warren Brasil Gestao e Administracao de Recursos Ltda - EPP, App Store BR id 1114394063 (busca da loja, termo 1)
+      botao: vazado
+      botao_caixa: [24, 461, 115, 122]
+      raio_px: 8
+      fonte: "fonte sem serifa do app (Warren)"
+      familia_generica: sans-serif
+      densidade_blocos: 12
+      densidade_lista: "barra de status; perfil; olho; sino; Carteiras; valor; atualizado em; Investir; Resgatar; Criar carteira; Saldo em conta; valor"
+      nota: "captura 1 da loja; recorte 189,1216,1061,2687 sobre 1242x2687. Universo: segundo quadro (termos fixos, limitacao), termo 'robo de investimentos'. Pelo criterio do plano v3: 'carteiras administradas de acordo com seus objetivos, respeitando o seu perfil'. A tela e cortada embaixo pelo limite da imagem. Botao: o atalho Investir, cartao branco sobre o fundo bege: vazado"
+      data: 2026-10-16
+  consolidador:
+    # Plano v3 (16/10/2026), universos_da_loja: o quadro publico de Financas da App Store BR (fila 28)
+    1:
+      marca: "So Dividendos"
+      categoria: consolidador
+      situacao: classificada
+      unidade: app         # 'So Dividendos', VEKTA LTDA, App Store BR id 1593925880 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [171, 626, 65, 64]
+      cor_do_texto: "#ffffff"
+      raio_px: 32
+      fonte: "fonte sem serifa do app (So Dividendos)"
+      familia_generica: sans-serif
+      densidade_blocos: 14
+      densidade_lista: "barra de status; Graficos; girar; ajuda; titulo do grafico; pizza; legenda Fiis; legenda Acoes; legenda Bdrs; Historico 2022; filtro; grafico de linha; botao +; barra de abas (cortada)"
+      nota: "captura 3 da loja; recorte 192,755,1015,2208 sobre 1242x2208. Quadro topgrossing (posicao 54). A 1 e a 2 mostram o aparelho inclinado. Botao: o + flutuante, circulo azul"
+      data: 2026-10-16
+    2:
+      marca: "TradeMap"
+      categoria: consolidador
+      situacao: classificada
+      unidade: app         # 'TradeMap: Acompanhe suas acoes', Valemobi Consultoria Empresarial SA, App Store BR id 1300692868 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [0, 446, 390, 54]
+      cor_do_texto: "#ffffff"
+      raio_px: 0
+      fonte: "fonte sem serifa do app (TradeMap)"
+      familia_generica: sans-serif
+      densidade_blocos: 19
+      densidade_lista: "voltar; Simulacao; menu; PETR4 e variacao; barra de preco; Limitada; Hoje; Quantidade; menos; 100; mais; Preco de Compra; menos; 34,21; mais; Custodia; Saldo; Total; Arraste para comprar"
+      nota: "captura 4 da loja; recorte 246,1240,998,2208 sobre 1242x2208. Quadro topgrossing (posicao 13). A 1 a 3 mostram o aparelho inclinado; a barra de status ficou fora do recorte. Botao Arraste para comprar, azul, de borda a borda. A moda dos pixels e o cinza dos campos (#e4e7ec, 8,9%) sobre o fundo escuro em degrade: limitacao 6"
+      data: 2026-10-16
+    3:
+      marca: "Investidor10"
+      categoria: consolidador
+      situacao: classificada
+      unidade: app         # 'Investidor10', INVESTIDOR10 SERVICOS DE INTERNET LTDA, App Store BR id 6461458365 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [69, 357, 44, 19]
+      cor_do_texto: "#000000"
+      raio_px: 9
+      fonte: "fonte sem serifa do app (Investidor10)"
+      familia_generica: sans-serif
+      densidade_blocos: 22
+      densidade_lista: "voltar; logotipo do ativo; cotacao PETR3; Visao Geral; Indicadores; Checklist; Proventos; aba cortada; Variacao; P/L; P/VP; DY; 6M; 1A; 5A; 10A; grafico; aviso; Rentabilidade; tres valores"
+      nota: "captura 1 da loja; recorte 305,892,938,2208 sobre 1242x2208. Quadro topgrossing (posicao 7). A captura 1, de frente; a tela e cortada embaixo. Botao: o seletor 6M marcado, pilula laranja-clara (o primeiro controle depois das abas)"
+      data: 2026-10-16
+    4:
+      marca: "Status Invest"
+      categoria: consolidador
+      situacao: classificada
+      unidade: app         # 'Status Invest', TRMF CONSULTORIA LTDA, App Store BR id 6444870587 (busca da loja, termo 1)
+      botao: cheio
+      botao_caixa: [77, 229, 53, 24]
+      cor_do_texto: "#ffffff"
+      raio_px: 3
+      fonte: "fonte sem serifa do app (Status Invest)"
+      familia_generica: sans-serif
+      densidade_blocos: 17
+      densidade_lista: "barra de status; voltar; logotipo do ativo; cotacao AAPL34; Cotacao; Indicadores; Proventos; Noticias; preco; variacao; 1D; 5D; 30D; 6M; 1A; 5A; grafico"
+      nota: "captura 1 da loja; recorte 180,1385,1098,2208 sobre 1242x2208 (o aparelho de baixo). Quadro topgrossing (posicao 62). A captura 1 tem dois aparelhos: o de cima de cabeca para baixo, o de baixo em pe e cortado pela borda; vale o de baixo. Botao: o seletor 5D marcado, laranja. Mesmo grupo da Suno (vendedor TRMF Consultoria), marca comercial distinta"
+      data: 2026-10-16
+    5:
+      marca: "Dividendos.me"
+      categoria: consolidador
+      situacao: classificada
+      unidade: app         # 'Dividendos: Acoes, FIIs, BDR', Dividendos.me LTDA, App Store BR id 1479496256 (busca da loja, termo 1)
+      botao: vazado
+      fonte: "fonte sem serifa do app (Dividendos.me)"
+      familia_generica: sans-serif
+      densidade_blocos: 24
+      densidade_lista: "menu; logotipo; ajuda; notificacoes; Hoje; Ativos; Seguindo; Meu Rob; Patrimonio Total e olho; valor; BRL; barra BRL/USD; legenda; Carteira Principal; valor; metricas; Carteira EUA; valor; metricas; cartao seguinte; Inicio; Graficos; Carteiras; Conta"
+      nota: "captura 1 da loja; recorte 373,470,1143,2200 sobre 1242x2208. Quadro topgrossing (posicao 48). A captura 1, de frente. Nenhum botao na tela (abas, icones e cartoes): vazado, e o matiz e a cor cromatica de maior area (livro)"
+      data: 2026-10-16
