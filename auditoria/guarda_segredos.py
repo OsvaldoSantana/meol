@@ -117,6 +117,8 @@ PERMITIDOS_POR_WORKFLOW = {
     "medir.yml": {("medir", "Medir (token de leitura)"): _R2_LEITURA},
     "testes.yml": {("completo", "Materializar o acervo do armazem"): _R2},
     "mutacao.yml": {},
+    # 16/10/2026 (P-170): o degrau 4a da R3 abre paginas publicas e nao usa segredo nenhum.
+    "captura_r3.yml": {},
     "captura_cvm.yml": {("captura", n): _R2 for n in (
         "Capturar", "Capturar COTAHIST", "Capturar NEFIN", "Capturar eventos B3",
         "Conciliar COTAHIST", "Publicar CVM")},

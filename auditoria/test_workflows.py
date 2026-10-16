@@ -102,7 +102,10 @@ def test_P148_dependabot_ignora_exatamente_as_dependencias_numericas():
     nao muda numero nenhum."""
     import tomllib
     with open(os.path.join(RAIZ, "pyproject.toml"), "rb") as f:
-        numericas = set(tomllib.load(f)["tool"]["meol"]["dependencias"]["numericas"])
+        deps = tomllib.load(f)["tool"]["meol"]["dependencias"]
+    # 16/10/2026 (P-170): o instrumento da R3 tambem fica parado ate a rodada fechar (o PR #69
+    # trocou o Playwright no meio dela). E outra lista, nao numerica: nao muda a impressao.
+    numericas = set(deps["numericas"]) | set(deps.get("instrumento_r3", []))
     with open(os.path.join(RAIZ, ".github", "dependabot.yml"), encoding="utf-8") as f:
         d = yaml.safe_load(f)
     pip = [u for u in d["updates"] if u["package-ecosystem"] == "pip"]
