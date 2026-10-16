@@ -82,15 +82,24 @@ se lê nível, tendência ou híbrido. Dependem dela P-17, P-18, P-58 a P-61 e P
 banco é a P-31, na reserva. **Fecha com:** o bloco rodando sobre o acervo, cada exclusão com o
 motivo nomeado, e a 63a lida do YAML.
 
-## P-17 · C-04 e C-05 nunca foram nomeados — o escopo já está no repositório
+## P-17 · C-04 e C-05 nomeados; o limiar do C-05 sai da contagem (27c)
 
-**Dono:** Claude Code · **Gatilho:** antes de codificar o bloco C (P-30) · **Classe:**
-`BLOQUEIA_O_SISTEMA` *(campos dados na triagem de 03/10/2026, P-171)*
+**Dono:** Osvaldo (o limiar, bloco 27) · Claude Code (gravá-lo no YAML) · **Gatilho:** antes de
+ligar o corte do C-05 no bloco C (P-30) · **Classe:** `DECISAO_DE_DESENHO` *(era
+`BLOQUEIA_O_SISTEMA` até 10/10: a identidade caiu na leitura, e o bloco C roda sem o corte)*
 
-O `politica.yaml` cita C-04 e C-05 como existentes e nunca os nomeia. A lista vive em
-`docs/auditoria/escopo-campos-de-analise.md`, que **já está no repositório** (conferido em
-03/10): o "exige o desktop" de antes não vale mais. Bloco de exclusão com critério inventado
-excluiria por regra que ninguém escolheu. **Fecha com:** os dois lidos e reconciliados com o YAML.
+**Feito em 10/10/2026** (`politica.yaml` 1.40.0, `bloco_C_solvencia.campos_C04_C05`, guarda
+`alocacao/test_p17_c04_c05.py`): os dois lidos no escopo e reconciliados com o YAML.
+**C-04**, moeda da dívida × moeda da receita: Fase B, nota de instrumentos financeiros;
+`NAO_CONSERTADA` com `pendencia: P-65`, e até lá marca "C-04 não medido" e nunca exclui (P6).
+**C-05**, caixa / dívida de curto prazo: Fase A, balanço estruturado; calcula e marca. O escopo
+não dá limiar como regra: o "caixa < dívida CP" é o exemplo do bloco L, e a §7 dele diz que
+nenhum limiar aparece no documento. Medido de passagem: o metadado do FRE estruturado da CVM não
+tem campo de moeda (730 campos), então o "exige o FRE" da Fase B não resolve o C-04 pelo CSV.
+**16/10/2026: ele respondeu 27c** (fila, bloco 27): o limiar sai da contagem do bloco C em 0,5 ·
+1,0 · 1,5, só o número de empresas, e até lá o C-05 marca e não corta. **Fecha com:** a contagem
+rodada na P-30, a escolha dele vendo ela, e o limiar gravado no `campos_C04_C05.C-05.limiar` com
+impressão digital.
 
 ## P-18 · `SETOR_ATIV` da CVM nunca foi contado
 
@@ -128,17 +137,20 @@ portão só diz *"regime X, exige dossiê; até lá fica no universo sem peso de
 todo regime. Os cortes de distrato (P-66, na reserva) entram junto. **Fecha com:** a saída
 `EXIGE_DOSSIE` no portão, com o motivo, e um teste que prova que ela não tira ninguém do universo.
 
-## P-65 · A segunda esteira: notas explicativas e IPE — decidida (65b) e sem lugar no caminho
+## P-65 · A segunda esteira: notas explicativas e IPE — decidida (65b), entra depois do bloco C (23a)
 
-**Dono:** Claude Code (construir) · Osvaldo (onde ela entra, fila, bloco 23) · **Gatilho:** a
-resposta dele ao bloco 23 · **Classe:** `BLOQUEIA_O_SISTEMA`
+**Dono:** Claude Code (construir) · **Gatilho:** o bloco C rodando sobre o acervo (P-30) —
+resposta 23a dele, 10/10/2026 · **Classe:** `BLOQUEIA_O_SISTEMA`
 
 Achado X-01: dos dez passos da leitura dele, 3 saem do dado estruturado e 7 não. **Decisão dele,
 26/09: 65b, construir já**, só com extração **determinística** (todo número com trecho, posição
 e sha256 da origem; número sem trecho é recusado, P1), começando por medir o formato do
-Empresas.NET. **Nenhum PR em oito dias** (0 de 47, de #13 a #59): é o achado IP-01. O caminho
-crítico de 03/10 não a nomeia, e escolher entre os dois não é da sessão. **Fecha com:** o formato
-medido e a primeira extração com procedência, na posição que ele der.
+Empresas.NET. **Nenhum PR em oito dias** (0 de 47, de #13 a #59): é o achado IP-01. **Onde ela
+entra, decidido em 10/10 (fila, bloco 23, 23a): depois do bloco C**, porque o consumidor dela é
+o dossiê (P-64), que lê a lista curta que o bloco C produz. A 65b muda de quando, não de se nem
+de condição. O C-04 (moeda da dívida) espera por ela: `politica.yaml →
+bloco_C_solvencia.campos_C04_C05.C-04`, `pendencia: P-65`. **Fecha com:** o formato medido e a
+primeira extração com procedência, na posição que ele deu (23a).
 
 ## P-180 · A série ajustada do COTAHIST vira limitação declarada
 
@@ -261,18 +273,6 @@ pagamentos, 16 de corretora, 3 de gestora, 2 de casa de análise; §3.1) e o Way
 (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** o degrau 4 e o arquivamento, uma linha
 por marca (categoria, captura com fonte e data, medidas do `classificar()`) e o `veto()` aplicado
 à direção vencedora.
-
-## P-172 · O PLANO.md na abertura volta à decisão em 17/10
-
-**Dono:** Osvaldo (decidir) · Claude Code (levar os números) · **Gatilho:** 17/10/2026, com duas
-semanas de dado da regra de volta · **Classe:** `DECISAO_DE_DESENHO`
-
-Resposta 22a de 03/10: o `PLANO.md` segue na abertura. Na mesma data ele foi reescrito curto
-(dieta de 03/10), e a pergunta de 17/10 fica menor. A sessão de 17/10 leva: a tabela da regra de
-volta (`python auditoria/metricas_processo.py --prs prs.json`, com `gh pr list --state merged
---base main --json number,title,mergedAt,author`) e os semanais de 05/10 e 12/10; o tamanho da
-abertura (`python auditoria/tamanho_do_contexto.py`); e se o piso da 21d ficou alto demais para o
-`registro` (limiar 0,21 com referência 1/7).
 
 ---
 

@@ -100,3 +100,16 @@ da fila sem resposta, abaixo de 2 mil tokens), um hook `SessionStart` o injeta, 
 **Não conferido:** se o hook roda no desktop dele, no Windows. O comando é `cat`, e esta sessão
 não leu como o Claude Code executa hooks lá nem viu o `estado.md` aparecer numa sessão local. A
 primeira sessão no desktop confere: se o estado não estiver no contexto, o hook não rodou.
+
+## Volta de 16/10/2026: `registro` sobe de `sonnet` para `opusplan`
+
+Medido em 12/10 pelo semanal (issue #71) e de novo em 16/10 (`auditoria/metricas_processo.py
+--prs`, 72 PRs mergeados): na janela de 14 dias, a classe `registro` teve **2 eventos em 4 PRs em
+Sonnet** (taxa 0,50), contra a referência de 0,14 (0 eventos em 6 PRs, em Opus) e o limite de 0,21
+(1,5 × 0,14). Os dois eventos: o `21d-ajuste` e o da P-165 (autoria das razões da B′), ambos de
+03/10. Os 4 PRs: #49, #54, #56 e #59. Mínimos atendidos (4 PRs, 2 eventos).
+
+Aplicada como saiu, no degrau seguinte da `ordem` (`opusplan`). **O que não se fez:** mexer no
+limiar depois do disparo, que a P-172 previa discutir; mudar a régua depois de ela acusar é o erro
+que a P4 proíbe. **Limitação (P7):** a regra mede sozinha, mas a troca dependeu de alguém ler a
+issue, e ela ficou parada de 12/10 a 16/10.

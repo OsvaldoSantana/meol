@@ -248,7 +248,7 @@ conclusão não passa dessa frase (§5-B, pergunta 1).*
 | gestora e private | 3 linhas | XP Gestão, Mérito, BREI | idem (as de 04/10) |
 | casa de análise e educação | 2 linhas | HM Research (o domínio é suposição: confirmar a marca ao abrir) e Suno | idem; a Suno vem depois da 10ª e só conta se alguma anterior cair |
 | todas | — | as 85 classificadas | `py -3.11 tools/r3_arquivar.py`: o Wayback de cada uma |
-| robô, consolidador, planejador | — | sem universo | decisão dele (fila, bloco 27) |
+| robô, consolidador, planejador | — | sem universo | decisão dele (fila, bloco 28) |
 
 Se uma pendente abrir e for classificada, a amostra da categoria se refaz **pela ordem do
 sorteio**: entram as 10 primeiras classificadas, e as do fim saem (gestora: 13, 14 e 15 são as
@@ -325,7 +325,7 @@ pendente abrir e for classificada, a 10ª sai e ganha a linha `excedente_da_cate
    (§3.1).
 3. ~~As listas oficiais de bancos, pagamentos e casas de análise~~ (10/10, nuvem; §2) e as
    visitas delas (11/10). **Robô, consolidador e planejador: sem universo (§2.1); a decisão é
-   dele (fila, bloco 27).**
+   dele (fila, bloco 28).**
 3b. O degrau 4: as 83 linhas `AGUARDA DEGRAU 4` e o Wayback das 85 (`tools/r3_arquivar.py`), na
    máquina dele (§3.1).
 4. As não auditadas das rodadas 1 e 2, e a seção fora do Brasil.

@@ -706,9 +706,16 @@ sobrou depois do `CLAUDE.md`: **8.779 tokens** (`auditoria/tamanho_do_contexto.p
 **Recomendação: 22a por enquanto**, até a regra de volta ter duas semanas de dado: medir um corte
 de cada vez.
 
+
+**Confirmada em 16/10/2026 (P-172), pelo formulário no claude.ai: 22a continua.** O `PLANO.md`
+segue na abertura. Números levados: abertura de 23.009 tokens com ele (3.133 do `PLANO.md`), contra
+~21,0 mil em 03/10 (`auditoria/tamanho_do_contexto.py`, proxy de 2,96 caracteres por token, ±15%).
+A regra de volta disparou para o `registro` (issue #71) e foi aplicada como saiu, sem mexer no
+limiar: mover a régua depois do disparo seria o erro que a P4 proíbe.
+
 ---
 
-## 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10
+## 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10 · **respondido em 10/10: 23a**
 
 Em 26/09 você decidiu **65b, construir já** (só extração determinística). Em 03/10, o caminho
 crítico ficou ponte → bitemporalidade → bloco C, sem a P-65. Nos oito dias entre as duas, nenhum
@@ -723,6 +730,11 @@ PR a tocou (IP-01). As duas decisões não dizem qual vem primeiro.
 
 **Recomendação: 23a**, porque construir a esteira antes do dossiê existir é construir sem
 consumidor. A 65b continua valendo: muda o quando, não o se nem a condição dele.
+
+**Resposta dele, 10/10/2026, pelo formulário no claude.ai: 23a.** A P-65 entra **depois do bloco
+C** (P-30), e a 65b segue com a condição dele (só extração determinística). Registrado na P-65
+(gatilho novo) e no `PLANO.md` §3; o C-04, que só ela alcança, ficou na `politica.yaml` como
+lacuna com caminho até lá (P-17, `campos_C04_C05`).
 
 ---
 
@@ -801,7 +813,55 @@ PR da P-179; o que falta está na P-179.
 
 ---
 
-## 27 · Robô, consolidador e planejador: sem universo oficial · P-170 · **a responder**
+## 27 · O limiar do C-05 (caixa / dívida de curto prazo) · P-17 · **respondido em 16/10: 27c**
+
+Lido no escopo em 10/10/2026 (`docs/auditoria/escopo-campos-de-analise.md`): o C-05 é **caixa /
+dívida de curto prazo**, Fase A, do balanço estruturado da CVM, e a fórmula diz só "Padrão". O
+documento **não dá limiar como regra** — a §7 diz que nenhum aparece nele, de propósito. O único
+critério escrito é o **exemplo** do bloco L (catálogo especulativo): uma aposta ilustrativa sai
+com "reprova: … C-05 (caixa < dívida CP)". É ilustração do formato do registro, não um corte que
+alguém escolheu; tratá-lo como regra seria o erro que o projeto corrige (apresentar como derivado
+o que é escolha). Hoje a `politica.yaml` marca o limiar `PENDENTE`, e até você responder o C-05
+calcula e **marca, sem cortar** (P6).
+
+Visto ao lado, e muda o peso da resposta: **nenhum dos cortes do bloco C tem limiar no YAML**
+(C-01 a C-03 também não; `grep` em 10/10). O jeito de decidir este tende a virar o dos outros
+três. E nenhum número de "quantas empresas saem" existe ainda: o bloco C não roda (P-30).
+
+- **27a** — **corte em 1,0** agora: caixa menor que a dívida de curto prazo reprova (o número do
+  exemplo). → Simples e reproduzível. Reprova quem paga a dívida curta com a geração do ano, e
+  não com caixa parado; e sai sem o "muda o universo em N empresas" que `natureza_dos_cortes`
+  exige de todo corte, porque N ainda não foi contado.
+- **27b** — **o C-05 não corta nunca, só marca**, como a tendência no híbrido (63a). O risco de
+  rolagem fica com o C-03 (perfil de vencimento) e o C-01. → Nenhuma exclusão por número que
+  ninguém escolheu; perde-se o único corte do bloco que olha liquidez imediata, e o C-03 mede
+  quanto vence, não com o que se paga.
+- **27c** — **decidir depois da contagem:** o bloco C roda com o C-05 só marcando; antes de ligar
+  o corte, mede-se **quantas empresas sairiam** em 0,5 · 1,0 · 1,5 (só a contagem, sem nome e sem
+  retorno), e você escolhe vendo isso; a escolha é gravada com impressão digital antes de
+  qualquer backtest que use o bloco (P4). → Até lá vale o 27b. É o único caminho que entrega o
+  "contra o corte X, que muda o universo em N" que o YAML promete; o risco é escolher de olho
+  em quem sai, e por isso a contagem não traz nomes.
+
+**Recomendação: 27c**, porque o próprio `politica.yaml` proíbe corte sem o custo de discordar, e
+esse custo só existe contado. Na prática a escolha de hoje é entre fixar 1,0 já (27a) ou depois
+de contar (27c). Quais contas somam o caixa e a dívida curta (aplicações de curto prazo?
+arrendamento?) **não** é desta pergunta: sai do plano de contas, que o leitor as-of já lê (P-51), e
+o arrendamento é da P-58.
+**Destrava:** o corte do C-05 no bloco C (P-30); e, se você quiser, o mesmo caminho para C-01 a
+C-03.
+
+**Resposta dele, 16/10/2026, pelo formulário no claude.ai: 27c.** Até a contagem, vale o 27b (marca,
+não corta). A contagem sai do bloco C (P-30) em 0,5 · 1,0 · 1,5, só o número de empresas, sem nome
+nem retorno; ele escolhe vendo isso, e a escolha é gravada com impressão digital antes de qualquer
+backtest que use o bloco (P4). Não decidido aqui: se C-01 a C-03 seguem o mesmo caminho.
+
+---
+
+## 28 · Robô, consolidador e planejador: sem universo oficial · P-170 · **respondido em 10/10: quadro público da App Store + 28c**
+
+*Numerado 27 no PR #81; renumerado para 28 em 16/10, porque o `main` ganhou o bloco 27 (limiar do
+C-05) no mesmo dia.*
 
 A R3 sorteia marcas de cadastro oficial, e para três categorias do livro **não existe cadastro**
 (`pesquisa-marcas-rodada3-2026-09.md` §2.1, com a escada transcrita): para o `robo` e o
@@ -810,17 +870,23 @@ Kinvo, a Gorila nem a Warren); para o `planejador`, a lista da Planejar está at
 de caixa de seleção, que não se resolve nem se contorna. Sem universo, a categoria fica com 0
 marcas e, pela regra do livro (`n_minimo_de_marcas: 5`), **não tem dominante e não aciona o veto**.
 
-- **27a** — **Aceitar "sem veto" nas três.** → A R3 fecha com oito categorias medidas e três
+- **28a** — **Aceitar "sem veto" nas três.** → A R3 fecha com oito categorias medidas e três
   declaradas sem lista. Nenhuma lista nova, nenhuma escolha de quem busca.
-- **27b** — **Autorizar uma lista por busca**, com critério escrito antes (por exemplo, "os
+- **28b** — **Autorizar uma lista por busca**, com critério escrito antes (por exemplo, "os
   dez primeiros apps da categoria na App Store do Brasil"). → Dá n para as três, mas é escolha de
   quem busca, que é o que o sorteio existe para impedir; entra como **limitação declarada** e com
   o critério pré-registrado, não como universo.
-- **27c** — **Pedir a lista da Planejar a você**, que abre o portal num navegador e exporta o
-  resultado. → Só o `planejador` ganha universo; as outras duas ficam como na 27a.
+- **28c** — **Pedir a lista da Planejar a você**, que abre o portal num navegador e exporta o
+  resultado. → Só o `planejador` ganha universo; as outras duas ficam como na 28a.
 
-**Recomendação: 27a**, e a 27c só se o planejador pesar na direção vencedora. Nenhuma das três muda
+**Recomendação: 28a**, e a 28c só se o planejador pesar na direção vencedora. Nenhuma das três muda
 o que a R3 já mediu: oito categorias, nenhum dominante.
+
+**Resposta dele, 10/10/2026, pelo formulário no claude.ai:** robô e consolidador ganham universo pelo
+**ranking público de apps de Finanças da App Store do Brasil** (o feed da Apple, com data e sha256),
+com o critério de quem entra escrito antes de classificar; planejador pela **28c** (ele exporta a
+busca da Planejar uma vez). A recomendação 28a acima ("sem veto") ficou como foi escrita; a crítica
+a ela (P6) é registro da sessão A da R3.
 
 ---
 

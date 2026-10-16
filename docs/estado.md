@@ -2,9 +2,9 @@
 
 *Gerado por `tools/estado.py` de `PENDENCIAS.md`, `docs/pendencias-reserva.md` e da fila; não editar à mão. As ativas se leem **inteiras** no `PENDENCIAS.md`; a reserva, só por busca: `grep -n "^## P-NN" docs/pendencias-reserva.md`.*
 
-## Ativas: 16 de 20 (`PENDENCIAS.md`, ler inteiro)
+## Ativas: 15 de 20 (`PENDENCIAS.md`, ler inteiro)
 
-P-145 · P-53b · P-183 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 · P-180 · P-127 · P-181 · P-179 · P-162 · P-170 · P-172
+P-145 · P-53b · P-183 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 · P-180 · P-127 · P-181 · P-179 · P-162 · P-170
 
 ## Reserva: 61 (`docs/pendencias-reserva.md`, por busca)
 
@@ -13,7 +13,5 @@ P-145 · P-53b · P-183 · P-30 · P-17 · P-18 · P-58 a P-61 · P-64 · P-65 �
 
 ## Sem dono, gatilho ou classe: nenhuma
 
-## Fila do Osvaldo, sem resposta: 2
+## Fila do Osvaldo, sem resposta: 0
 
-- 23 · Onde entra a segunda esteira (P-65, 65b) no caminho de 03/10
-- 27 · Robô, consolidador e planejador: sem universo oficial · P-170 · a responder
