@@ -66,11 +66,20 @@ def _csv_latin1(cabecalho, linhas):
     return buf.getvalue().encode("latin-1")
 
 
-def _zip_sintetico(recurso, ano, demonstrativos):
-    """Bytes de um ZIP com a forma do da CVM. `demonstrativos`: {"DRE_con": [linhas]}."""
+def _idx(dt_refer, versao, dt_receb, *, cd=CD, categ="ITR"):
+    """Uma linha SINTETICA do indice do ZIP ({recurso}_cia_aberta_{ano}.csv): uma por VERSAO
+    do documento, com o DT_RECEB dela (P-183)."""
+    return {"CNPJ_CIA": "00.000.000/0001-00", "DT_REFER": dt_refer, "VERSAO": versao,
+            "DENOM_CIA": "SINTETICA S.A.", "CD_CVM": cd, "CATEG_DOC": categ,
+            "ID_DOC": f"9{versao}", "DT_RECEB": dt_receb, "LINK_DOC": ""}
+
+
+def _zip_sintetico(recurso, ano, demonstrativos, indice=()):
+    """Bytes de um ZIP com a forma do da CVM. `demonstrativos`: {"DRE_con": [linhas]};
+    `indice`: as linhas de `_idx` (vazio, como nos testes que nao olham o DT_RECEB)."""
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w") as z:
-        z.writestr(f"{recurso}_cia_aberta_{ano}.csv", _csv_latin1(CAB_INDICE, []))
+        z.writestr(f"{recurso}_cia_aberta_{ano}.csv", _csv_latin1(CAB_INDICE, list(indice)))
         for dem, linhas in demonstrativos.items():
             cab = (CAB_DMPL if dem.startswith("DMPL") else
                    CAB_BALANCO if dem[:3] in ("BPA", "BPP") else CAB_FLUXO)
@@ -91,8 +100,8 @@ class Acervo:
         self.linhas = []
         self.abertos = []
 
-    def capturar(self, quando, recurso, ano, demonstrativos, situacao="novo"):
-        byte = _zip_sintetico(recurso, ano, demonstrativos)
+    def capturar(self, quando, recurso, ano, demonstrativos, situacao="novo", indice=()):
+        byte = _zip_sintetico(recurso, ano, demonstrativos, indice)
         sha = hashlib.sha256(byte).hexdigest()
         arquivo = f"{recurso}_cia_aberta_{ano}.zip"
         self.armazem.objetos[A.chave("cvm", recurso, arquivo, sha)] = byte
@@ -347,3 +356,105 @@ def test_o_leiaute_vem_do_yaml_e_nao_do_codigo():
     assert ordem["usado"] == ULTIMO
     assert lei["enumeracoes"]["ESCALA_MOEDA"]["valores"] == {"MIL": 1000, "UNIDADE": 1}
     assert lei["colunas_de_periodo"] == ["DT_INI_EXERC", "DT_FIM_EXERC", "COLUNA_DF"]
+
+
+# ── (e) P-183: a data de conhecimento do mercado pelo DT_RECEB da versao presente ─────
+#
+# O demonstrativo traz so a ULTIMA versao de cada documento; o indice do mesmo ZIP lista
+# todas, com o DT_RECEB de cada. O modo `conhecimento="dt_receb"` le o arquivo mais recente
+# e responde so o documento cuja versao PRESENTE ja tinha sido recebida em D. Captura em
+# 24/09/2026, consultas de 2024: no modo da captura, tudo aqui seria SemCaptura.
+
+CAPTURA_TARDIA = "2026-09-24T12:00:00Z"
+
+
+def _dt_receb(acv, ate, conta="3.01"):
+    return L.valor("itr", CD, _d("2024-03-31"), conta, "DRE_con", ate,
+                   conhecimento="dt_receb", **acv.kw())
+
+
+def test_e_entre_a_1a_e_a_2a_versao_nao_devolve_a_2a(acv):
+    """Duas versoes: a 1a recebida em 10/05, a 2a em 12/08; o arquivo so traz a 2a. Entre as
+    duas datas o mercado conhecia a 1a, que o arquivo nao tem mais: a resposta e
+    ContaAusente NOMEADA, nunca o valor da 2a (look-ahead) nem o da 1a (inventado).
+
+    Mutacao: use o DT_RECEB da PRIMEIRA versao do documento (o min do indice) em vez do da
+    versao presente, e a consulta de 30/06 devolve 120."""
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [
+        _ln("2024-03-31", "3.01", "120", versao="2")]},
+        indice=[_idx("2024-03-31", "1", "2024-05-10"), _idx("2024-03-31", "2", "2024-08-12")])
+    with pytest.raises(L.ContaAusente, match=r"VERSAO 2.*2024-08-12.*VERSAO 1.*2024-05-10"):
+        _dt_receb(acv, _d("2024-06-30"))
+    r = _dt_receb(acv, _d("2024-08-12"))
+    assert (r["vl_conta"], r["versao"], r["dt_receb"]) == (120, "2", "2024-08-12")
+    assert r["conhecimento"] == "dt_receb"
+    with pytest.raises(L.SemCaptura):                 # o modo da captura, o de antes
+        L.valor("itr", CD, _d("2024-03-31"), "3.01", "DRE_con", _d("2024-08-12"), **acv.kw())
+
+
+def test_e_documento_de_uma_versao_aparece_desde_o_seu_dt_receb(acv):
+    """Uma versao so, recebida em 10/05: invisivel em 09/05, presente desde 10/05 (a data
+    inclui o dia inteiro). A mensagem diz que o documento ainda nao tinha chegado."""
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [
+        _ln("2024-03-31", "3.01", "100")]}, indice=[_idx("2024-03-31", "1", "2024-05-10")])
+    with pytest.raises(L.ContaAusente, match="recebido em 2024-05-10"):
+        _dt_receb(acv, _d("2024-05-09"))
+    assert _dt_receb(acv, _d("2024-05-10"))["vl_conta"] == 100
+
+
+def test_e_instante_so_conta_o_dia_de_brasilia_inteiro(acv):
+    """O DT_RECEB nao tem hora, e o dia e o de Brasilia (CV-03). Num instante do proprio dia
+    do recebimento nao se sabe se o documento ja tinha chegado: so conta depois de o dia
+    terminar em Brasilia. Com data, o dia inteiro conta (como no modo da captura)."""
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [
+        _ln("2024-03-31", "3.01", "100")]}, indice=[_idx("2024-03-31", "1", "2024-05-10")])
+    with pytest.raises(L.ContaAusente):
+        _dt_receb(acv, dt.datetime(2024, 5, 11, 2, 59, tzinfo=UTC))   # 23:59 de 10/05 em BRT
+    assert _dt_receb(acv, dt.datetime(2024, 5, 11, 3, 0, tzinfo=UTC))["vl_conta"] == 100
+
+
+def test_e_versao_presente_fora_do_indice_e_recusada_sem_data_inventada(acv):
+    """O DT_RECEB vem do indice do proprio ZIP. Versao presente sem linha no indice nao ganha
+    data nenhuma (nem a da captura, nem a da 1a versao): falha nomeada (P1)."""
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [
+        _ln("2024-03-31", "3.01", "120", versao="2")]},
+        indice=[_idx("2024-03-31", "1", "2024-05-10")])
+    with pytest.raises(L.DataDeConhecimentoAusente, match="VERSAO 2"):
+        _dt_receb(acv, _d("2026-01-01"))
+
+
+def test_e_linhas_no_modo_dt_receb_filtra_documento_a_documento(acv):
+    """`linhas` devolve a serie do emissor: cada DT_REFER entra pelo DT_RECEB da sua propria
+    versao presente."""
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [
+        _ln("2024-03-31", "3.01", "100"),
+        _ln("2024-06-30", "3.01", "200", ini="2024-04-01")]},
+        indice=[_idx("2024-03-31", "1", "2024-05-10"), _idx("2024-06-30", "1", "2024-08-09")])
+    ate = _d("2024-07-01")
+    rs = L.linhas("itr", 2024, CD, "DRE_con", ate, conhecimento="dt_receb", **acv.kw())
+    assert [r["dt_refer"] for r in rs] == ["2024-03-31"]
+
+
+def test_e_modo_desconhecido_e_recusado(acv):
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [_ln("2024-03-31", "3.01", "1")]})
+    with pytest.raises(ValueError, match="conhecimento"):
+        L.valor("itr", CD, _d("2024-03-31"), "3.01", "DRE_con", _d("2024-06-01"),
+                conhecimento="adivinhar", **acv.kw())
+
+
+def test_e_versao_com_duas_datas_de_recebimento_e_recusada(acv):
+    """Medido em 16/10/2026: 5 chaves (CD_CVM, DT_REFER, VERSAO) do indice real tem duas
+    DT_RECEB diferentes. Escolher a primeira seria look-ahead se o conteudo mudou; escolher a
+    ultima, inventar que nao mudou. O leitor recusa (P1)."""
+    acv.capturar(CAPTURA_TARDIA, "itr", 2024, {"DRE_con": [
+        _ln("2024-03-31", "3.01", "100")]},
+        indice=[_idx("2024-03-31", "1", "2024-05-10"), _idx("2024-03-31", "1", "2024-05-20")])
+    with pytest.raises(L.DataDeConhecimentoAmbigua, match="2024-05-10.*2024-05-20"):
+        _dt_receb(acv, _d("2024-06-30"))
+
+
+def test_o_indice_vem_do_yaml():
+    """P2: o nome do membro do indice, as colunas e o formato da data sao dado."""
+    ind = L.leiaute()["indice"]
+    assert ind["membro"] == "{recurso}_cia_aberta_{ano}.csv"
+    assert "DT_RECEB" in ind["colunas_obrigatorias"] and ind["deslocamento_utc_horas"] == -3

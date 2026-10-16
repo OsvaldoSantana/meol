@@ -13,10 +13,18 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.41.0
+  versao: 1.42.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.42.0: >-
+      16/10/2026, P-183. `limitacoes_declaradas.dt_captura_nao_e_data_de_conhecimento_do_mercado`
+      continua NAO_CONSERTADA, reescrita: o leitor as-of ganhou o modo conhecimento=dt_receb,
+      que responde 2010-2026 pelo DT_RECEB da versao presente (o indice do proprio ZIP) sem
+      look-ahead; o que sobra sao 14.955 de 3.870.622 documento-meses (0,4%) em que o mercado
+      conhecia uma versao que o demonstrativo nao traz mais (medicoes/p183_dt_receb.py). O
+      valor dessa versao esta no ENET da CVM (LINK_DOC por versao, testado em 2 documentos):
+      pendencia P-184. Nenhuma regra de decisao mudou.
     1.41.0: >-
       16/10/2026, fila 27 respondida (27c). `campos_C04_C05.C-05`: o limiar continua PENDENTE
       e o C-05 so marca; o limiar sai da contagem do bloco C em 0,5, 1,0 e 1,5 (P-30). Nenhuma
@@ -1499,7 +1507,9 @@ bloco_C_solvencia:
       fonte_do_dado: >
         DFP/ITR estruturados da CVM (balanco patrimonial ativo e passivo), lidos as-of pelo
         fase0/leitor_cvm.py (P-51 e P-53, fechadas em 10/10): o mesmo caminho de C-01 a C-03.
-        O leitor responde desde 24/09/2026, a primeira captura; o historico espera a P-183.
+        O leitor responde desde 24/09/2026 pela captura e, desde 16/10/2026, de 2010 em diante
+        pelo DT_RECEB (conhecimento="dt_receb", P-183), com 0,4% de documento-meses ocultos
+        ate a P-184.
       _registros: [aplica_hoje]   # P-81: registra o estado de hoje; a P-30 o le ao ligar o bloco
       aplica_hoje: false
       por_que_nao_hoje: >
@@ -2868,41 +2878,46 @@ limitacoes_declaradas:
 
   dt_captura_nao_e_data_de_conhecimento_do_mercado:
     tipo: NAO_CONSERTADA
+    # 16/10/2026 (P-183, politica 1.42.0): reescrita depois do modo dt_receb e da medicao. O
+    # texto de 10/10 (o leitor nao responde nada antes de 24/09/2026) esta no 1.39.0 do
+    # changelog e no git; deixou de ser verdade no modo novo.
     o_que_falta: >
-      O leitor as-of de DFP/ITR (fase0/leitor_cvm.py) responde o que ESTE SISTEMA tinha
-      capturado ate D, pela dt_captura do registro (docs/acervo/cvm/capturas.csv). Nao e a
-      data em que o mercado soube: o documento chega a CVM pelo ENET (DT_RECEB), a CVM
-      regera os ZIPs de dados abertos uma vez por semana (regeracoes observadas em
-      domingos, CV-01 e CV-02) e o cron captura no mesmo dia ou no seguinte. Duas
-      consequencias: (1) dentro da era da captura o leitor sabe DEPOIS do mercado, ate
-      cerca de 8 dias pela cadencia observada (inferido da cadencia, nao medido documento
-      a documento); (2) antes da primeira linha do registro, 24/09/2026, o leitor nao
-      responde nada -- e o backtest de 2010 a 2026 esta inteiro antes dela.
+      O leitor as-of de DFP/ITR (fase0/leitor_cvm.py) tem dois modos. O padrao,
+      conhecimento="captura", responde o que ESTE SISTEMA tinha capturado ate D (a dt_captura
+      do registro): sabe depois do mercado, ate cerca de 8 dias, e nada antes de 24/09/2026.
+      O modo conhecimento="dt_receb" (P-183) responde 2010-2026 pelo DT_RECEB da VERSAO
+      presente no demonstrativo, que o indice do proprio ZIP da a cada versao: sem look-ahead,
+      mas o demonstrativo so traz a ULTIMA versao, e entre a 1a e a ultima o mercado
+      conhecia uma versao que o arquivo nao tem mais. Medido em 16/10/2026 nas 31 versoes
+      vigentes de DFP 2010-2025 e ITR 2011-2025 (medicoes/resultados/p183_dt_receb.txt):
+      14.955 de 3.870.622 documento-meses ocultos (0,4%; n = 40.905 documentos, 2.727 com
+      ao menos um mes oculto; mediana 2 meses, maximo 97), horizonte 31/08/2026. Nesses meses
+      o modo responde ContaAusente dizendo qual versao o mercado conhecia.
     direcao_do_vies: >
-      (1) Nunca a favor de vazamento: o leitor nao sabe antes do mercado. Penaliza a
-      estrategia que reage a divulgacao, porque o sinal chega ate uma semana depois e o
-      backtest a mede pior do que ela seria. (2) Antes de 24/09/2026 nao e vies, e
-      ausencia: o leitor recusa (SemCaptura) em vez de usar a versao de hoje para o
-      passado, que seria look-ahead.
+      (1) Modo da captura: nunca a favor de vazamento; penaliza a estrategia que reage a
+      divulgacao (o sinal chega ate uma semana depois). (2) Modo dt_receb: o documento
+      reapresentado some entre a 1a versao e a ultima. Nao e vazamento; e ausencia, e cai
+      sobre quem reapresenta, que nao e uma amostra ao acaso (a reapresentacao costuma vir de
+      erro ou de exigencia da CVM). Direcao do efeito numa estrategia: desconhecida; o
+      tamanho e o de cima.
     o_que_resolveria: >
-      Uma segunda data de conhecimento, tirada da propria fonte. O indice de cada ZIP
-      ({recurso}_cia_aberta_{ano}.csv) lista TODAS as versoes de cada documento com o
-      DT_RECEB de cada uma (medido em 10/10/2026 no ITR 2024: 2.448 linhas, 2.161
-      documentos, 238 com mais de uma versao, ate a VERSAO 6), enquanto o demonstrativo
-      traz so a ultima (0 de 1.408 documentos da DRE consolidada com mais de uma VERSAO).
-      "DT_RECEB da VERSAO presente <= D" reconstroi sem look-ahead, mas esconde o
-      documento ate a data da ultima reapresentacao; quanto ele esconde e a medicao da
-      pendencia. E, para o valor de versoes ja substituidas, copia de terceiro: a Wayback
-      Machine tem o dfp_cia_aberta_2022.zip de 26/03/2026 (status 200); dfp 2015, 2020,
-      2023 e itr 2021, 2023 nao tem copia nenhuma (archive.org/wayback/available,
-      10/10/2026; o CDX, que listaria todas, nao respondeu da nuvem).
-    pendencia: P-183
+      O valor da versao substituida, da propria fonte. O indice do ZIP traz um LINK_DOC por
+      VERSAO, com o DT_RECEB de cada uma (o que o modo dt_receb ja usa), e o ENET da CVM serve
+      a versao antiga pelo https: em 16/10/2026, a VERSAO 1 substituida do DFP 2015 do CD_CVM
+      1023 e a do ITR 31/03/2024 do CD_CVM 14206 vieram com o XML estruturado inteiro
+      (NumeroConta, DescricaoConta1, ValorConta1..12; n = 2 documentos). O pacote do ENET e
+      cortado no PDF (curl 56, conexao reiniciada perto de 12-16 MB), que vem depois do XML.
+      Reserva: a Wayback Machine (o dfp 2022 de 26/03/2026 tem copia; o CDX nao respondeu da
+      nuvem).
+    pendencia: P-184
     quando_deixa_de_importar: >
-      (1) Para decisao tomada dias depois da divulgacao (o aporte mensal), o atraso de ate
-      uma semana nao muda o que se sabe. (2) Para o backtest anterior a 24/09/2026, nunca:
-      ali a pergunta precisa da segunda data.
+      (1) Para decisao tomada dias depois da divulgacao (o aporte mensal), o atraso do modo da
+      captura nao muda o que se sabe. (2) Para o backtest, quando o leitor do ENET devolver o
+      valor da versao substituida nos 14.955 documento-meses; ate la, quando a estrategia
+      tolerar 0,4% de documento-meses ausentes concentrados em quem reapresenta.
     por_que_nao_e_fisica: >
-      O mundo fornece a data de conhecimento (DT_RECEB por versao, no proprio ZIP) e, em
-      parte, as versoes antigas (Wayback). Fisico e so o residuo: o valor de versao
-      substituida que ninguem guardou (CV-01).
-    fonte: "docs/decisoes/2026-10-10-leitor-asof-cvm.md; docs/fontes/pesquisa-bases-e-apis-2026-09.md secao 3, armadilha 1"
+      O mundo fornece as duas coisas: a data de conhecimento (DT_RECEB por versao, no proprio
+      ZIP, ja usada) e o valor da versao substituida (o ENET da propria CVM, pelo LINK_DOC; a
+      Wayback em parte). Fisico seria a versao que nem o ENET guarda, e nenhuma foi achada
+      assim nos 2 documentos testados.
+    fonte: "docs/decisoes/2026-10-10-leitor-asof-cvm.md; docs/decisoes/2026-10-16-leitor-dt-receb.md; medicoes/resultados/p183_dt_receb.txt"

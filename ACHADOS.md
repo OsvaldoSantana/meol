@@ -3455,3 +3455,48 @@ EUA); errada era a pergunta que se achou que ela respondia (5-B, cabeçalho).
 
 **O que muda.** As 20 estão como `site_inacessivel` com os três degraus transcritos (limitação 15 da
 pesquisa). Contornar verificação de robô continua proibido, e o instrumento não muda.
+
+## GIT-04 · O #86 foi mesclado num ramo que já tinha entrado no `main`, e ficou fora dele
+
+*16/10/2026. Retratação da sessão local que abriu o #86, achada por ela mesma na sessão seguinte.*
+
+**O que se mediu.** O #86 nasceu do ramo do #81 e foi aberto **com base nele**, para não arrastar
+o diff do #81. O #81 entrou no `main` às 10:13:50 (`0dabb14`); o #86 entrou **no ramo do #81** às
+10:14:00 (`954cc53`), dez segundos depois, antes de o GitHub trocar a base para o `main`.
+`git log origin/main..origin/claude/leitor-asof-dfp-itr-fh1lzm`: **7 commits** fora do `main`, que
+são o #86 inteiro (a regra do degrau 4 no CLAUDE.md §5-B.18, a guarda `auditoria/test_degrau4.py`,
+o workflow `captura_r3.yml`, o Playwright de volta a 1.56.0, as 89 linhas da R3 e os cinco
+achados da família EX).
+
+**A consequência em termos do projeto.** O `main` não tem a regra nem a guarda que o PR dizia
+entregar, e o PR aparece como mesclado: quem confere pelo GitHub vê "feito". A GIT-01 acusa o
+ramo fora do CI, mas só numa sessão que rode a suíte de `auditoria` num clone atualizado.
+
+**O que muda.** PR empilhado só com a base trocada para o `main` antes do merge, ou sem empilhar:
+a sessão abre o PR contra o `main` e diz no corpo de qual PR depende. O conserto deste caso é um PR
+do ramo `claude/leitor-asof-dfp-itr-fh1lzm` para o `main`, que só leva os 7 commits.
+
+## CV-08 · A CVM guarda as versões substituídas: o ENET serve cada uma pelo `LINK_DOC` do índice
+
+*16/10/2026. Achado da sessão local na P-183. Retrata a frase do desenho de 10/10 (#80): "físico,
+só o resíduo: o valor de versão substituída que ninguém guardou (CV-01)".*
+
+**O que se mediu.** O índice de cada ZIP dá um `LINK_DOC` por versão
+(`rad.cvm.gov.br/ENETCONSULTA/frmDownloadDocumento.aspx?...NumeroSequencialDocumento=<ID_DOC>`).
+Pelo `http`, conexão reiniciada; pelo **`https`, 200**. Para a VERSAO 1 substituída do DFP 2015 do
+CD_CVM 1023 (recebida em 25/02/2016; a presente é a 3, de 02/06/2016) e para a VERSAO 1 do ITR
+31/03/2024 do CD_CVM 14206 (20/07/2024; a presente é a 2, de 22/11/2024), o pacote trouxe o
+documento do ENET **com o XML estruturado inteiro**: `InfoFinaDFin.xml` com `NumeroConta`,
+`DescricaoConta1` e `ValorConta1..12`. O pacote é cortado no PDF (curl 56 perto de 12–16 MB, em
+tamanhos diferentes a cada tentativa, e o servidor ignora `Range`), mas o PDF vem depois do XML, e
+o XML se lê pelos cabeçalhos locais do ZIP. **n = 2 documentos.**
+
+**A consequência em termos do projeto.** A limitação da data de conhecimento ia virar `FISICA`
+pelo resíduo, e a P-183 dizia que o caminho do resíduo era a Wayback. Pela §5-B.16, um limite que
+a própria fonte resolve é `NAO_CONSERTADA`, e o caminho bom é a fonte primária, não uma cópia de
+terceiro que tem o DFP 2022 e não tem o 2015, 2020, 2023 nem o ITR 2021 e 2023. A medição de 10/10
+estava certa (a Wayback tem pouco); a pergunta que se achou que ela respondia ("só sobra a
+Wayback") não tinha sido feita à fonte.
+
+**O que muda.** A limitação fica `NAO_CONSERTADA` com o ENET em `o_que_resolveria` e a pendência
+**P-184**. Nenhuma guarda nova: o n = 2 não sustenta regra, sustenta o caminho.
