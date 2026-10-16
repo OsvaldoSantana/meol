@@ -327,11 +327,16 @@ que só imprime achados é opinião com sotaque de máquina.
   degrau tentado fica transcrito com o erro: **(1)** outra ferramenta (curl no terminal,
   `git clone`, a API em vez da página, outro formato do mesmo dado); **(2)** outra cópia
   (Wayback Machine, espelho oficial, portal de dados abertos); **(3)** outra fonte primária
-  com o mesmo dado; **(4)** outro executor (sessão local, workflow `medir/`, script na máquina
-  dele); **(5)** só então `NAO_CONFIRMADO`, com os degraus na linha (`escada:`) e uma `P-nnn`
-  de conserto. Motivo: a 13 e a 17 se cumpriam com "tentei, deu 403, parei"; em 27/09, três
-  "bloqueados" caíram no degrau 1 (skill `bastter-contorno`; guarda
-  `auditoria/test_escada_contorno.py`).
+  com o mesmo dado; **(4)** outro executor, **nesta ordem**: **(4a)** o workflow de captura do
+  repositório, no servidor do GitHub (`captura_r3.yml`; `medir/` quando é medição); **(4b)** o
+  runner `br-sp`, quando existir; **(4c)** só então a sessão local. "Aguarda a máquina dele"
+  só se escreve com 4a e 4b transcritos; **(5)** só então `NAO_CONFIRMADO`, com os degraus na
+  linha (`escada:`) e uma `P-nnn` de conserto. Motivo: a 13 e a 17 se cumpriam com "tentei, deu
+  403, parei"; em 27/09, três "bloqueados" caíram no degrau 1 (skill `bastter-contorno`; guarda
+  `auditoria/test_escada_contorno.py`). **E antes de pular uma marca por acesso, confira se o
+  site é mesmo a unidade dela** (ae-a: marca com app se lê pela loja). Motivo: em 16/10, 83
+  linhas da R3 estavam paradas em `AGUARDA DEGRAU 4`, à espera da máquina dele, e a maioria
+  tinha app (EX-01, EX-02; guarda `auditoria/test_degrau4.py`).
 
 A tabela dos onze erros de 11 a 13/09 e a narrativa de cada regra estão no histórico (§13).
 

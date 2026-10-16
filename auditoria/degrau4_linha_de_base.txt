@@ -1,0 +1,4 @@
+# Linha de base da guarda do degrau 4 (auditoria/degrau4.py): itens da secao "Ao voltar ao
+# desktop" do PENDENCIAS.md anteriores a regra de 16/10/2026. Formato: chave | motivo. A chave e o
+# sha256[:12] do CONTEUDO do item: editar o item o tira daqui. A base so encolhe.
+bc6d00959c13 | P-05 e P-169: o item e anterior a regra de 16/10 (4a e 4b nao foram tentados para o BOVV11 e os 11 bancos da m-B); sai daqui quando a proxima sessao que tocar numa das duas subir 4a e 4b e reescrever o item
