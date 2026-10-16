@@ -202,6 +202,12 @@ loja:
   # lugar dela, e a ultima classificada da categoria que fica alem da 10a sai como
   # excedente_da_categoria, com o motivo dizendo qual linha a deslocou. Vale para toda categoria.
   amostra: "as 10 primeiras classificadas na ordem do sorteio; a que sai leva excedente_da_categoria"
+  # 16/10/2026, ANTES da primeira classificacao da v3: a marca de OUTRO universo que a precedencia
+  # do livro leva a uma categoria (Azimut, 4UM e Rio Bravo da corretora e o Andbank dos bancos em
+  # gestora_e_private, o PicPay dos bancos em pagamentos, o Neon da corretora em banco_digital) nao
+  # tem lugar na ordem do sorteio daquela categoria. Ate 11/10 ela entrava se a categoria ainda nao
+  # tivesse 10 na hora da visita, e a gestora ficou com 14. Com a amostra refeita, a regra e uma so:
+  de_outro_universo: "primeiro as classificadas do universo da propria categoria, pela ordem do sorteio dele, ate 10; se nao chegar a 10, completam as de outros universos, na ordem dos universos neste plano e, dentro de cada um, a do sorteio; a que fica alem da 10a leva excedente_da_categoria, com o motivo dizendo qual"
 
 # O UNIVERSO DE ROBO E CONSOLIDADOR (fila 28, resposta dele de 10/10/2026): o quadro publico de
 # apps de Financas da App Store do Brasil, com data e sha256. O criterio de quem entra em cada
