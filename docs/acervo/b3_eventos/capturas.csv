@@ -277,3 +277,7 @@ dt_captura;recurso;arquivo;url;http_last_modified;etag;sha256;bytes;caminho;situ
 2026-10-12T19:08:13Z;eventos_suplemento;RADL.json;;;;ba5789e42dbb63f7a0e8f75d1f1f887b1753004f81969d0ed6ab39355840c511;2533;b3/eventos_suplemento/RADL.json/ba5789e42dbb63f7a0e8f75d1f1f887b1753004f81969d0ed6ab39355840c511.json;atualizado;
 2026-10-12T19:08:16Z;indice_carteira;IBOV.json;;;;36b4518a1a286431a9873b7ce79b2b590f36d7a7a8aa9c5a3dbd9c1d48ed5dc5;10194;b3/indice_carteira/IBOV.json/36b4518a1a286431a9873b7ce79b2b590f36d7a7a8aa9c5a3dbd9c1d48ed5dc5.json;atualizado;
 2026-10-12T19:08:28Z;rodada;IBOV.rodada;;;;;;;ressalva;eventos: emissora vazia, fora do formato ou sem evento (ver o log do coletor)
+2026-10-19T16:33:53Z;eventos_suplemento;BBDC.json;;;;19756fade276ab6eca1a15a4d56ba70ca75929d209017628bb22df10ef33b485;11639;b3/eventos_suplemento/BBDC.json/19756fade276ab6eca1a15a4d56ba70ca75929d209017628bb22df10ef33b485.json;atualizado;
+2026-10-19T16:33:58Z;eventos_suplemento;IGTI.json;;;;a8600da8bb347b2b2d162ebe611d4aaadf4e05ad0cc3f56d5adb3f6f184675d6;4216;b3/eventos_suplemento/IGTI.json/a8600da8bb347b2b2d162ebe611d4aaadf4e05ad0cc3f56d5adb3f6f184675d6.json;atualizado;
+2026-10-19T16:34:03Z;indice_carteira;IBOV.json;;;;7ab448730b80438655e99b85db01c38a00c3d3220a94febec6e01961f3171056;10194;b3/indice_carteira/IBOV.json/7ab448730b80438655e99b85db01c38a00c3d3220a94febec6e01961f3171056.json;atualizado;
+2026-10-19T16:34:20Z;rodada;IBOV.rodada;;;;;;;ressalva;eventos: emissora vazia, fora do formato ou sem evento (ver o log do coletor)
