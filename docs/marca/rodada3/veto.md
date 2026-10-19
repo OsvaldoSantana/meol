@@ -16,4 +16,4 @@
 | robo | 1 (1) | sem dominante | - | - | - | - | - | - |
 | planejador | 0 (0) | sem dominante | - | - | - | - | - | - |
 
-**Arquivamento:** 61 linha(s) classificada(s) com `PENDENTE_LOCAL`. A R3 so fecha com zero, ou com cada uma levando a escada e o proximo executor (tools/r3_arquivar.py pelo degrau 4 em ordem, 4a o workflow arquivar_r3.yml no servidor do GitHub; CLAUDE.md 5-B.18).
+**Arquivamento:** 7 linha(s) classificada(s) com `PENDENTE_LOCAL`. A R3 so fecha com zero, ou com cada uma levando a escada e o proximo executor (tools/r3_arquivar.py pelo degrau 4 em ordem, 4a o workflow arquivar_r3.yml no servidor do GitHub; CLAUDE.md 5-B.18).
