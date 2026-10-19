@@ -273,8 +273,12 @@ saíram pela loja (ae-a: 60 das 89 marcas tinham app) e pelo degrau 4 em ordem (
 GitHub, 4b o `br-sp`, que não existe, 4c esta sessão); **nenhuma linha espera a máquina dele**
 (guarda `auditoria/test_degrau4.py`). A amostra se refez pela ordem do sorteio (plano v3): 10 em
 cada categoria de cadastro, consolidador 5 e robô 1 pelo quadro da loja (fila 28), e **nenhum
-código dominante** em categoria nenhuma (`rodada3/veto.md`). Falta o Wayback das 86 classificadas
-(`tools/r3_arquivar.py`; ver "Ao voltar ao desktop") e o planejador (fila 28c, dele). Só página
+código dominante** em categoria nenhuma (`rodada3/veto.md`). ~~Falta o Wayback das 86 classificadas~~
+**19/10/2026: 80 de 86 com link do Wayback**, pelo degrau 4 em ordem (`arquivar_r3.yml` no servidor
+do GitHub: 25 no run 38944870464 e 1 no 39246785988; esta sessão, 4c: 54). As 6 que faltam (WCIA,
+Agibank, Desmistificando, C6, Crefisa, Rendimento) recusaram do lado do Save Page Now (conexão
+recusada, 520, 429), não do site, e cada uma leva a escada e o próximo executor (uma nova rodada
+do 4c fora do limite de frequência). Falta também o planejador (fila 28c, dele). Só página
 pública; nada de sessão logada (§5-A.7); recusa sobe a escada (§5-B.18). **Fecha com:** o
 arquivamento, uma linha por marca (categoria, captura com fonte e data, medidas do `classificar()`)
 e o `veto()` aplicado à direção vencedora. **E, no mesmo commit do fechamento,** sai o
@@ -293,9 +297,8 @@ ativas.*
 1. **P-145, depois do item 4:** `py -3.11 medicoes/p145_ponte_2013_2019.py` e o PR com os
    inventários que o envio gravou. É o passo 1 do caminho crítico.
 2. ~~**P-170, as 83 linhas paradas da R3**~~ (16/10: resolvidas pela loja e pela escada em
-   ordem; §3.3 da pesquisa). **O que sobra da P-170 é o Wayback das 86** (`tools/r3_arquivar.py`):
-   pela ordem nova, 4a) o passo de arquivar no `captura_r3.yml` (não tentado: o workflow só
-   captura hoje); 4b) `br-sp`: não existe; só depois a sessão local. As capturas das 85 de 10 e
+   ordem; §3.3 da pesquisa). ~~**O Wayback das 86**~~ (19/10: 80 de 86 pelo `arquivar_r3.yml` e
+   pelo 4c; as 6 que faltam levam a escada e o próximo executor no CSV). As capturas das 85 de 10 e
    11/10 (12 MB, enviadas por arquivo em 11/10) continuam sem descompactar nesta máquina; as de
    16/10 estão em `data/r3/capturas/` do worktree `Bastter-p170-appstore` (fora do git).
 3. **P-05 e P-169, o degrau 4 da escada:** `curl` de IP residencial no site do BOVV11 e nas
