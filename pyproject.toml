@@ -84,7 +84,7 @@ dev = [
 # P-40. Fora da impressao do ambiente de proposito — ver o bloco de comentario
 # no fim deste arquivo. `ambiente.declarado()` le apenas `dependencies` e `dev`.
 lint = [
-  "ruff==0.16.10",
+  "ruff==0.17.1",
   "mypy==2.4.0",
   "types-PyYAML",
 ]
