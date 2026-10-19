@@ -393,8 +393,13 @@ pendente abrir e for classificada, a 10ª sai e ganha a linha `excedente_da_cate
    visitas delas (11/10). **Robô, consolidador e planejador: sem universo (§2.1); a decisão é
    dele (fila, bloco 28).**
 3b. ~~O degrau 4: as 83 linhas `AGUARDA DEGRAU 4`~~ (16/10, §3.3: pela loja e pelo degrau 4 em
-   ordem; nenhuma espera a máquina dele). **O Wayback das 86** (`tools/r3_arquivar.py`) continua:
-   é publicar no archive.org, e a ordem do degrau 4 vale para ele também (4a primeiro).
+   ordem; nenhuma espera a máquina dele). ~~**O Wayback das 86**~~ (19/10/2026): **80 de 86
+   com link**. 4a, o `arquivar_r3.yml` no servidor do GitHub: 25 de 86 no run 38944870464
+   (Phoenix, EUA; 61 recusas do `web.archive.org`, conexão recusada ou handshake expirado) e 1 de 7
+   no 39246785988 (San Antonio). 4b, o `br-sp`: não existe. 4c, a sessão local (Campinas): 54 de
+   61. As 6 que faltam recusaram do lado do Save Page Now (520, tempo esgotado, conexão
+   recusada; 429 depois da rodada), não do site; cada uma leva a escada inteira e o próximo
+   executor na coluna `escada` do CSV.
 3c. Robô e consolidador: ~~sem universo~~ (16/10, §3.3, item 12). **Planejador: fila 28c, dele.**
 4. As não auditadas das rodadas 1 e 2, e a seção fora do Brasil.
 5. A tabela do veto completa **antes do fim da janela de 21 dias** do teste.
