@@ -117,6 +117,73 @@ def test_5B16_a_leitura_das_pendencias_ve_aberta_e_fechada():
     assert p.get("P-57") is False, "P-57 fechou em 25/09"
 
 
+# ── a serie ajustada do COTAHIST (P-180) ──────────────────────────────────────
+
+# P-180, decisao dele de 03/10/2026 (opcao A da P-115): o C-02 saiu NAO_CONFIRMADA em
+# 2016-2020, e a serie ajustada so e consumida por testes e auditoria (nenhuma conta a usa
+# como confirmada). O que faltava era DIZER isso onde o leitor do YAML confia por construcao.
+# O formato (tipo, pendencia aberta, o_que_resolveria) ja e do portao acima; aqui entra so o
+# que ele nao cobre: a chave existir, apontar para a P-127 e trazer os quatro campos.
+SERIE_AJUSTADA = "serie_ajustada_do_cotahist_nao_confirmada"
+CAMPOS_SERIE_AJUSTADA = ("o_que_falta", "direcao_do_vies", "o_que_resolveria", "fonte")
+
+
+def defeitos_serie_ajustada(lims):
+    """[o que falta] na entrada da serie ajustada; vazio e o unico resultado aceito."""
+    lim = lims.get(SERIE_AJUSTADA)
+    if not isinstance(lim, dict):
+        return [f"sem a chave `{SERIE_AJUSTADA}` em limitacoes_declaradas"]
+    falta = []
+    if lim.get("tipo") != "NAO_CONSERTADA":
+        falta.append(f"tipo {lim.get('tipo')!r} (esperado NAO_CONSERTADA)")
+    if lim.get("pendencia") != "P-127":
+        falta.append(f"pendencia {lim.get('pendencia')!r} (esperada P-127)")
+    for campo in CAMPOS_SERIE_AJUSTADA:
+        if not str(lim.get(campo) or "").strip():
+            falta.append(f"sem `{campo}`")
+    return falta
+
+
+@pytest.mark.repositorio   # 146b: le o repositorio, a mutacao exclui
+def test_P180_a_serie_ajustada_do_cotahist_e_limitacao_declarada():
+    assert defeitos_serie_ajustada(_limitacoes()) == []
+
+
+def _serie_boa():
+    return {SERIE_AJUSTADA: {"tipo": "NAO_CONSERTADA", "pendencia": "P-127",
+                             **{c: "texto" for c in CAMPOS_SERIE_AJUSTADA}}}
+
+
+def test_mutacao_P180_sem_a_chave_e_ACUSADA():
+    assert defeitos_serie_ajustada({}) == [
+        f"sem a chave `{SERIE_AJUSTADA}` em limitacoes_declaradas"]
+
+
+def test_mutacao_P180_pendencia_errada_e_ACUSADA():
+    lims = _serie_boa()
+    lims[SERIE_AJUSTADA]["pendencia"] = "P-115"
+    assert any("pendencia" in f for f in defeitos_serie_ajustada(lims))
+
+
+def test_mutacao_P180_tipo_FISICA_e_ACUSADO():
+    """A serie e consertavel (controle independente, P-127): chamar de FISICA encerraria a
+    investigacao, que e o que a regra 5-B.16 proibe."""
+    lims = _serie_boa()
+    lims[SERIE_AJUSTADA]["tipo"] = "FISICA"
+    assert any("tipo" in f for f in defeitos_serie_ajustada(lims))
+
+
+@pytest.mark.parametrize("campo", CAMPOS_SERIE_AJUSTADA)
+def test_mutacao_P180_campo_vazio_e_ACUSADO(campo):
+    lims = _serie_boa()
+    lims[SERIE_AJUSTADA][campo] = "  "
+    assert defeitos_serie_ajustada(lims) == [f"sem `{campo}`"]
+
+
+def test_a_entrada_bem_formada_da_serie_ajustada_passa():
+    assert defeitos_serie_ajustada(_serie_boa()) == []
+
+
 # ── prova por mutacao (regra 4 da 5-B) ────────────────────────────────────────
 
 # Universo de pendencias da mutacao: codigos REAIS (o `achados_ancorados` le este

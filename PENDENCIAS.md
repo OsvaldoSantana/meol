@@ -152,20 +152,6 @@ de condição. O C-04 (moeda da dívida) espera por ela: `politica.yaml →
 bloco_C_solvencia.campos_C04_C05.C-04`, `pendencia: P-65`. **Fecha com:** o formato medido e a
 primeira extração com procedência, na posição que ele deu (23a).
 
-## P-180 · A série ajustada do COTAHIST vira limitação declarada
-
-**Dono:** Claude Code · **Gatilho:** a próxima sessão de motor, antes de qualquer conta que use
-a série · **Classe:** `BLOQUEIA_O_SISTEMA`
-
-Decisão dele, 03/10/2026, depois da P-115 `NAO_CONFIRMADA` (opção A). A série segue no acervo e
-no código; o que muda é o status: nenhuma conta a usa como confirmada. A entrada vai para
-`politica.yaml → limitacoes_declaradas`, pelo protocolo de mudança (versão e changelog). O que
-ela diz: o C-02 não confirmou o ajuste em 2016–2020 (K2 e K3 sem poder; PO-01, PO-02); a direção
-do viés é desconhecida; o que resolveria é um controle independente (a P-127). Os consertos de
-série que estão na reserva (P-93, P-94, P-101, P-112) ficam lá, ligados a ela.
-**Fecha com:** a entrada no YAML, `NAO_CONSERTADA` com `pendencia: P-127`, e o
-`test_limitacoes_tipo.py` verde.
-
 ## P-127 · Oráculo externo do preço ajustado — em paralelo, sem bloquear
 
 **Dono:** Claude (pesquisa e pré-registro) · Osvaldo (fornecedor, se tiver custo) · **Gatilho:**
