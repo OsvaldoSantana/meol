@@ -495,8 +495,9 @@ REGIME_DAS_SECOES = {
                                      "provou; quem le e fase0/manifesto_cvm.py"),
     "cadencias_de_captura": (OPERACIONAL, "P-150: o dia em que uma captura sem HEAD pede "
                                           "a fonte; quem le e fase0/capturar_eventos_b3.py"),
-    "bloco_C_solvencia":            (ESPECIFICACAO, "P-30: especificado em 05/09, "
-                                     "nenhum modulo aplica"),
+    "bloco_C_solvencia":            (ESPECIFICACAO, "P-30: especificado em 05/09; desde 24/10 "
+                                     "alocacao/bloco_c.py o le e conta, mas nenhum modulo do "
+                                     "motor o aplica (parte 2 da P-30)"),
     "regime_instituicao_financeira":(ESPECIFICACAO, "P-31: especificado em 05/09, "
                                      "nenhum modulo aplica"),
 }
@@ -587,7 +588,13 @@ def _modulos_do_motor():
                   if f.endswith(".py") and not f.startswith(("test_", "demo_")))
 
 
-def _fontes_do_motor():
+# Modulos que LEEM uma secao ESPECIFICACAO sem ligar o comportamento ao motor: o que a guarda
+# da especificacao procura e a secao aplicada no alocar()/motor_aporte(), nao um leitor solto.
+# bloco_c.py (P-30 parte 1, 24/10/2026); test_bloco_c.py prova que nenhum modulo o importa.
+NAO_LIGADOS_AO_MOTOR = ("bloco_c.py",)
+
+
+def _fontes_do_motor(excluir=()):
     """Os modulos do motor e, desde 24/09, os do fase0: a secao `armazem` e politica
     lida pela captura, nao pelo alocador. Deixar o fase0 fora faria a guarda acusar como
     morta uma chave que a captura le antes de cada envio -- o E-05 (varrer metade do
@@ -596,7 +603,7 @@ def _fontes_do_motor():
     extras = sorted(os.path.join(fase0, f) for f in os.listdir(fase0)
                     if f.endswith(".py") and not f.startswith("test_"))
     return "".join(open(os.path.join(AQUI, m), encoding="utf-8").read()
-                   for m in _modulos_do_motor()) + \
+                   for m in _modulos_do_motor() if m not in excluir) + \
         "".join(open(p, encoding="utf-8").read() for p in extras)
 
 
@@ -675,7 +682,7 @@ def test_P28_a_divida_de_cobertura_nao_apodrece():
 def test_P28_especificacao_e_uma_promessa_com_numero():
     """ESPECIFICACAO e a categoria perigosa: e onde eu ponho o que escrevi e nao liguei.
     Sem numero de pendencia, ela e so um jeito educado de nao implementar."""
-    fontes = _fontes_do_motor()
+    fontes = _fontes_do_motor(excluir=NAO_LIGADOS_AO_MOTOR)
     for secao, (regime, motivo) in REGIME_DAS_SECOES.items():
         if regime != ESPECIFICACAO: continue
         assert re.search(r"P-\d+", motivo), f"{secao}: ESPECIFICACAO sem pendencia no motivo"
@@ -1548,9 +1555,11 @@ def test_bloco_C_recusa_instituicao_financeira_em_vez_de_calcular():
     assert b["status"] == "REGIME_ESPECIFICADO"
     r = b["recusa_em_vez_de_calcular"]
     assert "NAO produz numero" in r["regra"]
-    # a identificacao ainda nao e automatica, e isso precisa estar declarado
-    assert r["como_identificar"]["status"] == "PARCIAL"
-    assert r["como_identificar"]["bloqueia"]
+    # P-18 (24/10/2026): a enumeracao do SETOR_ATIV foi contada no dado real. Era PARCIAL com
+    # `bloqueia`; agora e OBSERVADO, com a lista, a procedencia e o sha256 em `setor_ativ`.
+    assert r["como_identificar"]["status"] == "OBSERVADO"
+    assert "bloqueia" not in r["como_identificar"]
+    assert b["setor_ativ"]["status"] == "OBSERVADO" and b["setor_ativ"]["sha256"]
 
 def test_bloco_C_declara_que_nenhum_corte_tem_ancora_legal():
     """A diferenca frente ao regime de banco, onde Basileia tem piso legal. Se
@@ -2096,6 +2105,9 @@ def test_P15_toda_dependencia_de_terceiro_esta_declarada():
     adivinhado."""
     D = ambiente.declarado()
     locais = {os.path.splitext(f)[0] for f in os.listdir(AQUI) if f.endswith(".py")}
+    # bloco_c.py importa o leitor as-of do fase0 (P-30): modulo do repositorio, nao dependencia
+    fase0 = os.path.join(os.path.dirname(AQUI), "fase0")
+    locais |= {os.path.splitext(f)[0] for f in os.listdir(fase0) if f.endswith(".py")}
     padrao = set(sys.stdlib_module_names)
     usados = set()
     for f in sorted(x for x in os.listdir(AQUI) if x.endswith(".py")):

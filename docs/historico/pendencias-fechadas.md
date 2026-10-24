@@ -2878,12 +2878,62 @@ backtest lê a saída do `fase0/ajustar.py`; os consumidores são `auditoria/c02
 `fase0/` e a configuração de mutação do `pyproject.toml`. Nenhum comportamento mudou. P-93, P-94,
 P-101 e P-112 ficam na reserva, ligadas a esta entrada, sem mudar de classe.
 
+## ~~P-64~~ · Portão × dossiê — a camada de desenho que o bloco C precisa — **FECHADA em 24/10/2026**
+
+**Dono:** Claude · **Gatilho:** antes de implementar qualquer regime (P-58) · **Classe:**
+`BLOQUEIA_O_SISTEMA`
+
+O portão é automático, sobre todo o universo, e só com dado estruturado. O dossiê é leitura
+guiada, empresa a empresa, só na lista curta. Onde o dado não existe (incorporação, X-01), o
+portão só diz *"regime X, exige dossiê; até lá fica no universo sem peso deste bloco"*. Vale para
+todo regime. Os cortes de distrato (P-66, na reserva) entram junto. **Fecha com:** a saída
+`EXIGE_DOSSIE` no portão, com o motivo, e um teste que prova que ela não tira ninguém do universo.
+
+**FECHADA em 24/10/2026.** O desenho das saídas do portão é do arquiteto (Claude), com as
+alternativas rejeitadas, em `docs/decisoes/2026-10-24-saidas-do-portao-bloco-c.md`: `APROVA`,
+`REPROVA`, `MARCA`, `RECUSA_REGIME`, `EXIGE_DOSSIE`, e o invariante de que só `REPROVA` tira
+empresa do universo (`politica.yaml → bloco_C_solvencia.saidas_do_portao`). Evidência:
+`alocacao/test_bloco_c.py`, que falhou no `main` (`ModuleNotFoundError: bloco_c`, `f0f97f6`):
+`test_b_EXIGE_DOSSIE_marca_e_recusa_ficam_no_universo` prova que `EXIGE_DOSSIE`, `MARCA` e
+`RECUSA_REGIME` não tiram ninguém; `test_a_*` prova que banco é recusado sem número e sem abrir o
+demonstrativo; mutação 4 de 4 (limiar pendente reprovando, leitor depois da data, universo
+tirando `MARCA`, banco calculando). Os cortes de distrato (P-66, reserva) e os regimes de N saídas
+(P-58 a P-61) seguem fora: aqui só existem as saídas que eles vão usar.
+
+
+## ~~P-18~~ · `SETOR_ATIV` da CVM nunca foi contado — **FECHADA em 24/10/2026**
+
+**Dono:** Claude Code (sessão local, ou `medir/`) · **Gatilho:** antes de codificar a separação
+de instituição financeira no bloco C · **Classe:** `BLOQUEIA_O_SISTEMA` *(campos dados na
+triagem de 03/10/2026, P-171)*
+
+O bloco C manda banco para regime próprio, e a identificação sai do `SETOR_ATIV` do cadastro.
+Só dois valores foram vistos; a enumeração nunca foi contada no dado real, como `ORDEM_EXERC` e
+`ESCALA_MOEDA` foram. **Fecha com:** a enumeração `OBSERVADO` no YAML, e o leitor falhando
+ruidosamente fora dela (P1).
+
+**FECHADA em 24/10/2026.** A enumeração foi contada no dado real, no degrau 1 da escada (5-B.18):
+`curl` de `https://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv`, HTTP 200,
+1.494.003 bytes, sha256 `39ac7027…556873`, o mesmo byte do registro do acervo (captura de
+2026-10-24T13:20:32Z). **2.678 linhas, 71 valores distintos de `SETOR_ATIV`** (6 linhas com o
+campo vazio), 2.567 `CD_CVM`, 107 deles em mais de uma linha e nenhum com setores diferentes. Estava
+gravada no YAML como "só dois exemplos vistos". A lista, com a contagem de cada valor, a data, a
+URL e o sha256, está em `politica.yaml → bloco_C_solvencia.setor_ativ` (`OBSERVADO`), e o leitor
+(`alocacao/bloco_c.py::ler_cadastro`) falha fora dela, com teste e mutação
+(`test_p18_*`). Transcrição e limites: `docs/auditoria/P18-SETOR-ATIV.md`. **O que não fechou
+sozinho:** quais valores são "instituição financeira ou seguradora" é leitura, e as listas
+`financeira` (2 valores, 139 linhas) e `a_decidir` (14 valores, 276 linhas) são escolha de Claude;
+o regime delas é a P-31 (reserva).
+
+
 ---
 
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-64** | portão × dossiê: a saída `EXIGE_DOSSIE` e o desenho das saídas | 24/10 — cinco saídas e o invariante "só REPROVA tira" no YAML; `test_bloco_c.py` falhou no `main` e passa; mutação 4 de 4; decisão do arquiteto em `docs/decisoes/2026-10-24-saidas-do-portao-bloco-c.md` |
+| **P-18** | `SETOR_ATIV` da CVM nunca foi contado | 24/10 — 71 valores em 2.678 linhas (sha256 `39ac7027…`), `OBSERVADO` em `setor_ativ`, leitor falhando fora da lista; quais são financeiros é escolha de Claude (P-31) |
 | **P-180** | a série ajustada do COTAHIST vira limitação declarada | 24/10 — `limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `NAO_CONSERTADA`, `pendencia: P-127`; política 1.43.0; teste `test_P180_…` falhou no `main` e passa; nenhum consumidor no motor nem no backtest |
 | **P-183** | a data de conhecimento do mercado: `DT_RECEB` por versão | 16/10 — modo `conhecimento="dt_receb"` no leitor, testes (e) com mutação; 14.955 de 3.870.622 documento-meses ocultos (0,4%); o resíduo é a P-184 |
 | **P-172** | o `PLANO.md` na abertura volta à decisão em 17/10 | 16/10 — 22a confirmada por ele; abertura 23.009 tokens; regra de volta aplicada ao `registro` (#71) |

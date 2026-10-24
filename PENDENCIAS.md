@@ -75,12 +75,24 @@ limitação passando a RESOLVIDA, ou a FISICA só pelas versões que nem o ENET 
 **Dono:** Claude Code · **Gatilho:** a bitemporalidade pronta (P-53, fechada em 10/10: o leitor responde desde 24/09/2026); para o histórico, o modo `dt_receb` (P-183, fechada em 16/10), com 0,4% de documento-meses ocultos até a P-184 · **Classe:**
 `BLOQUEIA_O_SISTEMA` *(campos dados na triagem de 03/10/2026, P-171)*
 
-`bloco_C_solvencia` tem 48 chaves escritas em 05/09, e nenhum módulo as aplica: os testes
-conferem o texto, não o comportamento. É o primeiro portão que olha empresa, e é de **exclusão**
+**Parte 1 feita em 24/10/2026** (`politica.yaml` 1.44.0; `alocacao/bloco_c.py`, 37 testes sobre
+acervo sintético): as cinco saídas do portão (decisão do arquiteto em
+`docs/decisoes/2026-10-24-saidas-do-portao-bloco-c.md`), o bloco lendo tudo do YAML (cortes,
+grades, ordem, 63a, contas do plano conferidas no DFP 2024 real), o documento visto só pelo leitor
+(modo da captura e `dt_receb`), a contagem do 27c como função (`contar`) e como medição
+(`medicoes/p30_contagem.py`, branch `medir/p30_contagem`). **Nenhum corte está ativo** e o bloco
+**não está ligado** ao `alocar()` nem ao `motor_aporte()`. C-01, C-03 e C-05 calculam e marcam; o
+C-02 é `NAO_IMPLEMENTADA` (P-185); o C-04 marca "não medido" (P-65). **Falta (parte 2):** a
+contagem real rodada (precisa do token `R2_LEITURA_*`), a escolha dele vendo a contagem (P-17),
+os setores financeiro-adjacentes e a holding genérica (265 linhas do cadastro, em `GERAL` por
+escolha de Claude) olhados por ele, e ligar ao motor.
+
+`bloco_C_solvencia` tinha 48 chaves escritas em 05/09 e nenhum módulo as aplicava: os testes
+conferiam o texto, não o comportamento. É o primeiro portão que olha empresa, e é de **exclusão**
 (`criterio_nao_e_previsao`). **Leva a 63a** (decisão dele, 26/09): cada métrica declara no YAML
 se lê nível, tendência ou híbrido. Dependem dela P-17, P-18, P-58 a P-61 e P-64; o regime de
 banco é a P-31, na reserva. **Fecha com:** o bloco rodando sobre o acervo, cada exclusão com o
-motivo nomeado, e a 63a lida do YAML.
+motivo nomeado, e a 63a lida do YAML (esta última, feita em 24/10; falta o resto da parte 2).
 
 ## P-17 · C-04 e C-05 nomeados; o limiar do C-05 sai da contagem (27c)
 
@@ -97,26 +109,20 @@ não dá limiar como regra: o "caixa < dívida CP" é o exemplo do bloco L, e a 
 nenhum limiar aparece no documento. Medido de passagem: o metadado do FRE estruturado da CVM não
 tem campo de moeda (730 campos), então o "exige o FRE" da Fase B não resolve o C-04 pelo CSV.
 **16/10/2026: ele respondeu 27c** (fila, bloco 27): o limiar sai da contagem do bloco C em 0,5 ·
-1,0 · 1,5, só o número de empresas, e até lá o C-05 marca e não corta. **Fecha com:** a contagem
-rodada na P-30, a escolha dele vendo ela, e o limiar gravado no `campos_C04_C05.C-05.limiar` com
-impressão digital.
-
-## P-18 · `SETOR_ATIV` da CVM nunca foi contado
-
-**Dono:** Claude Code (sessão local, ou `medir/`) · **Gatilho:** antes de codificar a separação
-de instituição financeira no bloco C · **Classe:** `BLOQUEIA_O_SISTEMA` *(campos dados na
-triagem de 03/10/2026, P-171)*
-
-O bloco C manda banco para regime próprio, e a identificação sai do `SETOR_ATIV` do cadastro.
-Só dois valores foram vistos; a enumeração nunca foi contada no dado real, como `ORDEM_EXERC` e
-`ESCALA_MOEDA` foram. **Fecha com:** a enumeração `OBSERVADO` no YAML, e o leitor falhando
-ruidosamente fora dela (P1).
+1,0 · 1,5, só o número de empresas, e até lá o C-05 marca e não corta. **24/10/2026: ele estendeu o 27c a C-01, C-02 e C-03** (fila, bloco 27, pelo formulário no
+claude.ai): os quatro marcam e não cortam até a contagem. A grade de cada um está em
+`bloco_C_solvencia.metricas.C-0x.grade` (C-05: 0,5 · 1,0 · 1,5, dele; C-01, C-02 e C-03: três
+pontos de Claude, cada um com fonte e "não é corte"), e a contagem existe como função e como
+medição (P-30). O C-02 não entra na contagem enquanto a P-185 não escrever a fórmula.
+**Fecha com:** a contagem
+rodada na P-30, a escolha dele vendo ela, e o limiar gravado no `campos_C04_C05.C-05.limiar` (e
+em `metricas.C-01` a `C-03`) com impressão digital.
 
 ## P-58 a P-61 · Regimes de leitura de balanço: o portão de regime tem 2 saídas e precisa de N
 
 **Dono:** Claude Code (desenho) · Osvaldo (o que só ele responde, §6 do documento) ·
-**Gatilho:** depois da P-18 · **Classe:** `BLOQUEIA_O_SISTEMA` *(dono dado na triagem de
-03/10/2026, P-171)*
+**Gatilho:** a P-18 fechada (24/10/2026) e a parte 1 da P-30 · **Classe:** `BLOQUEIA_O_SISTEMA`
+*(dono dado na triagem de 03/10/2026, P-171)*
 
 `docs/auditoria/regimes-de-leitura-de-balanco.md`. Um regime para banco e **um para "todo o
 resto"**, que lê incorporadora e WEG com a mesma régua. **P-58**, as saídas (incorporação,
@@ -126,16 +132,19 @@ contra expansão (limitação, viés contra quem cresce). A porta de entrada é 
 Construção civil **não sai do universo** (P6). **Fecha com:** o portão com N saídas, cada uma
 com regra no YAML, e as respostas dele registradas como decisão dele.
 
-## P-64 · Portão × dossiê — a camada de desenho que o bloco C precisa
+## P-185 · A fórmula do C-02 (dívida líquida / EBITDA): o escopo diz "Padrão"
 
-**Dono:** Claude · **Gatilho:** antes de implementar qualquer regime (P-58) · **Classe:**
-`BLOQUEIA_O_SISTEMA`
+**Dono:** Osvaldo (decide a fórmula do EBITDA e da dívida líquida) · Claude Code (escreve no YAML e
+implementa) · **Gatilho:** antes de a contagem do 27c incluir o C-02 · **Classe:**
+`DECISAO_DE_DESENHO`
 
-O portão é automático, sobre todo o universo, e só com dado estruturado. O dossiê é leitura
-guiada, empresa a empresa, só na lista curta. Onde o dado não existe (incorporação, X-01), o
-portão só diz *"regime X, exige dossiê; até lá fica no universo sem peso deste bloco"*. Vale para
-todo regime. Os cortes de distrato (P-66, na reserva) entram junto. **Fecha com:** a saída
-`EXIGE_DOSSIE` no portão, com o motivo, e um teste que prova que ela não tira ninguém do universo.
+O escopo (`docs/auditoria/escopo-campos-de-analise.md`, §4) traz "Padrão" na coluna da fórmula do
+C-02, e a §1 do mesmo documento exige fórmula explícita. EBITDA não é conta do plano da CVM: a
+depreciação e a amortização não têm `CD_CONTA` único, e as variantes (impairment, equivalência
+patrimonial, itens não recorrentes) mudam o número. Em 24/10/2026 o bloco C marcou o C-02
+`NAO_IMPLEMENTADA` (`metricas.C-02`) em vez de escolher uma. A dívida líquida tem a mesma questão
+da composição do caixa (`operandos.caixa`). **Fecha com:** a fórmula escrita no YAML, com as
+contas, implementada com teste, e o C-02 entrando na contagem.
 
 ## P-65 · A segunda esteira: notas explicativas e IPE — decidida (65b), entra depois do bloco C (23a)
 
