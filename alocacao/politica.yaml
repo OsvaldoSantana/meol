@@ -13,10 +13,19 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.43.0
+  versao: 1.44.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.44.0: >-
+      24/10/2026, P-30 parte 1 e P-64. `bloco_C_solvencia` ganha `saidas_do_portao` (APROVA,
+      REPROVA, MARCA, RECUSA_REGIME, EXIGE_DOSSIE; so REPROVA tira empresa do universo),
+      `ordem_de_avaliacao`, `operandos` (contas do plano da CVM conferidas no DFP 2024 real),
+      `metricas` (C-01, C-03 e C-05 implementadas, C-02 NAO_IMPLEMENTADA com pendencia P-185, a
+      grade de contagem de cada uma, a 63a por metrica) e `setor_ativ` (P-18: 71 valores
+      OBSERVADOS em 2.678 linhas do cadastro de 24/10/2026, com sha256). `como_identificar`
+      sai de PARCIAL para OBSERVADO. Nenhum limiar gravado: o bloco calcula e marca, e nao esta
+      ligado ao alocar() nem ao motor_aporte(). Nenhuma regra de decisao mudou.
     1.43.0: >-
       24/10/2026, P-180 fechada. `limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`,
       NAO_CONSERTADA, pendencia P-127: a serie de precos ajustada por proventos (fase0/ajustar.py,
@@ -1332,13 +1341,12 @@ bloco_C_solvencia:
       ausente virava zero e zero ganhava de todo mundo.
     como_identificar:
       fonte: "CVM, cadastro de companhias abertas, campo SETOR_ATIV"
-      status: PARCIAL
+      status: OBSERVADO
       motivo: >
-        O campo existe e foi conferido (docs/fontes/cvm-cadastro-companhias-abertas.md),
-        mas a lista completa de valores de SETOR_ATIV nao foi contada no dado real —
-        so dois exemplos foram vistos. Antes de codificar o corte, contar os valores
-        distintos como foi feito com ORDEM_EXERC/ESCALA_MOEDA (status OBSERVADO).
-      bloqueia: ["classificacao_automatica_de_instituicao_financeira"]
+        Contado no dado real em 24/10/2026 (P-18): 71 valores distintos em 2.678 linhas, com
+        data, URL e sha256 em `setor_ativ`. O leitor (alocacao/bloco_c.py) falha fora dessa
+        enumeracao (P1). Quais valores sao financeira ou seguradora e escolha de Claude, nas
+        listas `setor_ativ.financeira` e `setor_ativ.a_decidir`; o regime delas e a P-31.
 
   # ── 2. O QUE OS CORTES SAO, e o que eles nao sao ──────────────────────────
   natureza_dos_cortes:
@@ -1391,6 +1399,7 @@ bloco_C_solvencia:
     justificativa: 'Escolha do usuario contra a minha recomendacao, que era so nivel. O argumento
       dele e o mesmo da P-16b e da P-14: direcao e informacao real e descartá-la por conveniencia
       de implementacao seria perder sinal de proposito.'
+    tendencia_estado: AGUARDA_SERIE   # lido por alocacao/bloco_c.py; sai quando houver serie
     degradacao_declarada: 'A metade que CORTA (nivel) roda hoje, so com a DFP mais recente.
       A metade que MARCA (tendencia) exige serie alinhada por dt_disponivel e fica em AGUARDA_SERIE
       ate a Fase 0 — mesmo padrao do REGRA_DECIDIDA em teses.yaml: o que e decidivel hoje vale
@@ -1549,6 +1558,270 @@ bloco_C_solvencia:
       insolvencia, Altman Z ou Ohlson O, "rastreio, nunca veredito") e C-07 (covenants e
       garantias, Fase D, texto livre, provavel NAO OBTIDO). Nenhum dos dois e corte pelo
       proprio escopo; o lugar deles no bloco nao foi decidido, e nao se decide aqui.
+
+  # ══ 7. O BLOCO COMO CODIGO: P-30 parte 1 e P-64 (24/10/2026) ══════════════════════════════
+  # Lido por alocacao/bloco_c.py. NENHUM corte esta ativo: todo `limiar` e PENDENTE, e o bloco
+  # calcula e marca (decisao dele, 24/10/2026, fila bloco 27: C-01 a C-03 seguem o 27c). Nao
+  # esta ligado ao alocar() nem ao motor_aporte().
+  saidas_do_portao:
+    decidida_em: 2026-10-24
+    decidida_por: "Claude (arquiteto), P-64; docs/decisoes/2026-10-24-saidas-do-portao-bloco-c.md"
+    saidas: [APROVA, REPROVA, MARCA, RECUSA_REGIME, EXIGE_DOSSIE]
+    # O invariante: so uma saida tira empresa do universo. Ausencia de dado, de regime ou de
+    # limiar nunca e criterio de exclusao (P6).
+    tiram_do_universo: [REPROVA]
+    saidas_de_regime: [RECUSA_REGIME, EXIGE_DOSSIE]   # decididas ANTES de qualquer conta
+    precedencia_na_empresa: [RECUSA_REGIME, EXIGE_DOSSIE, REPROVA, MARCA, APROVA]
+    reprova_exige: [codigo, valor, corte, n_universo]
+  ordem_de_avaliacao: [C-01, C-02, C-03, C-04, C-05]
+  # Quantos exercicios para tras (a partir do ano anterior ao da data) o bloco procura um
+  # documento CONHECIDO na data. Escolha declarada de Claude, 24/10/2026: tres cobre o atraso
+  # de um DFP e um ano de reapresentacao; mais que isso e dado velho demais para um portao.
+  janela_de_exercicios: 3
+  # As contas lidas, no plano de contas da CVM. Conferido em 24/10/2026 no DFP 2024 real
+  # (dfp_cia_aberta_2024.zip, sha256 b51c920793c18edb66e8780c0780836d441af1199e1077064b73c7de6c865df0,
+  # n = 1 arquivo, 467 emissores no consolidado ULTIMO): 450 trazem exatamente estas descricoes
+  # e 17 trazem outras (banco: a 3.05 e "Resultado antes dos Tributos"). Conta com outra
+  # descricao nao vira numero: o bloco marca (PLANO_DE_CONTAS_DIFERENTE), porque numero
+  # plausivel de conta errada e o modo de falha do F-02.
+  operandos:
+    ebit:
+      recurso: dfp
+      demonstrativo: DRE_con
+      contas:
+        - {cd_conta: "3.05", ds_esperada: "Resultado Antes do Resultado Financeiro e dos Tributos"}
+    resultado_financeiro:
+      recurso: dfp
+      demonstrativo: DRE_con
+      contas:
+        - {cd_conta: "3.06", ds_esperada: "Resultado Financeiro"}
+    caixa:
+      recurso: dfp
+      demonstrativo: BPA_con
+      autor: "Claude, 24/10/2026 -- composicao para a contagem; ele decide vendo o numero (fila 27)"
+      contas:
+        - {cd_conta: "1.01.01", ds_esperada: "Caixa e Equivalentes de Caixa"}
+        - {cd_conta: "1.01.02", ds_esperada: "Aplica\xE7\xF5es Financeiras"}
+    divida_cp:
+      recurso: dfp
+      demonstrativo: BPP_con
+      autor: "Claude, 24/10/2026 -- inclui debentures e arrendamento, como o plano os poe sob a 2.01.04; separar o IFRS 16 e da P-58"
+      contas:
+        - {cd_conta: "2.01.04", ds_esperada: "Empr\xE9stimos e Financiamentos"}
+    divida_lp:
+      recurso: dfp
+      demonstrativo: BPP_con
+      autor: "Claude, 24/10/2026 -- idem, sob a 2.02.01"
+      contas:
+        - {cd_conta: "2.02.01", ds_esperada: "Empr\xE9stimos e Financiamentos"}
+  # Cada metrica: a formula do escopo (docs/auditoria/escopo-campos-de-analise.md, secao 4), o
+  # sentido do corte, a 63a (nivel corta, tendencia marca) e a grade de CONTAGEM. A grade nao
+  # e corte: e onde o bloco conta quantas empresas sairiam (27c). Nenhuma tem ancora legal.
+  metricas:
+    C-01:
+      nome: cobertura de juros
+      formula_no_escopo: "EBIT / despesa financeira liquida"
+      formula_id: cobertura_de_juros
+      operandos: [ebit, resultado_financeiro]
+      despesa_liquida: "menos o resultado financeiro; indefinida quando ele nao e negativo"
+      status: IMPLEMENTADA
+      sentido: reprova_abaixo
+      leitura: {nivel: CORTA, tendencia: MARCA}
+      limiar: PENDENTE
+      grade:
+        - valor: 1.25
+          fonte: "Damodaran, ratings sinteticos, tabela 'large non-financial service firms', dados de janeiro de 2026: 1,25 abre a faixa B3/B- (https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ratings.html, lida em 24/10/2026 por subagente web-fetch)"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+        - valor: 2.0
+          fonte: "idem: 2,0 abre a faixa Ba2/BB"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+        - valor: 3.0
+          fonte: "idem: 3,0 abre a faixa A3/A-"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+      alcance_da_fonte: >
+        A tabela e de empresas americanas nao financeiras, em dolar, calibrada num mercado que
+        nao e o brasileiro. Serve para dar tres pontos com procedencia na contagem, nao para
+        dizer onde o corte deve ficar (natureza_dos_cortes).
+    C-02:
+      nome: divida liquida / EBITDA
+      formula_no_escopo: "Padrao"
+      status: NAO_IMPLEMENTADA
+      motivo: >
+        O escopo traz so a palavra "Padrao" na coluna da formula, e a secao 1 do proprio escopo
+        exige formula explicita. EBITDA nao e conta do plano da CVM: a depreciacao e a
+        amortizacao nao tem CD_CONTA unico na DFC nem na DRE, e as variantes (impairment,
+        equivalencia patrimonial, itens nao recorrentes) mudam o numero. Escolher uma seria
+        inventar a formula (P1). A divida liquida tem o mesmo problema da composicao do caixa.
+      pendencia: P-185
+      sentido: reprova_acima
+      leitura: {nivel: CORTA, tendencia: MARCA}
+      limiar: PENDENTE
+      grade:
+        - valor: 2.0
+          fonte: "vizinho do 3: o 3 e o 'abaixo de 3' que natureza_dos_cortes cita como costume de mercado, sem fonte primaria (NAO_CONFIRMADO como literatura)"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+        - valor: 3.0
+          fonte: "natureza_dos_cortes.comparacao_com_o_bloco_de_banco: costume de mercado, sem URL"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+        - valor: 4.0
+          fonte: "vizinho do 3, a distancia 1"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+    C-03:
+      nome: perfil de vencimento
+      formula_no_escopo: "Divida < 12 m / divida total"
+      formula_id: perfil_de_vencimento
+      operandos: [divida_cp, divida_lp]
+      status: IMPLEMENTADA
+      sentido: reprova_acima
+      leitura: {nivel: CORTA, tendencia: MARCA}
+      limiar: PENDENTE
+      grade:
+        - valor: 0.25
+          fonte: "construcao, sem literatura: pontos equidistantes na escala [0; 1] da razao. Nenhuma fonte foi lida para este corte"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+        - valor: 0.5
+          fonte: "idem"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+        - valor: 0.75
+          fonte: "idem"
+          autor: "Claude, 24/10/2026 -- grade de contagem, nao e corte"
+    C-05:
+      nome: caixa / divida de curto prazo
+      formula_no_escopo: "Padrao (composicao em campos_C04_C05.C-05.composicao_pendente)"
+      formula_id: caixa_sobre_divida_cp
+      operandos: [caixa, divida_cp]
+      status: IMPLEMENTADA
+      sentido: reprova_abaixo
+      leitura: {nivel: CORTA, tendencia: MARCA}
+      limiar: {lido_de: "campos_C04_C05.C-05.limiar"}
+      grade:
+        - valor: 0.5
+          fonte: "fila-do-osvaldo.md, bloco 27, resposta 27c de 16/10/2026"
+          autor: "Osvaldo, 16/10/2026 -- 27c; grade de contagem, nao e corte"
+        - valor: 1.0
+          fonte: "idem"
+          autor: "Osvaldo, 16/10/2026 -- 27c; grade de contagem, nao e corte"
+        - valor: 1.5
+          fonte: "idem"
+          autor: "Osvaldo, 16/10/2026 -- 27c; grade de contagem, nao e corte"
+  setor_ativ:
+    status: OBSERVADO
+    # P-18, 24/10/2026. Contado no dado real, degrau 1 da escada (5-B.18): curl do cadastro
+    # da CVM, HTTP 200. O mesmo byte esta no acervo (docs/acervo/cvm/capturas.csv, captura de
+    # 2026-10-24T13:20:32Z, recurso cad): o sha256 abaixo e o do registro.
+    data: 2026-10-24
+    url: "https://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv"
+    sha256: "39ac70276c513b835eb3d470e6e1f623e217e4220e9608592eaf601948556873"
+    versao_do_acervo: "cad/cad_cia_aberta.csv, captura 2026-10-24T13:20:32Z"
+    linhas: 2678
+    distintos: 71
+    # 2.567 CD_CVM distintos; 107 deles em mais de uma linha, nenhum com setores diferentes.
+    alcance: >
+      Cadastro de HOJE, nao as-of: o setor que a CVM tem no dia da captura, aplicado a
+      qualquer data. Empresa que mudou de setor entra no regime de hoje no passado. Para
+      decisao de hoje nao importa; para backtest e look-ahead de classificacao, e a
+      captura diaria do cad (registro) permite reconstruir a partir de 24/09/2026.
+    # O que a enumeracao NAO decide: quais destes valores sao "instituicao financeira ou
+    # seguradora" (recusa_em_vez_de_calcular.regra). Isso e leitura, nao contagem, e esta
+    # nas duas listas abaixo, escolhidas por Claude em 24/10/2026 (nao por ele):
+    #   financeira: o nome diz banco ou seguradora, as duas palavras da regra;
+    #   a_decidir: financeiro-adjacente (securitizacao, factoring, credito imobiliario,
+    #     arrendamento, intermediacao, bolsa) e a holding que o nome liga a eles, mais o
+    #     setor vazio. Vai para EXIGE_DOSSIE, nunca para zero e nunca para GERAL; o regime
+    #     delas e da P-31 (reserva).
+    #   todo o resto e GERAL. A holding generica ("Emp. Adm. Participacoes", "Sem Setor
+    #     Principal") fica em GERAL por nao nomear setor: e a escolha em aberto mais cara
+    #     desta lista (265 linhas), registrada na P-18.
+    financeira:
+      - "Bancos"
+      - "Seguradoras e Corretoras"
+    a_decidir:
+      - ""
+      - "Arrendamento Mercantil"
+      - "Bolsas de Valores/Mercadorias e Futuros"
+      - "Cr\xE9dito Imobili\xE1rio"
+      - "Emp. Adm. Part. - Arrendamento Mercantil"
+      - "Emp. Adm. Part. - Bancos"
+      - "Emp. Adm. Part. - Cr\xE9dito Imobili\xE1rio"
+      - "Emp. Adm. Part. - Intermedia\xE7\xE3o Financeira"
+      - "Emp. Adm. Part. - Securitiza\xE7\xE3o de Receb\xEDveis"
+      - "Emp. Adm. Part. - Seguradoras e Corretoras"
+      - "Emp. Adm. Part.-Bolsas de Valores/Mercadorias e Futuros"
+      - "Factoring"
+      - "Intermedia\xE7\xE3o Financeira"
+      - "Securitiza\xE7\xE3o de Receb\xEDveis"
+    valores:
+      "M\xE1quinas, Equipamentos, Ve\xEDculos e Pe\xE7as": 181
+      "Constru\xE7\xE3o Civil, Mat. Constr. e Decora\xE7\xE3o": 172
+      "Emp. Adm. Participa\xE7\xF5es": 156
+      "Servi\xE7os Transporte e Log\xEDstica": 153
+      "Securitiza\xE7\xE3o de Receb\xEDveis": 141
+      "Metalurgia e Siderurgia": 139
+      "T\xEAxtil e Vestu\xE1rio": 122
+      "Energia El\xE9trica": 117
+      "Bancos": 115
+      "Com\xE9rcio (Atacado e Varejo)": 114
+      "Alimentos": 112
+      "Emp. Adm. Part. - Sem Setor Principal": 109
+      "Petroqu\xEDmicos e Borracha": 99
+      "Telecomunica\xE7\xF5es": 80
+      "Arrendamento Mercantil": 73
+      "Emp. Adm. Part. - Energia El\xE9trica": 53
+      "Extra\xE7\xE3o Mineral": 53
+      "Agricultura (A\xE7\xFAcar, \xC1lcool e Cana)": 50
+      "Saneamento, Serv. \xC1gua e G\xE1s": 41
+      "Comunica\xE7\xE3o e Inform\xE1tica": 40
+      "Emp. Adm. Part. - Servi\xE7os Transporte e Log\xEDstica": 39
+      "Emp. Adm. Part. - Telecomunica\xE7\xF5es": 38
+      "Hospedagem e Turismo": 29
+      "Emp. Adm. Part. - Const. Civil, Mat. Const. e Decora\xE7\xE3o": 26
+      "Petr\xF3leo e G\xE1s": 26
+      "Servi\xE7os M\xE9dicos": 26
+      "Bebidas e Fumo": 25
+      "Farmac\xEAutico e Higiene": 25
+      "Seguradoras e Corretoras": 24
+      "Emp. Adm. Part. - Com\xE9rcio (Atacado e Varejo)": 22
+      "Papel e Celulose": 21
+      "Outras Atividades Industriais": 18
+      "Servi\xE7os Diversos": 18
+      "Emp. Adm. Part. - Intermedia\xE7\xE3o Financeira": 16
+      "Emp. Adm. Part. - Petr\xF3leo e G\xE1s": 12
+      "Gr\xE1ficas e Editoras": 12
+      "Brinquedos e Lazer": 11
+      "Emp. Adm. Part. - Extra\xE7\xE3o Mineral": 11
+      "Educa\xE7\xE3o": 10
+      "Intermedia\xE7\xE3o Financeira": 10
+      "Emp. Adm. Part. - Educa\xE7\xE3o": 9
+      "Emp. Adm. Part. - Saneamento, Serv. \xC1gua e G\xE1s": 9
+      "Embalagens": 8
+      "Emp. Adm. Part. - Metalurgia e Siderurgia": 8
+      "Emp. Adm. Part. - M\xE1qs., Equip., Ve\xEDc. e Pe\xE7as": 8
+      "Emp. Adm. Part. - Servi\xE7os m\xE9dicos": 7
+      "": 6
+      "Cr\xE9dito Imobili\xE1rio": 6
+      "Emp. Adm. Part. - Alimentos": 6
+      "Emp. Adm. Part. - Comunica\xE7\xE3o e Inform\xE1tica": 6
+      "Emp. Adm. Part. - Seguradoras e Corretoras": 6
+      "Reflorestamento": 6
+      "Emp. Adm. Part. - Cr\xE9dito Imobili\xE1rio": 5
+      "Emp. Adm. Part. - Hospedagem e Turismo": 5
+      "Emp. Adm. Part. - T\xEAxtil e Vestu\xE1rio": 5
+      "Bolsas de Valores/Mercadorias e Futuros": 4
+      "Com\xE9rcio Exterior": 4
+      "Emp. Adm. Part. - Brinquedos e Lazer": 4
+      "Emp. Adm. Part. - Petroqu\xEDmicos e Borracha": 4
+      "Emp. Adm. Part. - Securitiza\xE7\xE3o de Receb\xEDveis": 4
+      "Pesca": 4
+      "Emp. Adm. Part. - Agricultura (A\xE7\xFAcar, \xC1lcool e Cana)": 3
+      "Emp. Adm. Part. - Arrendamento Mercantil": 2
+      "Emp. Adm. Part. - Embalagens": 2
+      "Emp. Adm. Part. - Farmac\xEAutico e Higiene": 2
+      "Emp. Adm. Part. - Bancos": 1
+      "Emp. Adm. Part. - Gr\xE1ficas e Editoras": 1
+      "Emp. Adm. Part. - Papel e Celulose": 1
+      "Emp. Adm. Part.-Bolsas de Valores/Mercadorias e Futuros": 1
+      "Factoring": 1
+      "Servi\xE7os em Geral": 1
 
 # ══ REGIME DE ANALISE: INSTITUICAO FINANCEIRA (pendencia 20) ═════════════════
 # Especificado em 05/09/2026. Fecha a ESPECIFICACAO da pendencia 20; nao fecha a

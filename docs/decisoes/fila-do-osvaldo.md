@@ -856,6 +856,16 @@ não corta). A contagem sai do bloco C (P-30) em 0,5 · 1,0 · 1,5, só o númer
 nem retorno; ele escolhe vendo isso, e a escolha é gravada com impressão digital antes de qualquer
 backtest que use o bloco (P4). Não decidido aqui: se C-01 a C-03 seguem o mesmo caminho.
 
+**Resposta dele, 24/10/2026, pelo formulário no claude.ai: C-01, C-02 e C-03 seguem o caminho
+do 27c.** A frase "Não decidido aqui: se C-01 a C-03 seguem o mesmo caminho" passa a ter
+resposta. Até a contagem, os três marcam e não cortam, como o C-05; a contagem sai do bloco C em
+três pontos de grade para cada um, só o número de empresas, sem nome e sem retorno, e ele escolhe
+vendo isso. As alternativas eram as da própria pergunta: **27a** (fixar o corte já, um número por
+métrica) e **27b** (nunca cortar, só marcar). Gravado em `politica.yaml` 1.44.0
+(`bloco_C_solvencia.metricas.C-0x.limiar: PENDENTE`, com a grade de cada um); a grade do C-05 é a
+dele (0,5 · 1,0 · 1,5), a dos outros três é de Claude, cada ponto com a fonte e "não é corte". O
+C-02 não pode entrar na contagem enquanto a fórmula for "Padrão" (P-185).
+
 ---
 
 ## 28 · Robô, consolidador e planejador: sem universo oficial · P-170 · **respondido em 10/10: quadro público da App Store + 28c**
