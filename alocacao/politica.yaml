@@ -13,10 +13,18 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.42.0
+  versao: 1.43.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.43.0: >-
+      24/10/2026, P-180 fechada. `limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`,
+      NAO_CONSERTADA, pendencia P-127: a serie de precos ajustada por proventos (fase0/ajustar.py,
+      C-02) saiu NAO_CONFIRMADA em 2016-2020 (P-115, opcao A), com K2 e K3 sem poder; decisao
+      dele de 03/10/2026. Os numeros saem de docs/auditoria/C02-JANELA-2016-2020-resultado.json
+      e de ACHADOS.md PO-01 e PO-02. Medido antes de escrever: nenhum modulo de alocacao/ nem o
+      backtest le a saida do ajustar.py (so auditoria/c02_*.py e testes). Nenhuma regra de
+      decisao mudou.
     1.42.0: >-
       16/10/2026, P-183. `limitacoes_declaradas.dt_captura_nao_e_data_de_conhecimento_do_mercado`
       continua NAO_CONSERTADA, reescrita: o leitor as-of ganhou o modo conhecimento=dt_receb,
@@ -2921,3 +2929,38 @@ limitacoes_declaradas:
       Wayback em parte). Fisico seria a versao que nem o ENET guarda, e nenhuma foi achada
       assim nos 2 documentos testados.
     fonte: "docs/decisoes/2026-10-10-leitor-asof-cvm.md; docs/decisoes/2026-10-16-leitor-dt-receb.md; medicoes/resultados/p183_dt_receb.txt"
+
+  serie_ajustada_do_cotahist_nao_confirmada:
+    tipo: NAO_CONSERTADA
+    # P-180, decisao dele de 03/10/2026 (opcao A da P-115). A serie continua no acervo e no
+    # codigo; o que muda e o status: nenhuma conta a usa como confirmada.
+    o_que_falta: >
+      O C-02 (fase0/ajustar.py, o preco ajustado por proventos) saiu NAO_CONFIRMADA em
+      2016-2020 (P-115, opcao A; docs/auditoria/C02-JANELA-2016-2020-resultado.json, janela
+      [2016, 2020], commit 506678e). Dois criterios ficaram SEM PODER: o K2 (JCP) com sigma
+      0,0971 (n=555, 271 pregoes) contra sigma_max 0,0416, e o K3 (dividendo) com sigma 0,0778
+      (n=416, 201 pregoes) contra 0,0463; os dois com veredito NAO_CONFIRMADO. Nenhuma janela
+      do acervo da ao K2 o n que ele pede: cerca de 3.024 JCPs pela convencao do juiz (4.725
+      pela regra de 0,8 x sigma_max), contra cerca de 1.658 em 2013-2025 (ACHADOS.md PO-01 e
+      PO-02). Os outros criterios do mesmo JSON passaram (D1, K1, K5, K6 e a completude); o
+      que falta e a confirmacao do ajuste por provento, que e o que a serie vale.
+    direcao_do_vies: >
+      Desconhecida. Sem poder, K2 e K3 nao distinguem ajuste certo de ajuste errado em
+      direcao nenhuma: a razao do K2 saiu 0,878 com intervalo de 0,680 a 1,060 (faixa de
+      aceite 0,85 a 1,15) e a do K3, 0,934 com intervalo de 0,770 a 1,075 (faixa 0,85 a
+      1,35), os dois intervalos largos demais para cair dentro ou fora da faixa. Nenhum numero
+      medido aponta o sinal, e o efeito sobre o retorno de uma estrategia nao foi medido.
+    o_que_resolveria: >
+      Um controle independente do preco ajustado, numa amostra pre-registrada (P-127, 127a,
+      decisao dele de 26/09/2026): um agregador de preco ajustado entra como CONTROLE, nunca
+      como feed (rebaixaria a P1); o criterio de "concordam" gravado e empurrado antes de
+      olhar (P4, P-116); os termos do fornecedor lidos na fonte. A divergencia medida nessa
+      amostra e o que fecha esta entrada. Corre em paralelo e nao bloqueia o caminho critico
+      (decisao de 03/10/2026).
+    pendencia: P-127
+    por_que_nao_e_fisica: >
+      O limite e nosso, nao do mundo: o preco ajustado de uma fonte independente existe e
+      pode ser medido contra a nossa serie. Um criterio v3 numa janela nova nao resolve, porque
+      nenhuma janela do acervo da n ao K2 (PO-01, PO-02). Os consertos da propria serie (P-93,
+      P-94, P-101, P-112) ficam na reserva, ligados a esta entrada.
+    fonte: "docs/auditoria/C02-JANELA-2016-2020-resultado.json; ACHADOS.md PO-01, PO-02; docs/decisoes/fila-do-osvaldo.md (decisoes de 03/10/2026, depois da P-115)"

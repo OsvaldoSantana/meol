@@ -2851,12 +2851,40 @@ ocultos (0,4%), por ano e por demonstrativo com o n. **A limitação** continua 
 (política 1.42.0), reescrita: o resíduo não é físico, porque o ENET guarda as versões substituídas
 (CV-08). O que sobra é a **P-184**. Decisão em `docs/decisoes/2026-10-16-leitor-dt-receb.md`.
 
+## ~~P-180~~ · A série ajustada do COTAHIST vira limitação declarada — **FECHADA em 24/10/2026**
+
+**Dono:** Claude Code · **Gatilho:** a próxima sessão de motor, antes de qualquer conta que use
+a série · **Classe:** `BLOQUEIA_O_SISTEMA`
+
+Decisão dele, 03/10/2026, depois da P-115 `NAO_CONFIRMADA` (opção A). A série segue no acervo e
+no código; o que muda é o status: nenhuma conta a usa como confirmada. A entrada vai para
+`politica.yaml → limitacoes_declaradas`, pelo protocolo de mudança (versão e changelog). O que
+ela diz: o C-02 não confirmou o ajuste em 2016–2020 (K2 e K3 sem poder; PO-01, PO-02); a direção
+do viés é desconhecida; o que resolveria é um controle independente (a P-127). Os consertos de
+série que estão na reserva (P-93, P-94, P-101, P-112) ficam lá, ligados a ela.
+**Fecha com:** a entrada no YAML, `NAO_CONSERTADA` com `pendencia: P-127`, e o
+`test_limitacoes_tipo.py` verde.
+
+**FECHADA em 24/10/2026.** A entrada `limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`
+está na política 1.43.0: `NAO_CONSERTADA`, `pendencia: P-127`, com `o_que_falta`,
+`direcao_do_vies` (desconhecida), `o_que_resolveria` (o controle independente da 127a) e `fonte`.
+Os números saem de `docs/auditoria/C02-JANELA-2016-2020-resultado.json` (K2: σ 0,0971, n=555,
+contra σ_max 0,0416; K3: σ 0,0778, n=416, contra 0,0463) e de `ACHADOS.md` PO-01 e PO-02 (cerca
+de 3.024 JCPs pedidos contra cerca de 1.658 no acervo). **Evidência:**
+`alocacao/test_limitacoes_tipo.py::test_P180_a_serie_ajustada_do_cotahist_e_limitacao_declarada`,
+que falhou no `main` (`06a0c68`, entrada ausente) e passa com a entrada; mais os seis testes de
+mutação que o acompanham. **Medido antes de escrever:** nenhum módulo de `alocacao/` nem o
+backtest lê a saída do `fase0/ajustar.py`; os consumidores são `auditoria/c02_*.py`, os testes de
+`fase0/` e a configuração de mutação do `pyproject.toml`. Nenhum comportamento mudou. P-93, P-94,
+P-101 e P-112 ficam na reserva, ligadas a esta entrada, sem mudar de classe.
+
 ---
 
 ## Fechadas
 
 | # | o que era | fechada em |
 |---|---|---|
+| **P-180** | a série ajustada do COTAHIST vira limitação declarada | 24/10 — `limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `NAO_CONSERTADA`, `pendencia: P-127`; política 1.43.0; teste `test_P180_…` falhou no `main` e passa; nenhum consumidor no motor nem no backtest |
 | **P-183** | a data de conhecimento do mercado: `DT_RECEB` por versão | 16/10 — modo `conhecimento="dt_receb"` no leitor, testes (e) com mutação; 14.955 de 3.870.622 documento-meses ocultos (0,4%); o resíduo é a P-184 |
 | **P-172** | o `PLANO.md` na abertura volta à decisão em 17/10 | 16/10 — 22a confirmada por ele; abertura 23.009 tokens; regra de volta aplicada ao `registro` (#71) |
 | **P-53** | o acervo lido não depende de engine; a ponte também é bitemporal | 10/10 — parte do leitor: `leitor_cvm.valor()` *as-of* pela `dt_captura` (`acervo.vigencias`), teste (b) com duas versões do mesmo `DT_REFER`; sem pacote novo; a ponte é a P-53b, o conhecimento do mercado é a P-183 |

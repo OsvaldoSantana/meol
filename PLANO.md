@@ -33,8 +33,10 @@ registra, e a ordem é dele.
 
 **A série ajustada do COTAHIST não é marco.** O C-02 saiu `NAO_CONFIRMADA` em 2016–2020 (P-115,
 opção A): K2 e K3 sem poder, e nenhuma janela do acervo dá ao K2 o n que ele pede (PO-01, PO-02).
-Por decisão de 03/10 ela vira **limitação declarada** (P-180), e o oráculo externo (P-127) corre
-em paralelo, sem bloquear nada.
+Por decisão de 03/10 ela é **limitação declarada**, registrada em 24/10 (P-180 fechada:
+`limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `NAO_CONSERTADA`, política
+1.43.0), e nenhuma conta a usa como confirmada. O oráculo externo (P-127) corre em paralelo, sem
+bloquear nada.
 
 ## 3. Caminho crítico — o motor (decisão de 03/10)
 

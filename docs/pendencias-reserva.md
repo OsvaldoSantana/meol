@@ -609,6 +609,8 @@ sobrevive a uma mudança de separador ou de codificação, e é a mais cara.
 **Dono:** próxima sessão · **Gatilho:** antes de usar a série ajustada em qualquer conta ·
 **Classe:** `BLOQUEIA_O_SISTEMA`
 
+**Ligada à P-180 (24/10/2026):** a série ajustada é limitação declarada (`politica.yaml → limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `pendencia: P-127`). Este conserto fica aqui, não destrava nenhuma conta com a série, e a classe não mudou.
+
 O A-03/A-04 chegou ao preço. A emissora troca de código, o evento chega com o código
 **novo** e o preço de 2023 está sob o **antigo**:
 
@@ -633,6 +635,8 @@ motivo: o `codeCVM` vem no mesmo objeto do suplemento e é **estável quando o t
 
 **Dono:** próxima sessão · **Gatilho:** quando o SEGUNDO ano de COTAHIST entrar no acervo ·
 **Classe:** `BLOQUEIA_O_SISTEMA`
+
+**Ligada à P-180 (24/10/2026):** a série ajustada é limitação declarada (`politica.yaml → limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `pendencia: P-127`). Este conserto fica aqui, não destrava nenhuma conta com a série, e a classe não mudou.
 
 Oito eventos com `ultimo_dia_com_direito = 28/12/2023` — o **último pregão observado**. A
 data ex é 02/01/2024, que o calendário não alcança, então não foi derivada, então o fator
@@ -684,6 +688,8 @@ incompletas são as de CODBDI e TPMERC, e a de ESPECI foi transcrita como "integ
 
 **Dono:** próxima sessão · **Gatilho:** **só quando a janela do `ajustar.py` passar de
 04/07/1994** · **Classe:** `BLOQUEIA_O_SISTEMA` · *(achado C-03)*
+
+**Ligada à P-180 (24/10/2026):** a série ajustada é limitação declarada (`politica.yaml → limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `pendencia: P-127`). Este conserto fica aqui, não destrava nenhuma conta com a série, e a classe não mudou.
 
 > **19/09 — MEDIDA e instrumentada, ainda NÃO aplicada.** Nasceu `fase0/moeda.py`: varre o
 > acervo, acha as fronteiras de `MODREF`, mede o fator pela razão do mesmo `CODNEG` com o
@@ -786,6 +792,8 @@ pegar.
 
 **Dono:** Claude Code · **Gatilho:** antes de usar qualquer série ajustada anterior a 2024 em
 backtest · **Classe:** `BLOQUEIA_O_SISTEMA`
+
+**Ligada à P-180 (24/10/2026):** a série ajustada é limitação declarada (`politica.yaml → limitacoes_declaradas.serie_ajustada_do_cotahist_nao_confirmada`, `pendencia: P-127`). Este conserto fica aqui, não destrava nenhuma conta com a série, e a classe não mudou.
 
 A-11: o ESPECI marca `EDB`/`EJB` em 11 papéis-dia de 2021–2024 sem evento de quantidade no
 silver, e a série da CMIG fica −27% num dia. O suplemento da B3 devolve janela **recente**.
