@@ -83,9 +83,19 @@ grades, ordem, 63a, contas do plano conferidas no DFP 2024 real), o documento vi
 (`medicoes/p30_contagem.py`, branch `medir/p30_contagem`). **Nenhum corte está ativo** e o bloco
 **não está ligado** ao `alocar()` nem ao `motor_aporte()`. C-01, C-03 e C-05 calculam e marcam; o
 C-02 é `NAO_IMPLEMENTADA` (P-185); o C-04 marca "não medido" (P-65). **Falta (parte 2):** a
-contagem real rodada (precisa do token `R2_LEITURA_*`), a escolha dele vendo a contagem (P-17),
+contagem real rodada, a escolha dele vendo a contagem (P-17),
 os setores financeiro-adjacentes e a holding genérica (265 linhas do cadastro, em `GERAL` por
 escolha de Claude) olhados por ele, e ligar ao motor.
+
+**A contagem real não rodou (24/10/2026).** O push em `medir/p30_contagem` (run 40124379403): o
+passo "Conferir insumos" passou e o "Medir" falhou com a mensagem do próprio `medir.yml`:
+`faltam os segredos do repositorio: R2_LEITURA_ACCOUNT_ID R2_LEITURA_BUCKET. Crie no Cloudflare um
+token do R2 com permissao SOMENTE LEITURA (Object Read) neste bucket e grave os quatro em Settings
+> Secrets and variables > Actions.` (dos quatro, `R2_LEITURA_ACCESS_KEY_ID` e
+`R2_LEITURA_SECRET_ACCESS_KEY` existem; faltam dois). Nenhum outro caminho com credencial foi
+tentado (5-A.7). **Assim que os dois segredos existirem, a medição roda de novo** com um novo push
+em `medir/p30_contagem` (ou com a branch já publicada, por um novo commit) e a saída fica em
+`medicoes/resultados/p30_contagem.txt`.
 
 `bloco_C_solvencia` tinha 48 chaves escritas em 05/09 e nenhum módulo as aplicava: os testes
 conferiam o texto, não o comportamento. É o primeiro portão que olha empresa, e é de **exclusão**
