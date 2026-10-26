@@ -4,6 +4,7 @@ alocacao/ambiente.py;1;81;50;61.7
 alocacao/aporte.py;1;88;43;48.9
 alocacao/aporte_do_mes.py;1;228;210;92.1
 alocacao/backtest_h1_h3.py;1;78;47;60.3
+alocacao/bloco_c.py;1;164;158;96.3
 alocacao/campos_mortos.py;1;64;57;89.1
 alocacao/cenarios.py;1;97;88;90.7
 alocacao/conftest.py;0;56;48;85.7
@@ -19,9 +20,10 @@ alocacao/preregistro.py;1;144;142;98.6
 alocacao/reserva.py;1;88;29;33.0
 alocacao/sleeve.py;1;49;33;67.3
 alocacao/tese.py;1;186;167;89.8
-alocacao/test_alocacao.py;0;1408;1387;98.5
+alocacao/test_alocacao.py;0;1412;1391;98.5
 alocacao/test_aporte_do_mes.py;0;128;128;100.0
 alocacao/test_b11_registro_sem_future.py;0;29;29;100.0
+alocacao/test_bloco_c.py;0;310;310;100.0
 alocacao/test_campos_mortos.py;0;32;32;100.0
 alocacao/test_cenarios.py;0;8;8;100.0
 alocacao/test_corretoras.py;0;291;291;100.0
@@ -33,7 +35,7 @@ alocacao/test_e08_bloqueio_e_copia.py;0;66;65;98.5
 alocacao/test_fatores.py;0;97;97;100.0
 alocacao/test_impacto.py;0;69;68;98.6
 alocacao/test_jcp.py;0;44;43;97.7
-alocacao/test_limitacoes_tipo.py;0;90;90;100.0
+alocacao/test_limitacoes_tipo.py;0;127;127;100.0
 alocacao/test_motor.py;0;115;112;97.4
 alocacao/test_multiplicidade.py;0;116;115;99.1
 alocacao/test_p141_paralelo.py;0;23;23;100.0
@@ -168,8 +170,10 @@ fase0/test_workflow_captura.py;0;122;122;100.0
 fase0/universo_ml.py;1;151;87;57.6
 medicoes/p145_ponte_2013_2019.py;1;144;84;58.3
 medicoes/p183_dt_receb.py;1;193;142;73.6
+medicoes/p30_contagem.py;1;69;41;59.4
 medicoes/test_p145_ponte_2013_2019.py;0;42;42;100.0
 medicoes/test_p183_dt_receb.py;0;44;44;100.0
+medicoes/test_p30_contagem.py;0;24;24;100.0
 tools/analisar_sessoes.py;1;218;187;85.8
 tools/analise_teste_marca.py;1;240;226;94.2
 tools/codigos_visuais.py;1;126;118;93.7
