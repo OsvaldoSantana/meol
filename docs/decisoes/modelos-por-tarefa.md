@@ -113,3 +113,32 @@ Aplicada como saiu, no degrau seguinte da `ordem` (`opusplan`). **O que não se 
 limiar depois do disparo, que a P-172 previa discutir; mudar a régua depois de ela acusar é o erro
 que a P4 proíbe. **Limitação (P7):** a regra mede sozinha, mas a troca dependeu de alguém ler a
 issue, e ela ficou parada de 12/10 a 16/10.
+
+## 10/11/2026: o Fable entra, pontual e medido, sem virar degrau
+
+**Decisão dele, 10/11/2026, na sessão na nuvem.** O Fable chegou por uma ação promocional. Nas
+palavras dele: *"será um uso pontual, daqui a pouco ele vai se esgotar e nunca mais será usado;
+deve ser avaliado o que ele pode contribuir mais e de forma mais eficiente, e ser feito"*.
+Perguntado onde ele fica na regra de volta, escolheu **abaixo do Opus, medido**. A linha "Fable
+não, em classe nenhuma" da tabela de 02/10 continua valendo no que diz: nenhuma classe aponta
+para ele.
+
+**Como ficou no YAML:** `pontuais: [fable]`. A etiqueta `[modelo=fable classe=<c>]` passa a ser
+aceita no evento e no título do PR, e o que ele fizer **conta** na regra de volta, dos dois lados
+(evento e PR), como qualquer modelo abaixo do topo. Ele **não** entra na `ordem`.
+
+**Por que não na `ordem`, que foi a forma da pergunta** (`haiku, sonnet, opusplan, fable, opus`):
+"voltar" é subir um degrau da lista. Com o Fable entre `opusplan` e `opus`, uma classe em
+`opusplan` que disparasse a regra subiria para um modelo que deixa de existir. O que ele
+escolheu (medido, com o Opus acima) está preservado; o que mudou foi só a estrutura do dado.
+Se ele preferir a lista literal, é uma linha no YAML e outra no teste.
+
+**O que isto não mede (P5):** "mais eficiente" é premissa dele, não medida. A regra de volta
+exige 4 PRs da classe na janela de 14 dias, e um uso pontual dificilmente chega a 4: o mais
+provável é o Fable sair sem número nenhum a favor ou contra. O que fica medido é o que alguém
+achar de erro no que ele fez, pelo `eventos.csv`.
+
+**O uso escolhido para ele, em 10/11:** a contagem real do bloco C (P-30) e a leitura do
+demonstrativo individual quando não há consolidado. A sessão já tinha a evidência medida, o
+passo está no caminho crítico e termina numa decisão dele (P-17), não em mais engenharia.
+
