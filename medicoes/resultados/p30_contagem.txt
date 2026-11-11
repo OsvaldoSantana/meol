@@ -1,0 +1,86 @@
+# P-30: quantas empresas sairiam em cada ponto da grade (27c)
+
+data: 2026-10-24
+politica: alocacao/politica.yaml bloco_C_solvencia
+universo: 439 CD_CVM, SIT ATIVO, Categoria A (cadastro mais recente, nao as-of)
+sha256 lido no modo captura, cad_cia_aberta.csv: 0025b7955673137a850c17ab428cd2f9bc9e7b20010cabc4322fa8c4220708ab
+sha256 lido no modo captura, dfp_cia_aberta_2025.zip: 5e273568aae97d1301c852e9f5d2ed024584beab31ee82a65eff47478ffdf34f
+sha256 lido no modo captura, dfp_cia_aberta_2024.zip: b51c920793c18edb66e8780c0780836d441af1199e1077064b73c7de6c865df0
+sha256 lido no modo captura, dfp_cia_aberta_2023.zip: 46f281e5849ae7e7f0862aa9b65241a1ead95bb22644d1b5310d6b6542d7c398
+sha256 lido no modo dt_receb, cad_cia_aberta.csv: 0025b7955673137a850c17ab428cd2f9bc9e7b20010cabc4322fa8c4220708ab
+sha256 lido no modo dt_receb, dfp_cia_aberta_2025.zip: a0aaf1ed8be9f7a644d1ec7eb6c17f2d0860f40416c0e3151c2c690329eeb343
+sha256 lido no modo dt_receb, dfp_cia_aberta_2024.zip: b6a485b540728dcd4e7ed030bad8e749471044594ec17866fff4f0e94c54120a
+sha256 lido no modo dt_receb, dfp_cia_aberta_2023.zip: 344e37b704a588b3863c5dd4ad6ee54b3dc9a2ee18cf88e0e4e35f5a641cdc2d
+
+## modo captura
+
+universo: 439; regime: RECUSA_REGIME=23, EXIGE_DOSSIE=12; sem dado: 19; nao implementadas: C-02
+
+| corte | ponto | sairiam | com valor | indefinido | plano diferente | sem dado |
+|---|---|---|---|---|---|---|
+| C-01 | 1.25 | 125 | 285 | 100 | 0 | 19 |
+RESUMO: modo=captura C-01 ponto=1.25 sairiam=125 (n=285 com valor, universo=439)
+| C-01 | 2.0 | 177 | 285 | 100 | 0 | 19 |
+RESUMO: modo=captura C-01 ponto=2.0 sairiam=177 (n=285 com valor, universo=439)
+| C-01 | 3.0 | 214 | 285 | 100 | 0 | 19 |
+RESUMO: modo=captura C-01 ponto=3.0 sairiam=214 (n=285 com valor, universo=439)
+| C-03 | 0.25 | 135 | 340 | 45 | 0 | 19 |
+RESUMO: modo=captura C-03 ponto=0.25 sairiam=135 (n=340 com valor, universo=439)
+| C-03 | 0.5 | 63 | 340 | 45 | 0 | 19 |
+RESUMO: modo=captura C-03 ponto=0.5 sairiam=63 (n=340 com valor, universo=439)
+| C-03 | 0.75 | 40 | 340 | 45 | 0 | 19 |
+RESUMO: modo=captura C-03 ponto=0.75 sairiam=40 (n=340 com valor, universo=439)
+| C-05 | 0.5 | 65 | 332 | 53 | 0 | 19 |
+RESUMO: modo=captura C-05 ponto=0.5 sairiam=65 (n=332 com valor, universo=439)
+| C-05 | 1.0 | 106 | 332 | 53 | 0 | 19 |
+RESUMO: modo=captura C-05 ponto=1.0 sairiam=106 (n=332 com valor, universo=439)
+| C-05 | 1.5 | 152 | 332 | 53 | 0 | 19 |
+RESUMO: modo=captura C-05 ponto=1.5 sairiam=152 (n=332 com valor, universo=439)
+
+lidas pelo demonstrativo: con=322, ind=63
+
+| pontos (do mais frouxo ao mais duro) | sairiam por pelo menos um | sairiam por todos | avaliadas |
+|---|---|---|---|
+| C-01=1.25 C-03=0.75 C-05=0.5 | 161 | 18 | 352 |
+RESUMO: modo=captura uniao C-01=1.25 C-03=0.75 C-05=0.5 pelo_menos_um=161 por_todos=18 (n=352 avaliadas, universo=439)
+| C-01=2.0 C-03=0.5 C-05=1.0 | 233 | 31 | 352 |
+RESUMO: modo=captura uniao C-01=2.0 C-03=0.5 C-05=1.0 pelo_menos_um=233 por_todos=31 (n=352 avaliadas, universo=439)
+| C-01=3.0 C-03=0.25 C-05=1.5 | 285 | 69 | 352 |
+RESUMO: modo=captura uniao C-01=3.0 C-03=0.25 C-05=1.5 pelo_menos_um=285 por_todos=69 (n=352 avaliadas, universo=439)
+
+## modo dt_receb
+
+universo: 439; regime: RECUSA_REGIME=23, EXIGE_DOSSIE=12; sem dado: 18; nao implementadas: C-02
+
+| corte | ponto | sairiam | com valor | indefinido | plano diferente | sem dado |
+|---|---|---|---|---|---|---|
+| C-01 | 1.25 | 125 | 286 | 100 | 0 | 18 |
+RESUMO: modo=dt_receb C-01 ponto=1.25 sairiam=125 (n=286 com valor, universo=439)
+| C-01 | 2.0 | 177 | 286 | 100 | 0 | 18 |
+RESUMO: modo=dt_receb C-01 ponto=2.0 sairiam=177 (n=286 com valor, universo=439)
+| C-01 | 3.0 | 214 | 286 | 100 | 0 | 18 |
+RESUMO: modo=dt_receb C-01 ponto=3.0 sairiam=214 (n=286 com valor, universo=439)
+| C-03 | 0.25 | 135 | 341 | 45 | 0 | 18 |
+RESUMO: modo=dt_receb C-03 ponto=0.25 sairiam=135 (n=341 com valor, universo=439)
+| C-03 | 0.5 | 63 | 341 | 45 | 0 | 18 |
+RESUMO: modo=dt_receb C-03 ponto=0.5 sairiam=63 (n=341 com valor, universo=439)
+| C-03 | 0.75 | 40 | 341 | 45 | 0 | 18 |
+RESUMO: modo=dt_receb C-03 ponto=0.75 sairiam=40 (n=341 com valor, universo=439)
+| C-05 | 0.5 | 65 | 333 | 53 | 0 | 18 |
+RESUMO: modo=dt_receb C-05 ponto=0.5 sairiam=65 (n=333 com valor, universo=439)
+| C-05 | 1.0 | 106 | 333 | 53 | 0 | 18 |
+RESUMO: modo=dt_receb C-05 ponto=1.0 sairiam=106 (n=333 com valor, universo=439)
+| C-05 | 1.5 | 152 | 333 | 53 | 0 | 18 |
+RESUMO: modo=dt_receb C-05 ponto=1.5 sairiam=152 (n=333 com valor, universo=439)
+
+lidas pelo demonstrativo: con=323, ind=63
+
+| pontos (do mais frouxo ao mais duro) | sairiam por pelo menos um | sairiam por todos | avaliadas |
+|---|---|---|---|
+| C-01=1.25 C-03=0.75 C-05=0.5 | 161 | 18 | 353 |
+RESUMO: modo=dt_receb uniao C-01=1.25 C-03=0.75 C-05=0.5 pelo_menos_um=161 por_todos=18 (n=353 avaliadas, universo=439)
+| C-01=2.0 C-03=0.5 C-05=1.0 | 233 | 31 | 353 |
+RESUMO: modo=dt_receb uniao C-01=2.0 C-03=0.5 C-05=1.0 pelo_menos_um=233 por_todos=31 (n=353 avaliadas, universo=439)
+| C-01=3.0 C-03=0.25 C-05=1.5 | 285 | 69 | 353 |
+RESUMO: modo=dt_receb uniao C-01=3.0 C-03=0.25 C-05=1.5 pelo_menos_um=285 por_todos=69 (n=353 avaliadas, universo=439)
+
