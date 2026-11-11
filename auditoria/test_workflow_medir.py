@@ -124,3 +124,28 @@ def _onde():
 def test_cx01_forma_de_segredo_que_escapava_do_regex_reprova(forma, onde):
     v = _FORMAS_QUE_ESCAPAVAM[forma]
     assert _mutante(lambda d: _onde()[onde](d, v)), (forma, onde)
+
+
+# ── 10/11/2026 (P-30): a CVM vem da release publica, num passo SEM segredo ────────────────
+
+PASSO_DA_RELEASE = "Trazer a CVM da release publica (sem segredo)"
+
+
+def test_a_release_publica_entra_antes_do_token_e_sem_segredo_nenhum():
+    """A contagem do bloco C ficou parada 17 dias por dois segredos do R2 quando os insumos
+    eram todos da CVM, publica na release do repositorio. O passo que a traz roda antes do
+    passo que mede, sem `env`, e a falta do token so derruba a medicao que nao se serviu dela."""
+    d = _wf("medir.yml")
+    nomes = [p.get("name") for p in d["jobs"]["medir"]["steps"]]
+    assert nomes.index(PASSO_DA_RELEASE) < nomes.index(PASSO_QUE_MEDE[1])
+    release = _passo(d, PASSO_DA_RELEASE)
+    assert "env" not in release and "secrets." not in release["run"]
+    assert "--cache-da-release" in release["run"] and release["id"] == "release"
+    assert "steps.release.outputs.pronto" in _passo(d, PASSO_QUE_MEDE[1])["run"]
+
+
+def test_mutacao_segredo_no_passo_da_release_reprova():
+    def f(d):
+        _passo(d, PASSO_DA_RELEASE)["env"] = {"R2_BUCKET": "${{ secrets.R2_LEITURA_BUCKET }}"}
+    assert _mutante(f)
+
