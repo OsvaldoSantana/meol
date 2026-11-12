@@ -79,7 +79,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "pytest==9.1.1",    # nao muda numero nenhum: so decide se o teste roda.
+  "pytest==9.2.0",    # nao muda numero nenhum: so decide se o teste roda.
 ]
 # P-40. Fora da impressao do ambiente de proposito — ver o bloco de comentario
 # no fim deste arquivo. `ambiente.declarado()` le apenas `dependencies` e `dev`.
