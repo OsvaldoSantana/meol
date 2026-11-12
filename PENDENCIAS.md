@@ -87,15 +87,14 @@ contagem real rodada, a escolha dele vendo a contagem (P-17),
 os setores financeiro-adjacentes e a holding genérica (265 linhas do cadastro, em `GERAL` por
 escolha de Claude) olhados por ele, e ligar ao motor.
 
-**A contagem real não rodou (24/10/2026).** O push em `medir/p30_contagem` (run 40124379403): o
-passo "Conferir insumos" passou e o "Medir" falhou com a mensagem do próprio `medir.yml`:
-`faltam os segredos do repositorio: R2_LEITURA_ACCOUNT_ID R2_LEITURA_BUCKET. Crie no Cloudflare um
-token do R2 com permissao SOMENTE LEITURA (Object Read) neste bucket e grave os quatro em Settings
-> Secrets and variables > Actions.` (dos quatro, `R2_LEITURA_ACCESS_KEY_ID` e
-`R2_LEITURA_SECRET_ACCESS_KEY` existem; faltam dois). Nenhum outro caminho com credencial foi
-tentado (5-A.7). **Assim que os dois segredos existirem, a medição roda de novo** com um novo push
-em `medir/p30_contagem` (ou com a branch já publicada, por um novo commit) e a saída fica em
-`medicoes/resultados/p30_contagem.txt`.
+**A contagem roda sem segredo desde 11/11/2026** (`535beb1`, PR #107): os insumos dela são só da
+CVM, e o `medir.yml` os traz da release pública `cvm-acervo-<ano>` (`fase0/cache_da_release.py`,
+sha256 conferido inteiro). A parte 2 (`af32fbd`, `politica.yaml` 1.45.0) fez o bloco ler o
+individual de quem não consolida (decisão dele, 10/11; fila, bloco 27). Resultado de 11/11 em
+`medicoes/resultados/p30_contagem.txt` (branch `medir/p30_contagem`, `034c806`): até o conjunto
+mais frouxo (C-01 1,25 · C-03 0,75 · C-05 0,5) tira 161 das 353 avaliadas. O que isso conta
+depende do universo: a medição por universo negociado é o passo seguinte (PR 2 de 12/11). A história da espera pelos
+segredos (24/10 a 10/11) está em `docs/historico/pendencias-fechadas.md`.
 
 `bloco_C_solvencia` tinha 48 chaves escritas em 05/09 e nenhum módulo as aplicava: os testes
 conferiam o texto, não o comportamento. É o primeiro portão que olha empresa, e é de **exclusão**
@@ -318,8 +317,9 @@ ativas.*
 5. **P-115, os PDFs do D1 no armazém:** baixar as 10 provas pelas URLs de
    `docs/fontes/jcp-amostra-2016-2020.md`, conferir cada sha256 contra a tabela e subir; do 20-F
    da Gerdau, o documento arquivado (sha256 `20f8599e…b512`).
-6. **Token do R2 somente leitura** e os quatro segredos `R2_LEITURA_*` (fila, "Conferência de
-   um minuto"): destrava toda medição na nuvem. A P-145 na sessão local não precisa dele.
+6. ~~**Token do R2 somente leitura** e os quatro segredos `R2_LEITURA_*`~~ **Feito em 12/11/2026:**
+   ele criou os quatro; valem para medições do acervo privado. A contagem do bloco C (P-30) não
+   os usa (release pública). A P-145 na sessão local não precisa deles.
 7. **P-162, a página no ar:** `docs/marca/teste-de-marca/roteiro-no-ar.md`. Nada exige o desktop
    além do passo 6.
 8. ~~**Instruções do Projeto no claude.ai:** colar a versão 4 de

@@ -866,6 +866,25 @@ métrica) e **27b** (nunca cortar, só marcar). Gravado em `politica.yaml` 1.44.
 dele (0,5 · 1,0 · 1,5), a dos outros três é de Claude, cada ponto com a fonte e "não é corte". O
 C-02 não pode entrar na contagem enquanto a fórmula for "Padrão" (P-185).
 
+**Decisões dele, 10/11/2026, registradas em 12/11 (P-30, parte 2).** Foram dadas na sessão na
+nuvem e entraram no repositório pelos commits `af32fbd` e `3b24098` (PR #107); o registro na fila
+faltava. Texto montado pela sessão a partir dos commits e do `modelos-por-tarefa.md`: **a ele
+corrigir** onde a memória dele for outra.
+
+- **Variante do demonstrativo (con/ind).** *Decisão:* o bloco C lê o consolidado e só desce para o
+  individual quando o emissor não tem linha nenhuma no consolidado
+  (`variante_do_demonstrativo`, ordem `[con, ind]`, `politica.yaml` 1.45.0). *Motivo medido:* na
+  contagem real, 59 dos 404 emissores do regime geral com DFP entregue em 2023-2025 e sem
+  consolidado saíam como "exercício não encontrado". *Alternativas (as que o commit deixa ver):*
+  (i) manter só `con`, como era, e declarar os 59 como não avaliáveis; (ii) descer para o
+  individual também quando falta uma conta num consolidado que existe, o que foi recusado porque
+  mistura variantes no mesmo exercício. A alternativa (ii) é inferida do desenho, não de uma
+  pergunta feita a ele.
+- **Modelo Fable, uso pontual.** *Decisão:* abaixo do Opus, medido pela regra de volta, fora da
+  `ordem`. Desenho e alternativas (a forma `haiku, sonnet, opusplan, fable, opus` que ele
+  perguntou e por que não foi adotada) em `docs/decisoes/modelos-por-tarefa.md`, seção de
+  10/11/2026.
+
 ---
 
 ## 28 · Robô, consolidador e planejador: sem universo oficial · P-170 · **respondido em 10/10: quadro público da App Store + 28c**

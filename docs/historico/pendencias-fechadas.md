@@ -3173,3 +3173,21 @@ toda semana — cada semana sem captura é uma rodada de reapresentações que *
 **Uma coisa que eu não fiz:** não atualizei o `ACHADOS.md` — ele nunca passou pelo
 container, e manter atualizado um arquivo que eu não li seria escrever sobre o que suponho
 que ele diz. O bloco pronto está em `ACHADOS-19-09-PARA-COLAR.md`.
+
+---
+
+## P-30 · "faltam dois segredos do R2" — a espera de 24/10 a 10/11/2026 (movido em 12/11)
+
+**A contagem real não rodou (24/10/2026).** O push em `medir/p30_contagem` (run 40124379403): o
+passo "Conferir insumos" passou e o "Medir" falhou com a mensagem do próprio `medir.yml`:
+`faltam os segredos do repositorio: R2_LEITURA_ACCOUNT_ID R2_LEITURA_BUCKET. Crie no Cloudflare um
+token do R2 com permissao SOMENTE LEITURA (Object Read) neste bucket e grave os quatro em Settings
+> Secrets and variables > Actions.` (dos quatro, `R2_LEITURA_ACCESS_KEY_ID` e
+`R2_LEITURA_SECRET_ACCESS_KEY` existem; faltam dois). Nenhum outro caminho com credencial foi
+tentado (5-A.7). **Assim que os dois segredos existirem, a medição roda de novo** com um novo push
+em `medir/p30_contagem` (ou com a branch já publicada, por um novo commit) e a saída fica em
+`medicoes/resultados/p30_contagem.txt`.
+
+**Como acabou:** em 11/11 a contagem passou a rodar pela release pública da CVM, sem segredo
+(`535beb1`). Em 12/11 ele criou os quatro `R2_LEITURA_*`; eles seguem valendo para medições do
+acervo **privado** (a contagem do bloco C não precisa deles).
