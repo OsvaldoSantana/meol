@@ -52,6 +52,12 @@ class EventoInvalido(ValueError):
     pass
 
 
+def aceitos(modelos):
+    """Os modelos que uma etiqueta pode trazer: os degraus da `ordem`, os `pontuais` (admitidos
+    por decisao datada, medidos e fora da escada) e `desconhecido`."""
+    return modelos["ordem"] + modelos["pontuais"] + ["desconhecido"]
+
+
 def ler(caminho=EVENTOS):
     with open(caminho, encoding="utf-8", newline="") as f:
         r = csv.DictReader(f, delimiter=";")
@@ -89,7 +95,7 @@ def validar(eventos, modelos=None):
             if et is None:
                 raise EventoInvalido(f"linha {i}: evento de autoria Claude desde {desde} abre a "
                                      "descricao com [modelo=<m> classe=<c>]")
-            if et[0] not in modelos["ordem"] + ["desconhecido"] or et[1] not in modelos["classes"]:
+            if et[0] not in aceitos(modelos) or et[1] not in modelos["classes"]:
                 raise EventoInvalido(f"linha {i}: etiqueta {et} fora de "
                                      "docs/metricas/modelos-por-tarefa.yaml")
     return eventos
@@ -141,7 +147,7 @@ def validar_titulo(titulo, modelos=None):
         raise EventoInvalido(f"titulo {titulo!r}: o PR abre com [modelo=<m> classe=<c>] "
                              "(docs/metricas/modelos-por-tarefa.yaml)")
     modelo, classe = m.groups()
-    if modelo not in modelos["ordem"] + ["desconhecido"] or classe not in modelos["classes"]:
+    if modelo not in aceitos(modelos) or classe not in modelos["classes"]:
         raise EventoInvalido(f"titulo {titulo!r}: etiqueta {m.groups()} fora de "
                              "docs/metricas/modelos-por-tarefa.yaml")
     return m.groups()
@@ -157,7 +163,8 @@ def regra_de_volta(eventos, prs, hoje, ref, modelos=None):
     exige tambem `min_eventos` eventos da classe na janela, alem do fator e dos `min_prs`."""
     modelos = modelos or ler_modelos()
     ordem, rv = modelos["ordem"], modelos["regra_de_volta"]
-    abaixo = set(ordem[:-1])
+    # 10/11/2026: o modelo pontual (Fable) e medido como quem esta abaixo do topo, sem ser degrau
+    abaixo = set(ordem[:-1]) | set(modelos["pontuais"])
     inicio = hoje - dt.timedelta(days=rv["janela_dias"])
 
     def na_janela(data):

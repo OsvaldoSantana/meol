@@ -61,6 +61,19 @@ jobs:
       - name: Conferir insumos
         run: python "medicoes/${{ steps.nome.outputs.nome }}.py" --conferir-insumos
 
+      # 10/11/2026 (P-30): medicao que so le a CVM nao precisa de segredo. A CVM e publica na
+      # release `cvm-acervo-<ano>` (P-136), e o cache do acervo so recebe byte com o sha256 do
+      # registro (fase0/cache_da_release.py). A medicao que sabe se servir dela declara a opcao
+      # `--cache-da-release`; as outras (B3, NEFIN) nao a tem e seguem pelo token de leitura.
+      # Este passo roda SEM segredo no ambiente. Se a release nao entregar, ele falha e diz.
+      - name: Trazer a CVM da release publica (sem segredo)
+        id: release
+        run: |
+          if grep -q -- '--cache-da-release' "medicoes/${{ steps.nome.outputs.nome }}.py"; then
+            python "medicoes/${{ steps.nome.outputs.nome }}.py" --cache-da-release
+            echo "pronto=sim" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Medir (token de leitura)
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_LEITURA_ACCOUNT_ID }}
@@ -72,7 +85,8 @@ jobs:
           for v in R2_ACCOUNT_ID R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_BUCKET; do
             [ -n "${!v}" ] || falta="$falta ${v/R2_/R2_LEITURA_}"
           done
-          if [ -n "$falta" ]; then
+          # com tudo no cache pela release publica, a falta do token nao impede a medicao
+          if [ -n "$falta" ] && [ "${{ steps.release.outputs.pronto }}" != "sim" ]; then
             echo "::error::faltam os segredos do repositorio:$falta. Crie no Cloudflare um token do R2 com permissao SOMENTE LEITURA (Object Read) neste bucket e grave os quatro em Settings > Secrets and variables > Actions. Nunca reaproveite o token de escrita da captura."
             exit 1
           fi

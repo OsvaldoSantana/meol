@@ -13,10 +13,17 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 meta:
-  versao: 1.44.0
+  versao: 1.45.0
   emissao: 2026-09-05
   base_de_custos: "custos.yaml"      # os numeros vem de la, com procedencia
   changelog:
+    1.45.0: >-
+      10/11/2026, P-30 parte 2 (decisao dele). `bloco_C_solvencia.variante_do_demonstrativo`:
+      o bloco le o demonstrativo individual quando o emissor nao tem linha nenhuma no
+      consolidado do exercicio (ordem [con, ind], desce_quando SEM_LINHA_NO_EXERCICIO). Antes
+      so lia `*_con`, e 59 dos 404 emissores do regime geral saiam como "exercicio nao
+      encontrado" tendo DFP entregue. Nenhum limiar gravado, nenhum corte ativo; o bloco
+      continua fora do alocar() e do motor_aporte(). Nenhuma regra de decisao do motor mudou.
     1.44.0: >-
       24/10/2026, P-30 parte 1 e P-64. `bloco_C_solvencia` ganha `saidas_do_portao` (APROVA,
       REPROVA, MARCA, RECUSA_REGIME, EXIGE_DOSSIE; so REPROVA tira empresa do universo),
@@ -1578,6 +1585,30 @@ bloco_C_solvencia:
   # documento CONHECIDO na data. Escolha declarada de Claude, 24/10/2026: tres cobre o atraso
   # de um DFP e um ano de reapresentacao; mais que isso e dado velho demais para um portao.
   janela_de_exercicios: 3
+  # 10/11/2026, DECISAO DELE (sessao na nuvem; fila, bloco 29): quando o emissor nao consolida,
+  # o bloco le o demonstrativo INDIVIDUAL. Medido antes de escrever (medicoes/p30_contagem.py
+  # sobre a release publica da CVM, data 2026-10-24, modo dt_receb, n = 404 emissores do regime
+  # geral): 77 saiam como "exercicio nao encontrado", e 59 deles tinham DFP em 2023-2025 sem
+  # linha nenhuma no BPP consolidado (dfp 2023 344e37b704a5, 2024 b6a485b54072, 2025
+  # a0aaf1ed8be9). Ausencia por problema tecnico e conserto, nao limitacao (5-B.16).
+  variante_do_demonstrativo:
+    decidida_em: 2026-11-10
+    decidida_por: usuario
+    resposta: "LER O INDIVIDUAL quando o emissor nao tem consolidado"
+    # A ordem em que o bloco procura, em cada exercicio. Os `operandos` declaram o
+    # demonstrativo na PRIMEIRA variante.
+    ordem: [con, ind]
+    # So desce para a variante seguinte quando o emissor nao tem linha NENHUMA, naquele
+    # exercicio, nos demonstrativos da anterior. O exercicio inteiro e lido numa variante so:
+    # caixa do consolidado nunca se soma a divida do individual.
+    desce_quando: SEM_LINHA_NO_EXERCICIO
+    alcance: >-
+      Quem consolida e SEMPRE lido pelo consolidado: a divida que a controladora tem sozinha
+      nao aparece separada. Se o arquivo da CVM vier sem as linhas consolidadas de um emissor
+      que consolida, o bloco le o individual da controladora e a proveniencia diz `variante:
+      ind`; nao ha como distinguir os dois casos pelo demonstrativo. As contas e as descricoes
+      esperadas sao as mesmas nas duas variantes (o plano de contas e um so); conta com outra
+      descricao continua marcando PLANO_DE_CONTAS_DIFERENTE.
   # As contas lidas, no plano de contas da CVM. Conferido em 24/10/2026 no DFP 2024 real
   # (dfp_cia_aberta_2024.zip, sha256 b51c920793c18edb66e8780c0780836d441af1199e1077064b73c7de6c865df0,
   # n = 1 arquivo, 467 emissores no consolidado ULTIMO): 450 trazem exatamente estas descricoes

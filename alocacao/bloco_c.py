@@ -29,6 +29,11 @@ O QUE ELE NAO FAZ (P5):
     "nao medido" (P-65) e a tendencia e AGUARDA_SERIE (63a): nenhum dos tres produz numero;
   - o regime de banco (P-31) e os regimes de N saidas (P-58 a P-61) nao existem aqui;
   - o setor vem do cadastro de HOJE, nao as-of (`setor_ativ.alcance`).
+
+10/11/2026 (decisao dele): emissor que nao consolida e lido pelo demonstrativo INDIVIDUAL
+(`variante_do_demonstrativo`). Antes, o bloco so lia `*_con`, e quem entregava DFP sem
+consolidado saia como "exercicio nao encontrado": 59 dos 404 do regime geral na contagem real.
+O exercicio inteiro e lido numa variante so, e a proveniencia diz qual.
 """
 from __future__ import annotations
 
@@ -49,6 +54,7 @@ import leitor_cvm as L  # noqa: E402
 
 POLITICA = os.path.join(AQUI, "politica.yaml")
 PENDENTE = "PENDENTE"
+SEM_LINHA = "SEM_LINHA_NO_EXERCICIO"       # a unica regra de descida que o modulo conhece
 FINANCEIRA, A_DECIDIR, GERAL = "FINANCEIRA", "A_DECIDIR", "GERAL"
 
 
@@ -164,13 +170,24 @@ _RECUSADOS = (L.PeriodoAmbiguo, L.ValorAmbiguo, L.DataDeConhecimentoAusente,
               L.DataDeConhecimentoAmbigua, L.EnumeracaoDesconhecida, L.LeiauteDesconhecido)
 
 
-def _ler_operando(op, cd, dt_refer, ate, conhecimento, kw):
+def _demonstrativo(op, variante, P):
+    """O demonstrativo do operando na `variante` (con ou ind). O YAML declara o operando na
+    PRIMEIRA variante da ordem; outra coisa ali e YAML incoerente, e nao se adivinha."""
+    primeira = P["variante_do_demonstrativo"]["ordem"][0]
+    base, sep, declarada = op["demonstrativo"].rpartition("_")
+    if not sep or declarada != primeira:
+        raise ValueError(f"operando com demonstrativo {op['demonstrativo']!r}: o YAML declara "
+                         f"os operandos na primeira variante da ordem ({primeira!r})")
+    return f"{base}_{variante}"
+
+
+def _ler_operando(op, cd, dt_refer, ate, conhecimento, kw, demonstrativo):
     """(valor, linha, causa): a soma das contas do operando, so se TODAS existem e trazem a
     descricao do plano; ausencia nunca vira zero."""
     total, primeira = Decimal(0), None
     for conta in op["contas"]:
         try:
-            r = L.valor(op["recurso"], cd, dt_refer, conta["cd_conta"], op["demonstrativo"],
+            r = L.valor(op["recurso"], cd, dt_refer, conta["cd_conta"], demonstrativo,
                         ate, conhecimento=conhecimento, **kw)
         except _RECUSADOS as e:
             return None, None, ("DADO_RECUSADO", str(e))
@@ -185,22 +202,58 @@ def _ler_operando(op, cd, dt_refer, ate, conhecimento, kw):
     return total, primeira, None
 
 
+def _ler_exercicio(cd, dt_refer, ate, P, conhecimento, kw, variante):
+    """Os operandos de UM exercicio, todos na mesma variante: ({operando: (valor, causa)},
+    {proveniencia}) ou (lidos, None) se nenhum operando trouxe linha."""
+    lidos, prov = {}, None
+    for nome, op in P["operandos"].items():
+        dem = _demonstrativo(op, variante, P)
+        valor, linha, causa = _ler_operando(op, cd, dt_refer, ate, conhecimento, kw, dem)
+        lidos[nome] = (valor, causa)
+        if linha is not None and prov is None:
+            prov = dict(dt_refer=dt_refer.isoformat(), dt_receb=linha.get("dt_receb"),
+                        sha256=linha["sha256"], arquivo=linha["arquivo"],
+                        desde=str(linha["desde"]), conhecimento=conhecimento,
+                        variante=variante)
+    return lidos, prov
+
+
+def _sem_linha(cd, dt_refer, ate, P, conhecimento, kw, variante):
+    """O emissor nao tem linha NENHUMA, neste exercicio, nos demonstrativos da variante? E a
+    condicao de descer para a variante seguinte: conta ausente num demonstrativo que existe nao
+    e "nao consolida", e descer ai trocaria o consolidado pelo individual de uma holding."""
+    for recurso, dem in sorted({(op["recurso"], _demonstrativo(op, variante, P))
+                                for op in P["operandos"].values()}):
+        try:
+            rs = L.linhas(recurso, dt_refer.year, cd, dem, ate, conhecimento=conhecimento, **kw)
+        except _RECUSADOS:
+            return False                             # dado recusado nao e dado ausente
+        except LookupError:
+            continue                                 # sem captura ou sem o membro: sem linha
+        if any(r["dt_refer"] == dt_refer.isoformat() for r in rs):
+            return False
+    return True
+
+
 def _exercicio(cd, ate, P, conhecimento, kw):
     """O exercicio mais recente CONHECIDO em `ate`, procurando `janela_de_exercicios` anos para
     tras: ({operando: (valor, causa)}, {proveniencia}) ou ({}, None). Quem decide se o documento
-    era conhecido e o leitor; o DT_REFER so nomeia o exercicio."""
+    era conhecido e o leitor; o DT_REFER so nomeia o exercicio. Em cada exercicio o bloco le a
+    primeira variante da `variante_do_demonstrativo.ordem` e so desce para a seguinte quando o
+    emissor nao tem linha nenhuma na anterior (decisao dele, 10/11/2026)."""
+    regra = P["variante_do_demonstrativo"]
+    if regra["desce_quando"] != SEM_LINHA:
+        raise MetricaNaoImplementada(f"variante_do_demonstrativo.desce_quando "
+                                     f"{regra['desce_quando']!r}: o modulo so conhece {SEM_LINHA}")
     for k in range(1, P["janela_de_exercicios"] + 1):
         dt_refer = dt.date(ate.year - k + 1, 1, 1) - dt.timedelta(days=1)
-        lidos, prov = {}, None
-        for nome, op in P["operandos"].items():
-            valor, linha, causa = _ler_operando(op, cd, dt_refer, ate, conhecimento, kw)
-            lidos[nome] = (valor, causa)
-            if linha is not None and prov is None:
-                prov = dict(dt_refer=dt_refer.isoformat(), dt_receb=linha.get("dt_receb"),
-                            sha256=linha["sha256"], arquivo=linha["arquivo"],
-                            desde=str(linha["desde"]), conhecimento=conhecimento)
-        if prov is not None:
-            return lidos, prov
+        for variante in regra["ordem"]:
+            lidos, prov = _ler_exercicio(cd, dt_refer, ate, P, conhecimento, kw, variante)
+            if prov is not None:
+                return lidos, prov
+            so_ausencia = all(c is not None and c[0] == "SEM_DADO" for _, c in lidos.values())
+            if not (so_ausencia and _sem_linha(cd, dt_refer, ate, P, conhecimento, kw, variante)):
+                break                                # ha linha ou recusa aqui: nao desce
     return {}, None
 
 
@@ -302,6 +355,39 @@ def contar_em(avaliacoes, P, cod, ponto):
                                                                  ponto, sentido))
 
 
+def _pontos_do_mais_frouxo_ao_mais_duro(P, cod):
+    """A grade do corte, ordenada pelo que ela tira: no `reprova_abaixo` o ponto menor e o mais
+    frouxo; no `reprova_acima`, o maior."""
+    m = P["metricas"][cod]
+    if m["sentido"] not in ("reprova_abaixo", "reprova_acima"):
+        raise ValueError(f"{cod}: sentido {m['sentido']!r} fora de reprova_abaixo/reprova_acima")
+    return sorted((p["valor"] for p in m["grade"]), key=lambda v: Decimal(str(v)),
+                  reverse=m["sentido"] == "reprova_acima")
+
+
+def contar_uniao(avaliacoes, P):
+    """Os cortes se SOMAM, e a contagem por corte esconde isso (10/11/2026: na contagem real, o
+    ponto mais frouxo de cada um tirava 109, 29 e 56 empresas, e 135 por pelo menos um). Para
+    cada posicao da grade, do ponto mais frouxo ao mais duro de cada corte implementado: quantas
+    sairiam por PELO MENOS UM e por TODOS. So numeros (P-136). `avaliadas` e o n: empresas com
+    valor em pelo menos um corte. {"C-01=<ponto> C-03=<ponto> ...": {avaliadas, pelo_menos_um,
+    por_todos}}, na ordem do mais frouxo ao mais duro."""
+    cods = [c for c in P["ordem_de_avaliacao"]
+            if P["metricas"].get(c, {}).get("status") == "IMPLEMENTADA"]
+    grades = {c: _pontos_do_mais_frouxo_ao_mais_duro(P, c) for c in cods}
+    com = [a for a in avaliacoes if any("valor" in a["metricas"].get(c, {}) for c in cods)]
+    out = {}
+    for pontos in zip(*(grades[c] for c in cods)):
+        cai = [[("valor" in a["metricas"].get(c, {})
+                 and _cai(a["metricas"][c]["valor"], p, P["metricas"][c]["sentido"]))
+                for c, p in zip(cods, pontos)] for a in com]
+        # a chave diz os pontos ("C-01=1.25 C-03=0.75 C-05=0.5"): a saida continua so numero
+        out[" ".join(f"{c}={p}" for c, p in zip(cods, pontos))] = dict(
+            avaliadas=len(com), pelo_menos_um=sum(1 for x in cai if any(x)),
+            por_todos=sum(1 for x in cai if all(x)))
+    return out
+
+
 def contar(avaliacoes, P):
     """So numeros: sem nome, sem CD_CVM, sem preco (P-136). Empresa sem dado e contada a parte."""
     cortes, nao_impl = {}, []
@@ -323,4 +409,9 @@ def contar(avaliacoes, P):
         universo_total=len(avaliacoes), cortes=cortes, nao_implementadas=nao_impl,
         regime={s: sum(1 for a in avaliacoes if a["saida"] == s)
                 for s in P["saidas_do_portao"]["saidas_de_regime"]},
-        sem_dado=sum(1 for a in avaliacoes if a["metricas"] and a["exercicio"] is None))
+        sem_dado=sum(1 for a in avaliacoes if a["metricas"] and a["exercicio"] is None),
+        # quantas foram lidas em cada variante do demonstrativo (con, ind): o n de cada leitura
+        por_variante={v: sum(1 for a in avaliacoes
+                             if (a["exercicio"] or {}).get("variante") == v)
+                      for v in P["variante_do_demonstrativo"]["ordem"]},
+        uniao=contar_uniao(avaliacoes, P))

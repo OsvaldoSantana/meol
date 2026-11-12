@@ -18,8 +18,16 @@ classes:
   auditoria: opus
   arquitetura: opus
 
-# Fable nao entra em classe nenhuma (decisao de 02/10). Etiqueta com modelo fora da `ordem`
-# reprova a validacao.
+# Fable nao entra em classe nenhuma (decisao de 02/10) e NAO e degrau da `ordem`. Etiqueta com
+# modelo fora da `ordem` e dos `pontuais` reprova a validacao.
+
+# DECISAO dele, 10/11/2026 (sessao na nuvem): o Fable chegou por uma acao promocional, e de uso
+# PONTUAL ("daqui a pouco ele vai se esgotar e nunca mais sera usado") e vai para onde contribui
+# mais. Entra na etiqueta e na conta da regra de volta como modelo ABAIXO do Opus (medido: PR e
+# evento dele contam), mas fora da `ordem`: se fosse degrau, a classe em opusplan que voltasse
+# subiria para um modelo que nao existe mais. Classe que dispara a regra com PR em Fable volta
+# para o degrau da `ordem`, como qualquer outra. Porque e alternativas: docs/decisoes/modelos-por-tarefa.md.
+pontuais: [fable]
 
 regra_de_volta:
   # DECISAO dele, 03/10/2026 (fila, bloco 21: 21d), no lugar da proposta 21a (2 eventos em 14

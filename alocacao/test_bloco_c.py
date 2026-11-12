@@ -499,3 +499,101 @@ def test_a_politica_real_carrega_com_o_mesmo_caminho_do_yaml_de_teste(tmp_path):
     P = _real()
     assert _yaml_de_teste(tmp_path, P) == yaml.safe_load(
         io.StringIO(yaml.safe_dump(P)))
+
+
+# ── 10/11/2026: quem nao consolida e lido pelo individual (decisao dele) ─────
+# Na contagem real (medicoes/p30_contagem.py, 404 emissores do regime geral), 59 tinham DFP
+# entregue e saiam como "exercicio nao encontrado": o bloco so lia `*_con`.
+
+def _so_individual(dt_refer, cd, **v):
+    """O DFP de quem nao consolida: os mesmos numeros, so nos membros `_ind`."""
+    return {nome.replace("_con", "_ind"): linhas
+            for nome, linhas in _demonstrativos(dt_refer, cd, **v).items()}
+
+
+def _capturar_membros(acv, quando, ano, cd, membros):
+    idx = [TL._idx(f"{ano}-12-31", "1", f"{ano + 1}-03-20", cd=cd, categ="DFP")]
+    acv.capturar(quando, "dfp", ano, membros, indice=idx)
+
+
+@pytest.mark.parametrize("modo", ["captura", "dt_receb"])
+def test_g_quem_nao_consolida_e_lido_pelo_individual_e_a_proveniencia_diz(acv, modo):
+    _capturar_membros(acv, "2025-04-10T12:00:00Z", 2024, CD, _so_individual("2024-12-31", CD))
+    a = _avaliar(acv, _real(), conhecimento=modo)
+    assert a["exercicio"]["variante"] == "ind" and a["exercicio"]["dt_refer"] == "2024-12-31"
+    m = a["metricas"]
+    assert (m["C-01"]["valor"], m["C-03"]["valor"], m["C-05"]["valor"]) == (
+        Decimal(3), Decimal("0.25"), Decimal(1))
+    # quem consolida continua no consolidado, e a proveniencia tambem o diz
+    assert B.contar([a], _real())["por_variante"] == {"con": 0, "ind": 1}
+
+
+def test_g_quem_consolida_e_lido_pelo_consolidado_mesmo_com_individual_diferente(acv):
+    con = _demonstrativos("2024-12-31", CD)                      # cobertura 3
+    ind = _so_individual("2024-12-31", CD, ebit=50)              # cobertura 0,5 na controladora
+    _capturar_membros(acv, "2025-04-10T12:00:00Z", 2024, CD, {**con, **ind})
+    a = _avaliar(acv, _real())
+    assert a["exercicio"]["variante"] == "con" and a["metricas"]["C-01"]["valor"] == Decimal(3)
+
+
+def test_g_o_exercicio_nunca_mistura_as_duas_variantes(acv):
+    """Consolidado SEM a divida de curto prazo (conta ausente num demonstrativo que existe) e
+    individual completo: o bloco fica no consolidado e marca a falta. Descer aqui somaria o
+    caixa do grupo com a divida da controladora, ou trocaria um pelo outro em silencio."""
+    con = _demonstrativos("2024-12-31", CD)
+    con["BPP_con"] = [ln for ln in con["BPP_con"] if ln["CD_CONTA"] != "2.01.04"]
+    _capturar_membros(acv, "2025-04-10T12:00:00Z", 2024, CD,
+                      {**con, **_so_individual("2024-12-31", CD, cp=999)})
+    a = _avaliar(acv, _real())
+    assert a["exercicio"]["variante"] == "con"
+    assert a["metricas"]["C-01"]["valor"] == Decimal(3)          # a DRE consolidada existe
+    assert a["metricas"]["C-05"]["causa"] == "SEM_DADO" and "valor" not in a["metricas"]["C-05"]
+
+
+def test_g_consolidado_com_linha_e_sem_as_contas_nao_desce_para_o_individual(acv):
+    """O consolidado existe (traz a receita, 3.01) e nenhuma das contas que o bloco le: isso e
+    conta ausente, nao "nao consolida". O bloco marca a falta e NAO le o individual."""
+    receita = _c("2024-12-31", "3.01", 1000, "Receita de Venda de Bens e/ou Serviços", CD)
+    con = {"DRE_con": [receita]}
+    _capturar_membros(acv, "2025-04-10T12:00:00Z", 2024, CD,
+                      {**con, **_so_individual("2024-12-31", CD)})
+    a = _avaliar(acv, _real())
+    assert a["exercicio"] is None
+    assert {a["metricas"][c]["causa"] for c in ("C-01", "C-03", "C-05")} == {"SEM_DADO"}
+
+
+def test_g_o_individual_do_ano_vem_antes_do_consolidado_do_ano_anterior(acv):
+    """Quem deixou de consolidar: o exercicio mais recente conhecido e o de 2024, no individual,
+    e nao o consolidado de 2023."""
+    _capturar(acv, "2024-04-10T12:00:00Z", 2023, CD, ebit=900)                 # cobertura 9
+    _capturar_membros(acv, "2025-04-10T12:00:00Z", 2024, CD, _so_individual("2024-12-31", CD))
+    a = _avaliar(acv, _real())
+    assert (a["exercicio"]["dt_refer"], a["exercicio"]["variante"]) == ("2024-12-31", "ind")
+    assert a["metricas"]["C-01"]["valor"] == Decimal(3)
+
+
+def test_g_a_ordem_das_variantes_e_a_regra_de_descida_sao_lidas_do_YAML(acv, tmp_path):
+    _capturar_membros(acv, "2025-04-10T12:00:00Z", 2024, CD, _so_individual("2024-12-31", CD))
+    P = copy.deepcopy(_real())
+    P["variante_do_demonstrativo"]["ordem"] = ["con"]            # so consolidado: volta ao de antes
+    a = _avaliar(acv, _yaml_de_teste(tmp_path, P))
+    assert a["exercicio"] is None and a["metricas"]["C-01"]["causa"] == "SEM_DADO"
+    P["variante_do_demonstrativo"]["desce_quando"] = "SEMPRE"
+    with pytest.raises(B.MetricaNaoImplementada, match="desce_quando"):
+        _avaliar(acv, _yaml_de_teste(tmp_path, P))
+    real = _real()["variante_do_demonstrativo"]
+    assert real["ordem"] == ["con", "ind"] and real["decidida_por"] == "usuario"
+
+
+def test_g_a_uniao_dos_cortes_conta_quem_sai_por_pelo_menos_um(acv):
+    """Os cortes se somam. Sintetico: coberturas 3, 1,5 e 0,5 com o mesmo perfil (0,25) e a
+    mesma razao de caixa (1). No ponto mais frouxo de cada corte (C-01 1,25; C-03 0,75; C-05
+    0,5) so a de cobertura 0,5 sai; no mais duro (3,0; 0,25; 1,5) saem as tres pelo C-05."""
+    P = _real()
+    u = B.contar(_universo_sintetico(acv), P)["uniao"]
+    frouxo, meio, duro = list(u)
+    assert frouxo == "C-01=1.25 C-03=0.75 C-05=0.5" and duro == "C-01=3.0 C-03=0.25 C-05=1.5"
+    assert u[frouxo] == dict(avaliadas=3, pelo_menos_um=1, por_todos=0)
+    assert u[meio]["pelo_menos_um"] == 2
+    assert u[duro] == dict(avaliadas=3, pelo_menos_um=3, por_todos=0)
+

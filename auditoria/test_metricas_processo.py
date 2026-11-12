@@ -68,7 +68,7 @@ def test_evento_claude_novo_sem_etiqueta_reprova_e_o_antigo_nao():
 
 def test_etiqueta_fora_da_tabela_reprova():
     with pytest.raises(M.EventoInvalido, match="fora de"):
-        M.validar([_t("2026-10-03", "[modelo=fable classe=registro]")])
+        M.validar([_t("2026-10-03", "[modelo=outro classe=registro]")])
     with pytest.raises(M.EventoInvalido, match="fora de"):
         M.validar([_t("2026-10-03", "[modelo=sonnet classe=faxina]")])
 
@@ -78,6 +78,28 @@ def test_a_tabela_tem_as_classes_da_decisao_e_fable_fora():
     # 16/10/2026: o registro VOLTOU de sonnet para opusplan pela propria regra (21d, issue #71).
     assert m["classes"]["registro"] == "opusplan" and m["classes"]["engenharia"] == "opusplan"
     assert m["classes"]["p-115"] == "opus" and "fable" not in m["ordem"]
+    # 10/11/2026: continua fora da escada e de toda classe; entra so como modelo pontual
+    assert "fable" not in m["classes"].values() and m["pontuais"] == ["fable"]
+
+
+def test_modelo_pontual_e_aceito_na_etiqueta_e_medido_sem_ser_degrau():
+    """10/11/2026, decisao dele: o Fable e de uso pontual e entra ABAIXO do Opus, medido. Antes,
+    a etiqueta `modelo=fable` reprovava o evento e o titulo do PR, e o que ele errasse nao
+    entraria na regra de volta. Fora da `ordem`: como degrau, a classe em opusplan que voltasse
+    subiria para um modelo que deixa de existir."""
+    m = M.ler_modelos()
+    M.validar([_t("2026-11-10", "[modelo=fable classe=engenharia]")])
+    assert M.validar_titulo("[modelo=fable classe=engenharia] x") == ("fable", "engenharia")
+    assert m["ordem"][-1] == "opus" and m["ordem"].index("opusplan") + 1 == m["ordem"].index("opus")
+    # medido: evento e PR com a etiqueta dele contam, e a classe volta como qualquer outra
+    etq = "[modelo=fable classe=registro]"
+    prs = [_pr("2026-10-15", etq)] * 4
+    v = _volta(_ev(4, etq=etq), prs, REF)
+    assert (v["eventos"], v["prs"], v["volta"]) == (4, 4, True)
+    # e sem a chave `pontuais` listar o modelo, ele volta a ser recusado (a lista e dado, P2)
+    sem = {**m, "pontuais": []}
+    with pytest.raises(M.EventoInvalido):
+        M.validar_titulo("[modelo=fable classe=engenharia] x", sem)
 
 
 # ── 03/10/2026: a regra de volta por taxa contra a referencia (fila, decisao 21d) ─────────
@@ -186,7 +208,7 @@ def test_21d_a_referencia_conta_so_entre_desde_e_ate():
 
 def test_21d_titulo_de_PR_sem_etiqueta_ou_fora_da_tabela_reprova():
     assert M.validar_titulo("[modelo=sonnet classe=registro] Fila 21") == ("sonnet", "registro")
-    for ruim in ("Fila 21", "[modelo=fable classe=registro] x", "[modelo=sonnet classe=faxina] x"):
+    for ruim in ("Fila 21", "[modelo=outro classe=registro] x", "[modelo=sonnet classe=faxina] x"):
         with pytest.raises(M.EventoInvalido):
             M.validar_titulo(ruim)
     assert M.main(["--titulo-pr", "Fila 21"]) == 1
